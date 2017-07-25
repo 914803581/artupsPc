@@ -1,0 +1,87 @@
+<template>
+	<div id="handers">
+			<div class="head">
+	<div class="header m">
+		<h1 class="logo l">
+			<a href="">
+				<img src="http://test.artup.com/img/login_1.png">
+			</a>
+		</h1>
+		<ul class="nav l">
+			<li style="border: none;">
+				<a href="">首页</a>
+			</li>
+			<li>	
+				<a href="">画册</a>
+			</li>
+			<li>
+				<a href="">宝宝书</a>
+			</li>
+			<li>
+				<a href="">框画</a>
+			</li>
+			<li>
+				<a href="">海报</a>
+			</li>
+			 <!--<li>
+				<a href="">台历</a>
+			</li>
+			<li>
+				<a href="">挂历</a>
+			</li> -->
+		</ul>
+		<div class="mineIM r " >
+			
+			<a class="touxiang l" href=""> 
+				
+				<img class="" src="http://img13.artimg.net/passport/avatar/002/141/731/150_150.png">
+				</a>
+			<div class="names l showCat" >
+			<span  class="span_cut">昵称</span>			
+			 <ul class="user_list">
+			 	<li><a href="">我的主页</a></li>
+			 	<li><a href="">账户管理</a></li>
+			 	<li><a href="">订单管理</a></li>
+			 	<li><a href="">优惠券</a></li>
+			 	<li><a href="">我的作品</a></li>
+			 	<li><a href="">我的草稿箱</a></li>
+			 	<li><a href="">我的素材</a></li>			 	
+			 	<li ><a href="">退出登录</a></li>
+			 </ul>
+			</div>
+			<a class="cars" href="">购物车有<span>1</span>件商品</a>
+			<a href="user.html#userCat" class="hander_cat">
+				<div class="img_cat">
+					<b aot-numbers="" class="">1</b>
+					<img src="http://test.artup.com/img/hander_cat.png">
+				</div>
+				<span>购物车</span>
+			</a>
+		</div>
+	</div>
+</div>
+		
+	 </div>
+	</div>
+</template>
+
+<script>
+	export default{
+		name:"nav-hander",
+		data () {
+		    return {
+		      msg: ''
+		    }
+		  },
+	    methods:{
+			
+	    },
+	    mounted(){
+	    	   
+		}
+	}
+</script>
+
+<style>
+	
+</style>
