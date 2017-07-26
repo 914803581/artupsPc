@@ -32,12 +32,12 @@
 							<span>逆时针</span>
 						</div>
 					</div>
-					<div class="rotate_left_90">		
+					<!--<div class="rotate_left_90">		
 						<div @click="checkImg" class="rotate-ccw">
 							<i class="iconfont">&#xe60f;</i>
 							<span>切换图片</span>
 						</div>
-					</div>
+					</div>-->
 					<div class="rotate_right_90">		
 						<div @click="rotateCw" class="rotate-cw">
 							<i class="iconfont">&#xe60e;</i>
@@ -67,19 +67,33 @@
 		      imgEdit: false
 		    }
 		  },
-		 props:["isImgEdit"],
+		 props:["isImgEdit","dataEditJson"],
 	    methods:{
-		    	checkImg(){
-		    		imageCropper.cropit('imageSrc', "http://192.168.127.60:8080/vueM/pcArtups/dist/index.html?__hbt=1500891862952#/bbsEdit");
-		    	},
+//		    	checkImg(){
+//		    		imageCropper.cropit('imageSrc', "http://192.168.127.60:8080/vueM/pcArtups/dist/index.html?__hbt=1500891862952#/bbsEdit");
+//		    	},
 			closeModel(){
+				//回传给父级的数据
+				var postData = {}
+				postData.imgData = imageCropper.cropit('export');
+				postData.postData = build();
 				//获取返回的数据
-				var cropitData = build();
 				this.imgEdit = false;
-				console.log(cropitData)
+				this.$emit("postData",postData)
+				console.log(postData)
 			},
 			openModel(){
 				this.imgEdit = true;
+				if(this.dataEditJson){
+					console.log(this.dataEditJson.oSrc)
+				 //修改图片src
+				 imageCropper.cropit('imageSrc', this.dataEditJson.oSrc);				
+				 //修改图片框大小
+				  if (this.dataEditJson.oW && this.dataEditJson.oH) {  //重新换算宽度比之后
+                      imageCropper.cropit('previewSize', { width: this.dataEditJson.oW*300/this.dataEditJson.oH, height: 300 })                 		
+				  }
+				}
+				 
 			},
 			rotateCw(){
 				angu = reg += rotationalp;
@@ -103,7 +117,7 @@
 	    },
 	    mounted(){
 	    	   this.imgEdit = this.isImgEdit;
-	    	   console.log(this.isImgEdit)
+	    	  
 	    	   //让框具有拖动的功能
 //		  setTimeout(()=>{
 //		  	 $(".model").each(function(){
@@ -114,7 +128,6 @@
 //				});
 //			});
 //		  },300)
-
           setTimeout(()=>{
           	 imageCropper = $('#image-cropper').cropit({
 	           freeMove: false,
@@ -128,10 +141,7 @@
 		          },
         		});
           },100)
-          
-           
 	    	   //$('#image-cropper').cropit('previewSize', { width: oWidth, height: oHeight });
-	    	   //动态修正编辑图片的值
 //		 $('#image-cropper').cropit('imageSrc', "http://www.jqueryscript.net/images/Simple-jQuery-Image-Zoom-Pan-Crop-Plugin-Cropit.jpg");
 		}
 	}

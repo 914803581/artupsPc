@@ -22,8 +22,8 @@
 				<div class="comtent">
 					<div class="time_main_left">
 						<div class="time_bg" v-for="(item,index) in bbsTemplate_data">
-							<!--pubilc_div 这个class是留给整屏来定义的样式-->
-							<div class="pubilc_div" v-html="htmlTetx" v-for="(htmlTetx,index2) in item">
+							<!--pubilc_div 这个class是留给整屏来定义的样式  click_template 是用vue里面的事件委派来解决避免不了的dom操作-->
+							<div class="pubilc_div" @click="click_template($event)" v-html="htmlTetx" v-for="(htmlTetx,index2) in item">
 								
 							</div>							
 						</div>
@@ -72,8 +72,8 @@
 		</div>
 		<!--模态框素材库-->
 		<div-model  :isShowModel="isModel"></div-model>
-		<!--图片编辑插件-->
-		<img-edit :isImgEdit="isimgEdit"></img-edit>
+		<!--图片编辑插件 postData 编辑器返回的数据-->
+		<img-edit :postData="postDatas" :dataEditJson="dataEditImg"  :isImgEdit="isimgEdit"></img-edit>
 		<!--文字编辑框-->
 		<edit-text :isEditText="iseditText"></edit-text>
 		<!--<div-editText ></div-editText>-->
@@ -100,7 +100,9 @@
 				footerShow:true, //页脚控制的折叠变量
 				bbs:{
 					material:[],//素材库
+					textModel:'' //弹出框文字
 				},
+				dataEditImg:{},//传递给图片编辑的对象
 				bbsTemplate_data:[] //宝宝书模版数据的二维数组
 			}
 		},
@@ -116,12 +118,34 @@
 	       editText
 	   	},
 		 methods: {
+		 	postDatas(val){
+		 		console.log(val)
+		 	},
+		 	click_template($event){//vue模版渲染完毕之后的事件处理
+		 		console.log($event.target)
+		 		if($($event.target).hasClass("text")){ // 点击文本框
+		 			$(".editText_one").removeClass("editText_one");
+		 			$($event.target).addClass("editText_one");
+		 			if ($($event.target)) {
+						this.$store.commit("getTextBox",$($event.target).text())
+		 			}
+		 			this.openTxst();//打开文字框
+		 		}
+		 		if($($event.target).hasClass("img_drap")){//点击图片调起编辑器		
+		 			$(".editbbs_one").removeClass("editbbs_one");
+		 			$($event.target).addClass("editbbs_one");
+		 			this.dataEditImg.oSrc = $($event.target).attr("imgstyle");
+		 			this.dataEditImg.oW = $($event.target).parent(".drapBox").width();
+		 			this.dataEditImg.oH = $($event.target).parent(".drapBox").height();
+		 			this.openImgEdit();
+		 		}
+		 	},
 		 	setPageIndex(){//设置页数
 		 		$(".comtent_chanpin .time_main_left .time_bg .pubilc_div > .time_pu .page").each((i,e)=>{
 		 			$(e).text('第'+(i+1)+'页')
 		 		})
 		 	},
-		 	jisuan(){		 		
+		 	jisuan(){//动态计算面积		 		
 	 			  $("#bbsEdit").css("height",$(window).height()+'px');
 			      var oH = $(window).height()-($(".footer_img").height()+$("#handers").height()+$(".title").height()+30);
 			  	  $("#bbsEdit .time_main_left").css("height",oH+'px');	
@@ -164,6 +188,7 @@
 		 	//调用vuex里面的拖拽方法，初始化的时候
 		 	this.$store.commit("drapDiv")
 		 	this.setPageIndex();
+		 	
 //		 	this.$router.push({ path: '/security/iploginanalysis/'+json.name,params: { deviceId: 123}});
 			
 //			var dragdiv = document.querySelector('#div_drap');

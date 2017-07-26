@@ -186,7 +186,7 @@ var bbsTemplateData={
 };
 //定义模版的数组
 var bbsData_template=[
-	[bbsTemplateData.bbs1,bbsTemplateData.bbs3],
+	[bbsTemplateData.bbs7,bbsTemplateData.bbs3],
 	[bbsTemplateData.bbs5,bbsTemplateData.bbs4],
 	[bbsTemplateData.bbs1,bbsTemplateData.bbs8],
 	[bbsTemplateData.bbs6,bbsTemplateData.bbs7],
