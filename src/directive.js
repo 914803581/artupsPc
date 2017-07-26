@@ -2,7 +2,7 @@
 import Vue from 'vue'
 let $ = window.jQuery
 // 注册一个全局自定义指令 v-DomHeight 这个指令是操作index的swipe快DOM的高度
-var DomHeight = Vue.directive('DomHeight', {
+let DomHeight = Vue.directive('DomHeight', {
   // 当绑定元素插入到 DOM 中。
   inserted: function (el) { // 拿到dom动态算出高度
     // $("#bbsEdit").css("height",$(window).height()+'px');
@@ -14,13 +14,13 @@ var DomHeight = Vue.directive('DomHeight', {
 })
 
 // 让元素可以拖拽到元素框，正确的回显的指令
-var DomDrap = Vue.directive('DomDrap', {
+let DomDrap = Vue.directive('DomDrap', {
   inserted: function (el) {
     // 被拖动的元素
-    var oDrapDiv = $('.fonter_box_img > ul >li >img')
+    let oDrapDiv = $('.fonter_box_img > ul >li >img')
     // 拖动到哪里去
-    var oDrap = document.querySelectorAll('.time_main_left .time_bg  .drapBox')
-    var i = 0
+    let oDrap = document.querySelectorAll('.time_main_left .time_bg  .drapBox')
+    let i = 0
     for (; i < oDrapDiv.length; i++) {
       oDrapDiv[i].index = i
       // console.log(oDrapDiv[i].src)

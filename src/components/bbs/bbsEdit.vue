@@ -1,7 +1,7 @@
 <template>
 	<div id="bbsEdit">
 		<nav-hander></nav-hander>
-		<div   class="comtent_chanpin">
+		<div class="comtent_chanpin">
 			<div class="line_comtent">
 				<div class="comtent">
 					<!--title-->
@@ -17,19 +17,23 @@
 						</div>
 					</div>
 				</div>
-			</div>	
+			</div>
 			<div class="line_comtent">
 				<div class="comtent">
 					<div class="time_main_left">
 						<div class="time_bg" v-for="(item,index) in bbsTemplate_data">
 							<!--pubilc_div 这个class是留给整屏来定义的样式-->
 							<div class="pubilc_div" v-html="htmlTetx" v-for="(htmlTetx,index2) in item">
-								
-							</div>							
+
+							</div>
 						</div>
-					</div>				
+					</div>
 				</div>
-			</div>	
+        <div class="shield" v-show="isShowPreview" @click="isShowPreview=false"></div>
+        <div class="preview_wrapper" v-show="isShowPreview">
+          <div class="preview_comtent"></div>
+        </div>
+			</div>
     			<!--底部的图片-->
     			<div v-DomHeight  class="footer_img">
     				<div class="footer_up_tittle">
@@ -45,9 +49,9 @@
     						<span class="imgSpan">图片<i class="iconfont">&#xe600;</i></span>
     					</div>
     					<div class="footer_right">
-    						<button class="footer_btn">
+    						<button class="footer_btn" @click="preview">
     							预览宝宝书
-    						</button>    					
+    						</button>
     						<select style="top: -2px;" class="footer_btn" name="">
     							<option value="">未使用图片</option>
     							<option value="">已使用图片</option>
@@ -60,14 +64,14 @@
     				<!--<el-collapse-transition>-->
 	    				<div   class="fonter_box_img">
 	    					<ul>
-	    					
+
 	    						<li  v-for="(footerImg,index) in $store.state.bbs.footerData" draggable="true">
 	    							<img :src="footerImg.thumbnailUrl"/>
 	    						</li>
-	    						
+
 	    					</ul>
 	    				</div>
-	    			<!--</el-collapse-transition>-->	
+	    			<!--</el-collapse-transition>-->
     			</div>
 		</div>
 		<!--模态框素材库-->
@@ -82,9 +86,9 @@
 		</div>-->
 	</div>
 </template>
-<script>	
-	import Api from '../../api.js'
-	import filter from '../../filter.js'
+<script>
+  import Api from '../../api.js'
+  import filter from '../../filter.js'
 	import {DomHeight} from '../../directive.js'
 	import divModel from '../component/model/model.vue'
 	import imgEdit from '../component/imgEdit/imgEdit.vue'
@@ -92,8 +96,9 @@
 	import navHander from '../../components/component/hander/hander.vue'
 	var aa = 0;//计数器
 	export default {
-		data() {
+		data () {
 			return {
+        isShowPreview:false, //
 				isModel:false, //素材
 				isimgEdit:false, //图片编辑
 				iseditText:false, //文字弹窗
@@ -109,7 +114,7 @@
 //			console.log(from)
 //			next()
 //		},
-		components:{  
+		components:{
 	       navHander,
 	       divModel,
 	       imgEdit,
@@ -121,12 +126,12 @@
 		 			$(e).text('第'+(i+1)+'页')
 		 		})
 		 	},
-		 	jisuan(){		 		
+		 	jisuan(){
 	 			  $("#bbsEdit").css("height",$(window).height()+'px');
 			      var oH = $(window).height()-($(".footer_img").height()+$("#handers").height()+$(".title").height()+30);
-			  	  $("#bbsEdit .time_main_left").css("height",oH+'px');	
+			  	  $("#bbsEdit .time_main_left").css("height",oH+'px');
 		 	},
-		 	checkFooterShow($event){ //切换底部的图片显示隐藏		 	
+		 	checkFooterShow($event){ //切换底部的图片显示隐藏
 		 		if ($($event.target).hasClass("imgSpan")) {
 					var bb = ++aa;
 					var footer = $($event.target).parents(".footer_img").find(".fonter_box_img");
@@ -134,7 +139,7 @@
 		 				footer.show();
 		 			}else{
 		 				footer.hide();
-		 			}		 			
+		 			}
 		 			this.jisuan();
 		 		}
 		 	},
@@ -148,14 +153,31 @@
 		 		this.isimgEdit = !this.isimgEdit;
 		 	},
 		 	get_material(){
-		 		
-		 	}
+
+		 	},
+       preview () {
+         let preview = $('.preview_comtent').html('')
+         $('.pubilc_div').each(function(i,dom){
+             let page = $(dom).clone(true)
+              page.find('.page').remove()
+           preview.append(page)
+         })
+         preview.off('turn')
+         preview.turn({
+           width: 930,
+           height: 540,
+           autoCenter: true,
+           gradients: true,
+           acceleration: true
+         });
+         this.isShowPreview = true
+       }
 		 },
 		 computed:{
-		 	
+
 		 },
 		 created(){//只执行一次
-		 	this.jisuan();// 计算页面位置		 	
+		 	this.jisuan();// 计算页面位置
 		 	//模版数据
 			this.bbsTemplate_data = bbsData_template;
 			console.log(this.bbsTemplate_data)
@@ -165,7 +187,7 @@
 		 	this.$store.commit("drapDiv")
 		 	this.setPageIndex();
 //		 	this.$router.push({ path: '/security/iploginanalysis/'+json.name,params: { deviceId: 123}});
-			
+
 //			var dragdiv = document.querySelector('#div_drap');
 
 //			$("#div_drap").dragDiv()
@@ -175,8 +197,6 @@
 //					randomPosition : false
 //				});
 //			});
-			
-			
 		 }
 	}
 </script>
