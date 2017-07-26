@@ -21,119 +21,11 @@
 			<div class="line_comtent">
 				<div class="comtent">
 					<div class="time_main_left">
-						<div class="time_bg">
-							<div class="time_pu">
-								<div class="bbsClass drapBox template01">
-									<img src=""/>
-								</div>	
-								<p class="text"></p>
-								<div class="page">
-									1
-								</div>
-							</div>
-							<div class="time_pu">
-								<div class="bbsClass drapBox template02">
-								<img src=""/>
-									
-								</div>	
-								<p class="text"></p>
-								<div class="page">
-									2
-								</div>
-							</div>
-						</div>
-						<div class="time_bg">
-							<div class="time_pu">
-								<div class="bbsClass template03">
-									<div class="drapBox div_page">
-										<img src=""/>
-									</div>
-									<div class="drapBox div_page">
-										<img src=""/>
-									</div>
-								</div>	
-								<p class="text"></p>
-								<div class="page">
-									3
-								</div>
-							</div>
-							<div class="time_pu">
-								<div class="drapBox bbsClass template04">
-									<img src=""/>
-								</div>	
-								<p class="text"></p>
-								<div class="page">
-									4
-								</div>
-							</div>
-						</div>
-					   
-						<div class="time_bg">
-							<div class="time_pu">
-								<div class="bbsClass drapBox template05">
-									<img src=""/>
-								</div>	
-								<p class="text"></p>
-								<div class="page">
-									5
-								</div>
-							</div>
-							<div class="time_pu">
-								<div class="bbsClass template06">
-									<div class="drapBox div_page">
-										<img src=""/>
-									</div>
-									<div class="drapBox div_page">
-										<img src=""/>
-									</div>
-								</div>	
-								<p class="text"></p>
-								<div class="page">
-									6
-								</div>
-							</div>
-						</div>					
-						<div class="time_bg">
-							<div class="time_pu">
-								<div class="bbsClass template07">
-									<div class="drapBox div_page">
-										<img src=""/>
-									</div>
-									<div class="drapBox div_page">
-										<img src=""/>
-									</div>
-									<div class="drapBox div_page">
-										<img src=""/>
-									</div>
-									<div class="drapBox div_page">
-										<img src=""/>
-									</div>								
-								</div>	
-								<p class="text"></p>
-								<div class="page">
-									7
-								</div>
-							</div>
-							<div class="time_pu">
-								<div class="bbsClass template08">
-									<div class="drapBox div_page">
-										<img src=""/>
-									</div>
-									<div class="drapBox div_page">
-										<img src=""/>
-									</div>
-									<div class="drapBox div_page">
-										<img src=""/>
-									</div>
-									<div class="drapBox div_page">
-										<img src=""/>
-									</div>
-								</div>	
-								<p class="text"></p>
-								<div class="page">
-									8
-								</div>
-							</div>
+						<div class="time_bg" v-for="(item,index) in bbsTemplate_data">
+							<!--pubilc_div 这个class是留给整屏来定义的样式-->
+							<div class="pubilc_div" v-html="htmlTetx" v-for="(htmlTetx,index2) in item">
+								
+							</div>							
 						</div>
 					</div>				
 				</div>
@@ -168,16 +60,11 @@
     				<!--<el-collapse-transition>-->
 	    				<div   class="fonter_box_img">
 	    					<ul>
-	    						<!--<li draggable="true">
-	    							<img src="../../../../artupApp/src/assets/img/xsg_fsfm.jpg"/>
-	    						</li>-->
+	    					
 	    						<li  v-for="(footerImg,index) in $store.state.bbs.footerData" draggable="true">
 	    							<img :src="footerImg.thumbnailUrl"/>
 	    						</li>
 	    						
-	    						<!--<li draggable="true">
-	    							<img src="../../../../artupApp/src/assets/img/xsg_fsfm.jpg"/>
-	    						</li>   						-->
 	    					</ul>
 	    				</div>
 	    			<!--</el-collapse-transition>-->	
@@ -213,7 +100,8 @@
 				footerShow:true, //页脚控制的折叠变量
 				bbs:{
 					material:[],//素材库
-				}
+				},
+				bbsTemplate_data:[] //宝宝书模版数据的二维数组
 			}
 		},
 //		beforeRouteEnter(to,from,next){
@@ -228,6 +116,11 @@
 	       editText
 	   	},
 		 methods: {
+		 	setPageIndex(){//设置页数
+		 		$(".comtent_chanpin .time_main_left .time_bg .pubilc_div > .time_pu .page").each((i,e)=>{
+		 			$(e).text('第'+(i+1)+'页')
+		 		})
+		 	},
 		 	jisuan(){		 		
 	 			  $("#bbsEdit").css("height",$(window).height()+'px');
 			      var oH = $(window).height()-($(".footer_img").height()+$("#handers").height()+$(".title").height()+30);
@@ -257,17 +150,20 @@
 		 	get_material(){
 		 		
 		 	}
-		 	
 		 },
 		 computed:{
 		 	
 		 },
 		 created(){//只执行一次
-		 	this.jisuan();// 计算页面位置	 	
+		 	this.jisuan();// 计算页面位置		 	
+		 	//模版数据
+			this.bbsTemplate_data = bbsData_template;
+			console.log(this.bbsTemplate_data)
 		 },
 		 mounted(){
 		 	//调用vuex里面的拖拽方法，初始化的时候
 		 	this.$store.commit("drapDiv")
+		 	this.setPageIndex();
 //		 	this.$router.push({ path: '/security/iploginanalysis/'+json.name,params: { deviceId: 123}});
 			
 //			var dragdiv = document.querySelector('#div_drap');
