@@ -13,7 +13,7 @@ import testStore from '@/components/store'
 //注入路由
 Vue.use(vueRouter)
 let router =  new vueRouter({	
-//	mode:'history',
+	mode:'history',
 	routes: [
 		{ //宝宝书介绍和尺寸选择
 	      path: '/bbsMsg',

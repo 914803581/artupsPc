@@ -52,6 +52,11 @@
 				this.$store.commit("slectFile");
 				//关闭弹窗
 				this.closeModel();
+				setTimeout(()=>{//延迟去执行此方法避免和vuex内部执行顺利冲突
+					this.$store.commit("drapDiv")					
+				},200)
+
+				
 			},
 			selectImg(index){
 				this.$store.state.bbs.material[index].isTrue = !this.$store.state.bbs.material[index].isTrue;

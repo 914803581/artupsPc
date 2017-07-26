@@ -43,7 +43,55 @@ let store = new Vuex.Store({
 			//可供拖拽的数组图片
 //			state.bbs.footerData.push(arrImg);
 //			console.log(state.bbs.footerData)
-		}
+		},
+		drapDiv(state){//拖动元素的方法
+				//被拖动的元素
+				var  oDrapDiv = $(".fonter_box_img > ul >li >img");
+				//拖动到哪里去
+				var  oDrap = document.querySelectorAll(".time_main_left .time_bg  .drapBox");
+
+				for (var i = 0; i < oDrapDiv.length; i++) {
+					oDrapDiv[i].index = i;
+		//			console.log(oDrapDiv[i].src)
+					oDrapDiv[i].ondragstart = function(ev){
+		//				ev.preventDefault();	
+						var ev = ev || window.event;
+		
+						//这里指定setDate的index=i
+						ev.dataTransfer.setData('Index',this.index);
+//						ev.dataTransfer.setData('oSrc',this.src);
+						this.style.background = 'green';
+					}
+				}
+				
+				for (var i = 0; i < oDrap.length; i++) {
+					oDrap[i].ondragover = function(ev){
+						//enter和leave之间连续触发
+						//要想触发drop事件，就 必须在dragover当中阻止默认事件
+						//document.title = i++;		
+						ev.preventDefault();	
+					};
+					//拖动结束
+					oDrap[i].ondrop = function(ev){
+						ev.preventDefault();	
+						ev.stopPropagation();//预防ff图片拖出打开		
+		//				console.log(ev.dataTransfer.getData('name'))
+		//				console.log(ev.dataTransfer.getData('oSrc'))
+//						$(ev.target).find(">img").attr("src",ev.dataTransfer.getData('oSrc'))
+
+						//根据传递过来的角标拿到底部的缓存数据
+						var oIndex = ev.dataTransfer.getData('Index');
+						//回显图片和删除底部缓存
+						$(ev.target).find(">img").attr("src",state.bbs.footerData[oIndex].thumbnailUrl);
+						state.bbs.footerData.splice(oIndex, 1);
+						//计算位置
+//						console.log(dragThumb)
+						setTimeout(function(){
+							dragThumb($(ev.target).find(">img"),$(ev.target))
+						},100)
+					}
+				}
+		 	}
 	},
 	actions:{ //actions是vuex 处理异步的函数,所有的异步操作都是在这里面处理的，但是他仅仅只是处理异步处理完毕之后也是需要像mutations commit方法让mutations去改变状态的
 		//也可以用es6 解构负值来简写这里

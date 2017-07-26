@@ -21,6 +21,7 @@ var DomDrap = Vue.directive('DomDrap',{
 		
 		//被拖动的元素
 		var  oDrapDiv = $(".fonter_box_img > ul >li >img");
+		
 		//拖动到哪里去
 		var  oDrap = document.querySelectorAll(".time_main_left .time_bg  .drapBox");
 		

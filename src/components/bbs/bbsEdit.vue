@@ -166,11 +166,11 @@
     					</div>
     				</div>
     				<!--<el-collapse-transition>-->
-	    				<div v-DomDrap  class="fonter_box_img">
+	    				<div   class="fonter_box_img">
 	    					<ul>
-	    						<li draggable="true">
+	    						<!--<li draggable="true">
 	    							<img src="../../../../artupApp/src/assets/img/xsg_fsfm.jpg"/>
-	    						</li>
+	    						</li>-->
 	    						<li  v-for="(footerImg,index) in $store.state.bbs.footerData" draggable="true">
 	    							<img :src="footerImg.thumbnailUrl"/>
 	    						</li>
@@ -257,6 +257,7 @@
 		 	get_material(){
 		 		
 		 	}
+		 	
 		 },
 		 computed:{
 		 	
@@ -265,7 +266,8 @@
 		 	this.jisuan();// 计算页面位置	 	
 		 },
 		 mounted(){
-		 	console.log(this.$store.state.bbs.footerData)
+		 	//调用vuex里面的拖拽方法，初始化的时候
+		 	this.$store.commit("drapDiv")
 //		 	this.$router.push({ path: '/security/iploginanalysis/'+json.name,params: { deviceId: 123}});
 			
 //			var dragdiv = document.querySelector('#div_drap');
