@@ -13,7 +13,8 @@ let store = new Vuex.Store({
 		bbs:{
 			materialModel:false, //
 			material:[], //素材库的数据
-			footerData:[]//底部的缓存数据可以供拖拽到图片框
+			footerData:[],//底部的缓存数据可以供拖拽到图片框
+			textData:'' //文本框文字
 		}
 	},
 	getters:{ //获取数据做逻辑上的判断
@@ -40,9 +41,10 @@ let store = new Vuex.Store({
 					state.bbs.footerData.unshift(val)
 				}
 			})
-			//可供拖拽的数组图片
-//			state.bbs.footerData.push(arrImg);
-//			console.log(state.bbs.footerData)
+		},
+		getTextBox(state,obj){
+			console.log(obj)
+			state.bbs.textData = obj
 		},
 		drapDiv(state){//拖动元素的方法
 				//被拖动的元素
@@ -82,7 +84,7 @@ let store = new Vuex.Store({
 						//根据传递过来的角标拿到底部的缓存数据
 						var oIndex = ev.dataTransfer.getData('Index');
 						//回显图片和删除底部缓存
-						$(ev.target).find(">img").attr("src",state.bbs.footerData[oIndex].thumbnailUrl);
+						$(ev.target).find(">img").attr("src",state.bbs.footerData[oIndex].thumbnailUrl).attr('imgStyle',state.bbs.footerData[oIndex].thumbnailUrl);
 						state.bbs.footerData.splice(oIndex, 1);
 						//计算位置
 //						console.log(dragThumb)

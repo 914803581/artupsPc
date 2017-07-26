@@ -7,12 +7,12 @@
 					<!--<i  @click="closeModels"  class="close iconfont">&#xe746;</i>-->
 				</div>
 				<!--文字输入框-->
-				<textarea class="textBox" maxlength="40" placeholder="输入字体应保存在40字之内">
+				<textarea class="textBox" v-model="$store.state.bbs.textData" maxlength="40" placeholder="输入字体应保存在40字之内">
 					
 				</textarea>
 				<div class="btn_box">
 					<el-button  @click.native="closeModels">取消输入</el-button>
-					<el-button type="danger">确认输入</el-button>
+					<el-button @click.native="okModels" type="danger">确认输入</el-button>
 				</div>
 			</div>
 		</div>
@@ -25,6 +25,7 @@
 		data () {
 		    return {
 		      isEditTexts: false
+//		      textData:''
 		    }
 		  },
 		 props:["isEditText"],
@@ -34,6 +35,12 @@
 			},
 			openModel(){
 				this.isEditTexts = true;
+				
+			},
+			okModels(){ //确认输入
+				console.log(this.$store.state.bbs.textData)
+				this.isEditTexts = false;
+				$(".editText_one").text(this.$store.state.bbs.textData)
 			}
 	    },
 	    watch:{
