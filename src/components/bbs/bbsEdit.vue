@@ -31,7 +31,9 @@
         </div>
         <div class="shield" v-show="isShowPreview" @click="isShowPreview=false"></div>
         <div class="preview_wrapper" v-show="isShowPreview">
-          <div class="preview_comtent"></div>
+          <div class="preview_comtent">
+            div.
+          </div>
         </div>
       </div>
       <!--底部的图片-->
@@ -96,7 +98,7 @@
   import navHander from '../../components/component/hander/hander.vue'
   var aa = 0;//计数器
   export default {
-    data() {
+    data () {
       return {
         isShowPreview:false,
         isModel:false, //素材
