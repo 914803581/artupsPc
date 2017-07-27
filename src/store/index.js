@@ -88,17 +88,17 @@ let store = new Vuex.Store({
 						//回显图片和删除底部缓存
 						$(ev.target).find(">img").attr("src",dataImg.thumbnailUrl).attr('imgStyle',dataImg.thumbnailUrl);
 						state.bbs.footerData.splice(oIndex, 1);
-						
+						console.log(dataImg)
 						var oPage = $(ev.target).parents(".pubilc_div").find(".page .pageleft span").attr("page");//第几页
 						var oTypeStyle = $(ev.target).find(">img").attr("typestyle");//板式
 						var oimgSort= $(ev.target).find(">img").attr("imgsort");//图片的顺序
-						console.log(oPage)
-						console.log('页数'+oPage)
-						console.log('板式'+oTypeStyle)
-						console.log('图片的顺序'+oimgSort)
-//						 var picObj = {"constName":constName,"picDbId" : responseText.pictureDbId, "page" : responseText.picPage, "editCnfIndex" : responseText.styleType, "num" : responseText.picNum, "actions" : {thumbnailScale:responseText.thumbnailScale},
-//                          "thumbnailImageUrl":responseText.thumbnailUrl, "previewThumbnailImageUrl" :responseText.previewThumbnailImageUrl, "crop" : "false","editCnfName" : responseText.editCnfName};
-                            
+//						console.log(oPage)
+//						console.log('页数'+oPage)
+//						console.log('板式'+oTypeStyle)
+//						console.log('图片的顺序'+oimgSort)
+						 var picObj = {"constName":oPage+"_"+oimgSort,"picDbId" : dataImg.dbId, "page" : oPage, "editCnfIndex" : oTypeStyle, "num" : oimgSort, "actions" : {},
+                            "thumbnailImageUrl":"", "previewThumbnailImageUrl" :"", "crop" : "false","editCnfName" : ""};
+						console.log(picObj)
                             
 						//计算位置
 						setTimeout(function(){
