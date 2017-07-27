@@ -14,7 +14,11 @@ let store = new Vuex.Store({
 			materialModel:false, //
 			material:[], //素材库的数据
 			footerData:[],//底部的缓存数据可以供拖拽到图片框
-			textData:'' //文本框文字
+			textData:'', //文本框文字
+			HashMap   :new HashMap(), //图片
+			lomHashMap:new HashMap(), //lomo卡
+			textHashMap:new HashMap() //保存的文字
+			
 		}
 	},
 	getters:{ //获取数据做逻辑上的判断
@@ -42,8 +46,7 @@ let store = new Vuex.Store({
 				}
 			})
 		},
-		getTextBox(state,obj){
-			console.log(obj)
+		getTextBox(state,obj){//获取文本框的内容函数
 			state.bbs.textData = obj
 		},
 		drapDiv(state){//拖动元素的方法
@@ -61,8 +64,9 @@ let store = new Vuex.Store({
 		
 						//这里指定setDate的index=i
 						ev.dataTransfer.setData('Index',this.index);
-//						ev.dataTransfer.setData('oSrc',this.src);
+
 						this.style.background = 'green';
+						
 					}
 				}
 				
@@ -77,17 +81,26 @@ let store = new Vuex.Store({
 					oDrap[i].ondrop = function(ev){
 						ev.preventDefault();	
 						ev.stopPropagation();//预防ff图片拖出打开		
-		//				console.log(ev.dataTransfer.getData('name'))
-		//				console.log(ev.dataTransfer.getData('oSrc'))
-//						$(ev.target).find(">img").attr("src",ev.dataTransfer.getData('oSrc'))
-
 						//根据传递过来的角标拿到底部的缓存数据
 						var oIndex = ev.dataTransfer.getData('Index');
+						
+						var dataImg = state.bbs.footerData[oIndex]; //每一个对象
 						//回显图片和删除底部缓存
-						$(ev.target).find(">img").attr("src",state.bbs.footerData[oIndex].thumbnailUrl).attr('imgStyle',state.bbs.footerData[oIndex].thumbnailUrl);
+						$(ev.target).find(">img").attr("src",dataImg.thumbnailUrl).attr('imgStyle',dataImg.thumbnailUrl);
 						state.bbs.footerData.splice(oIndex, 1);
+						
+						var oPage = $(ev.target).parents(".pubilc_div").find(".page .pageleft span").attr("page");//第几页
+						var oTypeStyle = $(ev.target).find(">img").attr("typestyle");//板式
+						var oimgSort= $(ev.target).find(">img").attr("imgsort");//图片的顺序
+						console.log(oPage)
+						console.log('页数'+oPage)
+						console.log('板式'+oTypeStyle)
+						console.log('图片的顺序'+oimgSort)
+//						 var picObj = {"constName":constName,"picDbId" : responseText.pictureDbId, "page" : responseText.picPage, "editCnfIndex" : responseText.styleType, "num" : responseText.picNum, "actions" : {thumbnailScale:responseText.thumbnailScale},
+//                          "thumbnailImageUrl":responseText.thumbnailUrl, "previewThumbnailImageUrl" :responseText.previewThumbnailImageUrl, "crop" : "false","editCnfName" : responseText.editCnfName};
+                            
+                            
 						//计算位置
-//						console.log(dragThumb)
 						setTimeout(function(){
 							dragThumb($(ev.target).find(">img"),$(ev.target))
 						},100)

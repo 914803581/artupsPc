@@ -77,10 +77,11 @@
 				var postData = {}
 				postData.imgData = imageCropper.cropit('export');
 				postData.postData = build();
+				
 				//获取返回的数据
 				this.imgEdit = false;
-				this.$emit("postData",postData)
-				console.log(postData)
+				this.$emit("postDataImg",postData)
+				imageCropper.cropit('imageSrc', "");	
 			},
 			openModel(){
 				this.imgEdit = true;
@@ -128,19 +129,19 @@
 //				});
 //			});
 //		  },300)
-          setTimeout(()=>{
+//        setTimeout(()=>{
           	 imageCropper = $('#image-cropper').cropit({
 	           freeMove: false,
                 exportZoom: 1,
                 imageBackground: true,
                 imageBackgroundBorderWidth: 0,
                 width: 200,
-                height: 300,
-		          imageState: {
-		            src: 'http://scottcheng.github.io/cropit/images/2-960.jpg',
-		          },
+                height: 300
+//		          imageState: {
+//		            src: 'http://scottcheng.github.io/cropit/images/2-960.jpg',
+//		          },
         		});
-          },100)
+//        },100)
 	    	   //$('#image-cropper').cropit('previewSize', { width: oWidth, height: oHeight });
 //		 $('#image-cropper').cropit('imageSrc', "http://www.jqueryscript.net/images/Simple-jQuery-Image-Zoom-Pan-Crop-Plugin-Cropit.jpg");
 		}
