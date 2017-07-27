@@ -14,11 +14,12 @@ let store = new Vuex.Store({
 			materialModel:false, //
 			material:[], //素材库的数据
 			footerData:[],//底部的缓存数据可以供拖拽到图片框
-			textData:'', //文本框文字
-			HashMap   :new HashMap(), //图片
+			textData:'', //文本框文字				
+		},
+		editData:{ //保存给后端缓存的大对象= 图片的hash lomo的hash
+			ImgHashMap:new HashMap(), //图片
 			lomHashMap:new HashMap(), //lomo卡
-			textHashMap:new HashMap() //保存的文字
-			
+			textHashMap:new HashMap() //保存的文字		
 		}
 	},
 	getters:{ //获取数据做逻辑上的判断
@@ -83,23 +84,27 @@ let store = new Vuex.Store({
 						ev.stopPropagation();//预防ff图片拖出打开		
 						//根据传递过来的角标拿到底部的缓存数据
 						var oIndex = ev.dataTransfer.getData('Index');
-						
 						var dataImg = state.bbs.footerData[oIndex]; //每一个对象
 						//回显图片和删除底部缓存
+						console.log(ev.target)
+						if($(ev.target).find(">img").attr("src")){
+							console.log('有图')
+						}
 						$(ev.target).find(">img").attr("src",dataImg.thumbnailUrl).attr('imgStyle',dataImg.thumbnailUrl);
 						state.bbs.footerData.splice(oIndex, 1);
 						console.log(dataImg)
 						var oPage = $(ev.target).parents(".pubilc_div").find(".page .pageleft span").attr("page");//第几页
 						var oTypeStyle = $(ev.target).find(">img").attr("typestyle");//板式
 						var oimgSort= $(ev.target).find(">img").attr("imgsort");//图片的顺序
-//						console.log(oPage)
 //						console.log('页数'+oPage)
 //						console.log('板式'+oTypeStyle)
 //						console.log('图片的顺序'+oimgSort)
-						 var picObj = {"constName":oPage+"_"+oimgSort,"picDbId" : dataImg.dbId, "page" : oPage, "editCnfIndex" : oTypeStyle, "num" : oimgSort, "actions" : {},
-                            "thumbnailImageUrl":"", "previewThumbnailImageUrl" :"", "crop" : "false","editCnfName" : ""};
-						console.log(picObj)
-                            
+						 var constName = oPage+"_"+oimgSort;
+						 var picObj = {"constName":constName,"picDbId" : dataImg.dbId, "page" : oPage, "editCnfIndex" : oTypeStyle, "num" : oimgSort, "actions" : {},
+                            "thumbnailImageUrl":dataImg.thumbnailUrl, "previewThumbnailImageUrl" :"", "crop" : "false","editCnfName" : ""};
+                        //存入图片ImgHashMap
+                        state.editData.ImgHashMap.putvalue(constName,picObj);
+//                      console.log(state.editData.ImgHashMap.getvalue("2_1")) 
 						//计算位置
 						setTimeout(function(){
 							dragThumb($(ev.target).find(">img"),$(ev.target))

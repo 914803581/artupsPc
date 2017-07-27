@@ -32,7 +32,7 @@
         <div class="shield" v-show="isShowPreview" @click="isShowPreview=false"></div>
         <div class="preview_wrapper" v-show="isShowPreview">
           <div class="preview_comtent">
-            div.
+            <!--<div class=""></div>-->
           </div>
         </div>
       </div>
@@ -79,7 +79,7 @@
     <!--模态框素材库-->
     <div-model  :isShowModel="isModel"></div-model>
     <!--图片编辑插件 postData 编辑器返回的数据-->
-    <img-edit :postData="postDatas" :dataEditJson="dataEditImg"  :isImgEdit="isimgEdit"></img-edit>
+    <img-edit @postDataImg="postDatas" :dataEditJson="dataEditImg"  :isImgEdit="isimgEdit"></img-edit>
     <!--文字编辑框-->
     <edit-text :isEditText="iseditText"></edit-text>
     <!--<div-editText ></div-editText>-->
@@ -125,8 +125,8 @@
       editText
     },
     methods: {
-      postDatas(val){
-        console.log(val)
+      postDatas(val){     	
+        $(".editbbs_one").attr("src",val.imgData).css("width","100%").css("height","auto").css("left",0).css("top",0)
       },
       click_template($event){//vue模版渲染完毕之后的事件处理
         console.log($event.target)
@@ -148,8 +148,8 @@
         }
       },
       setPageIndex(){//设置页数
-        $(".comtent_chanpin .time_main_left .time_bg .pubilc_div > .time_pu .page").each((i,e)=>{
-          $(e).text('第'+(i+1)+'页')
+        $(".comtent_chanpin .time_pu .page .pageleft span").each((i,e)=>{
+			$(e).text((i+1)).attr("page",(i+1))
         })
       },
       jisuan(){//动态计算面积
