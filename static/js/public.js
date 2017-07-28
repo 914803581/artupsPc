@@ -175,7 +175,7 @@ function isEmojiCharacter(substring) {
 //pc宝宝书模版
 /*定义宝宝书八个板式模板*/
 var bbsTemplateData={
-	bbs1:'<div class="time_pu"><div class="bbsClass drapBox template01"><img imgSort="1" typeStyle="1" class="img_drap" src=""/></div><p textSort="1" typeStyle="1" class="text"></p><div  class="page"><div class="pageleft">第<span></span>页</div><div class="pageRight">切换板式</div><div class="pageleft">第<span></span>页</div><div class="pageRight">切换板式</div></div></div>',
+	bbs1:'<div class="time_pu"><div class="bbsClass drapBox template01"><img imgSort="1" typeStyle="1" class="img_drap" src=""/></div><p textSort="1" typeStyle="1" class="text"></p><div  class="page"><div class="pageleft">第<span></span>页</div><div class="pageRight">切换板式</div></div></div>',
 	bbs2:'<div class="time_pu"><div class="bbsClass drapBox template02"><img  class="img_drap" imgSort="1" typeStyle="2" src=""/></div><p textSort="1" typeStyle="2" class="text"></p><div  class="page"><div class="pageleft">第<span></span>页</div><div class="pageRight">切换板式</div></div></div>',
 	bbs3:'<div class="time_pu"><div class="bbsClass template03"><div class="drapBox div_page"><img class="img_drap" imgSort="1" typeStyle="3" src=""/></div><div class="drapBox div_page"><img class="img_drap" imgSort="2" typeStyle="3" src=""/></div></div><p textSort="1" typeStyle="3" class="text"></p><div  class="page"><div class="pageleft">第<span></span>页</div><div class="pageRight">切换板式</div></div></div>',
 	bbs4:'<div class="time_pu"><div class="drapBox bbsClass template04"><img class="img_drap" imgSort="1" typeStyle="4" src=""/></div><p textSort="1" typeStyle="4" class="text"></p><div  class="page"><div class="pageleft">第<span></span>页</div><div class="pageRight">切换板式</div></div></div>',
@@ -191,7 +191,7 @@ var bbsData_template=[
 	[bbsTemplateData.bbs5,bbsTemplateData.bbs6],
 	[bbsTemplateData.bbs7,bbsTemplateData.bbs8],
 	[bbsTemplateData.bbs2,bbsTemplateData.bbs8],
-	[bbsTemplateData.bbs1,bbsTemplateData.bbs2]
+	[bbsTemplateData.bbs2,bbsTemplateData.bbs2]
 ]
 
 //原生在dom里面随意拖拽的函数
