@@ -50,19 +50,25 @@ let store = new Vuex.Store({
 		getTextBox(state,obj){//获取文本框的内容函数
 			state.bbs.textData = obj
 		},
+		setTextHashMap(state,obj){ //组装hashMap文本数据的方法
+			console.log(obj)	
+			var constName = obj.page+"_"+obj.textsort;
+			var picObj = {"constName":constName, "page" : obj.page, "editCnfIndex" : obj.typeStyle, "num" : obj.textsort,"content":obj.txt,
+            "editCnfName" : ""};
+            //存入图片ImgHashMap
+          	state.editData.textHashMap.putvalue(constName,picObj);                
+		},
 		drapDiv(state){//拖动元素的方法
 				//被拖动的元素
 				var  oDrapDiv = $(".fonter_box_img > ul >li >img");
 				//拖动到哪里去
-				var  oDrap = document.querySelectorAll(".time_main_left .time_bg  .drapBox");
-
+				var  oDrap = document.querySelectorAll(".time_main_left .time_bg  .drapBox .drap_img");
 				for (var i = 0; i < oDrapDiv.length; i++) {
 					oDrapDiv[i].index = i;
 		//			console.log(oDrapDiv[i].src)
 					oDrapDiv[i].ondragstart = function(ev){
 		//				ev.preventDefault();	
-						var ev = ev || window.event;
-		
+						var ev = ev || window.event;		
 						//这里指定setDate的index=i
 						ev.dataTransfer.setData('Index',this.index);
 
@@ -90,7 +96,7 @@ let store = new Vuex.Store({
 						if($(ev.target).find(">img").attr("src")){
 							console.log('有图')
 						}
-						$(ev.target).find(">img").attr("src",dataImg.thumbnailUrl).attr('imgStyle',dataImg.thumbnailUrl);
+						$(ev.target).next("img").attr("src",dataImg.thumbnailUrl).attr('imgStyle',dataImg.thumbnailUrl);
 						state.bbs.footerData.splice(oIndex, 1);
 						console.log(dataImg)
 						var oPage = $(ev.target).parents(".pubilc_div").find(".page .pageleft span").attr("page");//第几页
@@ -105,9 +111,11 @@ let store = new Vuex.Store({
                         //存入图片ImgHashMap
                         state.editData.ImgHashMap.putvalue(constName,picObj);
 //                      console.log(state.editData.ImgHashMap.getvalue("2_1")) 
+						
 						//计算位置
 						setTimeout(function(){
-							dragThumb($(ev.target).find(">img"),$(ev.target))
+							$(ev.target).next("img").attr("style","")
+							dragThumb($(ev.target).next("img"),$(ev.target))
 						},100)
 					}
 				}

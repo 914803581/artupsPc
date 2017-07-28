@@ -100,10 +100,13 @@
   import imgEdit from '../component/imgEdit/imgEdit.vue'
   import editText from '../component/editText/editText.vue'
   import navHander from '../../components/component/hander/hander.vue'
+  //如果是这种组件我要在这里 引入他
+
   var aa = 0;//计数器
   export default {
     data () {
       return {
+      	ImgHashMapBase64:new HashMap(),
         isShowPreview:false,
         isModel:false, //素材
         isimgEdit:false, //图片编辑
@@ -220,15 +223,28 @@
 //			console.log(from)
 //			next()
 //		},
-    components:{
+    components:{ //在再这里要注入我的组件
       navHander,
       divModel,
       imgEdit,
       editText
+
     },
     methods: {
-      postDatas(val){     	
-        $(".editbbs_one").attr("src",val.imgData).css("width","100%").css("height","auto").css("left",0).css("top",0)
+      postDatas(val){    
+      	console.log(val)
+//      $(".editbbs_one").next("img").attr("src",val.imgData).attr("style","")
+        $(".editbbs_one").next("img").attr("src",val.imgData).css("width","100%").css("height","100%").css("left",0).css("top",0)
+//      ImgHashMapBase64
+		var oPage = $(".editbbs_one").parents(".pubilc_div").find(".page .pageleft span").text();
+		var oImgSort = $(".editbbs_one").next("img").attr("imgsort")
+		var oTypesTyle = $(".editbbs_one").next("img").attr("typestyle")
+	
+		var constName = oPage+"_"+oImgSort;
+		var picObj = {"constName":constName, "page" : oPage, "editCnfIndex" : oTypesTyle, "num" : oImgSort,
+            "editCnfName" : "","base64Img":val.imgData};
+        //存入专门的base64的图片    
+        this.ImgHashMapBase64.putvalue(constName,picObj);
       },
       click_template($event){//vue模版渲染完毕之后的事件处理
         console.log($event.target)
@@ -240,10 +256,10 @@
           }
           this.openTxst();//打开文字框
         }
-        if($($event.target).hasClass("img_drap")){//点击图片调起编辑器
+        if($($event.target).hasClass("drap_img")){//点击图片调起编辑器
           $(".editbbs_one").removeClass("editbbs_one");
           $($event.target).addClass("editbbs_one");
-          this.dataEditImg.oSrc = $($event.target).attr("imgstyle");
+          this.dataEditImg.oSrc = $($event.target).next("img").attr("imgstyle");
           this.dataEditImg.oW = $($event.target).parent(".drapBox").width();
           this.dataEditImg.oH = $($event.target).parent(".drapBox").height();
           this.openImgEdit();
