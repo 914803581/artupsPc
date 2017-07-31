@@ -2,9 +2,11 @@ import Vue from "vue"
 import Vuex from "vuex"
 import axios from "axios"
 
+
 Vue.use(Vuex)
 
 import Api from '../api.js'
+
 
 //定义一个容器
 let store = new Vuex.Store({
