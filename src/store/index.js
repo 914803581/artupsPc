@@ -16,7 +16,12 @@ let store = new Vuex.Store({
 			materialModel:false, //
 			material:[], //素材库的数据
 			footerData:[],//底部的缓存数据可以供拖拽到图片框
-			textData:'' //文本框文字
+			textData:'', //文本框文字				
+		},
+		editData:{ //保存给后端缓存的大对象= 图片的hash lomo的hash
+			ImgHashMap:new HashMap(), //图片
+			lomHashMap:new HashMap(), //lomo卡
+			textHashMap:new HashMap() //保存的文字		
 		}
 	},
 	getters:{ //获取数据做逻辑上的判断
@@ -44,27 +49,33 @@ let store = new Vuex.Store({
 				}
 			})
 		},
-		getTextBox(state,obj){
-			console.log(obj)
+		getTextBox(state,obj){//获取文本框的内容函数
 			state.bbs.textData = obj
+		},
+		setTextHashMap(state,obj){ //组装hashMap文本数据的方法
+			console.log(obj)	
+			var constName = obj.page+"_"+obj.textsort;
+			var picObj = {"constName":constName, "page" : obj.page, "editCnfIndex" : obj.typeStyle, "num" : obj.textsort,"content":obj.txt,
+            "editCnfName" : ""};
+            //存入图片ImgHashMap
+          	state.editData.textHashMap.putvalue(constName,picObj);                
 		},
 		drapDiv(state){//拖动元素的方法
 				//被拖动的元素
 				var  oDrapDiv = $(".fonter_box_img > ul >li >img");
 				//拖动到哪里去
-				var  oDrap = document.querySelectorAll(".time_main_left .time_bg  .drapBox");
-
+				var  oDrap = document.querySelectorAll(".time_main_left .time_bg  .drapBox .drap_img");
 				for (var i = 0; i < oDrapDiv.length; i++) {
 					oDrapDiv[i].index = i;
 		//			console.log(oDrapDiv[i].src)
 					oDrapDiv[i].ondragstart = function(ev){
 		//				ev.preventDefault();	
-						var ev = ev || window.event;
-		
+						var ev = ev || window.event;		
 						//这里指定setDate的index=i
 						ev.dataTransfer.setData('Index',this.index);
-//						ev.dataTransfer.setData('oSrc',this.src);
+
 						this.style.background = 'green';
+						
 					}
 				}
 				
@@ -79,19 +90,34 @@ let store = new Vuex.Store({
 					oDrap[i].ondrop = function(ev){
 						ev.preventDefault();	
 						ev.stopPropagation();//预防ff图片拖出打开		
-		//				console.log(ev.dataTransfer.getData('name'))
-		//				console.log(ev.dataTransfer.getData('oSrc'))
-//						$(ev.target).find(">img").attr("src",ev.dataTransfer.getData('oSrc'))
-
 						//根据传递过来的角标拿到底部的缓存数据
 						var oIndex = ev.dataTransfer.getData('Index');
+						var dataImg = state.bbs.footerData[oIndex]; //每一个对象
 						//回显图片和删除底部缓存
-						$(ev.target).find(">img").attr("src",state.bbs.footerData[oIndex].thumbnailUrl).attr('imgStyle',state.bbs.footerData[oIndex].thumbnailUrl);
+						console.log(ev.target)
+						if($(ev.target).find(">img").attr("src")){
+							console.log('有图')
+						}
+						$(ev.target).next("img").attr("src",dataImg.thumbnailUrl).attr('imgStyle',dataImg.thumbnailUrl);
 						state.bbs.footerData.splice(oIndex, 1);
+						console.log(dataImg)
+						var oPage = $(ev.target).parents(".pubilc_div").find(".page .pageleft span").attr("page");//第几页
+						var oTypeStyle = $(ev.target).find(">img").attr("typestyle");//板式
+						var oimgSort= $(ev.target).find(">img").attr("imgsort");//图片的顺序
+//						console.log('页数'+oPage)
+//						console.log('板式'+oTypeStyle)
+//						console.log('图片的顺序'+oimgSort)
+						 var constName = oPage+"_"+oimgSort;
+						 var picObj = {"constName":constName,"picDbId" : dataImg.dbId, "page" : oPage, "editCnfIndex" : oTypeStyle, "num" : oimgSort, "actions" : {},
+                            "thumbnailImageUrl":dataImg.thumbnailUrl, "previewThumbnailImageUrl" :"", "crop" : "false","editCnfName" : ""};
+                        //存入图片ImgHashMap
+                        state.editData.ImgHashMap.putvalue(constName,picObj);
+//                      console.log(state.editData.ImgHashMap.getvalue("2_1")) 
+						
 						//计算位置
-//						console.log(dragThumb)
 						setTimeout(function(){
-							dragThumb($(ev.target).find(">img"),$(ev.target))
+							$(ev.target).next("img").attr("style","")
+							dragThumb($(ev.target).next("img"),$(ev.target))
 						},100)
 					}
 				}
