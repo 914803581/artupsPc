@@ -18,12 +18,18 @@ let router =  new vueRouter({
 		{ //宝宝书介绍和尺寸选择
 	      path: '/bbsMsg',
 	      name: 'bbsMsg',
-	      component: bbsMsg
+	      component: bbsMsg,
+	      meta:{
+	      	title:'宝宝书选择'
+	      }
 	    },
 		{ //宝宝书编辑页面
 	      path: '/bbsEdit',
 	      name: 'bbsEdit',
-	      component: bbsEdit
+	      component: bbsEdit,
+	      meta:{
+	      	title:'宝宝书编辑'
+	      }
 	    },
 	    { //vuex的具体使用路由暂时备份
 	      path: '/testStore',
@@ -44,12 +50,12 @@ let router =  new vueRouter({
 //	console.log('开始路由')
 //	next();
 //})
-//router.afterEach((to,from,next)=>{
+router.afterEach((to,from,next)=>{
 //	console.log('进入路由,可以用此方法来写每个导航的title')
-//	if (to.meta.title) {
-//		window.document.title = to.meta.title
-//	}
-//})
+	if (to.meta.title) {
+		window.document.title = to.meta.title
+	}
+})
 //暴露出路由对象
 export default  router
 

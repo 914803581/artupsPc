@@ -49,7 +49,7 @@
 					txt:this.$store.state.bbs.textData,
 					page:oPage,
 					textsort:oTextsort,
-					typeStyle:oTypestyle
+					typestyle:oTypestyle
 				})
 			}
 	    },

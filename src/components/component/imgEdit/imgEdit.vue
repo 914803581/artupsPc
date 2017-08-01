@@ -86,7 +86,7 @@
 			openModel(){
 				this.imgEdit = true;
 				if(this.dataEditJson){
-					console.log(this.dataEditJson.oSrc)
+					console.log(this.dataEditJson)
 				 //修改图片src
 				 imageCropper.cropit('imageSrc', this.dataEditJson.oSrc);				
 				 //修改图片框大小
