@@ -21,9 +21,9 @@
             label: '我的作品',
             path: '/center/works'
           }, {
-            works: 'draft',
+            id: 'draft',
             label: '草稿箱',
-            path: '/center/works'
+            path: '/center/draft'
           }, {
             id: 'material',
             label: '我的素材',
@@ -91,6 +91,9 @@
       dd {
         transition: all 0.5s;
         font-weight: 400;
+        a{
+          outline: 0;
+        }
         &:hover {
           text-indent: 6px;
         }

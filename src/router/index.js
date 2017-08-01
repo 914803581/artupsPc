@@ -7,6 +7,7 @@ import bbsEdit from '@/components/bbs/bbsEdit'
 import index from '@/components/component/index/index' // 首页
 import testStore from '@/components/store' // 测试vuex
 import WorksList from '@/views/center/WorksListView'
+import DraftList from '@/views/center/DraftListView'
 
 Vue.use(VueRouter)
 
@@ -54,6 +55,13 @@ let router = new VueRouter({
       component: WorksList,
       meta: {
         title: '我的作品'
+      }
+    }, {
+      path: '/center/draft',
+      name: 'DraftList',
+      component: DraftList,
+      meta: {
+        title: '草稿箱'
       }
     }
   ]
