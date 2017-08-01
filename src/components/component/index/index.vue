@@ -1,5 +1,7 @@
 <template>
 	<div id="index">
+<!--		<handerNav></handerNav>-->
+		<Handers	></Handers>
 		 <div class="block">
 		    <el-carousel height="460px">
 		      <el-carousel-item v-for="item in CarouselImgUrlList" >
@@ -63,6 +65,7 @@
 				</p>
 			</div>
 		</div>
+		<Footers></Footers>
 	</div>
 </template>
 

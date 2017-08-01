@@ -93,8 +93,7 @@
 				  if (this.dataEditJson.oW && this.dataEditJson.oH) {  //重新换算宽度比之后
                       imageCropper.cropit('previewSize', { width: this.dataEditJson.oW*300/this.dataEditJson.oH, height: 300 })                 		
 				  }
-				}
-				 
+				}				 
 			},
 			rotateCw(){
 				angu = reg += rotationalp;

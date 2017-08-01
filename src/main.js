@@ -15,6 +15,13 @@ import store from '@/store'
 Vue.use(ElementUI)
 // 引入ajax
 Vue.use(VueAxios, Axios)
+
+//自定义的一些全局组件
+import Handers from '@/components/component/hander'
+import Footers from '@/components/component/footer'
+Vue.use(Handers)
+Vue.use(Footers)
+
 // 线上环境的时候隐藏一些打印的东西
 // Vue.config.productionTip = false
 

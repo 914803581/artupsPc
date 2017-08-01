@@ -3,31 +3,31 @@
 			<div class="head">
 	<div class="header m">
 		<h1 class="logo l">
-			<a href="">
+			<a href="javascript:void(0);">
 				<img src="http://test.artup.com/img/login_1.png">
 			</a>
 		</h1>
 		<ul class="nav l">
 			<li style="border: none;">
-				<a href="">首页</a>
+				<a href="javascript:void(0);">首页</a>
 			</li>
 			<li>	
-				<a href="">画册</a>
+				<a href="javascript:void(0);">画册</a>
 			</li>
 			<li>
-				<a href="">宝宝书</a>
+				<a href="/bbsEdit">宝宝书</a>
 			</li>
 			<li>
-				<a href="">框画</a>
+				<a href="javascript:void(0);">框画</a>
 			</li>
 			<li>
-				<a href="">海报</a>
+				<a href="javascript:void(0);">海报</a>
 			</li>
 			 <!--<li>
-				<a href="">台历</a>
+				<a href="javascript:void(0);">台历</a>
 			</li>
 			<li>
-				<a href="">挂历</a>
+				<a href="javascript:void(0);">挂历</a>
 			</li> -->
 		</ul>
 		<div class="mineIM r " >
@@ -39,18 +39,18 @@
 			<div class="names l showCat" >
 			<span  class="span_cut">昵称</span>			
 			 <ul class="user_list">
-			 	<li><a href="">我的主页</a></li>
-			 	<li><a href="">账户管理</a></li>
-			 	<li><a href="">订单管理</a></li>
-			 	<li><a href="">优惠券</a></li>
-			 	<li><a href="">我的作品</a></li>
-			 	<li><a href="">我的草稿箱</a></li>
-			 	<li><a href="">我的素材</a></li>			 	
-			 	<li ><a href="">退出登录</a></li>
+			 	<li><a href="javascript:void(0);">我的主页</a></li>
+			 	<li><a href="javascript:void(0);">账户管理</a></li>
+			 	<li><a href="javascript:void(0);">订单管理</a></li>
+			 	<li><a href="javascript:void(0);">优惠券</a></li>
+			 	<li><a href="javascript:void(0);">我的作品</a></li>
+			 	<li><a href="javascript:void(0);">我的草稿箱</a></li>
+			 	<li><a href="javascript:void(0);">我的素材</a></li>			 	
+			 	<li ><a href="javascript:void(0);">退出登录</a></li>
 			 </ul>
 			</div>
-			<a class="cars" href="">购物车有<span>1</span>件商品</a>
-			<a href="user.html#userCat" class="hander_cat">
+			<a class="cars" href="javascript:void(0);">购物车有<span>1</span>件商品</a>
+			<a href="javascript:void(0);" class="hander_cat">
 				<div class="img_cat">
 					<b aot-numbers="" class="">1</b>
 					<img src="http://test.artup.com/img/hander_cat.png">
