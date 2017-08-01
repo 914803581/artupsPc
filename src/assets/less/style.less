@@ -703,3 +703,91 @@ body .el-loading-spinner .el-loading-text{
     }
   }
 }
+//首页
+#index{
+    width: 100%;
+    .el-carousel__item{
+       min-width: 1152px;
+        img{
+            width: 100%;
+            height: 100%;
+        }
+    }
+    /*main*/
+    .main{min-height: 940px;overflow: hidden;min-width: 1152px;}
+    .main .cont{height:870px;min-width: 1152px;padding-top: 69px;overflow: hidden;}
+    .main .cont p{color:#333;font-family:"微软雅黑";min-width: 206px;text-align: center;overflow: hidden;}
+    .main .cont .intro{font-size: 18px;}
+    .main .cont .tit{font-size: 64px;margin-top: 25px;font-weight: 100;}
+    .main .cont_jiashu{background: url(../img/jiashu_02.jpg) no-repeat center center;}
+    .main .cont_hc{background: url(../img/index_03.jpg) no-repeat center center;}
+    .main .cont_cth{background: url(../img/index_04.jpg) no-repeat center center;}
+    .main .cont_kh{background: url(../img/index_05.jpg) no-repeat center center;}
+    .main .cont_hb{background: url(../img/index_06.jpg) no-repeat center center;}
+    .main .cont_tl{background: url(../img/index_07.jpg) no-repeat center center;}
+    .main .cont_gl{background: url(../img/index_08.jpg) no-repeat center center;}
+    .main .cont_video{background: url(../img/video_04.jpg)no-repeat center center;overflow: hidden;height: 868px;}
+
+    /*video*/
+    .main .cont .pvideo{height: 310px;width:582px;border-radius: 30px;border: 2px solid  #b09976;margin-top: 80px;position: relative;background: url(../img/sangeren_05.png) no-repeat center center;}
+    .main .cont .ptext{width: 1152px;height: 135px;font-size: 24px ;font-family: "微软雅黑";color: #000;line-height: 48px;margin-top: 90px;text-align: left;}
+    /*.main .cont .pvideo .vbtn{height: 99px;width: 148px;background: rgba(3,3,3,0.5);border-radius: 20px;position: absolute;top:0;left: 0;right: 0;bottom: 0;margin: auto auto;border: none;cursor: pointer;}*/
+    .main .cont .pvideo .vbtn{height: 99px;width: 148px;background: url(../img/video_start.png) no-repeat;position: absolute;top:0;left: 0;right: 0;bottom: 0;margin: auto auto;border: none;cursor: pointer;}
+
+    .main .cont .price{margin-top: 620px;height: 30px;}
+    .main .cont .price .s1{font-family: "黑体";font-size: 16px;display:inline-block;height: 30px;line-height: 30px;margin-right: 40px;}
+    .main .cont .price .s2{font-family: "微软雅黑";font-size: 18px;font-weight: 100;display: inline-block;height: 30px;line-height: 30px;}
+    .main .cont .come{margin-top: 25px;height: 36px;text-align: center;}
+    .main .cont .come input{width: 150px;border: none;background: #010101;color: white;border-radius: 4px;height: 30px;font-size:16px;font-family: "微软雅黑";cursor:pointer;}
+    .main .cont .come input:hover{opacity: 0.8;}
+    .main .cont .come input:active{opacity: 0.8;position: relative;top: 1px;}
+}
+//user
+
+#user{
+    .work{width: 1196px;overflow: hidden;}
+    .workL{width: 172px;/*height: 804px;*/margin-bottom: 100px;border-radius: 5px;border:1px solid #dedede;background: #fff;margin-top: 14px;margin-left: 20px;}
+    .workL .worklist{width: 168px;height: 100%;}
+    .workL .worklist li{width: 118px;height: 55px;border-bottom:1px solid #e5e5e5;overflow: hidden;font-size: 16px;line-height: 55px;padding-left:50px;font-weight: 900;}
+    .workL .worklist li a{display: block;height: 100%;width: 100%;color: #303030;} 
+    .workL .worklist .wli{border: none;font-weight: 100;transition: all 0.5s;}
+    .workL .worklist .wli:hover{text-indent: 6px;}
+    .workL .worklist .wlithat a{color: #a00912;}
+    .workL .worklist .wli001{border-bottom:1px solid #e5e5e5;}
+    
+//  .workL .worklist .wli1{background: url(../img/tubiao_01.png) no-repeat 8px center;}
+//  .workL .worklist .wli2{background: url(../img/tubiao_02.png) no-repeat 8px center;}
+//  .workL .worklist .wli3{background: url(../img/tubiao_03.png) no-repeat 8px center;}
+//  .workL .worklist .wli4{background: url(../img/tubiao_04.png) no-repeat 8px center;}
+//  .workL .worklist .wli5{background: url(../img/tubiao_05.png) no-repeat 8px center;}
+//  
+    
+    .workR{overflow: hidden;width: 960px;height: 1100px;margin-bottom: 100px;border-radius: 5px;border:1px solid #dedede;background: #fff;margin-top: 14px;margin-right: 20px;}
+    .workR .worktit{height: 55px;font-size: 16px;width: 898px;border-bottom: 1px solid #DEDEDE;color: #303030;font-weight: 900;line-height: 55px;}
+    .workR .worktop{height: 76px;font-size: 16px;width: 898px;color: #303030;line-height: 76px;}
+//  .workR .workset{height: 40px;width: 131px;border: 1px solid #9e9e9e;border-radius: 4px;background: #FFFFFF;font-size: 16px;color: 9e9e9e;font-family: "微软雅黑";margin-left: 30px;margin-top: 18px;text-indent: 10px;outline: none;/*background: url(../img/b_jian_07.png) 90% center no-repeat;*/ cursor: pointer;}
+    .workR .workworks{display: inline-block;color:#A00912;padding: 0 20px 0 10px;}
+    .workR .workworks:hover{text-decoration: underline;}
+    .workR .workworks:active{position: relative;top: 1px;}
+    
+    .workR .workcont{width: 898px;height: 850px;overflow: hidden;}
+    .workR .workbox{width:1000px;height: 850px;}
+    .workR .workcont .workphoto{width:260px;height: 280px;margin-right: 56px;margin-bottom: 5px;position: relative;}
+    .workR .workcont .workphoto >b{width: 18px;height: 18px;position: absolute;border: 2px solid #bfbfbf;top: 8px;right: 8px;z-index: 8;background: #fff;}
+    .workR .workcont .workphoto >b >i{width: 12px;height: 12px;background: #a00912;position: absolute;margin: auto auto;top: 0;bottom: 0;right: 0;left: 0;border-radius: 50%;}
+    .workR .workcont .work_img{width: 260px;height: 195px;display: block;position: relative;overflow: hidden;}
+    .workR .workcont .work_img img{transition: all ease-out 0.5s;max-height: 100%;max-width: 100%;display: block;position: absolute;top: 0;left:0;bottom: 0;right: 0;margin: auto auto;}
+    .workR .workcont .work_img img:hover{transform: scale(1.2);}
+    
+    .workR .workcont .workp1{width: 250px;overflow: hidden;font-size: 14px;color: #303030;font-weight: 900;margin: 8px 10px 8px 10px ;height: 15px;}
+    .workR .workcont .workp2{font-size: 14px;color: #cbcbcb;margin: 0px 10px 0px 10px ;}
+    .workR .workcont .workp3 input{font-size: 14px;color: white;border: none;background:#a00912;border-radius:4px;padding: 3px 13px 3px 13px;cursor: pointer;}
+    .work_name{width: 194px;overflow: hidden;}
+    .workR .workcont .workp3 input:hover{opacity: 0.7;filter:alpha(opacity=70);}
+    .workR .workcont .workp3 input:active{position: relative;top: 1px;}
+    
+    .el-pagination{
+       width: 620px;
+       margin: 0 auto;
+    }
+}
