@@ -32,6 +32,11 @@
               </div>
             </div>
           </div>
+          <el-pagination
+            small="false"
+            layout="prev, pager, next"
+            :total="50000">
+          </el-pagination>
         </div>
         <left-menu selected="works"></left-menu>
       </div>
@@ -133,7 +138,6 @@
     }
     .main {
       width: 960px;
-      height: 1000px;
       float: right;
       border-radius: 5px;
       border: 1px solid #dedede;
@@ -259,7 +263,7 @@
         .type {
           margin-bottom: 28px;
         }
-        .buy-btn{
+        .buy-btn {
           position: absolute;
           right: 10px;
           bottom: 28px;
@@ -271,6 +275,25 @@
           line-height: 1.8;
           border-radius: 3px;
         }
+      }
+    }
+    .el-pagination {
+      text-align: center;
+      margin: 20px 0 40px;
+      button:hover {
+        color: #a00912;
+      }
+      .el-pager li:hover {
+        color: #a00912;
+      }
+      .number{
+        padding: 0 15px;
+        font-size: 14px;
+      }
+      .number.active {
+        border-color: #fff;
+        background-color: #fff;
+        color: #a00912;
       }
     }
   }
