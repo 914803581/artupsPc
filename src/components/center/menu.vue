@@ -27,7 +27,7 @@
           }, {
             id: 'material',
             label: '我的素材',
-            path: '/center/works'
+            path: '/center/material'
           }]
         }, {
           title: '账户管理',

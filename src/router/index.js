@@ -8,6 +8,7 @@ import index from '@/components/component/index/index' // 首页
 import testStore from '@/components/store' // 测试vuex
 import WorksList from '@/views/center/WorksListView'
 import DraftList from '@/views/center/DraftListView'
+import MaterialList from '@/views/center/MaterialListView'
 
 Vue.use(VueRouter)
 
@@ -62,6 +63,13 @@ let router = new VueRouter({
       component: DraftList,
       meta: {
         title: '草稿箱'
+      }
+    }, {
+      path: '/center/material',
+      name: 'MaterialList',
+      component: MaterialList,
+      meta: {
+        title: '我的素材'
       }
     }
   ]
