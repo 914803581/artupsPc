@@ -35,7 +35,7 @@
           child: [{
             id: 'account',
             label: '账户资料',
-            path: '/center/works'
+            path: '/center/account'
           }, {
             id: 'security',
             label: '账户安全',

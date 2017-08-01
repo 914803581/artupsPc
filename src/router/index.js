@@ -9,6 +9,7 @@ import testStore from '@/components/store' // 测试vuex
 import WorksList from '@/views/center/WorksListView'
 import DraftList from '@/views/center/DraftListView'
 import MaterialList from '@/views/center/MaterialListView'
+import AccountManager from '@/views/center/AccountManagerView'
 
 Vue.use(VueRouter)
 
@@ -70,6 +71,13 @@ let router = new VueRouter({
       component: MaterialList,
       meta: {
         title: '我的素材'
+      }
+    }, {
+      path: '/center/account',
+      name: 'AccountManager',
+      component: AccountManager,
+      meta: {
+        title: '账户资料'
       }
     }
   ]
