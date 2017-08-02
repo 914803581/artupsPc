@@ -12,6 +12,8 @@ import MaterialList from '@/views/center/MaterialListView'
 import AccountManager from '@/views/center/AccountManagerView'
 import AccountSecurity from '@/views/center/AccountSecurityView'
 import AddressManager from '@/views/center/AddressManagerView'
+import OrderList from '@/views/center/OrderListView'
+import CouponList from '@/views/center/CouponListView'
 
 Vue.use(VueRouter)
 
@@ -94,6 +96,20 @@ let router = new VueRouter({
       component: AddressManager,
       meta: {
         title: '收货地址管理'
+      }
+    }, {
+      path: '/center/order',
+      name: 'OrderList',
+      component: OrderList,
+      meta: {
+        title: '订单管理'
+      }
+    }, {
+      path: '/center/coupons',
+      name: 'CouponList',
+      component: CouponList,
+      meta: {
+        title: '优惠券管理'
       }
     }
   ]
