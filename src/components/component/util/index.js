@@ -1,6 +1,12 @@
 export default{
   install(Vue,options)
   {
+  	
+  	//获得coustName  宝宝书
+  	 Vue.prototype.getCoustName = function (dom) { 
+  	 	return dom.parents(".pubilc_div").find(".pageleft span").attr("page")+'_'+dom.next("img").attr("imgsort")
+  	 }
+  	
   	//addToSession 循环url，存入session
     Vue.prototype.addToSession = function () { 
 		var obj = JSON.parse(sessionStorage.getItem("urlQuery"));
@@ -28,16 +34,6 @@ export default{
 			return ''
 		}
     }
-    Vue.prototype.getFromSession2 = function (name,sessionName) {
-		var obj = JSON.parse(sessionStorage.getItem(name));
-		if (sessionName) {
-			if (obj[sessionName]) {
-				return obj[sessionName];
-			}
-			return ''
-		}
-    }
-    
      //将sessionStorage中存储的属性增加到jsons中
      Vue.prototype.sourceSession = function (jsons) {
 		var obj = JSON.parse(sessionStorage.getItem("urlQuery"));

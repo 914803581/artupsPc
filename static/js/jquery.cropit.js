@@ -412,6 +412,9 @@
 
                         if (imageSrc.indexOf('data') === 0) {
                             this.preImage.src = imageSrc;
+                            if(this.preImage.src ==imageSrc){
+                            	  this.onPreImageLoaded();
+                            }
                         } else {
                             var xhr = new XMLHttpRequest();
                             xhr.onload = function (e) {
@@ -419,12 +422,14 @@
                                     _this3.onImageError.call(_this3, _constants.ERRORS.IMAGE_FAILED_TO_LOAD);
                                     return;
                                 }
-
+								console.log('图片加载完成')
                                 _this3.loadFile(e.target.response);
                             };
                             xhr.open('GET', imageSrc);
                             xhr.responseType = 'blob';
                             xhr.send();
+								console.log('开始加载')
+                            
                         }
                     }
                 }, {
@@ -444,8 +449,11 @@
                             }
                             return;
                         }
-
+						
                         this.image.src = this.preImage.src;
+                        if ( this.image.src == this.preImage.src) {
+                        		this.onImageLoaded();
+                        }                        
                     }
                 }, {
                     key: 'onImageLoaded',

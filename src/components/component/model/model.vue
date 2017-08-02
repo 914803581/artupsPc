@@ -52,11 +52,11 @@
 				this.$store.commit("slectFile");
 				//关闭弹窗
 				this.closeModel();
+				//抬起下面的拖动框
+				this.$emit("footerBurl",true)
 				setTimeout(()=>{//延迟去执行此方法避免和vuex内部执行顺利冲突
 					this.$store.commit("drapDiv")					
 				},200)
-
-				
 			},
 			selectImg(index){
 				this.$store.state.bbs.material[index].isTrue = !this.$store.state.bbs.material[index].isTrue;
@@ -119,10 +119,6 @@
 					console.log('开始上传')
                     r.opts.query = extraPostData;
                     //打开进度框
-
-                    
-                    //关闭上弹块儿
-
                 });
                 //上传中
                 r.on('progress', function (e) {

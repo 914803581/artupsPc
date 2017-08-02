@@ -4,7 +4,6 @@
     <div   class="comtent_chanpin">
       <div class="line_comtent">
         <div class="comtent">
-          <!--title-->
           <div class="title">
             <div class="title_left">
               <span>画册编辑</span>
@@ -12,8 +11,8 @@
             </div>
             <div class="title_right">
               <span>255x355mm</span>
-              <span @click="openImgEdit">56页</span>
-              <span @click="openTxst">￥499</span>
+              <span >56页</span>
+              <span>￥499</span>
             </div>
           </div>
         </div>
@@ -67,21 +66,19 @@
             </button>
           </div>
         </div>
-        <!--<el-collapse-transition>-->
-        <div   class="fonter_box_img">
+        <el-collapse-transition>
+        <div   v-show="footerShow" class="fonter_box_img">
           <ul>
-
             <li  v-for="(footerImg,index) in $store.state.bbs.footerData" draggable="true">
               <img :src="footerImg.thumbnailUrl"/>
             </li>
-
           </ul>
         </div>
-        <!--</el-collapse-transition>-->
+        </el-collapse-transition>
       </div>
     </div>
     <!--模态框素材库-->
-    <div-model  :isShowModel="isModel"></div-model>
+    <div-model @footerBurl="footerBoolean"  :isShowModel="isModel"></div-model>
     <!--图片编辑插件 postData 编辑器返回的数据-->
     <img-edit @postDataImg="postDatas" :dataEditJson="dataEditImg"  :isImgEdit="isimgEdit"></img-edit>
     <!--文字编辑框-->
@@ -231,9 +228,19 @@
 
     },
     methods: {
+		footerBoolean(val){ //素材库抬起底部图片
+			var vm = this;
+			this.footerShow =val;
+			setTimeout(function(){
+	      		vm.jisuan();// 计算页面位置
+	      	},300)
+		},
       postDatas(val){    
       	console.log(val)
-//      $(".editbbs_one").next("img").attr("src",val.imgData).attr("style","")
+      	//获取数据覆盖便于二次编辑
+		var constName =this.getCoustName($(".editbbs_one"))
+		this.$store.state.editData.ImgHashMap.getvalue(constName).actions = val.postData;
+		
         $(".editbbs_one").next("img").attr("src",val.imgData).css("width","100%").css("height","100%").css("left",0).css("top",0)
 //      ImgHashMapBase64
 		var oPage = $(".editbbs_one").parents(".pubilc_div").find(".page .pageleft span").text();
@@ -257,11 +264,22 @@
           this.openTxst();//打开文字框
         }
         if($($event.target).hasClass("drap_img")){//点击图片调起编辑器
+        	  
+        	  if($($event.target).next(".img_drap").attr("src")==""){return;}//为空返回
+        	  
           $(".editbbs_one").removeClass("editbbs_one");
           $($event.target).addClass("editbbs_one");
           this.dataEditImg.oSrc = $($event.target).next("img").attr("imgstyle");
           this.dataEditImg.oW = $($event.target).parent(".drapBox").width();
           this.dataEditImg.oH = $($event.target).parent(".drapBox").height();
+          //点击时候获取coustName 从hashMap里面得到他有没第一次编辑的东西
+          
+          var constName =this.getCoustName($($event.target))
+		 this.dataEditImg.oActions = this.$store.state.editData.ImgHashMap.getvalue(constName).actions;
+		 console.log(this.dataEditImg)
+          //从vuex缓存里面拿到我的数据
+//        console.log()
+
           this.openImgEdit();
         }
       },
@@ -271,21 +289,15 @@
         })
       },
       jisuan(){//动态计算面积
-        $("#bbsEdit").css("height",$(window).height()+'px');
-        var oH = $(window).height()-($(".footer_img").height()+$("#handers").height()+$(".title").height()+30);
-        $("#bbsEdit .time_main_left").css("height",oH+'px');
+        var oH = $(window).height()-$(".footer_img").height()-$("#handers .header").height()-$(".comtent_chanpin .line_comtent .comtent .title").height()-32;
+		$(".time_main_left").css("height",oH+'px');
       },
       checkFooterShow($event){ //切换底部的图片显示隐藏
-        if ($($event.target).hasClass("imgSpan")) {
-          var bb = ++aa;
-          var footer = $($event.target).parents(".footer_img").find(".fonter_box_img");
-          if (bb %2==1) {
-            footer.show();
-          }else{
-            footer.hide();
-          }
-          this.jisuan();
-        }
+      	var vm = this;
+      	this.footerShow = !this.footerShow;
+      	setTimeout(function(){
+      		vm.jisuan();// 计算页面位置
+      	},300)
       },
       open_material(){ //打开素材库
         this.isModel= !this.isModel
@@ -307,7 +319,7 @@
 
     },
     created(){//只执行一次
-      this.jisuan();// 计算页面位置
+     
       //模版数据
       this.bbsTemplate_data = bbsData_template;
       console.log(this.bbsTemplate_data)
@@ -323,7 +335,7 @@
       //调用vuex里面的拖拽方法，初始化的时候
       this.$store.commit("drapDiv")
       this.setPageIndex();
-
+ 	  this.jisuan();// 计算页面位置
 //		 	this.$router.push({ path: '/security/iploginanalysis/'+json.name,params: { deviceId: 123}});
 
 //			var dragdiv = document.querySelector('#div_drap');

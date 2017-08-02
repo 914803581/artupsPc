@@ -84,17 +84,19 @@
 				imageCropper.cropit('imageSrc', "");	
 			},
 			openModel(){
+				var vm = this;
 				this.imgEdit = true;
 				if(this.dataEditJson){
 					console.log(this.dataEditJson)
-				 //修改图片src
-				 imageCropper.cropit('imageSrc', this.dataEditJson.oSrc);				
+				   //修改图片src
+				  imageCropper.cropit('imageSrc', this.dataEditJson.oSrc);				
 				 //修改图片框大小
 				  if (this.dataEditJson.oW && this.dataEditJson.oH) {  //重新换算宽度比之后
+//                    imageCropper.cropit('previewSize', { width: this.dataEditJson.oW, height: dataEditJson.oH})                 		
                       imageCropper.cropit('previewSize', { width: this.dataEditJson.oW*300/this.dataEditJson.oH, height: 300 })                 		
 				  }
-				}
-				 
+				  
+				}				 
 			},
 			rotateCw(){
 				angu = reg += rotationalp;
@@ -117,6 +119,7 @@
 	    		isImgEdit:"openModel"
 	    },
 	    mounted(){
+	    	var vm = this;
 	    	   this.imgEdit = this.isImgEdit;
 	    	  
 	    	   //让框具有拖动的功能
@@ -136,7 +139,26 @@
                 imageBackground: true,
                 imageBackgroundBorderWidth: 0,
                 width: 200,
-                height: 300
+                height: 300,
+                onImageLoaded:function(){
+              		console.log('图加班..')
+                		if(vm.dataEditJson.oActions&&JSON.stringify(vm.dataEditJson.oActions)!="{}"){
+//				  	  postData.postData.cropit = true;
+						var jsonActions = vm.dataEditJson.oActions;
+						//设置图像的加载缩放
+						imageCropper.cropit('zoom', jsonActions.scale);
+						//旋转角度
+						for (var i = 0; i < (jsonActions.rotate/90); i++) {
+							imageCropper.cropit("rotateCW");
+						}
+						//再次编辑的位置
+						imageCropper.cropit('offset', {
+	                        x: -jsonActions.x* jsonActions.scale,
+	                        y: -jsonActions.y* jsonActions.scale
+	                    });
+//						
+				  }               		
+                }
 //		          imageState: {
 //		            src: 'http://scottcheng.github.io/cropit/images/2-960.jpg',
 //		          },
