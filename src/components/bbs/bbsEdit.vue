@@ -19,6 +19,15 @@
       </div>
       <div class="line_comtent">
         <div class="comtent">
+        	<!--功能div-->
+        	 <div class="box_menu">
+        	 	<ul>
+        	 		<li><i class="iconfont">&#xe711;</i>添加组件</li>       	 		
+        	 		<li><i class="iconfont">&#xe64f;</i>更换板式</li>
+        	 		<li><i style="font-size: 20px;padding:0 ;" class="iconfont">&#xe602;</i>加入购物车</li>
+        	 		<li><i class="iconfont">&#xe629;</i>立即购买</li>
+        	 	</ul>
+        	 </div>
           <div class="time_main_left">
             <div class="time_bg" v-for="(item,index) in bbsTemplate_data">
               <!--pubilc_div 这个class是留给整屏来定义的样式  click_template 是用vue里面的事件委派来解决避免不了的dom操作-->
@@ -67,7 +76,7 @@
           </div>
         </div>
         <el-collapse-transition>
-        <div   v-show="footerShow" class="fonter_box_img">
+        <div  v-show="footerShow" class="fonter_box_img">
           <ul>
             <li  v-for="(footerImg,index) in $store.state.bbs.footerData" draggable="true">
               <img :src="footerImg.thumbnailUrl"/>

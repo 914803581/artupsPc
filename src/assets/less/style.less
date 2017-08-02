@@ -64,7 +64,6 @@ html,body{width:100%;min-height: 100%;font-family: "微软雅黑";font-weight: 5
 }
 .comtent_chanpin{
     width:100%;
-
     background: #efefef;
     .line_comtent{
         border-bottom: 1px solid #D3D3D6;
@@ -72,7 +71,41 @@ html,body{width:100%;min-height: 100%;font-family: "微软雅黑";font-weight: 5
         width: 1040px;
 //      height: 300px;
         margin: 0 auto;
-        overflow: hidden;
+//      overflow: auto;
+        position: relative;
+        .box_menu{
+            width: 120px;
+            height: 200px;
+//          border: 1px solid red;
+            position: absolute;
+            right: -130px;
+            top: 0px;
+            ul{
+                >li{
+                    cursor: pointer;
+                    height: 35px;
+                    line-height: 35px;
+                    margin: 10px;
+                    font-weight: 400;
+                    transition: all 0.2s;
+                    font-size: 14px;
+                    i{
+                        padding: 0 4px;
+                        color: #333;
+                        font-size: 16px;
+                    }
+                    &:hover{
+                      opacity: .8;
+                      text-indent: 2px;
+                    }
+                    &:active{
+                        position: relative;
+                        top: 1px;
+                    }
+                }
+                
+            }
+        }
         .title{
             font-size: 14px;
             color: #333;
