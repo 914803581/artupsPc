@@ -12,8 +12,8 @@
             </div>
             <div class="title_right">
               <span>255x355mm</span>
-              <span @click="openImgEdit">56页</span>
-              <span @click="openTxst">￥499</span>
+              <span >56页</span>
+              <span>￥499</span>
             </div>
           </div>
         </div>
@@ -70,11 +70,9 @@
         <!--<el-collapse-transition>-->
         <div   class="fonter_box_img">
           <ul>
-
             <li  v-for="(footerImg,index) in $store.state.bbs.footerData" draggable="true">
               <img :src="footerImg.thumbnailUrl"/>
             </li>
-
           </ul>
         </div>
         <!--</el-collapse-transition>-->
@@ -233,7 +231,10 @@
     methods: {
       postDatas(val){    
       	console.log(val)
-//      $(".editbbs_one").next("img").attr("src",val.imgData).attr("style","")
+      	//获取数据覆盖便于二次编辑
+		var constName =this.getCoustName($(".editbbs_one"))
+		this.$store.state.editData.ImgHashMap.getvalue(constName).actions = val.postData;
+		
         $(".editbbs_one").next("img").attr("src",val.imgData).css("width","100%").css("height","100%").css("left",0).css("top",0)
 //      ImgHashMapBase64
 		var oPage = $(".editbbs_one").parents(".pubilc_div").find(".page .pageleft span").text();
@@ -257,11 +258,22 @@
           this.openTxst();//打开文字框
         }
         if($($event.target).hasClass("drap_img")){//点击图片调起编辑器
+        	  
+        	  if($($event.target).next(".img_drap").attr("src")==""){return;}//为空返回
+        	  
           $(".editbbs_one").removeClass("editbbs_one");
           $($event.target).addClass("editbbs_one");
           this.dataEditImg.oSrc = $($event.target).next("img").attr("imgstyle");
           this.dataEditImg.oW = $($event.target).parent(".drapBox").width();
           this.dataEditImg.oH = $($event.target).parent(".drapBox").height();
+          //点击时候获取coustName 从hashMap里面得到他有没第一次编辑的东西
+          
+          var constName =this.getCoustName($($event.target))
+		 this.dataEditImg.oActions = this.$store.state.editData.ImgHashMap.getvalue(constName).actions;
+		 console.log(this.dataEditImg)
+          //从vuex缓存里面拿到我的数据
+//        console.log()
+
           this.openImgEdit();
         }
       },

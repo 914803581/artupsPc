@@ -19,8 +19,14 @@ Vue.use(VueAxios, Axios)
 //自定义的一些全局组件
 import Handers from '@/components/component/hander'
 import Footers from '@/components/component/footer'
+import utils from './components/component/util';
+
 Vue.use(Handers)
 Vue.use(Footers)
+Vue.use(utils) //工具函数
+
+
+
 
 // 线上环境的时候隐藏一些打印的东西
 // Vue.config.productionTip = false

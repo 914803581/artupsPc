@@ -102,12 +102,15 @@ let store = new Vuex.Store({
 						state.bbs.footerData.splice(oIndex, 1);
 						console.log(dataImg)
 						var oPage = $(ev.target).parents(".pubilc_div").find(".page .pageleft span").attr("page");//第几页
-						var oTypeStyle = $(ev.target).find(">img").attr("typestyle");//板式
-						var oimgSort= $(ev.target).find(">img").attr("imgsort");//图片的顺序
+						var oTypeStyle = $(ev.target).next(".img_drap").attr("typestyle");//板式
+						var oimgSort= $(ev.target).next(".img_drap").attr("imgsort");//图片的顺序
 //						console.log('页数'+oPage)
 //						console.log('板式'+oTypeStyle)
 //						console.log('图片的顺序'+oimgSort)
+
 						 var constName = oPage+"_"+oimgSort;
+						 console.log(constName)
+						 
 						 var picObj = {"constName":constName,"picDbId" : dataImg.dbId, "page" : oPage, "editCnfIndex" : oTypeStyle, "num" : oimgSort, "actions" : {},
                             "thumbnailImageUrl":dataImg.thumbnailUrl, "previewThumbnailImageUrl" :"", "crop" : "false","editCnfName" : ""};
                         //存入图片ImgHashMap
