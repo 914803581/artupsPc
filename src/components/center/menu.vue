@@ -43,7 +43,7 @@
           }, {
             id: 'address',
             label: '收获地址管理',
-            path: '/center/works'
+            path: '/center/address'
           }]
         }, {
           title: '订单',

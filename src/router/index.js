@@ -11,6 +11,7 @@ import DraftList from '@/views/center/DraftListView'
 import MaterialList from '@/views/center/MaterialListView'
 import AccountManager from '@/views/center/AccountManagerView'
 import AccountSecurity from '@/views/center/AccountSecurityView'
+import AddressManager from '@/views/center/AddressManagerView'
 
 Vue.use(VueRouter)
 
@@ -86,6 +87,13 @@ let router = new VueRouter({
       component: AccountSecurity,
       meta: {
         title: '账户安全'
+      }
+    }, {
+      path: '/center/address',
+      name: 'AddressManager',
+      component: AddressManager,
+      meta: {
+        title: '收货地址管理'
       }
     }
   ]
