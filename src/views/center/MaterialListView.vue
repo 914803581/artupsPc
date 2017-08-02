@@ -1,18 +1,11 @@
 <template>
-  <div class="works-list">
+  <div class="material-list">
     <unify-header></unify-header>
     <div class="container">
       <div class="wrapper">
         <div class="main">
-          <h2 class="title">我的作品</h2>
+          <h2 class="title">我的素材</h2>
           <div class="operation">
-            <label>作品类型</label>
-            <ul class="types-filter">
-              <li class="drop-down"></li>
-              <li class="type" :class="{candidate:!t.selected}" v-for="t in types" @click="typeFilter(t)">
-                {{t.text}}
-              </li>
-            </ul>
             <div class="manager">
               <a href="javascript:void(0);" v-show="!managerIng" @click="managerIng=true" class="manager-btn">管理</a>
               <a href="javascript:void(0);" v-show="managerIng" class="manager-btn">全选</a>
@@ -21,14 +14,11 @@
           </div>
           <div class="works-list">
             <div class="works-container">
-              <div class="woks-data" v-for="work in workData" :key="work.id">
+              <div class="woks-data" v-for="material in materialData" :key="material.id">
                 <div class="img-box">
-                  <img :src="work.imgPath" :alt="work.name" :title="work.name">
+                  <img :src="material.showPath">
                 </div>
-                <label class="title">{{work.name}}</label>
-                <span class="time">{{work.createTime | time}}</span>
-                <span class="type">{{work.typeName}} {{work.size}} mm</span>
-                <a href="javascript:void(0);" class="buy-btn">购买定制</a>
+                <span class="time">{{material.createTime | time}}</span>
               </div>
             </div>
           </div>
@@ -38,7 +28,7 @@
             :total="50000">
           </el-pagination>
         </div>
-        <left-menu selected="works"></left-menu>
+        <left-menu selected="material"></left-menu>
       </div>
     </div>
     <unify-footer></unify-footer>
@@ -71,7 +61,7 @@
           id: 'huace',
           text: '画册'
         }],
-        workData: []
+        materialData: []
       }
     },
     methods: {
@@ -95,28 +85,29 @@
     watch: {},
     created: function () {
       for (let i = 0; i < 9; i++) {
-        this.workData.push({
-          id: '475bb8d4c5874f69810c30bdb4733e74',
-          name: '未命名 2017-05-15 16:02',
-          skuCode: 'B01004',
-          material: null,
-          size: '500*400',
-          worksType: 'haibao',
-          isrelease: null,
-          createTime: 1494835379000,
-          page: null,
-          imgPath: 'http://testpcbuilder.artup.com/upload/475bb8d4c5874f69810c30bdb4733e741494835379.jpg',
-          price: 40,
-          ext: 'web',
-          ext2: null,
-          ext3: null,
-          userId: '8dab7dbe6d094347ac8d2af61c4b194a',
-          pdfPath: null,
-          isRedo: null,
-          productId: null,
-          typeName: '海报',
-          attribute: null,
-          swfUrl: null
+        this.materialData.push({
+          'id': '8f5b551daa3640a08ec768e11b9081be',
+          'name': null,
+          'storagePath': 'http://testboss.artup.com//origin/645/0ff87cd6be7a32932bbaab98210e768324d23996befee595ef4f0ccb3d519aaa16108eb5083f437e0ecb27684fd46bbf1484623385307.JPG',
+          'showPath': 'http://testboss.artup.com//material/thumb/2017/01/17/8f5b551daa3640a08ec768e11b9081be_360-240.jpg',
+          'createTime': 1484623386000,
+          'pixel': '3264X2448',
+          'picSize': 1153434,
+          'shootEqu': 'iPhone 6',
+          'shootLens': null,
+          'shootBurnt': '83/20',
+          'aperture': '7983/3509',
+          'iso': '100',
+          'colorMode': '1',
+          'shutter': '253/50',
+          'resolvingPower': '72/1',
+          'userId': '8dab7dbe6d094347ac8d2af61c4b194a',
+          'ext': null,
+          'ext2': null,
+          'tagName': null,
+          'meteringMode': null,
+          'exposureProgram': null,
+          'shootDate': null
         })
       }
     }
@@ -126,7 +117,7 @@
 <style lang="scss" type="text/scss" rel="stylesheet/sass">
   @import "~cube.css/src/scss/neat.scss";
 
-  .works-list {
+  .material-list {
     .wrapper {
       width: 1152px;
       margin: 0 auto;
@@ -150,54 +141,6 @@
       }
       .operation {
         position: relative;
-        label {
-          margin-left: 30px;
-          line-height: 76px;
-          font-weight: 400;
-        }
-      }
-      .types-filter {
-        position: absolute;
-        top: 16px;
-        display: inline-block;
-        height: 38px;
-        z-index: 100;
-        margin-left: 20px;
-        color: #515151;
-        line-height: 38px;
-        overflow: hidden;
-        border: 1px solid #9e9e9e;
-        border-radius: 5px;
-        background: #fff;
-        .drop-down {
-          position: absolute;
-          top: 13px;
-          right: 6px;
-          width: 0;
-          height: 0;
-          border-left: 5px solid transparent;
-          border-right: 5px solid transparent;
-          border-top: 10px solid #515151;
-        }
-        .type {
-          width: 138px;
-          padding-left: 1em;
-          border-bottom: 1px solid #9e9e9e;
-          &:last-child {
-            border: 0;
-          }
-          &.candidate:hover {
-            cursor: pointer;
-            background: rgba(139, 195, 74, .2);
-          }
-        }
-        &:hover {
-          height: auto;
-          .drop-down {
-            transform: rotate(180deg);
-            transition: all 0.5s;
-          }
-        }
       }
       .manager {
         float: right;
@@ -248,32 +191,11 @@
             transform: scale(1.2);
           }
         }
-        .title {
+        .time {
           display: block;
-          margin-top: 8px;
-          color: #303030;
-          font-size: 14px;
-          font-weight: 400;
-        }
-        .time, .type {
-          display: block;
+          margin: 10px 0 28px;
           color: #cbcbcb;
           font-size: 12px;
-        }
-        .type {
-          margin-bottom: 28px;
-        }
-        .buy-btn {
-          position: absolute;
-          right: 10px;
-          bottom: 28px;
-          display: block;
-          padding: 0 .8em;
-          background: #a00912;
-          color: #fff;
-          font-size: 14px;
-          line-height: 1.8;
-          border-radius: 3px;
         }
       }
     }
@@ -286,7 +208,7 @@
       .el-pager li:hover {
         color: #a00912;
       }
-      .number{
+      .number {
         padding: 0 15px;
         font-size: 14px;
       }

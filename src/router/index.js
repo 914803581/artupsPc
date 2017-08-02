@@ -7,6 +7,11 @@ import bbsEdit from '@/components/bbs/bbsEdit'
 import index from '@/components/component/index/index' // 首页
 import testStore from '@/components/store' // 测试vuex
 import WorksList from '@/views/center/WorksListView'
+import DraftList from '@/views/center/DraftListView'
+import MaterialList from '@/views/center/MaterialListView'
+import AccountManager from '@/views/center/AccountManagerView'
+import AccountSecurity from '@/views/center/AccountSecurityView'
+import AddressManager from '@/views/center/AddressManagerView'
 
 Vue.use(VueRouter)
 
@@ -55,6 +60,41 @@ let router = new VueRouter({
       meta: {
         title: '我的作品'
       }
+    }, {
+      path: '/center/draft',
+      name: 'DraftList',
+      component: DraftList,
+      meta: {
+        title: '草稿箱'
+      }
+    }, {
+      path: '/center/material',
+      name: 'MaterialList',
+      component: MaterialList,
+      meta: {
+        title: '我的素材'
+      }
+    }, {
+      path: '/center/account',
+      name: 'AccountManager',
+      component: AccountManager,
+      meta: {
+        title: '账户资料'
+      }
+    }, {
+      path: '/center/security',
+      name: 'AccountSecurity',
+      component: AccountSecurity,
+      meta: {
+        title: '账户安全'
+      }
+    }, {
+      path: '/center/address',
+      name: 'AddressManager',
+      component: AddressManager,
+      meta: {
+        title: '收货地址管理'
+      }
     }
   ]
 })
@@ -69,6 +109,5 @@ router.afterEach((to, from, next) => {
     window.document.title = to.meta.title
   }
 })
-
 export default router
 

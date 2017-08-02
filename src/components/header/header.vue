@@ -54,6 +54,7 @@
       float: left;
       width: 146px;
       height: 42px;
+      text-indent: -9999px;
       background: #2e2e2e url('../../assets/img/login_1.png') no-repeat;
       background-size: 100% 100%;
     }

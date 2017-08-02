@@ -1,18 +1,11 @@
 <template>
-  <div class="works-list">
+  <div class="draft-list">
     <unify-header></unify-header>
     <div class="container">
       <div class="wrapper">
         <div class="main">
-          <h2 class="title">我的作品</h2>
+          <h2 class="title">草稿箱</h2>
           <div class="operation">
-            <label>作品类型</label>
-            <ul class="types-filter">
-              <li class="drop-down"></li>
-              <li class="type" :class="{candidate:!t.selected}" v-for="t in types" @click="typeFilter(t)">
-                {{t.text}}
-              </li>
-            </ul>
             <div class="manager">
               <a href="javascript:void(0);" v-show="!managerIng" @click="managerIng=true" class="manager-btn">管理</a>
               <a href="javascript:void(0);" v-show="managerIng" class="manager-btn">全选</a>
@@ -28,7 +21,7 @@
                 <label class="title">{{work.name}}</label>
                 <span class="time">{{work.createTime | time}}</span>
                 <span class="type">{{work.typeName}} {{work.size}} mm</span>
-                <a href="javascript:void(0);" class="buy-btn">购买定制</a>
+                <a href="javascript:void(0);" class="buy-btn">继续编辑</a>
               </div>
             </div>
           </div>
@@ -38,7 +31,7 @@
             :total="50000">
           </el-pagination>
         </div>
-        <left-menu selected="works"></left-menu>
+        <left-menu selected="draft"></left-menu>
       </div>
     </div>
     <unify-footer></unify-footer>
@@ -126,7 +119,7 @@
 <style lang="scss" type="text/scss" rel="stylesheet/sass">
   @import "~cube.css/src/scss/neat.scss";
 
-  .works-list {
+  .draft-list {
     .wrapper {
       width: 1152px;
       margin: 0 auto;
@@ -150,54 +143,6 @@
       }
       .operation {
         position: relative;
-        label {
-          margin-left: 30px;
-          line-height: 76px;
-          font-weight: 400;
-        }
-      }
-      .types-filter {
-        position: absolute;
-        top: 16px;
-        display: inline-block;
-        height: 38px;
-        z-index: 100;
-        margin-left: 20px;
-        color: #515151;
-        line-height: 38px;
-        overflow: hidden;
-        border: 1px solid #9e9e9e;
-        border-radius: 5px;
-        background: #fff;
-        .drop-down {
-          position: absolute;
-          top: 13px;
-          right: 6px;
-          width: 0;
-          height: 0;
-          border-left: 5px solid transparent;
-          border-right: 5px solid transparent;
-          border-top: 10px solid #515151;
-        }
-        .type {
-          width: 138px;
-          padding-left: 1em;
-          border-bottom: 1px solid #9e9e9e;
-          &:last-child {
-            border: 0;
-          }
-          &.candidate:hover {
-            cursor: pointer;
-            background: rgba(139, 195, 74, .2);
-          }
-        }
-        &:hover {
-          height: auto;
-          .drop-down {
-            transform: rotate(180deg);
-            transition: all 0.5s;
-          }
-        }
       }
       .manager {
         float: right;

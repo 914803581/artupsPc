@@ -12,9 +12,11 @@ import VueAxios from 'vue-axios'
 import router from '@/router'
 // 引入vuex
 import store from '@/store'
+import mixins from './mixins'
 Vue.use(ElementUI)
 // 引入ajax
 Vue.use(VueAxios, Axios)
+
 
 //自定义的一些全局组件
 import Handers from '@/components/component/hander'
@@ -25,9 +27,7 @@ Vue.use(Handers)
 Vue.use(Footers)
 Vue.use(utils) //工具函数
 
-
-
-
+Vue.mixin(mixins)
 // 线上环境的时候隐藏一些打印的东西
 // Vue.config.productionTip = false
 

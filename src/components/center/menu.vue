@@ -21,13 +21,13 @@
             label: '我的作品',
             path: '/center/works'
           }, {
-            works: 'draft',
+            id: 'draft',
             label: '草稿箱',
-            path: '/center/works'
+            path: '/center/draft'
           }, {
             id: 'material',
             label: '我的素材',
-            path: '/center/works'
+            path: '/center/material'
           }]
         }, {
           title: '账户管理',
@@ -35,15 +35,15 @@
           child: [{
             id: 'account',
             label: '账户资料',
-            path: '/center/works'
+            path: '/center/account'
           }, {
             id: 'security',
             label: '账户安全',
-            path: '/center/works'
+            path: '/center/security'
           }, {
             id: 'address',
             label: '收获地址管理',
-            path: '/center/works'
+            path: '/center/address'
           }]
         }, {
           title: '订单',
@@ -91,11 +91,17 @@
       dd {
         transition: all 0.5s;
         font-weight: 400;
+        a {
+          outline: 0;
+        }
         &:hover {
           text-indent: 6px;
         }
         &.selected {
           font-weight: 500;
+          a {
+            color: #a00912;
+          }
         }
       }
       dd a {
