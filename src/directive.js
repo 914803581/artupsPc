@@ -1,5 +1,6 @@
 // directive 自定义指令的js
 import Vue from 'vue'
+
 let $ = window.jQuery
 // 注册一个全局自定义指令 v-DomHeight 这个指令是操作index的swipe快DOM的高度
 let DomHeight = Vue.directive('DomHeight', {

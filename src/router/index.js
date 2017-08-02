@@ -14,6 +14,9 @@ import AccountSecurity from '@/views/center/AccountSecurityView'
 import AddressManager from '@/views/center/AddressManagerView'
 import OrderList from '@/views/center/OrderListView'
 import CouponList from '@/views/center/CouponListView'
+import UserWorks from '@/views/user/WorksListView'
+import UserMaterial from '@/views/user/MaterialListView'
+import UserCoupons from '@/views/user/CouponListView'
 
 Vue.use(VueRouter)
 
@@ -110,6 +113,27 @@ let router = new VueRouter({
       component: CouponList,
       meta: {
         title: '优惠券管理'
+      }
+    }, {
+      path: '/user/works',
+      name: 'UserWorks',
+      component: UserWorks,
+      meta: {
+        title: '我的作品'
+      }
+    }, {
+      path: '/user/material',
+      name: 'UserMaterial',
+      component: UserMaterial,
+      meta: {
+        title: '我的素材'
+      }
+    }, {
+      path: '/user/coupons',
+      name: 'UserCoupons',
+      component: UserCoupons,
+      meta: {
+        title: '我的优惠券'
       }
     }
   ]
