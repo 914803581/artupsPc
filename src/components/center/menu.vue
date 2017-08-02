@@ -51,7 +51,7 @@
           child: [{
             id: 'order',
             label: '订单管理',
-            path: '/center/works'
+            path: '/center/order'
           }]
         }, {
           title: '优惠券',
@@ -59,7 +59,7 @@
           child: [{
             id: 'coupons',
             label: '优惠券管理',
-            path: '/center/works'
+            path: '/center/coupons'
           }]
         }]
       }
