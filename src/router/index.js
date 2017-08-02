@@ -10,6 +10,7 @@ import WorksList from '@/views/center/WorksListView'
 import DraftList from '@/views/center/DraftListView'
 import MaterialList from '@/views/center/MaterialListView'
 import AccountManager from '@/views/center/AccountManagerView'
+import AccountSecurity from '@/views/center/AccountSecurityView'
 
 Vue.use(VueRouter)
 
@@ -78,6 +79,13 @@ let router = new VueRouter({
       component: AccountManager,
       meta: {
         title: '账户资料'
+      }
+    }, {
+      path: '/center/security',
+      name: 'AccountSecurity',
+      component: AccountSecurity,
+      meta: {
+        title: '账户安全'
       }
     }
   ]

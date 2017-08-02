@@ -39,7 +39,7 @@
           }, {
             id: 'security',
             label: '账户安全',
-            path: '/center/works'
+            path: '/center/security'
           }, {
             id: 'address',
             label: '收获地址管理',
@@ -91,7 +91,7 @@
       dd {
         transition: all 0.5s;
         font-weight: 400;
-        a{
+        a {
           outline: 0;
         }
         &:hover {
@@ -99,6 +99,9 @@
         }
         &.selected {
           font-weight: 500;
+          a {
+            color: #a00912;
+          }
         }
       }
       dd a {
