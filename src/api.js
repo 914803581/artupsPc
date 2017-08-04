@@ -19,7 +19,8 @@ var HTTP = VueHttp.$http.create({
 // baseUrl:'http:www.baidu.com',
 // timeout:5000, //请求超时配置
   params: { // 每一个连接都跟手的东西，查询字符串
-    book: 123
+    book: 123,
+    userDbId: '2221214',
   },
   headers: {}// 设置请求头的对象
 
@@ -108,8 +109,8 @@ const QUERY_CAR = `${HOST}artup-build/builder/cors/car/queryAll.do?format=json&i
 
 // //只要访问ajax的时候，没有这个用户信息，就跳到首页去登录获取用户信息
 // if (!sessionIds) {
-//	alert('用户信息不存在!');
-//	location.href='#/'
+// alert('用户信息不存在!');
+// location.href='#/'
 export default {
   testBaidu: {
     test: (inter) => {
@@ -248,6 +249,22 @@ export default {
   //     return VueHttp.$http.post(GER_USERDBID)
   //   }
   // },
+  Works: {
+    WorkList: (paramJson) => {
+      return HTTP.get(QUERY_WORK_LIST_URL,
+        {
+          params: paramJson
+        }
+      )
+    },
+    DeletWork: (paramJson) => {
+      return HTTP.get(DELECT_WORK,
+        {
+          params: paramJson
+        }
+      )
+    }
+  },
   Material: {
     MaterialData: (paramJson) => { // 素材数据
       return HTTP.get(QUERY_PICTURE_URL,
@@ -259,7 +276,7 @@ export default {
   },
   UPLOAD_URL: UPLOAD_URL,
 
-  ajax (url, callback) {
+  ajax: function (url, callback) {
     console.log(arguments.length)
     if (arguments.length > 2) {
       console.log('直接调用那个对象')
@@ -272,7 +289,7 @@ export default {
       callback('123')
     }
   },
-  $$ajax (inter, data, callback) {
+  $$ajax: function (inter, data, callback) {
     if (data && url !== '') {
       console.log('post请求')
     } else {
