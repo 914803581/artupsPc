@@ -30,7 +30,11 @@
 				<a href="javascript:void(0);">挂历</a>
 			</li> -->
 		</ul>
-		<div class="mineIM r " >
+		<div class="loding r" >
+			<a style="margin-left: 10px;" class="l" href="http://passport.artron.net/wechat/callback?skipSync=1&getToken=1&priority=1&sourceId=12&force=1&redirect=http://test.artup.com/artup-webapp/login/wechat">微信登录</a>
+			<!--<a class="l" style="margin-left: 31px;" href="user.html#/userReg">注册</a>-->
+		</div>
+		<div style="display: none;" class="mineIM r " >
 			
 			<a class="touxiang l" href=""> 
 				
@@ -49,7 +53,6 @@
 			 	<li ><a href="javascript:void(0);">退出登录</a></li>
 			 </ul>
 			</div>
-			<a class="cars" href="javascript:void(0);">购物车有<span>1</span>件商品</a>
 			<a href="javascript:void(0);" class="hander_cat">
 				<div class="img_cat">
 					<b aot-numbers="" class="">1</b>

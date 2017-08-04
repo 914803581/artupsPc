@@ -17,11 +17,10 @@ Vue.use(ElementUI)
 // 引入ajax
 Vue.use(VueAxios, Axios)
 
-
 //自定义的一些全局组件
 import Handers from '@/components/component/hander'
 import Footers from '@/components/component/footer'
-import utils from './components/component/util';
+import utils from '@/components/component/util';
 
 Vue.use(Handers)
 Vue.use(Footers)
