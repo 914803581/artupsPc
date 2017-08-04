@@ -1,6 +1,6 @@
 <template>
   <div class="works-list">
-    <unify-header></unify-header>
+    <Handers></Handers>
     <div class="container">
       <div class="wrapper">
         <div class="main">
@@ -15,33 +15,47 @@
             </ul>
             <div class="manager">
               <a href="javascript:void(0);" v-show="!managerIng" @click="managerIng=true" class="manager-btn">管理</a>
-              <a href="javascript:void(0);" v-show="managerIng" class="manager-btn">全选</a>
-              <a href="javascript:void(0);" v-show="managerIng" @click="managerIng=false" class="manager-btn">删除</a>
+              <a href="javascript:void(0);" v-show="managerIng" @click="checkedAll" class="manager-btn">全选</a>
+              <a href="javascript:void(0);" v-show="managerIng" @click="showDeleteDialogVisible"
+                 class="manager-btn">删除</a>
             </div>
           </div>
           <div class="works-list">
             <div class="works-container">
               <div class="woks-data" v-for="work in workData" :key="work.id">
                 <div class="img-box">
-                  <img :src="work.imgPath" :alt="work.name" :title="work.name">
+                  <el-checkbox v-show="managerIng" v-model="work.checked" class="checkbox-work"></el-checkbox>
+                  <img :src="work.thumbnailImageUrl" :alt="work.name" :title="work.name">
                 </div>
                 <label class="title">{{work.name}}</label>
-                <span class="time">{{work.createTime | time}}</span>
-                <span class="type">{{work.typeName}} {{work.size}} mm</span>
+                <span class="time">{{work.updatedDt}}</span>
+                <span class="type">{{work.sku}}</span>
                 <a href="javascript:void(0);" class="buy-btn">购买定制</a>
               </div>
             </div>
           </div>
-          <el-pagination
-            small="false"
-            layout="prev, pager, next"
-            :total="50000">
+          <el-pagination v-show="total>pageSize"
+                         small
+                         layout="prev, pager, next"
+                         :page-size="pageSize"
+                         :total="total"
+                         @current-change="paging">
           </el-pagination>
         </div>
         <left-menu selected="works"></left-menu>
       </div>
     </div>
     <unify-footer></unify-footer>
+    <el-dialog
+      title="我的作品"
+      :visible.sync="deleteDialogVisible"
+      size="small">
+      <span>您确认删除选中作品吗?</span>
+      <span slot="footer" class="dialog-footer">
+        <el-button @click="deleteDialogVisible=false">取 消</el-button>
+        <el-button type="primary" @click="deleteWork">确 定</el-button>
+      </span>
+    </el-dialog>
   </div>
 </template>
 
@@ -49,13 +63,16 @@
   import Header from '../../components/header/header.vue'
   import Footer from '../../components/footer/footer.vue'
   import LeftMenu from '../../components/center/menu.vue'
+  import Api from '../../api.js'
 
   export default {
     data: function () {
       return {
+        checkedAllValue: false,
+        deleteDialogVisible: false,
         managerIng: false,
         types: [{
-          id: '-1',
+          id: '',
           text: '所有类型',
           selected: true
         }, {
@@ -71,10 +88,76 @@
           id: 'huace',
           text: '画册'
         }],
-        workData: []
+        workData: [],
+        category: '',
+        pageSize: 9,
+        total: 0,
+        pageNum: 1
       }
     },
     methods: {
+      deleteWorkList: function () {
+        let deleteArr = []
+        this.workData.forEach(function (work) {
+          if (work.checked) {
+            deleteArr.push(work)
+          }
+        })
+        return deleteArr
+      },
+      deleteWork: function () {
+        let deleteArr = this.deleteWorkList()
+        let ids = []
+        deleteArr.forEach((item) => {
+          ids.push(item.dbId)
+        })
+        Api.Works.DeletWork({
+          dbId: ids.join(',')
+        }).then((result) => {
+          return result.status === 200 ? result.request.response : ''
+        }).then((result) => {
+          result = result ? JSON.parse(result) : ''
+          if (!result) {
+            return
+          }
+          if (result.code === 'success') {
+            this.managerIng = false
+            this.checkedAllValue = false
+            this.deleteDialogVisible = false
+            this.getData()
+          }
+        })
+      },
+      showDeleteDialogVisible: function () {
+        if (this.deleteWorkList().length) {
+          this.deleteDialogVisible = true
+        }
+      },
+      getData: function () {
+        this.pageNum -= 1
+        Api.Works.WorkList({
+          sortField: 'createdDt',
+          pageSize: this.pageSize,
+          pageNum: this.pageNum,
+          order: 'desc',
+          status: 2,
+          category: this.category
+        }).then((result) => {
+          return result.status === 200 ? result.request.response : ''
+        }).then((result) => {
+          let data = result ? JSON.parse(result) : ''
+          if (!data) {
+            return
+          }
+          let works = []
+          data.results.forEach((work) => {
+            work.checked = false
+            works.push(work)
+          })
+          this.workData = works
+          this.total = data.totalRecord
+        })
+      },
       typeFilter: function (type) {
         let _self = this
         this.types.forEach(function (t, i) {
@@ -85,6 +168,19 @@
         })
         type['selected'] = true
         this.types.unshift(type)
+        this.category = type.id
+        this.pageNum = 1
+        this.getData()
+      },
+      checkedAll: function () {
+        this.checkedAllValue = !this.checkedAllValue
+        for (let i = 0; i < this.workData.length; i++) {
+          this.workData[i]['checked'] = this.checkedAllValue
+        }
+      },
+      paging: function (val) {
+        this.pageNum = val
+        this.getData()
       }
     },
     components: {
@@ -92,33 +188,8 @@
       'unify-footer': Footer,
       'left-menu': LeftMenu
     },
-    watch: {},
     created: function () {
-      for (let i = 0; i < 9; i++) {
-        this.workData.push({
-          id: '475bb8d4c5874f69810c30bdb4733e74',
-          name: '未命名 2017-05-15 16:02',
-          skuCode: 'B01004',
-          material: null,
-          size: '500*400',
-          worksType: 'haibao',
-          isrelease: null,
-          createTime: 1494835379000,
-          page: null,
-          imgPath: 'http://testpcbuilder.artup.com/upload/475bb8d4c5874f69810c30bdb4733e741494835379.jpg',
-          price: 40,
-          ext: 'web',
-          ext2: null,
-          ext3: null,
-          userId: '8dab7dbe6d094347ac8d2af61c4b194a',
-          pdfPath: null,
-          isRedo: null,
-          productId: null,
-          typeName: '海报',
-          attribute: null,
-          swfUrl: null
-        })
-      }
+      this.getData()
     }
   }
 </script>
@@ -138,6 +209,7 @@
     }
     .main {
       width: 960px;
+      min-height: 666px;
       float: right;
       border-radius: 5px;
       border: 1px solid #dedede;
@@ -230,12 +302,18 @@
         margin-right: 56px;
         overflow: hidden;
         .img-box {
+          position: relative;
           width: 258px;
           height: 195px;
           border: 1px solid #dedede;
           border-radius: 5px;
           overflow: hidden;
           background: rgba(229, 229, 229, .5);
+          .checkbox-work {
+            position: absolute;
+            top: 4px;
+            right: 8px;
+          }
         }
         img {
           display: block;
@@ -286,7 +364,7 @@
       .el-pager li:hover {
         color: #a00912;
       }
-      .number{
+      .number {
         padding: 0 15px;
         font-size: 14px;
       }
