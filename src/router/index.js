@@ -17,6 +17,8 @@ import CouponList from '@/views/center/CouponListView'
 import UserWorks from '@/views/user/WorksListView'
 import UserMaterial from '@/views/user/MaterialListView'
 import UserCoupons from '@/views/user/CouponListView'
+import cart from '@/components/user/cart/cart'//购物车
+import confimOrder from '@/components/user/order/confimOrder'//确认订单
 
 Vue.use(VueRouter)
 
@@ -134,6 +136,20 @@ let router = new VueRouter({
       component: UserCoupons,
       meta: {
         title: '我的优惠券'
+      }
+    },{
+      path: '/cart',
+      name: 'cart',
+      component: cart,
+      meta: {
+        title: '购物车'
+      }
+    },{
+      path: '/confimOrder',
+      name: 'confimOrder',
+      component: confimOrder,
+      meta: {
+        title: '确认订单'
       }
     }
   ]

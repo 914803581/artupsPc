@@ -49,8 +49,8 @@
 			 	<li ><a href="javascript:void(0);">退出登录</a></li>
 			 </ul>
 			</div>
-			<a class="cars" href="javascript:void(0);">购物车有<span>1</span>件商品</a>
-			<a href="javascript:void(0);" class="hander_cat">
+			<a class="cars">购物车有<span>1</span>件商品</a>
+			<a href="/cart" class="hander_cat">
 				<div class="img_cat">
 					<b aot-numbers="" class="">1</b>
 					<img src="http://test.artup.com/img/hander_cat.png">
