@@ -52,19 +52,17 @@
 				<span class="r">单价</span>
 			</p>
 			<div class="ord2-main">
-				<!-- ngRepeat: (productIndex,product) in product_d --><div ng-repeat="(productIndex,product) in product_d" class="div_order ng-scope">				
+				<div v-for="(itmes,index) in dataList" class="div_order ng-scope">				
 				<div class="or2m-t m">
 					<div class="or2m-t-l l">
 						<div class="l img">
-							<img class="l" ng-src="http://testpcbuilder.artup.com/upload/2ffdd21d8db8442da0af195a7e496ffd1494483779.jpg" src="http://testpcbuilder.artup.com/upload/2ffdd21d8db8442da0af195a7e496ffd1494483779.jpg">
+							<img class="l" :src="itmes.thumbnailImageUrl" >
 						</div>
-						<!--<img class="l" src="img/fan_tl_03.jpg" />-->
+					
 						<div class="l">
-							<p class="p1 ng-binding">未命名 2017-05-11 14:22</p>
-							<!--
-							<p class="p2">尺寸：<span>{{product.Attribute |splitSize}}</span></p>
-							-->
-							<p class="p2"><span class="ng-binding">框画/棕色木框/400X500mm                                                                             </span></p>
+							<p class="p1 ng-binding">{{itmes.sku}}</p>
+							
+							<p class="p2"><span class="ng-binding">{{itmes.createdDt}}</span></p>
 						</div>
 					</div>
 					
@@ -76,33 +74,29 @@
 					
 					<div class="or2m-t-2 ritdh l">
 						<span class="s1">￥</span>
-						<span class="s2 ng-binding">289</span>
+						<span class="s2 ng-binding">{{itmes.price}}</span>
 						<span class="s1">元</span>
 					</div>
 					<div class="or2m-t-2 l">
 						<span class="s1">x</span>
-						<span class="s2 ng-binding">4</span>
+						<span class="s2 ng-binding">{{itmes.num}}</span>
 					</div>
 					<div class="or2m-t-2 redd l">
 						<span class="s1">￥</span>
-						<span class="s2 ng-binding">1156</span>
+						<span class="s2 ng-binding">{{itmes.price * itmes.num | toFixedTwo}}</span>
 						<span class="s1">元</span>
 					</div>
 				</div>
 				<!--隐藏的优惠卷-->
-				<div class="or2m-b m">
-					<!-- <p class="or2m-b-tit" ng-if="product.result.data.couponStrategy.length > 0">可使用优惠券：
-						{{product.result.data.couponStrategy.length}}
-					</p> -->
+				<div class="or2m-b m" style="display: none;">
+					
 					<div class="or2bm aolectActive">
-						<!-- ng-if="product.ProductID == items.goodsId" -->
-						<!-- ngRepeat: items in product.result.data.couponStrategy --><!-- ngIf: product.ProductID == items.goodsId --><div ng-if="product.ProductID == items.goodsId" ng-click="setCode(productIndex,$index)" ng-repeat="items in product.result.data.couponStrategy" class="ng-scope">
-								
-								<!-- ngRepeat: link in items.coupons track by $index -->							
-						</div><!-- end ngIf: product.ProductID == items.goodsId --><!-- end ngRepeat: items in product.result.data.couponStrategy -->					
+						<div ng-if="product.ProductID == items.goodsId" ng-click="setCode(productIndex,$index)" ng-repeat="items in product.result.data.couponStrategy" class="ng-scope">
+												
+						</div>				
 					</div>
 				</div>
-			</div><!-- end ngRepeat: (productIndex,product) in product_d -->
+			</div>
 			</div>
 			<div class="notes m">
 				<!--隐藏的优惠卷-->
@@ -126,8 +120,7 @@
 					支付方式
 				</div>
 				<div class="pay-cont">
-				<!-- {{$index+1==page?'active':''}} -->
-					<!-- <a    class="a1 l active_pay" ng-click="fn_wx()" href=""> -->
+				
 					<a class="a1 l active_pay" ng-click="fn_wx()" href="">
 
 						<div>
@@ -147,18 +140,18 @@
 			<!---->
 			<div class="detail m">
 				<div class="dtl01 r">
-					<p class=""><span id="oNUmber" class="redd ng-binding">4</span>件商品，商品总金额：￥<span id="oPrice" class="ng-binding">1156.00</span></p>
+					<p class=""><span id="oNUmber" class="redd ng-binding">{{goodsSize}}</span>件商品，商品总金额：￥<span id="oPrice" class="ng-binding">{{allPrice}}</span></p>
 					<p class="">
-					享受优惠：使用优惠劵抵现 <span id="couponPrefeAmount" class="ng-binding">0.00</span> 元，<span ng-show="!manYuan==0" class="">订单总价满<span id="manYuan" class="ng-binding">1000</span>元减<span id="prefePrice" class="ng-binding">700</span>元</span> 
-						<!-- ngRepeat: products in arrProductStrategys -->
+					享受优惠：使用优惠劵抵现 <span id="couponPrefeAmount" class="ng-binding">0.00</span> 元，<span ng-show="!manYuan==0" class="">订单总价满<span id="manYuan" class="ng-binding">0</span>元减<span id="prefePrice" class="ng-binding">0</span>元</span> 
+						
 					</p>
-					<p class="">合计优惠金额：-￥<span id="totalPrefeAmount" class="ng-binding">700.00元</span></p>
+					<p class="">合计优惠金额：-￥<span id="totalPrefeAmount" class="ng-binding">0.00元</span></p>
 					<p class=""><span class="bul">中通快递</span>&nbsp;&nbsp;运费：￥<span>0.00</span></p>
 				</div>
 			</div>
 			<div class="detail m" style="clear: both;">
 				<div class="money r">
-					<p class="l">应付金额：<span>￥</span><span id="goodsPayAmount" class="ng-binding">456.00</span></p>
+					<p class="l">应付金额：<span>￥</span><span id="goodsPayAmount" class="ng-binding">{{allPrice}}</span></p>
 				</div>
 			</div>
 			<div class="detail m mt2">
@@ -178,6 +171,57 @@
 </template>
 
 <script>
+	import Api from '../../../API.js'
+	import { MessageBox } from 'element-ui';
+	
+    export default {
+        data() {
+            return {
+              dataList:[],
+              addressData:[],
+              addresBool :false,
+              car:'',
+              total:0,
+              goodsSize:'',//商品数量
+              allPrice:0//总金额
+            }
+        },
+        methods: {
+        	
+        },
+        mounted() {
+        	 this.car = sessionStorage.getItem('cars'); 
+	        	var jsons = {
+	        		dbId:this.car
+	        	}
+	        	 Api.car.queryCar(jsons).then(res=>{ 
+	           	if(res.data.length > 0){
+	           		this.goodsSize = res.data.length;
+	           		console.log(res.data)
+	           		this.dataList = res.data;
+	           		for(var i = 0; i<this.dataList.length; i++){
+	           			this.total += Number(this.dataList[i].total);
+	           			this.allPrice += Number(this.dataList[i].num * this.dataList[i].price);
+	           		} 
+	           	} 
+	           },err=>{
+	           		Toast('数据请求错误');
+	           })
+	
+	           var addJsons= {
+	           		userDbId:this.$route.query.userDbId
+	           }
+	
+	           Api.address.defaultAddress(addJsons).then(res=>{
+	           		if(res.data.length > 0){
+	           			this.addressData = res.data[0];
+	           			this.addresBool = true;
+	           		} 
+	           },err=>{
+	            	Toast('数据请求错误');
+	           })
+	        }
+	    }
 </script>
 
 <style>
