@@ -112,7 +112,7 @@
 			<div class="bill m">
 				<span class="billl l">发票信息</span>
 				<p class="billr r"><span>普通发票 （纸质）</span><span>个 人</span><span>明细</span>
-				<a ng-click="invoice_edit()" href="">修改</a><span>&gt;</span></p>
+				<a  href="">修改</a><span>&gt;</span></p>
 			</div>
 			<!---->
 			<div class="pay m">
