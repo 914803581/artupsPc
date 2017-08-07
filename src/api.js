@@ -263,6 +263,23 @@ export default {
       )
     }
   },
+  Address: {
+    List: (paramJson) => {
+      return HTTP.get(ADDRESS, {
+        params: paramJson
+      })
+    },
+    Delete: (paramJson) => {
+      return HTTP.get(DELETE_ADDRESS, {
+        params: paramJson
+      })
+    },
+    SetDefault: (paramJson) => {
+      return HTTP.get(SET_DEFAULT_ADDRESS, {
+        params: paramJson
+      })
+    }
+  },
   UPLOAD_URL: UPLOAD_URL,
 
   ajax: function (url, callback) {
