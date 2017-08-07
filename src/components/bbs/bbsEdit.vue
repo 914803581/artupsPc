@@ -300,6 +300,7 @@
 			var vms = true;
 			var vm = this;
 			this.$forceUpdate();
+			this.$nextTick();
 			this.bbsTemplate_data.forEach((item,i)=>{
 	      		item.forEach((e,i)=>{
 	      			if(e.slectTemplate){	 
@@ -330,7 +331,8 @@
 				},300)
 				return;
 			}
-			if (otemplate.only) {//横版换两页的情况
+			console.log(otemplate.only)
+			if (otemplate.only || otemplate.only==undefined) {//横版换两页的情况
 				this.bbsTemplate_data[this.bbs.bbs_index1] = [];
 				var josnImg = {"template":bbsTemplateData.bbs1,"only":false,"slectTemplate":false};
 				//选中的板式
@@ -340,7 +342,8 @@
 			}else{
 				otemplate.template = bbsTemplateData[chenkIndex]				
 			}
-			this.$forceUpdate();			
+			this.$forceUpdate();
+			this.$nextTick();
 			setTimeout(function(){
 				vm.setPageIndex()
 				vm.$store.commit("drapDiv");			
@@ -378,7 +381,7 @@
       	this.$forceUpdate();
       	this.setBbsTemplate()
       	this.bbsTemplate_data[index1][index2].slectTemplate = true;
-		this.$forceUpdate();
+		this.$nextTick();
         console.log($event.target)        
         if($($event.target).hasClass("text")){ // 点击文本框
           $(".editText_one").removeClass("editText_one");
