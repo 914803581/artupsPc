@@ -331,8 +331,8 @@
 				},300)
 				return;
 			}
-			console.log(otemplate.only)
-			if (otemplate.only || otemplate.only==undefined) {//横版换两页的情况
+			console.log(this.bbsTemplate_data[this.bbs.bbs_index1][0].only)
+			if (this.bbsTemplate_data[this.bbs.bbs_index1][0].only) {//横版换两页的情况
 				this.bbsTemplate_data[this.bbs.bbs_index1] = [];
 				var josnImg = {"template":bbsTemplateData.bbs1,"only":false,"slectTemplate":false};
 				//选中的板式
