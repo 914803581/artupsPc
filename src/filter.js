@@ -35,3 +35,10 @@ Vue.filter('time', function (value) {
   }
   return [Y, '-', m, '-', d, ' ', H, ':', i, ':' + s].join('')
 })
+//计算价格保留两位小数
+Vue.filter("toFixedTwo",function(value){
+	if (value) {
+		
+		return parseFloat(value.toFixed(2));
+	}
+})

@@ -19,6 +19,7 @@ import UserMaterial from '@/views/user/MaterialListView'
 import UserCoupons from '@/views/user/CouponListView'
 import cart from '@/components/user/cart/cart'//购物车
 import confimOrder from '@/components/user/order/confimOrder'//确认订单
+import loginCallback from '@/components/user/loginCallback'//登陆跳转
 
 Vue.use(VueRouter)
 
@@ -150,6 +151,13 @@ let router = new VueRouter({
       component: confimOrder,
       meta: {
         title: '确认订单'
+      }
+    },{
+      path: '/loginCallback',
+      name: 'loginCallback',
+      component: loginCallback,
+      meta: {
+        title: '登陆'
       }
     }
   ]
