@@ -264,8 +264,8 @@
 						} 
 						Api.car.submitCars(jsons).then(res=>{
 							if(res.data.code == 'success'){
-								//console.log(res.data)
-								location.href="/confimOrder?openId="+res.data.openId+"&userDbId=2221214";
+								
+								location.href="/confimOrder";
 							} else{
 								this.$message({message: '请求错误!' });
 								
