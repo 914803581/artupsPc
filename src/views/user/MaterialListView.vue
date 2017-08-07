@@ -8,45 +8,30 @@
           <div class="operation">
             <div class="manager">
               <a href="javascript:void(0);" v-show="!managerIng" @click="managerIng=true" class="manager-btn">管理</a>
-              <a href="javascript:void(0);" v-show="managerIng" @click="checkedAll" class="manager-btn">全选</a>
-              <a href="javascript:void(0);" v-show="managerIng" @click="showDeleteDialogVisible"
-                 class="manager-btn">删除</a>
+              <a href="javascript:void(0);" v-show="managerIng" class="manager-btn">全选</a>
+              <a href="javascript:void(0);" v-show="managerIng" @click="managerIng=false" class="manager-btn">删除</a>
             </div>
           </div>
           <div class="works-list">
             <div class="works-container">
               <div class="woks-data" v-for="material in materialData" :key="material.id">
                 <div class="img-box">
-                  <el-checkbox v-show="managerIng" v-model="material.checked" class="checkbox-material"></el-checkbox>
-                  <img :src="material.thumbnailUrl">
+                  <img :src="material.showPath">
                 </div>
-                <span class="time">{{material.updatedDt}}</span>
+                <span class="time">{{material.createTime | time}}</span>
               </div>
             </div>
           </div>
           <el-pagination
-            v-show="total>pageSize"
-            small
+            small="false"
             layout="prev, pager, next"
-            :page-size="pageSize"
-            :total="total"
-            @current-change="paging">
+            :total="50000">
           </el-pagination>
         </div>
         <left-menu selected="material"></left-menu>
       </div>
     </div>
     <unify-footer></unify-footer>
-    <el-dialog
-      title="我的作品"
-      :visible.sync="deleteDialogVisible"
-      size="small">
-      <span>您确认删除当前素材？</span>
-      <span slot="footer" class="dialog-footer">
-        <el-button @click="deleteDialogVisible=false">取 消</el-button>
-        <el-button type="primary" @click="deleteMaterial">确 定</el-button>
-      </span>
-    </el-dialog>
   </div>
 </template>
 
@@ -54,89 +39,42 @@
   import Header from '../../components/header/header.vue'
   import Footer from '../../components/footer/footer.vue'
   import LeftMenu from '../../components/center/menu.vue'
-  import Api from '../../api.js'
 
   export default {
     data: function () {
       return {
-        checkedAllValue: false,
-        deleteDialogVisible: false,
         managerIng: false,
-        pageSize: 9,
-        total: 0,
-        pageNum: 1,
+        types: [{
+          id: '-1',
+          text: '所有类型',
+          selected: true
+        }, {
+          id: 'kuanghua',
+          text: '框画'
+        }, {
+          id: 'haibao',
+          text: '海报'
+        }, {
+          id: 'citiehua',
+          text: '磁贴画'
+        }, {
+          id: 'huace',
+          text: '画册'
+        }],
         materialData: []
       }
     },
     methods: {
-      deleteWorkList: function () {
-        let deleteArr = []
-        this.materialData.forEach(function (item) {
-          if (item.checked) {
-            deleteArr.push(item)
+      typeFilter: function (type) {
+        let _self = this
+        this.types.forEach(function (t, i) {
+          t['selected'] = false
+          if (t.id === type.id) {
+            _self.types.splice(i, 1)
           }
         })
-        return deleteArr
-      },
-      deleteMaterial: function () {
-        let deleteArr = this.deleteWorkList()
-        let ids = []
-        deleteArr.forEach((item) => {
-          ids.push(item.dbId)
-        })
-        Api.Works.DeletWork({
-          dbId: ids.join(',')
-        }).then((result) => {
-          return result.status === 200 ? result.request.response : ''
-        }).then((result) => {
-          result = result ? JSON.parse(result) : ''
-          if (!result) {
-            return
-          }
-          if (result.code === 'success') {
-            this.managerIng = false
-            this.checkedAllValue = false
-            this.deleteDialogVisible = false
-            this.getData()
-          }
-        })
-      },
-      showDeleteDialogVisible: function () {
-        if (this.deleteWorkList().length) {
-          this.deleteDialogVisible = true
-        }
-      },
-      getData: function () {
-        this.pageNum -= 1
-        Api.Material.MaterialData({
-          sort: 'uploadDt',
-          order: 'desc',
-          status: 1
-        }).then((result) => {
-          return result.status === 200 ? result.request.response : ''
-        }).then((result) => {
-          let data = result ? JSON.parse(result) : ''
-          if (!data) {
-            return
-          }
-          let list = []
-          data.results.forEach((item) => {
-            item.checked = false
-            list.push(item)
-          })
-          this.materialData = list
-          this.total = data.totalRecord
-        })
-      },
-      checkedAll: function () {
-        this.checkedAllValue = !this.checkedAllValue
-        for (let i = 0; i < this.materialData.length; i++) {
-          this.materialData[i]['checked'] = this.checkedAllValue
-        }
-      },
-      paging: function (val) {
-        this.pageNum = val
-        this.getData()
+        type['selected'] = true
+        this.types.unshift(type)
       }
     },
     components: {
@@ -146,7 +84,32 @@
     },
     watch: {},
     created: function () {
-      this.getData()
+      for (let i = 0; i < 9; i++) {
+        this.materialData.push({
+          'id': '8f5b551daa3640a08ec768e11b9081be',
+          'name': null,
+          'storagePath': 'http://testboss.artup.com//origin/645/0ff87cd6be7a32932bbaab98210e768324d23996befee595ef4f0ccb3d519aaa16108eb5083f437e0ecb27684fd46bbf1484623385307.JPG',
+          'showPath': 'http://testboss.artup.com//material/thumb/2017/01/17/8f5b551daa3640a08ec768e11b9081be_360-240.jpg',
+          'createTime': 1484623386000,
+          'pixel': '3264X2448',
+          'picSize': 1153434,
+          'shootEqu': 'iPhone 6',
+          'shootLens': null,
+          'shootBurnt': '83/20',
+          'aperture': '7983/3509',
+          'iso': '100',
+          'colorMode': '1',
+          'shutter': '253/50',
+          'resolvingPower': '72/1',
+          'userId': '8dab7dbe6d094347ac8d2af61c4b194a',
+          'ext': null,
+          'ext2': null,
+          'tagName': null,
+          'meteringMode': null,
+          'exposureProgram': null,
+          'shootDate': null
+        })
+      }
     }
   }
 </script>
@@ -216,11 +179,6 @@
           border-radius: 5px;
           overflow: hidden;
           background: rgba(229, 229, 229, .5);
-          .checkbox-material {
-            position: absolute;
-            top: 4px;
-            right: 8px;
-          }
         }
         img {
           display: block;
