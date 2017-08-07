@@ -337,8 +337,20 @@
 				var josnImg = {"template":bbsTemplateData.bbs1,"only":false,"slectTemplate":false};
 				//选中的板式
 				var josnImg2 = {"template":bbsTemplateData[chenkIndex],"only":false,"slectTemplate":true};
-				this.bbsTemplate_data[this.bbs.bbs_index1].push(josnImg2)
-				this.bbsTemplate_data[this.bbs.bbs_index1].push(josnImg);
+				
+				var josnImg3 = {"template":bbsTemplateData.bbs1,"only":false,"slectTemplate":true};
+				var josnImg4 = {"template":bbsTemplateData[chenkIndex],"only":false,"slectTemplate":false};
+				
+				//判断角标让选择更精确
+				if (this.bbs.bbs_index2==0) {
+					this.bbsTemplate_data[this.bbs.bbs_index1].push(josnImg2)
+					this.bbsTemplate_data[this.bbs.bbs_index1].push(josnImg);
+				}else{
+					this.bbsTemplate_data[this.bbs.bbs_index1].push(josnImg4)
+					this.bbsTemplate_data[this.bbs.bbs_index1].push(josnImg3);
+				}
+				
+				
 			}else{
 				otemplate.template = bbsTemplateData[chenkIndex]				
 			}
