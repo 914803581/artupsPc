@@ -1,5 +1,5 @@
 <template>
-  <div id="bbsEdit">
+  <div id="bbsEdit">	
     <nav-hander></nav-hander>
     <div   class="comtent_chanpin">
       <div class="line_comtent">
@@ -7,7 +7,7 @@
           <div class="title">
             <div class="title_left">
               <span>画册编辑</span>
-              <span>未命名 2017-07-14 11:05</span>
+              <span>2017-07-14 11:05</span>
             </div>
             <div class="title_right">
               <span>255x355mm</span>
@@ -18,23 +18,35 @@
         </div>
       </div>
       <div class="line_comtent">
-        <div class="comtent">
+        <div class="comtent">    	 	
         	<!--功能div-->
         	 <div class="box_menu">
         	 	<ul>
         	 		<li><i class="iconfont">&#xe711;</i>添加组件</li>       	 		
-        	 		<li><i class="iconfont">&#xe64f;</i>更换板式</li>
+        	 		<li @click="bbs.Switching=true"><i class="iconfont">&#xe64f;</i>更换板式</li>
         	 		<li><i style="font-size: 20px;padding:0 ;" class="iconfont">&#xe602;</i>加入购物车</li>
         	 		<li><i class="iconfont">&#xe629;</i>立即购买</li>
         	 	</ul>
         	 </div>
           <div class="time_main_left">
+          	<transition name="el-zoom-in-top">
+          	<div v-show="bbs.Switching" id="div_drap">
+		        <div class="titleBox menubar_titleBox">
+		               更换版式
+		            <div @click="bbs.Switching=false" class="titleClose"><i class="iconfont">&#xe746;</i></div>
+		        </div>
+				<div class="checkBS_b">
+					<div :style="{'width':itemImg.isTrue?'90%':'45%'}" :istrue="itemImg.isTrue"   @click="chenkTemplate(index)" v-for="(itemImg,index) in mobanArr" :class="templateoindex==index?'img_div boder_actiev':'img_div'">
+						<img   :src="itemImg.templateImg">
+					</div>		
+				</div>     
+	  		</div>
+          	</transition>
             <div class="time_bg" v-for="(item,index) in bbsTemplate_data">
-              <!--pubilc_div 这个class是留给整屏来定义的样式  click_template 是用vue里面的事件委派来解决避免不了的dom操作-->
-              <div class="pubilc_div" @click="click_template($event)" v-html="htmlTetx" v-for="(htmlTetx,index2) in item">
-                
+              <!--pubilc_div 这个class是留给整屏来定义的样式  click_template 是用vue里面的事件委派来解决避免不了的dom操作  hengban_bbs 横版增加的class  hengban_bbs 红线class-->
+              <div class="pubilc_div" :only="htmlTetx.only" :class="{'active_line':htmlTetx.slectTemplate,'hengban_bbs':htmlTetx.only}"    v-html="htmlTetx.template"  @click="click_template($event,index,index2)"  v-for="(htmlTetx,index2) in item">
               </div>
-            </div>
+            </div>           
           </div>
         </div>
         <div class="shield" v-show="isShowPreview" @click="isShowPreview=false"></div>
@@ -93,12 +105,12 @@
     <!--文字编辑框-->
     <edit-text :isEditText="iseditText"></edit-text>
     <!--<div-editText ></div-editText>-->
-    <!--<div id="div_drap"  style="display: none;background: #fff;position: absolute;top: 0;width: 200px;height: 400px;border: 1px solid red;line-height: 400px;text-align: center;">
-            我是可以拖拽的内容
-        </div>-->
+   <!--<img src=""/>-->
   </div>
 </template>
 <script>
+  import { Message } from 'element-ui';
+	
   import Api from '../../api.js'
   import filter from '../../filter.js'
   import {DomHeight} from '../../directive.js'
@@ -106,12 +118,56 @@
   import imgEdit from '../component/imgEdit/imgEdit.vue'
   import editText from '../component/editText/editText.vue'
   import navHander from '../../components/component/hander/hander.vue'
-  //如果是这种组件我要在这里 引入他
-
-  var aa = 0;//计数器
   export default {
     data () {
       return {
+      	mobanArr:[//模版对应的图片
+      		{
+      			templateImg:'http://image2.artup.com/resources/static/pc/images/bbs_pc01.jpg',
+      			isTrue:false,
+      		},
+      		{
+      			templateImg:'http://image2.artup.com/resources/static/pc/images/bbs_pc02.jpg',
+      			isTrue:false,
+      		},
+      		{
+      			templateImg:'http://image2.artup.com/resources/static/pc/images/bbs_pc03.jpg',
+      			isTrue:false,
+      		},
+      		{
+      			templateImg:'http://image2.artup.com/resources/static/pc/images/bbs_pc04.jpg',
+      			isTrue:false,
+      		},
+      		{
+      			templateImg:'http://image2.artup.com/resources/static/pc/images/bbs_pc05.jpg',
+      			isTrue:false,
+      		},
+      		{
+      			templateImg:'http://image2.artup.com/resources/static/pc/images/bbs_pc06.jpg',
+      			isTrue:false,
+      		},
+      		{
+      			templateImg:'http://image2.artup.com/resources/static/pc/images/bbs_pc07.jpg',
+      			isTrue:false,
+      		},
+      		{
+      			templateImg:'http://image2.artup.com/resources/static/pc/images/bbs_pc08.jpg',
+      			isTrue:false,
+      		},
+      		{
+      			templateImg:'http://image2.artup.com/resources/static/pc/images/bbs_pc01.jpg',
+      			isTrue:true
+      		}
+//          'http://image2.artup.com/resources/static/pc/images/bbs_pc01.jpg',
+//          'http://image2.artup.com/resources/static/pc/images/bbs_pc02.jpg',
+//          'http://image2.artup.com/resources/static/pc/images/bbs_pc03.jpg',
+//          'http://image2.artup.com/resources/static/pc/images/bbs_pc04.jpg',
+//          'http://image2.artup.com/resources/static/pc/images/bbs_pc05.jpg',
+//          'http://image2.artup.com/resources/static/pc/images/bbs_pc06.jpg',
+//          'http://image2.artup.com/resources/static/pc/images/bbs_pc07.jpg',
+//          'http://image2.artup.com/resources/static/pc/images/bbs_pc08.jpg'
+         ],
+        templateoindex:0,  
       	ImgHashMapBase64:new HashMap(),
         isShowPreview:false,
         isModel:false, //素材
@@ -120,7 +176,10 @@
         footerShow:true, //页脚控制的折叠变量
         bbs:{
           material:[],//素材库
-          textModel:'' //弹出框文字
+          textModel:'', //弹出框文字
+          Switching:false,  //切换板式
+           					//二维数组第一位角标 bbs_index1  和二位角标
+         
         },
         dataEditImg:{},//传递给图片编辑的对象
         bbsTemplate_data:[], //宝宝书模版数据的二维数组
@@ -237,6 +296,57 @@
 
     },
     methods: {
+    		chenkTemplate(index){//切换模版
+			var vms = true;
+			var vm = this;
+			this.$forceUpdate();
+			this.bbsTemplate_data.forEach((item,i)=>{
+	      		item.forEach((e,i)=>{
+	      			if(e.slectTemplate){	 
+	      				vms = false;
+				        this.templateoindex = index;
+	      			}
+	      		})
+	      	})
+			if (vms) {
+				this.$message({
+			          showClose: true,
+			          message: '请选择需要更换的板式页码',
+			          type: 'warning'
+				});vms = true;
+				return;
+			}
+//			切换的模版索引
+			var chenkIndex = 'bbs'+(index+1);
+			var otemplate = this.bbsTemplate_data[this.bbs.bbs_index1][this.bbs.bbs_index2];
+			
+			if(this.mobanArr[index].isTrue){ //两页换横版的情况选中
+				this.bbsTemplate_data[this.bbs.bbs_index1] = [];
+				var josnImg = {"template":bbsTemplateData.bbs9,"only":true,"slectTemplate":true};
+				this.bbsTemplate_data[this.bbs.bbs_index1].push(josnImg)
+				setTimeout(function(){
+					vm.setPageIndex()
+					vm.$store.commit("drapDiv")				
+				},300)
+				return;
+			}
+			if (otemplate.only) {//横版换两页的情况
+				this.bbsTemplate_data[this.bbs.bbs_index1] = [];
+				var josnImg = {"template":bbsTemplateData.bbs1,"only":false,"slectTemplate":false};
+				//选中的板式
+				var josnImg2 = {"template":bbsTemplateData[chenkIndex],"only":false,"slectTemplate":true};
+				this.bbsTemplate_data[this.bbs.bbs_index1].push(josnImg2)
+				this.bbsTemplate_data[this.bbs.bbs_index1].push(josnImg);
+			}else{
+				otemplate.template = bbsTemplateData[chenkIndex]				
+			}
+			this.$forceUpdate();			
+			setTimeout(function(){
+				vm.setPageIndex()
+				vm.$store.commit("drapDiv");			
+			},300)
+			
+    		},
 		footerBoolean(val){ //素材库抬起底部图片
 			var vm = this;
 			this.footerShow =val;
@@ -262,8 +372,14 @@
         //存入专门的base64的图片    
         this.ImgHashMapBase64.putvalue(constName,picObj);
       },
-      click_template($event){//vue模版渲染完毕之后的事件处理
-        console.log($event.target)
+      click_template($event,index1,index2){//vue模版渲染完毕之后的事件处理,index1和index2就是那个二维数组对应的索引
+      	this.bbs.bbs_index1 = index1; //存入二维数组的值
+      	this.bbs.bbs_index2 = index2;
+      	this.$forceUpdate();
+      	this.setBbsTemplate()
+      	this.bbsTemplate_data[index1][index2].slectTemplate = true;
+		this.$forceUpdate();
+        console.log($event.target)        
         if($($event.target).hasClass("text")){ // 点击文本框
           $(".editText_one").removeClass("editText_one");
           $($event.target).addClass("editText_one");
@@ -291,6 +407,13 @@
 
           this.openImgEdit();
         }
+      },
+      setBbsTemplate(){//设置宝宝书板式初始化数据
+      	this.bbsTemplate_data.forEach((item,i)=>{
+      		item.forEach((e,i)=>{
+      			e.slectTemplate = false
+      		})
+      	})
       },
       setPageIndex(){//设置页数
         $(".comtent_chanpin .time_pu .page .pageleft span").each((i,e)=>{
@@ -322,16 +445,23 @@
       },
       preview () {
         this.isShowPreview = true
+      },
+      fnd(){
+      	console.log("数据改变了")
       }
     },
     computed:{
-
+		
+    },
+    watch:{
+    		bbsTemplate_data:"fnd"
     },
     created(){//只执行一次
      
       //模版数据
       this.bbsTemplate_data = bbsData_template;
       console.log(this.bbsTemplate_data)
+      this.setBbsTemplate();
       this.$nextTick(function () {
         $('#previewComtent').off('turn').turn({
           page:2,
@@ -346,16 +476,9 @@
       this.setPageIndex();
  	  this.jisuan();// 计算页面位置
 //		 	this.$router.push({ path: '/security/iploginanalysis/'+json.name,params: { deviceId: 123}});
-
-//			var dragdiv = document.querySelector('#div_drap');
-
-//			$("#div_drap").dragDiv()
-//			$(document).each(function(){
-//				$(this).find("#div_drap").dragging({
-//					move : 'both',
-//					randomPosition : false
-//				});
-//			});
+	  setTimeout(function(){
+		$("#div_drap").Tdrag();
+	  },500)
 
 
     }

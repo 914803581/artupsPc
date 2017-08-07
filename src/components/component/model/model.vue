@@ -112,7 +112,7 @@
 	                    	"userDbId" : '2221214',
 	                    "category" : 'baobaoshu', 
 	                    "format" : 'json',
-	                    "thumbnailWidth":"200",
+	                    "thumbnailWidth":"1400",
 	                    "client":"pc"
                     }
 					

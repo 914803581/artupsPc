@@ -175,23 +175,65 @@ function isEmojiCharacter(substring) {
 //pc宝宝书模版
 /*定义宝宝书八个板式模板*/
 var bbsTemplateData={
-	bbs1:'<div class="time_pu"><div class="bbsClass drapBox template01"><div class="drap_img"></div><img imgSort="1" typeStyle="1" class="img_drap" src=""/></div><p textSort="1" typeStyle="1" class="text"></p><div  class="page"><div class="pageleft">第<span></span>页</div><div class="pageRight">切换板式</div></div></div>',
-	bbs2:'<div class="time_pu"><div class="bbsClass drapBox template02"><div class="drap_img"></div><img  class="img_drap" imgSort="1" typeStyle="2" src=""/></div><p textSort="1" typeStyle="2" class="text"></p><div  class="page"><div class="pageleft">第<span></span>页</div><div class="pageRight">切换板式</div></div></div>',
-	bbs3:'<div class="time_pu"><div class="bbsClass template03"><div class="drapBox div_page"><div class="drap_img"></div><img class="img_drap" imgSort="1" typeStyle="3" src=""/></div><div class="drapBox div_page"><div class="drap_img"></div><img class="img_drap" imgSort="2" typeStyle="3" src=""/></div></div><p textSort="1" typeStyle="3" class="text"></p><div  class="page"><div class="pageleft">第<span></span>页</div><div class="pageRight">切换板式</div></div></div>',
-	bbs4:'<div class="time_pu"><div class="drapBox bbsClass template04"><div class="drap_img"></div><img class="img_drap" imgSort="1" typeStyle="4" src=""/></div><p textSort="1" typeStyle="4" class="text"></p><div  class="page"><div class="pageleft">第<span></span>页</div><div class="pageRight">切换板式</div></div></div>',
-	bbs5:'<div class="time_pu"><div class="bbsClass drapBox template05"><div class="drap_img"></div><img class="img_drap" imgSort="1" typeStyle="5" src=""/></div><p textSort="1" typeStyle="5"  class="text"></p><div  class="page"><div class="pageleft">第<span></span>页</div><div class="pageRight">切换板式</div></div></div>',
-	bbs6:'<div class="time_pu"><div class="bbsClass template06"><div class="drapBox div_page"><div class="drap_img"></div><img class="img_drap" imgSort="1" typeStyle="6" src=""/></div><div class="drapBox div_page"><div class="drap_img"></div><img class="img_drap" imgSort="2" typeStyle="6" src=""/></div></div><p textSort="1" typeStyle="6" class="text"></p><div  class="page"><div class="pageleft">第<span></span>页</div><div class="pageRight">切换板式</div></div></div>',
-	bbs7:'<div class="time_pu"><div class="bbsClass template07"><div class="drapBox div_page"><div class="drap_img"></div><img imgsort="1" typestyle="7" src="" class="img_drap"></div> <div class="drapBox div_page"><div class="drap_img"></div><img imgsort="2" typestyle="7" src="" class="img_drap"></div> <div class="drapBox div_page"><div class="drap_img"></div><img imgsort="3" typestyle="7" src="" class="img_drap"></div> <div class="drapBox div_page"><div class="drap_img"></div><img imgsort="4" typestyle="7" src="" class="img_drap"></div></div> <p textsort="1" typestyle="7" class="text"></p> <div  class="page"><div class="pageleft">第<span></span>页</div><div class="pageRight">切换板式</div></div></div>',
-	bbs8:'<div class="time_pu"><div class="bbsClass template08"><div class="drapBox div_page"><div class="drap_img"></div><img imgsort="1" typestyle="8" src="" class="img_drap"></div> <div class="drapBox div_page"><div class="drap_img"></div><img imgsort="2" typestyle="8" src="" class="img_drap"></div> <div class="drapBox div_page"><div class="drap_img"></div><img imgsort="3" typestyle="8" src="" class="img_drap"></div> <div class="drapBox div_page"><div class="drap_img"></div><img imgsort="4" typestyle="8" src="" class="img_drap"></div></div> <p textsort="1" typestyle="8" class="text"></p> <div  class="page"><div class="pageleft">第<span></span>页</div><div class="pageRight">切换板式</div></div></div>'
+	bbs1:'<div class="time_pu"><div class="bbsClass drapBox template01"><div class="drap_img"></div><img imgSort="1" typeStyle="1" class="img_drap" src=""/></div><p textSort="1" typeStyle="1" class="text"></p><div  class="page"><div class="pageleft">第<span></span>页</div><div class="pageRight"></div></div></div>',
+	bbs2:'<div class="time_pu"><div class="bbsClass drapBox template02"><div class="drap_img"></div><img  class="img_drap" imgSort="1" typeStyle="2" src=""/></div><p textSort="1" typeStyle="2" class="text"></p><div  class="page"><div class="pageleft">第<span></span>页</div><div class="pageRight"></div></div></div>',
+	bbs3:'<div class="time_pu"><div class="bbsClass template03"><div class="drapBox div_page"><div class="drap_img"></div><img class="img_drap" imgSort="1" typeStyle="3" src=""/></div><div class="drapBox div_page"><div class="drap_img"></div><img class="img_drap" imgSort="2" typeStyle="3" src=""/></div></div><p textSort="1" typeStyle="3" class="text"></p><div  class="page"><div class="pageleft">第<span></span>页</div><div class="pageRight"></div></div></div>',
+	bbs4:'<div class="time_pu"><div class="drapBox bbsClass template04"><div class="drap_img"></div><img class="img_drap" imgSort="1" typeStyle="4" src=""/></div><p textSort="1" typeStyle="4" class="text"></p><div  class="page"><div class="pageleft">第<span></span>页</div><div class="pageRight"></div></div></div>',
+	bbs5:'<div class="time_pu"><div class="bbsClass drapBox template05"><div class="drap_img"></div><img class="img_drap" imgSort="1" typeStyle="5" src=""/></div><p textSort="1" typeStyle="5"  class="text"></p><div  class="page"><div class="pageleft">第<span></span>页</div><div class="pageRight"></div></div></div>',
+	bbs6:'<div class="time_pu"><div class="bbsClass template06"><div class="drapBox div_page"><div class="drap_img"></div><img class="img_drap" imgSort="1" typeStyle="6" src=""/></div><div class="drapBox div_page"><div class="drap_img"></div><img class="img_drap" imgSort="2" typeStyle="6" src=""/></div></div><p textSort="1" typeStyle="6" class="text"></p><div  class="page"><div class="pageleft">第<span></span>页</div><div class="pageRight"></div></div></div>',
+	bbs7:'<div class="time_pu"><div class="bbsClass template07"><div class="drapBox div_page"><div class="drap_img"></div><img imgsort="1" typestyle="7" src="" class="img_drap"></div> <div class="drapBox div_page"><div class="drap_img"></div><img imgsort="2" typestyle="7" src="" class="img_drap"></div> <div class="drapBox div_page"><div class="drap_img"></div><img imgsort="3" typestyle="7" src="" class="img_drap"></div> <div class="drapBox div_page"><div class="drap_img"></div><img imgsort="4" typestyle="7" src="" class="img_drap"></div></div> <p textsort="1" typestyle="7" class="text"></p> <div  class="page"><div class="pageleft">第<span></span>页</div><div class="pageRight"></div></div></div>',
+	bbs8:'<div class="time_pu"><div class="bbsClass template08"><div class="drapBox div_page"><div class="drap_img"></div><img imgsort="1" typestyle="8" src="" class="img_drap"></div> <div class="drapBox div_page"><div class="drap_img"></div><img imgsort="2" typestyle="8" src="" class="img_drap"></div> <div class="drapBox div_page"><div class="drap_img"></div><img imgsort="3" typestyle="8" src="" class="img_drap"></div> <div class="drapBox div_page"><div class="drap_img"></div><img imgsort="4" typestyle="8" src="" class="img_drap"></div></div> <p textsort="1" typestyle="8" class="text"></p> <div  class="page"><div class="pageleft">第<span></span>页</div><div class="pageRight"></div></div></div>',
+	bbs9:'<div class="time_pu"><div class="bbsClass bbs_hengban"><div class="drapBox div_page"><div class="drap_img"></div> <img imgsort="1" typestyle="9" src="" class="img_drap"></div></div> <p textsort="1" typestyle="8" class="hengbanText  text"></p> <div class="page"><div class="pageleft">第<span page=""></span>页</div> <div class="pageleft">第<span page=""></span>页</div></div></div>'
 };
 //定义模版的数组
 var bbsData_template=[
-	[bbsTemplateData.bbs1,bbsTemplateData.bbs2],
-	[bbsTemplateData.bbs3,bbsTemplateData.bbs4],
-	[bbsTemplateData.bbs5,bbsTemplateData.bbs6],
-	[bbsTemplateData.bbs7,bbsTemplateData.bbs8],
-	[bbsTemplateData.bbs2,bbsTemplateData.bbs8],
-	[bbsTemplateData.bbs2,bbsTemplateData.bbs2]
+	[
+		{
+			"template":bbsTemplateData.bbs1,
+			"only":false
+		},
+		{
+			"template":bbsTemplateData.bbs2,
+			"only":false
+		}
+	],
+	[
+		{
+			"template":bbsTemplateData.bbs3,
+			"only":false
+		},
+		{
+			"template":bbsTemplateData.bbs4,
+			"only":false
+		}
+	],
+	[
+		{
+			"template":bbsTemplateData.bbs5,
+			"only":false
+		},
+		{
+			"template":bbsTemplateData.bbs6,
+			"only":false
+		}
+	],
+	[
+		{
+			"template":bbsTemplateData.bbs7,
+			"only":false
+		},
+		{
+			"template":bbsTemplateData.bbs8,
+			"only":false
+		}
+	],
+	[
+		{
+			"template":bbsTemplateData.bbs9,
+			"only":true   //是不是横版
+		}
+	]
+	
 ]
 
 //原生在dom里面随意拖拽的函数
