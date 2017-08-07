@@ -7,26 +7,38 @@
           <h2 class="title">
             <span>收货地址</span>
             <div class="operation">
-              <el-button class="btn" v-show="startDelete" @click="startDelete=false" type="danger">回退</el-button>
-              <el-button class="btn" v-show="startDelete" type="danger">删除</el-button>
+              <el-button class="btn" v-show="startDelete" @click="rollback" type="danger">回退</el-button>
+              <el-button class="btn" v-show="startDelete" @click="deleteAddress" type="danger">删除</el-button>
               <el-button class="btn" v-show="!startDelete" @click="startDelete=true" type="danger">管理</el-button>
               <el-button class="btn" type="danger">添加</el-button>
             </div>
           </h2>
           <div class="address-list">
-            <div class="address-details" v-for="item in addressList">
-              <label>收件人：</label>
-              <span class="text">{{item.name}}</span>
+            <div class="address-details" :class="{last:index===addressList.length-1}" v-for="(item,index) in addressList">
+              <el-radio class="radio-address" v-model="radioAddress" :label="item.dbId" v-show="startDelete"></el-radio>
+              <label class="label-name">收件人：</label>
+              <span class="text name">{{item.name}}</span>
               <label>联系方式：</label>
-              <span class="text">{{item.phone}}</span>
+              <span class="text">{{item.mobile}}</span>
               <label>邮编：</label>
-              <span class="text">{{item.zipCode}}</span>
-              <p class="address">{{item.areaDetail}}</p>
+              <span class="text">100000</span>
+              <p class="address">{{item.address}}</p>
               <div class="set-default-box">
-                <el-button v-show="!item.hasDefault" class="btn" type="danger">设为默认</el-button>
-                <span v-show="item.hasDefault" class="text-default">默认地址</span>
+                <el-button v-show="!startDelete&&!item.hasDefault" @click="setDefault(item)" class="btn" type="danger">
+                  设为默认
+                </el-button>
+                <span v-show="!startDelete&&item.hasDefault" class="text-default">默认地址</span>
+                <el-button v-show="startDelete" @click="showEditBox(item)" class="btn" type="danger">编辑</el-button>
               </div>
             </div>
+            <el-pagination
+              v-show="total>pageSize"
+              small
+              layout="prev, pager, next"
+              :page-size="pageSize"
+              :total="total"
+              @current-change="paging">
+            </el-pagination>
           </div>
         </div>
         <left-menu selected="address"></left-menu>
@@ -40,6 +52,7 @@
   import Header from '../../components/header/header.vue'
   import Footer from '../../components/footer/footer.vue'
   import LeftMenu from '../../components/center/menu.vue'
+  import Api from '../../api.js'
 
   export default {
     data: function () {
@@ -57,10 +70,72 @@
         },
         imageUrl: '',
         startDelete: false,
-        addressList: []
+        pageNum: 1,
+        addressList: [],
+        radioAddress: '',
+        total: 0,
+        pageSize: 15
       }
     },
-    methods: {},
+    methods: {
+      getData: function () {
+        this.pageNum -= 1
+        Api.Address.List({
+          status: 1,
+          pageNum: this.pageNum,
+          pageSize: 15,
+          sort: 'createdDt'
+        }).then((result) => {
+          return result.status === 200 ? result.request.response : ''
+        }).then((result) => {
+          let data = result ? JSON.parse(result) : ''
+          if (!data) {
+            return
+          }
+          this.total = data.totalRecord
+          this.addressList = data.results
+        })
+      },
+      rollback: function () {
+        this.startDelete = false
+        this.radioAddress = ''
+      },
+      deleteAddress: function () {
+        if (!this.radioAddress) {
+          return
+        }
+        Api.Address.Delete({
+          dbId: this.radioAddress
+        }).then((result) => {
+          return result.status === 200 ? result.request.response : ''
+        }).then((result) => {
+          if (result.code === 'success') {
+            this.pageNum = 1
+            this.getData()
+          }
+        })
+      },
+      setDefault: function (address) {
+        Api.Address.SetDefault({
+          dbId: address.dbId
+        }).then((result) => {
+          return result.status === 200 ? result.request.response : ''
+        }).then((result) => {
+          if (result.code === 'success') {
+            this.addressList.forEach((item) => {
+              item.hasDefault = false
+            })
+            address.hasDefault = true
+          }
+        })
+      },
+      showEditBox: function (item) {
+        console.log(item)
+      },
+      paging: function () {
+        console.log(1)
+      }
+    },
     components: {
       'unify-header': Header,
       'unify-footer': Footer,
@@ -68,19 +143,7 @@
     },
     watch: {},
     created: function () {
-      for (let i = 0; i < 15; i++) {
-        this.addressList.push({
-          'hasDefault': false,
-          'areaDetail': '浙江省归属感的故事会受到很多事',
-          'zipCode': '111111',
-          'regionId': 100,
-          'phone': '18301232813',
-          'name': '彭进',
-          'id': 546,
-          'addressArea': '浙江省'
-        })
-      }
-      this.addressList[3].hasDefault = true
+      this.getData()
     }
   }
 </script>
@@ -134,17 +197,28 @@
         padding: 24px 0;
         color: #a3a3a3;
         border-bottom: 1px solid #dedede;
-        &:last-child {
+        &.last {
           border: 0;
         }
         label {
           margin-left: 86px;
-          &:first-child {
-            margin: 0;
-          }
+        }
+        .radio-address, .label-name {
+          margin: 0;
+        }
+        .el-radio__label {
+          display: none;
         }
         .text {
           color: #797d80;
+        }
+        .text.name {
+          display: inline-block;
+          width: 100px;
+          vertical-align: top;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
         }
         .address {
           margin-top: 12px;
