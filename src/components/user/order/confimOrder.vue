@@ -120,20 +120,15 @@
 					支付方式
 				</div>
 				<div class="pay-cont">
-				
 					<a class="a1 l active_pay" ng-click="fn_wx()" href="">
-
 						<div>
-							
 						</div>
 						<p>微信支付</p>
 					</a>
 					<a class="a2 l" ng-click="fn_zfb()" href="">
 						<div>
-							
 						</div>
 						<p>支付宝支付</p>
-						
 					</a>
 				</div>
 			</div>
@@ -156,7 +151,7 @@
 			<div class="detail m mt2">
 				<div class="btnaa r">
 					<p class="l">
-					<a class="btna1" href="#userCat">返回购物车</a> <input class="btnbtn" ng-click="placeOrder()" type="button" id="" value="提交订单"></p>
+					<a class="btna1" href="#userCat">返回购物车</a> <input class="btnbtn" @click="placeOrder()" type="button" id="" value="提交订单"></p>
 				</div>
 			</div>
 			<div class="detail m">
@@ -184,7 +179,8 @@
               total:0,
               goodsSize:'',//商品数量
               allPrice:0,//总金额
-              selectAddressA:true
+              selectAddressA:true,
+              paymentType:'WX'
             }
         },
         methods: {
@@ -193,6 +189,28 @@
         				this.selectAddressA = !this.selectAddressA;
         			}
         			return;
+        		},
+        		placeOrder(){
+        			if(this.addresBool != true){
+	        			alert('地址不能为空')
+	        			return;
+	        		}
+				var jsons = {
+					userDbId:'2221214',
+					cars:sessionStorage.getItem('cars'),
+					client:Api.CLIENT
+				}
+				Api.car.createOrder(jsons).then(res=>{ 
+					if(res.data.code == 'success'){
+	                    var orderDbId = res.data.orderDbId;
+	                    
+	        	 			location.href="/payOrder?addressId="+this.addressData.dbId+"&userDbId=2221214&dbId="+res.data.orderDbId;
+
+					}
+				},err=>{
+					Toast('请求错误');
+				})
+				//location.href="/payOrder";        			
         		},
         		setDefaultAddress(index,dbid){
         			this.addressDataList[index].isOK = !this.addressDataList[index].isOK;
@@ -217,6 +235,7 @@
 						Toast('数据请求错误');
 					})
         		}
+     
         },
         mounted() {
         	 this.car = sessionStorage.getItem('cars'); 
@@ -243,6 +262,7 @@
 		   Api.address.defaultAddress(addJsons).then(res=>{
            		if(res.data.length > 0){
            			this.addressData = res.data[0];
+           			console.log(this.addressData)
            			this.addresBool = true;
            		} 
            },err=>{
@@ -259,7 +279,7 @@
 			}
 			Api.address.addressList(jsons).then(res=>{
 				this.addressDataList = res.data.results;
-				console.log(this.addressDataList)
+
 				for (var i = 0; i < this.addressDataList.length; i++) {
 					if(this.addressDataList[i].mainAddr  == '是'){
 						

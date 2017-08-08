@@ -6,6 +6,7 @@ Vue.prototype.$http = axios
 
 // 常量 API 接口地址
 const HOST = 'http://image2.artup.com/'
+const CLIENT = 'pc';
 
 // 图片服务器（静态资源）服务器地址
 const STATIC_SERVER_HOST = 'http://image2.artup.com/'
@@ -110,6 +111,7 @@ const QUERY_CAR = `${HOST}artup-build/builder/cors/car/queryAll.do?format=json&i
 // alert('用户信息不存在!');
 // location.href='#/'
 export default {
+	
   testBaidu: {
     test: (inter) => {
       return VueHttp.$http.get(HOST + inter)
@@ -290,7 +292,7 @@ export default {
     }
   },
   UPLOAD_URL: UPLOAD_URL,
-
+  CLIENT,
   ajax: function (url, callback) {
     console.log(arguments.length)
     if (arguments.length > 2) {
