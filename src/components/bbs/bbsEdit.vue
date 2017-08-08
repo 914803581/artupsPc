@@ -26,6 +26,7 @@
         	 		<li @click="bbs.Switching=true"><i class="iconfont">&#xe64f;</i>更换板式</li>
         	 		<li><i style="font-size: 20px;padding:0 ;" class="iconfont">&#xe602;</i>加入购物车</li>
         	 		<li><i class="iconfont">&#xe629;</i>立即购买</li>
+        	 		<li @click="editWork"><i class="iconfont">&#xe612;</i>保存作品</li>
         	 	</ul>
         	 </div>
           <div class="time_main_left">
@@ -67,8 +68,8 @@
             <button  class="footer_btn">
               清空已放入的图片
             </button>
-            <button class="footer_btn">
-              自动填充2张
+            <button  @click="autoDrapImg" v-if="FooterDataAuto.length>0"  class="footer_btn">
+              自动填充<b style="font-weight: 500;">{{FooterDataAuto.length}}张</b>
             </button>
           </div>
           <div @click="checkFooterShow($event)" class="footer_center">
@@ -90,7 +91,7 @@
         <el-collapse-transition>
         <div  v-show="footerShow" class="fonter_box_img">
           <ul>
-            <li  v-for="(footerImg,index) in $store.state.bbs.footerData" draggable="true">
+            <li @click="footerImgSlectFooter(index)"  :class="{'img_size_border':footerImg.slectFooter}" :att="footerImg.slectFooter"  v-for="(footerImg,index) in $store.state.bbs.footerData" draggable="true">
               <img :src="footerImg.thumbnailUrl"/>
             </li>
           </ul>
@@ -106,11 +107,12 @@
     <edit-text :isEditText="iseditText"></edit-text>
     <!--<div-editText ></div-editText>-->
    <!--<img src=""/>-->
+   <p id="uuuu">{{FooterDataAuto}}</p>
   </div>
 </template>
 <script>
   import { Message } from 'element-ui';
-	
+  import {mapState,mapGetters,mapActions,mapMutations} from "vuex" 	
   import Api from '../../api.js'
   import filter from '../../filter.js'
   import {DomHeight} from '../../directive.js'
@@ -178,8 +180,7 @@
           material:[],//素材库
           textModel:'', //弹出框文字
           Switching:false,  //切换板式
-           					//二维数组第一位角标 bbs_index1  和二位角标
-         
+           					//二维数组第一位角标 bbs_index1  和二位角标        
         },
         dataEditImg:{},//传递给图片编辑的对象
         bbsTemplate_data:[], //宝宝书模版数据的二维数组
@@ -280,7 +281,6 @@
     src: 'http://ww3.sinaimg.cn/thumb180/7cbf7143jw1evs1s7c44ij21mw0w37fv.jpg'
   }]
 }]
-
       }
     },
 //		beforeRouteEnter(to,from,next){
@@ -296,6 +296,31 @@
 
     },
     methods: {
+    		autoDrapImg(){//自动填充图片的操作
+    			var vm = this;
+    			var arrNode=[];
+			$(".comtent_chanpin .pubilc_div .bbsClass  .img_drap").each(function(index,el){
+				if (!$(el).attr("src")) {
+					arrNode.push($(el));
+				}				
+			})
+			$(arrNode).each(function(index,el){//真正存放的操作
+				if (index<vm.FooterDataAuto.length) {
+					$(el).attr("src",vm.FooterDataAuto[index].thumbnailUrl).attr('imgStyle',vm.FooterDataAuto[index].thumbnailUrl);					
+						//计算位置
+						setTimeout(function(){
+//							$(ev.target).next("img").attr("style","")
+							dragThumb($(el),$(el).parent())
+						},100)
+				}
+			})
+    		},
+	    	footerImgSlectFooter($index){//提交
+	    		this.$store.commit("editFooterStatus",$index)
+	    	},
+	    	editWork(){//保存作品
+	    		alert('保存作品')
+	    	},
     		chenkTemplate(index){//切换模版
 			var vms = true;
 			var vm = this;
@@ -322,25 +347,35 @@
 			var otemplate = this.bbsTemplate_data[this.bbs.bbs_index1][this.bbs.bbs_index2];
 			
 			if(this.mobanArr[index].isTrue){ //两页换横版的情况选中
+				console.log("两页换横版的情况选中")
+				//切换前选中的页码
+				var otext = $(".time_main_left .active_line .pageleft span").text()
+//				console.log(otext+'页')
 				this.bbsTemplate_data[this.bbs.bbs_index1] = [];
 				var josnImg = {"template":bbsTemplateData.bbs9,"only":true,"slectTemplate":true};
 				this.bbsTemplate_data[this.bbs.bbs_index1].push(josnImg)
+				//两页换横版的时候清空vue里面相邻所有的数据
+				if (otext%2==1) {
+					console.log('奇数')
+					vm.$store.commit("setDrapData",{"opage":otext,"type":"奇数"});	
+				}else{
+					console.log('偶数')
+					vm.$store.commit("setDrapData",{"opage":otext,"type":"偶数"});
+				}
 				setTimeout(function(){
 					vm.setPageIndex()
 					vm.$store.commit("drapDiv")				
 				},300)
 				return;
 			}
-			console.log(this.bbsTemplate_data[this.bbs.bbs_index1][0].only)
 			if (this.bbsTemplate_data[this.bbs.bbs_index1][0].only) {//横版换两页的情况
+				console.log("横版换两页的情况")
 				this.bbsTemplate_data[this.bbs.bbs_index1] = [];
 				var josnImg = {"template":bbsTemplateData.bbs1,"only":false,"slectTemplate":false};
 				//选中的板式
-				var josnImg2 = {"template":bbsTemplateData[chenkIndex],"only":false,"slectTemplate":true};
-				
+				var josnImg2 = {"template":bbsTemplateData[chenkIndex],"only":false,"slectTemplate":true};				
 				var josnImg3 = {"template":bbsTemplateData.bbs1,"only":false,"slectTemplate":true};
-				var josnImg4 = {"template":bbsTemplateData[chenkIndex],"only":false,"slectTemplate":false};
-				
+				var josnImg4 = {"template":bbsTemplateData[chenkIndex],"only":false,"slectTemplate":false};				
 				//判断角标让选择更精确
 				if (this.bbs.bbs_index2==0) {
 					this.bbsTemplate_data[this.bbs.bbs_index1].push(josnImg2)
@@ -349,18 +384,17 @@
 					this.bbsTemplate_data[this.bbs.bbs_index1].push(josnImg4)
 					this.bbsTemplate_data[this.bbs.bbs_index1].push(josnImg3);
 				}
-				
-				
 			}else{
+				console.log("单页兑换")
 				otemplate.template = bbsTemplateData[chenkIndex]				
 			}
 			this.$forceUpdate();
 			this.$nextTick();
+			//让编辑器 重新有拖动和页数的功能
 			setTimeout(function(){
 				vm.setPageIndex()
 				vm.$store.commit("drapDiv");			
-			},300)
-			
+			},300)			
     		},
 		footerBoolean(val){ //素材库抬起底部图片
 			var vm = this;
@@ -404,19 +438,19 @@
           this.openTxst();//打开文字框
         }
         if($($event.target).hasClass("drap_img")){//点击图片调起编辑器
-        	  
+
         	  if($($event.target).next(".img_drap").attr("src")==""){return;}//为空返回
         	  
           $(".editbbs_one").removeClass("editbbs_one");
           $($event.target).addClass("editbbs_one");
+          
           this.dataEditImg.oSrc = $($event.target).next("img").attr("imgstyle");
           this.dataEditImg.oW = $($event.target).parent(".drapBox").width();
           this.dataEditImg.oH = $($event.target).parent(".drapBox").height();
-          //点击时候获取coustName 从hashMap里面得到他有没第一次编辑的东西
-          
+          //点击时候获取coustName 从hashMap里面得到他有没第一次编辑的东西         
           var constName =this.getCoustName($($event.target))
-		 this.dataEditImg.oActions = this.$store.state.editData.ImgHashMap.getvalue(constName).actions;
-		 console.log(this.dataEditImg)
+		  this.dataEditImg.oActions = this.$store.state.editData.ImgHashMap.getvalue(constName).actions;
+		  console.log(this.dataEditImg)
           //从vuex缓存里面拿到我的数据
 //        console.log()
 
@@ -466,7 +500,9 @@
       }
     },
     computed:{
-		
+		...mapGetters({   
+			FooterDataAuto:"GetFooterDataAuto"   //底部选中的图片状态
+		})
     },
     watch:{
     		bbsTemplate_data:"fnd"
