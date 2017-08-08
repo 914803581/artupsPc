@@ -107,7 +107,7 @@
 			},
 			mounted(){
 			var jsons = {
-	        		paymentType:'WX',
+	        		paymentType:'wx',
 	        		addressId:this.$route.query.addressId,
 	        		dbId:this.$route.query.dbId,
 	        		userDbId:this.$route.query.userDbId,
