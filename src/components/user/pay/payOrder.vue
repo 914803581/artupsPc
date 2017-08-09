@@ -45,15 +45,15 @@
 	        	 		if(res.data.paymentType == 'zfb'){
 	        	 			$('#zfb_pay_fk').html(res.data.payHtml)
 	        	 		}else{
-	        	 		//PC端微信扫码生成二维码
-				  	 $('#prView').qrcode({
-				  		 width:190,
-						 height: 190,
-						 text:res.data.codeUrl
-				  	 });
+	        	 			//PC端微信扫码生成二维码
+				  	 		$('#prView').qrcode({
+				  		 		width:190,
+						 		height: 190,
+						 		text:res.data.codeUrl
+				  	 		});
 	        	 		}
 	        	 		this.price =  res.data.total;
-				})
+					})
 	        	}
 			},
 			mounted(){
@@ -70,7 +70,7 @@
 	            	client:Api.CLIENT,
 	        		subject:this.subject
 	        	};
-	        	
+
 	        //调用支付接口
 			this.pay(jsons);
 
