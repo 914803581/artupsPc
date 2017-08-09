@@ -100,14 +100,18 @@
       </div>
     </div>
     <!--模态框素材库-->
-    <div-model @footerBurl="footerBoolean"  :isShowModel="isModel"></div-model>
+     <transition name="el-fade-in">
+   		 <div-model @footerBurl="footerBoolean"  :isShowModel="isModel"></div-model>
+    </transition>
     <!--图片编辑插件 postData 编辑器返回的数据-->
+     <transition name="el-fade-in">
     <img-edit @postDataImg="postDatas" :dataEditJson="dataEditImg"  :isImgEdit="isimgEdit"></img-edit>
+    </transition>
     <!--文字编辑框-->
-    <edit-text :isEditText="iseditText"></edit-text>
+     <transition name="el-fade-in">
+   	 <edit-text :isEditText="iseditText"></edit-text>
+    </transition>
     <!--<div-editText ></div-editText>-->
-   <!--<img src=""/>-->
-   <!--<p id="uuuu">{{FooterDataAuto}}</p>-->
   </div>
 </template>
 <script>
@@ -160,14 +164,6 @@
       			templateImg:'http://image2.artup.com/resources/static/pc/images/bbs_pc01.jpg',
       			isTrue:true
       		}
-//          'http://image2.artup.com/resources/static/pc/images/bbs_pc01.jpg',
-//          'http://image2.artup.com/resources/static/pc/images/bbs_pc02.jpg',
-//          'http://image2.artup.com/resources/static/pc/images/bbs_pc03.jpg',
-//          'http://image2.artup.com/resources/static/pc/images/bbs_pc04.jpg',
-//          'http://image2.artup.com/resources/static/pc/images/bbs_pc05.jpg',
-//          'http://image2.artup.com/resources/static/pc/images/bbs_pc06.jpg',
-//          'http://image2.artup.com/resources/static/pc/images/bbs_pc07.jpg',
-//          'http://image2.artup.com/resources/static/pc/images/bbs_pc08.jpg'
          ],
         templateoindex:0,  
       	ImgHashMapBase64:new HashMap(),
@@ -307,7 +303,14 @@
 				}				
 			})
 			var arrDrap = [];//一下传递给vuex处理的数据角标
-			
+			if ($(arrNode).size()<1) {
+				this.$message({
+			          showClose: true,
+			          message: '恭喜您图片已全部上传完毕，请加入购物车购买喲',
+			          type: 'success'
+				});
+				return;
+			}
 			$(arrNode).each(function(index,el){//真正存放的操作
 				if (index<vm.FooterDataAuto.length) {
 					$(".editAutoDrap").removeClass("editAutoDrap");

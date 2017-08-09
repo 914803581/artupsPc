@@ -34,8 +34,12 @@
 		  },
 		props:["isShowModel"],
 	    methods:{
-			closeModel(){
+			closeModel(event){
+				console.log(event)
+
 				this.isShowModels = false;
+
+				
 			},
 			openModel(){
 				this.isShowModels = true;
