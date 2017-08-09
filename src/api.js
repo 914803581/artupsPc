@@ -105,6 +105,8 @@ const DELECT_WORK = `${HOST}artup-build/builder/cors/edit/delete/command.do?form
 const SUBMIT_CARS = `${HOST}artup-build/builder/cors/car/submitCars.do?format=json&ignore=true`
 //购物车物品查询
 const QUERY_CAR = `${HOST}artup-build/builder/cors/car/queryAll.do?format=json&ignore=true`
+//支付状态查询
+const QUERY_ORDER_STATE = `${HOST}artup-build//builder/order/query.do?format=json&ignore=true`
 
 // //只要访问ajax的时候，没有这个用户信息，就跳到首页去登录获取用户信息
 // if (!sessionIds) {
@@ -142,6 +144,9 @@ export default {
       return VueHttp.$http.post(ORDER_PAY,
         qs.stringify(jsons)
       )
+    },
+    queryOrderState:(jsons)=>{
+    		return HTTP.get(QUERY_ORDER_STATE,{params:jsons})
     },
     carList: (jsons) => { // 购物车列表
       return HTTP.get(CAR_LIST, {params: jsons})

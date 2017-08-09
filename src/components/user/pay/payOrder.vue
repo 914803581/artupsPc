@@ -2,7 +2,7 @@
 	<div id="htm">
 		<Handers	></Handers>
 		<!--支付页面-->
-		<div id="payOrder" >
+		<div id="payOrder"  >
 			<div class="top">
 				支付 <span>{{price}}</span>元
 			</div>
@@ -20,7 +20,11 @@
 		
 		
 		<Footers></Footers>
+		<div id="zfb_pay_fk">
+	
+		</div>
 	</div>
+	
 </template>
 <script>
 	import Api from '../../../API.js'
@@ -29,97 +33,67 @@
 		export default{
 			data(){
 				return{
-					price:0
+					price:0,
+					times:30,
+					subject:''
 				}
 			},
 			methods:{
 			pay(jsons){
 	        	 	Api.car.orderPay(jsons).then(res=>{  
 	        	 		console.log(res)
-	        	 		this.price =  res.data.total;
-					//PC端微信扫码生成二维码
+	        	 		if(res.data.paymentType == 'zfb'){
+	        	 			$('#zfb_pay_fk').html(res.data.payHtml)
+	        	 		}else{
+	        	 		//PC端微信扫码生成二维码
 				  	 $('#prView').qrcode({
 				  		 width:190,
 						 height: 190,
 						 text:res.data.codeUrl
 				  	 });
-	//			    		  if(res.data.code === 'success'){
-//								if(this.$route.query.paymentType==='WX'){//手机微信支付 
-//									wxpay(res.data,function callback(res){ 
-//										if(res.errMsg=="chooseWXPay:fail"){
-//											alert('调起支付失败');
-//											Api.car.updataOrderStatus2Pay({dbId:jsons.dbId, status:1}).then(res=>{
-//												if(res.data.code == 'success'){
-//													location.href="#orderList"
-//												}
-//												
-//											},err=>{
-//												alert('请求数据失败');
-//											})
-//											
-//										}else if(res.errMsg == "chooseWXPay:cancel" ) {//用户取消订单
-//			                                
-//											Api.car.updataOrderStatus2Pay({dbId:jsons.dbId, status:1}).then(res=>{
-//												if(res.data.code == 'success'){
-//
-//													location.href="#orderList"
-//												}
-//												
-//											},err=>{
-//												alert('请求数据失败');
-//			                                    location.href="#orderList";
-//											})
-//											alert('用户取消支付');
-//											location.href="#orderList";
-//											
-//										}else{
-//											alert('支付成功');
-//
-//			                                location.href="#orderList";
-//										}
-//									}); 
-//								}
-//							} else {
-//								
-//			                    if(res.data.acquireOpenId && res.data.acquireOpenId === 'Y'){ 
-//			                        window.location.href= res.data.codeUrl;
-//			                    } else if(res.data.pay && res.data.pay === 'Y'){ 
-//			                        window.location.href="#user";
-//			                    }
-//			                    else {
-//			                        alert('支付失败');
-//			                        Api.car.updataOrderStatus2Pay({dbId:jsons.dbId, status:1}).then(res=>{
-//			                        if(res.data.code == 'success'){ 
-//			                           window.location.href="#orderList"
-//			                        }
-//			                        
-//			                        },err=>{
-//			                            alert('请求数据失败');
-//			                        })
-//			                    }
-//			    				
-//							}
-//			    	   },err=>{ 
-//			    		alert('请求数据失败');
+	        	 		}
+	        	 		this.price =  res.data.total;
 				})
-	        		}
-		
+	        	}
 			},
 			mounted(){
-			var jsons = {
-	        		paymentType:'wx',
+				if(this.$route.query.paymentType == 'wx'){
+					this.subject = '微信支付';
+				}else{
+					this.subject = '支付宝支付';
+				}
+			var jsons = { 
+	        		paymentType:this.$route.query.paymentType, 
 	        		addressId:this.$route.query.addressId,
 	        		dbId:this.$route.query.dbId,
 	        		userDbId:this.$route.query.userDbId,
-	            client:Api.CLIENT,
-	        		subject:'微信支付'
+	            	client:Api.CLIENT,
+	        		subject:this.subject
 	        	};
-			this.pay(jsons)
+	        	
+	        //调用支付接口
+			this.pay(jsons);
 
-					 
+			if(this.$route.query.paymentType == 'wx'){
+				var	timer1 = setInterval(function(){
+		           Api.car.queryOrderState(jsons).then(res=>{
+		           	if(res.data.status >= 3){
+		           		clearInterval(timer1);
+		           		 location.href="/payOk?orderCode="+res.data.code+'&price='+res.data.total;
+		           	}
+		           },err=>{
+		           	
+		           })
+		        }, 5000);//设置3秒循环查询
+			}else{
+				$("#payOrder").hide();
 			}
-
+			
+	        
+			 
 		}
+
+	}
 	
 </script>
 
