@@ -7,6 +7,17 @@ import 'element-ui/lib/theme-default/index.css'
 // 引入ajax注入原型
 import Axios from 'axios'
 import VueAxios from 'vue-axios'
+
+
+
+//import mixins from './mixins'
+Vue.use(ElementUI)
+//Vue.use(mixins)
+// 引入ajax
+Vue.use(VueAxios, Axios)
+
+//自定义的一些全局组件
+
 import router from '@/router' // 引入路由
 import store from '@/store' // 引入vuex
 // 自定义的一些全局组件
@@ -16,6 +27,7 @@ import utils from './components/component/util'
 
 Vue.use(ElementUI)
 Vue.use(VueAxios, Axios) // 引入ajax
+
 
 Vue.use(Handers)
 Vue.use(Footers)

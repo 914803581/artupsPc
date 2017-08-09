@@ -6,32 +6,33 @@
 			<div class="rod001">
 				<div class="ord1m l">
 					<!-- 默认地址 -->
-					<!-- ngRepeat: address in address --><!-- ngIf: address.hasDefault --><div class="dizhi ng-scope" ng-show="selectAddressA" ng-if="address.hasDefault" ng-repeat="address in address">
+					<div class="dizhi ng-scope" ng-show="selectAddressA" v-model="addressData">
 						<div class="ord1m_1">
-							<p class="l">收货人：<span class="ng-binding">彭进</span>电话：<span class="ng-binding">18301232813</span></p>
+							<p class="l">收货人：<span class="ng-binding">{{addressData.name}}</span>电话：<span class="ng-binding">{{addressData.mobile}}</span></p>
 						</div>
 						<div class="ord1m_2">
-							<a class="xuanze l" href="javascript:;"><!-- ngIf: address.hasDefault --><span ng-if="address.hasDefault" class="xz01 ng-scope" href=""></span><!-- end ngIf: address.hasDefault --></a><span class="ng-binding">浙江省归属感的故事会受到很多事</span>
+							<a class="xuanze l" href="javascript:;"><span  class="xz01 ng-scope" href=""></span></a><span class="ng-binding">{{addressData.province}}{{addressData.address}}</span>
 						</div>
-					</div><!-- end ngIf: address.hasDefault --><!-- end ngRepeat: address in address --><!-- ngIf: address.hasDefault --><!-- end ngRepeat: address in address --><!-- ngIf: address.hasDefault --><!-- end ngRepeat: address in address --><!-- ngIf: address.hasDefault --><!-- end ngRepeat: address in address --><!-- ngIf: address.hasDefault --><!-- end ngRepeat: address in address --><!-- ngIf: address.hasDefault --><!-- end ngRepeat: address in address --><!-- ngIf: address.hasDefault --><!-- end ngRepeat: address in address --><!-- ngIf: address.hasDefault --><!-- end ngRepeat: address in address --><!-- ngIf: address.hasDefault --><!-- end ngRepeat: address in address -->
-					<div ng-show="selectAddressA" ng-click="MoreAddress()" style="color: #A00912;cursor:pointer;" class="ord1m_3">
+					</div>
+					<div v-show="selectAddressA"@click="MoreAddress()" style="color: #A00912;cursor:pointer;" class="ord1m_3">
 						更多地址&gt;&gt;
 					</div>
 
-					<!-- 全部地址 -->
-					<!-- end ngRepeat: address in address -->					
-					<div ng-show="!selectAddressA" style="color: #A00912;cursor:pointer;" class="ord1m_3 ng-hide">
+					<!-- 全部地址 -->			
+					<div v-show="!selectAddressA" style="color: #A00912;cursor:pointer;" class="ord1m_3 ng-hide">
 						请选择配送地址&gt;&gt;
 					</div>
 
-					<!--<div class="dizhi" ng-repeat="address in address">
-						<div class="ord1m_1">
-							<p class="l">收货人：<span>张建国</span>电话：<span>135216801</span></p>
+					<div v-show="!selectAddressA" class="otherAddress">
+						<div class="dizhi" v-for="(address,index) in addressDataList">
+							<div class="ord1m_1">
+								<p class="l">收货人：<span>{{address.name}}</span>电话：<span>{{address.mobile}}</span></p>
+							</div>
+							<div class="ord1m_2">
+								<a class="xuanze l" href="javascript:;" @click="setDefaultAddress(index,address.dbid)"><span  class="xz01" v-show="address.isOK"></span></a><span>{{address.isOK}}{{address.province}}{{address.address}}</span>
+							</div>
 						</div>
-						<div class="ord1m_2">
-							<a class="xuanze l" href="javascript:;"><span class="xz01" href=""></span></a><span>北京 北京市 顺义区 天竺 空港工业区A区天纬四街7号雅昌艺术中心</span>
-						</div>
-					</div>-->
+					</div>
 					
 					
 				</div>
@@ -102,7 +103,7 @@
 				<!--隐藏的优惠卷-->
 				<div class="note-top">
 					<p class="ntl l">备&nbsp;&nbsp;注&nbsp;&nbsp;<span>(提示：请勿填写有关支付、收货、发票方面的信息)</span></p>
-					<p class="ntr r">
+					<p class="ntr r" style="display: none;">
 					<input class="ntrtxt ng-pristine ng-untouched ng-valid ng-empty" type="text" ng-model="exchangeCouponCode" name="" id="exchangeCouponCode" value="" placeholder="请输入优惠码"><input class="ntrbtn" type="button" name="" ng-click="exchangeCode()" id="" value="兑换"></p>
 					<!-- <span>{{exchangeCouponCode}}</span>	 -->
 				</div>
@@ -114,38 +115,31 @@
 				<p class="billr r"><span>普通发票 （纸质）</span><span>个 人</span><span>明细</span>
 				<a  href="">修改</a><span>&gt;</span></p>
 			</div>
-			<!---->
 			<div class="pay m">
 				<div class="pay-tit">
 					支付方式
 				</div>
 				<div class="pay-cont">
-				
-					<a class="a1 l active_pay" ng-click="fn_wx()" href="">
-
+					<a :class="{'active_pay':payType==1}" class="a1 l " @click="pay_wx()" >
 						<div>
-							
 						</div>
 						<p>微信支付</p>
 					</a>
-					<a class="a2 l" ng-click="fn_zfb()" href="">
+					<a :class="{'active_pay':payType==2}" class="a2 l" @click="pay_zfb()" >
 						<div>
-							
 						</div>
 						<p>支付宝支付</p>
-						
 					</a>
 				</div>
 			</div>
-			<!---->
 			<div class="detail m">
 				<div class="dtl01 r">
 					<p class=""><span id="oNUmber" class="redd ng-binding">{{goodsSize}}</span>件商品，商品总金额：￥<span id="oPrice" class="ng-binding">{{allPrice}}</span></p>
-					<p class="">
+					<p style="display: none;" class="">
 					享受优惠：使用优惠劵抵现 <span id="couponPrefeAmount" class="ng-binding">0.00</span> 元，<span ng-show="!manYuan==0" class="">订单总价满<span id="manYuan" class="ng-binding">0</span>元减<span id="prefePrice" class="ng-binding">0</span>元</span> 
 						
 					</p>
-					<p class="">合计优惠金额：-￥<span id="totalPrefeAmount" class="ng-binding">0.00元</span></p>
+					<p class="" style="display: none;">合计优惠金额：-￥<span id="totalPrefeAmount" class="ng-binding">0.00元</span></p>
 					<p class=""><span class="bul">中通快递</span>&nbsp;&nbsp;运费：￥<span>0.00</span></p>
 				</div>
 			</div>
@@ -157,13 +151,13 @@
 			<div class="detail m mt2">
 				<div class="btnaa r">
 					<p class="l">
-					<a class="btna1" href="#userCat">返回购物车</a> <input class="btnbtn" ng-click="placeOrder()" type="button" id="" value="提交订单"></p>
+					<a class="btna1" href="#userCat">返回购物车</a> <input class="btnbtn" @click="placeOrder()" type="button" id="" value="提交订单"></p>
 				</div>
 			</div>
 			<div class="detail m">
 				<div class="defd r" style="padding-bottom: 100px;">
-					<p class="l">寄送至：<span class="ng-binding">浙江省归属感的故事会受到很多事</span></p>
-					<p class="l">收货人：<span class="ng-binding">彭进</span><span class="ng-binding">18301232813</span></p>
+					<p class="l">寄送至：<span class="ng-binding">{{addressData.province}}{{addressData.address}}</span></p>
+					<p class="l">收货人：<span class="ng-binding">{{addressData.name}}</span><span class="ng-binding">{{addressData.mobile}}</span></p>
 				</div>
 			</div>
 		</div>
@@ -179,49 +173,134 @@
             return {
               dataList:[],
               addressData:[],
+              addressDataList:[],
               addresBool :false,
               car:'',
               total:0,
               goodsSize:'',//商品数量
-              allPrice:0//总金额
+              allPrice:0,//总金额
+              selectAddressA:true,
+              paymentType:'WX',
+              payType:1
             }
         },
         methods: {
-        	
+        		pay_wx(){
+        			this.payType = 1;
+        		},
+        		pay_zfb(){
+        			this.payType = 2;
+        		},
+        		MoreAddress(){
+        			if(this.addressDataList.length > 0){
+        				this.selectAddressA = !this.selectAddressA;
+        			}
+        			return;
+        		},
+        		placeOrder(){
+        			if(this.addresBool != true){
+	        			alert('地址不能为空')
+	        			return;
+	        		}
+				var jsons = {
+					userDbId:'2221214',
+					cars:sessionStorage.getItem('cars'),
+					client:Api.CLIENT
+				}
+				Api.car.createOrder(jsons).then(res=>{ 
+					if(res.data.code == 'success'){
+	                    var orderDbId = res.data.orderDbId;
+	                    
+	        	 			location.href="/payOrder?addressId="+this.addressData.dbId+"&userDbId=2221214&dbId="+res.data.orderDbId;
+
+					}
+				},err=>{
+					Toast('请求错误');
+				})
+				//location.href="/payOrder";        			
+        		},
+        		setDefaultAddress(index,dbid){
+        			this.addressDataList[index].isOK = !this.addressDataList[index].isOK;
+        			this.selectAddressA = !this.selectAddressA;
+					var jsons = {
+								userDbId:this.$route.query.userDbId,
+								dbId:dbid
+								}
+					Api.address.setDefaultAddress(jsons).then(res=>{
+						 var addJsons= {
+				           		userDbId:this.$route.query.userDbId
+				           }
+						   Api.address.defaultAddress(addJsons).then(res=>{
+				           		if(res.data.length > 0){
+				           			this.addressData = res.data[0];
+				           			this.addresBool = true;
+				           		} 
+				           },err=>{
+				            	Toast('数据请求错误');
+				           })
+					},err=>{
+						Toast('数据请求错误');
+					})
+        		}
+     
         },
         mounted() {
         	 this.car = sessionStorage.getItem('cars'); 
 	        	var jsons = {
 	        		dbId:this.car
 	        	}
-	        	 Api.car.queryCar(jsons).then(res=>{ 
-	           	if(res.data.length > 0){
-	           		this.goodsSize = res.data.length;
-	           		console.log(res.data)
-	           		this.dataList = res.data;
-	           		for(var i = 0; i<this.dataList.length; i++){
-	           			this.total += Number(this.dataList[i].total);
-	           			this.allPrice += Number(this.dataList[i].num * this.dataList[i].price);
-	           		} 
-	           	} 
-	           },err=>{
-	           		Toast('数据请求错误');
-	           })
-	
-	           var addJsons= {
-	           		userDbId:this.$route.query.userDbId
-	           }
-	
-	           Api.address.defaultAddress(addJsons).then(res=>{
-	           		if(res.data.length > 0){
-	           			this.addressData = res.data[0];
-	           			this.addresBool = true;
-	           		} 
-	           },err=>{
-	            	Toast('数据请求错误');
-	           })
-	        }
-	    }
+        Api.car.queryCar(jsons).then(res=>{ 
+           	if(res.data.length > 0){
+           		this.goodsSize = res.data.length;
+           		console.log(res.data)
+           		this.dataList = res.data;
+           		for(var i = 0; i<this.dataList.length; i++){
+           			this.total += Number(this.dataList[i].total);
+           			this.allPrice += Number(this.dataList[i].num * this.dataList[i].price);
+           		} 
+           	} 
+           },err=>{
+           		Toast('数据请求错误');
+           })
+          //默认收货地址
+           var addJsons= {
+           		userDbId:this.$route.query.userDbId
+           }
+		   Api.address.defaultAddress(addJsons).then(res=>{
+           		if(res.data.length > 0){
+           			this.addressData = res.data[0];
+           			console.log(this.addressData)
+           			this.addresBool = true;
+           		} 
+           },err=>{
+            	Toast('数据请求错误');
+           })
+          
+           //全部收货地址
+           var jsons = {
+				userDbId:this.$route.query.userDbId,
+				status:1, 
+				pageNum:0,
+				pageSize:15,
+				sort:'createdDt'
+			}
+			Api.address.addressList(jsons).then(res=>{
+				this.addressDataList = res.data.results;
+
+				for (var i = 0; i < this.addressDataList.length; i++) {
+					if(this.addressDataList[i].mainAddr  == '是'){
+						
+						this.addressDataList[i].isOK = true;
+					}else{
+						this.addressDataList[i].isOK = false;	
+					}
+				}
+
+			},err=>{
+				Toast('数据请求错误');
+			})
+        }
+    }
 </script>
 
 <style>
