@@ -53,7 +53,7 @@ var webpackConfig = merge(baseWebpackConfig, {
       filename: config.build.main,
       template: path.resolve(__dirname, '../multiple/index.html'),
       inject: true,
-      chunks: ['main'],
+      chunks: ['manifest', 'vendor', 'main'],
       minify: {
         removeComments: true,
         collapseWhitespace: true,
