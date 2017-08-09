@@ -46,13 +46,14 @@ var webpackConfig = merge(baseWebpackConfig, {
         safe: true
       }
     }),
-    // generate dist index.html with correct asset hash for caching.
-    // you can customize output by editing /index.html
+    // generate dist index.multiple with correct asset hash for caching.
+    // you can customize output by editing /index.multiple
     // see https://github.com/ampedandwired/html-webpack-plugin
     new HtmlWebpackPlugin({
-      filename: config.build.index,
-      template: 'index.html',
+      filename: config.build.main,
+      template: path.resolve(__dirname, '../multiple/index.html'),
       inject: true,
+      chunks: ['manifest', 'vendor', 'main'],
       minify: {
         removeComments: true,
         collapseWhitespace: true,
@@ -92,7 +93,22 @@ var webpackConfig = merge(baseWebpackConfig, {
       }
     ])
   ]
-})
+});
+['home', 'album', 'magnet', 'framed-pictures', 'poster'].forEach((page) => {
+  webpackConfig.entry[page] = `./src/script/${page}.js`
+  webpackConfig.plugins.push(new HtmlWebpackPlugin({
+    filename: path.resolve(__dirname, `../dist/${page}.html`),
+    template: path.resolve(__dirname, `../multiple/${page}.html`),
+    inject: true,
+    chunks: [page],
+    minify: {
+      removeComments: true,
+      collapseWhitespace: true,
+      removeAttributeQuotes: true
+    },
+    chunksSortMode: 'dependency'
+  }));
+});
 
 if (config.build.productionGzip) {
   var CompressionWebpackPlugin = require('compression-webpack-plugin')
