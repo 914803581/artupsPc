@@ -11,8 +11,8 @@
 					<div class="rightBox">
 						<ul>
 							<li>订单支付成功！</li>
-							<li>订单号：<span>838738378</span></li>
-							<li>金额: <span>800元</span></li>
+							<li>订单号：<span>{{orderCode}}</span></li>
+							<li>金额: <span>{{price}}元</span></li>
 							
 						</ul>
 					</div>
@@ -20,7 +20,7 @@
 			</div>
 			<div class="payOkBtn">
 				<ul>
-					<li>继续定制</li>
+					<li @click="jxdz()">继续定制</li>
 					<li>查看订单</li>
 				</ul>
 			</div>
@@ -30,7 +30,32 @@
 </template>
 
 <script>
-</script>
+	import Api from '../../../API.js'
+	import { MessageBox } from 'element-ui';
 
+		export default{
+			data(){
+				return{
+					price:0,
+					orderCode:''
+				}
+			},
+			methods:{
+				jxdz(){
+					location.href = '/'
+				}
+		
+			},
+			mounted(){
+				this.price = this.$route.query.price;
+				this.orderCode = this.$route.query.orderCode;
+		
+		
+			 
+		}
+
+	}
+	
+</script>
 <style>
 </style>

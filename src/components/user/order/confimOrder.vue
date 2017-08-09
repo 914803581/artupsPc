@@ -180,7 +180,6 @@
               goodsSize:'',//商品数量
               allPrice:0,//总金额
               selectAddressA:true,
-              paymentType:'WX',
               payType:1
             }
         },
@@ -198,11 +197,12 @@
         			return;
         		},
         		placeOrder(){
+        			
         			if(this.addresBool != true){
 	        			alert('地址不能为空')
 	        			return;
 	        		}
-				var jsons = {
+        			var jsons = {
 					userDbId:'2221214',
 					cars:sessionStorage.getItem('cars'),
 					client:Api.CLIENT
@@ -210,9 +210,11 @@
 				Api.car.createOrder(jsons).then(res=>{ 
 					if(res.data.code == 'success'){
 	                    var orderDbId = res.data.orderDbId;
-	                    
-	        	 			location.href="/payOrder?addressId="+this.addressData.dbId+"&userDbId=2221214&dbId="+res.data.orderDbId;
-
+	                    var payType = 'wx';
+	                    if(this.payType == 2){
+							payType='zfb';
+    						}
+    					    location.href="/payOrder?addressId="+this.addressData.dbId+"&userDbId=2221214&dbId="+res.data.orderDbId+"&paymentType="+payType;
 					}
 				},err=>{
 					Toast('请求错误');
