@@ -1,4 +1,5 @@
 var utils = require('./utils')
+var path = require('path')
 var webpack = require('webpack')
 var config = require('../config')
 var merge = require('webpack-merge')
@@ -11,9 +12,9 @@ Object.keys(baseWebpackConfig.entry).forEach(function (name) {
   baseWebpackConfig.entry[name] = ['./build/dev-client'].concat(baseWebpackConfig.entry[name])
 })
 
-module.exports = merge(baseWebpackConfig, {
+var webpackConfig = merge(baseWebpackConfig, {
   module: {
-    rules: utils.styleLoaders({ sourceMap: config.dev.cssSourceMap })
+    rules: utils.styleLoaders({sourceMap: config.dev.cssSourceMap})
   },
   // cheap-module-eval-source-map is faster for development
   devtool: '#cheap-module-eval-source-map',
@@ -26,10 +27,28 @@ module.exports = merge(baseWebpackConfig, {
     new webpack.NoEmitOnErrorsPlugin(),
     // https://github.com/ampedandwired/html-webpack-plugin
     new HtmlWebpackPlugin({
-      filename: 'index.html',
-      template: 'index.html',
+      filename: config.build.main,
+      template: path.resolve(__dirname, '../multiple/index.html'),
       inject: true
     }),
     new FriendlyErrorsPlugin()
   ]
-})
+});
+
+['home', 'album', 'magnet', 'framed-pictures', 'poster'].forEach((page) => {
+  webpackConfig.entry[page] = `./src/script/${page}.js`
+  webpackConfig.plugins.push(new HtmlWebpackPlugin({
+    filename: path.resolve(__dirname, `../dist/${page}.html`),
+    template: path.resolve(__dirname, `../multiple/${page}.html`),
+    inject: true,
+    chunks: [page],
+    minify: {
+      removeComments: true,
+      collapseWhitespace: true,
+      removeAttributeQuotes: true
+    },
+    chunksSortMode: 'dependency'
+  }));
+});
+
+module.exports = webpackConfig

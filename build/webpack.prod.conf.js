@@ -51,7 +51,7 @@ var webpackConfig = merge(baseWebpackConfig, {
     // see https://github.com/ampedandwired/html-webpack-plugin
     new HtmlWebpackPlugin({
       filename: config.build.main,
-      template: path.resolve(__dirname, '../multiple/main.html'),
+      template: path.resolve(__dirname, '../multiple/index.html'),
       inject: true,
       chunks: ['main'],
       minify: {
@@ -94,7 +94,7 @@ var webpackConfig = merge(baseWebpackConfig, {
     ])
   ]
 });
-['index', 'album', 'magnet', 'framed-pictures', 'poster'].forEach((page) => {
+['home', 'album', 'magnet', 'framed-pictures', 'poster'].forEach((page) => {
   webpackConfig.entry[page] = `./src/script/${page}.js`
   webpackConfig.plugins.push(new HtmlWebpackPlugin({
     filename: path.resolve(__dirname, `../dist/${page}.html`),
