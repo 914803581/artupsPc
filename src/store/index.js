@@ -1,8 +1,6 @@
 import Vue from "vue"
 import Vuex from "vuex"
 import axios from "axios"
-
-
 Vue.use(Vuex)
 
 import Api from '../api.js'
@@ -55,6 +53,9 @@ let store = new Vuex.Store({
 				}
 			})
 		},
+		delectFooterData(state){//清空底部数据
+			state.bbs.footerData=[];
+		},
 		editFooterStatus(state,obj){//修改页脚底部的状态
 			var jsonArr = state.bbs.footerData[obj]
 			jsonArr.slectFooter = !jsonArr.slectFooter;
@@ -70,6 +71,40 @@ let store = new Vuex.Store({
             "editCnfName" : "","isOnly":false};
             //存入图片ImgHashMap
           	state.editData.textHashMap.putvalue(constName,picObj);                
+		},
+		autoPushData(state,obj){
+			var edidData = $(".editAutoDrap");
+			var oPage = edidData.parents(".pubilc_div").find(".page .pageleft span").attr("page");//第几页
+			var oTypeStyle = edidData.attr("typestyle");//板式
+			var oimgSort= edidData.attr("imgsort");//图片的顺序
+			var constName = oPage+"_"+oimgSort;
+			 	var picObj = {"constName":constName,"picDbId" : edidData.attr("dbId"), "page" : oPage, "editCnfIndex" : oTypeStyle, "num" : oimgSort, "actions" : {},
+                "thumbnailImageUrl":edidData.attr("src"), "previewThumbnailImageUrl" :"", "crop" : "false","editCnfName" : "","isOnly":false};
+		    //存入图片ImgHashMap
+	        state.editData.ImgHashMap.putvalue(constName,picObj);
+	        console.log(state.editData.ImgHashMap.getvalue(constName))
+		},
+		autoDrapData(state,obj){//自动填充后端的处理图片的方法
+			var arrIndex = [];
+			state.bbs.footerData.forEach((val,i)=>{				
+				if(val.slectFooter){
+					arrIndex.unshift(i)
+				}
+			})
+			arrIndex.forEach(index=>{
+				state.bbs.footerData.splice(index, 1);
+			})
+			//组装数据放入
+			
+
+			
+			 
+
+//          
+			
+			
+			
+			
 		},
 		setDrapData(state,obj){//两页换横版的时候清空vue里面相邻所有的数据
 			console.log(obj)
@@ -126,9 +161,9 @@ let store = new Vuex.Store({
 						var dataImg = state.bbs.footerData[oIndex]; //每一个对象
 						//回显图片和删除底部缓存
 						console.log(ev.target)
-						if($(ev.target).find(">img").attr("src")){
-							console.log('有图')
-						}
+//						if($(ev.target).find(">img").attr("src")){
+//							console.log('有图')
+//						}
 						$(ev.target).next("img").attr("src",dataImg.thumbnailUrl).attr('imgStyle',dataImg.thumbnailUrl);
 						state.bbs.footerData.splice(oIndex, 1);
 						console.log(dataImg)
