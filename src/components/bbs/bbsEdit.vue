@@ -65,7 +65,7 @@
       <div v-DomHeight  class="footer_img">
         <div class="footer_up_tittle">
           <div class="footer_left">
-            <button  class="footer_btn">
+            <button  @click="delectFooter" class="footer_btn">
               清空已放入的图片
             </button>
             <button  @click="autoDrapImg" v-if="FooterDataAuto.length>0"  class="footer_btn">
@@ -79,10 +79,10 @@
             <button class="footer_btn" @click="preview">
               预览宝宝书
             </button>
-            <select style="top: -2px;" class="footer_btn" name="">
+            <!--<select style="top: -2px;" class="footer_btn" name="">
               <option value="">未使用图片</option>
               <option value="">已使用图片</option>
-            </select>
+            </select>-->
             <button @click="open_material" class="footer_btn">
               添加图片
             </button>
@@ -107,7 +107,7 @@
     <edit-text :isEditText="iseditText"></edit-text>
     <!--<div-editText ></div-editText>-->
    <!--<img src=""/>-->
-   <p id="uuuu">{{FooterDataAuto}}</p>
+   <!--<p id="uuuu">{{FooterDataAuto}}</p>-->
   </div>
 </template>
 <script>
@@ -293,9 +293,11 @@
       divModel,
       imgEdit,
       editText
-
     },
     methods: {
+    	   ...mapMutations({//同步触发操作集合
+ 			delectFooter:"delectFooterData"   	   	
+    	   }),
     		autoDrapImg(){//自动填充图片的操作
     			var vm = this;
     			var arrNode=[];
@@ -304,16 +306,25 @@
 					arrNode.push($(el));
 				}				
 			})
+			var arrDrap = [];//一下传递给vuex处理的数据角标
+			
 			$(arrNode).each(function(index,el){//真正存放的操作
 				if (index<vm.FooterDataAuto.length) {
-					$(el).attr("src",vm.FooterDataAuto[index].thumbnailUrl).attr('imgStyle',vm.FooterDataAuto[index].thumbnailUrl);					
+					$(".editAutoDrap").removeClass("editAutoDrap");
+					$(el).addClass("editAutoDrap");//编辑自动拖拽
+					$(el).attr("src",vm.FooterDataAuto[index].thumbnailUrl).attr('imgStyle',vm.FooterDataAuto[index].thumbnailUrl).attr("dbid",vm.FooterDataAuto[index].dbId);						
+						//每次循环都取触发存储数据的操作
+						vm.$store.commit("autoPushData")
 						//计算位置
 						setTimeout(function(){
-//							$(ev.target).next("img").attr("style","")
+							arrDrap.unshift(index)						
 							dragThumb($(el),$(el).parent())
 						},100)
 				}
-			})
+			})			
+			//处理图片底部自动删除的操作
+			vm.$store.commit("autoDrapData",arrDrap)
+			
     		},
 	    	footerImgSlectFooter($index){//提交
 	    		this.$store.commit("editFooterStatus",$index)
