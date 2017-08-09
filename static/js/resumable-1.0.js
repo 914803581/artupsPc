@@ -394,7 +394,7 @@
           })()} else {
             filesSkipped.push(file);
           };
-          
+
 //          file.uniqueIdentifier = uniqueIdentifier;
 //          var f = new ResumableFile($, file, uniqueIdentifier);
 //          $.files.push(f);
@@ -403,7 +403,7 @@
 //          window.setTimeout(function(){
 //            $.fire('fileAdded', f, event)
 //          },0);
-          
+
           decreaseReamining();
         }
         // directories have size == 0
@@ -934,12 +934,12 @@
               input.focus();
               input.click();
               input.style.display='none';
-              
+
         	  var onclickFn = domNode.getAttribute('onClick');
         	  if(onclickFn){
         		  window[onclickFn](domNode, input, e);
         	  }
-            
+
           }, false);
           domNode.appendChild(input);
         }
