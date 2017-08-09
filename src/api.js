@@ -10,9 +10,7 @@ const CLIENT = 'pc';
 
 // 图片服务器（静态资源）服务器地址
 const STATIC_SERVER_HOST = 'http://image2.artup.com/'
-
-// 图片测试地址
-const IMG_TEST = 'http://192.168.82.119:7090/'
+ 
 let urlQuery = sessionStorage.getItem('urlQuery')
 
 const VueHttp = new Vue()
