@@ -6,8 +6,6 @@ import axios from "axios"
 Vue.use(Vuex)
 
 import Api from '../api.js'
-
-
 //定义一个容器
 let store = new Vuex.Store({
 	state:{
@@ -28,8 +26,15 @@ let store = new Vuex.Store({
 		filterCount(state){
 			return state.count >=120 ? 120:state.count
 		},
-		footerDataGet(state){
-//			return state.bbs.footerData
+		GetFooterDataAuto(state){//获取页脚选中需要自动回填的图片数组
+			var arr=[];//选中的临时变量
+			state.bbs.footerData.forEach(val=>{
+				if(val.slectFooter){
+					arr.push(val)	 				
+				}			
+			})
+			return arr
+
 		}
 	},
 	mutations:{ //改变数据的方法集合-->记住 这个方法只能处理同步的异步的是actions函数
@@ -45,9 +50,15 @@ let store = new Vuex.Store({
 //			var arrImg = [];
 			state.bbs.material.forEach(val=>{
 				if(val.isTrue){
+					val.slectFooter = "true";//默认的值全部选中
 					state.bbs.footerData.unshift(val)
 				}
 			})
+		},
+		editFooterStatus(state,obj){//修改页脚底部的状态
+			var jsonArr = state.bbs.footerData[obj]
+			jsonArr.slectFooter = !jsonArr.slectFooter;
+			state.bbs.footerData.splice(obj, 1, jsonArr);
 		},
 		getTextBox(state,obj){//获取文本框的内容函数
 			state.bbs.textData = obj
@@ -56,9 +67,29 @@ let store = new Vuex.Store({
 			console.log(obj)	
 			var constName = obj.page+"_"+obj.textsort;
 			var picObj = {"constName":constName, "page" : obj.page, "editCnfIndex" : obj.typeStyle, "num" : obj.textsort,"content":obj.txt,
-            "editCnfName" : ""};
+            "editCnfName" : "","isOnly":false};
             //存入图片ImgHashMap
           	state.editData.textHashMap.putvalue(constName,picObj);                
+		},
+		setDrapData(state,obj){//两页换横版的时候清空vue里面相邻所有的数据
+			console.log(obj)
+			var oPage = obj.opage;
+			if(obj.type=="奇数"){
+				state.editData.ImgHashMap.remove((parseInt(oPage)+1)+'_1');
+            		state.editData.ImgHashMap.remove((parseInt(oPage)+1)+'_2');
+            		state.editData.ImgHashMap.remove((parseInt(oPage)+1)+'_3');
+            		state.editData.ImgHashMap.remove((parseInt(oPage)+1)+'_4');				
+			}else{
+				state.editData.ImgHashMap.remove((parseInt(oPage)-1)+'_1');
+            		state.editData.ImgHashMap.remove((parseInt(oPage)-1)+'_2');
+            		state.editData.ImgHashMap.remove((parseInt(oPage)-1)+'_3');
+            		state.editData.ImgHashMap.remove((parseInt(oPage)-1)+'_4');
+			}
+			state.editData.ImgHashMap.remove((parseInt(oPage))+'_1');
+        		state.editData.ImgHashMap.remove((parseInt(oPage))+'_2');
+        		state.editData.ImgHashMap.remove((parseInt(oPage))+'_3');
+        		state.editData.ImgHashMap.remove((parseInt(oPage))+'_4');
+			
 		},
 		drapDiv(state){//拖动元素的方法
 				//被拖动的元素
@@ -74,7 +105,7 @@ let store = new Vuex.Store({
 						//这里指定setDate的index=i
 						ev.dataTransfer.setData('Index',this.index);
 
-						this.style.background = 'green';
+//						this.style.background = 'green';
 						
 					}
 				}
@@ -112,10 +143,19 @@ let store = new Vuex.Store({
 						 console.log(constName)
 						 
 						 var picObj = {"constName":constName,"picDbId" : dataImg.dbId, "page" : oPage, "editCnfIndex" : oTypeStyle, "num" : oimgSort, "actions" : {},
-                            "thumbnailImageUrl":dataImg.thumbnailUrl, "previewThumbnailImageUrl" :"", "crop" : "false","editCnfName" : ""};
+                            "thumbnailImageUrl":dataImg.thumbnailUrl, "previewThumbnailImageUrl" :"", "crop" : "false","editCnfName" : "","isOnly":false};
+                        
+		                if($(ev.target).parents(".pubilc_div").hasClass("hengban_bbs")){//如果拖动的图片结束是横版
+		                		picObj.isOnly = true;
+		                		//拖动是横版的情况删除他后面的所有图片
+		                		state.editData.ImgHashMap.remove((parseInt(oPage)+1)+'_1');
+		                		state.editData.ImgHashMap.remove((parseInt(oPage)+1)+'_2');
+		                		state.editData.ImgHashMap.remove((parseInt(oPage)+1)+'_3');
+		                		state.editData.ImgHashMap.remove((parseInt(oPage)+1)+'_4');
+		                }
                         //存入图片ImgHashMap
                         state.editData.ImgHashMap.putvalue(constName,picObj);
-//                      console.log(state.editData.ImgHashMap.getvalue("2_1")) 
+                        console.log(state.editData.ImgHashMap.getvalue(constName)) 
 						
 						//计算位置
 						setTimeout(function(){
