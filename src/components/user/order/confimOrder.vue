@@ -120,12 +120,12 @@
 					支付方式
 				</div>
 				<div class="pay-cont">
-					<a class="a1 l active_pay" ng-click="fn_wx()" href="">
+					<a :class="{'active_pay':payType==1}" class="a1 l " @click="pay_wx()" >
 						<div>
 						</div>
 						<p>微信支付</p>
 					</a>
-					<a class="a2 l" ng-click="fn_zfb()" href="">
+					<a :class="{'active_pay':payType==2}" class="a2 l" @click="pay_zfb()" >
 						<div>
 						</div>
 						<p>支付宝支付</p>
@@ -180,10 +180,17 @@
               goodsSize:'',//商品数量
               allPrice:0,//总金额
               selectAddressA:true,
-              paymentType:'WX'
+              paymentType:'WX',
+              payType:1
             }
         },
         methods: {
+        		pay_wx(){
+        			this.payType = 1;
+        		},
+        		pay_zfb(){
+        			this.payType = 2;
+        		},
         		MoreAddress(){
         			if(this.addressDataList.length > 0){
         				this.selectAddressA = !this.selectAddressA;
