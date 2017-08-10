@@ -44,13 +44,12 @@ let store = new Vuex.Store({
 			state.bbs.material = obj.results;
 			$(".el-loading-mask").remove();
 		},
-		slectFile(state){//素材库里面，选中图片所形成的数组缓存
-//			var arrImg = [];
-			state.bbs.material.forEach(val=>{
-				if(val.isTrue){
-					val.slectFooter = "true";//默认的值全部选中
-					state.bbs.footerData.unshift(val)
-				}
+		slectFile(state,obj){//素材库里面，选中图片所形成的数组缓存
+			obj.forEach(val=>{//变量返回的data
+				val.isTrue = "true"				
+				val.slectFooter = "true";//默认的值全部选中
+				state.bbs.footerData.unshift(val)
+				
 			})
 		},
 		delectFooterData(state){//清空底部数据
@@ -232,7 +231,10 @@ let store = new Vuex.Store({
 		        		console.log('加载完毕')
 		        		commit("getMaterials",res.data)
 		        })
-		}
+		},
+//		CutMobile({commit,dispatch}){ //裁剪
+//			commit("getMaterials",'1')
+//		}
 		
 	}
 })

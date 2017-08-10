@@ -34,8 +34,8 @@
 			<ol class="user_login">
 
 				<li><a href="">&nbsp;</a></li>
-				<li><a href="http://image2.artup.com/artup-build/builder/service/toIndex.do?client=pc&source=wx">扫码登录</a></li>
-				
+				<!--<li><a href="http://image2.artup.com/artup-build/builder/service/toIndex.do?client=pc&source=wx">扫码登录</a></li>-->
+				<li><a href="loginCallback?userDbId=2221214&userName=昵称">扫码登录</a></li>				
 			</ol>
 		</div>
 		<div class="mineIM r "  style="display: none;">			

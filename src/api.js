@@ -11,24 +11,22 @@ const CLIENT = 'pc';
 // 图片服务器（静态资源）服务器地址
 const STATIC_SERVER_HOST = 'http://image2.artup.com/'
  
-let urlQuery = sessionStorage.getItem('urlQuery')
+var userDbIds = localStorage.getItem('userDbId')
 
+//只要访问ajax的时候，没有这个用户信息，就跳到首页去登录获取用户信息
+if (!userDbIds) {
+   alert('用户信息不存在!');
+   location.href='/'
+}
 const VueHttp = new Vue()
 var HTTP = VueHttp.$http.create({
 // baseUrl:'http:www.baidu.com',
 // timeout:5000, //请求超时配置
   params: { // 每一个连接都跟手的东西，查询字符串
-    book: 123,
-    userDbId: '2221214',
+    userDbId: userDbIds
   },
   headers: {}// 设置请求头的对象
-
 })
-
-// 用户名全局变量获取
-// localStorage.setItem("sessionId","2141731");
-// var  userDbIds = localStorage.getItem('userDbId');
-// var  sessionIds = "";
 
 /* 图片上传地址 */
 const UPLOAD_URL = `${STATIC_SERVER_HOST}artup-build/builder/cors/picture/upload.do?format=json`
@@ -110,10 +108,7 @@ const QUERY_ORDER_STATE = `${HOST}artup-build//builder/order/query.do?format=jso
 //素材库选择微信裁剪图片
 const CUT_WEIXIN_IMG = `${HOST}artup-build/builder/cors/picture/cut.do?format=json&ignore=true`
 
-// //只要访问ajax的时候，没有这个用户信息，就跳到首页去登录获取用户信息
-// if (!sessionIds) {
-// alert('用户信息不存在!');
-// location.href='#/'
+
 export default {
 	
   testBaidu: {
