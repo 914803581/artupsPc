@@ -45,10 +45,6 @@
 				this.isShowModels = true;
 				//给vuex提交一个异步请求
 				this.$store.dispatch("getMaterial");
-//				Loading.service({
-////					target:document.querySelector(".upload_box"),
-//					"text":'我的'
-//				})
 
 			},
 			slectFile(){ //选择上传之后选择的图片
@@ -92,14 +88,14 @@
                 r.assignBrowse(browBtn, false);
                 r.on('filesAdded', function(array) {
                 
-                    if(array.length > 1){
-                        $.each(array, function(idx, file) { 
-                            file.chunks = [];
-                        });
-                        alert('只能上传一张图片');
-                        return;
-
-                    }
+//                  if(array.length > 1){
+//                      $.each(array, function(idx, file) { 
+//                          file.chunks = [];
+//                      });
+//                      alert('只能上传一张图片');
+//                      return;
+//
+//                  }
                     var ok = validateUploadFiles($, array); 
                     if (ok) {
                         //触发uploadStart

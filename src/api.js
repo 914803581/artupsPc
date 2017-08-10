@@ -107,6 +107,8 @@ const SUBMIT_CARS = `${HOST}artup-build/builder/cors/car/submitCars.do?format=js
 const QUERY_CAR = `${HOST}artup-build/builder/cors/car/queryAll.do?format=json&ignore=true`
 //支付状态查询
 const QUERY_ORDER_STATE = `${HOST}artup-build//builder/order/query.do?format=json&ignore=true`
+//素材库选择微信裁剪图片
+const CUT_WEIXIN_IMG = `${HOST}artup-build/builder/cors/picture/cut.do?format=json&ignore=true`
 
 // //只要访问ajax的时候，没有这个用户信息，就跳到首页去登录获取用户信息
 // if (!sessionIds) {
@@ -275,6 +277,16 @@ export default {
       return HTTP.get(QUERY_PICTURE_URL,
         {
           params: paramJson
+        }
+      )
+    },
+    MaterialCut: (pictureDbIds,thumbnailWidth) => { // 素材如果是微信图片选择裁剪图片,pictureDbIds图片id，thumbnailWidth 裁剪的宽度
+      return HTTP.get(CUT_WEIXIN_IMG,
+        {
+          params: {        	
+			"pictureDbIds":pictureDbIds,
+			"thumbnailWidth":thumbnailWidth
+          }
         }
       )
     }
