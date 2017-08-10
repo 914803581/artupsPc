@@ -29,7 +29,8 @@ var webpackConfig = merge(baseWebpackConfig, {
     new HtmlWebpackPlugin({
       filename: config.build.main,
       template: path.resolve(__dirname, '../multiple/index.html'),
-      inject: true
+      inject: true,
+      chunks: ['manifest', 'vendor', 'main']
     }),
     new FriendlyErrorsPlugin()
   ]
