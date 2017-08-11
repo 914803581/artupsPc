@@ -37,8 +37,7 @@
 						<div class="lect1 l">
 							<div class="lectmain ng-scope" ng-repeat="childOrder in order.orderItems">
 								<div class="lectm_img l">
-								<img ng-src="http://testpcbuilder.artup.com/upload/758a86701f2d4d29980a535c5d7066f31493877673.jpg" src="http://testpcbuilder.artup.com/upload/758a86701f2d4d29980a535c5d7066f31493877673.jpg">
-									
+									<img ng-src="http://testpcbuilder.artup.com/upload/758a86701f2d4d29980a535c5d7066f31493877673.jpg" src="http://testpcbuilder.artup.com/upload/758a86701f2d4d29980a535c5d7066f31493877673.jpg">									
 								</div>
 								<div class="lectm_ct r">
 									<p class="lect_top">

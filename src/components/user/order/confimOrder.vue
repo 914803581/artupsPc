@@ -134,7 +134,7 @@
 			</div>
 			<div class="detail m">
 				<div class="dtl01 r">
-					<p class=""><span id="oNUmber" class="redd ng-binding">{{goodsSize}}</span>件商品，商品总金额：￥<span id="oPrice" class="ng-binding">{{allPrice}}</span></p>
+					<p class=""><span id="oNUmber" class="redd ng-binding">{{goodsSize}}</span>件商品，商品总金额：￥<span id="oPrice" class="ng-binding">{{allPrice | toFixedTwo}}</span></p>
 					<p style="display: none;" class="">
 					享受优惠：使用优惠劵抵现 <span id="couponPrefeAmount" class="ng-binding">0.00</span> 元，<span ng-show="!manYuan==0" class="">订单总价满<span id="manYuan" class="ng-binding">0</span>元减<span id="prefePrice" class="ng-binding">0</span>元</span> 
 						
@@ -145,7 +145,7 @@
 			</div>
 			<div class="detail m" style="clear: both;">
 				<div class="money r">
-					<p class="l">应付金额：<span>￥</span><span id="goodsPayAmount" class="ng-binding">{{allPrice}}</span></p>
+					<p class="l">应付金额：<span>￥</span><span id="goodsPayAmount" class="ng-binding">{{allPrice | toFixedTwo}}元</span></p>
 				</div>
 			</div>
 			<div class="detail m mt2">
@@ -193,6 +193,8 @@
         		MoreAddress(){
         			if(this.addressDataList.length > 0){
         				this.selectAddressA = !this.selectAddressA;
+        			}else{
+        				alert('没有更多地址选择，请新添加地址')
         			}
         			return;
         		},
