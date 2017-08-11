@@ -6,7 +6,7 @@
         <div class="comtent">
           <div class="title">
             <div class="title_left">
-              <span>画册编辑</span>
+              <span>宝宝书编辑</span>
               <span>2017-07-14 11:05</span>
             </div>
             <div class="title_right">
@@ -443,7 +443,7 @@
       	this.bbsTemplate_data[index1][index2].slectTemplate = true;
 		this.$nextTick();
         console.log($event.target)        
-        if($($event.target).hasClass("text")){ // 点击文本框
+        if($($event.target).hasClass("title_pu")){ // 点击文本框
           $(".editText_one").removeClass("editText_one");
           $($event.target).addClass("editText_one");
           if ($($event.target)) {
@@ -467,7 +467,6 @@
 		  console.log(this.dataEditImg)
           //从vuex缓存里面拿到我的数据
 //        console.log()
-
           this.openImgEdit();
         }
       },

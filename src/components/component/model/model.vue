@@ -17,6 +17,8 @@
 					</div>
 				</div>
 				<el-button style="position: relative;left: -45%;" @click.native="slectFile" type="danger">上传图片</el-button>
+				<!--快速选中十张图片-->
+				<span  @click="selectImg_10" class="selectImg_10" style="float: right" >10</span>
 			</div>
 		</div>
 	</div>
@@ -29,34 +31,56 @@
 		name:'div-model',
 		data () {
 		    return {
-		      isShowModels: false
+		      isShowModels: false,
+		      imgMunber:0
 		    }
 		  },
 		props:["isShowModel"],
 	    methods:{
+	    		selectImg_10(){ //快速选中十张
+				var ob = (++this.imgMunber)*5
+				if (ob>this.$store.state.bbs.material.length+4) {
+					alert('全部选中完毕')
+					return;
+					
+				}
+	    			this.$store.state.bbs.material.forEach((val,index)=>{
+					if (index<ob) {
+						val.isTrue = true;						
+					}
+				})
+	    			this.$forceUpdate();
+	    		},
 			closeModel(event){
 				console.log(event)
-
-				this.isShowModels = false;
-
-				
+				this.isShowModels = false;				
 			},
 			openModel(){
 				this.isShowModels = true;
+				this.imgMunber = 0;
 				//给vuex提交一个异步请求
 				this.$store.dispatch("getMaterial");
 
 			},
 			slectFile(){ //选择上传之后选择的图片
 				//过滤选中的图片，形成一个图片缓存
-				this.$store.commit("slectFile");
-				//关闭弹窗
-				this.closeModel();
-				//抬起下面的拖动框
-				this.$emit("footerBurl",true)
-				setTimeout(()=>{//延迟去执行此方法避免和vuex内部执行顺利冲突
-					this.$store.commit("drapDiv")					
-				},200)
+				var strCut = '';
+				this.$store.state.bbs.material.forEach(val=>{
+					if(val.isTrue){//如果被选中的
+						strCut+=val.dbId+';'
+					}
+				})
+				 //素材库图片裁剪
+				 Api.Material.MaterialCut(strCut,2000).then((res)=>{
+					this.$store.commit("slectFile",res.data);					
+					//关闭弹窗
+					this.closeModel();
+					//抬起下面的拖动框
+					this.$emit("footerBurl",true)
+					setTimeout(()=>{//延迟去执行此方法避免和vuex内部执行顺利冲突
+						this.$store.commit("drapDiv")					
+					},200)					
+		        })				
 			},
 			selectImg(index){
 				this.$store.state.bbs.material[index].isTrue = !this.$store.state.bbs.material[index].isTrue;

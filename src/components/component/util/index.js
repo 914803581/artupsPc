@@ -21,7 +21,7 @@ export default{
             }
             
         } 
-    	sessionStorage.setItem("urlQuery",JSON.stringify(obj)) 
+    		sessionStorage.setItem("urlQuery",JSON.stringify(obj)) 
     }
 
     //获取我需要对session

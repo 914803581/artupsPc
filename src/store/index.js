@@ -32,7 +32,6 @@ let store = new Vuex.Store({
 				}			
 			})
 			return arr
-
 		}
 	},
 	mutations:{ //改变数据的方法集合-->记住 这个方法只能处理同步的异步的是actions函数
@@ -44,13 +43,11 @@ let store = new Vuex.Store({
 			state.bbs.material = obj.results;
 			$(".el-loading-mask").remove();
 		},
-		slectFile(state){//素材库里面，选中图片所形成的数组缓存
-//			var arrImg = [];
-			state.bbs.material.forEach(val=>{
-				if(val.isTrue){
-					val.slectFooter = "true";//默认的值全部选中
-					state.bbs.footerData.unshift(val)
-				}
+		slectFile(state,obj){//素材库里面，选中图片所形成的数组缓存
+			obj.forEach(val=>{//变量返回的data
+				val.isTrue = "true"				
+				val.slectFooter = "true";//默认的值全部选中
+				state.bbs.footerData.unshift(val)				
 			})
 		},
 		delectFooterData(state){//清空底部数据
@@ -80,9 +77,16 @@ let store = new Vuex.Store({
 			var constName = oPage+"_"+oimgSort;
 			 	var picObj = {"constName":constName,"picDbId" : edidData.attr("dbId"), "page" : oPage, "editCnfIndex" : oTypeStyle, "num" : oimgSort, "actions" : {},
                 "thumbnailImageUrl":edidData.attr("src"), "previewThumbnailImageUrl" :"", "crop" : "false","editCnfName" : "","isOnly":false};
+		    //如果是横版的修改标识符
+		    if(edidData.parents(".hengban_bbs").size()>0){
+		    		
+				console.log('是横的',picObj.isOnly)
+		    }
 		    //存入图片ImgHashMap
 	        state.editData.ImgHashMap.putvalue(constName,picObj);
 	        console.log(state.editData.ImgHashMap.getvalue(constName))
+	        picObj.isOnly=false;
+	        
 		},
 		autoDrapData(state,obj){//自动填充后端的处理图片的方法
 			var arrIndex = [];
@@ -232,7 +236,10 @@ let store = new Vuex.Store({
 		        		console.log('加载完毕')
 		        		commit("getMaterials",res.data)
 		        })
-		}
+		},
+//		CutMobile({commit,dispatch}){ //裁剪
+//			commit("getMaterials",'1')
+//		}
 		
 	}
 })
