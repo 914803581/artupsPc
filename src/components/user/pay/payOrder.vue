@@ -45,15 +45,15 @@
 	        	 		if(res.data.paymentType == 'zfb'){
 	        	 			$('#zfb_pay_fk').html(res.data.payHtml)
 	        	 		}else{
-	        	 		//PC端微信扫码生成二维码
-				  	 $('#prView').qrcode({
-				  		 width:190,
-						 height: 190,
-						 text:res.data.codeUrl
-				  	 });
+	        	 			//PC端微信扫码生成二维码
+				  	 		$('#prView').qrcode({
+				  		 		width:190,
+						 		height: 190,
+						 		text:res.data.codeUrl
+				  	 		});
 	        	 		}
 	        	 		this.price =  res.data.total;
-				})
+					})
 	        	}
 			},
 			mounted(){
@@ -62,15 +62,18 @@
 				}else{
 					this.subject = '支付宝支付';
 				}
-			var jsons = {
-	        		paymentType:this.$route.query.paymentType,
+			var jsons = { 
+	        		paymentType:this.$route.query.paymentType, 
 	        		addressId:this.$route.query.addressId,
 	        		dbId:this.$route.query.dbId,
 	        		userDbId:this.$route.query.userDbId,
-	            client:Api.CLIENT,
+	            	client:Api.CLIENT,
 	        		subject:this.subject
 	        	};
+
+	        //调用支付接口
 			this.pay(jsons);
+
 			if(this.$route.query.paymentType == 'wx'){
 				var	timer1 = setInterval(function(){
 		           Api.car.queryOrderState(jsons).then(res=>{

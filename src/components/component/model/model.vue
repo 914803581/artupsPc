@@ -34,29 +34,38 @@
 		  },
 		props:["isShowModel"],
 	    methods:{
-			closeModel(){
+			closeModel(event){
+				console.log(event)
+
 				this.isShowModels = false;
+
+				
 			},
 			openModel(){
 				this.isShowModels = true;
 				//给vuex提交一个异步请求
 				this.$store.dispatch("getMaterial");
-//				Loading.service({
-////					target:document.querySelector(".upload_box"),
-//					"text":'我的'
-//				})
 
 			},
 			slectFile(){ //选择上传之后选择的图片
 				//过滤选中的图片，形成一个图片缓存
-				this.$store.commit("slectFile");
-				//关闭弹窗
-				this.closeModel();
-				//抬起下面的拖动框
-				this.$emit("footerBurl",true)
-				setTimeout(()=>{//延迟去执行此方法避免和vuex内部执行顺利冲突
-					this.$store.commit("drapDiv")					
-				},200)
+				var strCut = '';
+				this.$store.state.bbs.material.forEach(val=>{
+					if(val.isTrue){//如果被选中的
+						strCut+=val.dbId+';'
+					}
+				})
+				 //素材库图片裁剪
+				 Api.Material.MaterialCut(strCut,2000).then((res)=>{
+					this.$store.commit("slectFile",res.data);					
+					//关闭弹窗
+					this.closeModel();
+					//抬起下面的拖动框
+					this.$emit("footerBurl",true)
+					setTimeout(()=>{//延迟去执行此方法避免和vuex内部执行顺利冲突
+						this.$store.commit("drapDiv")					
+					},200)					
+		        })				
 			},
 			selectImg(index){
 				this.$store.state.bbs.material[index].isTrue = !this.$store.state.bbs.material[index].isTrue;
@@ -88,14 +97,14 @@
                 r.assignBrowse(browBtn, false);
                 r.on('filesAdded', function(array) {
                 
-                    if(array.length > 1){
-                        $.each(array, function(idx, file) { 
-                            file.chunks = [];
-                        });
-                        alert('只能上传一张图片');
-                        return;
-
-                    }
+//                  if(array.length > 1){
+//                      $.each(array, function(idx, file) { 
+//                          file.chunks = [];
+//                      });
+//                      alert('只能上传一张图片');
+//                      return;
+//
+//                  }
                     var ok = validateUploadFiles($, array); 
                     if (ok) {
                         //触发uploadStart

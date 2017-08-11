@@ -23,17 +23,23 @@
 			<li>
 				<a href="javascript:void(0);">海报</a>
 			</li>
-			 <!--<li>
+			<li>
 				<a href="javascript:void(0);">台历</a>
 			</li>
 			<li>
 				<a href="javascript:void(0);">挂历</a>
-			</li> -->
+			</li>
 		</ul>
 		<div class="mineIM r " >
-			
-			<a class="touxiang l" href=""> 
-				
+			<ol class="user_login">
+
+				<li><a href="">&nbsp;</a></li>
+				<!--<li><a href="http://image2.artup.com/artup-build/builder/service/toIndex.do?client=pc&source=wx">扫码登录</a></li>-->
+				<li><a href="loginCallback?userDbId=2221214&userName=昵称">扫码登录</a></li>				
+			</ol>
+		</div>
+		<div class="mineIM r "  style="display: none;">			
+			<a class="touxiang l" href="javascript:void(0);"> 
 				<img class="" src="http://img13.artimg.net/passport/avatar/002/141/731/150_150.png">
 				</a>
 			<div class="names l showCat" >
