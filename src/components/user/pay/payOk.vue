@@ -21,7 +21,7 @@
 			<div class="payOkBtn">
 				<ul>
 					<li @click="jxdz()">继续定制</li>
-					<li>查看订单</li>
+					<li @click='ckdd()'>查看订单</li>
 				</ul>
 			</div>
 		</div>
@@ -43,6 +43,9 @@
 			methods:{
 				jxdz(){
 					location.href = '/'
+				},
+				ckdd(){
+					
 				}
 		
 			},
