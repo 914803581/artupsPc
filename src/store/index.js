@@ -16,7 +16,7 @@ let store = new Vuex.Store({
 		},
 		editData:{ //保存给后端缓存的大对象= 图片的hash lomo的hash
 			ImgHashMap:new HashMap(), //图片
-			lomHashMap:new HashMap(), //lomo卡
+			lomoHashMap:new HashMap(), //lomo卡
 			textHashMap:new HashMap() //保存的文字		
 		}
 	},
@@ -74,19 +74,34 @@ let store = new Vuex.Store({
 			var oPage = edidData.parents(".pubilc_div").find(".page .pageleft span").attr("page");//第几页
 			var oTypeStyle = edidData.attr("typestyle");//板式
 			var oimgSort= edidData.attr("imgsort");//图片的顺序
+			
+			
+			//如果是lomo卡
+			if(edidData.parents(".lomoTemplate").size()>0){
+				oPage = edidData.parents(".lomoTemplate").find(".page .pageLomo").text()
+			}
+			
+			
+			
 			var constName = oPage+"_"+oimgSort;
 			 	var picObj = {"constName":constName,"picDbId" : edidData.attr("dbId"), "page" : oPage, "editCnfIndex" : oTypeStyle, "num" : oimgSort, "actions" : {},
                 "thumbnailImageUrl":edidData.attr("src"), "previewThumbnailImageUrl" :"", "crop" : "false","editCnfName" : "","isOnly":false};
 		    //如果是横版的修改标识符
 		    if(edidData.parents(".hengban_bbs").size()>0){
-		    		
-				console.log('是横的',picObj.isOnly)
+		    		picObj.isOnly = true;
 		    }
+		  	
+		  	//如果是lomo卡
+			if(edidData.parents(".lomoTemplate").size()>0){
+				//存入lomoHashMap
+	        		state.editData.lomoHashMap.putvalue(constName,picObj);
+	        		console.log(state.editData.lomoHashMap.getvalue(constName))
+				return;	        		
+			}
+			
 		    //存入图片ImgHashMap
 	        state.editData.ImgHashMap.putvalue(constName,picObj);
 	        console.log(state.editData.ImgHashMap.getvalue(constName))
-	        picObj.isOnly=false;
-	        
 		},
 		autoDrapData(state,obj){//自动填充后端的处理图片的方法
 			var arrIndex = [];
@@ -117,17 +132,32 @@ let store = new Vuex.Store({
 				state.editData.ImgHashMap.remove((parseInt(oPage)+1)+'_1');
             		state.editData.ImgHashMap.remove((parseInt(oPage)+1)+'_2');
             		state.editData.ImgHashMap.remove((parseInt(oPage)+1)+'_3');
-            		state.editData.ImgHashMap.remove((parseInt(oPage)+1)+'_4');				
+            		state.editData.ImgHashMap.remove((parseInt(oPage)+1)+'_4');
+				state.editData.lomoHashMap.remove((parseInt(oPage)+1)+'_1');
+            		state.editData.lomoHashMap.remove((parseInt(oPage)+1)+'_2');
+            		state.editData.lomoHashMap.remove((parseInt(oPage)+1)+'_3');
+            		state.editData.lomoHashMap.remove((parseInt(oPage)+1)+'_4');				
+            		state.editData.lomoHashMap.remove((parseInt(oPage)+1)+'_5');				
 			}else{
 				state.editData.ImgHashMap.remove((parseInt(oPage)-1)+'_1');
             		state.editData.ImgHashMap.remove((parseInt(oPage)-1)+'_2');
             		state.editData.ImgHashMap.remove((parseInt(oPage)-1)+'_3');
             		state.editData.ImgHashMap.remove((parseInt(oPage)-1)+'_4');
+				state.editData.lomoHashMap.remove((parseInt(oPage)-1)+'_1');
+            		state.editData.lomoHashMap.remove((parseInt(oPage)-1)+'_2');
+            		state.editData.lomoHashMap.remove((parseInt(oPage)-1)+'_3');
+            		state.editData.lomoHashMap.remove((parseInt(oPage)-1)+'_4');
+            		state.editData.lomoHashMap.remove((parseInt(oPage)-1)+'_5');
 			}
 			state.editData.ImgHashMap.remove((parseInt(oPage))+'_1');
         		state.editData.ImgHashMap.remove((parseInt(oPage))+'_2');
         		state.editData.ImgHashMap.remove((parseInt(oPage))+'_3');
         		state.editData.ImgHashMap.remove((parseInt(oPage))+'_4');
+			state.editData.lomoHashMap.remove((parseInt(oPage))+'_1');
+        		state.editData.lomoHashMap.remove((parseInt(oPage))+'_2');
+        		state.editData.lomoHashMap.remove((parseInt(oPage))+'_3');
+        		state.editData.lomoHashMap.remove((parseInt(oPage))+'_4');
+        		state.editData.lomoHashMap.remove((parseInt(oPage))+'_5');
 			
 		},
 		drapDiv(state){//拖动元素的方法

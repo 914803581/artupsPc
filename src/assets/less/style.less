@@ -136,6 +136,10 @@ html,body{width:100%;min-height: 100%;font-family: "微软雅黑";font-weight: 5
     background: #efefef;
     .line_comtent{
         border-bottom: 1px solid #D3D3D6;
+        .scrollBar{
+            overflow-y: auto;
+//          overflow: hidden;
+        }
       .comtent{
         width: 1040px;
 //      height: 300px;
@@ -144,11 +148,11 @@ html,body{width:100%;min-height: 100%;font-family: "微软雅黑";font-weight: 5
         position: relative;
         .box_menu{
             width: 120px;
-            height: 200px;
+            height: 250px;
 //          border: 1px solid red;
             position: absolute;
             right: -130px;
-            top: 0px;
+            top: 50px;
             ul{
                 >li{
                     cursor: pointer;
@@ -209,7 +213,7 @@ html,body{width:100%;min-height: 100%;font-family: "微软雅黑";font-weight: 5
         //
         .time_main_left{
             width:100%;
-           overflow-y: auto;;
+           overflow: auto;
             margin-top: 30px;
             .time_bg{
                 float: left;

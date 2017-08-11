@@ -15,22 +15,7 @@
               <span>￥499</span>
             </div>
           </div>
-        </div>
-      </div>
-      <div class="line_comtent">
-        <div class="comtent">    	 	
-        	<!--功能div-->
-        	 <div class="box_menu">
-        	 	<ul>
-        	 		<li><i class="iconfont">&#xe711;</i>添加组件</li>       	 		
-        	 		<li @click="bbs.Switching=true"><i class="iconfont">&#xe64f;</i>更换板式</li>
-        	 		<li><i style="font-size: 20px;padding:0 ;" class="iconfont">&#xe602;</i>加入购物车</li>
-        	 		<li><i class="iconfont">&#xe629;</i>立即购买</li>
-        	 		<li @click="editWork"><i class="iconfont">&#xe612;</i>保存作品</li>
-        	 	</ul>
-        	 </div>
-          <div class="time_main_left">
-          	<transition name="el-zoom-in-top">
+          <transition name="el-zoom-in-top">
           	<div v-show="bbs.Switching" id="div_drap">
 		        <div class="titleBox menubar_titleBox">
 		               更换版式
@@ -43,12 +28,35 @@
 				</div>     
 	  		</div>
           	</transition>
+           	<!--功能div-->
+        	 <div class="box_menu">
+        	 	<ul>
+        	 		<li><i class="iconfont">&#xe711;</i>添加组件</li>       	 		
+        	 		<li @click="bbs.Switching=true"><i class="iconfont">&#xe64f;</i>更换板式</li>
+        	 		<li><i style="font-size: 20px;padding:0 ;" class="iconfont">&#xe602;</i>加入购物车</li>
+        	 		<li><i class="iconfont">&#xe629;</i>立即购买</li>
+        	 		<li @click="editWork"><i class="iconfont">&#xe612;</i>保存作品</li>
+        	 	</ul>
+        	 </div>
+        </div>
+      </div>
+      <div class="line_comtent">
+        <div class="comtent scrollBar"> 
+          <div class="time_main_left time_main_left_ht">
+          	
             <div class="time_bg" v-for="(item,index) in bbsTemplate_data">
               <!--pubilc_div 这个class是留给整屏来定义的样式  click_template 是用vue里面的事件委派来解决避免不了的dom操作  hengban_bbs 横版增加的class  hengban_bbs 红线class-->
               <div class="pubilc_div" :only="htmlTetx.only" :class="{'active_line':htmlTetx.slectTemplate,'hengban_bbs':htmlTetx.only}"    v-html="htmlTetx.template"  @click="click_template($event,index,index2)"  v-for="(htmlTetx,index2) in item">
               </div>
             </div>           
           </div>
+          <div class="title"><div class="title_left"><span>LOMO卡编辑</span> <span>2017-07-14 11:05</span></div> <div class="title_right"><span>照片尺寸：102X152</span> <span>LOMO卡单张：74X100</span> <span>赠送物品</span></div></div>
+           <div style="margin-top: 0;" class="time_main_left">
+           		<div style="height: 226px;" class="time_bg" v-for="(item,index) in lomoTemplate_data">
+              		<div class="pubilc_div"  :only="htmlTetx.only"  :class="{'hengban_bbs':htmlTetx.only}"  v-html="htmlTetx.template"  v-for="(htmlTetx,index2) in item">
+              </div>
+            </div> 
+           </div>
         </div>
         <div class="shield" v-show="isShowPreview" @click="isShowPreview=false"></div>
         <div class="preview_wrapper" v-show="isShowPreview">
@@ -61,8 +69,13 @@
           </div>
         </div>
       </div>
-      <!--底部的图片-->
+     <!--<div class="line_comtent"><div class="comtent"><div class="title"><div class="title_left"><span>宝宝书编辑</span> <span>2017-07-14 11:05</span></div> <div class="title_right"><span>255x355mm</span> <span>56页</span> <span>￥499</span></div></div></div></div>-->
+     
+     	
+     	
+     <!--底部的图片-->
       <div v-DomHeight  class="footer_img">
+      	
         <div class="footer_up_tittle">
           <div class="footer_left">
             <button  @click="delectFooter" class="footer_btn">
@@ -79,10 +92,6 @@
             <button class="footer_btn" @click="preview">
               预览宝宝书
             </button>
-            <!--<select style="top: -2px;" class="footer_btn" name="">
-              <option value="">未使用图片</option>
-              <option value="">已使用图片</option>
-            </select>-->
             <button @click="open_material" class="footer_btn">
               添加图片
             </button>
@@ -180,6 +189,7 @@
         },
         dataEditImg:{},//传递给图片编辑的对象
         bbsTemplate_data:[], //宝宝书模版数据的二维数组
+        lomoTemplate_data:[], //lomo卡数组
         testData :[{
   type: 1,
   title: '标题123456',
@@ -363,7 +373,7 @@
 			if(this.mobanArr[index].isTrue){ //两页换横版的情况选中
 				console.log("两页换横版的情况选中")
 				//切换前选中的页码
-				var otext = $(".time_main_left .active_line .pageleft span").text()
+				var otext = $(".time_main_left_ht .active_line .pageleft span").text()
 //				console.log(otext+'页')
 				this.bbsTemplate_data[this.bbs.bbs_index1] = [];
 				var josnImg = {"template":bbsTemplateData.bbs9,"only":true,"slectTemplate":true};
@@ -481,10 +491,15 @@
         $(".comtent_chanpin .time_pu .page .pageleft span").each((i,e)=>{
 			$(e).text((i+1)).attr("page",(i+1))
         })
+        $(".comtent_chanpin .time_pu .page .pageLomo").each((i,e)=>{
+			$(e).text((i+1)).css("opacity","0")
+
+        })
+        
       },
       jisuan(){//动态计算面积
-        var oH = $(window).height()-$(".footer_img").height()-$("#handers .header").height()-$(".comtent_chanpin .line_comtent .comtent .title").height()-32;
-		$(".time_main_left").css("height",oH+'px');
+        var oH = $(window).height()-$(".footer_img").height()-$("#handers .header").height()-$(".comtent_chanpin .line_comtent .comtent .title").height()-2;
+		$(".line_comtent .scrollBar").css("height",oH+'px');
       },
       checkFooterShow($event){ //切换底部的图片显示隐藏
       	var vm = this;
@@ -522,9 +537,13 @@
     },
     created(){//只执行一次
      
-      //模版数据
+      //宝宝书模版数据
       this.bbsTemplate_data = bbsData_template;
-      console.log(this.bbsTemplate_data)
+      
+      //lomo卡模版数据
+      this.lomoTemplate_data = lomoData_template;
+      
+      console.log(this.lomoTemplate_data)
       this.setBbsTemplate();
       this.$nextTick(function () {
         $('#previewComtent').off('turn').turn({
