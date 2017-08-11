@@ -30,7 +30,7 @@ let router = new VueRouter({
   mode: 'history',
   routes: [
     { // 宝宝书介绍和尺寸选择
-      path: '/bbsMsg',
+      path: '/babyAlbum/bbsMsg',
       name: 'bbsMsg',
       component: bbsMsg,
       meta: {
@@ -38,7 +38,7 @@ let router = new VueRouter({
       }
     },
     { // 宝宝书编辑页面
-      path: '/bbsEdit',
+      path: '/babyAlbum/bbsEdit',
       name: 'bbsEdit',
       component: bbsEdit,
       meta: {
@@ -142,35 +142,35 @@ let router = new VueRouter({
         title: '我的优惠券'
       }
     },{
-      path: '/cart',
+      path: '/user/cart',
       name: 'cart',
       component: cart,
       meta: {
         title: '购物车'
       }
     },{
-      path: '/confimOrder',
+      path: '/order/confim',
       name: 'confimOrder',
       component: confimOrder,
       meta: {
         title: '确认订单'
       }
     },{
-      path: '/loginCallback',
+      path: '/user/loginCallback',
       name: 'loginCallback',
       component: loginCallback,
       meta: {
         title: '登陆'
       }
     },{
-      path: '/payOrder',
+      path: '/pay/payOrder',
       name: 'payOrder',
       component: payOrder,
       meta: {
         title: '支付'
       }
     },{
-      path: '/payOk',
+      path: '/pay/payOk',
       name: 'payOk',
       component: payOk,
       meta: {
