@@ -61,6 +61,7 @@ var webpackConfig = merge(baseWebpackConfig, {
         // more options:
         // https://github.com/kangax/html-minifier#options-quick-reference
       },
+      resourcePrefix: config.build.assetsPublicPath,
       // necessary to consistently work with multiple chunks via CommonsChunkPlugin
       chunksSortMode: 'dependency'
     }),
@@ -100,12 +101,13 @@ var webpackConfig = merge(baseWebpackConfig, {
     filename: path.resolve(__dirname, `../dist/${page}.html`),
     template: path.resolve(__dirname, `../multiple/${page}.html`),
     inject: true,
-    chunks: [page],
+    chunks: ['manifest', 'vendor', page],
     minify: {
       removeComments: true,
       collapseWhitespace: true,
       removeAttributeQuotes: true
     },
+    resourcePrefix: config.build.assetsPublicPath,
     chunksSortMode: 'dependency'
   }));
 });

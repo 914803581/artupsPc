@@ -30,6 +30,7 @@ var webpackConfig = merge(baseWebpackConfig, {
       filename: config.build.main,
       template: path.resolve(__dirname, '../multiple/index.html'),
       inject: true,
+      resourcePrefix: '/',
       chunks: ['manifest', 'vendor', 'main']
     }),
     new FriendlyErrorsPlugin()
@@ -48,6 +49,7 @@ var webpackConfig = merge(baseWebpackConfig, {
       collapseWhitespace: true,
       removeAttributeQuotes: true
     },
+    resourcePrefix: '/',
     chunksSortMode: 'dependency'
   }));
 });
