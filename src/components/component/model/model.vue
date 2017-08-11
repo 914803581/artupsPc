@@ -17,6 +17,8 @@
 					</div>
 				</div>
 				<el-button style="position: relative;left: -45%;" @click.native="slectFile" type="danger">上传图片</el-button>
+				<!--快速选中十张图片-->
+				<span  @click="selectImg_10" class="selectImg_10" style="float: right" >10</span>
 			</div>
 		</div>
 	</div>
@@ -29,20 +31,33 @@
 		name:'div-model',
 		data () {
 		    return {
-		      isShowModels: false
+		      isShowModels: false,
+		      imgMunber:0
 		    }
 		  },
 		props:["isShowModel"],
 	    methods:{
+	    		selectImg_10(){ //快速选中十张
+				var ob = (++this.imgMunber)*5
+				if (ob>this.$store.state.bbs.material.length+4) {
+					alert('全部选中完毕')
+					return;
+					
+				}
+	    			this.$store.state.bbs.material.forEach((val,index)=>{
+					if (index<ob) {
+						val.isTrue = true;						
+					}
+				})
+	    			this.$forceUpdate();
+	    		},
 			closeModel(event){
 				console.log(event)
-
-				this.isShowModels = false;
-
-				
+				this.isShowModels = false;				
 			},
 			openModel(){
 				this.isShowModels = true;
+				this.imgMunber = 0;
 				//给vuex提交一个异步请求
 				this.$store.dispatch("getMaterial");
 

@@ -25,7 +25,8 @@
 		 created(){//只执行一次
 			//存入id和用户名
 		 	localStorage.setItem("userDbId",this.$route.query.userDbId);
-		 	localStorage.setItem("userName",this.$route.query.userName);		 	
+		 	localStorage.setItem("userName",this.$route.query.userName);	
+			this.$router.push({path:"/"})
 		 },
 		 mounted(){//全部渲染完毕
 		 	

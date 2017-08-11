@@ -14,10 +14,10 @@ const STATIC_SERVER_HOST = 'http://image2.artup.com/'
 var userDbIds = localStorage.getItem('userDbId')
 
 //只要访问ajax的时候，没有这个用户信息，就跳到首页去登录获取用户信息
-if (!userDbIds) {
-   alert('用户信息不存在!');
-   location.href='/'
-}
+//if (!userDbIds) {
+// alert('用户信息不存在!');
+// location.href='/'
+//}
 const VueHttp = new Vue()
 var HTTP = VueHttp.$http.create({
 // baseUrl:'http:www.baidu.com',

@@ -48,8 +48,7 @@ let store = new Vuex.Store({
 			obj.forEach(val=>{//变量返回的data
 				val.isTrue = "true"				
 				val.slectFooter = "true";//默认的值全部选中
-				state.bbs.footerData.unshift(val)
-				
+				state.bbs.footerData.unshift(val)				
 			})
 		},
 		delectFooterData(state){//清空底部数据
@@ -79,9 +78,16 @@ let store = new Vuex.Store({
 			var constName = oPage+"_"+oimgSort;
 			 	var picObj = {"constName":constName,"picDbId" : edidData.attr("dbId"), "page" : oPage, "editCnfIndex" : oTypeStyle, "num" : oimgSort, "actions" : {},
                 "thumbnailImageUrl":edidData.attr("src"), "previewThumbnailImageUrl" :"", "crop" : "false","editCnfName" : "","isOnly":false};
+		    //如果是横版的修改标识符
+		    if(edidData.parents(".hengban_bbs").size()>0){
+		    		
+				console.log('是横的',picObj.isOnly)
+		    }
 		    //存入图片ImgHashMap
 	        state.editData.ImgHashMap.putvalue(constName,picObj);
 	        console.log(state.editData.ImgHashMap.getvalue(constName))
+	        picObj.isOnly=false;
+	        
 		},
 		autoDrapData(state,obj){//自动填充后端的处理图片的方法
 			var arrIndex = [];

@@ -30,30 +30,32 @@
 				<a href="javascript:void(0);">挂历</a>
 			</li>
 		</ul>
-		<div class="mineIM r " >
+		<div v-show="!handerInfo"  class="mineIM r " >
 			<ol class="user_login">
 
 				<li><a href="">&nbsp;</a></li>
 				<!--<li><a href="http://image2.artup.com/artup-build/builder/service/toIndex.do?client=pc&source=wx">扫码登录</a></li>-->
-				<li><a href="loginCallback?userDbId=2221214&userName=昵称">扫码登录</a></li>				
+				<li><a href="loginCallback?userDbId=2221214&userName=昵称啊">扫码登录</a></li>				
 			</ol>
 		</div>
-		<div class="mineIM r "  style="display: none;">			
+		<div v-show="handerInfo" class="mineIM r "  >			
 			<a class="touxiang l" href="javascript:void(0);"> 
 				<img class="" src="http://img13.artimg.net/passport/avatar/002/141/731/150_150.png">
 				</a>
-			<div class="names l showCat" >
-			<span  class="span_cut">昵称</span>			
-			 <ul class="user_list">
+			<div  @mouseenter="userBox($event)"   class="names l showCat" >
+			<span  class="span_cut">{{userName}}</span>		
+			<el-collapse-transition>
+			 <ul @mouseleave="overNav($event)" v-show="navBox" class="user_list">
 			 	<li><a href="javascript:void(0);">我的主页</a></li>
-			 	<li><a href="javascript:void(0);">账户管理</a></li>
-			 	<li><a href="javascript:void(0);">订单管理</a></li>
-			 	<li><a href="javascript:void(0);">优惠券</a></li>
-			 	<li><a href="javascript:void(0);">我的作品</a></li>
-			 	<li><a href="javascript:void(0);">我的草稿箱</a></li>
-			 	<li><a href="javascript:void(0);">我的素材</a></li>			 	
-			 	<li ><a href="javascript:void(0);">退出登录</a></li>
+<!--			 	<li><a href="javascript:void(0);">账户管理</a></li>-->
+			 	<li><a href="/center/order">订单管理</a></li>
+			 	<!--<li><a href="javascript:void(0);">优惠券</a></li>-->
+			 	<li><a href="/center/works">我的作品</a></li>
+			 	<li><a href="/center/draft">我的草稿箱</a></li>
+			 	<li><a href="/center/material">我的素材</a></li>			 	
+			 	<li @click="LogOut"><a href="javascript:void(0);">退出登录</a></li>
 			 </ul>
+			 </el-collapse-transition>
 			</div>
 			<a class="cars">购物车有<span>1</span>件商品</a>
 			<a href="/cart" class="hander_cat">
@@ -65,8 +67,7 @@
 			</a>
 		</div>
 	</div>
-</div>
-		
+</div>		
 	 </div>
 	</div>
 </template>
@@ -76,16 +77,36 @@
 		name:"nav-hander",
 		data () {
 		    return {
-		      msg: ''
+		     	handerInfo:false,
+		     	userName:'',
+		     	navBox:false
 		    }
 		  },
 	    methods:{
-			
+	    		//退出登录的操作
+	    		LogOut(){
+	    			localStorage.setItem("userDbId","");
+	    			this.handerInfo=false;
+	    			this.$router.push({path:"/"})
+	    		},
+			userBox($event){
+				this.navBox = true;
+				$event.stopPropagation();
+			},
+			overNav($event){
+				$event.stopPropagation();
+				this.navBox = false;
+				
+			}
 	    },
 	    mounted(){
-	    	   
+	    		if (localStorage.getItem('userDbId')) {
+	    			this.handerInfo = true;
+	    		}
+	    	   this.userName = localStorage.getItem("userName")
 		}
 	}
 </script>
 <style>
+	
 </style>
