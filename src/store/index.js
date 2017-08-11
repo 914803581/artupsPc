@@ -32,7 +32,6 @@ let store = new Vuex.Store({
 				}			
 			})
 			return arr
-
 		}
 	},
 	mutations:{ //改变数据的方法集合-->记住 这个方法只能处理同步的异步的是actions函数

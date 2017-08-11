@@ -6,7 +6,7 @@
         <div class="comtent">
           <div class="title">
             <div class="title_left">
-              <span>画册编辑</span>
+              <span>宝宝书编辑</span>
               <span>2017-07-14 11:05</span>
             </div>
             <div class="title_right">
