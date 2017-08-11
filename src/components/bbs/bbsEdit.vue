@@ -443,7 +443,7 @@
       	this.bbsTemplate_data[index1][index2].slectTemplate = true;
 		this.$nextTick();
         console.log($event.target)        
-        if($($event.target).hasClass("text")){ // 点击文本框
+        if($($event.target).hasClass("title_pu")){ // 点击文本框
           $(".editText_one").removeClass("editText_one");
           $($event.target).addClass("editText_one");
           if ($($event.target)) {
@@ -467,7 +467,6 @@
 		  console.log(this.dataEditImg)
           //从vuex缓存里面拿到我的数据
 //        console.log()
-
           this.openImgEdit();
         }
       },
