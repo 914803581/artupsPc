@@ -33,8 +33,9 @@
         	 	<ul>
         	 		<li><i class="iconfont">&#xe711;</i>添加组件</li>       	 		
         	 		<li @click="bbs.Switching=true"><i class="iconfont">&#xe64f;</i>更换板式</li>
-        	 		<li><i style="font-size: 20px;padding:0 ;" class="iconfont">&#xe602;</i>加入购物车</li>
+        	 		<li @click="goCart"><i style="font-size: 20px;padding:0 ;" class="iconfont">&#xe602;</i>加入购物车</li>
         	 		<li><i class="iconfont">&#xe629;</i>立即购买</li>
+        	 		<li @click="nextStep"><i class="iconfont">&#xe629;</i>下一步</li>
         	 		<li @click="editWork"><i class="iconfont">&#xe612;</i>保存作品</li>
         	 	</ul>
         	 </div>
@@ -185,11 +186,14 @@
           material:[],//素材库
           textModel:'', //弹出框文字
           Switching:false,  //切换板式
-           					//二维数组第一位角标 bbs_index1  和二位角标        
+           					//二维数组第一位角标 bbs_index1  和二位角标  
+          extraCode:'' //保存之后，随机生成的一个编辑code码
         },
         dataEditImg:{},//传递给图片编辑的对象
         bbsTemplate_data:[], //宝宝书模版数据的二维数组
         lomoTemplate_data:[], //lomo卡数组
+        tplCode:'pc_baobaoshu_170-235_24',//暂时写死的1个数据
+        workEdit:{},//素材保存组装传给后端的数据
         testData :[{
   type: 1,
   title: '标题123456',
@@ -304,6 +308,35 @@
     	   ...mapMutations({//同步触发操作集合
  			delectFooter:"delectFooterData"   	   	
     	   }),
+    	    goCart(){//加入购物车   	    		
+    	    		var jsons = {
+					operator: "add",
+//					userDbId: localStorage.getItem("userDbId"),
+//					client: "mobile", //渠道前端传递，暂时写死
+					category: bbsSlsectDate.category, //产品类型这里是宝宝书,暂时写死
+					edtDbId: this.bbs.extraCode, //编辑的id
+					price: bbsSlsectDate.price,
+					num: 1,
+					discount: '',
+					channelCode: "artron",
+					opSystem: '',
+					thumbnailImageUrl: "",//首页图
+					total: bbsSlsectDate.price,
+					sku: bbsSlsectDate.name,
+					skuCode: bbsSlsectDate.skuCode
+				}
+				Api.car.addCar(jsons).then(res => {
+					console.log(res);
+//					if(res.data.code === 'success' && res.data.extraCode) {
+//					location.href = "#cart?edtDbId=" + this.bbs.extraCode + "&category=" + bbsSlsectDate.category
+//					} else {
+//						alert('添加购物车失败(' + res.data.message + ')');
+//					}
+				}, err => {
+					alert('添加购物车出错');
+				})
+    	    		
+    	    },
     		autoDrapImg(){//自动填充图片的操作
     			var vm = this;
     			var arrNode=[];
@@ -342,8 +375,100 @@
 	    	footerImgSlectFooter($index){//提交
 	    		this.$store.commit("editFooterStatus",$index)
 	    	},
+
 	    	editWork(){//保存作品
-	    		alert('保存作品')
+	    			var vm = this;	
+	    			var arrMap = []; //宝宝书图片的
+				var textArrMap = []; //文字的
+				var lomArrMap = []; //lomo卡的
+				for(var i = 0; i < this.$store.state.editData.ImgHashMap.keys().length; i++) {
+
+					if(this.$store.state.editData.ImgHashMap.getvalue(this.$store.state.editData.ImgHashMap.keys()[i])) {
+
+						arrMap.push(this.$store.state.editData.ImgHashMap.getvalue(this.$store.state.editData.ImgHashMap.keys()[i]));
+					}
+				}
+				for(var i = 0; i < this.$store.state.editData.lomoHashMap.keys().length; i++) {
+					if(this.$store.state.editData.lomoHashMap.getvalue(this.$store.state.editData.lomoHashMap.keys()[i])) {
+						lomArrMap.push(this.$store.state.editData.lomoHashMap.getvalue(this.$store.state.editData.lomoHashMap.keys()[i]));
+					}
+				}
+				for(var i = 0; i < this.$store.state.editData.textHashMap.keys().length; i++) {
+					if(this.$store.state.editData.textHashMap.getvalue(this.$store.state.editData.textHashMap.keys()[i])) {
+						textArrMap.push(this.$store.state.editData.textHashMap.getvalue(this.$store.state.editData.textHashMap.keys()[i]));
+					}
+				}
+	    			//字符串转换数组存储到对象里面
+				this.workEdit.editPicture = JSON.stringify(arrMap);
+				this.workEdit.editTxt = JSON.stringify(textArrMap);
+				this.workEdit.lomo = JSON.stringify(lomArrMap);
+				this.workEdit.tplCode = this.tplCode;
+				
+	    			$(".comtent_chanpin .pubilc_div .bbsClass  .img_drap").each(function(index,el){
+					if ($(el).attr("src")) { //如果src存在
+						vm.workEdit.thumbnailImageUrl = $(el).attr("src");
+						return false;						
+					}else{
+						vm.workEdit.thumbnailImageUrl = "";
+					}
+				})
+	    			//保存函数
+	    			console.log(this.workEdit)
+				Api.work.workEdit(this.workEdit).then((res) => {
+					if(res.data.code=="success"){ //如果成功
+						this.$message({
+					          showClose: true,
+					          message: '作品保存成功 !',
+					          type: 'success'
+						});
+					}
+					//存入编辑id
+					this.workEdit.edtDbId = res.data.extraCode
+				
+					console.log('保存的code:',res.data.extraCode)
+				})
+	    	},
+	    	nextStep(){ //下一步
+	    		//保存函数
+	    		var vm = this;
+	    		
+			Api.work.workEdit(this.workEdit).then((res) => {
+				if(res.data.code=="success"){ //如果成功
+					
+					this.workEdit.edtDbId = res.data.extraCode;
+					console.log('保存的code:',res.data.extraCode);
+					let isOK = true					
+				    $(".comtent_chanpin .pubilc_div .bbsClass  .img_drap").each(function(index,el){
+						if (!$(el).attr("src")) { //如果src存在
+							var page = $(el).parents(".pubilc_div").find(".pageleft >span").eq(0).text();
+							if (page) {
+								vm.$message({
+						          showClose: true,
+						          message: '请上传第'+page+'页图片'
+								});
+								isOK = false
+								return false;
+							}							
+							if ($(el).parents(".lomoTemplate")) { //lomo卡图片不完整
+								vm.$message({
+						          showClose: true,
+						          message: 'lomo卡图片上传不完整'
+								});	
+								isOK = false
+								return false;
+							}
+						}
+					})
+					if (isOK) { //作品图片全部上传完毕
+						this.$message({
+					          showClose: true,
+					          message: '作品已全部上传成功,预览作品后，请添加购物车购买 !',
+					          type: 'success'
+						});
+					}
+				}
+				
+			})
 	    	},
     		chenkTemplate(index){//切换模版
 			var vms = true;
@@ -394,6 +519,8 @@
 			}
 			if (this.bbsTemplate_data[this.bbs.bbs_index1][0].only) {//横版换两页的情况
 				console.log("横版换两页的情况")
+				//切换前选中的页码
+				var otext = $(".time_main_left_ht .active_line .pageleft span").text();
 				this.bbsTemplate_data[this.bbs.bbs_index1] = [];
 				var josnImg = {"template":bbsTemplateData.bbs1,"only":false,"slectTemplate":false};
 				//选中的板式
@@ -408,9 +535,13 @@
 					this.bbsTemplate_data[this.bbs.bbs_index1].push(josnImg4)
 					this.bbsTemplate_data[this.bbs.bbs_index1].push(josnImg3);
 				}
+				vm.$store.commit("setDrapData",{"opage":otext,"type":"奇数"});
 			}else{
 				console.log("单页兑换")
-				otemplate.template = bbsTemplateData[chenkIndex]				
+				//切换前选中的页码
+				var otext = $(".time_main_left_ht .active_line .pageleft span").text();
+				otemplate.template = bbsTemplateData[chenkIndex];
+				vm.$store.commit("oneToOneSetDrapData",{"opage":otext});
 			}
 			this.$forceUpdate();
 			this.$nextTick();
@@ -559,10 +690,22 @@
       this.setPageIndex();
  	  this.jisuan();// 计算页面位置
 //		 	this.$router.push({ path: '/security/iploginanalysis/'+json.name,params: { deviceId: 123}});
+		
+	  if (this.$route.query.dbId) {  //如果是再次编辑进来的界面
+	  	 this.workEdit.edtDbId = this.$route.query.dbId;//存入id预防
+// 		var paramsJson = {		
+//			edtDbId: 
+//		};
+		Api.work.unfinishedWork(this.$route.query.dbId).then((res) => {
+			console.log(res)
+		})
+	  }
+
+
 	  setTimeout(function(){
 		$("#div_drap").Tdrag();
 	  },500)
-
+	  	
 
     }
   }

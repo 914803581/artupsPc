@@ -11,7 +11,6 @@ import VueAxios from 'vue-axios'
 
 
 //import mixins from './mixins'
-Vue.use(ElementUI)
 //Vue.use(mixins)
 // 引入ajax
 Vue.use(VueAxios, Axios)
