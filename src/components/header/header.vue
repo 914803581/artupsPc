@@ -28,7 +28,7 @@
           link: '/builder/citiehua.html'
         }, {
           label: '框画',
-          link: '/builder/frame_pic.html'
+          link: '/framed-pictures.html'
         }, {
           label: '海报',
           link: '/builder/haibao.html'
