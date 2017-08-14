@@ -30,16 +30,16 @@ let router = new VueRouter({
   mode: 'history',
   routes: [
     { // 宝宝书介绍和尺寸选择
-      path: '/babyAlbum/bbsMsg',
-      name: 'bbsMsg',
+      path: '/album/imgEditMsg',
+      name: 'imgEditMsg',
       component: bbsMsg,
       meta: {
         title: '宝宝书介绍'
       }
     },
     { // 宝宝书编辑页面
-      path: '/babyAlbum/bbsEdit',
-      name: 'bbsEdit',
+      path: '/album/imgEdit',
+      name: 'imgEdit',
       component: bbsEdit,
       meta: {
         title: '宝宝书编辑'

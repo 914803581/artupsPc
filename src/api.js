@@ -23,7 +23,8 @@ var HTTP = VueHttp.$http.create({
 // baseUrl:'http:www.baidu.com',
 // timeout:5000, //请求超时配置
   params: { // 每一个连接都跟手的东西，查询字符串
-    userDbId: userDbIds
+    userDbId: userDbIds,
+    client:'pc'
   },
   headers: {}// 设置请求头的对象
 })
@@ -212,12 +213,11 @@ export default {
     }
   },
   work: { // 作品的接口post方法(保存)
-    // workEdit: (jsons) => {
-    //   jsons = VueHttp.sourceSession(jsons)
-    //   return VueHttp.$http.post(SAVE_WORK_URL,
-    //     qs.stringify(jsons)
-    //   )
-    // },
+       workEdit: (jsons) => {
+         return HTTP.post(SAVE_WORK_URL,
+           qs.stringify(jsons)
+         )
+       },
     // deletWork: (jsons) => {
     //   return VueHttp.$http.get(DELECT_WORK, {params: jsons})
     // },
@@ -227,11 +227,13 @@ export default {
     //     }
     //   )
     // },
-    // unfinishedWork: (paramJson) => {//素材数据
-    //   return VueHttp.$http.get(QUERY_UNFINISHED_WORK_URL, {
-    //     params: paramJson
-    //   })
-    // },
+       unfinishedWork: (edtDbId) => {//素材回填数据   -->edtDbId 回填的数据
+         return HTTP.get(QUERY_UNFINISHED_WORK_URL, {
+           params: {
+           	 edtDbId:edtDbId
+           }
+         })
+       }
     // checkDPI: (jsons) => {
     //   return VueHttp.$http.post(MATER_DPI,
     //     qs.stringify(jsons)

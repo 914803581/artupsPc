@@ -15,7 +15,7 @@
           </div>
           <div class="works-list">
             <div class="works-container">
-              <div class="woks-data" v-for="work in workData" :key="work.id">
+              <div class="woks-data" v-for="(work,index) in workData" :key="work.id">
                 <div class="img-box">
                   <el-checkbox v-show="managerIng" v-model="work.checked" class="checkbox-work"></el-checkbox>
                   <img :src="work.thumbnailImageUrl" :alt="work.name" :title="work.name">
@@ -23,7 +23,7 @@
                 <label class="title">{{work.name}}</label>
                 <span class="time">{{work.updatedDt}}</span>
                 <span class="type">{{work.sku}}</span>
-                <a href="javascript:void(0);" class="buy-btn">继续编辑</a>
+                <a @click="continueEdit(index)" href="javascript:void(0);" class="buy-btn">继续编辑</a>
               </div>
             </div>
           </div>
@@ -72,6 +72,9 @@
       }
     },
     methods: {
+	  continueEdit($index){ //继续编辑
+		  this.$router.push({path:"/album/imgEdit",query:{dbId:this.workData[$index].dbId}})
+	  },
       deleteWorkList: function () {
         let deleteArr = []
         this.workData.forEach(function (work) {

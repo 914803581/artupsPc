@@ -74,14 +74,11 @@ let store = new Vuex.Store({
 			var oPage = edidData.parents(".pubilc_div").find(".page .pageleft span").attr("page");//第几页
 			var oTypeStyle = edidData.attr("typestyle");//板式
 			var oimgSort= edidData.attr("imgsort");//图片的顺序
-			
-			
+	
 			//如果是lomo卡
 			if(edidData.parents(".lomoTemplate").size()>0){
 				oPage = edidData.parents(".lomoTemplate").find(".page .pageLomo").text()
 			}
-			
-			
 			
 			var constName = oPage+"_"+oimgSort;
 			 	var picObj = {"constName":constName,"picDbId" : edidData.attr("dbId"), "page" : oPage, "editCnfIndex" : oTypeStyle, "num" : oimgSort, "actions" : {},
@@ -90,7 +87,7 @@ let store = new Vuex.Store({
 		    if(edidData.parents(".hengban_bbs").size()>0){
 		    		picObj.isOnly = true;
 		    }
-		  	
+		    
 		  	//如果是lomo卡
 			if(edidData.parents(".lomoTemplate").size()>0){
 				//存入lomoHashMap
@@ -133,32 +130,45 @@ let store = new Vuex.Store({
             		state.editData.ImgHashMap.remove((parseInt(oPage)+1)+'_2');
             		state.editData.ImgHashMap.remove((parseInt(oPage)+1)+'_3');
             		state.editData.ImgHashMap.remove((parseInt(oPage)+1)+'_4');
-				state.editData.lomoHashMap.remove((parseInt(oPage)+1)+'_1');
-            		state.editData.lomoHashMap.remove((parseInt(oPage)+1)+'_2');
-            		state.editData.lomoHashMap.remove((parseInt(oPage)+1)+'_3');
-            		state.editData.lomoHashMap.remove((parseInt(oPage)+1)+'_4');				
-            		state.editData.lomoHashMap.remove((parseInt(oPage)+1)+'_5');				
+				state.editData.textHashMap.remove((parseInt(oPage)+1)+'_1');
+            		state.editData.textHashMap.remove((parseInt(oPage)+1)+'_2');
+            		state.editData.textHashMap.remove((parseInt(oPage)+1)+'_3');
+            		state.editData.textHashMap.remove((parseInt(oPage)+1)+'_4');				
+            		state.editData.textHashMap.remove((parseInt(oPage)+1)+'_5');				
 			}else{
 				state.editData.ImgHashMap.remove((parseInt(oPage)-1)+'_1');
             		state.editData.ImgHashMap.remove((parseInt(oPage)-1)+'_2');
             		state.editData.ImgHashMap.remove((parseInt(oPage)-1)+'_3');
             		state.editData.ImgHashMap.remove((parseInt(oPage)-1)+'_4');
-				state.editData.lomoHashMap.remove((parseInt(oPage)-1)+'_1');
-            		state.editData.lomoHashMap.remove((parseInt(oPage)-1)+'_2');
-            		state.editData.lomoHashMap.remove((parseInt(oPage)-1)+'_3');
-            		state.editData.lomoHashMap.remove((parseInt(oPage)-1)+'_4');
-            		state.editData.lomoHashMap.remove((parseInt(oPage)-1)+'_5');
+				state.editData.textHashMap.remove((parseInt(oPage)-1)+'_1');
+            		state.editData.textHashMap.remove((parseInt(oPage)-1)+'_2');
+            		state.editData.textHashMap.remove((parseInt(oPage)-1)+'_3');
+            		state.editData.textHashMap.remove((parseInt(oPage)-1)+'_4');
+            		state.editData.textHashMap.remove((parseInt(oPage)-1)+'_5');
 			}
 			state.editData.ImgHashMap.remove((parseInt(oPage))+'_1');
         		state.editData.ImgHashMap.remove((parseInt(oPage))+'_2');
         		state.editData.ImgHashMap.remove((parseInt(oPage))+'_3');
         		state.editData.ImgHashMap.remove((parseInt(oPage))+'_4');
-			state.editData.lomoHashMap.remove((parseInt(oPage))+'_1');
-        		state.editData.lomoHashMap.remove((parseInt(oPage))+'_2');
-        		state.editData.lomoHashMap.remove((parseInt(oPage))+'_3');
-        		state.editData.lomoHashMap.remove((parseInt(oPage))+'_4');
-        		state.editData.lomoHashMap.remove((parseInt(oPage))+'_5');
+        		state.editData.ImgHashMap.remove((parseInt(oPage))+'_5');
+			state.editData.textHashMap.remove((parseInt(oPage))+'_1');
+        		state.editData.textHashMap.remove((parseInt(oPage))+'_2');
+        		state.editData.textHashMap.remove((parseInt(oPage))+'_3');
+        		state.editData.textHashMap.remove((parseInt(oPage))+'_4');
+        		state.editData.textHashMap.remove((parseInt(oPage))+'_5');
 			
+		},
+		oneToOneSetDrapData(state,obj){ //单页切换板式删除的操作
+
+			var oPage = obj.opage;
+			state.editData.ImgHashMap.remove((parseInt(oPage))+'_1');			
+			state.editData.ImgHashMap.remove((parseInt(oPage))+'_2');			
+			state.editData.ImgHashMap.remove((parseInt(oPage))+'_3');			
+			state.editData.ImgHashMap.remove((parseInt(oPage))+'_4');
+			state.editData.textHashMap.remove((parseInt(oPage))+'_1');
+        		state.editData.textHashMap.remove((parseInt(oPage))+'_2');
+        		state.editData.textHashMap.remove((parseInt(oPage))+'_3');
+        		state.editData.textHashMap.remove((parseInt(oPage))+'_4');
 		},
 		drapDiv(state){//拖动元素的方法
 				//被拖动的元素
@@ -207,7 +217,12 @@ let store = new Vuex.Store({
 //						console.log('页数'+oPage)
 //						console.log('板式'+oTypeStyle)
 //						console.log('图片的顺序'+oimgSort)
-
+						//如果是lomo卡
+						if($(ev.target).parents(".lomoTemplate").size()>0){
+							oPage = $(ev.target).parents(".lomoTemplate").find(".page .pageLomo").text()
+						}
+						
+						
 						 var constName = oPage+"_"+oimgSort;
 						 console.log(constName)
 						 
@@ -222,6 +237,20 @@ let store = new Vuex.Store({
 		                		state.editData.ImgHashMap.remove((parseInt(oPage)+1)+'_3');
 		                		state.editData.ImgHashMap.remove((parseInt(oPage)+1)+'_4');
 		                }
+		                
+		                
+		                //如果是lomo卡
+						if($(ev.target).parents(".lomoTemplate").size()>0){
+							//存入lomoHashMap
+				        		state.editData.lomoHashMap.putvalue(constName,picObj);
+				        		console.log(state.editData.lomoHashMap.getvalue(constName))
+				        		//计算位置
+							setTimeout(function(){
+								$(ev.target).next("img").attr("style","")
+								dragThumb($(ev.target).next("img"),$(ev.target))
+							},100)
+							return;	        		
+						}		                
                         //存入图片ImgHashMap
                         state.editData.ImgHashMap.putvalue(constName,picObj);
                         console.log(state.editData.ImgHashMap.getvalue(constName)) 
