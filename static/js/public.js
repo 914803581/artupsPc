@@ -192,6 +192,45 @@ var bbsTemplateData={
 	lomo2:'<div class="time_pu lomoTemplate"><div class="drapBox bbsClass template04"><div class="drap_img"></div><img class="img_drap" imgSort="1" typeStyle="2" src=""/></div><div  class="page"><div class="pageRight pageLomo">&nbsp;</div><div class="pageRight">LOMO卡</div></div></div>'	
 };
 
+/*定义画册八个板式模板*/
+var hcTemplate225_355={//hcTemplate225_355
+	bbs1:'<div class="time_pu"><div class="bbsClass drapBox template01"><div class="drap_img"></div><img imgSort="1" typeStyle="1" class="img_drap" src=""/></div><p textSort="1" typeStyle="1" class="text"></p><div  class="page"><div class="pageleft">第<span></span>页</div><div class="pageRight"></div></div></div>',
+	bbs2:'<div class="time_pu"><div class="bbsClass drapBox template02"><div class="drap_img"></div><img  class="img_drap" imgSort="1" typeStyle="2" src=""/></div><p textSort="1" typeStyle="2" class="text"></p><div  class="page"><div class="pageleft">第<span></span>页</div><div class="pageRight"></div></div></div>',
+	bbs3:'<div class="time_pu"><div class="bbsClass template03"><div class="drapBox div_page"><div class="drap_img"></div><img class="img_drap" imgSort="1" typeStyle="3" src=""/></div><div class="drapBox div_page"><div class="drap_img"></div><img class="img_drap" imgSort="2" typeStyle="3" src=""/></div></div><p textSort="1" typeStyle="3" class="text"></p><div  class="page"><div class="pageleft">第<span></span>页</div><div class="pageRight"></div></div></div>',
+	bbs4:'<div class="time_pu hcTemplate225_355"><div class="drapBox bbsClass template225_320"><div class="drap_img"></div><img class="img_drap" imgSort="1" typeStyle="4" src=""/></div><p textSort="1" typeStyle="4" class="text"></p><div  class="page"><div class="pageleft">第<span></span>页</div><div class="pageRight"></div></div></div>',
+	bbs5:'<div class="time_pu hcTemplate225_355"><div class="bbsClass template225_157"><div class="drapBox div_page"><div class="drap_img"></div><img class="img_drap" imgSort="1" typeStyle="5" src=""/></div><div class="drapBox div_page"><div class="drap_img"></div><img class="img_drap" imgSort="2" typeStyle="5" src=""/></div></div><p textSort="1" typeStyle="5" class="text"></p><div  class="page"><div class="pageleft">第<span></span>页</div><div class="pageRight"></div></div></div>',
+	bbs6:'<div class="time_pu hcTemplate225_355"><div class="bbsClass drapBox template255_255"><div class="drap_img"></div><img imgSort="1" typeStyle="6" class="img_drap" src=""/></div><p textSort="1" typeStyle="6" class="text"></p><div  class="page"><div class="pageleft">第<span></span>页</div><div class="pageRight"></div></div></div>',
+	bbs7:'<div class="time_pu hcTemplate225_355"><div class="bbsClass drapBox template255_150"><div class="drap_img"></div><img imgSort="1" typeStyle="7" class="img_drap" src=""/></div><p textSort="1" typeStyle="7" class="text"></p><div  class="page"><div class="pageleft">第<span></span>页</div><div class="pageRight"></div></div></div>',
+	bbs8:'<div class="time_pu hcTemplate225_355"><div class="bbsClass template480_320 "><div class="drapBox div_page"><div class="drap_img"></div> <img imgsort="1" typestyle="8" src="" class="img_drap"></div></div> <p textsort="1" typestyle="8" class="hengbanText  text"></p> <div class="page"><div class="pageleft">第<span page=""></span>页</div> <div class="pageleft">第<span page=""></span>页</div></div></div>'
+	
+};
+/*定义画册八个板式模板*/
+var hcTemplate355_225={//hcTemplate355_225
+	bbs1:'<div class="time_pu"><div class="bbsClass drapBox template01"><div class="drap_img"></div><img imgSort="1" typeStyle="1" class="img_drap" src=""/></div><p textSort="1" typeStyle="1" class="text"></p><div  class="page"><div class="pageleft">第<span></span>页</div><div class="pageRight"></div></div></div>',
+	bbs2:'<div class="time_pu"><div class="bbsClass drapBox template02"><div class="drap_img"></div><img  class="img_drap" imgSort="1" typeStyle="2" src=""/></div><p textSort="1" typeStyle="2" class="text"></p><div  class="page"><div class="pageleft">第<span></span>页</div><div class="pageRight"></div></div></div>',
+	bbs3:'<div class="time_pu"><div class="bbsClass template03"><div class="drapBox div_page"><div class="drap_img"></div><img class="img_drap" imgSort="1" typeStyle="3" src=""/></div><div class="drapBox div_page"><div class="drap_img"></div><img class="img_drap" imgSort="2" typeStyle="3" src=""/></div></div><p textSort="1" typeStyle="3" class="text"></p><div  class="page"><div class="pageleft">第<span></span>页</div><div class="pageRight"></div></div></div>',
+	bbs4:'<div class="time_pu hcTemplate355_225"><div class="drapBox bbsClass template325_220"><div class="drap_img"></div><img class="img_drap" imgSort="1" typeStyle="4" src=""/></div><p textSort="1" typeStyle="4" class="text"></p><div  class="page"><div class="pageleft">第<span></span>页</div><div class="pageRight"></div></div></div>',
+	bbs5:'<div class="time_pu hcTemplate355_225"><div class="drapBox bbsClass template220_220"><div class="drap_img"></div><img class="img_drap" imgSort="1" typeStyle="5" src=""/></div><p textSort="1" typeStyle="5" class="text"></p><div  class="page"><div class="pageleft">第<span></span>页</div><div class="pageRight"></div></div></div>',
+	bbs6:'<div class="time_pu hcTemplate355_225"><div class="bbsClass drapBox template255_255"><div class="drap_img"></div><img imgSort="1" typeStyle="6" class="img_drap" src=""/></div><p textSort="1" typeStyle="6" class="text"></p><div  class="page"><div class="pageleft">第<span></span>页</div><div class="pageRight"></div></div></div>',
+	bbs7:'<div class="time_pu hcTemplate355_225"><div class="bbsClass drapBox template255_150"><div class="drap_img"></div><img imgSort="1" typeStyle="7" class="img_drap" src=""/></div><p textSort="1" typeStyle="7" class="text"></p><div  class="page"><div class="pageleft">第<span></span>页</div><div class="pageRight"></div></div></div>',
+	bbs8:'',
+	bbs9:'<div class="time_pu hcTemplate355_225"><div class="bbsClass template680_220"><div class="drapBox div_page"><div class="drap_img"></div> <img imgsort="1" typestyle="8" src="" class="img_drap"></div></div> <p textsort="1" typestyle="8" class="hengbanText  text"></p> <div class="page"><div class="pageleft">第<span page=""></span>页</div> <div class="pageleft">第<span page=""></span>页</div></div></div>'
+	
+};
+/*定义画册八个板式模板*/
+var hcTemplate360_510={//hcTemplate360_510
+	bbs1:'<div class="time_pu"><div class="bbsClass drapBox template01"><div class="drap_img"></div><img imgSort="1" typeStyle="1" class="img_drap" src=""/></div><p textSort="1" typeStyle="1" class="text"></p><div  class="page"><div class="pageleft">第<span></span>页</div><div class="pageRight"></div></div></div>',
+	bbs2:'<div class="time_pu"><div class="bbsClass drapBox template02"><div class="drap_img"></div><img  class="img_drap" imgSort="1" typeStyle="2" src=""/></div><p textSort="1" typeStyle="2" class="text"></p><div  class="page"><div class="pageleft">第<span></span>页</div><div class="pageRight"></div></div></div>',
+	bbs3:'<div class="time_pu"><div class="bbsClass template03"><div class="drapBox div_page"><div class="drap_img"></div><img class="img_drap" imgSort="1" typeStyle="3" src=""/></div><div class="drapBox div_page"><div class="drap_img"></div><img class="img_drap" imgSort="2" typeStyle="3" src=""/></div></div><p textSort="1" typeStyle="3" class="text"></p><div  class="page"><div class="pageleft">第<span></span>页</div><div class="pageRight"></div></div></div>',
+	bbs4:'<div class="time_pu hcTemplate360_510"><div class="drapBox bbsClass template330_475"><div class="drap_img"></div><img class="img_drap" imgSort="1" typeStyle="4" src=""/></div><p textSort="1" typeStyle="4" class="text"></p><div  class="page"><div class="pageleft">第<span></span>页</div><div class="pageRight"></div></div></div>',
+	bbs5:'<div class="time_pu hcTemplate360_510"><div class="bbsClass template330_235"><div class="drapBox div_page"><div class="drap_img"></div><img class="img_drap" imgSort="1" typeStyle="5" src=""/></div><div class="drapBox div_page"><div class="drap_img"></div><img class="img_drap" imgSort="2" typeStyle="5" src=""/></div></div><p textSort="1" typeStyle="5" class="text"></p><div  class="page"><div class="pageleft">第<span></span>页</div><div class="pageRight"></div></div></div>',
+	bbs6:'<div class="time_pu hcTemplate360_510"><div class="bbsClass drapBox template330_330"><div class="drap_img"></div><img imgSort="1" typeStyle="6" class="img_drap" src=""/></div><p textSort="1" typeStyle="6" class="text"></p><div  class="page"><div class="pageleft">第<span></span>页</div><div class="pageRight"></div></div></div>',
+	bbs7:'<div class="time_pu hcTemplate360_510"><div class="bbsClass drapBox template330_320"><div class="drap_img"></div><img imgSort="1" typeStyle="7" class="img_drap" src=""/></div><p textSort="1" typeStyle="7" class="text"></p><div  class="page"><div class="pageleft">第<span></span>页</div><div class="pageRight"></div></div></div>',
+	bbs8:'',
+	bbs9:'<div class="time_pu hcTemplate360_510"><div class="bbsClass template690_475 "><div class="drapBox div_page"><div class="drap_img"></div> <img imgsort="1" typestyle="8" src="" class="img_drap"></div></div> <p textsort="1" typestyle="8" class="hengbanText  text"></p> <div class="page"><div class="pageleft">第<span page=""></span>页</div> <div class="pageleft">第<span page=""></span>页</div></div></div>'	
+};
+
+
 //var lomoTemplateData={
 //	bbs1:'<div class="time_pu"><div class="bbsClass drapBox template05"><div class="drap_img"></div><img class="img_drap" imgSort="1" typeStyle="5" src=""/></div><p textSort="1" typeStyle="5"  class="text title_pu"></p><div  class="page"><div class="pageleft">第<span></span>页</div><div class="pageRight"></div></div></div>',
 //	bbs2:'<div class="time_pu"><div class="drapBox bbsClass template04"><div class="drap_img"></div><img class="img_drap" imgSort="1" typeStyle="4" src=""/></div><p textSort="1" typeStyle="4" class="text title_pu"></p><div  class="page"><div class="pageleft">第<span></span>页</div><div class="pageRight"></div></div></div>',	
@@ -266,6 +305,7 @@ var lomoData_template=[
 //	bbsTemplateData.lomo2,
 //	bbsTemplateData.lomo2
 ]
+>>>>>>> a465e349cbcff72306fc6cfbe29add94414986e9
 //定义模版的数组
 var bbsData_template=[
 	[
@@ -335,7 +375,6 @@ function drapDom(dragdiv){
     }, false);
 
     document.addEventListener('drop', function (e) {
-    	console.log("2")
         dragdiv.style.left = (e.pageX - x) + 'px';
         dragdiv.style.top = (e.pageY - y) + 'px';
         e.preventDefault() || e.stopPropagation();  //不取消，firefox中会触发网页跳转到查找setData中的内容
