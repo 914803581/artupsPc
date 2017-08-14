@@ -8,8 +8,6 @@ import 'element-ui/lib/theme-default/index.css'
 import Axios from 'axios'
 import VueAxios from 'vue-axios'
 
-
-
 //import mixins from './mixins'
 //Vue.use(mixins)
 // 引入ajax
@@ -26,7 +24,6 @@ import utils from './components/component/util'
 
 Vue.use(ElementUI)
 Vue.use(VueAxios, Axios) // 引入ajax
-
 
 Vue.use(Handers)
 Vue.use(Footers)

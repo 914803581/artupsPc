@@ -59,11 +59,9 @@ let router = new VueRouter({
     // },
     {
       path: '/',
-      name: 'index',
-      meta: {
-        title: '首页'
-      },
-      component: index
+      beforeEnter: function () {
+        location.href = '/welcome.html'
+      }
     }, {
       path: '/center/works',
       name: 'WorksList',
@@ -141,35 +139,35 @@ let router = new VueRouter({
       meta: {
         title: '我的优惠券'
       }
-    },{
+    }, {
       path: '/user/cart',
       name: 'cart',
       component: cart,
       meta: {
         title: '购物车'
       }
-    },{
+    }, {
       path: '/order/confim',
       name: 'confimOrder',
       component: confimOrder,
       meta: {
         title: '确认订单'
       }
-    },{
+    }, {
       path: '/user/loginCallback',
       name: 'loginCallback',
       component: loginCallback,
       meta: {
         title: '登陆'
       }
-    },{
+    }, {
       path: '/pay/payOrder',
       name: 'payOrder',
       component: payOrder,
       meta: {
         title: '支付'
       }
-    },{
+    }, {
       path: '/pay/payOk',
       name: 'payOk',
       component: payOk,
