@@ -305,7 +305,7 @@ var lomoData_template=[
 //	bbsTemplateData.lomo2,
 //	bbsTemplateData.lomo2
 ]
->>>>>>> a465e349cbcff72306fc6cfbe29add94414986e9
+
 //定义模版的数组
 var bbsData_template=[
 	[
