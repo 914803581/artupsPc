@@ -18,6 +18,9 @@ new Vue({
   components: {
     'unify-header': Header,
     'unify-footer': Footer
+  },
+  created: function () {
+    document.body.style.cssText = 'opacity:1;'
   }
 })
 
