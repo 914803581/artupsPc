@@ -5,7 +5,6 @@ import Vue from 'vue'
 import ElementUI from 'element-ui'
 import Header from '@/components/header/header.vue'
 import Footer from '@/components/footer/footer.vue'
-import $ from 'jquery';
 
 Vue.use(ElementUI)
 
@@ -21,7 +20,6 @@ new Vue({
     'unify-footer': Footer
   },
   created: function () {
-    console.log($)
     document.body.style.cssText = 'opacity:1;'
   }
 })
