@@ -37,8 +37,8 @@ var webpackConfig = merge(baseWebpackConfig, {
   ]
 });
 
-['home', 'album', 'magnet', 'framed-pictures', 'poster'].forEach((page) => {
-  webpackConfig.entry[page] = `./src/script/${page}.js`
+config.build.multiplePageList.forEach((page) => {
+  webpackConfig.entry[page] = `./src/page/${page}/${page}.js`
   webpackConfig.plugins.push(new HtmlWebpackPlugin({
     filename: path.resolve(__dirname, `../dist/${page}.html`),
     template: path.resolve(__dirname, `../multiple/${page}.html`),
