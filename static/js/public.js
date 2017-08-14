@@ -211,7 +211,7 @@ var hcTemplate355_225={//hcTemplate355_225
 	
 };
 /*定义画册八个板式模板*/
-var bbsTemplateData={//hcTemplate360_510
+var hcTemplate360_510={//hcTemplate360_510
 	bbs1:'<div class="time_pu"><div class="bbsClass drapBox template01"><div class="drap_img"></div><img imgSort="1" typeStyle="1" class="img_drap" src=""/></div><p textSort="1" typeStyle="1" class="text"></p><div  class="page"><div class="pageleft">第<span></span>页</div><div class="pageRight"></div></div></div>',
 	bbs2:'<div class="time_pu"><div class="bbsClass drapBox template02"><div class="drap_img"></div><img  class="img_drap" imgSort="1" typeStyle="2" src=""/></div><p textSort="1" typeStyle="2" class="text"></p><div  class="page"><div class="pageleft">第<span></span>页</div><div class="pageRight"></div></div></div>',
 	bbs3:'<div class="time_pu"><div class="bbsClass template03"><div class="drapBox div_page"><div class="drap_img"></div><img class="img_drap" imgSort="1" typeStyle="3" src=""/></div><div class="drapBox div_page"><div class="drap_img"></div><img class="img_drap" imgSort="2" typeStyle="3" src=""/></div></div><p textSort="1" typeStyle="3" class="text"></p><div  class="page"><div class="pageleft">第<span></span>页</div><div class="pageRight"></div></div></div>',
@@ -220,8 +220,7 @@ var bbsTemplateData={//hcTemplate360_510
 	bbs6:'<div class="time_pu hcTemplate360_510"><div class="bbsClass drapBox template330_330"><div class="drap_img"></div><img imgSort="1" typeStyle="6" class="img_drap" src=""/></div><p textSort="1" typeStyle="6" class="text"></p><div  class="page"><div class="pageleft">第<span></span>页</div><div class="pageRight"></div></div></div>',
 	bbs7:'<div class="time_pu hcTemplate360_510"><div class="bbsClass drapBox template330_320"><div class="drap_img"></div><img imgSort="1" typeStyle="7" class="img_drap" src=""/></div><p textSort="1" typeStyle="7" class="text"></p><div  class="page"><div class="pageleft">第<span></span>页</div><div class="pageRight"></div></div></div>',
 	bbs8:'',
-	bbs9:'<div class="time_pu hcTemplate360_510"><div class="bbsClass template690_475 "><div class="drapBox div_page"><div class="drap_img"></div> <img imgsort="1" typestyle="8" src="" class="img_drap"></div></div> <p textsort="1" typestyle="8" class="hengbanText  text"></p> <div class="page"><div class="pageleft">第<span page=""></span>页</div> <div class="pageleft">第<span page=""></span>页</div></div></div>'
-	
+	bbs9:'<div class="time_pu hcTemplate360_510"><div class="bbsClass template690_475 "><div class="drapBox div_page"><div class="drap_img"></div> <img imgsort="1" typestyle="8" src="" class="img_drap"></div></div> <p textsort="1" typestyle="8" class="hengbanText  text"></p> <div class="page"><div class="pageleft">第<span page=""></span>页</div> <div class="pageleft">第<span page=""></span>页</div></div></div>'	
 };
 //定义模版的数组
 var bbsData_template=[
@@ -292,7 +291,6 @@ function drapDom(dragdiv){
     }, false);
 
     document.addEventListener('drop', function (e) {
-    	console.log("2")
         dragdiv.style.left = (e.pageX - x) + 'px';
         dragdiv.style.top = (e.pageY - y) + 'px';
         e.preventDefault() || e.stopPropagation();  //不取消，firefox中会触发网页跳转到查找setData中的内容
