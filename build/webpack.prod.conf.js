@@ -61,6 +61,7 @@ var webpackConfig = merge(baseWebpackConfig, {
         // more options:
         // https://github.com/kangax/html-minifier#options-quick-reference
       },
+      resourcePrefix: config.build.assetsPublicPath,
       // necessary to consistently work with multiple chunks via CommonsChunkPlugin
       chunksSortMode: 'dependency'
     }),
@@ -94,18 +95,19 @@ var webpackConfig = merge(baseWebpackConfig, {
     ])
   ]
 });
-['home', 'album', 'magnet', 'framed-pictures', 'poster'].forEach((page) => {
-  webpackConfig.entry[page] = `./src/script/${page}.js`
+config.build.multiplePageList.forEach((page) => {
+  webpackConfig.entry[page] = `./src/page/${page}/${page}.js`
   webpackConfig.plugins.push(new HtmlWebpackPlugin({
     filename: path.resolve(__dirname, `../dist/${page}.html`),
     template: path.resolve(__dirname, `../multiple/${page}.html`),
     inject: true,
-    chunks: [page],
+    chunks: ['manifest', 'vendor', page],
     minify: {
       removeComments: true,
       collapseWhitespace: true,
       removeAttributeQuotes: true
     },
+    resourcePrefix: config.build.assetsPublicPath,
     chunksSortMode: 'dependency'
   }));
 });

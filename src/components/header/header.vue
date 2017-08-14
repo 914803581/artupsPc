@@ -1,7 +1,9 @@
 <template>
   <header class="unify-header">
     <div class="wrapper">
-      <h1 class="title">雅昌影业</h1>
+      <a href="/welcome.html" class="logo">
+        <h1 class="title">雅昌影业</h1>
+      </a>
       <ul class="menu">
         <li class="item" v-for="item in menus">
           <a :href="item.link">{{item.label}}</a>
@@ -17,7 +19,7 @@
       return {
         menus: [{
           label: '首页',
-          link: '/index.html'
+          link: '/welcome.html'
         }, {
           label: '画册',
           link: '/builder/artalbum_builder.html'
@@ -49,7 +51,9 @@
       padding-top: 4px;
       font-size: 0;
     }
-
+    .logo {
+      outline: 0;
+    }
     .title {
       float: left;
       width: 146px;

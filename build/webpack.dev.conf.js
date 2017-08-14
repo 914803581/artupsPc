@@ -30,14 +30,15 @@ var webpackConfig = merge(baseWebpackConfig, {
       filename: config.build.main,
       template: path.resolve(__dirname, '../multiple/index.html'),
       inject: true,
+      resourcePrefix: '/',
       chunks: ['manifest', 'vendor', 'main']
     }),
     new FriendlyErrorsPlugin()
   ]
 });
 
-['home', 'album', 'magnet', 'framed-pictures', 'poster'].forEach((page) => {
-  webpackConfig.entry[page] = `./src/script/${page}.js`
+config.build.multiplePageList.forEach((page) => {
+  webpackConfig.entry[page] = `./src/page/${page}/${page}.js`
   webpackConfig.plugins.push(new HtmlWebpackPlugin({
     filename: path.resolve(__dirname, `../dist/${page}.html`),
     template: path.resolve(__dirname, `../multiple/${page}.html`),
@@ -48,6 +49,7 @@ var webpackConfig = merge(baseWebpackConfig, {
       collapseWhitespace: true,
       removeAttributeQuotes: true
     },
+    resourcePrefix: '/',
     chunksSortMode: 'dependency'
   }));
 });

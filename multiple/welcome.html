@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="zh_CN">
+<head>
+  <meta charset="UTF-8">
+  <title>雅昌影像-专业定制照片画册,装饰画,海报,挂历</title>
+  <meta name="Keywords" content="传给雅昌,画册,装饰画,有框画,海报定制,挂历2018"/>
+  <meta name="Description" content="传给雅昌是雅昌集团旗下中国最大的专业艺术影像输出平台，提供画册、装饰画、框画、海报、挂历等照片产品的个性定制服务。您选一张照片，我送您一件艺术品。"/>
+</head>
+<body>
+<div id="app">
+  <unify-header></unify-header>
+  <div class="container">
+    <div class="shuffling">
+      <el-carousel :interval="5000" arrow="always">
+        <el-carousel-item v-for="item in shufflingList" :key="item">
+          <img :src="picturePrefix+item">
+        </el-carousel-item>
+      </el-carousel>
+    </div>
+    <div class="letter">
+      <h4 class="subtitle">家族记忆，百年传承</h4>
+      <h3 class="title">家丶书</h3>
+      <div class="starting-price">
+        <label>起始价格</label>
+        <span>￥499CNY</span>
+      </div>
+      <a href="#" class="btn">开始定制</a>
+    </div>
+  </div>
+  <unify-footer></unify-footer>
+</div>
+</body>
+</html>

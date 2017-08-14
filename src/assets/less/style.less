@@ -48,12 +48,12 @@ html,body{width:100%;min-height: 100%;font-family: "微软雅黑";font-weight: 5
                   }
                }
            }
-        
+
         }
-    
-    
-    
-    
+
+
+
+
     .touxiang{height: 30px;width: 30px;border-radius:50%;display: inline-block;margin-top: 10px;position: relative;}
     .touxiang b{z-index: 8;font-size: 12px;left: 24px;top: -4px;display: block;position: absolute;width: 16px;height: 16px;border-radius: 50%;background: #a00912;color: #fff;line-height: 16px;text-align: center;}
     .touxiang img{display: inline-block;height: 100%;width: 100%;border-radius: 50%;position: absolute;}
@@ -76,7 +76,7 @@ html,body{width:100%;min-height: 100%;font-family: "微软雅黑";font-weight: 5
 #bbsEdit{
     width: 100%;
     height: 100%;
-    overflow: hidden;    
+    overflow: hidden;
     //拖拽的板式kuang
     #div_drap{
         font-size: 14px;color: #333;background: #fff;
@@ -87,7 +87,7 @@ html,body{width:100%;min-height: 100%;font-family: "微软雅黑";font-weight: 5
         height: 12.8125rem;
         box-shadow: 0 10px 10px -6px #777;
         cursor:move;
-        
+
        .titleBox{width: 100%;height: 30px;line-height: 30px;text-align: center;border-bottom: 1px solid #d7d7d7;}
        .titleClose{
            >i{
@@ -95,13 +95,13 @@ html,body{width:100%;min-height: 100%;font-family: "微软雅黑";font-weight: 5
            }
            &:hover{
                cursor: pointer;
-               
+
            }
            &:active{
                top: 1px;color: #a00912;
            }
            position: absolute;right: 0;top: 0;width: 30px;height: 30px;}
-           
+
            .checkBS_b{
                width: 100%;
                height: 369px;
@@ -121,21 +121,25 @@ html,body{width:100%;min-height: 100%;font-family: "微软雅黑";font-weight: 5
                           cursor:default;
                           display: block;
 //                        width: 80%;
-                          .pubCenter;  
+                          .pubCenter;
                       }
                 }
-               
+
               .boder_actiev{
                  border: 1px solid #a00912 !important;
               }
            }
-    } 
+    }
 }
 .comtent_chanpin{
     width:100%;
     background: #efefef;
     .line_comtent{
         border-bottom: 1px solid #D3D3D6;
+        .scrollBar{
+            overflow-y: auto;
+//          overflow: hidden;
+        }
       .comtent{
         width: 1040px;
 //      height: 300px;
@@ -144,11 +148,11 @@ html,body{width:100%;min-height: 100%;font-family: "微软雅黑";font-weight: 5
         position: relative;
         .box_menu{
             width: 120px;
-            height: 200px;
+            height: 250px;
 //          border: 1px solid red;
             position: absolute;
             right: -130px;
-            top: 0px;
+            top: 50px;
             ul{
                 >li{
                     cursor: pointer;
@@ -177,7 +181,7 @@ html,body{width:100%;min-height: 100%;font-family: "微软雅黑";font-weight: 5
                         top: 1px;
                     }
                 }
-                
+
             }
         }
         .title{
@@ -209,7 +213,7 @@ html,body{width:100%;min-height: 100%;font-family: "微软雅黑";font-weight: 5
         //
         .time_main_left{
             width:100%;
-           overflow-y: auto;;
+           overflow: auto;
             margin-top: 30px;
             .time_bg{
                 float: left;
@@ -231,7 +235,7 @@ html,body{width:100%;min-height: 100%;font-family: "微软雅黑";font-weight: 5
 
     //模版样式
     .active_line{border: 1px solid #a00912 !important;height: 242px !important;overflow: hidden;}
-    
+
         .hengban_bbs{
         width: 100% !important;
         height: 100%;
@@ -240,7 +244,7 @@ html,body{width:100%;min-height: 100%;font-family: "微软雅黑";font-weight: 5
             height: 100% !important;
             .pageleft{
                 text-align: left !important;
-                text-indent: 28px; 
+                text-indent: 28px;
              }
             .hengbanText{
                margin-left: 20px !important;
@@ -252,8 +256,9 @@ html,body{width:100%;min-height: 100%;font-family: "微软雅黑";font-weight: 5
                 .div_page{
                     width:100%;position: relative;height: 100%;
                     background-color: #d2d2d2 ;
-                    
+
                 }
+<<<<<<< HEAD
                 
             }  
         }
@@ -297,12 +302,101 @@ html,body{width:100%;min-height: 100%;font-family: "微软雅黑";font-weight: 5
             }
         }
       
+=======
+
+            }
+
+        }
+>>>>>>> a465e349cbcff72306fc6cfbe29add94414986e9
     }
-    
+
     .pubilc_div{
 //          transition: all 1.3s;
             box-sizing: border-box;
-//          border: 1px solid #fff;
+                  .hcTemplatetext01{
+                      .title_pu{
+                              border: 1px solid #d2d2d2;
+                              box-sizing: border-box;overflow: hidden;
+                      }
+                      .mainTitle{
+                          width:140px;
+                          height: 20px;
+                          margin: 20px auto 10px;  line-height: 20px;     font-size: 12px;
+                      }
+                      .subtitle{
+                           width:140px;
+                           height: 12px;
+                           margin: 0px auto 30px;
+                           line-height: 12px;
+                           font-size: 12px;
+                      }
+                      .box_text{
+                          width:140px;
+                          height: 106px;
+                          margin: 14px auto; font-size: 12px;
+                           line-height: 13px;
+                           overflow: hidden;
+                          .text_left{
+                              width: 66px;
+                              float: left;height: 106px;
+                          }
+                          .text_right{
+                              width: 66px;height: 106px;
+                              float: right
+                          }
+                      }
+                  }
+                  .hcTemplatetext02{
+
+                      .title_pu{
+                              border: 1px solid #d2d2d2;
+                              box-sizing: border-box;overflow: hidden;
+                      }
+                      .mainTitle{
+                          width:100px;
+                          height: 20px;
+                          margin: 20px 0px 10px 50px;
+                          line-height: 20px;  font-size: 12px;
+                      }
+                      .subtitle{
+                           width:100px;
+                           height: 12px;
+                           margin: 0px 0px 30px 50px;line-height: 12px;    font-size: 12px;
+                      }
+                      .box_text{
+                          width:100px;
+                          height: 106px;
+                           margin: 14px 0px 14px 50px; font-size: 12px;
+                           line-height: 12px; overflow: hidden;
+                      }
+                  }
+                  .hcTemplatetext03{
+
+                     .title_pu{
+                              border: 1px solid #d2d2d2;
+                              box-sizing: border-box;overflow: hidden;
+                      }
+                      .mainTitle{
+                          width:140px;
+                          height: 20px;
+                          margin: 20px auto 10px;   line-height: 20px;
+                      }
+//                    .subtitle{
+//                         width:100px;
+//                         height: 12px;
+//                         margin: 0px 0px 30px 50px;
+//                    }
+                      .box_text{
+                          width:140px;
+                          height: 40px;
+                           margin:30px auto 102px;
+                          line-height: 13px;font-size: 12px; overflow: hidden;
+                      }
+                  }
+
+
+
+
                    >.time_pu{
                     position: relative;
                     .bbsClass{
@@ -598,10 +692,10 @@ html,body{width:100%;min-height: 100%;font-family: "微软雅黑";font-weight: 5
                 font-size: 14px;  color: #6b6b6b;
                 cursor: pointer;
                 box-sizing: border-box;
-                transition:all .7s; 
+                transition:all .7s;
                 &:hover{
                    border: 1px solid #a00912;
-                   color: #a00912; 
+                   color: #a00912;
                 }
                  &:active{
                      position: relative;
@@ -692,22 +786,22 @@ html,body{width:100%;min-height: 100%;font-family: "微软雅黑";font-weight: 5
                   right: 10px;
                   border: 1px solid #a00912;
                   width: 30px;
-                  height: 30px;   
+                  height: 30px;
                   border-radius: 30px;
                   line-height: 30px;
                   text-align: center;
                   cursor: pointer;
-                  transition: all .3s; 
+                  transition: all .3s;
                   -webkit-user-select: none;-moz-user-select: none;
                   &:hover{
                      background: #a00912;
-                     color: #fff; 
+                     color: #fff;
                   }
                   &:active{
                       background: #ccc;
                       border: 1px solid #ccc;
                   }
-              }  
+              }
             .textBox{
                 display: block;
                 width: 80%;
@@ -1044,7 +1138,7 @@ body .el-loading-spinner .el-loading-text{
     .main .cont p{color:#333;font-family:"微软雅黑";min-width: 206px;text-align: center;overflow: hidden;}
     .main .cont .intro{font-size: 18px;}
     .main .cont .tit{font-size: 64px;margin-top: 25px;font-weight: 100;}
-    .main .cont_jiashu{background: url(../img/jiashu_02.jpg) no-repeat center center;}
+    .main .cont_jiashu{background: url(../../page/welcome/img/jiashu_02.jpg) no-repeat center center;}
     .main .cont_hc{background: url(../img/index_03.jpg) no-repeat center center;}
     .main .cont_cth{background: url(../img/index_04.jpg) no-repeat center center;}
     .main .cont_kh{background: url(../img/index_05.jpg) no-repeat center center;}
@@ -1180,12 +1274,12 @@ body .el-loading-spinner .el-loading-text{
     .cart_null .goIndex:hover{
         color: #fff;
         background: #444;
-        
+
     }
     .cart_null .goIndex:active{
         position: relative;
         top: 1px;
-        
+
     }
     .p_cat > .pay_cat {
       width: 1116px;
@@ -1475,7 +1569,7 @@ body .el-loading-spinner .el-loading-text{
     .ord1m_2 span{display: block;float: left;}
     .ord1m_3{font-size: 16px;margin-top: 20px;}
     .ord1m_3 select{height: 36px;width: 125px;border:1px solid #999;color: #A00912;font-size: 16px;outline: none;border-radius: 4px;padding-left: 20px;font-weight: 900;}
-    
+
     /*ssssssssssssssssssss*/
     .order2{width: 1200px;clear: both;}
     .ord2-tit{height: 48px;line-height: 48px;font-size: 16px;margin-top: 25px;border-bottom: 1px solid #999;}
@@ -1587,7 +1681,7 @@ body .el-loading-spinner .el-loading-text{
             body .lineR2{
                 margin-top: 0;
             }
-            .lineRs ul{   
+            .lineRs ul{
                 height: 55px;
                 font-size: 16px;
                 width: 898px;
@@ -1636,7 +1730,7 @@ body .el-loading-spinner .el-loading-text{
                 .lect_cer{font-size: 14px;color: #6F6F6F;margin-top: 12px;}
                 .shr{font-size: 16px;font-weight: 900;line-height: 80px;}
                 .jine{line-height: 25px;}
-                
+
                 .mt1{margin-top: 15px;}
                 .jine01{font-size: 16px;color:#000 ;}
                 .jine02{font-size: 14px;color: #a00912;}
@@ -1664,15 +1758,15 @@ body .el-loading-spinner .el-loading-text{
                 }
             }
          }
-            
+
      }
-    
+
 }
 #htm{
     #payOrder{
         width: 100%;
         height: 100%;
-        
+
         .top{
             line-height: 160px;
             text-align: center;
@@ -1714,7 +1808,7 @@ body .el-loading-spinner .el-loading-text{
                     line-height: 60px;
                     text-align: center;
                     font-size: 24px;
-    
+
                 }
                 .tm{
                     bottom: 15px;
@@ -1725,7 +1819,7 @@ body .el-loading-spinner .el-loading-text{
                      >span{
                        color: #A00912;
                     }
-                    
+
                 }
             }
         }
@@ -1733,12 +1827,12 @@ body .el-loading-spinner .el-loading-text{
     #payCancel{
         width: 100%;
         height: 600px;
-        
+
        .topBox{
            width: 100%;
            min-height: 380px;
            border-bottom: 1px solid #D2D2D2;
-           
+
            .msg{
                width: 1200px;
                height: 100%;
@@ -1785,7 +1879,7 @@ body .el-loading-spinner .el-loading-text{
                     li:nth-child(2){
                       color: #3a3a3a;
                     }
-                       
+
                }
            }
        }
@@ -1831,7 +1925,7 @@ body .el-loading-spinner .el-loading-text{
                    font-size: 20px;
                }
            }
-           
+
            .btnBox{
                width: 330px;
                height: 36px;
