@@ -170,7 +170,7 @@ let store = new Vuex.Store({
         		state.editData.textHashMap.remove((parseInt(oPage))+'_3');
         		state.editData.textHashMap.remove((parseInt(oPage))+'_4');
 		},
-		drapDiv(state){//拖动元素的方法
+		drapDiv(state,obj){//拖动元素的方法
 				//被拖动的元素
 				var  oDrapDiv = $(".fonter_box_img > ul >li >img");
 				//拖动到哪里去
@@ -215,6 +215,11 @@ let store = new Vuex.Store({
 						var oPage = $(ev.target).parents(".pubilc_div").find(".page .pageleft span").attr("page");//第几页
 						var oTypeStyle = $(ev.target).next(".img_drap").attr("typestyle");//板式
 						var oimgSort= $(ev.target).next(".img_drap").attr("imgsort");//图片的顺序
+						if(obj=="单图"){
+							oPage = 1;
+							oTypeStyle = 1;
+							oimgSort = 1;
+						}
 //						console.log('页数'+oPage)
 //						console.log('板式'+oTypeStyle)
 //						console.log('图片的顺序'+oimgSort)

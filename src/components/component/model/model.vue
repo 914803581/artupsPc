@@ -35,7 +35,7 @@
 		      imgMunber:0
 		    }
 		  },
-		props:["isShowModel"],
+		props:["isShowModel","typeWork"],
 	    methods:{
 	    		selectImg_10(){ //快速选中十张
 				var ob = (++this.imgMunber)*5
@@ -52,7 +52,7 @@
 	    			this.$forceUpdate();
 	    		},
 			closeModel(event){
-				console.log(event)
+//				console.log(event)
 				this.isShowModels = false;				
 			},
 			openModel(){
@@ -70,6 +70,7 @@
 						strCut+=val.dbId+';'
 					}
 				})
+				
 				 //素材库图片裁剪
 				 Api.Material.MaterialCut(strCut,2000).then((res)=>{
 					this.$store.commit("slectFile",res.data);					
@@ -78,7 +79,7 @@
 					//抬起下面的拖动框
 					this.$emit("footerBurl",true)
 					setTimeout(()=>{//延迟去执行此方法避免和vuex内部执行顺利冲突
-						this.$store.commit("drapDiv")					
+						this.$store.commit("drapDiv",this.typeWork)					
 					},200)					
 		        })				
 			},

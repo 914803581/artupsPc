@@ -15,7 +15,7 @@
 				<a href="javascript:void(0);">画册</a>
 			</li>
 			<li>
-				<a href="/album/imgEditMsg">宝宝书</a>
+				<a href="/album/imgEditMsg?category=baobaoshu">宝宝书</a>
 			</li>
 			<li>
 				<a href="javascript:void(0);">框画</a>

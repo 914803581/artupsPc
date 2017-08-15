@@ -275,8 +275,9 @@
 		 	Api.sku.queryAttributes(paraAttributeJson).then((res)=>{
 				//添加1个titleName
 				 sessionStorage.setItem('titleName',res.data.name);
-
+		
 				  this.attributes = res.data.attributes;
+				  console.log(this.attributes)
 				 //默认的价格
 				 setTimeout(function(){
 				 	vm.getPrice($(".bbs_msg .line"));				    

@@ -122,11 +122,11 @@
 		</div>
 		 <!--模态框素材库-->
 	     <transition name="el-fade-in">
-	   		 <div-model @footerBurl="footerBoolean"  :isShowModel="isModel"></div-model>
+	   		 <div-model @footerBurl="footerBoolean"  :typeWork="'单图'" :isShowModel="isModel"></div-model>
 	    </transition>
 	    <!--图片编辑插件 postData 编辑器返回的数据-->
 	     <transition name="el-fade-in">
-	    		<img-edit @postDataImg="postDatas" :dataEditJson="dataEditImg"  :isImgEdit="isimgEdit"></img-edit>
+	    		<img-edit @postDataImg="postDatas"  :dataEditJson="dataEditImg"  :isImgEdit="isimgEdit"></img-edit>
 	    </transition>
 	    
 	</div>
@@ -172,6 +172,10 @@ export default {
           this.dataEditImg.oSrc = $($event.target).next("img").attr("imgstyle");
           this.dataEditImg.oW = $($event.target).parent(".drapBox").width();
           this.dataEditImg.oH = $($event.target).parent(".drapBox").height();
+          
+           //点击时候获取coustName 从hashMap里面得到他有没第一次编辑的东西         
+          var constName ='1_1';
+		  this.dataEditImg.oActions = this.$store.state.editData.ImgHashMap.getvalue(constName).actions;
     	      this.openImgEdit();
     	   },
 	   open_material(){ //打开素材库
@@ -190,26 +194,15 @@ export default {
      postDatas(val){    
       	console.log(val)
       	//获取数据覆盖便于二次编辑
-		var constName =this.getCoustName($(".editbbs_one"))
-		this.$store.state.editData.ImgHashMap.getvalue(constName).actions = val.postData;
-		
+		var constName ='1_1';
+		this.$store.state.editData.ImgHashMap.getvalue(constName).actions = val.postData;		
         $(".editbbs_one").next("img").attr("src",val.imgData).css("width","100%").css("height","100%").css("left",0).css("top",0)
-//      ImgHashMapBase64
-		var oPage = $(".editbbs_one").parents(".pubilc_div").find(".page .pageleft span").text();
-		var oImgSort = $(".editbbs_one").next("img").attr("imgsort")
-		var oTypesTyle = $(".editbbs_one").next("img").attr("typestyle")
-	
-		var constName = oPage+"_"+oImgSort;
-		var picObj = {"constName":constName, "page" : oPage, "editCnfIndex" : oTypesTyle, "num" : oImgSort,
-            "editCnfName" : "","base64Img":val.imgData};
-        //存入专门的base64的图片    
-        this.ImgHashMapBase64.putvalue(constName,picObj);
       }
     },
     created(){//只执行一次
     },
     mounted(){
-
+//	   this.$store.commit("drapDiv")
     }
   }
 </script>
