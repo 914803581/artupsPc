@@ -175,6 +175,7 @@ let store = new Vuex.Store({
 				var  oDrapDiv = $(".fonter_box_img > ul >li >img");
 				//拖动到哪里去
 				var  oDrap = document.querySelectorAll(".time_main_left .time_bg  .drapBox .drap_img");
+				
 				for (var i = 0; i < oDrapDiv.length; i++) {
 					oDrapDiv[i].index = i;
 		//			console.log(oDrapDiv[i].src)

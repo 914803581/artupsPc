@@ -1,14 +1,16 @@
 import 'cube.css/src/scss/neat.scss'
 import 'element-ui/lib/theme-default/index.css'
-//import './welcome.scss'
+import './framed-pictures.scss'
 import Vue from 'vue'
 import ElementUI from 'element-ui'
 import SelectTpl from '../script/index.js'
 import Header from '@/components/header/header.vue'
 import Footer from '@/components/footer/footer.vue'
+import $ from 'jquery'
 
 Vue.use(ElementUI)
 var selTpl = new SelectTpl()
+
 //eslint-disable-next-line no-new
 new Vue({
   el: '#app',
@@ -24,7 +26,21 @@ new Vue({
   	
   },
   mounted(){
-  	selTpl.init()
+//	$('#picContainer').css({
+//		'background':'url(http://test.artup.com/builder/imgs/kuanghua/400x500-zm.jpg)',
+//		
+//	})
+  	const imgHttp = 'http://test.artup.com/builder/imgs/';
+  	$('.frameBox .picAndText .kuangAngle').click(function(){
+  		
+  	})
+  	selTpl.init($('#picContainer'),'A','400x500','zm',function(ul){
+		$('#picContainer').css({
+		'background':'url('+imgHttp+'kuanghua/'+ul+'.jpg)',
+		})
+  	})
+  },
+  created: function () {
+    document.body.style.cssText = 'opacity:1;'
   }
 })
-
