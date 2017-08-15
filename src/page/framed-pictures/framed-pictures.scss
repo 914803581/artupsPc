@@ -51,10 +51,10 @@
          #picContainer{
             border: 1px solid red;
             position: absolute;
-            width: 100px;
-            height: 100px;
             bottom: 0px;
             left: 0px;
+            background-position: center !important;
+            background-size: 100% 100% !important;
          }
         .boxA{
             width: 260px;

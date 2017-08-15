@@ -23,6 +23,7 @@ import loginCallback from '@/components/user/loginCallback'//登陆跳转
 import payOrder from '@/components/user/pay/payOrder'//支付页面
 import payCancel from '@/components/user/pay/payCancel'//取消支付
 import payOk from '@/components/user/pay/payOk'//取消支付
+import framedEdit from '@/components/framed/framedEdit'
 
 Vue.use(VueRouter)
 
@@ -173,6 +174,13 @@ let router = new VueRouter({
       component: payOk,
       meta: {
         title: '支付成功'
+      }
+    }, {
+      path: '/framed/framedEdit',
+      name: 'framedEdit',
+      component: framedEdit,
+      meta: {
+        title: '框画编辑'
       }
     }
   ]

@@ -26,10 +26,19 @@ new Vue({
   	
   },
   mounted(){
+//	$('#picContainer').css({
+//		'background':'url(http://test.artup.com/builder/imgs/kuanghua/400x500-zm.jpg)',
+//		
+//	})
+  	const imgHttp = 'http://test.artup.com/builder/imgs/';
   	$('.frameBox .picAndText .kuangAngle').click(function(){
-  		alert(1)
+  		
   	})
-  	//selTpl.init()
+  	selTpl.init($('#picContainer'),'A','400x500','zm',function(ul){
+		$('#picContainer').css({
+		'background':'url('+imgHttp+'kuanghua/'+ul+'.jpg)',
+		})
+  	})
   },
   created: function () {
     document.body.style.cssText = 'opacity:1;'
