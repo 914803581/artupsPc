@@ -6,9 +6,11 @@ import ElementUI from 'element-ui'
 import SelectTpl from '../script/index.js'
 import Header from '@/components/header/header.vue'
 import Footer from '@/components/footer/footer.vue'
+import $ from 'jquery'
 
 Vue.use(ElementUI)
 var selTpl = new SelectTpl()
+
 //eslint-disable-next-line no-new
 new Vue({
   el: '#app',
@@ -27,7 +29,9 @@ new Vue({
   	$('.frameBox .picAndText .kuangAngle').click(function(){
   		alert(1)
   	})
-  	selTpl.init()
+  	//selTpl.init()
+  },
+  created: function () {
+    document.body.style.cssText = 'opacity:1;'
   }
 })
-
