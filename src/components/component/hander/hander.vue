@@ -15,7 +15,7 @@
 				<a href="javascript:void(0);">画册</a>
 			</li>
 			<li>
-				<a href="/bbsEdit">宝宝书</a>
+				<a href="/album/imgEditMsg">宝宝书</a>
 			</li>
 			<li>
 				<a href="javascript:void(0);">框画</a>
@@ -38,7 +38,7 @@
 				<li><a href="loginCallback?userDbId=2221214&userName=昵称啊">扫码登录</a></li>				
 			</ol>
 		</div>
-		<div v-show="handerInfo" class="mineIM r "  >			
+		<div v-show="handerInfo" class="mineIM r" >			
 			<a class="touxiang l" href="javascript:void(0);"> 
 				<img class="" src="http://img13.artimg.net/passport/avatar/002/141/731/150_150.png">
 				</a>

@@ -71,12 +71,8 @@
         </div>
       </div>
      <!--<div class="line_comtent"><div class="comtent"><div class="title"><div class="title_left"><span>宝宝书编辑</span> <span>2017-07-14 11:05</span></div> <div class="title_right"><span>255x355mm</span> <span>56页</span> <span>￥499</span></div></div></div></div>-->
-     
-     	
-     	
      <!--底部的图片-->
-      <div v-DomHeight  class="footer_img">
-      	
+      <div v-DomHeight  class="footer_img">    	
         <div class="footer_up_tittle">
           <div class="footer_left">
             <button  @click="delectFooter" class="footer_btn">
@@ -697,7 +693,25 @@
 //			edtDbId: 
 //		};
 		Api.work.unfinishedWork(this.$route.query.dbId).then((res) => {
-			console.log(res)
+			var oImgData = JSON.parse(res.data.data.editPicture);
+			var editTxt = JSON.parse(res.data.data.editTxt);
+			if(res.data.data.lomo) { //如果有lomo卡
+				var oImgLomo = JSON.parse(res.data.data.lomo);
+			}
+			//图片节点生成之后id回显 ==>动态添加id节点
+			setTimeout(function() {
+				$(".comtent_chanpin .pubilc_div .bbsClass  .img_drap").each(function(index,el){
+					var opage = $(el).parents(".pubilc_div").find(".page .pageleft span").text();
+					$(el).attr("id", opage + '_'+ $(el).attr("imgsort")+'_'+ 'bbs');
+				})
+				
+				$(".comtent_chanpin .pubilc_div .pageLomo").each(function(index,el){
+					var srcDom = $(el).parents(".pubilc_div").find(".img_drap")				
+					srcDom.attr("id", $(el).text() + '_'+ srcDom.attr("imgsort")+'_'+ 'lomo');
+				})
+				
+
+			}, 500)
 		})
 	  }
 

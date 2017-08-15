@@ -122,7 +122,7 @@ export default {
       return VueHttp.$http.get(QUERY_SKU_URL, {params: paraJsons})
     },
     queryAttributes: (paraJsons) => {
-      return VueHttp.$http.get(QUERY_ATTRIBUTE_URL, {params: paraJsons})
+      return HTTP.get(QUERY_ATTRIBUTE_URL, {params: paraJsons})
     }
   },
   car: {// 购物车
