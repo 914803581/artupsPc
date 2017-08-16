@@ -135,12 +135,12 @@
 <script>
   import { Message } from 'element-ui';
   import {mapState,mapGetters,mapActions,mapMutations} from "vuex" 	
-  import Api from '../../api.js'
-  import filter from '../../filter.js'
-  import {DomHeight} from '../../directive.js'
-  import divModel from '../component/model/model.vue'
-  import imgEdit from '../component/imgEdit/imgEdit.vue'
-  import editText from '../component/editText/editText.vue'
+  import Api from '../../../api.js'
+  import filter from '../../../filter.js'
+  import {DomHeight} from '../../../directive.js'
+  import divModel from '../model/model.vue'
+  import imgEdit from '../imgEdit/imgEdit.vue'
+  import editText from '../editText/editText.vue'
 export default {
     data () {
       return {
