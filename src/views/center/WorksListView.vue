@@ -60,7 +60,7 @@
 </template>
 
 <script type="text/ecmascript-6">
-  import Header from '@/components/header/header.vue'
+  import Header from '../../components/header/header.vue'
   import Footer from '../../components/footer/footer.vue'
   import LeftMenu from '../../components/center/menu.vue'
   import Api from '../../api.js'

@@ -23,7 +23,7 @@
           </ul>
         </div>
       </div>
-      <a href="/cart" class="shopping-cart" v-if="isLogin">
+      <a href="/user/cart" class="shopping-cart" v-if="isLogin">
         <i class="iconfont icon-gouwuche"></i>
         <em class="shopping-count">12</em>
         购物车
