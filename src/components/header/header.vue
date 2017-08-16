@@ -22,7 +22,7 @@
           link: '/welcome.html'
         }, {
           label: '画册',
-          link: '/builder/artalbum_builder.html'
+          link: '/album.html'
         }, {
           label: '磁铁画',
           link: '/builder/citiehua.html'
