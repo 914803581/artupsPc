@@ -152,6 +152,7 @@
         }
         a {
           color: #efefef;
+          outline: 0;
           &:hover {
             color: #5b5b5b;
           }
