@@ -17,6 +17,9 @@
             <li class="item" v-for="item in userMenu">
               <a :href="item.link">{{item.label}}</a>
             </li>
+            <li class="item">
+              <a href="javascript:void(0);" @click="exit">退出登录</a>
+            </li>
           </ul>
         </div>
       </div>
@@ -67,9 +70,6 @@
         }, {
           label: '我的素材',
           link: '/welcome.html'
-        }, {
-          label: '退出登录',
-          link: '/welcome.html'
         }],
         userInfo: null,
         isLogin: false
@@ -81,6 +81,10 @@
         localStorage.userDbId = '2221214'
         localStorage.userName = '头条快报'
         localStorage.avatar = 'http://img13.artimg.net/passport/avatar/002/141/731/150_150.png'
+        window.location.reload()
+      },
+      exit: function () {
+        localStorage.clear()
         window.location.reload()
       },
       getLoginState: function () {
