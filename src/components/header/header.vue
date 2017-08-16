@@ -235,7 +235,7 @@
       position: relative;
       display: inline-block;
       padding-left: 36px;
-      margin-left: 12px;
+      margin-left: 30px;
       font-size: 16px;
       color: #fff;
       outline: 0;
