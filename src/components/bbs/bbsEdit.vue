@@ -108,6 +108,7 @@
    	 <edit-text :isEditText="iseditText"></edit-text>
     </transition>
     <!--<div-editText ></div-editText>-->
+    <preview-book :previewDialogVisible="previewDialogVisible" :data="testData"></preview-book>
   </div>
 </template>
 <script>
@@ -120,6 +121,7 @@
   import imgEdit from '../component/imgEdit/imgEdit.vue'
   import editText from '../component/editText/editText.vue'
   import navHander from '../../components/component/hander/hander.vue'
+  import PreviewBook from '../album/previewBook'
   export default {
     data () {
       return {
@@ -179,6 +181,7 @@
         lomoTemplate_data:[], //lomo卡数组
         tplCode:'pc_baobaoshu_170-235_24',//暂时写死的1个数据
         workEdit:{},//素材保存组装传给后端的数据
+        previewDialogVisible:false,
         testData :[{
   type: 1,
   title: '标题123456',
@@ -287,7 +290,8 @@
       navHander,
       divModel,
       imgEdit,
-      editText
+      editText,
+      'preview-book':PreviewBook
     },
     methods: {
       ...mapMutations({//同步触发操作集合
@@ -647,24 +651,7 @@
 
       },
       preview () {
-        const h = this.$createElement
-        this.$msgbox({
-          title: '',
-          showCancelButton: true,
-          cancelButtonText: '关闭',
-          showConfirmButton: false,
-          closeOnPressEscape: false,
-          closeOnClickModal: false,
-          message: h('p', null, [
-            h('span', null, '内容可以是 '),
-            h('i', {style: 'color: teal'}, 'VNode')
-          ])
-        }).then(action => {
-          this.$message({
-            type: 'info',
-            message: 'action: ' + action
-          })
-        })
+        this.previewDialogVisible = true
         console.log('预览需要的数据', this.PreviewWork)
       },
       fnd(){
