@@ -54,7 +54,7 @@
           <div class="title"><div class="title_left"><span>LOMO卡编辑</span> <span>2017-07-14 11:05</span></div> <div class="title_right"><span>照片尺寸：102X152</span> <span>LOMO卡单张：74X100</span> <span>赠送物品</span></div></div>
            <div style="margin-top: 0;" class="time_main_left">
            		<div style="height: 226px;" class="time_bg" v-for="(item,index) in lomoTemplate_data">
-              		<div class="pubilc_div"  :only="htmlTetx.only"  :class="{'hengban_bbs':htmlTetx.only}"  v-html="htmlTetx.template"  v-for="(htmlTetx,index2) in item">
+              		<div class="pubilc_div"  @click="click_template_lomo($event)"  :only="htmlTetx.only"  :class="{'hengban_bbs':htmlTetx.only}"  v-html="htmlTetx.template"  v-for="(htmlTetx,index2) in item">
               </div>
             </div> 
            </div>
@@ -371,7 +371,6 @@
 	    	footerImgSlectFooter($index){//提交
 	    		this.$store.commit("editFooterStatus",$index)
 	    	},
-
 	    	editWork(){//保存作品
 	    			var vm = this;	
 	    			var arrMap = []; //宝宝书图片的
@@ -554,28 +553,37 @@
 	      		vm.jisuan();// 计算页面位置
 	      	},300)
 		},
-      postDatas(val){    
+      	
+      postDatas(val){ //获取数据覆盖便于二次编辑   
       	console.log(val)
-      	//获取数据覆盖便于二次编辑
-		var constName =this.getCoustName($(".editbbs_one"))
-		this.$store.state.editData.ImgHashMap.getvalue(constName).actions = val.postData;
-		
+		//如果是lomo卡
+		if ($(".editbbs_one").hasClass("drap_img_lomo")) {//lomo
+			//是lomo卡调起图片编辑器
+           var constName = $(".editbbs_one").parents(".pubilc_div").find(".pageLomo").text()+'_1';
+           this.$store.state.editData.lomoHashMap.getvalue(constName).actions = val.postData;
+           var oPage = $(".editbbs_one").parents(".pubilc_div").find(".pageLomo").text();
+		}else{
+			var constName =this.getCoustName($(".editbbs_one"))
+			this.$store.state.editData.ImgHashMap.getvalue(constName).actions = val.postData;
+			var oPage = $(".editbbs_one").parents(".pubilc_div").find(".page .pageleft span").text();
+		}		
         $(".editbbs_one").next("img").attr("src",val.imgData).css("width","100%").css("height","100%").css("left",0).css("top",0)
 //      ImgHashMapBase64
-		var oPage = $(".editbbs_one").parents(".pubilc_div").find(".page .pageleft span").text();
 		var oImgSort = $(".editbbs_one").next("img").attr("imgsort")
-		var oTypesTyle = $(".editbbs_one").next("img").attr("typestyle")
-	
+		var oTypesTyle = $(".editbbs_one").next("img").attr("typestyle")	
 		var constName = oPage+"_"+oImgSort;
 		var picObj = {"constName":constName, "page" : oPage, "editCnfIndex" : oTypesTyle, "num" : oImgSort,
             "editCnfName" : "","base64Img":val.imgData};
+            
         //存入专门的base64的图片    
-        this.ImgHashMapBase64.putvalue(constName,picObj);
-        this.ImgHashMapBase64.getvalue(constName);
-        
-        //拿constName去替换vuex里面已经存在的数据给预览产品
-        this.$store.commit("previewWork",{constName:constName,picObj:picObj})
-        
+//      this.ImgHashMapBase64.putvalue(constName,picObj);
+//      this.ImgHashMapBase64.getvalue(constName);
+        if ($(".editbbs_one").hasClass("drap_img_lomo")) {//lomo
+        		this.$store.commit("previewWork_lomo",{constName:constName,picObj:picObj})
+        }else{
+        		//拿constName去替换vuex里面已经存在的数据给预览产品
+       	    this.$store.commit("previewWork",{constName:constName,picObj:picObj})
+        }
       },
       click_template($event,index1,index2){//vue模版渲染完毕之后的事件处理,index1和index2就是那个二维数组对应的索引
       	this.bbs.bbs_index1 = index1; //存入二维数组的值
@@ -605,12 +613,30 @@
           this.dataEditImg.oH = $($event.target).parent(".drapBox").height();
           //点击时候获取coustName 从hashMap里面得到他有没第一次编辑的东西         
           var constName =this.getCoustName($($event.target))
+         
+          
+          
 		  this.dataEditImg.oActions = this.$store.state.editData.ImgHashMap.getvalue(constName).actions;
 		  console.log(this.dataEditImg)
           //从vuex缓存里面拿到我的数据
 //        console.log()
           this.openImgEdit();
         }
+      },
+      click_template_lomo($event){//lomo卡
+      	  if($($event.target).next(".img_drap").attr("src")==""){return;}//为空返回
+        	  
+          $(".editbbs_one").removeClass("editbbs_one");
+          $($event.target).addClass("editbbs_one");
+          
+          this.dataEditImg.oSrc = $($event.target).next("img").attr("imgstyle");
+          this.dataEditImg.oW = $($event.target).parent(".drapBox").width();
+          this.dataEditImg.oH = $($event.target).parent(".drapBox").height();
+          //是lomo卡调起图片编辑器
+          var constName = $($event.target).parents(".pubilc_div").find(".pageLomo").text()+'_1';
+          console.log(constName)
+		 this.dataEditImg.oActions = this.$store.state.editData.lomoHashMap.getvalue(constName).actions;	
+		 this.openImgEdit();         
       },
       setBbsTemplate(){//设置宝宝书板式初始化数据
       	this.bbsTemplate_data.forEach((item,i)=>{
@@ -625,9 +651,7 @@
         })
         $(".comtent_chanpin .time_pu .page .pageLomo").each((i,e)=>{
 			$(e).text((i+1)).css("opacity","0")
-
-        })
-        
+        })        
       },
       jisuan(){//动态计算面积
         var oH = $(window).height()-$(".footer_img").height()-$("#handers .header").height()-$(".comtent_chanpin .line_comtent .comtent .title").height()-2;
