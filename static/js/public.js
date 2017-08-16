@@ -188,8 +188,8 @@ var bbsTemplateData={
 //	bbs11:'<div class="time_pu"><div class="bbsClass hcTemplatetext02"><div class="mainTitle title_pu" typestyle="2" textsort="1" ></div><div class="subtitle title_pu" typestyle="2" textsort="2"></div><div class="box_text title_pu" typestyle="2" textsort="3" ></div><div class="page"><div class="pageleft">第<span page=""></span>页</div><div class="pageRight"></div></div></div></div>',
 //	bbs12:'<div class="time_pu"><div class="bbsClass hcTemplatetext03"><div class="mainTitle title_pu" typestyle="3" textsort="1" ></div><div class="box_text title_pu" typestyle="3" textsort="2" ></div><div class="page"><div class="pageleft">第<span page=""></span>页</div><div class="pageRight"></div></div></div></div>'	
 	//lomo卡的模版
-	lomo1:'<div class="time_pu lomoTemplate"><div class="bbsClass bbs_hengban"><div class="drapBox div_page"><div class="drap_img"></div> <img imgsort="1" typestyle="1" src="" class="img_drap"></div></div>  <div class="page"><div class="pageRight pageLomo">&nbsp;</div> <div class="pageRight">6寸照片</div></div></div>',
-	lomo2:'<div class="time_pu lomoTemplate"><div class="drapBox bbsClass template04"><div class="drap_img"></div><img class="img_drap" imgSort="1" typeStyle="2" src=""/></div><div  class="page"><div class="pageRight pageLomo">&nbsp;</div><div class="pageRight">LOMO卡</div></div></div>'	
+	lomo1:'<div class="time_pu lomoTemplate"><div class="bbsClass bbs_hengban"><div class="drapBox div_page"><div class="drap_img drap_img_lomo"></div> <img imgsort="1" typestyle="1" src="" class="img_drap"></div></div>  <div class="page"><div class="pageRight pageLomo">&nbsp;</div> <div class="pageRight">6寸照片</div></div></div>',
+	lomo2:'<div class="time_pu lomoTemplate"><div class="drapBox bbsClass template04"><div class="drap_img drap_img_lomo"></div><img class="img_drap" imgSort="1" typeStyle="2" src=""/></div><div  class="page"><div class="pageRight pageLomo">&nbsp;</div><div class="pageRight">LOMO卡</div></div></div>'	
 };
 
 /*定义画册八个板式模板*/

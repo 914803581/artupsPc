@@ -1,6 +1,6 @@
 <template>
 	<div id="cart">
-		<Handers	></Handers>
+		<nav-header></nav-header>
 		<div class="p_cat ng-scope">
 		<dl ng-if="!items.length==0" class="ng-scope">
 		<div class="cat_hander" style="width: 1136px;">
@@ -88,6 +88,8 @@
 <script>
 	import Api from '../../../API.js'
 	import { MessageBox } from 'element-ui';
+	import Hander from '../../header/header.vue'
+	
 
 		export default{
 			data(){
@@ -97,6 +99,9 @@
 					checkAllBtn:false
 				}
 			},
+			components:{ //在再这里要注入我的组件
+		      'nav-header':Hander
+		    },
 			methods:{//单条记录删除
 				deleteCar(index,dbId){
 					 this.$confirm('您确定要删除此条订单吗?', '提示', {
@@ -265,7 +270,7 @@
 						Api.car.submitCars(jsons).then(res=>{
 							if(res.data.code == 'success'){
 								
-								location.href="/confimOrder";
+								location.href="/order/confim";
 							} else{
 								this.$message({message: '请求错误!' });
 								
