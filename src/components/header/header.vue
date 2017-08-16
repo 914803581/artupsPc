@@ -37,6 +37,7 @@
 
 <script type="text/ecmascript-6">
   export default {
+  	name:"nav-hander",
     data: function () {
       return {
         menus: [{
@@ -44,16 +45,22 @@
           link: '/welcome.html'
         }, {
           label: '画册',
-          link: '/album.html'
-        }, {
-          label: '磁铁画',
-          link: '/magnet.html'
-        }, {
+          link: '/album.html?category=huace'
+        }, 
+//      {
+//        label: '磁铁画',
+//        link: '/magnet.html'
+//      }, 
+        
+        {
           label: '框画',
-          link: '/framed-pictures.html'
+          link: '/framed-pictures.html?category=kuanghua'
         }, {
           label: '海报',
-          link: '/poster.html'
+          link: '/poster.html?category=haibao'
+        }, {
+          label: '小时光',
+          link: '/album/imgEditMsg?category=baobaoshu&editCnfName='
 
         }],
         userMenu: [{
@@ -61,16 +68,16 @@
           link: '/welcome.html'
         }, {
           label: '订单管理',
-          link: '/welcome.html'
+          link: '/center/order'
         }, {
           label: '我的作品',
-          link: '/welcome.html'
+          link: '/center/works'
         }, {
           label: '我的草稿箱',
-          link: '/welcome.html'
+          link: '/center/draft'
         }, {
           label: '我的素材',
-          link: '/welcome.html'
+          link: '/center/material'
         }],
         userInfo: null,
         isLogin: false

@@ -18,7 +18,8 @@ let store = new Vuex.Store({
 			ImgHashMap:new HashMap(), //图片
 			lomoHashMap:new HashMap(), //lomo卡
 			textHashMap:new HashMap(), //保存的文字	
-			base64HashMap:new HashMap()   //预览宝宝书需要的数据
+			base64HashMap:new HashMap(),   //预览宝宝书需要的base数据
+			baseLomoHashMap:new HashMap()  //lomo卡需要的base数据
 		}
 	},
 	getters:{ //获取数据做逻辑上的判断
@@ -37,12 +38,17 @@ let store = new Vuex.Store({
 		GetPreviewWork(state){ //预览产品最终需要的数据
 			let preview = {};
 			preview.baseHashMap = state.editData.base64HashMap;
-			preview.lomoHashMap = state.editData.lomoHashMap;
+			preview.lomoHashMap = state.editData.baseLomoHashMap;
 			preview.textHashMap = state.editData.textHashMap;
 			return preview;
 		}
 	},
 	mutations:{ //改变数据的方法集合-->记住 这个方法只能处理同步的异步的是actions函数
+		previewWork_lomo(state,obj){
+			//存入base64给预览产品
+	        state.editData.baseLomoHashMap.putvalue(obj.constName,obj.picObj);
+	        console.log(state.editData.baseLomoHashMap.getvalue(obj.constName))
+		},
 		previewWork(state,obj){//处理预览产品的数据函数
 			//存入base64给预览产品
 	        state.editData.base64HashMap.putvalue(obj.constName,obj.picObj);
@@ -80,8 +86,7 @@ let store = new Vuex.Store({
 			var picObj = {"constName":constName, "page" : obj.page, "editCnfIndex" : obj.typeStyle, "num" : obj.textsort,"content":obj.txt,
             "editCnfName" : "","isOnly":false};
             //存入图片ImgHashMap
-          	state.editData.textHashMap.putvalue(constName,picObj);                
-          	                
+          	state.editData.textHashMap.putvalue(constName,picObj);         	                
 		},
 		autoPushData(state,obj){
 			var edidData = $(".editAutoDrap");
@@ -113,6 +118,9 @@ let store = new Vuex.Store({
 	        state.editData.ImgHashMap.putvalue(constName,picObj);
 	        //存入base64给预览产品
 	        state.editData.base64HashMap.putvalue(constName,picObj);
+	        //存入base64Lomo给预览产品
+	        state.editData.baseLomoHashMap.putvalue(constName,picObj);
+	        
 	        console.log(state.editData.ImgHashMap.getvalue(constName))
 		},
 		autoDrapData(state,obj){//自动填充后端的处理图片的方法
@@ -157,6 +165,12 @@ let store = new Vuex.Store({
             		state.editData.base64HashMap.remove((parseInt(oPage)+1)+'_3');
             		state.editData.base64HashMap.remove((parseInt(oPage)+1)+'_4');
             		
+            		//删除base64_lomo的
+            		state.editData.baseLomoHashMap.remove((parseInt(oPage)+1)+'_1');
+            		state.editData.baseLomoHashMap.remove((parseInt(oPage)+1)+'_2');
+            		state.editData.baseLomoHashMap.remove((parseInt(oPage)+1)+'_3');
+            		state.editData.baseLomoHashMap.remove((parseInt(oPage)+1)+'_4');
+            		
 			}else{
 				state.editData.ImgHashMap.remove((parseInt(oPage)-1)+'_1');
             		state.editData.ImgHashMap.remove((parseInt(oPage)-1)+'_2');
@@ -173,6 +187,14 @@ let store = new Vuex.Store({
             		state.editData.base64HashMap.remove((parseInt(oPage)-1)+'_2');
             		state.editData.base64HashMap.remove((parseInt(oPage)-1)+'_3');
             		state.editData.base64HashMap.remove((parseInt(oPage)-1)+'_4');
+            		
+            		//删除base64 lomo的
+            		state.editData.baseLomoHashMap.remove((parseInt(oPage)-1)+'_1');
+            		state.editData.baseLomoHashMap.remove((parseInt(oPage)-1)+'_2');
+            		state.editData.baseLomoHashMap.remove((parseInt(oPage)-1)+'_3');
+            		state.editData.baseLomoHashMap.remove((parseInt(oPage)-1)+'_4');
+            		
+            		
             		
             		
 			}
@@ -192,7 +214,16 @@ let store = new Vuex.Store({
         		state.editData.base64HashMap.remove((parseInt(oPage))+'_2');
         		state.editData.base64HashMap.remove((parseInt(oPage))+'_3');
         		state.editData.base64HashMap.remove((parseInt(oPage))+'_4');
-        		state.editData.base64HashMap.remove((parseInt(oPage))+'_5');	
+        		state.editData.base64HashMap.remove((parseInt(oPage))+'_5');
+        		
+        		//删除baselomo64
+        		state.editData.baseLomoHashMap.remove((parseInt(oPage))+'_1');
+        		state.editData.baseLomoHashMap.remove((parseInt(oPage))+'_2');
+        		state.editData.baseLomoHashMap.remove((parseInt(oPage))+'_3');
+        		state.editData.baseLomoHashMap.remove((parseInt(oPage))+'_4');
+        		state.editData.baseLomoHashMap.remove((parseInt(oPage))+'_5');
+        		
+        		
 		},
 		oneToOneSetDrapData(state,obj){ //单页切换板式删除的操作
 
@@ -205,6 +236,13 @@ let store = new Vuex.Store({
         		state.editData.textHashMap.remove((parseInt(oPage))+'_2');
         		state.editData.textHashMap.remove((parseInt(oPage))+'_3');
         		state.editData.textHashMap.remove((parseInt(oPage))+'_4');
+        		       		
+        		//删除base64
+        		state.editData.base64HashMap.remove((parseInt(oPage))+'_1');
+        		state.editData.base64HashMap.remove((parseInt(oPage))+'_2');
+        		state.editData.base64HashMap.remove((parseInt(oPage))+'_3');
+        		state.editData.base64HashMap.remove((parseInt(oPage))+'_4');
+        		state.editData.base64HashMap.remove((parseInt(oPage))+'_5');
 		},
 		drapDiv(state,obj){//拖动元素的方法
 				//被拖动的元素
@@ -263,8 +301,6 @@ let store = new Vuex.Store({
 						if($(ev.target).parents(".lomoTemplate").size()>0){
 							oPage = $(ev.target).parents(".lomoTemplate").find(".page .pageLomo").text()
 						}
-						
-						
 						 var constName = oPage+"_"+oimgSort;
 						 console.log(constName)
 						 
