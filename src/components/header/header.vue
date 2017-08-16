@@ -54,9 +54,6 @@
         }, {
           label: '海报',
           link: '/poster.html'
-<<<<<<< HEAD
-        }]
-=======
         }],
         userMenu: [{
           label: '我的主页',
@@ -103,7 +100,6 @@
           }
         }
         return isLogin
->>>>>>> 55eabb5ab581d1941cd5fd0e4b5c39a72dda857a
       }
     },
     created: function () {
