@@ -58,7 +58,7 @@
 			 </el-collapse-transition>
 			</div>
 			<a class="cars">购物车有<span>1</span>件商品</a>
-			<a href="/cart" class="hander_cat">
+			<a href="/user/cart" class="hander_cat">
 				<div class="img_cat">
 					<b aot-numbers="" class="">1</b>
 					<img src="http://test.artup.com/img/hander_cat.png">

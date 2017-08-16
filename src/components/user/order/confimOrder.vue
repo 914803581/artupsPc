@@ -216,7 +216,7 @@
 	                    if(this.payType == 2){
 							payType='zfb';
     						}
-    					    location.href="/payOrder?addressId="+this.addressData.dbId+"&userDbId=2221214&dbId="+res.data.orderDbId+"&paymentType="+payType;
+    					    location.href="/pay/payOrder?addressId="+this.addressData.dbId+"&userDbId=2221214&dbId="+res.data.orderDbId+"&paymentType="+payType;
 					}
 				},err=>{
 					Toast('请求错误');
