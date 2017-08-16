@@ -17,7 +17,8 @@ let store = new Vuex.Store({
 		editData:{ //保存给后端缓存的大对象= 图片的hash lomo的hash
 			ImgHashMap:new HashMap(), //图片
 			lomoHashMap:new HashMap(), //lomo卡
-			textHashMap:new HashMap() //保存的文字		
+			textHashMap:new HashMap(), //保存的文字	
+			base64HashMap:new HashMap()   //预览宝宝书需要的数据
 		}
 	},
 	getters:{ //获取数据做逻辑上的判断
@@ -32,9 +33,21 @@ let store = new Vuex.Store({
 				}			
 			})
 			return arr
+		},
+		GetPreviewWork(state){ //预览产品最终需要的数据
+			let preview = {};
+			preview.baseHashMap = state.editData.base64HashMap;
+			preview.lomoHashMap = state.editData.lomoHashMap;
+			preview.textHashMap = state.editData.textHashMap;
+			return preview;
 		}
 	},
 	mutations:{ //改变数据的方法集合-->记住 这个方法只能处理同步的异步的是actions函数
+		previewWork(state,obj){//处理预览产品的数据函数
+			//存入base64给预览产品
+	        state.editData.base64HashMap.putvalue(obj.constName,obj.picObj);
+	        console.log(state.editData.base64HashMap.getvalue(obj.constName))
+		},
 		getMaterials(state,obj){ //素材库付值 obj是传递过来的数据
 			//给素材库付值增加一个判断标记
 			obj.results.forEach(val=>{
@@ -68,6 +81,7 @@ let store = new Vuex.Store({
             "editCnfName" : "","isOnly":false};
             //存入图片ImgHashMap
           	state.editData.textHashMap.putvalue(constName,picObj);                
+          	                
 		},
 		autoPushData(state,obj){
 			var edidData = $(".editAutoDrap");
@@ -94,10 +108,11 @@ let store = new Vuex.Store({
 	        		state.editData.lomoHashMap.putvalue(constName,picObj);
 	        		console.log(state.editData.lomoHashMap.getvalue(constName))
 				return;	        		
-			}
-			
+			}			
 		    //存入图片ImgHashMap
 	        state.editData.ImgHashMap.putvalue(constName,picObj);
+	        //存入base64给预览产品
+	        state.editData.base64HashMap.putvalue(constName,picObj);
 	        console.log(state.editData.ImgHashMap.getvalue(constName))
 		},
 		autoDrapData(state,obj){//自动填充后端的处理图片的方法
@@ -134,7 +149,14 @@ let store = new Vuex.Store({
             		state.editData.textHashMap.remove((parseInt(oPage)+1)+'_2');
             		state.editData.textHashMap.remove((parseInt(oPage)+1)+'_3');
             		state.editData.textHashMap.remove((parseInt(oPage)+1)+'_4');				
-            		state.editData.textHashMap.remove((parseInt(oPage)+1)+'_5');				
+            		state.editData.textHashMap.remove((parseInt(oPage)+1)+'_5');	
+            		
+            		//删除base64的
+            		state.editData.base64HashMap.remove((parseInt(oPage)+1)+'_1');
+            		state.editData.base64HashMap.remove((parseInt(oPage)+1)+'_2');
+            		state.editData.base64HashMap.remove((parseInt(oPage)+1)+'_3');
+            		state.editData.base64HashMap.remove((parseInt(oPage)+1)+'_4');
+            		
 			}else{
 				state.editData.ImgHashMap.remove((parseInt(oPage)-1)+'_1');
             		state.editData.ImgHashMap.remove((parseInt(oPage)-1)+'_2');
@@ -145,6 +167,14 @@ let store = new Vuex.Store({
             		state.editData.textHashMap.remove((parseInt(oPage)-1)+'_3');
             		state.editData.textHashMap.remove((parseInt(oPage)-1)+'_4');
             		state.editData.textHashMap.remove((parseInt(oPage)-1)+'_5');
+            		
+            		//删除base64的
+            		state.editData.base64HashMap.remove((parseInt(oPage)-1)+'_1');
+            		state.editData.base64HashMap.remove((parseInt(oPage)-1)+'_2');
+            		state.editData.base64HashMap.remove((parseInt(oPage)-1)+'_3');
+            		state.editData.base64HashMap.remove((parseInt(oPage)-1)+'_4');
+            		
+            		
 			}
 			state.editData.ImgHashMap.remove((parseInt(oPage))+'_1');
         		state.editData.ImgHashMap.remove((parseInt(oPage))+'_2');
@@ -156,7 +186,13 @@ let store = new Vuex.Store({
         		state.editData.textHashMap.remove((parseInt(oPage))+'_3');
         		state.editData.textHashMap.remove((parseInt(oPage))+'_4');
         		state.editData.textHashMap.remove((parseInt(oPage))+'_5');
-			
+        		
+        		//删除base64
+        		state.editData.base64HashMap.remove((parseInt(oPage))+'_1');
+        		state.editData.base64HashMap.remove((parseInt(oPage))+'_2');
+        		state.editData.base64HashMap.remove((parseInt(oPage))+'_3');
+        		state.editData.base64HashMap.remove((parseInt(oPage))+'_4');
+        		state.editData.base64HashMap.remove((parseInt(oPage))+'_5');	
 		},
 		oneToOneSetDrapData(state,obj){ //单页切换板式删除的操作
 
@@ -260,7 +296,8 @@ let store = new Vuex.Store({
                         //存入图片ImgHashMap
                         state.editData.ImgHashMap.putvalue(constName,picObj);
                         console.log(state.editData.ImgHashMap.getvalue(constName)) 
-						
+						//存入base64给预览产品
+	       			    state.editData.base64HashMap.putvalue(constName,picObj);
 						//计算位置
 						setTimeout(function(){
 							$(ev.target).next("img").attr("style","")
