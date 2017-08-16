@@ -1,6 +1,6 @@
 <template>
   <div id="bbsEdit">	
-    <nav-hander></nav-hander>
+    <unify-header></unify-header>
     <div   class="comtent_chanpin">
       <div class="line_comtent">
         <div class="comtent">
@@ -123,6 +123,7 @@
 <script>
   import { Message } from 'element-ui';
   import {mapState,mapGetters,mapActions,mapMutations} from "vuex" 	
+  import Header from '@/components/header/header.vue'
   import Api from '../../api.js'
   import filter from '../../filter.js'
   import {DomHeight} from '../../directive.js'
@@ -295,7 +296,7 @@
 //			next()
 //		},
     components:{ //在再这里要注入我的组件
-      navHander,
+      'unify-header': Header,
       divModel,
       imgEdit,
       editText

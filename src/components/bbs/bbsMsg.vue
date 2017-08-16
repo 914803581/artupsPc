@@ -1,6 +1,6 @@
 <template>
 	<div id="bbsMsg">
-		<nav-hander></nav-hander>
+		<unify-header></unify-header>
 		<div class="div-box">
 				
 				<div class="img_tl_bg active_04">
@@ -213,6 +213,7 @@
 	import Api from '../../api.js'
 	import filter from '../../filter.js'
 	import navHander from '../../components/component/hander/hander.vue'
+	import Header from '@/components/header/header.vue'
 	export default {
 		data() {
 			return {
@@ -223,7 +224,7 @@
 			}
 		},
 		components:{  
-	       navHander
+	       'unify-header': Header
 	   },
 		 methods: {
 		 	checkWork($index){ //切换选项
