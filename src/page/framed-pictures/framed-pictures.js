@@ -30,7 +30,7 @@ new Vue({
 //		'background':'url(http://test.artup.com/builder/imgs/kuanghua/400x500-zm.jpg)',
 //		
 //	})
-  	const imgHttp = 'http://test.artup.com/builder/imgs/';
+  	const imgHttp = 'http://image2.artup.com/static/pc/imgs/';
   	$('.frameBox .picAndText .kuangAngle').click(function(){
   		
   	})

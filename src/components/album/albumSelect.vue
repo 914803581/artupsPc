@@ -15,22 +15,22 @@
 		    <div class="container-fluid ">
 		        <div class="row themeBox">
 			        <div class="themeDiv text-center themeStyle"> 
-				        	<img class="img_div" src="http://test.artup.com/builder/imgs/album/huise-255-355-4.png">
+				        	<img class="img_div" src="http://image2.artup.com/static/pc/imgs/album/huise-255-355-4.png">
 				        	<div class="thName">风景竖版</div>
 				        	<div class="styleId">D01G01</div>
 			        </div>
 			        <div class="themeDiv text-center themeStyle">
-			        		<img class="img_div" src="http://test.artup.com/builder/imgs/album/huise-255-355-3.png">
+			        		<img class="img_div" src="http://image2.artup.com/static/pc/imgs/album/huise-255-355-3.png">
 			        		<div class="thName">纪实竖版</div>
 			        		<div class="styleId">D02G01</div>
 			        </div>
 			        <div class="themeDiv text-center themeStyle">
-			        		<img class="img_div" src="http://test.artup.com/builder/imgs/album/huise-255-355-1.png">
+			        		<img class="img_div" src="http://image2.artup.com/static/pc/imgs/album/huise-255-355-1.png">
 			        		<div class="thName">建筑竖版</div>
 			        		<div class="styleId">D04G01</div>
 			        </div>
 			        <div class="themeDiv text-center themeStyle">
-			        		<img class="img_div select_theme" src="http://test.artup.com/builder/imgs/album/huise-255-355-2.png">
+			        		<img class="img_div select_theme" src="http://image2.artup.com/static/pc/imgs/album/huise-255-355-2.png">
 			        		<div class="thName">人像竖版</div>
 			        		<div class="styleId">D03G01</div>
 			        </div>
@@ -42,8 +42,8 @@
 </template>
 
 <script>
-	import navHander from '../../components/component/hander/hander.vue'
-	import footer from '../../components/component/footer/footer.vue'
+	import navHander from '../header/header.vue'
+	import footer from '../footer/footer.vue'
 	export default {
 	    data () {
 	      return {
