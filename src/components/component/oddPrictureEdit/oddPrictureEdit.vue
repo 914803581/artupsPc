@@ -64,7 +64,7 @@
 				</div>
 			</div>
 			<div class="comtent scrollBar time_main_left" style="height: 872px;">
-				<div class="waikuang time_bg" style="width: 520px; height: 620px; background-image: url(http://test.artup.com/builder/imgs/citiehua/edit/400x500-ypl.jpg); background-size: 100% 100%;">
+				<div class="waikuang time_bg" id="waikuang" style="width: 520px; height: 620px; background: url(http://image2.artup.com/static/pc/imgs/citiehua/edit/400x500-ypl.jpg); background-size: 100% 100%;">
                    <div class="drapBox"  style="width: 400px; height: 500px; position: absolute; top: 50%; left: 50%; margin-top: -250px; margin-left: -200px;">
 
 	                   <!--<div class="k_AlertBox" id="alertBox">
@@ -87,7 +87,6 @@
 			  <!--底部的图片-->
 			  <!--v-DomHeight-->
 		      <div   class="footer_img">
-		      	
 		        <div class="footer_up_tittle">
 		          <div class="footer_left">
 		            <!--<button  class="footer_btn">
@@ -148,8 +147,10 @@ export default {
       	dataEditImg:{},//传递给图片编辑的对象
       	isimgEdit:false, //图片编辑
       	footerShow:true //页脚控制的折叠变量
+      	
       }	
    	},
+   	props:[""],
     components:{ //在再这里要注入我的组件
 	  divModel,
       imgEdit
@@ -200,9 +201,10 @@ export default {
       }
     },
     created(){//只执行一次
+    		
     },
     mounted(){
-//	   this.$store.commit("drapDiv")
+   
     }
   }
 </script>

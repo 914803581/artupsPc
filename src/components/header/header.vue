@@ -31,7 +31,7 @@
           link: '/framed-pictures.html'
         }, {
           label: '海报',
-          link: '/builder/haibao.html'
+          link: '/poster.html'
         }]
       }
     }
