@@ -571,6 +571,11 @@
             "editCnfName" : "","base64Img":val.imgData};
         //存入专门的base64的图片    
         this.ImgHashMapBase64.putvalue(constName,picObj);
+        this.ImgHashMapBase64.getvalue(constName);
+        
+        //拿constName去替换vuex里面已经存在的数据给预览产品
+        this.$store.commit("previewWork",{constName:constName,picObj:picObj})
+        
       },
       click_template($event,index1,index2){//vue模版渲染完毕之后的事件处理,index1和index2就是那个二维数组对应的索引
       	this.bbs.bbs_index1 = index1; //存入二维数组的值
@@ -648,7 +653,8 @@
 
       },
       preview () {
-        this.isShowPreview = true
+        this.isShowPreview = true;
+        console.log('预览需要的数据',this.PreviewWork)
       },
       fnd(){
       	console.log("数据改变了")
@@ -656,7 +662,8 @@
     },
     computed:{
 		...mapGetters({   
-			FooterDataAuto:"GetFooterDataAuto"   //底部选中的图片状态
+			FooterDataAuto:"GetFooterDataAuto",   //底部选中的图片状态
+			PreviewWork:"GetPreviewWork"          //预览产品需要数据的变量
 		})
     },
     watch:{
