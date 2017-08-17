@@ -286,9 +286,7 @@
     }
     .login-register {
       display: inline-block;
-      float: right;
-      margin-right: 50px;
-      padding-top: 8px;
+      padding-top: 12px;
       font-size: 16px;
       line-height: 26px;
       color: #fff;
