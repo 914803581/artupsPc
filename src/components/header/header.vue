@@ -9,35 +9,37 @@
           <a :href="item.link">{{item.label}}</a>
         </li>
       </ul>
-      <div class="user-info" v-if="isLogin">
-        <img :src="userInfo.avatar" class="avatar">
-        <span class="nickname">{{userInfo.userName}}</span>
-        <div class="user-menu">
-          <ul>
-            <li class="item" v-for="item in userMenu">
-              <a :href="item.link">{{item.label}}</a>
-            </li>
-            <li class="item">
-              <a href="javascript:void(0);" @click="exit">退出登录</a>
-            </li>
-          </ul>
+      <div class="right-platform">
+        <div class="user-info" v-if="isLogin">
+          <img :src="userInfo.avatar" class="avatar">
+          <span class="nickname">{{userInfo.userName}}</span>
+          <div class="user-menu">
+            <ul>
+              <li class="item" v-for="item in userMenu">
+                <a :href="item.link">{{item.label}}</a>
+              </li>
+              <li class="item">
+                <a href="javascript:void(0);" @click="exit">退出登录</a>
+              </li>
+            </ul>
+          </div>
         </div>
+        <a href="/user/cart" class="shopping-cart" v-if="isLogin">
+          <i class="iconfont icon-gouwuche"></i>
+          <em class="shopping-count">12</em>
+          <label>购物车</label>
+        </a>
+        <a class="login-register" href="javascript:void(0);" @click="testLogin" v-if="!isLogin">
+          登录/注册
+        </a>
       </div>
-      <a href="/user/cart" class="shopping-cart" v-if="isLogin">
-        <i class="iconfont icon-gouwuche"></i>
-        <em class="shopping-count">12</em>
-        购物车
-      </a>
-      <a class="login-register" href="javascript:void(0);" @click="testLogin" v-if="!isLogin">
-        登录/注册
-      </a>
     </div>
   </header>
 </template>
 
 <script type="text/ecmascript-6">
   export default {
-  	name:"nav-hander",
+    name: 'nav-hander',
     data: function () {
       return {
         menus: [{
@@ -46,23 +48,23 @@
         }, {
           label: '画册',
           link: '/album.html?category=huace'
-        }, 
+        },
 //      {
 //        label: '磁铁画',
 //        link: '/magnet.html'
-//      }, 
-        
-        {
-          label: '框画',
-          link: '/framed-pictures.html?category=kuanghua'
-        }, {
-          label: '海报',
-          link: '/poster.html?category=haibao'
-        }, {
-          label: '小时光',
-          link: '/album/imgEditMsg?category=baobaoshu&editCnfName='
+//      },
 
-        }],
+          {
+            label: '框画',
+            link: '/framed-pictures.html?category=kuanghua'
+          }, {
+            label: '海报',
+            link: '/poster.html?category=haibao'
+          }, {
+            label: '小时光',
+            link: '/album/imgEditMsg?category=baobaoshu&editCnfName='
+
+          }],
         userMenu: [{
           label: '我的主页',
           link: '/welcome.html'
@@ -127,10 +129,12 @@
     .wrapper {
       width: 1152px;
       margin: 0 auto;
-      padding-top: 4px;
-      font-size: 0;
+      overflow: hidden;
     }
     .logo {
+      float: left;
+      display: block;
+      margin-top: 4px;
       outline: 0;
     }
     .title {
@@ -145,11 +149,11 @@
     .menu {
       display: block;
       float: left;
-      margin-left: 92px;
-      padding-top: 8px;
+      margin-left: 88px;
       overflow: hidden;
       .item {
         display: block;
+        margin-top: 12px;
         padding: 0 46px;
         float: left;
         font-size: 16px;
@@ -167,6 +171,9 @@
         }
       }
     }
+    .right-platform {
+      float: right;
+    }
     .user-info {
       display: inline-block;
       cursor: pointer;
@@ -180,19 +187,19 @@
         }
       }
       .avatar {
-        padding-top: 6px;
         display: inline-block;
-        width: 30px;
-        height: 30px;
+        width: 32px;
+        height: 32px;
+        margin-top: 9px;
         border-radius: 50%;
       }
       .nickname {
         display: inline-block;
-        margin-left: 8px;
-        padding: 8px 0 12px;
+        margin-top: 12px;
+        color: #fff;
         font-size: 16px;
         line-height: 26px;
-        color: #fff;
+        vertical-align: top;
         &:after {
           content: '';
           display: inline-block;
@@ -242,30 +249,39 @@
     .shopping-cart {
       position: relative;
       display: inline-block;
-      padding-left: 36px;
       margin-left: 30px;
-      font-size: 16px;
+      padding-left: 36px;
       color: #fff;
-      outline: 0;
+      vertical-align: top;
       .icon-gouwuche {
         position: absolute;
-        top: -13px;
+        top: 12px;
         left: 0;
         font-size: 30px;
-
+        line-height: 26px;
       }
       .shopping-count {
         position: absolute;
-        top: -7px;
-        left: 16px;
+        top: 3px;
+        left: 19px;
         display: block;
-        width: 20px;
-        line-height: 20px;
+        width: 18px;
+        line-height: 18px;
+        font-weight: 200;
         font-size: 12px;
         font-style: normal;
         text-align: center;
         background: #ff0000;
         border-radius: 50%;
+      }
+      label {
+        display: inline-block;
+        margin-top: 12px;
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 26px;
+        outline: 0;
       }
     }
     .login-register {
