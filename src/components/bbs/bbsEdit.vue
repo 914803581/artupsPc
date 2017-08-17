@@ -59,16 +59,6 @@
             </div> 
            </div>
         </div>
-        <div class="shield" v-show="isShowPreview" @click="isShowPreview=false"></div>
-        <div class="preview_wrapper" v-show="isShowPreview">
-          <div class="preview_comtent" id="previewComtent">
-            <div></div>
-            <div class="preview_page" :class="'style_type_'+item.type" v-for="item in testData">
-                <img :key="img.id" :src="img.src" :class="['page_style_'+item.type,'img_style_'+item.type+'_'+img.index]" v-for="img in item.imgs">
-                <label class="title">{{item.title}}</label>
-            </div>
-          </div>
-        </div>
       </div>
      <!--<div class="line_comtent"><div class="comtent"><div class="title"><div class="title_left"><span>宝宝书编辑</span> <span>2017-07-14 11:05</span></div> <div class="title_right"><span>255x355mm</span> <span>56页</span> <span>￥499</span></div></div></div></div>-->
      <!--底部的图片-->
@@ -118,6 +108,10 @@
    	 <edit-text :isEditText="iseditText"></edit-text>
     </transition>
     <!--<div-editText ></div-editText>-->
+<<<<<<< HEAD
+=======
+    <preview-book :visible.sync="previewDialogVisible" :data="testData" @close="previewDialogVisible=false"></preview-book>
+>>>>>>> 5ea4f17ba6d619720577329e8e4b7fa1f3720ea0
   </div>
 </template>
 <script>
@@ -712,6 +706,7 @@
       
       console.log(this.lomoTemplate_data)
       this.setBbsTemplate();
+<<<<<<< HEAD
       this.$nextTick(function () {
         $('#previewComtent').off('turn').turn({
           page:2,
@@ -719,6 +714,9 @@
           acceleration: true});
       })
       
+=======
+
+>>>>>>> 5ea4f17ba6d619720577329e8e4b7fa1f3720ea0
     },
     mounted(){
 	  var vm = this;  	

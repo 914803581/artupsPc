@@ -1,19 +1,24 @@
 <template>
   <div class="preview">
-    <el-dialog :title="title" :visible.sync="previewDialogVisible">
-      <div class="preview_comtent" id="previewComtent">
-        <div></div>
+    <el-dialog :title="title" :size="size" :visible.sync="previewDialogVisible" @close="close" @open="open"
+               :close-on-click-modal="false">
+      <div class="preview_comtent" ref="previewComtent">
+        <div class="hard book-name">{{title}}[封面]</div>
+        <div class="hard"></div>
         <div class="preview_page" :class="'style_type_'+item.type" v-for="item in data">
           <img :key="img.id" :src="img.src" :class="['page_style_'+item.type,'img_style_'+item.type+'_'+img.index]"
                v-for="img in item.imgs">
           <label class="title">{{item.title}}</label>
         </div>
+        <div class="hard"></div>
       </div>
     </el-dialog>
   </div>
 </template>
 
 <script type="text/ecmascript-6">
+  /* eslint-disable no-undef */
+
   export default {
     name: 'previewBook',
     props: {
@@ -21,7 +26,7 @@
         type: String,
         default: '预览画册'
       },
-      previewDialogVisible: {
+      visible: {
         type: Boolean,
         default: false
       },
@@ -32,26 +37,95 @@
       data: {
         type: Array,
         default: []
+      },
+      size: {
+        type: String,
+        default: 'small'
+      },
+      pageNum: {
+        type: Number,
+        default: 1
       }
+    },
+    data: function () {
+      return {
+        isTurn: false,
+        previewDialogVisible: this.visible
+      }
+    },
+    methods: {
+      close: function () {
+        this.$emit('close', false)
+      },
+      open: function () {
+        if (!this.isTurn) {
+          this.isTurn = true
+          this.$nextTick(function () {
+            $(this.$refs.previewComtent).turn({
+              page: 2,
+              width: 900,
+              autoCenter: true,
+              gradients: true,
+              acceleration: true
+            })
+          })
+        } else {
+          $(this.$refs.previewComtent).turn('page', 2)
+        }
+      }
+    },
+    watch: {
+      visible: function (val) {
+        this.previewDialogVisible = val
+      }
+    },
+    created: function () {
     }
   }
 </script>
 
 <style lang="scss" rel="stylesheet/sass">
   .preview {
+    .el-dialog--small {
+      width: 940px;
+    }
     .preview_comtent {
       width: 900px;
       height: 550px;
       overflow: hidden;
+      border-radius: 4px;
+      .hard {
+        background: #ccc !important;
+        color: #333;
+        box-shadow: inset 0 0 5px #666;
+        font-weight: bold;
+      }
+      .book-name {
+        line-height: 550px;
+        text-align: center;
+      }
+      .odd {
+        background-image: linear-gradient(right, #FFF 95%, #C4C4C4 100%);
+        box-shadow: inset 0 0 5px #666;
+      }
+      .even {
+        background-image: linear-gradient(left, #fff 95%, #dadada 100%);
+        box-shadow: inset 0 0 5px #666;
+      }
       .preview_page {
         position: relative;
         float: left;
         width: 450px;
         height: 100%;
+        box-sizing: border-box;
         overflow: hidden;
         font-size: 0;
         text-align: center;
         background: #fff;
+        user-select: none;
+        &:nth-child(even) {
+          border: 0;
+        }
         .title {
           position: absolute;
           bottom: 4px;
