@@ -44,6 +44,21 @@ let store = new Vuex.Store({
 		}
 	},
 	mutations:{ //改变数据的方法集合-->记住 这个方法只能处理同步的异步的是actions函数
+		 //存入图片ImgHashMap
+        
+		
+		ReEditWork_p(state,obj){ //再次编辑作品存入数据图片
+			//存入再次编辑数据的东西
+	        state.editData.ImgHashMap.putvalue(obj.constName,obj.picObj);
+	        state.editData.base64HashMap.putvalue(obj.constName,obj.picObj);
+
+		},
+		ReEditWork_p_lomo(state,obj){
+			state.editData.lomoHashMap.putvalue(obj.constName,obj.picObj);
+	        state.editData.baseLomoHashMap.putvalue(obj.constName,obj.picObj);
+        		console.log(state.editData.lomoHashMap.getvalue(obj.constName))
+	        
+		},
 		previewWork_lomo(state,obj){
 			//存入base64给预览产品
 	        state.editData.baseLomoHashMap.putvalue(obj.constName,obj.picObj);
@@ -101,7 +116,7 @@ let store = new Vuex.Store({
 			
 			var constName = oPage+"_"+oimgSort;
 			 	var picObj = {"constName":constName,"picDbId" : edidData.attr("dbId"), "page" : oPage, "editCnfIndex" : oTypeStyle, "num" : oimgSort, "actions" : {},
-                "thumbnailImageUrl":edidData.attr("src"), "previewThumbnailImageUrl" :"", "crop" : "false","editCnfName" : "","isOnly":false};
+                "thumbnailImageUrl":edidData.attr("src"), "previewThumbnailImageUrl" :"", "crop" : "true","editCnfName" : "","isOnly":false};
 		    //如果是横版的修改标识符
 		    if(edidData.parents(".hengban_bbs").size()>0){
 		    		picObj.isOnly = true;
@@ -134,16 +149,6 @@ let store = new Vuex.Store({
 				state.bbs.footerData.splice(index, 1);
 			})
 			//组装数据放入
-			
-
-			
-			 
-
-//          
-			
-			
-			
-			
 		},
 		setDrapData(state,obj){//两页换横版的时候清空vue里面相邻所有的数据
 			console.log(obj)
@@ -193,10 +198,6 @@ let store = new Vuex.Store({
             		state.editData.baseLomoHashMap.remove((parseInt(oPage)-1)+'_2');
             		state.editData.baseLomoHashMap.remove((parseInt(oPage)-1)+'_3');
             		state.editData.baseLomoHashMap.remove((parseInt(oPage)-1)+'_4');
-            		
-            		
-            		
-            		
 			}
 			state.editData.ImgHashMap.remove((parseInt(oPage))+'_1');
         		state.editData.ImgHashMap.remove((parseInt(oPage))+'_2');
@@ -221,12 +222,9 @@ let store = new Vuex.Store({
         		state.editData.baseLomoHashMap.remove((parseInt(oPage))+'_2');
         		state.editData.baseLomoHashMap.remove((parseInt(oPage))+'_3');
         		state.editData.baseLomoHashMap.remove((parseInt(oPage))+'_4');
-        		state.editData.baseLomoHashMap.remove((parseInt(oPage))+'_5');
-        		
-        		
+        		state.editData.baseLomoHashMap.remove((parseInt(oPage))+'_5');	
 		},
 		oneToOneSetDrapData(state,obj){ //单页切换板式删除的操作
-
 			var oPage = obj.opage;
 			state.editData.ImgHashMap.remove((parseInt(oPage))+'_1');			
 			state.editData.ImgHashMap.remove((parseInt(oPage))+'_2');			
@@ -305,7 +303,7 @@ let store = new Vuex.Store({
 						 console.log(constName)
 						 
 						 var picObj = {"constName":constName,"picDbId" : dataImg.dbId, "page" : oPage, "editCnfIndex" : oTypeStyle, "num" : oimgSort, "actions" : {},
-                            "thumbnailImageUrl":dataImg.thumbnailUrl, "previewThumbnailImageUrl" :"", "crop" : "false","editCnfName" : "","isOnly":false};
+                            "thumbnailImageUrl":dataImg.thumbnailUrl, "previewThumbnailImageUrl" :"", "crop" : "true","editCnfName" : "","isOnly":false};
                         
 		                if($(ev.target).parents(".pubilc_div").hasClass("hengban_bbs")){//如果拖动的图片结束是横版
 		                		picObj.isOnly = true;
@@ -314,9 +312,7 @@ let store = new Vuex.Store({
 		                		state.editData.ImgHashMap.remove((parseInt(oPage)+1)+'_2');
 		                		state.editData.ImgHashMap.remove((parseInt(oPage)+1)+'_3');
 		                		state.editData.ImgHashMap.remove((parseInt(oPage)+1)+'_4');
-		                }
-		                
-		                
+		                }		                
 		                //如果是lomo卡
 						if($(ev.target).parents(".lomoTemplate").size()>0){
 							//存入lomoHashMap

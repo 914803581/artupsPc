@@ -62,7 +62,7 @@
             link: '/poster.html?category=haibao'
           }, {
             label: '小时光',
-            link: '/album/imgEditMsg?category=baobaoshu&editCnfName='
+            link: '/album/imgEditMsg?category=baobaoshu&tplCode=pc_baobaoshu_170-235_24'
 
           }],
         userMenu: [{
