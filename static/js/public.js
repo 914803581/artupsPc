@@ -116,6 +116,7 @@ function dragThumb(cs_src, cs_divdom) { //cs_src图片的节点,框型（固定d
 	}else{
 		 mul = oProportionHeight;
 	}
+//	console.log('比例:__',mul)
 	//得到原图变小的比例大小
 	imgWidth = imgWidth * mul;
 		imgHeight = imgHeight * mul;
@@ -134,7 +135,8 @@ function dragThumb(cs_src, cs_divdom) { //cs_src图片的节点,框型（固定d
 		height:imgHeight+'px',
 		left:dx+'px',
 		top:dy+'px'
-		})
+	})
+	cs_src.attr("min_scale",mul);
 } 
 
 /*校验文本框输入是否有表情*/

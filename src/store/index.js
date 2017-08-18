@@ -115,7 +115,7 @@ let store = new Vuex.Store({
 			var oPage = edidData.parents(".pubilc_div").find(".page .pageleft span").attr("page"); //第几页
 			var oTypeStyle = edidData.attr("typestyle"); //板式
 			var oimgSort = edidData.attr("imgsort"); //图片的顺序
-
+			var min_scale = "";
 			//如果是lomo卡
 			if(edidData.parents(".lomoTemplate").size() > 0) {
 				oPage = edidData.parents(".lomoTemplate").find(".page .pageLomo").text()
@@ -132,7 +132,7 @@ let store = new Vuex.Store({
 					"thumbnailScale": edidData.attr("thumbnailScale"),
 					"init": "true", //标识符第二次进去消失
 					"cropit": "true",
-					"height": Math.abs(parseFloat(edidData.prev().height())),
+					"height": "",
 					"rotate": 0,
 					"width": Math.abs(parseFloat(edidData.prev().width())),
 					"x": "",
@@ -153,8 +153,12 @@ let store = new Vuex.Store({
 			if(edidData.parents(".lomoTemplate").size() > 0) {
 				setTimeout(function() {
 					picObj.editCnfName = "pc_baobaoshu_lomo";
-					picObj.actions.x = Math.abs(parseFloat(edidData.css("left")));
-					picObj.actions.y = Math.abs(parseFloat(edidData.css("top")));
+					min_scale = edidData.attr("min_scale"); //图片和缩略图的比例
+					picObj.actions.min_scale = min_scale;
+					picObj.actions.x = Math.abs(parseFloat(edidData.css("left")))/min_scale;
+					picObj.actions.y = Math.abs(parseFloat(edidData.css("top")))/min_scale;
+					picObj.actions.width = Math.abs(parseFloat(edidData.width()))/min_scale;
+					picObj.actions.height = Math.abs(parseFloat(edidData.height()))/min_scale;
 					//存入lomoHashMap
 					state.editData.lomoHashMap.putvalue(constName, picObj);
 					//存入base64Lomo给预览产品				
@@ -162,9 +166,13 @@ let store = new Vuex.Store({
 				}, 200)
 				return;
 			}
-			setTimeout(function() {
-				picObj.actions.x = Math.abs(parseFloat(edidData.css("left")));
-				picObj.actions.y = Math.abs(parseFloat(edidData.css("top")));
+			setTimeout(function() {	
+				min_scale = edidData.attr("min_scale"); //图片和缩略图的比例
+				picObj.actions.min_scale = min_scale;
+				picObj.actions.x = Math.abs(parseFloat(edidData.css("left")))/min_scale;
+				picObj.actions.y = Math.abs(parseFloat(edidData.css("top")))/min_scale;
+				picObj.actions.width = Math.abs(parseFloat(edidData.width()))/min_scale;
+				picObj.actions.height = Math.abs(parseFloat(edidData.height()))/min_scale;				
 				//存入lomoHashMap
 				state.editData.ImgHashMap.putvalue(constName, picObj);
 				//存入base64Lomo给预览产品				
@@ -318,6 +326,8 @@ let store = new Vuex.Store({
 					var oPage = $(ev.target).parents(".pubilc_div").find(".page .pageleft span").attr("page"); //第几页
 					var oTypeStyle = $(ev.target).next(".img_drap").attr("typestyle"); //板式
 					var oimgSort = $(ev.target).next(".img_drap").attr("imgsort"); //图片的顺序
+					var min_scale = ""; //图片和缩略图的比例
+					console.log(min_scale)
 					if(obj == "单图") {
 						oPage = 1;
 						oTypeStyle = 1;
@@ -341,10 +351,11 @@ let store = new Vuex.Store({
 						"num": oimgSort,
 						"actions": {
 							"init": "true", //标识符第二次进去消失
+							"min_scale":min_scale,
 							"cropit": true,
-							"height": Math.abs(parseFloat($(ev.target).height())),
+							"height": "",
 							"rotate": 0,
-							"width": Math.abs(parseFloat($(ev.target).width())),
+							"width":"",
 							"x": "",
 							"y": "",
 							"thumbnailScale": dataImg.thumbnailScale
@@ -370,8 +381,11 @@ let store = new Vuex.Store({
 							$(ev.target).next("img").attr("style", "")
 							dragThumb($(ev.target).next("img"), $(ev.target))
 							picObj.editCnfName = "pc_baobaoshu_lomo";
-							picObj.actions.x = Math.abs(parseFloat($(ev.target).next("img").css("left")));
-							picObj.actions.y = Math.abs(parseFloat($(ev.target).next("img").css("top")));
+							min_scale = $(ev.target).next(".img_drap").attr("min_scale"); //图片和缩略图的比例
+							picObj.actions.x = Math.abs(parseFloat($(ev.target).next("img").css("left")))/min_scale;
+							picObj.actions.y = Math.abs(parseFloat($(ev.target).next("img").css("top")))/min_scale;
+							picObj.actions.width = Math.abs(parseFloat($(ev.target).width()))/min_scale;
+							picObj.actions.height = Math.abs(parseFloat($(ev.target).height()))/min_scale;
 							//存入lomoHashMap
 							state.editData.lomoHashMap.putvalue(constName, picObj);
 							console.log(state.editData.lomoHashMap.getvalue(constName));
@@ -383,8 +397,11 @@ let store = new Vuex.Store({
 					setTimeout(function() {
 						$(ev.target).next("img").attr("style", "")
 						dragThumb($(ev.target).next("img"), $(ev.target));
-						picObj.actions.x = Math.abs(parseFloat($(ev.target).next("img").css("left")));
-						picObj.actions.y = Math.abs(parseFloat($(ev.target).next("img").css("top")));
+						min_scale = $(ev.target).next(".img_drap").attr("min_scale"); //图片和缩略图的比例
+						picObj.actions.x = Math.abs(parseFloat($(ev.target).next("img").css("left")))/min_scale;
+						picObj.actions.y = Math.abs(parseFloat($(ev.target).next("img").css("top")))/min_scale;
+						picObj.actions.width = Math.abs(parseFloat($(ev.target).width()))/min_scale;
+						picObj.actions.height = Math.abs(parseFloat($(ev.target).height()))/min_scale;
 						//存入图片ImgHashMap
 						state.editData.ImgHashMap.putvalue(constName, picObj);
 						console.log(state.editData.ImgHashMap.getvalue(constName))
