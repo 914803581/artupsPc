@@ -14,47 +14,27 @@
 							<span>￥499</span>
 						</div>
 					</div>
-					<div id="div_drap" style="display: none; position: absolute; margin: 0px;">
-						<div class="titleBox menubar_titleBox">
-		               更换版式
-		            <div class="titleClose">
-		            	<i class="iconfont"></i>
-		            </div>
-						</div>
-						<div class="checkBS_b">
-							<div class="img_div boder_actiev" style="width: 45%;">
-								<img src="http://image2.artup.com/resources/static/pc/images/bbs_pc01.jpg">
+					 <transition name="el-zoom-in-top">
+						<div id="div_drap" v-show="switchFormat" >
+							<div  class="titleBox menubar_titleBox">
+				               更换版式{{switchFormat}}
+				            <div  class="titleClose" @click="closeFormat">
+				            		<i class="iconfont"></i>
+				            </div>
 							</div>
-							<div class="img_div" style="width: 45%;">
-								<img src="http://image2.artup.com/resources/static/pc/images/bbs_pc02.jpg">
-							</div>
-							<div class="img_div" style="width: 45%;">
-								<img src="http://image2.artup.com/resources/static/pc/images/bbs_pc03.jpg">
-							</div>
-							<div class="img_div" style="width: 45%;">
-								<img src="http://image2.artup.com/resources/static/pc/images/bbs_pc04.jpg">
-							</div>
-							<div class="img_div" style="width: 45%;">
-								<img src="http://image2.artup.com/resources/static/pc/images/bbs_pc05.jpg">
-							</div>
-							<div class="img_div" style="width: 45%;">
-								<img src="http://image2.artup.com/resources/static/pc/images/bbs_pc06.jpg">
-							</div>
-							<div class="img_div" style="width: 45%;">
-								<img src="http://image2.artup.com/resources/static/pc/images/bbs_pc07.jpg">
-							</div>
-							<div class="img_div" style="width: 45%;">
-								<img src="http://image2.artup.com/resources/static/pc/images/bbs_pc08.jpg">
-							</div>
-							<div istrue="true" class="img_div" style="width: 90%;">
-								<img src="http://image2.artup.com/resources/static/pc/images/bbs_pc01.jpg">
+							<div class="checkBS_b">
+								<select name="">
+									<option value="">700x500</option>
+									<option value="">700x500</option>
+									<option value="">700x500</option>
+									<option value="">700x500</option>
+								</select>
 							</div>
 						</div>
-					</div> 
+					</transition>	
 					<div class="box_menu">
 						<ul>
-							<li><i class="iconfont"></i>添加组件</li> 
-							<li><i class="iconfont"></i>更换板式</li>
+							<li @click="updateStyle"><i class="iconfont"></i>更换板式</li>
 							<li><i class="iconfont" style="font-size: 20px; padding: 0px;"></i>加入购物车</li> 
 							<li><i class="iconfont"></i>立即购买</li> 
 							<li><i class="iconfont"></i>下一步</li> 
@@ -146,7 +126,9 @@ export default {
       	isModel:false,//素材库
       	dataEditImg:{},//传递给图片编辑的对象
       	isimgEdit:false, //图片编辑
-      	footerShow:true //页脚控制的折叠变量
+      	footerShow:true, //页脚控制的折叠变量
+	    switchFormat : false //控制切换板式弹框显示隐藏变量（true显示 false隐藏） 
+      
       	
       }	
    	},
@@ -198,13 +180,25 @@ export default {
 		var constName ='1_1';
 		this.$store.state.editData.ImgHashMap.getvalue(constName).actions = val.postData;		
         $(".editbbs_one").next("img").attr("src",val.imgData).css("width","100%").css("height","100%").css("left",0).css("top",0)
-      }
+     },
+     updateStyle (){
+     	this.switchFormat = true;
+    		$("#div_drap").Tdrag();
+     },
+     closeFormat (){
+     	this.switchFormat = false;	
+     }
     },
     created(){//只执行一次
     		
     },
     mounted(){
-   
+    		//如果更换板式弹框显示
+		$('.checkBS_b').click(function(e){
+
+		})
+
+		  
     }
   }
 </script>

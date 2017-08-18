@@ -11,7 +11,8 @@
 	export default {
 	    data () {
 	      return {
-	      	productData:{}
+	      	productData:{},
+
 	      }	
 	   	},
 	    components:{ //在再这里要注入我的组件
