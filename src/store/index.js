@@ -152,6 +152,7 @@ let store = new Vuex.Store({
 			//如果是lomo卡
 			if(edidData.parents(".lomoTemplate").size() > 0) {
 				setTimeout(function() {
+					picObj.editCnfName = "pc_baobaoshu_lomo";
 					picObj.actions.x = Math.abs(parseFloat(edidData.css("left")));
 					picObj.actions.y = Math.abs(parseFloat(edidData.css("top")));
 					//存入lomoHashMap
@@ -351,7 +352,7 @@ let store = new Vuex.Store({
 						"thumbnailImageUrl": dataImg.thumbnailUrl,
 						"previewThumbnailImageUrl": "",
 						"crop": "true",
-						"editCnfName": "",
+						"editCnfName": JSON.parse(sessionStorage.getItem("urlQuery")).tplCode,
 						"isOnly": false
 					};
 					if($(ev.target).parents(".pubilc_div").hasClass("hengban_bbs")) { //如果拖动的图片结束是横版
@@ -368,6 +369,7 @@ let store = new Vuex.Store({
 						setTimeout(function() {
 							$(ev.target).next("img").attr("style", "")
 							dragThumb($(ev.target).next("img"), $(ev.target))
+							picObj.editCnfName = "pc_baobaoshu_lomo";
 							picObj.actions.x = Math.abs(parseFloat($(ev.target).next("img").css("left")));
 							picObj.actions.y = Math.abs(parseFloat($(ev.target).next("img").css("top")));
 							//存入lomoHashMap
