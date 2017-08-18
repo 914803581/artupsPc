@@ -77,7 +77,7 @@
 				var postData = {}
 				postData.imgData = imageCropper.cropit('export');
 				postData.postData = build();
-				
+				postData.postData.cropit = true; //每次都需要编辑
 				//获取返回的数据
 				this.imgEdit = false;
 				this.$emit("postDataImg",postData)
