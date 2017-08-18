@@ -108,10 +108,9 @@
    	 <edit-text :isEditText="iseditText"></edit-text>
     </transition>
     <!--<div-editText ></div-editText>-->
-<<<<<<< HEAD
-=======
+
     <preview-book :visible.sync="previewDialogVisible" :data="testData" @close="previewDialogVisible=false"></preview-book>
->>>>>>> 5ea4f17ba6d619720577329e8e4b7fa1f3720ea0
+
   </div>
 </template>
 <script>
@@ -706,17 +705,14 @@
       
       console.log(this.lomoTemplate_data)
       this.setBbsTemplate();
-<<<<<<< HEAD
+
       this.$nextTick(function () {
         $('#previewComtent').off('turn').turn({
           page:2,
           gradients: true,
           acceleration: true});
       })
-      
-=======
 
->>>>>>> 5ea4f17ba6d619720577329e8e4b7fa1f3720ea0
     },
     mounted(){
 	  var vm = this;  	
