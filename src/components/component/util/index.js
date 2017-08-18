@@ -23,7 +23,14 @@ export default{
         } 
     		sessionStorage.setItem("urlQuery",JSON.stringify(obj)) 
     }
-
+	Vue.prototype.getQueryString =  function(name) {
+	    var reg = new RegExp('(^|&)' + name + '=([^&]*)(&|$)', 'i');
+	    var r = window.location.search.substr(1).match(reg);
+	    if (r != null) {
+	        return unescape(r[2]);
+	    }
+	    return null;
+	}
     //获取我需要对session
     Vue.prototype.getFromSession = function (sessionName) {
 		var obj = JSON.parse(sessionStorage.getItem("urlQuery"));

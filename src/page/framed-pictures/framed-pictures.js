@@ -7,10 +7,12 @@ import SelectTpl from '../script/index.js'
 import Header from '@/components/header/header.vue'
 import Footer from '@/components/footer/footer.vue'
 import $ from 'jquery'
+import Api from '../../api.js'
+import Utils from '../../components/component/util'
 
 Vue.use(ElementUI)
 var selTpl = new SelectTpl()
-
+Vue.use(Utils)  // 工具函数
 //eslint-disable-next-line no-new
 new Vue({
   el: '#app',
@@ -26,10 +28,14 @@ new Vue({
   	
   },
   mounted(){
-//	$('#picContainer').css({
-//		'background':'url(http://test.artup.com/builder/imgs/kuanghua/400x500-zm.jpg)',
-//		
-//	})
+  	var category = this.getQueryString('category');
+    	sessionStorage.setItem("urlQuery",JSON.stringify(category)) 
+  	
+	Api.sku.queryAttributes({category:this.getFromSession("category")}).then(res=>{
+		console.log(res)
+	},err=>{
+		
+	})
   	const imgHttp = 'http://image2.artup.com/static/pc/imgs/';
   	$('.frameBox .picAndText .kuangAngle').click(function(){
   		

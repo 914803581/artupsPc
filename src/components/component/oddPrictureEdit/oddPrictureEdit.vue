@@ -23,12 +23,14 @@
 				            </div>
 							</div>
 							<div class="checkBS_b">
-								<select name="">
-									<option value="">700x500</option>
-									<option value="">700x500</option>
-									<option value="">700x500</option>
-									<option value="">700x500</option>
-								</select>
+								<el-select v-model="value" placeholder="请选择">
+								    <el-option
+								      v-for="item in options"
+								      :key="item.value"
+								      :label="item.label"
+								      :value="item.value">
+								    </el-option>
+								  </el-select>
 							</div>
 						</div>
 					</transition>	
@@ -127,9 +129,25 @@ export default {
       	dataEditImg:{},//传递给图片编辑的对象
       	isimgEdit:false, //图片编辑
       	footerShow:true, //页脚控制的折叠变量
-	    switchFormat : false //控制切换板式弹框显示隐藏变量（true显示 false隐藏） 
-      
-      	
+	    switchFormat : false, //控制切换板式弹框显示隐藏变量（true显示 false隐藏） 
+	    selectSlide : false,  //控制选择板式下拉菜单
+	  	options: [{
+	      value: '选项1',
+	      label: '黄金糕'
+	    }, {
+	      value: '选项2',
+	      label: '双皮奶'
+	    }, {
+	      value: '选项3',
+	      label: '蚵仔煎'
+	    }, {
+	      value: '选项4',
+	      label: '龙须面'
+	    }, {
+	      value: '选项5',
+	      label: '北京烤鸭'
+	    }],
+      	 value: ''
       }	
    	},
    	props:[""],
@@ -183,10 +201,20 @@ export default {
      },
      updateStyle (){
      	this.switchFormat = true;
-    		$("#div_drap").Tdrag();
+    		//$("#div_drap").Tdrag();
      },
      closeFormat (){
      	this.switchFormat = false;	
+     },
+     fn (){
+     	this.selectSlide = !this.selectSlide;
+     	//alert()
+     	if(this.selectSlide == true){
+     		$('#selec').slideDown()
+     	}else{
+     		$('#selec').slideUp()
+     	}
+     	
      }
     },
     created(){//只执行一次
