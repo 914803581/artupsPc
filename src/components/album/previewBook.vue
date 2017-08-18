@@ -20,7 +20,6 @@
   /* eslint-disable no-undef */
 
   export default {
-    name: 'previewBook',
     props: {
       title: {
         type: String,

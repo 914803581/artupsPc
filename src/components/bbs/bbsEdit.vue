@@ -366,7 +366,7 @@
           if (index < vm.FooterDataAuto.length) {
             $(".editAutoDrap").removeClass("editAutoDrap");
             $(el).addClass("editAutoDrap");//编辑自动拖拽
-            $(el).attr("src", vm.FooterDataAuto[index].thumbnailUrl).attr('imgStyle', vm.FooterDataAuto[index].thumbnailUrl).attr("dbid", vm.FooterDataAuto[index].dbId);
+            $(el).attr("src", vm.FooterDataAuto[index].thumbnailUrl).attr('imgStyle', vm.FooterDataAuto[index].thumbnailUrl).attr("dbid", vm.FooterDataAuto[index].dbId).attr("thumbnailScale",vm.FooterDataAuto[index].thumbnailScale);
             //每次循环都取触发存储数据的操作
             vm.$store.commit("autoPushData")
             //计算位置
