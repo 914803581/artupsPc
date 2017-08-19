@@ -10,7 +10,7 @@ const CLIENT = 'pc';
 
 // 图片服务器（静态资源）服务器地址
 const STATIC_SERVER_HOST = 'http://image2.artup.com/'
- 
+
 var userDbIds = localStorage.getItem('userDbId')
 
 //只要访问ajax的时候，没有这个用户信息，就跳到首页去登录获取用户信息
@@ -30,9 +30,13 @@ var HTTP = VueHttp.$http.create({
 })
 
 /* 图片上传地址 */
-const UPLOAD_URL = `${STATIC_SERVER_HOST}artup-build/builder/cors/picture/upload.do?format=json`
+//const UPLOAD_URL = `${STATIC_SERVER_HOST}artup-build/builder/cors/picture/upload.do?format=json`
+const UPLOAD_URL = `${STATIC_SERVER_HOST}artup-build/image/cors/upload.do?format=json&ignore=true`
+
 /* 查询素材库 */
-const QUERY_PICTURE_URL = `${HOST}artup-build/service/picture/page.do?format=json&ignore=true`
+//const QUERY_PICTURE_URL = `${HOST}artup-build/service/picture/page.do?format=json&ignore=true`
+const QUERY_PICTURE_URL = `${HOST}artup-build/image/cors/userImages.do?format=json&ignore=true`
+
 /* 未完成作品 */
 const QUERY_UNFINISHED_WORK_URL = `${HOST}artup-build/builder/cors/edit/queryOne.do?format=json&ignore=true`
 /* 保存作品 */
@@ -107,11 +111,12 @@ const QUERY_CAR = `${HOST}artup-build/builder/cors/car/queryAll.do?format=json&i
 //支付状态查询
 const QUERY_ORDER_STATE = `${HOST}artup-build//builder/order/query.do?format=json&ignore=true`
 //素材库选择微信裁剪图片
-const CUT_WEIXIN_IMG = `${HOST}artup-build/builder/cors/picture/cut.do?format=json&ignore=true`
+//const CUT_WEIXIN_IMG = `${HOST}artup-build/builder/cors/picture/cut.do?format=json&ignore=true`
+const CUT_WEIXIN_IMG = `${HOST}artup-build/image/cors/thumbnail.do?format=json&ignore=true`
 
 
 export default {
-	
+
   testBaidu: {
     test: (inter) => {
       return VueHttp.$http.get(HOST + inter)
@@ -149,7 +154,7 @@ export default {
     carList: (jsons) => { // 购物车列表
       return HTTP.get(CAR_LIST, {params: jsons})
     },
-    submitCars:(jsons)=>{ 
+    submitCars:(jsons)=>{
 	   		return HTTP.post(SUBMIT_CARS, qs.stringify(jsons))
 	},
     createOrder: (jsons) => { // 创建订单
@@ -280,9 +285,11 @@ export default {
     MaterialCut: (pictureDbIds,thumbnailWidth) => { // 素材如果是微信图片选择裁剪图片,pictureDbIds图片id，thumbnailWidth 裁剪的宽度
       return HTTP.get(CUT_WEIXIN_IMG,
         {
-          params: {        	
-			"pictureDbIds":pictureDbIds,
-			"thumbnailWidth":thumbnailWidth
+          params: {
+			            "pictureDbIds":pictureDbIds,
+			            "thumbnailWidth":thumbnailWidth,
+                  "thumbnailType" : "thumbnail",
+                  "client" : "pc"
           }
         }
       )
@@ -333,4 +340,3 @@ export default {
   }
 
 }
-
