@@ -21,8 +21,8 @@
 		        <p class="pageTitleDetail"><span>更多详情</span></p>
 		    </div>
 		    <div class="bothSides">
-		       <div class="imgBoxList">
-			       <div id="picContainer">
+		       <div class="imgBoxList" v-show="!frameShowBool">
+			       <div class="picContainer picContainerOne">
 			       				
 			       </div>
 		       	  <div class="boxA">
@@ -41,59 +41,28 @@
 		       	  	<span class="sizeFrame">E</span>
 		       	  </div>
 		       </div>
+		       <div class="imgBoxList" v-show="frameShowBool">
+			       <div  class="picContainer picContainerTwo" style="background-image: url(http://test.artup.com/builder/imgs/kuanghua/500x500-hxl.jpg);width: 324px;height: 324px;">		
+			       </div>
+		       </div>
 		       <div class="typeBox">
 		       		<div class="btnChoose">选择尺寸</div>
 		       		<div class="sizeBox">
-		       			<div class="k1_Foot1size_click" sizeType='A' size='400×500'>A&nbsp; 400×500 mm </div>
-		       			<div class="k1_Foot1size_click" sizeType='B' size='500×400'>B&nbsp; 500×400 mm </div>
-		       			<div class="k1_Foot1size_click" sizeType='C' size='500×500'>C&nbsp; 500×500 mm </div>
-		       			<div class="k1_Foot1size_click" sizeType='D' size='530×740'>D&nbsp; 530×740 mm </div>
-		       			<div class="k1_Foot1size_click" sizeType='E' size='740×530'>E&nbsp; 740×530 mm </div>
+		       			<div @click='updateSizeFn(index)' v-for='(frameSize,index) in frameSize' class="k1_Foot1size_click"  sizeType='A' :size='frameSize.code'>&nbsp; {{frameSize.name}}</div>
 		       		</div>
 		       		<div class="btnChoose">选择边框</div>
 		       		<div class="frameBox">
-		       			<div class="picAndText">
-		       				<div class="kuangAngle" frameType='zm' style="background-image:url(http://image2.artup.com/static/pc/imgs/kuanghua/angle-zm.png)"></div>
-		       				<div class="k1_Foot1frame_click k1_pre_frame">棕色木框</div>
+		       			<div class="picAndText" v-for='(frameType,index) in frameType'>
+		       				<div class="kuangAngle" @click='updataTypeFn(index)' :code='frameType.code' :frameType='frameType.name' :style="{backgroundImage:'url('+picturePrefix+frameType.attr+')'}"></div>
+		       				<div class="k1_Foot1frame_click k1_pre_frame">{{frameType.name}}</div>
 		       			</div>
-		       			<div class="picAndText">
-		       				<div class="kuangAngle" frameType='yxl' style="background-image:url(http://image2.artup.com/static/pc/imgs/kuanghua/angle-yxl.png)"></div>
-		       				<div class="k1_Foot1frame_click k1_pre_frame">银细边铝框</div>
-		       			</div>
-		       			<div class="picAndText">
-		       				<div class="kuangAngle" frameType='ypl' style="background-image:url(http://image2.artup.com/static/pc/imgs/kuanghua/angle-ypl.png)"></div>
-		       				<div class="k1_Foot1frame_click k1_pre_frame">银平面铝框</div>
-		       			</div>
-		       			<div class="picAndText">
-		       				<div class="kuangAngle" frameType='ym' style="background-image:url(http://image2.artup.com/static/pc/imgs/kuanghua/angle-ym.png)"></div>
-		       				<div class="k1_Foot1frame_click k1_pre_frame">原木色木框</div>
-		       			</div>
-		       			<div class="picAndText">
-		       				<div class="kuangAngle" frameType='yll' style="background-image:url(http://image2.artup.com/static/pc/imgs/kuanghua/angle-yll.png)"></div>
-		       				<div class="k1_Foot1frame_click k1_pre_frame">银立体铝框</div>
-		       			</div>
-		       			<div class="picAndText">
-		       				<div class="kuangAngle" frameType='ykl' style="background-image:url(http://image2.artup.com/static/pc/imgs/kuanghua/angle-ykl.png)"></div>
-		       				<div class="k1_Foot1frame_click k1_pre_frame">银宽边铝框</div>
-		       			</div>
-		       			<div class="picAndText">
-		       				<div class="kuangAngle" frameType='hpl' style="background-image:url(http://image2.artup.com/static/pc/imgs/kuanghua/angle-hpl.png)"></div>
-		       				<div class="k1_Foot1frame_click k1_pre_frame">黑平面铝框</div>
-		       			</div>
-		       			<div class="picAndText">
-		       				<div class="kuangAngle" frameType='hkl' style="background-image:url(http://image2.artup.com/static/pc/imgs/kuanghua/angle-hkl.png)"></div>
-		       				<div class="k1_Foot1frame_click k1_pre_frame">黑宽边铝框</div>
-		       			</div>
-		       			<div class="picAndText">
-		       				<div class="kuangAngle" frameType='hxl' style="background-image:url(http://image2.artup.com/static/pc/imgs/kuanghua/angle-hxl.png)"></div>
-		       				<div class="k1_Foot1frame_click k1_pre_frame">黑细边铝框</div>
-		       			</div>
+		       			
 		       		</div>
 		       		<div class="rightBottom">
 	                    <div class="showPrice">
-	                        ￥ : <span class="price_show">289</span><span class="skuCode" style="display: none"></span>
+	                        ￥ : <span class="price_show">{{price}}</span><span class="skuCode" style="display: none"></span>
 	                    </div>
-	                    <a href="/framed/framedEdit"><div class="startBook">开始定制</div></a>
+	                    <a @click="startCustom"><div class="startBook">开始定制</div></a>
 	                </div>
 		       </div>
 		       

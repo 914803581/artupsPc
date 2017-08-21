@@ -20,12 +20,27 @@
 	      'nav-hander':navHander
 	    },
 	    methods: {
-	    
+	    		/*初始化编辑框的宽高*/
+	    		initEditFrameSize (){
+	    			var size = this.$route.query.size;//框画尺寸
+	    			var arr = size.split('X');
+	    			/*设置外框的框高*/
+	    			$('#waikuang').css({
+					width:+(Number(arr[0])+100)+'px',
+					height:+(Number(arr[1])+100)+'px'
+				});
+	    			/*设置画心的宽高*/
+				$('.drapBox').css({
+					width:arr[0]+'px',
+					height:arr[1]+'px'
+				});
+		    		}
 	    },
 	    created(){//只执行一次
 	    },
 	    mounted(){
-	
+	   
+			this.initEditFrameSize();
 	    }
   }
 </script>

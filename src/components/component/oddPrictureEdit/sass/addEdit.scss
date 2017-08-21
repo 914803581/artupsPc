@@ -47,13 +47,23 @@
                 }
                 .checkBS_b {
                     width: 90%;
-                    height: 369px;
+                    height: 80%;
                     margin: 20px auto;
-                    overflow-y: auto;
                     background: #fff;
                     >select{
                       width: 100%;  
                     }
+                }
+                #selec{
+                    display: none;
+                    text-align: center;
+                    >ul li{
+                        border: 1px solid greenyellow;
+                    }
+                }
+                .selectClickBox{
+                    border: 1px solid red;
+                    text-align: center;
                 }
            }
             .waikuang {
@@ -64,6 +74,12 @@
                 position: relative;
                 .drapBox{
                     overflow: hidden;
+                    position: absolute;
+                    top: 0;
+                    right: 0;
+                    bottom: 0;
+                    left: 0;
+                    margin: auto auto;
                     .div_alert{
                        position: absolute; 
                         z-index: 1;
