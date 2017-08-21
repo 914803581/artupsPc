@@ -284,7 +284,6 @@
         })
         //处理图片底部自动删除的操作
         vm.$store.commit("autoDrapData", arrDrap)
-
       },
       footerImgSlectFooter($index) {//提交
         this.$store.commit("editFooterStatus", $index)
@@ -694,7 +693,11 @@
           // 图片节点生成之后id回显 ==>动态添加id节点
           setTimeout(function () {
             $(".comtent_chanpin .pubilc_div .bbsClass  .img_drap").each(function (index, el) {//图片
+            	  	
               var opage = $(el).parents(".pubilc_div").find(".page .pageleft span").text();
+              if ($(el).parents(".pubilc_div").size()<2) { //如果是横版的页面
+              	opage = $(el).parents(".pubilc_div").find(".page .pageleft span").eq(0).text();
+              }
               $(el).attr("id", opage + '_' + $(el).attr("imgsort") + '_' + 'bbs');
             })
             $(".comtent_chanpin .pubilc_div > .time_pu .title_pu").each((index, el) => {//文字

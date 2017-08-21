@@ -105,7 +105,7 @@ let store = new Vuex.Store({
 				"num": obj.textsort,
 				"content": obj.txt,
 				"editCnfName": JSON.parse(sessionStorage.getItem("urlQuery")).tplCode,
-				"isOnly": false
+				"crossPage": false
 			};
 			//存入图片ImgHashMap
 			state.editData.textHashMap.putvalue(constName, picObj);
@@ -142,11 +142,11 @@ let store = new Vuex.Store({
 				"previewThumbnailImageUrl": "",
 				"crop": "true",
 				"editCnfName": JSON.parse(sessionStorage.getItem("urlQuery")).tplCode,
-				"isOnly": false
+				"crossPage": false
 			};
 			//如果是横版的修改标识符
 			if(edidData.parents(".hengban_bbs").size() > 0) {
-				picObj.isOnly = true;
+				picObj.crossPage = true;
 			}
 			//			console.log(edidData)
 			//如果是lomo卡
@@ -364,10 +364,10 @@ let store = new Vuex.Store({
 						"previewThumbnailImageUrl": "",
 						"crop": "true",
 						"editCnfName": JSON.parse(sessionStorage.getItem("urlQuery")).tplCode,
-						"isOnly": false
+						"crossPage": false
 					};
 					if($(ev.target).parents(".pubilc_div").hasClass("hengban_bbs")) { //如果拖动的图片结束是横版
-						picObj.isOnly = true;
+						picObj.crossPage = true;
 						//拖动是横版的情况删除他后面的所有图片
 						state.editData.ImgHashMap.remove((parseInt(oPage) + 1) + '_1');
 						state.editData.ImgHashMap.remove((parseInt(oPage) + 1) + '_2');
