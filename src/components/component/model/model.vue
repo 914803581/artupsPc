@@ -11,6 +11,7 @@
 				<div class="upload_inbox">					
 					<div style="border: 2px solid #ccc;" id="fileLoad" class="imagebox">
 						<i class="iconfont">&#xe60b;</i>
+						<p class="text">*按shift支持多图上传</p>
 					</div>
 					<div @click="selectImg(index)" :class="item.isTrue ?'imagebox img_size_border':'imagebox'  " v-for="(item,index) in $store.state.bbs.material">
 						<img :src="item.thumbnailUrl"    alt="" />
