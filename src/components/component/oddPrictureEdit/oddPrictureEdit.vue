@@ -5,13 +5,13 @@
 				<div class="comtent">
 					<div class="title">
 						<div class="title_left">
-							<span>作品</span>
+							<span>{{nowProductData.type}}{{nowProductData.category}}</span>
 							<span>2017-07-14 11:05</span>
 						</div>
 						<div class="title_right">
-							<span>255x355mm</span>
-							<span></span>
-							<span>￥499</span>
+							<span>{{nowProductData.size}}</span>
+							<span>{{nowProductData.frameType}}</span>
+							<span>￥{{nowProductData.price}}</span>
 						</div>
 					</div>
 					 <transition name="el-zoom-in-top">
@@ -23,12 +23,16 @@
 				            </div>
 							</div>
 							<div class="checkBS_b">
-								<el-select v-model="value" placeholder="请选择">
+								<el-select v-model="sizeValue" placeholder="请选择尺寸">
 								    <el-option
-								      v-for="item in options"
-								      :key="item.value"
-								      :label="item.label"
-								      :value="item.value">
+								      v-for="item in frameSizeData"								      
+								      :value="item.code+'mm'">
+								    </el-option>
+								  </el-select>
+								  <el-select style='margin-top: 20px;' v-model="typeValue" placeholder="请选择框形">
+								    <el-option
+								      v-for="item in frameTypeData"								      
+								      :value="item.name">
 								    </el-option>
 								  </el-select>
 							</div>
@@ -45,7 +49,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="comtent scrollBar time_main_left" style="height: 872px;">
+			<div class="comtent scrollBar time_main_left">
 				<div class="waikuang time_bg" id="waikuang" style="width: 520px; height: 620px; background: url(http://image2.artup.com/static/pc/imgs/citiehua/edit/400x500-ypl.jpg); background-size: 100% 100%;">
                    <div class="drapBox">
 
@@ -68,7 +72,10 @@
 			</div> 	
 			  <!--底部的图片-->
 			  <!--v-DomHeight-->
-		      <div   class="footer_img">
+			  <div style="height: 176px;background-color: #efefef;">
+			  	
+			  </div>
+		      <div style="position: fixed;"  class="footer_img">
 		        <div class="footer_up_tittle">
 		          <div class="footer_left">
 		            <!--<button  class="footer_btn">
@@ -126,31 +133,19 @@ export default {
     data () {
       return {
       	isModel:false,//素材库
-      	dataEditImg:{},//传递给图片编辑的对象
-      	isimgEdit:false, //图片编辑
-      	footerShow:true, //页脚控制的折叠变量
+      	dataEditImg : {},//传递给图片编辑的对象
+      	isimgEdit : false, //图片编辑
+      	footerShow : true, //页脚控制的折叠变量
 	    switchFormat : false, //控制切换板式弹框显示隐藏变量（true显示 false隐藏） 
 	    selectSlide : false,  //控制选择板式下拉菜单
-	  	options: [{
-	      value: '选项1',
-	      label: '黄金糕'
-	    }, {
-	      value: '选项2',
-	      label: '双皮奶'
-	    }, {
-	      value: '选项3',
-	      label: '蚵仔煎'
-	    }, {
-	      value: '选项4',
-	      label: '龙须面'
-	    }, {
-	      value: '选项5',
-	      label: '北京烤鸭'
-	    }],
-      	 value: ''
+	    frameSizeData : {},//编辑框尺寸
+	    frameTypeData : {},//编辑框类型
+      	sizeValue : '',
+      	typeValue : '',
+      	 nowProductData:{}//编辑产品的数据
       }	
    	},
-   	props:[""],
+   	props:["productData"],
     components:{ //在再这里要注入我的组件
 	  divModel,
       imgEdit
@@ -215,12 +210,57 @@ export default {
      		$('#selec').slideUp()
      	}
      	
-     }
+     },
+     /*更新sku*/
+  	updataSkuData (){
+  		this.skuCode = this.getFromSession("category") + '.' + this.sizeValue + '.' + this.typeValue;
+  		var jsons = {
+  			category:this.getFromSession("category"),
+  			parameter:this.skuCode
+  		};
+  		Api.sku.querySku(jsons).then(res=>{
+  			console.log(res)
+  			this.previewImageUrl = res.data.previewImageUrl;//框形预览图
+  			this.price = res.data.price;
+  		});
+  	},
     },
     created(){//只执行一次
     		
     },
     mounted(){
+    		var vm = this;
+    		this.nowProductData = this.productData;//插件传递过来的编辑器上显示数据
+    		this.$forceUpdate();
+    		setTimeout(function(){
+    			console.log(vm.nowProductData.category)
+    			var queryObj = {'category':vm.nowProductData.category};
+	   	 	sessionStorage.setItem("urlQuery",JSON.stringify(queryObj)); 
+    		})
+    		
+    		//获取url的category值 以字符串的json格式保存到sessionStroage中
+		
+	   
+		//获取框画的类型
+		Api.sku.queryAttributes({category:this.getFromSession("category")}).then(res=>{
+			if(res){
+				console.log(res)
+				this.frameSizeData = res.data.attributes[1].attributeValues;
+				this.frameTypeData = res.data.attributes[0].attributeValues;
+				
+				/*默认获取价和展示图片
+				 * 默认选择第一个
+				 */
+				setTimeout(function(){
+					vm.nowSize = $('.k1_Foot1size_click').eq(0).attr('size');
+					vm.nowType = $('.kuangAngle').eq(0).attr('code');
+					//vm.updataSkuData();
+				});
+			}
+	
+		},err=>{
+			
+		});
     		//如果更换板式弹框显示
 		$('.checkBS_b').click(function(e){
 
