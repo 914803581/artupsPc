@@ -199,7 +199,7 @@
         dataEditImg: {},//传递给图片编辑的对象
         bbsTemplate_data: [], //宝宝书模版数据的二维数组
         lomoTemplate_data: [], //lomo卡数组
-        tplCode: 'pc_baobaoshu_170-235_24',//暂时写死的1个数据
+        tplCode: 'pc_baobaoshu_170-235_24_single',//暂时写死的1个数据
         workEdit: {},//素材保存组装传给后端的数据
         previewData: []
       }
@@ -207,7 +207,9 @@
 //		beforeRouteEnter(to,from,next){
 //			console.log(to)
 //			console.log(from)
-//			next()
+//			
+//			next();
+//
 //		},
     components: { //在再这里要注入我的组件
       'unify-header': Header,
@@ -325,7 +327,7 @@
 
         $(".comtent_chanpin .pubilc_div .bbsClass  .img_drap").each(function (index, el) {
           if ($(el).attr("src")) { //如果src存在
-            vm.workEdit.thumbnailImageUrl = $(el).attr("src");
+            vm.workEdit.thumbnailImageUrl = $(el).attr("imgstyle");
             return false;
           } else {
             vm.workEdit.thumbnailImageUrl = "";
@@ -583,7 +585,8 @@
         })
       },
       jisuan() {//动态计算面积
-        var oH = $(window).height() - $(".footer_img").height() - $("#handers .header").height() - $(".comtent_chanpin .line_comtent .comtent .title").height() - 2;
+      	console.log($(".comtent_chanpin .line_comtent .comtent .title").height())
+        var oH = $(window).height() - $(".footer_img").height() - $(".unify-header").height() - $(".comtent_chanpin .line_comtent .comtent .title").height() - 2;
         $(".line_comtent .scrollBar").css("height", oH + 'px');
       },
       checkFooterShow($event) { //切换底部的图片显示隐藏
@@ -657,7 +660,7 @@
       bbsTemplate_data: "fnd"
     },
     created() {
-
+		
       // 宝宝书模版数据
       this.bbsTemplate_data = bbsData_template;
 
@@ -677,9 +680,7 @@
 
       if (this.$route.query.dbId) {  // 如果是再次编辑进来的界面
         this.workEdit.edtDbId = this.$route.query.dbId// 存入id预防
-// 		var paramsJson = {
-//			edtDbId:
-//		};
+        
         Api.work.unfinishedWork(this.$route.query.dbId).then((res) => {
           var oImgData = JSON.parse(res.data.data.editPicture)
           var editTxt = JSON.parse(res.data.data.editTxt)
@@ -703,7 +704,7 @@
             $(".comtent_chanpin .pubilc_div .pageLomo").each(function (index, el) {//lomo
               var srcDom = $(el).parents(".pubilc_div").find(".img_drap")
               srcDom.attr("id", $(el).text() + '_' + srcDom.attr("imgsort") + '_' + 'lomo');
-            })
+            })       
           }, 500)
 
           //回显图片和文字
@@ -744,7 +745,7 @@
                 vm.$store.commit("ReEditWork_p", {constName: constName, picObj: picObj});
 
                 var pageNum = oImgData[i].page + '_' + oImgData[i].num + '_bbs';
-                $("#" + pageNum).css("width", "100%").css("height", "100%").attr("src", oImgData[i].thumbnailImageUrl).attr("imgstyle", oImgData[i].thumbnailImageUrl);
+                $("#" + pageNum).css("width", "100%").css("height", "100%").attr("src", oImgData[i].previewThumbnailImageUrl).attr("imgstyle", oImgData[i].thumbnailImageUrl);
               }
             }
             //回显lomo卡图片
@@ -766,7 +767,7 @@
                 };
                 vm.$store.commit("ReEditWork_p_lomo", {constName: constName, picObj: picObj});
                 var pageNum = oImgLomo[i].page + '_' + oImgLomo[i].num + '_lomo';
-                $("#" + pageNum).css("width", "100%").css("height", "100%").attr("src", oImgLomo[i].thumbnailImageUrl).attr("imgstyle", oImgLomo[i].thumbnailImageUrl);
+                $("#" + pageNum).css("width", "100%").css("height", "100%").attr("src", oImgLomo[i].previewThumbnailImageUrl).attr("imgstyle", oImgLomo[i].thumbnailImageUrl);
               }
             }
           }, 1000)
