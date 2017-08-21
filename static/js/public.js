@@ -416,3 +416,47 @@ function drapDom(dragdiv){
         e.preventDefault() || e.stopPropagation();  //不取消，firefox中会触发网页跳转到查找setData中的内容
     }, false);
 }
+
+function pubulic_rm_bg(){//统一删除背景的函数
+	$(".titlePage_bg .page_fm").removeClass("bbs_bg_orange bbs_bg_blue bbs_bg_red bbs_bg_green");
+	$(".firstPage .page_bg").removeClass("bbs_bg_orange_fd bbs_bg_blue_fd bbs_bg_red_fd bbs_bg_green_fd");
+	$(".lastPage .page_bg").removeClass("bbs_bg_orange_fm bbs_bg_blue_fm bbs_bg_red_fm bbs_bg_green_fm");
+}
+//给扉页加背景
+function setBookBg(name){
+
+	switch (name){
+		case "活力橙":
+	console.log(name)
+		
+			pubulic_rm_bg();
+			$(".titlePage_bg .page_fm").addClass("bbs_bg_orange");
+			$(".firstPage .page_bg").addClass("bbs_bg_orange_fd");
+			$(".lastPage .page_bg").addClass("bbs_bg_orange_fm")
+			break;
+		case "智慧蓝":
+	console.log(name)
+		
+			pubulic_rm_bg();
+			$(".titlePage_bg .page_fm").addClass("bbs_bg_blue");
+			$(".firstPage .page_bg").addClass("bbs_bg_blue_fm");
+			$(".lastPage .page_bg").addClass("bbs_bg_blue_fd")
+			break;
+		case "欢乐红":
+			pubulic_rm_bg();
+			$(".titlePage_bg .page_fm").addClass("bbs_bg_red");
+			$(".firstPage .page_bg").addClass("bbs_bg_red_fm");
+			$(".lastPage .page_bg").addClass("bbs_bg_red_fd")
+			break;
+		case "健康绿":
+			pubulic_rm_bg();
+			$(".titlePage_bg .page_fm").addClass("bbs_bg_green");
+			$(".firstPage .page_bg").addClass("bbs_bg_green_fm");
+			$(".lastPage .page_bg").addClass("bbs_bg_green_fd")
+			break;
+			
+		default:
+			break;
+	}
+	
+}

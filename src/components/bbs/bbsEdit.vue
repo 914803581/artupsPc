@@ -47,17 +47,16 @@
         <div class="comtent scrollBar">
           <div class="time_main_left time_main_left_ht">
           	<div class="titlePage_bg">
-          		<div style="background: darkred;">
+          		<div class="page_fm">
           			<span>封 面</span>
           		</div>
-          		<div style="background: #efefef;">
-          			
+          		<div style="background: #efefef;">     			
           		</div>
           	</div>
              <div class="time_bg" v-for="(item,index) in bbsTemplate_data">
               <!--pubilc_div 这个class是留给整屏来定义的样式  click_template 是用vue里面的事件委派来解决避免不了的dom操作  hengban_bbs 横版增加的class  hengban_bbs 红线class-->
               <div class="firstPage" v-if="item[0].firstPage">
-              	<div class="page_bg" style="background: darkred;"></div>
+              	<div class="page_bg" ></div>
               	<div class="footer_page" style="background: #efefef;"></div>
               </div>
               <div class="pubilc_div" :only="htmlTetx.only"
@@ -66,7 +65,7 @@
                    v-for="(htmlTetx,index2) in item">
               </div>
               <div class="lastPage" v-if="item[0].lastPage">
-              	<div class="page_bg" style="background: darkred;"></div>
+              	<div class="page_bg"></div>
               	<div class="footer_page" style="background: #efefef;"></div>
               </div>
             </div>
@@ -700,10 +699,15 @@
       this.setPageIndex()
       this.jisuan()// 计算页面位置
 // this.$router.push({ path: '/security/iploginanalysis/'+json.name,params: { deviceId: 123}});
-
+	
+	//设置书皮的操作
+	 let colorName = JSON.parse(sessionStorage.getItem("bbsSlsectDate")).colorName;
+//	console.log(colorName)
+	//设置背景
+	setBookBg(colorName)
+	
       if (this.$route.query.dbId) {  // 如果是再次编辑进来的界面
-        this.workEdit.edtDbId = this.$route.query.dbId// 存入id预防
-        
+        this.workEdit.edtDbId = this.$route.query.dbId// 存入id预防      
         Api.work.unfinishedWork(this.$route.query.dbId).then((res) => {
           var oImgData = JSON.parse(res.data.data.editPicture)
           var editTxt = JSON.parse(res.data.data.editTxt)
