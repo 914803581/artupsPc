@@ -313,47 +313,81 @@ var bbsData_template=[
 	[
 		{
 			"template":bbsTemplateData.bbs1,
-			"only":false
+			"only":false,
+			"firstPage":true,//第一页必须有的属性
+			"lastPage":false   
+		}
+	],
+	[
+		{
+			"template":bbsTemplateData.bbs1,
+			"only":false,
+			"firstPage":false,
+			"lastPage":false 
 		},
 		{
 			"template":bbsTemplateData.bbs2,
-			"only":false
+			"only":false,
+			"firstPage":false,
+			"lastPage":false 
 		}
 	],
 	[
 		{
 			"template":bbsTemplateData.bbs3,
-			"only":false
+			"only":false,
+			"firstPage":false,
+			"lastPage":false 
 		},
 		{
 			"template":bbsTemplateData.bbs4,
-			"only":false
+			"only":false,
+			"firstPage":false,
+			"lastPage":false 
 		}
 	],
 	[
 		{
 			"template":bbsTemplateData.bbs5,
-			"only":false
+			"only":false,
+			"firstPage":false,
+			"lastPage":false 
 		},
 		{
 			"template":bbsTemplateData.bbs6,
-			"only":false
+			"only":false,
+			"firstPage":false,
+			"lastPage":false 
 		}
 	],
 	[
 		{
 			"template":bbsTemplateData.bbs7,
-			"only":false
+			"only":false,
+			"firstPage":false,
+			"lastPage":false 
 		},
 		{
 			"template":bbsTemplateData.bbs8,
-			"only":false
+			"only":false,
+			"firstPage":false,
+			"lastPage":false 
 		}
 	],
 	[
 		{
 			"template":bbsTemplateData.bbs9,
-			"only":true
+			"only":true,
+			"firstPage":false,
+			"lastPage":false 
+		}
+	],
+	[
+		{
+			"template":bbsTemplateData.bbs1,
+			"only":false,
+			"firstPage":false,
+			"lastPage":true  //最后一页必须有的属性
 		}
 	]
 	
@@ -381,4 +415,48 @@ function drapDom(dragdiv){
         dragdiv.style.top = (e.pageY - y) + 'px';
         e.preventDefault() || e.stopPropagation();  //不取消，firefox中会触发网页跳转到查找setData中的内容
     }, false);
+}
+
+function pubulic_rm_bg(){//统一删除背景的函数
+	$(".titlePage_bg .page_fm").removeClass("bbs_bg_orange bbs_bg_blue bbs_bg_red bbs_bg_green");
+	$(".firstPage .page_bg").removeClass("bbs_bg_orange_fd bbs_bg_blue_fd bbs_bg_red_fd bbs_bg_green_fd");
+	$(".lastPage .page_bg").removeClass("bbs_bg_orange_fm bbs_bg_blue_fm bbs_bg_red_fm bbs_bg_green_fm");
+}
+//给扉页加背景
+function setBookBg(name){
+
+	switch (name){
+		case "活力橙":
+	console.log(name)
+		
+			pubulic_rm_bg();
+			$(".titlePage_bg .page_fm").addClass("bbs_bg_orange");
+			$(".firstPage .page_bg").addClass("bbs_bg_orange_fd");
+			$(".lastPage .page_bg").addClass("bbs_bg_orange_fm")
+			break;
+		case "智慧蓝":
+	console.log(name)
+		
+			pubulic_rm_bg();
+			$(".titlePage_bg .page_fm").addClass("bbs_bg_blue");
+			$(".firstPage .page_bg").addClass("bbs_bg_blue_fm");
+			$(".lastPage .page_bg").addClass("bbs_bg_blue_fd")
+			break;
+		case "欢乐红":
+			pubulic_rm_bg();
+			$(".titlePage_bg .page_fm").addClass("bbs_bg_red");
+			$(".firstPage .page_bg").addClass("bbs_bg_red_fm");
+			$(".lastPage .page_bg").addClass("bbs_bg_red_fd")
+			break;
+		case "健康绿":
+			pubulic_rm_bg();
+			$(".titlePage_bg .page_fm").addClass("bbs_bg_green");
+			$(".firstPage .page_bg").addClass("bbs_bg_green_fm");
+			$(".lastPage .page_bg").addClass("bbs_bg_green_fd")
+			break;
+			
+		default:
+			break;
+	}
+	
 }

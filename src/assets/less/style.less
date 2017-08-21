@@ -21,7 +21,7 @@ input { padding:0px; margin:0px;outline:none;}
 a:link, a:visited { text-decoration:none;}
 a:hover { text-decoration:none;}
 body{word-wrap:break-word;display:box;display: -webkit-box;-webkit-box-orient: vertical;box-orient:vertical;}
-html,body{width:100%;min-height: 100%;font-family: "微软雅黑";font-weight: 500;}
+html,body{width:100%;height: 100%;font-family: "微软雅黑";font-weight: 500;}
 //#handers{
 //  .head{height: 50px;background: #2e2e2e;min-width: 1152px;}
 //  .header{height: 50px;width: 1152px;background: #2e2e2e;}
@@ -130,6 +130,83 @@ html,body{width:100%;min-height: 100%;font-family: "微软雅黑";font-weight: 5
               }
            }
     }
+      
+}
+//书皮样式
+.titlePage_bg{
+        float: left;
+        width: 320px;
+        height: 212px;
+        background: #fff;
+        margin:   0px 8px 10px 8px;
+
+        >div{
+            width: 50%;
+            float: left;
+            height: 100%;
+            position: relative;
+            
+           span{
+               position: absolute;
+               line-height: 30px;
+               bottom: -30px;
+                    height: 30px;
+                    font-size: 14px;
+                    text-align: center;
+                    background: #efefef;
+                    color: #333;
+                    left: 40%;
+           }
+        }
+        
+    }
+    
+   //封面的样式   
+   .bbs_bg_blue{ //宝宝书蓝色
+        background: url(http://image2.artup.com/static/img/xsg_lsfm.jpg) no-repeat;
+        background-size: 100% 100%;
+   }
+    .bbs_bg_blue_fd{
+        background: url(http://image2.artup.com/static/img/xsg_lsfd.jpg);
+        background-size: 100% 100%;
+    }
+    .bbs_bg_blue_fm{background: #107669;}
+    .bbs_bg_red{ //宝宝书红色
+        background: url(http://image2.artup.com/static/img/xsg_fsfm.jpg);
+        background-size: 100% 100%;
+    }
+    .bbs_bg_red_fd{
+        background: url(http://image2.artup.com/static/img/xsg_fsfd.jpg);
+        background-size: 100% 100%;
+    }
+    .bbs_bg_red_fm{background: #eb6621;}
+    
+    .bbs_bg_orange{//宝宝书橙色
+        background: url(http://image2.artup.com/static/img/xsg_csfm.jpg);
+        background-size: 100% 100%;
+    }
+    .bbs_bg_orange_fd{background: #c52d6b;} 
+    .bbs_bg_orange_fm{background: #eb6621;}
+    .bbs_bg_green{//宝宝书绿色
+        background: url(http://image2.artup.com/static/img/xsg_lvsfm.jpg);
+        background-size: 100% 100%;
+    }
+    .bbs_bg_green_fd{
+        background: url(http://image2.artup.com/static/img/xsg_lvsfd.jpg);
+        background-size: 100% 100%;
+    }
+    .bbs_bg_green_fm{background: #283e6f;}  
+    
+    
+.firstPage,.lastPage{ //首页和尾页书皮的样式
+   .page_bg{
+       height: 212px;
+       width: 100%;
+   } 
+   .footer_page{
+       height: 30px;
+       background: red;
+   }
 }
 .comtent_chanpin{
     width:100%;
@@ -209,12 +286,12 @@ html,body{width:100%;min-height: 100%;font-family: "微软雅黑";font-weight: 5
                 padding-right: 100px;
             }
         }
-
         //
         .time_main_left{
             width:100%;
            overflow: auto;
             margin-top: 30px;
+            
             .time_bg{
                 float: left;
                 width: 320px;
@@ -988,8 +1065,11 @@ html,body{width:100%;min-height: 100%;font-family: "微软雅黑";font-weight: 5
                         font-size:54px;
                         color: #ccc;
                         cursor: pointer;
-                        top: -8px;
+                        top: -48px;
                         right: -4px;
+                    }
+                    >.title_msg{
+                        
                     }
                 }
                 .img_size_border{
