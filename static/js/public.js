@@ -313,47 +313,81 @@ var bbsData_template=[
 	[
 		{
 			"template":bbsTemplateData.bbs1,
-			"only":false
+			"only":false,
+			"firstPage":true,//第一页必须有的属性
+			"lastPage":false   
+		}
+	],
+	[
+		{
+			"template":bbsTemplateData.bbs1,
+			"only":false,
+			"firstPage":false,
+			"lastPage":false 
 		},
 		{
 			"template":bbsTemplateData.bbs2,
-			"only":false
+			"only":false,
+			"firstPage":false,
+			"lastPage":false 
 		}
 	],
 	[
 		{
 			"template":bbsTemplateData.bbs3,
-			"only":false
+			"only":false,
+			"firstPage":false,
+			"lastPage":false 
 		},
 		{
 			"template":bbsTemplateData.bbs4,
-			"only":false
+			"only":false,
+			"firstPage":false,
+			"lastPage":false 
 		}
 	],
 	[
 		{
 			"template":bbsTemplateData.bbs5,
-			"only":false
+			"only":false,
+			"firstPage":false,
+			"lastPage":false 
 		},
 		{
 			"template":bbsTemplateData.bbs6,
-			"only":false
+			"only":false,
+			"firstPage":false,
+			"lastPage":false 
 		}
 	],
 	[
 		{
 			"template":bbsTemplateData.bbs7,
-			"only":false
+			"only":false,
+			"firstPage":false,
+			"lastPage":false 
 		},
 		{
 			"template":bbsTemplateData.bbs8,
-			"only":false
+			"only":false,
+			"firstPage":false,
+			"lastPage":false 
 		}
 	],
 	[
 		{
 			"template":bbsTemplateData.bbs9,
-			"only":true
+			"only":true,
+			"firstPage":false,
+			"lastPage":false 
+		}
+	],
+	[
+		{
+			"template":bbsTemplateData.bbs1,
+			"only":false,
+			"firstPage":false,
+			"lastPage":true  //最后一页必须有的属性
 		}
 	]
 	

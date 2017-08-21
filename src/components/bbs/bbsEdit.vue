@@ -46,13 +46,28 @@
       <div class="line_comtent">
         <div class="comtent scrollBar">
           <div class="time_main_left time_main_left_ht">
-
-            <div class="time_bg" v-for="(item,index) in bbsTemplate_data">
+          	<div class="titlePage_bg">
+          		<div style="background: darkred;">
+          			<span>封 面</span>
+          		</div>
+          		<div style="background: #efefef;">
+          			
+          		</div>
+          	</div>
+             <div class="time_bg" v-for="(item,index) in bbsTemplate_data">
               <!--pubilc_div 这个class是留给整屏来定义的样式  click_template 是用vue里面的事件委派来解决避免不了的dom操作  hengban_bbs 横版增加的class  hengban_bbs 红线class-->
+              <div class="firstPage" v-if="item[0].firstPage">
+              	<div class="page_bg" style="background: darkred;"></div>
+              	<div class="footer_page" style="background: #efefef;"></div>
+              </div>
               <div class="pubilc_div" :only="htmlTetx.only"
                    :class="{'active_line':htmlTetx.slectTemplate,'hengban_bbs':htmlTetx.only}"
                    v-html="htmlTetx.template" @click="click_template($event,index,index2)"
                    v-for="(htmlTetx,index2) in item">
+              </div>
+              <div class="lastPage" v-if="item[0].lastPage">
+              	<div class="page_bg" style="background: darkred;"></div>
+              	<div class="footer_page" style="background: #efefef;"></div>
               </div>
             </div>
           </div>
@@ -415,22 +430,31 @@
 //			切换的模版索引
         var chenkIndex = 'bbs' + (index + 1);
         var otemplate = this.bbsTemplate_data[this.bbs.bbs_index1][this.bbs.bbs_index2];
-
+		
         if (this.mobanArr[index].isTrue) { //两页换横版的情况选中
           console.log("两页换横版的情况选中")
           //切换前选中的页码
-          var otext = $(".time_main_left_ht .active_line .pageleft span").text()
-//				console.log(otext+'页')
+          var otext = $(".time_main_left_ht .active_line .pageleft span").text();
+          //尾页的页码
+          var oLastPage = $(".lastPage").prev(".pubilc_div").find(".pageleft span").text();
+		 if (otext==1 || otext == oLastPage) {
+		 	vm.$message({
+	            showClose: true,
+	            message: '首尾页不能切换双页的板式 ！',
+	            type: 'warning'
+	          });
+		 	return;
+		 }
           this.bbsTemplate_data[this.bbs.bbs_index1] = [];
           var josnImg = {"template": bbsTemplateData.bbs9, "only": true, "slectTemplate": true};
           this.bbsTemplate_data[this.bbs.bbs_index1].push(josnImg)
           //两页换横版的时候清空vue里面相邻所有的数据
           if (otext % 2 == 1) {
-            console.log('奇数')
-            vm.$store.commit("setDrapData", {"opage": otext, "type": "奇数"});
-          } else {
             console.log('偶数')
             vm.$store.commit("setDrapData", {"opage": otext, "type": "偶数"});
+          } else {
+            console.log('奇数')
+            vm.$store.commit("setDrapData", {"opage": otext, "type": "奇数"});
           }
           setTimeout(function () {
             vm.setPageIndex()

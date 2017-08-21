@@ -131,6 +131,49 @@ html,body{width:100%;min-height: 100%;font-family: "微软雅黑";font-weight: 5
            }
     }
 }
+
+//书皮样式
+.titlePage_bg{
+        float: left;
+        width: 320px;
+        height: 212px;
+        background: #fff;
+        margin:   0px 8px 10px 8px;
+
+        >div{
+            width: 50%;
+            float: left;
+            height: 100%;
+            position: relative;
+            
+           span{
+               position: absolute;
+               line-height: 30px;
+               bottom: -30px;
+                    height: 30px;
+                    font-size: 14px;
+                    text-align: center;
+                    background: #efefef;
+                    color: #333;
+                    left: 40%;
+           }
+        }
+        
+    }
+.firstPage,.lastPage{ //首页和尾页书皮的样式
+   .page_bg{
+       height: 212px;
+       width: 100%;
+   } 
+   .footer_page{
+       height: 30px;
+       background: red;
+   }
+}
+
+
+
+
 .comtent_chanpin{
     width:100%;
     background: #efefef;
@@ -215,6 +258,7 @@ html,body{width:100%;min-height: 100%;font-family: "微软雅黑";font-weight: 5
             width:100%;
            overflow: auto;
             margin-top: 30px;
+            
             .time_bg{
                 float: left;
                 width: 320px;
