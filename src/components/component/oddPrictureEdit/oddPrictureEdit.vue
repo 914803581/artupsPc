@@ -10,7 +10,7 @@
 						</div>
 						<div class="title_right">
 							<span>255x355mm</span>
-							<span>56页</span>
+							<span></span>
 							<span>￥499</span>
 						</div>
 					</div>
@@ -39,15 +39,15 @@
 							<li @click="updateStyle"><i class="iconfont"></i>更换板式</li>
 							<li><i class="iconfont" style="font-size: 20px; padding: 0px;"></i>加入购物车</li> 
 							<li><i class="iconfont"></i>立即购买</li> 
-							<li><i class="iconfont"></i>下一步</li> 
-							<li><i class="iconfont"></i>保存作品</li>
+							<!--<li><i class="iconfont"></i>下一步</li> 
+							<li><i class="iconfont"></i>保存作品</li>-->
 						</ul>
 					</div>
 				</div>
 			</div>
 			<div class="comtent scrollBar time_main_left" style="height: 872px;">
 				<div class="waikuang time_bg" id="waikuang" style="width: 520px; height: 620px; background: url(http://image2.artup.com/static/pc/imgs/citiehua/edit/400x500-ypl.jpg); background-size: 100% 100%;">
-                   <div class="drapBox"  style="width: 400px; height: 500px; position: absolute; top: 50%; left: 50%; margin-top: -250px; margin-left: -200px;">
+                   <div class="drapBox">
 
 	                   <!--<div class="k_AlertBox" id="alertBox">
 	                        <div class="k_AlertBox_span">

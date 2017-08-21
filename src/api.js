@@ -307,6 +307,7 @@ export default {
   },
   UPLOAD_URL: UPLOAD_URL,
   CLIENT,
+  STATIC_SERVER_HOST:STATIC_SERVER_HOST,
   ajax: function (url, callback) {
     console.log(arguments.length)
     if (arguments.length > 2) {
