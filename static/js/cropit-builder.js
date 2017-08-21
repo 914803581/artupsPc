@@ -84,6 +84,7 @@ function build() {
 	cropitData.height = nwHeight;
 	cropitData.rotate = rotat;
 	cropitData.scale = scale;
+	cropitData.init = "false";
 
 	return cropitData;
 

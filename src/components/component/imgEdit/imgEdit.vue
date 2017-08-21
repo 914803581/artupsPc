@@ -78,6 +78,7 @@
 				postData.imgData = imageCropper.cropit('export');
 				postData.postData = build();
 				postData.postData.cropit = true; //每次都需要编辑
+				postData.postData.thumbnailScale = this.dataEditJson.oActions.thumbnailScale
 				//获取返回的数据
 				this.imgEdit = false;
 				this.$emit("postDataImg",postData)
@@ -86,6 +87,7 @@
 			openModel(){
 				var vm = this;
 				this.imgEdit = true;
+//				&& 
 				if(this.dataEditJson){
 					console.log(this.dataEditJson)
 				   //修改图片src
@@ -142,9 +144,10 @@
                 height: 300,
                 onImageLoaded:function(){
               		console.log('图加班..')
-                		if(vm.dataEditJson.oActions&&JSON.stringify(vm.dataEditJson.oActions)!="{}"){
-//				  	  postData.postData.cropit = true;
+                		if(vm.dataEditJson.oActions&&JSON.stringify(vm.dataEditJson.oActions)!="{}" &&vm.dataEditJson.oActions.init=="false"){
 						var jsonActions = vm.dataEditJson.oActions;
+						console.log(jsonActions)
+						
 						//设置图像的加载缩放
 						imageCropper.cropit('zoom', jsonActions.scale);
 						//旋转角度

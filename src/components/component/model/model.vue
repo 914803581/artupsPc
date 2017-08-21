@@ -28,6 +28,7 @@
 	import { Loading } from 'element-ui';
 	 import Api from '../../../API.js'
 	export default{
+		
 		name:'div-model',
 		data () {
 		    return {

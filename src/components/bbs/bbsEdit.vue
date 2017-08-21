@@ -122,7 +122,7 @@
 
     <preview-book
       :visible.sync="previewDialogVisible"
-      :data="testData"
+      :data="previewData"
       @close="previewDialogVisible=false"
     ></preview-book>
   </div>
@@ -193,117 +193,23 @@
           material: [],//素材库
           textModel: '', //弹出框文字
           Switching: false,  //切换板式
-          //二维数组第一位角标 bbs_index1  和二位角标
+          // 二维数组第一位角标 bbs_index1  和二位角标
           extraCode: '' //保存之后，随机生成的一个编辑code码
         },
         dataEditImg: {},//传递给图片编辑的对象
         bbsTemplate_data: [], //宝宝书模版数据的二维数组
         lomoTemplate_data: [], //lomo卡数组
-        tplCode: 'pc_baobaoshu_170-235_24',//暂时写死的1个数据
+        tplCode: 'pc_baobaoshu_170-235_24_single',//暂时写死的1个数据
         workEdit: {},//素材保存组装传给后端的数据
-        testData: [{
-          type: 1,
-          title: '标题123456',
-          imgs: [{
-            id: 'deabe24d-d9c7-4b98-bf2c-7595322a6436',
-            index: 1,
-            src: 'http://ww3.sinaimg.cn/thumb180/7d09f171gw1f6v66s5pmgj21kw1kw7wj.jpg'
-          }]
-        }, {
-          type: 2,
-          title: '标题123456',
-          imgs: [{
-            id: 'deabe24d-d9c7-4b98-bf2c-7595322a6436',
-            index: 1,
-            src: 'http://ww4.sinaimg.cn/thumb180/967a86b2jw1f6gebq6czaj237k1swqv7.jpg'
-          }]
-        }, {
-          type: 3,
-          title: '标题123456',
-          imgs: [{
-            id: 'deabe24d-d9c7-4b98-bf2c-7595322a6436',
-            index: 1,
-            src: 'http://ww3.sinaimg.cn/thumb180/5a8872e0jw1f67b7yc3ahj21bh0qojwd.jpg'
-          }, {
-            id: 'deabe24d-d9c7-4b98-bf2c-7595322a6436',
-            index: 2,
-            src: 'http://ww2.sinaimg.cn/thumb180/6f4a7055jw1f63pbowqchj20ku0kun29.jpg'
-          }]
-        }, {
-          type: 4,
-          title: '标题123456',
-          imgs: [{
-            id: 'deabe24d-d9c7-4b98-bf2c-7595322a6436',
-            index: 1,
-            src: 'http://ww2.sinaimg.cn/thumb180/7e7378f1jw1exk6w83h44j20f909a759.jpg'
-          }]
-        }, {
-          type: 5,
-          title: '标题123456',
-          imgs: [{
-            id: 'deabe24d-d9c7-4b98-bf2c-7595322a6436',
-            index: 1,
-            src: 'http://ww3.sinaimg.cn/thumb180/58d8a7e4jw1evzq3l2oazj215o1jkx1h.jpg'
-          }]
-        }, {
-          type: 6,
-          title: '标题123456',
-          imgs: [{
-            id: 'deabe24d-d9c7-4b98-bf2c-7595322a6436',
-            index: 1,
-            src: 'http://ww2.sinaimg.cn/thumb180/005CvtJFgw1eubq12p5faj30ae06oglt.jpg'
-          }, {
-            id: 'deabe24d-d9c7-4b98-bf2c-7595322a6436',
-            index: 2,
-            src: 'http://ww1.sinaimg.cn/thumb180/80cc4225jw1eik72o10oaj20hs0dcabf.jpg'
-          }]
-        }, {
-          type: 7,
-          title: '标题123456',
-          imgs: [{
-            id: 'deabe24d-d9c7-4b98-bf2c-7595322a6436',
-            index: 1,
-            src: 'http://ww3.sinaimg.cn/thumb180/7a36eef1jw1eifrrld0qdj20hs0np3zj.jpg'
-          }, {
-            id: 'deabe24d-d9c7-4b98-bf2c-7595322a6436',
-            index: 2,
-            src: 'http://ww2.sinaimg.cn/thumb180/8a11a9e4jw1ejp0vmguwhj20gm09xwfj.jpg'
-          }, {
-            id: 'deabe24d-d9c7-4b98-bf2c-7595322a6436',
-            index: 3,
-            src: 'http://ww1.sinaimg.cn/thumb180/8fa20930jw1euwhwpzhhej20qo0f0ab1.jpg'
-          }, {
-            id: 'deabe24d-d9c7-4b98-bf2c-7595322a6436',
-            index: 4,
-            src: 'http://ww3.sinaimg.cn/thumb180/736e2503jw1f6sfg8dsf4j20zk0zk7ey.jpg'
-          }]
-        }, {
-          type: 8,
-          title: '标题123456',
-          imgs: [{
-            id: 'deabe24d-d9c7-4b98-bf2c-7595322a6436',
-            index: 1,
-            src: 'http://ww3.sinaimg.cn/thumb180/6cbac290jw1ege2wx4v90j218g0p043f.jpg'
-          }, {
-            id: 'deabe24d-d9c7-4b98-bf2c-7595322a6436',
-            index: 2,
-            src: 'http://ww2.sinaimg.cn/thumb180/005vdkp3gw1f1m5kq81omj30np0hsacb.jpg'
-          }, {
-            id: 'deabe24d-d9c7-4b98-bf2c-7595322a6436',
-            index: 3,
-            src: 'http://ww4.sinaimg.cn/thumb180/6910021bjw1euivb5sf4yj20dc0hsac2.jpg'
-          }, {
-            id: 'deabe24d-d9c7-4b98-bf2c-7595322a6436',
-            index: 4,
-            src: 'http://ww3.sinaimg.cn/thumb180/7cbf7143jw1evs1s7c44ij21mw0w37fv.jpg'
-          }]
-        }]
+        previewData: []
       }
     },
 //		beforeRouteEnter(to,from,next){
 //			console.log(to)
 //			console.log(from)
-//			next()
+//			
+//			next();
+//
 //		},
     components: { //在再这里要注入我的组件
       'unify-header': Header,
@@ -366,7 +272,7 @@
           if (index < vm.FooterDataAuto.length) {
             $(".editAutoDrap").removeClass("editAutoDrap");
             $(el).addClass("editAutoDrap");//编辑自动拖拽
-            $(el).attr("src", vm.FooterDataAuto[index].thumbnailUrl).attr('imgStyle', vm.FooterDataAuto[index].thumbnailUrl).attr("dbid", vm.FooterDataAuto[index].dbId);
+            $(el).attr("src", vm.FooterDataAuto[index].thumbnailUrl).attr('imgStyle', vm.FooterDataAuto[index].thumbnailUrl).attr("dbid", vm.FooterDataAuto[index].dbId).attr("thumbnailScale",vm.FooterDataAuto[index].thumbnailScale);
             //每次循环都取触发存储数据的操作
             vm.$store.commit("autoPushData")
             //计算位置
@@ -421,7 +327,7 @@
 
         $(".comtent_chanpin .pubilc_div .bbsClass  .img_drap").each(function (index, el) {
           if ($(el).attr("src")) { //如果src存在
-            vm.workEdit.thumbnailImageUrl = $(el).attr("src");
+            vm.workEdit.thumbnailImageUrl = $(el).attr("imgstyle");
             return false;
           } else {
             vm.workEdit.thumbnailImageUrl = "";
@@ -679,7 +585,8 @@
         })
       },
       jisuan() {//动态计算面积
-        var oH = $(window).height() - $(".footer_img").height() - $("#handers .header").height() - $(".comtent_chanpin .line_comtent .comtent .title").height() - 2;
+      	console.log($(".comtent_chanpin .line_comtent .comtent .title").height())
+        var oH = $(window).height() - $(".footer_img").height() - $(".unify-header").height() - $(".comtent_chanpin .line_comtent .comtent .title").height() - 2;
         $(".line_comtent .scrollBar").css("height", oH + 'px');
       },
       checkFooterShow($event) { //切换底部的图片显示隐藏
@@ -702,8 +609,42 @@
 
       },
       preview() {
-        this.isShowPreview = true;
-        console.log('预览需要的数据', this.PreviewWork)
+        let _self = this
+        this.previewData = []
+        let assembly = []
+        let pageIndex = {}
+        this.PreviewWork.baseHashMap.keys().forEach(function (key) {
+          let img = _self.PreviewWork.baseHashMap.getvalue(key)
+          let _imgObject = {
+            id: img.picDbId,
+            index: img.num,
+            src: img.thumbnailImageUrl
+          }
+          let index = 0
+          if (pageIndex[img.page]) {
+            index = pageIndex[img.page]
+            assembly[index].imgs.push(_imgObject)
+          } else {
+            index = assembly.length
+            pageIndex[img.page] = index
+            assembly[index] = {
+              index: img.page,
+              type: img.editCnfIndex,
+              title: '标题123456',
+              imgs: [_imgObject]
+            }
+          }
+        })
+        assembly.sort((a, b) => {
+          return a.page - 0 > b.page - 0
+        })
+        this.previewData = assembly
+        this.PreviewWork.lomoHashMap.keys().forEach((key) => {
+          console.log(this.PreviewWork.lomoHashMap.getvalue(key))
+        })
+//        console.log(this.PreviewWork.textHashMap.keys())
+//        console.log('预览需要的数据', this.PreviewWork)
+        this.previewDialogVisible = true
       },
       fnd() {
         console.log("数据改变了")
@@ -711,19 +652,19 @@
     },
     computed: {
       ...mapGetters({
-        FooterDataAuto: "GetFooterDataAuto",   //底部选中的图片状态
-        PreviewWork: "GetPreviewWork"          //预览产品需要数据的变量
+        FooterDataAuto: "GetFooterDataAuto",   // 底部选中的图片状态
+        PreviewWork: "GetPreviewWork"          // 预览产品需要数据的变量
       })
     },
     watch: {
       bbsTemplate_data: "fnd"
     },
-    created() {//只执行一次
-
-      //宝宝书模版数据
+    created() {
+		
+      // 宝宝书模版数据
       this.bbsTemplate_data = bbsData_template;
 
-      //lomo卡模版数据
+      // lomo卡模版数据
       this.lomoTemplate_data = lomoData_template;
 
       console.log(this.lomoTemplate_data)
@@ -731,28 +672,26 @@
     },
     mounted() {
       var vm = this;
-      //调用vuex里面的拖拽方法，初始化的时候
-      this.$store.commit("drapDiv")
-      this.setPageIndex();
-      this.jisuan();// 计算页面位置
-//		 	this.$router.push({ path: '/security/iploginanalysis/'+json.name,params: { deviceId: 123}});
+      // 调用vuex里面的拖拽方法，初始化的时候
+      this.$store.commit('drapDiv')
+      this.setPageIndex()
+      this.jisuan()// 计算页面位置
+// this.$router.push({ path: '/security/iploginanalysis/'+json.name,params: { deviceId: 123}});
 
-      if (this.$route.query.dbId) {  //如果是再次编辑进来的界面
-        this.workEdit.edtDbId = this.$route.query.dbId;//存入id预防
-// 		var paramsJson = {
-//			edtDbId:
-//		};
+      if (this.$route.query.dbId) {  // 如果是再次编辑进来的界面
+        this.workEdit.edtDbId = this.$route.query.dbId// 存入id预防
+        
         Api.work.unfinishedWork(this.$route.query.dbId).then((res) => {
-          var oImgData = JSON.parse(res.data.data.editPicture);
-          var editTxt = JSON.parse(res.data.data.editTxt);
+          var oImgData = JSON.parse(res.data.data.editPicture)
+          var editTxt = JSON.parse(res.data.data.editTxt)
           console.log(oImgData)
           console.log(editTxt)
 
-          if (res.data.data.lomo) { //如果有lomo卡
-            var oImgLomo = JSON.parse(res.data.data.lomo);
+          if (res.data.data.lomo) { // 如果有lomo卡
+            var oImgLomo = JSON.parse(res.data.data.lomo)
             console.log(oImgLomo)
           }
-          //图片节点生成之后id回显 ==>动态添加id节点
+          // 图片节点生成之后id回显 ==>动态添加id节点
           setTimeout(function () {
             $(".comtent_chanpin .pubilc_div .bbsClass  .img_drap").each(function (index, el) {//图片
               var opage = $(el).parents(".pubilc_div").find(".page .pageleft span").text();
@@ -765,7 +704,7 @@
             $(".comtent_chanpin .pubilc_div .pageLomo").each(function (index, el) {//lomo
               var srcDom = $(el).parents(".pubilc_div").find(".img_drap")
               srcDom.attr("id", $(el).text() + '_' + srcDom.attr("imgsort") + '_' + 'lomo');
-            })
+            })       
           }, 500)
 
           //回显图片和文字
@@ -806,7 +745,7 @@
                 vm.$store.commit("ReEditWork_p", {constName: constName, picObj: picObj});
 
                 var pageNum = oImgData[i].page + '_' + oImgData[i].num + '_bbs';
-                $("#" + pageNum).css("width", "100%").css("height", "100%").attr("src", oImgData[i].thumbnailImageUrl).attr("imgstyle", oImgData[i].thumbnailImageUrl);
+                $("#" + pageNum).css("width", "100%").css("height", "100%").attr("src", oImgData[i].previewThumbnailImageUrl).attr("imgstyle", oImgData[i].thumbnailImageUrl);
               }
             }
             //回显lomo卡图片
@@ -828,7 +767,7 @@
                 };
                 vm.$store.commit("ReEditWork_p_lomo", {constName: constName, picObj: picObj});
                 var pageNum = oImgLomo[i].page + '_' + oImgLomo[i].num + '_lomo';
-                $("#" + pageNum).css("width", "100%").css("height", "100%").attr("src", oImgLomo[i].thumbnailImageUrl).attr("imgstyle", oImgLomo[i].thumbnailImageUrl);
+                $("#" + pageNum).css("width", "100%").css("height", "100%").attr("src", oImgLomo[i].previewThumbnailImageUrl).attr("imgstyle", oImgLomo[i].thumbnailImageUrl);
               }
             }
           }, 1000)

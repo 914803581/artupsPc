@@ -3,14 +3,14 @@
     <el-dialog :title="title" :size="size" :visible.sync="previewDialogVisible" @close="close" @open="open"
                :close-on-click-modal="false">
       <div class="preview_comtent" ref="previewComtent">
-        <div class="hard book-name">{{title}}[封面]</div>
-        <div class="hard"></div>
+        <div class="hard">{{title}}[封面]</div>
+        <div class="hard">扉页</div>
         <div class="preview_page" :class="'style_type_'+item.type" v-for="item in data">
           <img :key="img.id" :src="img.src" :class="['page_style_'+item.type,'img_style_'+item.type+'_'+img.index]"
                v-for="img in item.imgs">
           <label class="title">{{item.title}}</label>
         </div>
-        <div class="hard"></div>
+        <div class="hard">尾页</div>
       </div>
     </el-dialog>
   </div>
@@ -20,7 +20,6 @@
   /* eslint-disable no-undef */
 
   export default {
-    name: 'previewBook',
     props: {
       title: {
         type: String,
@@ -99,8 +98,6 @@
         color: #333;
         box-shadow: inset 0 0 5px #666;
         font-weight: bold;
-      }
-      .book-name {
         line-height: 550px;
         text-align: center;
       }
