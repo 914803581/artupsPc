@@ -41,4 +41,10 @@ Vue.filter("toFixedTwo",function(value){
 		
 		return parseFloat(value.toFixed(2));
 	}
+});
+//截取第一个字符
+Vue.filter("firstCode",function(value){
+	if (value) {
+		return value.substr(0,1);
+	}
 })
