@@ -135,6 +135,7 @@
     <!--<div-editText ></div-editText>-->
 
     <preview-book
+      :colorName="colorName"
       :visible.sync="previewDialogVisible"
       :data="previewData"
       @close="previewDialogVisible=false"
@@ -159,6 +160,7 @@
   export default {
     data() {
       return {
+        colorName:'',
         previewDialogVisible: false,
         mobanArr: [// 模版对应的图片
           {
@@ -305,9 +307,9 @@
 	        var textArrMap = []; //文字的
 	        var lomArrMap = []; //lomo卡的
 	        for (var i = 0; i < this.$store.state.editData.ImgHashMap.keys().length; i++) {
-	
+
 	          if (this.$store.state.editData.ImgHashMap.getvalue(this.$store.state.editData.ImgHashMap.keys()[i])) {
-	
+
 	            arrMap.push(this.$store.state.editData.ImgHashMap.getvalue(this.$store.state.editData.ImgHashMap.keys()[i]));
 	          }
 	        }
@@ -333,7 +335,7 @@
 	        this.workEdit.skuId = bbsSlsectDate.skuId;
 	        this.workEdit.status = 1;
 	        this.workEdit.skuCode = bbsSlsectDate.skuCode;
-	
+
 	        $(".comtent_chanpin .pubilc_div .bbsClass  .img_drap").each(function (index, el) {
 	          if ($(el).attr("src")) { //如果src存在
 	            vm.workEdit.thumbnailImageUrl = $(el).attr("imgstyle");
@@ -399,7 +401,7 @@
                 message: '作品已全部上传成功,预览作品后，请添加购物车购买 !',
                 type: 'success'
               });
-              
+
             }
           }
 
@@ -680,6 +682,7 @@
           }
           obj.imgs = imgs
         })
+        this.colorName = JSON.parse(sessionStorage.getItem("bbsSlsectDate")).colorName;
         console.log(this.previewData)
         this.previewDialogVisible = true
       },
