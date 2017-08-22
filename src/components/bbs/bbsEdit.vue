@@ -717,9 +717,8 @@
 
 	//设置书皮的操作
 	 let colorName = JSON.parse(sessionStorage.getItem("bbsSlsectDate")).colorName;
-//	console.log(colorName)
 	//设置背景
-	setBookBg(colorName)
+	setBookBg(colorName,$(".titlePage_bg .page_fm"),$(".firstPage .page_bg"),$(".lastPage .page_bg"))
 
       if (this.$route.query.dbId) {  // 如果是再次编辑进来的界面
         this.workEdit.edtDbId = this.$route.query.dbId// 存入id预防

@@ -406,42 +406,41 @@ function drapDom(dragdiv){
     }, false);
 }
 
-function pubulic_rm_bg(){//统一删除背景的函数
-	$(".titlePage_bg .page_fm").removeClass("bbs_bg_orange bbs_bg_blue bbs_bg_red bbs_bg_green");
-	$(".firstPage .page_bg").removeClass("bbs_bg_orange_fd bbs_bg_blue_fd bbs_bg_red_fd bbs_bg_green_fd");
-	$(".lastPage .page_bg").removeClass("bbs_bg_orange_fm bbs_bg_blue_fm bbs_bg_red_fm bbs_bg_green_fm");
+function pubulic_rm_bg(dom1,dom2,dom3){//统一删除背景的函数
+	dom1.removeClass("bbs_bg_orange bbs_bg_blue bbs_bg_red bbs_bg_green");
+	dom2.removeClass("bbs_bg_orange_fd bbs_bg_blue_fd bbs_bg_red_fd bbs_bg_green_fd");
+	dom3.removeClass("bbs_bg_orange_fm bbs_bg_blue_fm bbs_bg_red_fm bbs_bg_green_fm");
 }
 //给扉页加背景
-function setBookBg(name){
-
+function setBookBg(name,dom1,dom2,dom3){ //name:书皮名 dom1：封面  dom2第二页纯色背景 ,dom3 页脚		
 	switch (name){
 		case "活力橙":
 	console.log(name)
 		
-			pubulic_rm_bg();
-			$(".titlePage_bg .page_fm").addClass("bbs_bg_orange");
-			$(".firstPage .page_bg").addClass("bbs_bg_orange_fd");
-			$(".lastPage .page_bg").addClass("bbs_bg_orange_fm")
+			pubulic_rm_bg(dom1,dom2,dom3);
+			dom1.addClass("bbs_bg_orange");
+			dom2.addClass("bbs_bg_orange_fd");
+			dom3.addClass("bbs_bg_orange_fm")
 			break;
 		case "智慧蓝":
 	console.log(name)
 		
-			pubulic_rm_bg();
-			$(".titlePage_bg .page_fm").addClass("bbs_bg_blue");
-			$(".firstPage .page_bg").addClass("bbs_bg_blue_fm");
-			$(".lastPage .page_bg").addClass("bbs_bg_blue_fd")
+			pubulic_rm_bg(dom1,dom2,dom3);
+			dom1.addClass("bbs_bg_blue");
+			dom2.addClass("bbs_bg_blue_fm");
+			dom3.addClass("bbs_bg_blue_fd")
 			break;
 		case "欢乐红":
-			pubulic_rm_bg();
-			$(".titlePage_bg .page_fm").addClass("bbs_bg_red");
-			$(".firstPage .page_bg").addClass("bbs_bg_red_fm");
-			$(".lastPage .page_bg").addClass("bbs_bg_red_fd")
+			pubulic_rm_bg(dom1,dom2,dom3);
+			dom1.addClass("bbs_bg_red");
+			dom2.addClass("bbs_bg_red_fm");
+			dom3.addClass("bbs_bg_red_fd")
 			break;
 		case "健康绿":
-			pubulic_rm_bg();
-			$(".titlePage_bg .page_fm").addClass("bbs_bg_green");
-			$(".firstPage .page_bg").addClass("bbs_bg_green_fm");
-			$(".lastPage .page_bg").addClass("bbs_bg_green_fd")
+			pubulic_rm_bg(dom1,dom2,dom3);
+			dom1.addClass("bbs_bg_green");
+			dom2.addClass("bbs_bg_green_fm");
+			dom3.addClass("bbs_bg_green_fd")
 			break;
 			
 		default:

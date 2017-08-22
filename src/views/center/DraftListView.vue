@@ -74,7 +74,6 @@
     methods: {
 	  continueEdit($index){ //继续编辑
 	  	 location.href="/album/imgEdit?dbId="+this.workData[$index].dbId;
-//		  this.$router.push({path:"/album/imgEdit",query:{dbId:this.workData[$index].dbId}})
 	  },
       deleteWorkList: function () {
         let deleteArr = []
