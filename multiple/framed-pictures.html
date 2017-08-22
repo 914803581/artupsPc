@@ -21,8 +21,8 @@
 		        <p class="pageTitleDetail"><span>更多详情</span></p>
 		    </div>
 		    <div class="bothSides">
-		       <div class="imgBoxList" v-show="!frameShowBool">
-			       <div class="picContainer picContainerOne">
+		       <div class="imgBoxList"  v-show="!frameShowBool">
+			       <div class="picContainer picContainerOne" :style="{backgroundImage:'url('+picturePrefix+previewImageUrl+')'}">
 			       				
 			       </div>
 		       	  <div class="boxA">
@@ -42,17 +42,18 @@
 		       	  </div>
 		       </div>
 		       <div class="imgBoxList" v-show="frameShowBool">
-			       <div  class="picContainer picContainerTwo" style="background-image: url(http://test.artup.com/builder/imgs/kuanghua/500x500-hxl.jpg);width: 324px;height: 324px;">		
+			       <div  class="picContainer picContainerTwo" :style="{backgroundImage:'url('+picturePrefix+previewImageUrl+')'}">		
+			      
 			       </div>
 		       </div>
 		       <div class="typeBox">
 		       		<div class="btnChoose">选择尺寸</div>
 		       		<div class="sizeBox">
-		       			<div @click='updateSizeFn(index)' v-for='(frameSize,index) in frameSize' class="k1_Foot1size_click"  sizeType='A' :size='frameSize.code'>&nbsp; {{frameSize.name}}</div>
+		       			<div @click='updateSizeFn(index)' v-for='(frameSize,index) in frameSize' class="k1_Foot1size_click"  :sizeType='frameSize.name | firstCode' :size='frameSize.code'>&nbsp; {{frameSize.name}}</div>
 		       		</div>
 		       		<div class="btnChoose">选择边框</div>
 		       		<div class="frameBox">
-		       			<div class="picAndText" v-for='(frameType,index) in frameType'>
+		       			<div class="picAndText" v-for='(frameType,index) in frameTypeData'>
 		       				<div class="kuangAngle" @click='updataTypeFn(index)' :code='frameType.code' :frameType='frameType.name' :style="{backgroundImage:'url('+picturePrefix+frameType.attr+')'}"></div>
 		       				<div class="k1_Foot1frame_click k1_pre_frame">{{frameType.name}}</div>
 		       			</div>
