@@ -86,7 +86,9 @@
 <style lang="scss" rel="stylesheet/sass">
   .preview {
     .el-dialog--small {
+      top: 50% !important;
       width: 940px;
+      margin-top: -326px;
     }
     .preview_comtent {
       width: 900px;
@@ -200,6 +202,9 @@
           &.img_style_8_1, &.img_style_8_2 {
             margin-top: 30px;
           }
+        }
+        .page_style_9 {
+
         }
       }
     }

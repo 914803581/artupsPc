@@ -1,6 +1,6 @@
 <template>
 	<div id="confimOrder">
-		<Handers	></Handers>
+		<unify-header></unify-header>
 		<div class="order1 m ng-scope">
 			<p class="ord1-tit">填写并核对订单信息</p>
 			<div class="rod001">
@@ -167,7 +167,7 @@
 <script>
 	import Api from '../../../API.js'
 	import { MessageBox } from 'element-ui';
-	
+	import Header from '@/components/header/header.vue'
     export default {
         data() {
             return {
@@ -182,6 +182,9 @@
               selectAddressA:true,
               payType:1
             }
+        },
+        components:{
+        		'unify-header': Header
         },
         methods: {
         		pay_wx(){
