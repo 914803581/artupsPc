@@ -237,29 +237,24 @@
         delectFooter: "delectFooterData"
       }),
       goCart() {//加入购物车
+      	//字符串转换数组存储到对象里面
+	    let bbsSlsectDate = JSON.parse(sessionStorage.getItem("bbsSlsectDate"));
         var jsons = {
           operator: "add",
-//					userDbId: localStorage.getItem("userDbId"),
-//					client: "mobile", //渠道前端传递，暂时写死
+		  userDbId: localStorage.getItem("userDbId"),
           category: bbsSlsectDate.category, //产品类型这里是宝宝书,暂时写死
-          edtDbId: this.bbs.extraCode, //编辑的id
+          edtDbId: this.workEdit.edtDbId, //编辑的id
           price: bbsSlsectDate.price,
-          num: 1,
-          discount: '',
-          channelCode: "artron",
-          opSystem: '',
+          num: "1",
           thumbnailImageUrl: "",//首页图
           total: bbsSlsectDate.price,
           sku: bbsSlsectDate.name,
-          skuCode: bbsSlsectDate.skuCode
+          skuCode: bbsSlsectDate.skuCode,
+          skuId:bbsSlsectDate.skuId
         }
         Api.car.addCar(jsons).then(res => {
           console.log(res);
-//					if(res.data.code === 'success' && res.data.extraCode) {
-//					location.href = "#cart?edtDbId=" + this.bbs.extraCode + "&category=" + bbsSlsectDate.category
-//					} else {
-//						alert('添加购物车失败(' + res.data.message + ')');
-//					}
+          this.$router.push({path:"/user/cart",query:{}})
         }, err => {
           alert('添加购物车出错');
         })
@@ -302,50 +297,52 @@
       footerImgSlectFooter($index) {//提交
         this.$store.commit("editFooterStatus", $index)
       },
+      assembleData(){ //执行保存工作组装数据的公共函数
+      	 var vm = this;
+	        var arrMap = []; //宝宝书图片的
+	        var textArrMap = []; //文字的
+	        var lomArrMap = []; //lomo卡的
+	        for (var i = 0; i < this.$store.state.editData.ImgHashMap.keys().length; i++) {
+	
+	          if (this.$store.state.editData.ImgHashMap.getvalue(this.$store.state.editData.ImgHashMap.keys()[i])) {
+	
+	            arrMap.push(this.$store.state.editData.ImgHashMap.getvalue(this.$store.state.editData.ImgHashMap.keys()[i]));
+	          }
+	        }
+	        for (var i = 0; i < this.$store.state.editData.lomoHashMap.keys().length; i++) {
+	          if (this.$store.state.editData.lomoHashMap.getvalue(this.$store.state.editData.lomoHashMap.keys()[i])) {
+	            lomArrMap.push(this.$store.state.editData.lomoHashMap.getvalue(this.$store.state.editData.lomoHashMap.keys()[i]));
+	          }
+	        }
+	        for (var i = 0; i < this.$store.state.editData.textHashMap.keys().length; i++) {
+	          if (this.$store.state.editData.textHashMap.getvalue(this.$store.state.editData.textHashMap.keys()[i])) {
+	            textArrMap.push(this.$store.state.editData.textHashMap.getvalue(this.$store.state.editData.textHashMap.keys()[i]));
+	          }
+	        }
+	        //字符串转换数组存储到对象里面
+	        let bbsSlsectDate = JSON.parse(sessionStorage.getItem("bbsSlsectDate"));
+	        this.workEdit.editPicture = JSON.stringify(arrMap);
+	        this.workEdit.editTxt = JSON.stringify(textArrMap);
+	        this.workEdit.lomo = JSON.stringify(lomArrMap);
+	        this.workEdit.tplCode = this.getFromSession("tplCode");
+	        this.workEdit.operator = "add";
+	        this.workEdit.category = this.getFromSession("category");
+	        this.workEdit.sku = bbsSlsectDate.name;
+	        this.workEdit.skuId = bbsSlsectDate.skuId;
+	        this.workEdit.status = 1;
+	        this.workEdit.skuCode = bbsSlsectDate.skuCode;
+	
+	        $(".comtent_chanpin .pubilc_div .bbsClass  .img_drap").each(function (index, el) {
+	          if ($(el).attr("src")) { //如果src存在
+	            vm.workEdit.thumbnailImageUrl = $(el).attr("imgstyle");
+	            return false;
+	          } else {
+	            vm.workEdit.thumbnailImageUrl = "";
+	          }
+	        })
+      },
       editWork() {//保存作品
-        var vm = this;
-        var arrMap = []; //宝宝书图片的
-        var textArrMap = []; //文字的
-        var lomArrMap = []; //lomo卡的
-        for (var i = 0; i < this.$store.state.editData.ImgHashMap.keys().length; i++) {
-
-          if (this.$store.state.editData.ImgHashMap.getvalue(this.$store.state.editData.ImgHashMap.keys()[i])) {
-
-            arrMap.push(this.$store.state.editData.ImgHashMap.getvalue(this.$store.state.editData.ImgHashMap.keys()[i]));
-          }
-        }
-        for (var i = 0; i < this.$store.state.editData.lomoHashMap.keys().length; i++) {
-          if (this.$store.state.editData.lomoHashMap.getvalue(this.$store.state.editData.lomoHashMap.keys()[i])) {
-            lomArrMap.push(this.$store.state.editData.lomoHashMap.getvalue(this.$store.state.editData.lomoHashMap.keys()[i]));
-          }
-        }
-        for (var i = 0; i < this.$store.state.editData.textHashMap.keys().length; i++) {
-          if (this.$store.state.editData.textHashMap.getvalue(this.$store.state.editData.textHashMap.keys()[i])) {
-            textArrMap.push(this.$store.state.editData.textHashMap.getvalue(this.$store.state.editData.textHashMap.keys()[i]));
-          }
-        }
-        //字符串转换数组存储到对象里面
-        let bbsSlsectDate = JSON.parse(sessionStorage.getItem("bbsSlsectDate"));
-
-        this.workEdit.editPicture = JSON.stringify(arrMap);
-        this.workEdit.editTxt = JSON.stringify(textArrMap);
-        this.workEdit.lomo = JSON.stringify(lomArrMap);
-        this.workEdit.tplCode = this.getFromSession("tplCode");
-        this.workEdit.operator = "add";
-        this.workEdit.category = this.getFromSession("category");
-        this.workEdit.sku = bbsSlsectDate.name;
-        this.workEdit.skuId = bbsSlsectDate.skuId;
-        this.workEdit.status = 1;
-        this.workEdit.skuCode = bbsSlsectDate.skuCode;
-
-        $(".comtent_chanpin .pubilc_div .bbsClass  .img_drap").each(function (index, el) {
-          if ($(el).attr("src")) { //如果src存在
-            vm.workEdit.thumbnailImageUrl = $(el).attr("imgstyle");
-            return false;
-          } else {
-            vm.workEdit.thumbnailImageUrl = "";
-          }
-        })
+       this.assembleData();
         //保存函数
         console.log(this.workEdit)
         Api.work.workEdit(this.workEdit).then((res) => {
@@ -364,11 +361,12 @@
       },
       nextStep() { //下一步
         //保存函数
+        this.assembleData();
         var vm = this;
-
+		console.log(this.workEdit)
         Api.work.workEdit(this.workEdit).then((res) => {
           if (res.data.code == "success") { //如果成功
-
+			res.data.commandTitle;
             this.workEdit.edtDbId = res.data.extraCode;
             console.log('保存的code:', res.data.extraCode);
             let isOK = true
@@ -399,6 +397,7 @@
                 message: '作品已全部上传成功,预览作品后，请添加购物车购买 !',
                 type: 'success'
               });
+              
             }
           }
 
