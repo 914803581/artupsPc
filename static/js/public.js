@@ -320,41 +320,41 @@ var bbsData_template=[
 	],
 	[
 		{
-			"template":bbsTemplateData.bbs1,
-			"only":false,
-			"firstPage":false,
-			"lastPage":false 
-		},
-		{
 			"template":bbsTemplateData.bbs2,
 			"only":false,
 			"firstPage":false,
 			"lastPage":false 
-		}
-	],
-	[
+		},
 		{
 			"template":bbsTemplateData.bbs3,
 			"only":false,
 			"firstPage":false,
 			"lastPage":false 
-		},
+		}
+	],
+	[
 		{
 			"template":bbsTemplateData.bbs4,
 			"only":false,
 			"firstPage":false,
 			"lastPage":false 
-		}
-	],
-	[
+		},
 		{
 			"template":bbsTemplateData.bbs5,
 			"only":false,
 			"firstPage":false,
 			"lastPage":false 
-		},
+		}
+	],
+	[
 		{
 			"template":bbsTemplateData.bbs6,
+			"only":false,
+			"firstPage":false,
+			"lastPage":false 
+		},
+		{
+			"template":bbsTemplateData.bbs7,
 			"only":false,
 			"firstPage":false,
 			"lastPage":false 
@@ -362,7 +362,7 @@ var bbsData_template=[
 	],
 	[
 		{
-			"template":bbsTemplateData.bbs7,
+			"template":bbsTemplateData.bbs8,
 			"only":false,
 			"firstPage":false,
 			"lastPage":false 
@@ -384,7 +384,7 @@ var bbsData_template=[
 	],
 	[
 		{
-			"template":bbsTemplateData.bbs1,
+			"template":bbsTemplateData.bbs2,
 			"only":false,
 			"firstPage":false,
 			"lastPage":true  //最后一页必须有的属性

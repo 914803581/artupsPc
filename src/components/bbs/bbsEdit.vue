@@ -631,6 +631,12 @@
 
       },
       preview() {
+      	//动态获取板式
+      	$(".time_main_left_ht .pubilc_div > .time_pu .bbsClass").each(function(i,el){
+      		var typestyle = $(el).find(".img_drap").eq(0).attr("typestyle");
+      		console.log('最终动态需要的板式...'+typestyle)
+      	})
+      	
         let _self = this
         this.previewData = []
         let assembly = []
@@ -665,7 +671,7 @@
           console.log(this.PreviewWork.lomoHashMap.getvalue(key))
         })
 //        console.log(this.PreviewWork.textHashMap.keys())
-//        console.log('预览需要的数据', this.PreviewWork)
+          console.log('预览需要的数据', this.PreviewWork)
         this.previewDialogVisible = true
       },
       fnd() {
