@@ -28,7 +28,8 @@ new Vue({
 	skuCode : '' ,//用来取价钱的sku
 	price : '', //框画的价钱
 	previewImageUrl : '',//框形预览图
-	frameType : '' //框形
+	frameType : '', //框形
+	editImageUrl : '' //编辑框背景图
 	//editFrameSize : {}//图片编辑框的宽高obj{width,height}
   },
   components: {
@@ -51,7 +52,6 @@ new Vue({
   		selTpl.setShowImgSize(showTypeStr , 'picContainerOne');
   		this.nowSize = $('.k1_Foot1size_click').eq(index).attr('size');
   		this.updataSkuData();
-  		//this.editFrameSize = selTpl.getEditFrameSize();
   	},
   	/*点击更新框形
   	 * index：点击对象的索引
@@ -71,6 +71,7 @@ new Vue({
   	/*更新sku*/
   	updataSkuData (){
   		this.skuCode = this.getFromSession("category") + '.' + this.nowSize + '.' + this.nowType;
+  		//console.log(this.skuCode)
   		var jsons = {
   			category:this.getFromSession("category"),
   			parameter:this.skuCode
@@ -78,12 +79,13 @@ new Vue({
   		Api.sku.querySku(jsons).then(res=>{
   			console.log(res)
   			this.previewImageUrl = res.data.previewImageUrl;//框形预览图
+  			this.editImageUrl = res.data.editImageUrl;//编辑框背景图
   			this.price = res.data.price;
   		});
   	},
   	/*开始定制*/
   	startCustom (){
-  		location.href = '/framed/framedEdit?size='+this.nowSize+"&previewImageUrl="+this.previewImageUrl+"&price="+this.price+'&frameType='+this.frameType+'&category='+this.getQueryString('category');
+  		location.href = '/framed/framedEdit?size='+this.nowSize+"&editImageUrl="+this.editImageUrl+"&price="+this.price+'&frameType='+this.frameType+'&category='+this.getQueryString('category');
   	}
   	
   },

@@ -48,7 +48,18 @@
         position: relative;
         float: left;
         box-sizing: border-box;
-         #picContainer{
+        .picContainerTwo{
+            width: 351px !important;
+            height: 421px !important;
+            background-size: 100% 100% !important;
+            background-repeat: no-repeat !important;
+            background-position: center !important;
+            position: absolute;
+            top: 0px;
+            right: 100px !important;
+            left: inherit !important;
+        }
+         .picContainer{
             border: 1px solid red;
             position: absolute;
             bottom: 0px;

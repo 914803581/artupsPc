@@ -23,15 +23,16 @@
 				            </div>
 							</div>
 							<div class="checkBS_b">
-								<el-select v-model="sizeValue" placeholder="请选择尺寸">
+								<el-select v-model="sizeValue" @change='onChangeSize(sizeValue)' placeholder="请选择尺寸">
 								    <el-option
 								      v-for="item in frameSizeData"								      
 								      :value="item.code+'mm'">
 								    </el-option>
 								  </el-select>
-								  <el-select style='margin-top: 20px;' v-model="typeValue" placeholder="请选择框形">
+								  <el-select style='margin-top: 20px;' @change='onChangeType(typeValue)' v-model="typeValue" placeholder="请选择框形">
 								    <el-option
-								      v-for="item in frameTypeData"								      
+								      v-for="(item,index) in frameTypeData"
+								      :code='item.code'
 								      :value="item.name">
 								    </el-option>
 								  </el-select>
@@ -50,7 +51,7 @@
 				</div>
 			</div>
 			<div class="comtent scrollBar time_main_left">
-				<div class="waikuang time_bg" id="waikuang" style="width: 520px; height: 620px; background: url(http://image2.artup.com/static/pc/imgs/citiehua/edit/400x500-ypl.jpg); background-size: 100% 100%;">
+				<div class="waikuang time_bg" id="waikuang" v-model="editImageUrl" :style="{backgroundImage:'url('+editImageUrl+')'}">
                    <div class="drapBox">
 
 	                   <!--<div class="k_AlertBox" id="alertBox">
@@ -142,7 +143,10 @@ export default {
 	    frameTypeData : {},//编辑框类型
       	sizeValue : '',
       	typeValue : '',
-      	 nowProductData:{}//编辑产品的数据
+      	nowProductData:{},//编辑产品的数据
+      	nowSize : '' ,//当前框的大小
+      	nowType : '' ,//当前框的类型
+      	editImageUrl : ''
       }	
    	},
    	props:["productData"],
@@ -187,6 +191,22 @@ export default {
 	 openImgEdit(){
         this.isimgEdit = !this.isimgEdit;
       },
+      onChangeSize(data){
+      	var str = data.substring(0,data.length-2);//当前尺寸
+      	this.nowSize = str;
+      	this.updataSkuData();
+      	
+      },
+      onChangeType(data){
+      	var typeStr = ''
+      	for(var i = 0; i < this.frameTypeData.length; i++){
+      		if(this.frameTypeData[i].name == data){
+      			typeStr = this.frameTypeData[i].code;
+      		}
+      	};
+      	this.nowType = typeStr;
+      	this.updataSkuData();
+      },
      postDatas(val){    
       	console.log(val)
       	//获取数据覆盖便于二次编辑
@@ -201,70 +221,79 @@ export default {
      closeFormat (){
      	this.switchFormat = false;	
      },
-     fn (){
-     	this.selectSlide = !this.selectSlide;
-     	//alert()
-     	if(this.selectSlide == true){
-     		$('#selec').slideDown()
-     	}else{
-     		$('#selec').slideUp()
-     	}
-     	
-     },
+     
      /*更新sku*/
   	updataSkuData (){
-  		this.skuCode = this.getFromSession("category") + '.' + this.sizeValue + '.' + this.typeValue;
+  		this.skuCode = this.getFromSession("category") + '.' + this.nowSize + '.' + this.nowType;
   		var jsons = {
   			category:this.getFromSession("category"),
   			parameter:this.skuCode
   		};
   		Api.sku.querySku(jsons).then(res=>{
-  			console.log(res)
-  			this.previewImageUrl = res.data.previewImageUrl;//框形预览图
-  			this.price = res.data.price;
+  			//console.log(res)
+  			this.editImageUrl = Api.STATIC_SERVER_HOST + res.data.editImageUrl;//编辑框背景图
+  			this.nowProductData.price = res.data.price;
+    			this.$forceUpdate();
+  			this.initEditFrameSize();
+  			
   		});
+  		
   	},
+  	/*初始化编辑框的宽高*/
+  	initEditFrameSize (){
+		var size = this.nowSize;//框画尺寸
+		var arr = size.split('X');
+		/*设置外框的框高*/
+		$('#waikuang').css({
+			width:+(Number(arr[0])+100)+'px',
+			height:+(Number(arr[1])+100)+'px'
+		});
+			/*设置画心的宽高*/
+		$('.drapBox').css({
+			width:arr[0]+'px',
+			height:arr[1]+'px'
+		});	
+
+		}
     },
     created(){//只执行一次
     		
     },
     mounted(){
-    		var vm = this;
+    		
     		this.nowProductData = this.productData;//插件传递过来的编辑器上显示数据
     		this.$forceUpdate();
-    		setTimeout(function(){
-    			console.log(vm.nowProductData.category)
-    			var queryObj = {'category':vm.nowProductData.category};
-	   	 	sessionStorage.setItem("urlQuery",JSON.stringify(queryObj)); 
-    		})
-    		
-    		//获取url的category值 以字符串的json格式保存到sessionStroage中
-		
-	   
+		var queryObj = {'category':this.nowProductData.category};
+		//获取url的category值 以字符串的json格式保存到sessionStroage中
+ 		sessionStorage.setItem("urlQuery",JSON.stringify(queryObj)); 
 		//获取框画的类型
 		Api.sku.queryAttributes({category:this.getFromSession("category")}).then(res=>{
 			if(res){
 				console.log(res)
 				this.frameSizeData = res.data.attributes[1].attributeValues;
-				this.frameTypeData = res.data.attributes[0].attributeValues;
-				
-				/*默认获取价和展示图片
-				 * 默认选择第一个
+				this.frameTypeData = res.data.attributes[0].attributeValues;	
+				/*设置默认的编辑框
+				 * nowSize ： 当前的尺寸 默认是前面传过来的
+				 * nowType ： 当前的框形
 				 */
-				setTimeout(function(){
-					vm.nowSize = $('.k1_Foot1size_click').eq(0).attr('size');
-					vm.nowType = $('.kuangAngle').eq(0).attr('code');
-					//vm.updataSkuData();
-				});
+				this.nowSize = this.nowProductData.size;
+		    		var typeStr = '';
+		    		for(var i = 0; i < this.frameTypeData.length; i++){
+		      		if(this.frameTypeData[i].name == this.nowProductData.frameType){
+		      			typeStr = this.frameTypeData[i].code;
+		      		}
+		      	};
+		      	this.nowType = typeStr;
+		      	this.editImageUrl = this.nowProductData.editImgUrl;//默认编辑框背景
 			}
-	
 		},err=>{
 			
 		});
     		//如果更换板式弹框显示
 		$('.checkBS_b').click(function(e){
 
-		})
+		});
+		
 
 		  
     }
