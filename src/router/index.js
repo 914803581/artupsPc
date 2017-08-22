@@ -27,6 +27,10 @@ import framedEdit from '@/components/framed/framedEdit'//框画编辑
 import posterEdit from '@/components/poster/posterEdit'//海报编辑
 import albumSelect from '@/components/album/albumSelect'
 
+//多图编辑的入口
+import maxImgEdit from '@/components/bbs/maxImgEdit'
+
+
 Vue.use(VueRouter)
 
 let router = new VueRouter({
@@ -46,6 +50,14 @@ let router = new VueRouter({
       component: bbsEdit,
       meta: {
         title: '宝宝书编辑'
+      }
+    },
+     { // 宝宝书编辑页面
+      path: '/album/maxImgEdit',
+      name: 'maxImgEdit',
+      component: maxImgEdit,
+      meta: {
+        title: '产品多图编辑'
       }
     },
     { // vuex的具体使用路由暂时备份
