@@ -6,7 +6,7 @@
 </template>
 <script>
 	// import '' from ''
-	 import MaxImgEdit from '../../components/component/maxImgModul/maxImgE.vue'
+	 import MaxImgEdit from '../../components/component/maxImgModul/maxImgEdit.vue'
 	 export default {
 		data() {
 			return {

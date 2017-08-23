@@ -10,11 +10,12 @@
               <el-button class="btn" v-show="startDelete" @click="rollback" type="danger">回退</el-button>
               <el-button class="btn" v-show="startDelete" @click="deleteAddress" type="danger">删除</el-button>
               <el-button class="btn" v-show="!startDelete" @click="startDelete=true" type="danger">管理</el-button>
-              <el-button class="btn" type="danger">添加</el-button>
+              <el-button class="btn" type="danger" @click="addition">添加</el-button>
             </div>
           </h2>
           <div class="address-list">
-            <div class="address-details" :class="{last:index===addressList.length-1}" v-for="(item,index) in addressList">
+            <div class="address-details" :class="{last:index===addressList.length-1}"
+                 v-for="(item,index) in addressList">
               <el-radio class="radio-address" v-model="radioAddress" :label="item.dbId" v-show="startDelete"></el-radio>
               <label class="label-name">收件人：</label>
               <span class="text name">{{item.name}}</span>
@@ -57,6 +58,7 @@
   export default {
     data: function () {
       return {
+        addAddressDialogFormVisible: false,
         form: {
           email: '',
           name: '',
@@ -78,6 +80,11 @@
       }
     },
     methods: {
+      addition: function () {
+        this.$router.push({
+          name: 'AddressAdd'
+        })
+      },
       getData: function () {
         this.pageNum -= 1
         Api.Address.List({

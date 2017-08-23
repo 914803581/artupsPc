@@ -40,7 +40,7 @@
 						<div class="pices">
 							¥ <i>{{price}}</i> CNY
 						</div>
-						<a href="/album/imgEdit" class="sib-a">开始定制</a>
+						<a href="/album/maxImgEdit" class="sib-a">开始定制</a>
 					</dt>
 				</dl>
 				</div>							
@@ -154,8 +154,7 @@
 				</div>
 				<div class="bbstpone">
 					<img src="http://image2.artup.com/static/pc/bbs/001_03.png" alt="">
-				</div>
-				
+				</div>				
 				</div>
 			</div>
 		</div>
@@ -284,10 +283,6 @@
 				 	vm.getPrice($(".bbs_msg .line"));				    
 				 },100)	 
 			});
-		 	
-		 	
-		 	
-		 	
 		 }
 	}
 </script>
@@ -432,12 +427,6 @@
 	text-align: center;
 	font-size: 31px;
 }
-
-
-
-
-
-
 /*banenr-bg*/
  .div-box{width: 1120px;height: 780px;margin: 0 auto;position: relative;z-index: 99;}
  .text{width: 561px;height: 129px;float: right;margin-top: 80px;margin-bottom: 30px;}
