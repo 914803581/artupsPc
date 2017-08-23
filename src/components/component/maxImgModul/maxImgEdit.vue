@@ -126,10 +126,12 @@
 		</transition>
 		<!--<div-editText ></div-editText>-->
 
-		<preview-book :visible.sync="previewDialogVisible" :data="previewData" @close="previewDialogVisible=false"></preview-book>
+		<preview-book :colorName="colorName" :visible.sync="previewDialogVisible" :data="previewData" @close="previewDialogVisible=false"></preview-book>
 	</div>
 </template>
 <script>
+	/* eslint-disable semi */
+
 	import { Message } from 'element-ui'
 	import { mapState, mapGetters, mapActions, mapMutations } from 'vuex'
 	import Header from '@/components/header/header.vue'
@@ -144,8 +146,9 @@
 	export default {
 		data() {
 			return {
+				colorName: '',
 				previewDialogVisible: false,
-				mobanArr: [], //模版对应的图片地址
+				mobanArr: [],
 				templateoindex: 0,
 				ImgHashMapBase64: new HashMap(),
 				isShowPreview: false,
@@ -171,7 +174,7 @@
 		//		beforeRouteEnter(to,from,next){
 		//			console.log(to)
 		//			console.log(from)
-		//			
+		//
 		//			next();
 		//
 		//		},
@@ -624,47 +627,66 @@
 
 			},
 			preview() {
-				//动态获取板式
-				$(".time_main_left_ht .pubilc_div > .time_pu .bbsClass").each(function(i, el) {
-					var typestyle = $(el).find(".img_drap").eq(0).attr("typestyle");
-					console.log('最终动态需要的板式...' + typestyle)
+				const TYPESTYLECOUNT = {
+					1: 1,
+					2: 1,
+					3: 2,
+					4: 1,
+					5: 1,
+					6: 2,
+					7: 4,
+					8: 4,
+					9: 1
+				}
+				let typeStyle = []
+				$('.time_main_left_ht .pubilc_div > .time_pu .bbsClass').each((i, el) => {
+					typeStyle.push($(el).find('.img_drap:eq(0)').attr('typestyle'))
 				})
-
-				let _self = this
 				this.previewData = []
-				let assembly = []
-				let pageIndex = {}
+				let _self = this
+				typeStyle.forEach((type) => {
+					type = type - 0;
+					let pageInfo = {
+						title: '标题一二三',
+						type: type,
+						imgs: []
+					}
+					_self.previewData.push(pageInfo)
+					if(type === 9) {
+						_self.previewData.push(Object.assign(pageInfo, {}))
+					}
+				})
 				this.PreviewWork.baseHashMap.keys().forEach(function(key) {
 					let img = _self.PreviewWork.baseHashMap.getvalue(key)
-					let _imgObject = {
+					_self.previewData[img.page - 1].imgs.push({
 						id: img.picDbId,
-						index: img.num,
-						src: img.thumbnailImageUrl
-					}
-					let index = 0
-					if(pageIndex[img.page]) {
-						index = pageIndex[img.page]
-						assembly[index].imgs.push(_imgObject)
-					} else {
-						index = assembly.length
-						pageIndex[img.page] = index
-						assembly[index] = {
-							index: img.page,
-							type: img.editCnfIndex,
-							title: '标题123456',
-							imgs: [_imgObject]
+						index: img.num - 0,
+						src: img.base64Img ? img.base64Img : img.thumbnailImageUrl
+					})
+				})
+				this.previewData.forEach((obj) => {
+					let imgList = {}
+					obj.imgs.forEach((obj) => {
+						imgList[obj.index] = obj
+					})
+					for(let i = 1; i <= TYPESTYLECOUNT[obj.type]; i++) {
+						if(!imgList[i]) {
+							imgList[i] = {
+								isNull: true,
+								id: new Date().getTime(),
+								index: i,
+								src: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWO4dOnSfwAIZgN2UcgHsgAAAABJRU5ErkJggg=='
+							}
 						}
 					}
+					let imgs = []
+					for(let key in imgList) {
+						imgs.push(imgList[key])
+					}
+					obj.imgs = imgs
 				})
-				assembly.sort((a, b) => {
-					return a.page - 0 > b.page - 0
-				})
-				this.previewData = assembly
-				this.PreviewWork.lomoHashMap.keys().forEach((key) => {
-					console.log(this.PreviewWork.lomoHashMap.getvalue(key))
-				})
-				//        console.log(this.PreviewWork.textHashMap.keys())
-				console.log('预览需要的数据', this.PreviewWork)
+				this.colorName = JSON.parse(sessionStorage.getItem("bbsSlsectDate")).colorName;
+				console.log(this.previewData)
 				this.previewDialogVisible = true
 			},
 			fnd() {
@@ -682,7 +704,6 @@
 		},
 		created() {
 			console.log('传递的数据', this.dataTemp)
-
 			// 宝宝书模版数据
 			this.bbsTemplate_data = this.dataTemp.productData;
 			// lomo卡模版数据
@@ -693,21 +714,18 @@
 			this.setBbsTemplate();
 		},
 		mounted() {
-
 			var vm = this;
 			// 调用vuex里面的拖拽方法，初始化的时候
 			this.$store.commit('drapDiv')
 			this.setPageIndex()
 			this.jisuan() // 计算页面位置
-			// this.$router.push({ path: '/security/iploginanalysis/'+json.name,params: { deviceId: 123}});
-
 			//设置书皮的操作
 			let colorName = JSON.parse(sessionStorage.getItem("bbsSlsectDate")).colorName;
-			//	console.log(colorName)
-			//设置背景图片的函数
-			setBookBg(colorName);
+			//设置背景
+			setBookBg(colorName, $(".titlePage_bg .page_fm"), $(".firstPage .page_bg"), $(".lastPage .page_bg"))
+
 			if(this.$route.query.dbId) { // 如果是再次编辑进来的界面
-				this.workEdit.edtDbId = this.$route.query.dbId // 存入id预防      
+				this.workEdit.edtDbId = this.$route.query.dbId // 存入id预防
 				Api.work.unfinishedWork(this.$route.query.dbId).then((res) => {
 					var oImgData = JSON.parse(res.data.data.editPicture)
 					var editTxt = JSON.parse(res.data.data.editTxt)
@@ -777,7 +795,6 @@
 									constName: constName,
 									picObj: picObj
 								});
-
 								var pageNum = oImgData[i].page + '_' + oImgData[i].num + '_bbs';
 								$("#" + pageNum).css("width", "100%").css("height", "100%").attr("src", oImgData[i].previewThumbnailImageUrl).attr("imgstyle", oImgData[i].thumbnailImageUrl);
 							}

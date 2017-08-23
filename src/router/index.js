@@ -3,7 +3,7 @@ import VueRouter from 'vue-router'
 // import noFound from '@/components/404'
 // 宝宝书
 import bbsMsg from '@/components/bbs/bbsMsg'
-import bbsEdit from '@/components/bbs/bbsEdit'
+//import bbsEdit from '@/components/bbs/bbsEdit'
 import index from '@/components/component/index/index' // 首页
 import testStore from '@/components/store' // 测试vuex
 import WorksList from '@/views/center/WorksListView'
@@ -28,7 +28,7 @@ import posterEdit from '@/components/poster/posterEdit'//海报编辑
 import albumSelect from '@/components/album/albumSelect'
 
 //多图编辑的入口
-import maxImgEdit from '@/components/bbs/maxImgEdit'
+import maxImgEdit from '@/components/bbs/bbsImgEdit'
 
 
 Vue.use(VueRouter)
@@ -44,20 +44,20 @@ let router = new VueRouter({
         title: '宝宝书介绍'
       }
     },
-    { // 宝宝书编辑页面
-      path: '/album/imgEdit',
-      name: 'imgEdit',
-      component: bbsEdit,
-      meta: {
-        title: '宝宝书编辑'
-      }
-    },
+//  { // 宝宝书编辑页面
+//    path: '/album/imgEdit',
+//    name: 'imgEdit',
+//    component: bbsEdit,
+//    meta: {
+//      title: '宝宝书编辑'
+//    }
+//  },
      { // 宝宝书编辑页面
       path: '/album/maxImgEdit',
       name: 'maxImgEdit',
       component: maxImgEdit,
       meta: {
-        title: '产品多图编辑'
+        title: '产品编辑'
       }
     },
     { // vuex的具体使用路由暂时备份
