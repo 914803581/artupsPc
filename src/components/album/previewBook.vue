@@ -3,14 +3,14 @@
     <el-dialog :title="title" :size="size" :visible.sync="previewDialogVisible" @close="close" @open="open"
                :close-on-click-modal="false">
       <div class="preview_comtent" ref="previewComtent">
-        <div class="hard">{{title}}[封面]</div>
-        <div class="hard">扉页</div>
+        <div class="hard" ref="frontCover"></div>
+        <div class="hard" ref="coverPage"></div>
         <div class="preview_page" :class="'style_type_'+item.type" v-for="item in data">
           <img :key="img.id" :src="img.src" :class="['page_style_'+item.type,'img_style_'+item.type+'_'+img.index]"
                v-for="img in item.imgs">
           <label class="title">{{item.title}}</label>
         </div>
-        <div class="hard">尾页</div>
+        <div class="hard" ref="lastPage"></div>
       </div>
     </el-dialog>
   </div>
@@ -21,6 +21,10 @@
 
   export default {
     props: {
+      colorName: {
+        type: String,
+        default: ''
+      },
       title: {
         type: String,
         default: '预览画册'
@@ -79,6 +83,7 @@
       }
     },
     created: function () {
+      setBookBg(this.colorName, this.$refs.previewComtent, this.$refs.coverPage, this.$refs.lastPage)
     }
   }
 </script>
