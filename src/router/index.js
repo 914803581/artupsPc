@@ -27,6 +27,8 @@ import framedEdit from '@/components/framed/framedEdit'//框画编辑
 import posterEdit from '@/components/poster/posterEdit'//海报编辑
 import albumSelect from '@/components/album/albumSelect'
 
+import tlEdit from '@/components/bbs/tlEdit'  //台历编辑
+
 //多图编辑的入口
 import maxImgEdit from '@/components/bbs/bbsImgEdit'
 
@@ -212,7 +214,15 @@ let router = new VueRouter({
       meta: {
         title: '海报编辑'
       }
+    },
+    {
+      path: '/album/tlEdit',
+      name: 'tlEdit',
+      component: tlEdit,
+      meta: {
+        title: '台历编辑'
       }
+    }
   ]
 })
 
