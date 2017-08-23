@@ -60,7 +60,7 @@
             link: '/album/imgEditMsg?category=baobaoshu&tplCode=pc_baobaoshu_170-235_24_single'
           }, {
             label: '台历',
-            link: '/album/imgEditMsg?category=taili&tplCode=pc_taili_170-235_24_single'
+            link: '/desk.html?category=taili'
           }],
         userMenu: [{
           label: '我的主页',

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="zh_CN">
+<head>
+  <meta charset="UTF-8">
+  <title>雅昌影像-艺术台历制作,照片书定制,摄影作品出版-传给雅昌专业定制</title>
+  <meta name="Keywords" content="照片书,纪念册制作,画册制作,照片画册,毕业纪念册,婚纱相册,宝宝相册,旅游相册"/>
+  <meta name="Description" content="传给雅昌个性定制照片书、画册，全球顶尖的色彩管理方案，进口环保纸，每一个手工制作的相本选用无酸材料，为您的摄影作品定制出版级画册。"/>
+  <style>
+    body {
+      opacity: 0;
+    }
+  </style>
+</head>
+<body>
+	<div id="app">
+		 <unify-header></unify-header>
+		 <div class="container">
+		 	<div class="pageTitle">
+		        <h2 class="pageTitleTop">艺术台历</h2>
+		        <p class="pageTitleMid">13张专属照片，定制365天的时光陪伴</p>
+		        <p class="pageTitleMid">用艺术装饰你的生活，打造你的桌面展览</p>
+		        <p class="pageTitleDetail"><span>更多详情</span></p>
+		    </div>
+		    <div class="bothSides">
+		       <div class="imgBoxList" v-show="!frameShowBool">
+			       <div id="picContainer" class="picContainer picContainerOne" :style="{'background':nowColor}">
+			       				
+			       </div>
+		       	  <div class="boxA">
+		       	  	<span class="sizeFrame">A</span>
+		       	  </div>
+		       	  <div class="boxB">
+		       	  	<span class="sizeFrame">B</span>
+		       	  </div>
+		       	   <div class="boxC">
+		       	  	<span class="sizeFrame">C</span>
+		       	  </div>
+		       	   <div class="boxD">
+		       	  	<span class="sizeFrame">D</span>
+		       	  </div>
+		       </div>
+		       <div class="imgBoxList" v-show="frameShowBool">
+			       <div  class="picContainerTwo picContainer " style="background-image: url(https://www.artup.com/img/tl_icon13.png)">		
+			      
+			       </div>
+		       </div>
+		       <div class="typeBox">
+		       		<div class="btnChoose">选择尺寸</div>
+		       		<div class="sizeBox">
+		       			<!--<div @click='updateSizeFn(index)' v-for='(frameSize,index) in frameSize' class="k1_Foot1size_click" sizeType='A' :size='frameSize.code'>A&nbsp; {{frameSize.name}}</div>-->
+		       			<div @click='updateSizeFn(index)' class="k1_Foot1size_click" sizeType='A' :size='frameSize.code'>A&nbsp; 145X195mm</div>
+		       			<div @click='updateSizeFn(index)' class="k1_Foot1size_click" sizeType='A' :size='frameSize.code'>A&nbsp; 195X145mm</div>
+		       			
+		       		</div>
+		       		<!--<div class="btnChoose">选择页码</div>
+		       		<div class="sizeBox">
+		       			<div @click="updatePageFn(index)" class="k1_Foot1size_click k1_FootPage_click" v-for="(item,index) in framePage"  :page='item.code'>{{item.code}} </div>
+		       		</div>-->
+		       		<div class="btnChoose">选择颜色</div>
+		       		<div class="frameBox">
+		       			<!--<div class="picAndText" v-for="(item,index) in frameColor">
+		       				<div class="kuangAngle" @click="updateColorFn(index)"  frameType='zm' :code='item.code' :color='item.attr' :style="{'background':item.attr}"></div>
+		       				<div class="k1_Foot1frame_click k1_pre_frame">{{item.name}}</div>
+		       			</div>-->
+		       			<div class="picAndText">
+		       				<div class="kuangAngle" @click="updateColorFn(index)"  frameType='zm' style="background:#6a3906"></div>
+		       				<div class="k1_Foot1frame_click k1_pre_frame">咖啡色</div>
+		       			</div>
+		       			<div class="picAndText">
+		       				<div class="kuangAngle" @click="updateColorFn(index)"  frameType='zm'  style="background:##F7F7F7"></div>
+		       				<div class="k1_Foot1frame_click k1_pre_frame">白色</div>
+		       			</div>
+		       			
+		       		</div>
+		       		<div class="rightBottom">
+	                    <div class="showPrice">
+	                        ￥ : <span class="price_show">{{price}}</span><span class="skuCode" style="display: none"></span>
+	                    </div>
+	                    <a href="/album/albumSelect"><div class="startBook">开始定制</div></a>
+	                </div>
+		       </div>
+		       
+		    </div>
+		 </div>
+  		<unify-footer></unify-footer>
+	</div>
+</body>
+</html>
