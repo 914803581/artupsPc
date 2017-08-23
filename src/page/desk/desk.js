@@ -1,6 +1,6 @@
 import 'cube.css/src/scss/neat.scss'
 import 'element-ui/lib/theme-default/index.css'
-import './album.scss'
+import './desk.scss'
 import Vue from 'vue'
 import ElementUI from 'element-ui'
 import SelectTpl from '../script/index.js'

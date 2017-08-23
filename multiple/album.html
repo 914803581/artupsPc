@@ -22,7 +22,7 @@
 		    </div>
 		    <div class="bothSides">
 		       <div class="imgBoxList" v-show="!frameShowBool">
-			       <div id="picContainer" class="picContainer picContainerOne" :style="{background:''}">
+			       <div id="picContainer" class="picContainer picContainerOne" :style="{'background':nowColor}">
 			       				
 			       </div>
 		       	  <div class="boxA">
@@ -46,18 +46,18 @@
 		       <div class="typeBox">
 		       		<div class="btnChoose">选择尺寸</div>
 		       		<div class="sizeBox">
-		       			<div @click='updateSizeFn(index)' v-for='(frameSize,index) in frameSize' class="k1_Foot1size_click" sizeType='A' :size='frameSize.code'>A&nbsp; {{frameSize.name}}</div>
+		       			<div @click='updateSizeFn(index)' v-for='(frameSize,index) in frameSize' class="k1_Foot1size_click" sizeType='A' :size='frameSize.code'>{{frameSize.name}}</div>
 		       			
 
 		       		</div>
 		       		<div class="btnChoose">选择页码</div>
 		       		<div class="sizeBox">
-		       			<div class="k1_Foot1size_click k1_FootPage_click" v-for="item in framePage"  :page='item.code'>{{item.code}} </div>
+		       			<div @click="updatePageFn(index)" class="k1_Foot1size_click k1_FootPage_click" v-for="(item,index) in framePage"  :page='item.code'>{{item.code}} </div>
 		       		</div>
 		       		<div class="btnChoose">选择颜色</div>
 		       		<div class="frameBox">
-		       			<div class="picAndText" v-for="item in frameColor">
-		       				<div class="kuangAngle" frameType='zm' :code='item.code' :style="{'background':item.attr}"></div>
+		       			<div class="picAndText" v-for="(item,index) in frameColor">
+		       				<div class="kuangAngle" @click="updateColorFn(index)"  frameType='zm' :code='item.code' :color='item.attr' :style="{'background':item.attr}"></div>
 		       				<div class="k1_Foot1frame_click k1_pre_frame">{{item.name}}</div>
 		       			</div>
 		       			
