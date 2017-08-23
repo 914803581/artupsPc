@@ -48,35 +48,43 @@
         position: relative;
         float: left;
         box-sizing: border-box;
-         #picContainer{
-            border: 1px solid red;
+         .picContainer{
             position: absolute;
             bottom: 0px;
             left: 0px;
             background-position: center !important;
             background-size: 100% 100% !important;
          }
+         .picContainerTwo{
+            position: absolute;
+            top: 0px;
+            right: 100px !important;
+            left: inherit;
+            background-position: center !important;
+            background-size: 100% 100% !important;
+            width: 324px;height: 324px;
+         }
         .boxA{
-            width: 266.4px;
-            height: 333px;
+            width: 260px;
+            height: 325px;
             position: absolute;
             bottom: 0px;
             left: 0px;
             border: 2px solid rgb(220, 219, 219);
-            box-sizing: content-box;
+            box-sizing: border-box;
         }
         .boxB{
-            width: 333px;
-            height: 266.4px;
+            width: 325px;
+            height: 260px;
             position: absolute;
             bottom: 0px;
             left: 0px;
             border: 2px solid rgb(220, 219, 219);
-            box-sizing: content-box;
+            box-sizing: border-box;
         }
         .boxC{
-            width: 466.2px;
-            height: 333px;
+            width: 325px;
+            height: 325px;
             position: absolute;
             bottom: 0px;
             left: 0px;
@@ -84,22 +92,25 @@
             box-sizing: content-box;
         }
         .boxD{
-            width: 333px;
-            height: 466.2px;
+            width: 344.5px;
+            height: 481px;
             position: absolute;
             bottom: 0px;
             left: 0px;
             border: 2px solid rgb(220, 219, 219);
-            box-sizing: content-box;
+            box-sizing: border-box;
         }
         .boxE{
-            width: 333px;
-            height: 333px;
+            width: 481px;
+            height: 344.5px;
             position: absolute;
             bottom: 0px;
             left: 0px;
             border: 2px solid rgb(220, 219, 219);
-            box-sizing: content-box;
+            box-sizing: border-box;
+        }
+        .boxBorderNoe{
+            border: none !important;
         }
         .sizeFrame{
             position: absolute;
@@ -139,7 +150,7 @@
                 text-align: center;
                 line-height: 59px;
             }
-            .sizeActive{
+             .sizeActive{
                 border: 3px solid #2a2a2a;
                 box-sizing: border-box;
             }
@@ -165,6 +176,11 @@
                     background-size: 100% 100%;
                     background-repeat: no-repeat;
                     background-position: center;
+                }
+                .typeActive{
+                    border: 3px solid #a00912;
+                    border-radius: 5px;
+                    box-sizing: border-box;
                 }
                 .k1_Foot1frame_click {
                     border-radius: 5px;

@@ -292,7 +292,8 @@
 	  			pageNum:0,
 	  			pageSize:15,
 	  			sort:"createdDt",
-	  			order:'desc'
+	  			order:'desc',
+	  			carDbId:this.$route.query.carDbId
 			}
 			//alert(localStorage.getItem("userDbId"));
 			Api.car.carList(jsons).then(res=>{

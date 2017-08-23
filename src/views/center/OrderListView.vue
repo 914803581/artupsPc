@@ -24,6 +24,8 @@
 						<span class="lets4 ">操作</span>
 					</p>
 				</div>
+				
+				<!--订单list-->
 				<div ng-hide="totalCount==0" class="lineliet m ng-scope" order-height="" ng-repeat="order in orderList">
 					<div class="linetop m">
 						<span class="lines1">
@@ -85,6 +87,7 @@
 						</div>
 					</div>
 				</div>
+				
 			</div>
         </div>
       <left-menu selected="order"></left-menu>

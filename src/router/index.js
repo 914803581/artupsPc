@@ -3,7 +3,7 @@ import VueRouter from 'vue-router'
 // import noFound from '@/components/404'
 // 宝宝书
 import bbsMsg from '@/components/bbs/bbsMsg'
-//import bbsEdit from '@/components/bbs/bbsEdit'
+// import bbsEdit from '@/components/bbs/bbsEdit'
 import index from '@/components/component/index/index' // 首页
 import testStore from '@/components/store' // 测试vuex
 import WorksList from '@/views/center/WorksListView'
@@ -12,15 +12,16 @@ import MaterialList from '@/views/center/MaterialListView'
 import AccountManager from '@/views/center/AccountManagerView'
 import AccountSecurity from '@/views/center/AccountSecurityView'
 import AddressManager from '@/views/center/AddressManagerView'
+import AddressAdd from '@/views/center/AddressAddView'
 import OrderList from '@/views/center/OrderListView'
 import CouponList from '@/views/center/CouponListView'
 import UserWorks from '@/views/user/WorksListView'
 import UserMaterial from '@/views/user/MaterialListView'
 import UserCoupons from '@/views/user/CouponListView'
-import cart from '@/components/user/cart/cart'//购物车
-import confimOrder from '@/components/user/order/confimOrder'//确认订单
-import loginCallback from '@/components/user/loginCallback'//登陆跳转
-import payOrder from '@/components/user/pay/payOrder'//支付页面
+import cart from '@/components/user/cart/cart'// 购物车
+import confimOrder from '@/components/user/order/confimOrder'// 确认订单
+import loginCallback from '@/components/user/loginCallback'// 登陆跳转
+import payOrder from '@/components/user/pay/payOrder'// 支付页面
 import payCancel from '@/components/user/pay/payCancel'//取消支付
 import payOk from '@/components/user/pay/payOk'//取消支付
 import framedEdit from '@/components/framed/framedEdit'//框画编辑
@@ -31,6 +32,7 @@ import tlEdit from '@/components/bbs/tlEdit'  //台历编辑
 
 //多图编辑的入口
 import maxImgEdit from '@/components/bbs/bbsImgEdit'
+// eslint-disable-next-line no-multiple-empty-lines
 
 
 Vue.use(VueRouter)
@@ -54,7 +56,7 @@ let router = new VueRouter({
 //      title: '宝宝书编辑'
 //    }
 //  },
-     { // 宝宝书编辑页面
+    { // 宝宝书编辑页面
       path: '/album/maxImgEdit',
       name: 'maxImgEdit',
       component: maxImgEdit,
@@ -118,6 +120,13 @@ let router = new VueRouter({
       path: '/center/address',
       name: 'AddressManager',
       component: AddressManager,
+      meta: {
+        title: '收货地址管理'
+      }
+    }, {
+      path: '/center/address/addition',
+      name: 'AddressAdd',
+      component: AddressAdd,
       meta: {
         title: '收货地址管理'
       }
@@ -198,7 +207,7 @@ let router = new VueRouter({
       meta: {
         title: '框画编辑'
       }
-    }, 
+    },
     {
       path: '/album/albumSelect',
       name: 'albumSelect',
@@ -214,6 +223,7 @@ let router = new VueRouter({
       meta: {
         title: '海报编辑'
       }
+<<<<<<< HEAD
     },
     {
       path: '/album/tlEdit',
@@ -222,6 +232,8 @@ let router = new VueRouter({
       meta: {
         title: '台历编辑'
       }
+=======
+>>>>>>> aa1ffe8d1b3d8085cf9540f05acc65f459e5c2ac
     }
   ]
 })

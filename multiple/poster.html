@@ -21,45 +21,43 @@
 	        <p class="pageTitleDetail"><span>更多详情</span></p>
 	    </div>
 	    <div class="bothSides">
-	       <div class="imgBoxList">
-		       <div id="picContainer">
-		       				
+		       <div class="imgBoxList"  v-show="!frameShowBool">
+			       <div class="picContainer picContainerOne" :style="{'backgroundImage':'url('+picturePrefix+previewImageUrl+')'}">	
+			       </div>
+		       	  <div class="boxA shwoImgBox">
+		       	  	<span class="sizeFrame">A</span>
+		       	  </div>
+		       	  <div class="boxB shwoImgBox">
+		       	  	<span class="sizeFrame shwoImgBox">B</span>
+		       	  </div>
+		       	   <div class="boxC shwoImgBox">
+		       	  	<span class="sizeFrame">C</span>
+		       	  </div>
+		       	   <div class="boxD shwoImgBox">
+		       	  	<span class="sizeFrame">D</span>
+		       	  </div>
+		       	   <div class="boxE shwoImgBox">
+		       	  	<span class="sizeFrame">E</span>
+		       	  </div>
 		       </div>
-	       	   <div class="boxA">
-	       	  	<span class="sizeFrame">A</span>
-	       	  </div>
-	       	  <div class="boxB">
-	       	  	<span class="sizeFrame">B</span>
-	       	  </div>
-	       	   <div class="boxC">
-	       	  	<span class="sizeFrame">C</span>
-	       	  </div>
-	       	   <div class="boxD">
-	       	  	<span class="sizeFrame">D</span>
-	       	  </div>
-	       	   <div class="boxE">
-	       	  	<span class="sizeFrame">E</span>
-	       	  </div>
-
-	       </div>
-	       <div class="typeBox">
-	       		<div class="btnChoose">选择尺寸</div>
-	       		<div class="sizeBox">
-	   				<div class="k1_Foot1size_click" sizeType='A' size='400×500'>A&nbsp; 400×500 mm </div>
-	       			<div class="k1_Foot1size_click" sizeType='B' size='500×400'>B&nbsp; 500×400 mm </div>
-	       			<div class="k1_Foot1size_click" sizeType='D' size='700×500'>D&nbsp; 700×500 mm </div>
-	       			<div class="k1_Foot1size_click" sizeType='E' size='500×700'>E&nbsp; 500×700 mm </div>
-	       			<div class="k1_Foot1size_click" sizeType='C' size='500×500'>C&nbsp; 500×500 mm </div>
-	       			
-	       		</div>
-	       		
-	       		<div class="rightBottom">
-                    <div class="showPrice">
-                        ￥ : <span class="price_show">499</span><span class="skuCode" style="display: none"></span>
-                    </div>
-                    <a href="/poster/posterEdit?productType=poster"><div class="startBook">开始定制</div></a>
-                </div>
-	       </div>
+		       <div class="imgBoxList" v-show="frameShowBool">
+			       <div  class="picContainer picContainerTwo" :style="{backgroundImage:'url('+picturePrefix+previewImageUrl+')'}">		
+			      
+			       </div>
+		       </div>
+	       	<div class="typeBox">
+		       		<div class="btnChoose">选择尺寸</div>
+		       		<div class="sizeBox">
+		       			<div @click='updateSizeFn(index)' v-for='(frameSize,index) in frameSize' class="k1_Foot1size_click"  :sizeType='frameSize.name | firstCode' :size='frameSize.code'>&nbsp; {{frameSize.name}}</div>
+		       		</div>
+		       		
+		       		<div class="rightBottom">
+	                    <div class="showPrice">
+	                        ￥ : <span class="price_show">{{price}}</span><span class="skuCode" style="display: none"></span>
+	                    </div>
+	                    <a @click="startCustom"><div class="startBook">开始定制</div></a>
+	                </div>
+		       </div>
 	       
 	    </div>
 	 </div>
