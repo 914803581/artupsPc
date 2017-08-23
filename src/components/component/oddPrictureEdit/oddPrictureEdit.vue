@@ -10,7 +10,7 @@
 						</div>
 						<div class="title_right">
 							<span>{{nowProductData.size}}</span>
-							<span>{{nowProductData.frameType}}</span>
+							<span>{{nowProductData.frameType == 'undefined' ? '' : nowProductData.frameType }}</span>
 							<span>￥{{nowProductData.price}}</span>
 						</div>
 					</div>
@@ -23,13 +23,13 @@
 				            </div>
 							</div>
 							<div class="checkBS_b">
-								<el-select v-model="sizeValue" @change='onChangeSize(sizeValue)' placeholder="请选择尺寸">
+								<el-select v-show='frameSizeData.length > 1' v-model="sizeValue" @change='onChangeSize(sizeValue)' placeholder="请选择尺寸">
 								    <el-option
 								      v-for="item in frameSizeData"								      
 								      :value="item.code+'mm'">
 								    </el-option>
 								  </el-select>
-								  <el-select style='margin-top: 20px;' @change='onChangeType(typeValue)' v-model="typeValue" placeholder="请选择框形">
+								  <el-select v-show='frameTypeData.length > 1' style='margin-top: 20px;' @change='onChangeType(typeValue)' v-model="typeValue" placeholder="请选择框形">
 								    <el-option
 								      v-for="(item,index) in frameTypeData"
 								      :code='item.code'
@@ -42,8 +42,8 @@
 					<div class="box_menu">
 						<ul>
 							<li @click="updateStyle"><i class="iconfont"></i>更换板式</li>
-							<li><i class="iconfont" style="font-size: 20px; padding: 0px;"></i>加入购物车</li> 
-							<li><i class="iconfont"></i>立即购买</li> 
+							<li  @click="addCarFn(1)"><i class="iconfont" style="font-size: 20px; padding: 0px;"></i>加入购物车</li> 
+							<li  @click="addCarFn(2)"><i class="iconfont"></i>立即购买</li> 
 							<!--<li><i class="iconfont"></i>下一步</li> 
 							<li><i class="iconfont"></i>保存作品</li>-->
 						</ul>
@@ -146,7 +146,9 @@ export default {
       	nowProductData:{},//编辑产品的数据
       	nowSize : '' ,//当前框的大小
       	nowType : '' ,//当前框的类型
-      	editImageUrl : ''
+      	editImageUrl : '',
+      	editData:{},
+      	
       }	
    	},
    	props:["productData"],
@@ -208,16 +210,90 @@ export default {
       	this.updataSkuData();
       },
      postDatas(val){    
-      	console.log(val)
+      	console.log(val);
       	//获取数据覆盖便于二次编辑
 		var constName ='1_1';
-		this.$store.state.editData.ImgHashMap.getvalue(constName).actions = val.postData;		
+		//this.$store.state.editData.ImgHashMap.getvalue(constName).actions = val.postData;	
+		console.log(this.$store.state.editData.ImgHashMap.getvalue(constName))
+		var picObj = this.$store.state.editData.ImgHashMap.getvalue(constName);
+			picObj.actions = val.postData;
+			console.log(val.postData)
+			this.editData.editCnfName = this.nowProductData.editCnfName;
+			this.editData.userDbId = '2221214';
+			this.editData.category = this.nowProductData.category;
+			this.editData.sku = this.nowProductData.sku;
+			this.editData.status = 2;
+			this.editData.saveMode='parallel';
+			this.editData.tplCode = this.nowProductData.templateCode;
+			this.editData.skuCode = this.nowProductData.skuCode;
+			this.editData.skuId = this.nowProductData.skuId;
+
+			//alert(this.editData.sku)
+			this.editData.editPicture = '['+JSON.stringify(picObj)+']';
+			
+//		var picObj = {
+//				 	"constName":'1_1',
+//				 	"picDbId" : val.pictureDbId,
+//				 	"page" :val.picPage,
+//				 	"editCnfIndex" :val.styleType,
+//				 	"num" : val.picNum,
+//				 	 actions : {
+//				 	 	"thumbnailScale":val.thumbnailScale,
+//				 	 	"minDpiHeight":val.minDpiHeight,
+//				 	 	"minDpiWidth":val.minDpiWidth
+//				 	 },
+//                   "thumbnailImageUrl":val.thumbnailUrl, 
+//                   "previewThumbnailImageUrl" :val.previewThumbnailImageUrl,
+//                   "cropt" : "false",
+//                   "editCnfName": val.editCnfName,
+//                   "userDbId":val.userDbId
+//				 };
         $(".editbbs_one").next("img").attr("src",val.imgData).css("width","100%").css("height","100%").css("left",0).css("top",0)
      },
      updateStyle (){
      	this.switchFormat = true;
     		//$("#div_drap").Tdrag();
      },
+     /*加入购物车*/
+	addCarFn(type){
+		if($('.drap_img').attr('src')){
+			Api.work.workEdit(this.editData).then(res=>{
+				if(res.data.code == 'success'){
+					var jsons = {
+					edtDbId:res.data.extraCode,
+					thumbnailImageUrl:res.data.commandTitle,
+					category:this.getFromSession("category"),
+					price:this.nowProductData.price,
+					num:1,
+					total:this.nowProductData.price,
+					sku:this.nowProductData.sku,
+					skuCode:this.nowProductData.skuCode,
+					skuId:this.nowProductData.skuId,
+					status:1,
+					userDbId:'2221214'
+				}
+				Api.car.addCar(jsons).then(res=>{
+					if(res.data.code == 'success'){
+						if(type == 2){
+							location.href = '/user/cart?carDbId='+res.data.extraCode;
+						}
+						location.href = '/user/cart';
+						
+					}
+
+				},err=>{
+					
+				})
+				}
+			},err=>{
+				
+			});
+		}else{
+			alert('请上传图片')
+		}
+			
+
+		},
      closeFormat (){
      	this.switchFormat = false;	
      },
@@ -255,6 +331,7 @@ export default {
 		});	
 
 		}
+		
     },
     created(){//只执行一次
     		
@@ -263,15 +340,21 @@ export default {
     		
     		this.nowProductData = this.productData;//插件传递过来的编辑器上显示数据
     		this.$forceUpdate();
+    		console.log(this.nowProductData)
 		var queryObj = {'category':this.nowProductData.category};
 		//获取url的category值 以字符串的json格式保存到sessionStroage中
  		sessionStorage.setItem("urlQuery",JSON.stringify(queryObj)); 
 		//获取框画的类型
 		Api.sku.queryAttributes({category:this.getFromSession("category")}).then(res=>{
 			if(res){
-				console.log(res)
-				this.frameSizeData = res.data.attributes[1].attributeValues;
-				this.frameTypeData = res.data.attributes[0].attributeValues;	
+				for(var i = 0; i < res.data.attributes.length; i++ ){
+					if(res.data.attributes[i].code == 'box'){
+						this.frameTypeData = res.data.attributes[i].attributeValues;
+					}
+					if(res.data.attributes[i].code == 'size'){
+						this.frameSizeData = res.data.attributes[i].attributeValues;
+					}
+				}
 				/*设置默认的编辑框
 				 * nowSize ： 当前的尺寸 默认是前面传过来的
 				 * nowType ： 当前的框形

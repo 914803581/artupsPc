@@ -29,7 +29,9 @@ new Vue({
 	price : '', //框画的价钱
 	previewImageUrl : '',//框形预览图
 	frameType : '', //框形
-	editImageUrl : '' //编辑框背景图
+	editImageUrl : '', //编辑框背景图
+	skuId : '' ,//产品的skuid
+	templateCode : '' //产品的模板号
 	//editFrameSize : {}//图片编辑框的宽高obj{width,height}
   },
   components: {
@@ -72,6 +74,7 @@ new Vue({
   	updataSkuData (){
   		this.skuCode = this.getFromSession("category") + '.' + this.nowSize + '.' + this.nowType;
   		//console.log(this.skuCode)
+  		
   		var jsons = {
   			category:this.getFromSession("category"),
   			parameter:this.skuCode
@@ -81,11 +84,13 @@ new Vue({
   			this.previewImageUrl = res.data.previewImageUrl;//框形预览图
   			this.editImageUrl = res.data.editImageUrl;//编辑框背景图
   			this.price = res.data.price;
+  			this.templateCode =  res.data.templateCode;
+  			this.skuId = res.data.skuId;
   		});
   	},
   	/*开始定制*/
   	startCustom (){
-  		location.href = '/framed/framedEdit?size='+this.nowSize+"&editImageUrl="+this.editImageUrl+"&price="+this.price+'&frameType='+this.frameType+'&category='+this.getQueryString('category');
+  		location.href = '/framed/framedEdit?size='+this.nowSize+"&editImageUrl="+this.editImageUrl+"&price="+this.price+'&frameType='+this.frameType+'&category='+this.getQueryString('category')+'&skuCode='+this.skuCode+'&templateCode='+this.templateCode+'&skuId='+this.skuId;
   	}
   	
   },

@@ -22,6 +22,8 @@ function selectTpl(){
 				})
   				domObj.width = picBoxWidth;
   				domObj.height = picBoxHeight;
+  				$('.shwoImgBox').removeClass('boxBorderNoe');
+  				$('.'+str).addClass('boxBorderNoe');
 				//console.log(domeSize)
 				//callBack(domeSize);
 			}

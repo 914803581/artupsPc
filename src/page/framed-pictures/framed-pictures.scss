@@ -71,7 +71,7 @@
             bottom: 0px;
             left: 0px;
             border: 2px solid rgb(220, 219, 219);
-            box-sizing: content-box;
+            box-sizing: border-box;
         }
         .boxB{
             width: 325px;
@@ -80,7 +80,7 @@
             bottom: 0px;
             left: 0px;
             border: 2px solid rgb(220, 219, 219);
-            box-sizing: content-box;
+            box-sizing: border-box;
         }
         .boxC{
             width: 325px;
@@ -98,7 +98,7 @@
             bottom: 0px;
             left: 0px;
             border: 2px solid rgb(220, 219, 219);
-            box-sizing: content-box;
+            box-sizing: border-box;
         }
         .boxE{
             width: 481px;
@@ -107,7 +107,10 @@
             bottom: 0px;
             left: 0px;
             border: 2px solid rgb(220, 219, 219);
-            box-sizing: content-box;
+            box-sizing: border-box;
+        }
+        .boxBorderNoe{
+            border: none !important;
         }
         .sizeFrame{
             position: absolute;

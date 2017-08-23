@@ -44,7 +44,7 @@ const SAVE_WORK_URL = `${HOST}artup-build/builder/cors/edit/add/command.do?forma
 /* 作品列表 */
 const QUERY_WORK_LIST_URL = `${HOST}artup-build/builder/cors/edit/queryByPage.do?format=json&ignore=true`
 /* 查询sku */
-const QUERY_SKU_URL = `${HOST}artup-build/builder/sku.do?format=json&ignore=true`
+const QUERY_SKU_URL = `${HOST}artup-build/builder/sku.do?format=json&ignore=true&client=pc`
 /* 查询属性对象 */
 const QUERY_ATTRIBUTE_URL = `${HOST}artup-build/builder/service/attributes.do?format=json&ignore=true`
 

@@ -20,7 +20,10 @@
 				price : this.$route.query.price,
 				frameType : this.$route.query.frameType,
 			    category : this.$route.query.category,
-			    editImgUrl : Api.STATIC_SERVER_HOST+this.$route.query.editImageUrl
+			    editImgUrl : Api.STATIC_SERVER_HOST+this.$route.query.editImageUrl,
+			    skuCode : this.$route.query.skuCode,
+			    skuId : this.$route.query.skuId,
+			    sku : ''
 			},
 	      }	
 	   	},
@@ -43,20 +46,16 @@
 				width:arr[0]+'px',
 				height:arr[1]+'px'
 			});	
-			/*设置外框*/
-//			$('#waikuang').css({
-//				'background':'url('+Api.STATIC_SERVER_HOST+this.$route.query.editImageUrl+')'
-//			});
+			
 	    		}
 	    },
 	    created(){//只执行一次
 	    },
 	    mounted(){
-//	    		this.productData.type = '框画';
-//	    		this.productData.size = this.$route.query.size;
-//	    		this.productData.price = this.$route.query.price;
-//	    		this.productData.frameType = this.$route.query.frameType;
-//			this.productData.category = this.$route.query.category;
+	    	this.productData.sku = '框画.'+this.$route.query.size+'.'+this.$route.query.frameType;
+	    	this.productData.defDbId = '6afedcf6-b0e4-447d-afd9-c70449f42f50';
+	    	this.productData.templateCode = this.$route.query.templateCode;
+	    	this.productData.editCnfName = this.$route.query.templateCode;
 			this.initEditFrameSize();
 	    }
   }
