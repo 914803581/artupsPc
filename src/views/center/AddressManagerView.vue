@@ -82,7 +82,7 @@
     methods: {
       addition: function () {
         this.$router.push({
-          path: '/center/address/addition'
+          name: 'AddressAdd'
         })
       },
       getData: function () {

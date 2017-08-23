@@ -296,6 +296,11 @@ export default {
     }
   },
   Address: {
+    Add: (paramJson) => {
+      return HTTP.get(NEW_ADDRESS, {
+        params: paramJson
+      })
+    },
     List: (paramJson) => {
       return HTTP.get(ADDRESS, {
         params: paramJson

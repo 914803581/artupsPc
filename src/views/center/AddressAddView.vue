@@ -29,7 +29,7 @@
               <el-select v-show="county" v-model="ruleForm.county" placeholder="请选择区县" prop="county">
                 <el-option
                   :label="county.name"
-                  :value="county.id+''"
+                  :value="county.name"
                   :key="county.id"
                   v-for="county in county"
                 ></el-option>
@@ -73,7 +73,9 @@
         ruleForm: {
           name: '',
           province: '',
+          provinceText: '',
           city: '',
+          cityText: '',
           county: '',
           postcode: '',
           phone: '',
@@ -94,7 +96,8 @@
             {required: true, message: '请选择区县', trigger: 'change'}
           ],
           phone: [
-            {required: true, message: '请填写手机号', trigger: 'blur'}
+            {required: true, message: '请填写手机号', trigger: 'blur'},
+            {min: 11, message: '手机号长度为11位', trigger: 'blur'}
           ],
           addition: [
             {required: true, message: '请填写详细地址', trigger: 'blur'}
@@ -104,13 +107,33 @@
     },
     methods: {
       submitForm(formName) {
+        let _self = this
         this.$refs[formName].validate((valid) => {
-          if (valid) {
-            alert('submit!')
-          } else {
-            console.log('error submit!!')
-            return false
+          if (!valid) {
+            return
           }
+          let form = this.ruleForm
+          Api.Address.Add({
+            name: form.name,
+            mobile: form.phone,
+            province: [form.provinceText, form.cityText, form.county].join(','),
+            address: form.addition,
+            mainAddr: 'Y'
+          }).then((result) => {
+            return result.status === 200 ? result.request.response : ''
+          }).then((result) => {
+            result = JSON.parse(result)
+            if (result.code === 'success') {
+              this.$alert('添加成功', '提示', {
+                confirmButtonText: '确定',
+                callback: function () {
+                  _self.$router.push({
+                    path: '/center/address/'
+                  })
+                }
+              })
+            }
+          })
         })
       },
       resetForm(formName) {
@@ -124,31 +147,32 @@
     },
     watch: {
       'ruleForm.province': function (val) {
-        val = val - 0
         this.city = null
         this.ruleForm.city = ''
+        let _self = this
         this.region.forEach((province) => {
-          if (province.id === val && province.venue) {
-            this.city = province.venue
+          if (province.id === val - 0) {
+            _self.ruleForm.provinceText = province.name
+            _self.city = province.venue ? province.venue : null
           }
         })
       },
       'ruleForm.city': function (val) {
-        val = val - 0
         this.county = null
         if (!this.city) {
           return
         }
         this.ruleForm.county = ''
+        let _self = this
         this.city.forEach((city) => {
-          if (city.id === val && city.venue) {
-            this.county = city.venue
+          if (city.id === val - 0) {
+            _self.ruleForm.cityText = city.name
+            _self.county = city.venue ? city.venue : null
           }
         })
       }
     },
     created: function () {
-      console.log(region)
     }
   }
 </script>
