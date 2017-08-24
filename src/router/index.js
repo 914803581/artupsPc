@@ -223,7 +223,6 @@ let router = new VueRouter({
       meta: {
         title: '海报编辑'
       }
-<<<<<<< HEAD
     },
     {
       path: '/album/tlEdit',
@@ -232,8 +231,6 @@ let router = new VueRouter({
       meta: {
         title: '台历编辑'
       }
-=======
->>>>>>> aa1ffe8d1b3d8085cf9540f05acc65f459e5c2ac
     }
   ]
 })

@@ -72,7 +72,9 @@
 		    		"skuCode":this.$route.query.sku,
 		    		"category":this.$route.query.category,
 		    		"price":this.$route.query.price,
-		    		"skuId":this.$route.query.skuId
+		    		"skuId":this.$route.query.skuId,
+		    		"size":this.$route.query.size,
+		    		"titleName":"画册"
 	    		};
 	    		sessionStorage.setItem('bbsSlsectDate',JSON.stringify(jsons));
 	    		sessionStorage.setItem('titleName','画册');
