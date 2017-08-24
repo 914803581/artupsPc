@@ -5,7 +5,16 @@
       <div class="preview_comtent" ref="previewComtent">
         <div class="hard" ref="frontCover"></div>
         <div class="hard even" ref="coverPage"></div>
-        <div class="preview_page" :class="['style_type_'+item.type,{'odd':index%2,'even':!(index%2)}]" v-for="(item,index) in data">
+        <div class="preview_page"
+             :class="[
+               'style_type_'+item.type,
+               {
+                 'odd': index % 2 && item.type !== 9,
+                 'even': !(index%2) && item.type !== 9,
+                 't9_left': index%2 && item.type === 9,
+                 't9_right': !(index%2) && item.type === 9
+               }
+               ]" v-for="(item,index) in data">
           <img :key="img.id" :src="img.src" :class="['page_style_'+item.type,'img_style_'+item.type+'_'+img.index]"
                v-for="img in item.imgs">
           <label class="title">{{item.title}}</label>
@@ -102,7 +111,6 @@
       width: 900px;
       height: 550px;
       overflow: hidden;
-
       border-radius: 4px;
       .hard {
         background: #f1f1f1;
@@ -120,6 +128,13 @@
         background-image: linear-gradient(left, #fff 95%, #dadada 100%);
         box-shadow: inset 0 0 5px #666;
       }
+
+      .style_type_9 {
+        &:focus {
+          outline: 0 !important;
+        }
+      }
+
       .preview_page {
         position: relative;
         float: left;
@@ -145,13 +160,13 @@
         }
         .page_num {
           position: absolute;
-          bottom: 0;
+          bottom: 4px;
           font-size: 12px;
           &.left {
-            left: 0;
+            left: 4px;
           }
           &.right {
-            right: 0;
+            right: 4px;
           }
         }
         .page_style_1 {
@@ -222,9 +237,6 @@
           &.img_style_8_1, &.img_style_8_2 {
             margin-top: 30px;
           }
-        }
-        .page_style_9 {
-          border:1px solid red;
         }
       }
     }

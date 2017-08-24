@@ -140,7 +140,6 @@
         console.log(item)
       },
       paging: function () {
-        console.log(1)
       }
     },
     components: {
