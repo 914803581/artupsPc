@@ -196,6 +196,7 @@ export default {
       onChangeSize(data){
       	var str = data.substring(0,data.length-2);//当前尺寸
       	this.nowSize = str;
+      	this.productData.size = this.nowSize;
       	this.updataSkuData();
       	
       },
@@ -207,6 +208,7 @@ export default {
       		}
       	};
       	this.nowType = typeStr;
+      	this.productData.frameType = data;
       	this.updataSkuData();
       },
      postDatas(val){    
@@ -217,7 +219,7 @@ export default {
 		console.log(this.$store.state.editData.ImgHashMap.getvalue(constName))
 		var picObj = this.$store.state.editData.ImgHashMap.getvalue(constName);
 			picObj.actions = val.postData;
-			console.log(val.postData)
+			//console.log(val.postData)
 			this.editData.editCnfName = this.nowProductData.editCnfName;
 			this.editData.userDbId = '2221214';
 			this.editData.category = this.nowProductData.category;
@@ -227,7 +229,6 @@ export default {
 			this.editData.tplCode = this.nowProductData.templateCode;
 			this.editData.skuCode = this.nowProductData.skuCode;
 			this.editData.skuId = this.nowProductData.skuId;
-
 			//alert(this.editData.sku)
 			this.editData.editPicture = '['+JSON.stringify(picObj)+']';
 			
@@ -372,10 +373,12 @@ export default {
 		},err=>{
 			
 		});
-    		//如果更换板式弹框显示
-		$('.checkBS_b').click(function(e){
-
-		});
+		//拖拽选择尺寸框
+    		setTimeout(function(){
+			$("#div_drap").Tdrag({
+				 handle:".titleBox"
+			});
+    		},500)
 		
 
 		  
