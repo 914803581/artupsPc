@@ -14,12 +14,15 @@
 	    data () {
 	      return {
 	      	productData:{//传给插件的编辑数据
-				type : '框画',
+				type : '海报',
 				size : this.$route.query.size,
 				price : this.$route.query.price,
 				frameType : this.$route.query.frameType,
 			    category : this.$route.query.category,
-			    editImgUrl : Api.STATIC_SERVER_HOST+this.$route.query.editImageUrl
+			    editImgUrl : Api.STATIC_SERVER_HOST+this.$route.query.editImageUrl,
+			    skuCode : this.$route.query.skuCode,
+			    skuId : this.$route.query.skuId,
+			    sku : ''
 			}
 
 	      }	
@@ -52,6 +55,10 @@
 	    created(){//只执行一次
 	    },
 	    mounted(){
+	    		this.productData.sku = '海报.'+this.$route.query.size;
+		    	this.productData.defDbId = 'd6e44ca4-511f-41d5-87df-d8d75a491c09';
+		    	this.productData.templateCode = this.$route.query.templateCode;
+		    	this.productData.editCnfName = this.$route.query.templateCode;
 	    		this.initEditFrameSize();
 
 	    }

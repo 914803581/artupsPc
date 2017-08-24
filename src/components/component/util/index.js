@@ -1,12 +1,15 @@
 export default{
   install(Vue,options)
-  {
-  	
+  {	
   	//获得coustName  宝宝书
   	 Vue.prototype.getCoustName = function (dom) { 
   	 	return dom.parents(".pubilc_div").find(".pageleft span").attr("page")+'_'+dom.next("img").attr("imgsort")
   	 }
-  	
+  	 //获取台历的coustName
+  	 Vue.prototype.getCoustNameTaiLi = function (dom) { 
+  	 	return dom.parents(".pubilc_taili_div").find(".page span:nth-of-type(2)").text()+'_'+dom.next("img").attr("imgsort")
+  	 }  	
+  	 
   	//addToSession 循环url，存入session
     Vue.prototype.addToSession = function () { 
 		var obj = JSON.parse(sessionStorage.getItem("urlQuery"));

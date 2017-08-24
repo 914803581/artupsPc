@@ -6,7 +6,7 @@
 				<div class="comtent">
 					<div class="title">
 						<div class="title_left">
-							<span>宝宝书编辑</span>
+							<span>台历编辑</span>
 							<span>2017-07-14 11:05</span>
 						</div>
 						<div class="title_right">
@@ -15,19 +15,25 @@
 							<span>￥499</span>
 						</div>
 					</div>
-					<!--<transition name="el-zoom-in-top">
+					<transition name="el-zoom-in-top">
 						<div v-show="bbs.Switching" id="div_drap">
 							<div class="titleBox menubar_titleBox">
 								更换版式
 								<div @click="bbs.Switching=false" class="titleClose"><i class="iconfont">&#xe746;</i></div>
 							</div>
 							<div class="checkBS_b">
-								<div :style="{'width':itemImg.isTrue?'90%':'45%'}" :istrue="itemImg.isTrue" @click="chenkTemplate(index)" v-for="(itemImg,index) in mobanArr" :class="templateoindex==index?'img_div boder_actiev':'img_div'">
-									<img :src="itemImg.templateImg">
-								</div>
+								<ul>
+									<li>选择尺寸:</li>
+									<li>
+										<el-select @change="changeSize" size="small" v-model="optionValue" placeholder="请选择">
+											<el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value">
+											</el-option>
+										</el-select>
+									</li>
+								</ul>
 							</div>
 						</div>
-					</transition>-->
+					</transition>
 					<!--功能div-->
 					<div class="box_menu">
 						<ul>
@@ -43,38 +49,15 @@
 			</div>
 			<div class="line_comtent">
 				<div class="comtent scrollBar">
-					<div class="time_main_left time_main_left_ht">
-						<!--<div class="titlePage_bg">
-							<div class="page_fm">
-								<span>封 面</span>
-							</div>
-							<div style="background: #efefef;">
-							</div>
-						</div>-->
-						
+					<div class="time_main_left time_main_left_ht">						
 						<div class="time_bg taili_hengban" v-for="(item,index) in bbsTemplate_data">
 							<!--pubilc_div 这个class是留给整屏来定义的样式  click_template 是用vue里面的事件委派来解决避免不了的dom操作  hengban_bbs 横版增加的class  hengban_bbs 红线class-->
-							<div  :ddd= "item[0].firstPage" class="pubilc_div" :only="htmlTetx.only" :class="{'hengban_bbs':htmlTetx.only}" v-html="htmlTetx.template" @click="click_template($event,index,index2)" v-for="(htmlTetx,index2) in item">
-							</div>
-							<!--<div class="lastPage" v-if="item[0].lastPage">
-								<div class="page_bg"></div>
-								<div class="footer_page" style="background: #efefef;"></div>
-							</div>-->
-						</div>
-					</div>
-					<!--<div class="title">
-						<div class="title_left"><span>LOMO卡编辑</span> <span>2017-07-14 11:05</span></div>
-						<div class="title_right"><span>照片尺寸：102X152</span> <span>LOMO卡单张：74X100</span> <span>赠送物品</span></div>
-					</div>
-					<div style="margin-top: 0;" class="time_main_left">
-						<div style="height: 226px;" class="time_bg" v-for="(item,index) in lomoTemplate_data">
-							<div class="pubilc_div" @click="click_template_lomo($event)" :only="htmlTetx.only" :class="{'hengban_bbs':htmlTetx.only}" v-html="htmlTetx.template" v-for="(htmlTetx,index2) in item">
+							<div :ddd="item[0].firstPage" class="pubilc_div pubilc_taili_div" :only="htmlTetx.only" :class="{'hengban_bbs':htmlTetx.only}" v-html="htmlTetx.template" @click="click_template($event,index,index2)" v-for="(htmlTetx,index2) in item">
 							</div>
 						</div>
-					</div>-->
+					</div>
 				</div>
 			</div>
-			<!--<div class="line_comtent"><div class="comtent"><div class="title"><div class="title_left"><span>宝宝书编辑</span> <span>2017-07-14 11:05</span></div> <div class="title_right"><span>255x355mm</span> <span>56页</span> <span>￥499</span></div></div></div></div>-->
 			<!--底部的图片-->
 			<div v-DomHeight class="footer_img">
 				<div class="footer_up_tittle">
@@ -122,13 +105,11 @@
 			<edit-text :isEditText="iseditText"></edit-text>
 		</transition>
 		<!--<div-editText ></div-editText>-->
-
 		<preview-book :colorName="colorName" :visible.sync="previewDialogVisible" :data="previewData" @close="previewDialogVisible=false"></preview-book>
 	</div>
 </template>
 <script>
 	/* eslint-disable semi */
-
 	import { Message } from 'element-ui'
 	import { mapState, mapGetters, mapActions, mapMutations } from 'vuex'
 	import Header from '@/components/header/header.vue'
@@ -144,46 +125,23 @@
 	export default {
 		data() {
 			return {
-				colorName: '',
-				previewDialogVisible: false,
-				mobanArr: [ // 模版对应的图片
-					{
-						templateImg: 'http://image2.artup.com/resources/static/pc/images/bbs_pc01.jpg',
-						isTrue: false
+				tailiStyle:{  //这里1等于横，2为竖
+					plate:"1"	
+				},
+				//选择横版还是竖版
+				options: [{
+						value: '横',
+						label: '台历横版'
 					},
 					{
-						templateImg: 'http://image2.artup.com/resources/static/pc/images/bbs_pc02.jpg',
-						isTrue: false
-					},
-					{
-						templateImg: 'http://image2.artup.com/resources/static/pc/images/bbs_pc03.jpg',
-						isTrue: false
-					},
-					{
-						templateImg: 'http://image2.artup.com/resources/static/pc/images/bbs_pc04.jpg',
-						isTrue: false
-					},
-					{
-						templateImg: 'http://image2.artup.com/resources/static/pc/images/bbs_pc05.jpg',
-						isTrue: false
-					},
-					{
-						templateImg: 'http://image2.artup.com/resources/static/pc/images/bbs_pc06.jpg',
-						isTrue: false
-					},
-					{
-						templateImg: 'http://image2.artup.com/resources/static/pc/images/bbs_pc07.jpg',
-						isTrue: false
-					},
-					{
-						templateImg: 'http://image2.artup.com/resources/static/pc/images/bbs_pc08.jpg',
-						isTrue: false
-					},
-					{
-						templateImg: 'http://image2.artup.com/resources/static/pc/images/bbs_pc01.jpg',
-						isTrue: true
+						value: '竖',
+						label: '台历竖版'
 					}
 				],
+				optionValue: '', //选中的横竖板式
+				colorName: '',
+				previewDialogVisible: false,
+				mobanArr: [],
 				templateoindex: 0,
 				ImgHashMapBase64: new HashMap(),
 				isShowPreview: false,
@@ -223,6 +181,19 @@
 			...mapMutations({ //同步触发操作集合
 				delectFooter: "delectFooterData"
 			}),
+			chenk_style(){//切换横版和竖版的方法
+				$(".taili_pu").addClass("taili_pu_2");
+				$(".taili_pu_2").removeClass("taili_pu");
+			},
+			changeSize() {
+				if(this.optionValue == "横") {
+					$(".taili_pu_2").addClass("taili_pu");
+					$(".taili_pu").removeClass("taili_pu_2");
+				} else if(this.optionValue == "竖") {
+					$(".taili_pu").addClass("taili_pu_2");
+					$(".taili_pu_2").removeClass("taili_pu");
+				}
+			},
 			goCart() { //加入购物车
 				//字符串转换数组存储到对象里面
 				let bbsSlsectDate = JSON.parse(sessionStorage.getItem("bbsSlsectDate"));
@@ -290,7 +261,7 @@
 			assembleData() { //执行保存工作组装数据的公共函数
 				var vm = this;
 				var arrMap = []; //宝宝书图片的
-				
+
 				for(var i = 0; i < this.$store.state.editData.ImgHashMap.keys().length; i++) {
 
 					if(this.$store.state.editData.ImgHashMap.getvalue(this.$store.state.editData.ImgHashMap.keys()[i])) {
@@ -298,7 +269,7 @@
 						arrMap.push(this.$store.state.editData.ImgHashMap.getvalue(this.$store.state.editData.ImgHashMap.keys()[i]));
 					}
 				}
-				
+
 				//字符串转换数组存储到对象里面
 				let bbsSlsectDate = JSON.parse(sessionStorage.getItem("bbsSlsectDate"));
 				this.workEdit.editPicture = JSON.stringify(arrMap);
@@ -342,44 +313,73 @@
 				this.assembleData();
 				var vm = this;
 				console.log(this.workEdit)
-				Api.work.workEdit(this.workEdit).then((res) => {
-					if(res.data.code == "success") { //如果成功
-						res.data.commandTitle;
-						this.workEdit.edtDbId = res.data.extraCode;
-						console.log('保存的code:', res.data.extraCode);
-						let isOK = true
-						$(".comtent_chanpin .pubilc_div .bbsClass  .img_drap").each(function(index, el) {
-							if(!$(el).attr("src")) { //如果src存在
-								var page = $(el).parents(".pubilc_div").find(".pageleft >span").eq(0).text();
-								if(page) {
-									vm.$message({
-										showClose: true,
-										message: '请上传第' + page + '页图片'
-									});
-									isOK = false
-									return false;
-								}
-								if($(el).parents(".lomoTemplate")) { //lomo卡图片不完整
-									vm.$message({
-										showClose: true,
-										message: 'lomo卡图片上传不完整'
-									});
-									isOK = false
-									return false;
-								}
+				let isOK = true
+				$(".comtent_chanpin .pubilc_div .bbsClass  .img_drap").each(function(index, el) {
+					if(!$(el).attr("src")) { //如果src存在
+						var page = $(el).parents(".pubilc_div").find(".page span:nth-of-type(2)").text();
+						if(page) {
+							if(page == "封面") {
+								vm.$message({
+									showClose: true,
+									message: '请上传台历封面图片'
+								});
+								isOK = false
+								return false;
 							}
-						})
-						if(isOK) { //作品图片全部上传完毕
-							this.$message({
+							vm.$message({
 								showClose: true,
-								message: '作品已全部上传成功,预览作品后，请添加购物车购买 !',
-								type: 'success'
+								message: '请上传台历第' + page + '月图片'
 							});
-
+							isOK = false
+							return false;
 						}
 					}
-
 				})
+				if(isOK) { //作品图片全部上传完毕
+					this.$message({
+						showClose: true,
+						message: '作品已全部上传成功,预览作品后，请添加购物车购买 !',
+						type: 'success'
+					});
+				}
+
+				//				Api.work.workEdit(this.workEdit).then((res) => {
+				//					if(res.data.code == "success") { //如果成功
+				//						res.data.commandTitle;
+				//						this.workEdit.edtDbId = res.data.extraCode;
+				//						console.log('保存的code:', res.data.extraCode);
+				//						let isOK = true
+				//						$(".comtent_chanpin .pubilc_div .bbsClass  .img_drap").each(function(index, el) {
+				//							if(!$(el).attr("src")) { //如果src存在
+				//								var page = $(el).parents(".pubilc_div").find(".pageleft >span").eq(0).text();
+				//								if(page) {
+				//									vm.$message({
+				//										showClose: true,
+				//										message: '请上传第' + page + '页图片'
+				//									});
+				//									isOK = false
+				//									return false;
+				//								}
+				//								if($(el).parents(".lomoTemplate")) { //lomo卡图片不完整
+				//									vm.$message({
+				//										showClose: true,
+				//										message: 'lomo卡图片上传不完整'
+				//									});
+				//									isOK = false
+				//									return false;
+				//								}
+				//							}
+				//						})
+				//						if(isOK) { //作品图片全部上传完毕
+				//							this.$message({
+				//								showClose: true,
+				//								message: '作品已全部上传成功,预览作品后，请添加购物车购买 !',
+				//								type: 'success'
+				//							});
+				//						}
+				//					}
+				//
+				//				})
 			},
 			footerBoolean(val) { //素材库抬起底部图片
 				var vm = this;
@@ -390,17 +390,10 @@
 			},
 
 			postDatas(val) { //获取数据覆盖便于二次编辑
-				//如果是lomo卡
-				if($(".editbbs_one").hasClass("drap_img_lomo")) { //lomo
-					//是lomo卡调起图片编辑器
-					var constName = $(".editbbs_one").parents(".pubilc_div").find(".pageLomo").text() + '_1';
-					this.$store.state.editData.lomoHashMap.getvalue(constName).actions = val.postData;
-					var oPage = $(".editbbs_one").parents(".pubilc_div").find(".pageLomo").text();
-				} else {
-					var constName = this.getCoustName($(".editbbs_one"))
-					this.$store.state.editData.ImgHashMap.getvalue(constName).actions = val.postData;
-					var oPage = $(".editbbs_one").parents(".pubilc_div").find(".page .pageleft span").text();
-				}
+
+				var constName = this.getCoustNameTaiLi($(".editbbs_one"))
+				this.$store.state.editData.ImgHashMap.getvalue(constName).actions = val.postData;
+				var oPage = $(".editbbs_one").parents(".pubilc_div").find(".page .pageleft span").text();
 				$(".editbbs_one").next("img").attr("src", val.imgData).css("width", "100%").css("height", "100%").css("left", 0).css("top", 0)
 				//      ImgHashMapBase64
 				var oImgSort = $(".editbbs_one").next("img").attr("imgsort")
@@ -446,7 +439,7 @@
 					this.dataEditImg.oW = $($event.target).parent(".drapBox").width();
 					this.dataEditImg.oH = $($event.target).parent(".drapBox").height();
 					//点击时候获取coustName 从hashMap里面得到他有没第一次编辑的东西
-					var constName = this.getCoustName($($event.target))
+					var constName = this.getCoustNameTaiLi($($event.target))
 
 					this.dataEditImg.oActions = this.$store.state.editData.ImgHashMap.getvalue(constName).actions;
 					console.log(this.dataEditImg)
@@ -463,13 +456,15 @@
 				})
 			},
 			setPageIndex() { //设置页数
-				$(".comtent_chanpin .pubilc_div .time_pu .page").each(function(i,el){
-					if(i==0){
-						$(el).text("封 面")
-					}else{
+				$(".comtent_chanpin .pubilc_div .time_pu .page").each(function(i, el) {
+					if(i == 0) {
+						$(el).text("");
+						$(el).append("<span></span>");
+						$(el).append("<span></span>");
+						$(el).find("span:nth-child(2)").text("封面");
+					} else {
 						$(el).find("span:nth-child(2)").text(i);
 					}
-					
 				})
 			},
 			jisuan() { //动态计算面积
@@ -585,9 +580,11 @@
 			//设置书皮的操作
 			let colorName = JSON.parse(sessionStorage.getItem("bbsSlsectDate")).colorName;
 			//设置背景
-//			setBookBg(colorName, $(".titlePage_bg .page_fm"), $(".firstPage .page_bg"), $(".lastPage .page_bg"))
+			//			setBookBg(colorName, $(".titlePage_bg .page_fm"), $(".firstPage .page_bg"), $(".lastPage .page_bg"))
 			setTimeout(function() {
-				$("#div_drap").Tdrag();
+				$("#div_drap").Tdrag({
+					handle: ".titleBox"
+				});
 			}, 500)
 		}
 	}

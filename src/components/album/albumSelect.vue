@@ -15,25 +15,11 @@
 		    <div class="container-fluid ">
 		        <div class="row themeBox">
 			        <div @click='checkActive(index)' class="themeDiv text-center themeStyle" v-for="(item,index) in typeDataList"> 
-				        	<img class="img_div" :src="picturePrefix+item">
-				        	<div class="thName">风景竖版</div>
+				        	<img class="img_div" :src="picturePrefix+item.editImageUrl">
+				        	<div class="thName">{{item.content}}</div>
 				        	<div class="styleId">D01G01</div>
 			        </div>
-			        <!--<div class="themeDiv text-center themeStyle">
-			        		<img class="img_div" src="http://image2.artup.com/static/pc/imgs/album/huise-255-355-3.png">
-			        		<div class="thName">纪实竖版</div>
-			        		<div class="styleId">D02G01</div>
-			        </div>
-			        <div class="themeDiv text-center themeStyle">
-			        		<img class="img_div" src="http://image2.artup.com/static/pc/imgs/album/huise-255-355-1.png">
-			        		<div class="thName">建筑竖版</div>
-			        		<div class="styleId">D04G01</div>
-			        </div>
-			        <div class="themeDiv text-center themeStyle">
-			        		<img class="img_div select_theme" src="http://image2.artup.com/static/pc/imgs/album/huise-255-355-2.png">
-			        		<div class="thName">人像竖版</div>
-			        		<div class="styleId">D03G01</div>
-			        </div>-->
+			        
 		        </div>
 		    </div>
 		</div>
@@ -72,14 +58,13 @@
 		    		"skuCode":this.$route.query.sku,
 		    		"category":this.$route.query.category,
 		    		"price":this.$route.query.price,
-		    		"skuId":this.$route.query.skuId
+		    		"skuId":this.$route.query.skuId,
+		    		"size":this.$route.query.size,
+		    		"titleName":"画册"
 	    		};
 	    		sessionStorage.setItem('bbsSlsectDate',JSON.stringify(jsons));
 	    		sessionStorage.setItem('titleName','画册');
-	    		var typeDataList = this.$route.query.editImageUrl;
-	    		this.typeDataList =  typeDataList.split(',');
-	    		console.log(this.typeDataList)
-	    		console.log(this.$route.query.editImageUrl)
+	    		this.typeDataList = JSON.parse(this.$route.query.editImageUrl);
 			$('.img_div').click(function(){
 				$('.img_div').removeClass('active');
 				$(this).addClass('active');
