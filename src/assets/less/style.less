@@ -290,10 +290,9 @@ html,body{width:100%;height: 100%;font-family: "微软雅黑";font-weight: 500;}
         }
         //
         .time_main_left{
-            width:100%;
+           width:100%;
            overflow: auto;
-            margin-top: 30px;
-            
+           margin-top: 30px;          
             .time_bg{
                 float: left;
                 width: 320px;
@@ -307,6 +306,40 @@ html,body{width:100%;height: 100%;font-family: "微软雅黑";font-weight: 500;}
                     height: 100%;
                 }
 
+            }
+            >.taili_hengban{ //台历横版的情况
+                height: auto !important;
+                background: #efefef;                
+                .pubilc_div{
+                    height: 230px;
+                     &:nth-of-type(2n+2) .taili_pu{
+                        float: right;
+                    }
+                     &:nth-of-type(2n+2) .taili_pu_2{
+                        float: right;
+                    }                   
+                    //台历的样式
+                   >.taili_pu{             
+                       width: 152px;
+                       float:left;  
+                       height: 120px; 
+                       >.taili_template{
+                           width: 100%;
+                           height: 100%;
+                           background-color: #fff;
+                       }
+                    }
+                    .taili_pu_2{
+                           width: 152px;
+                           float:left;  
+                           height: 190px; 
+                           >.taili_template{
+                               width: 100%;
+                               height: 100%;
+                               background-color: #fff;
+                           }
+                    }                   
+                }
             }
         }
     }
@@ -329,6 +362,7 @@ html,body{width:100%;height: 100%;font-family: "微软雅黑";font-weight: 500;}
                margin-left: 20px !important;
              }
             .bbs_hengban{
+                
                 width: 280px;
                 height:160px;
                 margin: 18px auto 18px;
@@ -385,8 +419,11 @@ html,body{width:100%;height: 100%;font-family: "微软雅黑";font-weight: 500;}
     }
 
     .pubilc_div{
+        
+        
 //          transition: all 1.3s;
             box-sizing: border-box;
+            
                   .hcTemplatetext01{
                       .title_pu{
                               border: 1px solid #d2d2d2;
@@ -466,12 +503,10 @@ html,body{width:100%;height: 100%;font-family: "微软雅黑";font-weight: 500;}
                            margin:30px auto 102px;
                           line-height: 13px;font-size: 12px; overflow: hidden;
                       }
-                  }
-
-
-
-
-                   >.time_pu{
+              }
+                
+                     
+                .time_pu{
                     position: relative;
                     .bbsClass{
                        overflow: hidden;

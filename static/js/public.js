@@ -99,7 +99,6 @@ function HashMap () {
 }
 /*计算图片的缩放*/
 function dragThumb(cs_src, cs_divdom) { //cs_src图片的节点,框型（固定div）的节点
-
 	 imgWidth = parseFloat(cs_src.width());//原图宽
 	 imgHeight = parseFloat(cs_src.height());//原图高
 	 boxWidth = parseFloat(cs_divdom.width());//框宽
@@ -191,7 +190,11 @@ var bbsTemplateData={
 //	bbs12:'<div class="time_pu"><div class="bbsClass hcTemplatetext03"><div class="mainTitle title_pu" typestyle="3" textsort="1" ></div><div class="box_text title_pu" typestyle="3" textsort="2" ></div><div class="page"><div class="pageleft">第<span page=""></span>页</div><div class="pageRight"></div></div></div></div>'	
 	//lomo卡的模版
 	lomo1:'<div class="time_pu lomoTemplate"><div class="bbsClass bbs_hengban"><div class="drapBox div_page"><div class="drap_img drap_img_lomo"></div> <img imgsort="1" typestyle="1" src="" class="img_drap"></div></div>  <div class="page"><div class="pageRight pageLomo">&nbsp;</div> <div class="pageRight">6寸照片</div></div></div>',
-	lomo2:'<div class="time_pu lomoTemplate"><div class="drapBox bbsClass template04"><div class="drap_img drap_img_lomo"></div><img class="img_drap" imgSort="1" typeStyle="2" src=""/></div><div  class="page"><div class="pageRight pageLomo">&nbsp;</div><div class="pageRight">LOMO卡</div></div></div>'	
+	lomo2:'<div class="time_pu lomoTemplate"><div class="drapBox bbsClass template04"><div class="drap_img drap_img_lomo"></div><img class="img_drap" imgSort="1" typeStyle="2" src=""/></div><div  class="page"><div class="pageRight pageLomo">&nbsp;</div><div class="pageRight">LOMO卡</div></div></div>',
+		
+	taili1:'<div class="time_pu taili_pu"><div class="bbsClass drapBox taili_template"><div class="drap_img"></div><img  class="img_drap" imgSort="1" typeStyle="2" src=""/></div><div  class="page"> <span class="year"></span>第<span></span>月</div></div>',
+	taili2:'<div class="time_pu taili_pu_2"><div class="bbsClass drapBox taili_template"><div class="drap_img"></div><img  class="img_drap" imgSort="1" typeStyle="2" src=""/></div></p><div  class="page"><span class="year"></span>第<span></span>月</div></div>',	
+	taili3:'<div class="time_pu taili_pu"><img style="width:100%;height:100%" src="https://www.artup.com/img/tl_icon09.png"></div>'
 };
 
 /*定义画册八个板式模板*/
@@ -298,87 +301,140 @@ var lomoData_template=[
 ]
 
 //定义模版的数组
-var bbsData_template=[
+var bbsData_template=[	
 	[
 		{
-			"template":bbsTemplateData.bbs1,
-			"only":false,
-			"firstPage":true,//第一页必须有的属性
-			"lastPage":false   
-		}
-	],
-	[
-		{
-			"template":bbsTemplateData.bbs2,
-			"only":false,
+			"template":bbsTemplateData.taili1,
 			"firstPage":false,
-			"lastPage":false 
+			"lastPage":false,
+			"baseYear":"https://www.artup.com/img/tl_icon09.png"
 		},
 		{
-			"template":bbsTemplateData.bbs3,
-			"only":false,
-			"firstPage":false,
-			"lastPage":false 
-		}
-	],
-//	[
-//		{
-//			"template":bbsTemplateData.bbs4,
-//			"only":false,
-//			"firstPage":false,
-//			"lastPage":false 
-//		},
-//		{
-//			"template":bbsTemplateData.bbs5,
-//			"only":false,
-//			"firstPage":false,
-//			"lastPage":false 
-//		}
-//	],
-//	[
-//		{
-//			"template":bbsTemplateData.bbs6,
-//			"only":false,
-//			"firstPage":false,
-//			"lastPage":false 
-//		},
-//		{
-//			"template":bbsTemplateData.bbs7,
-//			"only":false,
-//			"firstPage":false,
-//			"lastPage":false 
-//		}
-//	],
-//	[
-//		{
-//			"template":bbsTemplateData.bbs8,
-//			"only":false,
-//			"firstPage":false,
-//			"lastPage":false 
-//		},
-//		{
-//			"template":bbsTemplateData.bbs8,
-//			"only":false,
-//			"firstPage":false,
-//			"lastPage":false 
-//		}
-//	],
-	[
-		{
-			"template":bbsTemplateData.bbs9,
-			"only":true,
-			"firstPage":false,
-			"lastPage":false 
+			"template":bbsTemplateData.taili1,
 		}
 	],
 	[
 		{
-			"template":bbsTemplateData.bbs2,
-			"only":false,
-			"firstPage":false,
-			"lastPage":true  //最后一页必须有的属性
+			"template":bbsTemplateData.taili3,
+
+		},
+		{
+			"template":bbsTemplateData.taili1,
+			
+		}
+	],
+	[
+		{
+			"template":bbsTemplateData.taili3,
+			
+		},
+		{
+			"template":bbsTemplateData.taili1,
+			
+		}
+	],
+	[
+		{
+			"template":bbsTemplateData.taili3,
+			
+		},
+		{
+			"template":bbsTemplateData.taili1,
+			
+		}
+	],
+	[
+		{
+			"template":bbsTemplateData.taili3,
+			
+		},
+		{
+			"template":bbsTemplateData.taili1,
+			
+		}
+	],
+	[
+		{
+			"template":bbsTemplateData.taili3,
+			
+		},
+		{
+			"template":bbsTemplateData.taili1,
+			
+		}
+	],
+	[
+		{
+			"template":bbsTemplateData.taili3,
+			
+		},
+		{
+			"template":bbsTemplateData.taili1,
+		
+		}
+	],
+	[
+		{
+			"template":bbsTemplateData.taili3,
+			
+		},
+		{
+			"template":bbsTemplateData.taili1,
+			
+		}
+	],
+	[
+		{
+			"template":bbsTemplateData.taili3,
+			
+		},
+		{
+			"template":bbsTemplateData.taili1,
+		
+		}
+	],
+	[
+		{
+			"template":bbsTemplateData.taili3,
+			
+		},
+		{
+			"template":bbsTemplateData.taili1,
+			
+		}
+	],
+	[
+		{
+			"template":bbsTemplateData.taili3,
+			
+		},
+		{
+			"template":bbsTemplateData.taili1,
+			
+		}
+	],
+	[
+		{
+			"template":bbsTemplateData.taili3,
+			
+		},
+		{
+			"template":bbsTemplateData.taili1,
+
+		}
+	],
+	[
+		{
+			"template":bbsTemplateData.taili3,
+
+		},
+		{
+			"template":bbsTemplateData.taili3,
+
+			
 		}
 	]
+	
 	
 ]
 

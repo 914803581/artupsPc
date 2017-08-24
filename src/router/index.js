@@ -1,9 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 // import noFound from '@/components/404'
-// 宝宝书
 import bbsMsg from '@/components/bbs/bbsMsg'
-// import bbsEdit from '@/components/bbs/bbsEdit'
 import index from '@/components/component/index/index' // 首页
 import testStore from '@/components/store' // 测试vuex
 import WorksList from '@/views/center/WorksListView'
@@ -27,10 +25,8 @@ import payOk from '@/components/user/pay/payOk'//取消支付
 import framedEdit from '@/components/framed/framedEdit'//框画编辑
 import posterEdit from '@/components/poster/posterEdit'//海报编辑
 import albumSelect from '@/components/album/albumSelect'
-
-//多图编辑的入口
-import maxImgEdit from '@/components/bbs/bbsImgEdit'
-// eslint-disable-next-line no-multiple-empty-lines
+import tlEdit from '@/components/bbs/tlEdit'  //台历编辑
+import maxImgEdit from '@/components/bbs/bbsImgEdit' //多图编辑的入口
 
 
 Vue.use(VueRouter)
@@ -205,21 +201,26 @@ let router = new VueRouter({
       meta: {
         title: '框画编辑'
       }
-    },
-    {
+    }, {
       path: '/album/albumSelect',
       name: 'albumSelect',
       component: albumSelect,
       meta: {
         title: '画册选择'
       }
-    },
-    {
+    }, {
       path: '/poster/posterEdit',
       name: 'posterEdit',
       component: posterEdit,
       meta: {
         title: '海报编辑'
+      }
+    }, {
+      path: '/album/tlEdit',
+      name: 'tlEdit',
+      component: tlEdit,
+      meta: {
+        title: '台历编辑'
       }
     }
   ]
