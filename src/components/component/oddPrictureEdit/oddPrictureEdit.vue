@@ -256,7 +256,8 @@ export default {
      },
      /*加入购物车*/
 	addCarFn(type){
-		if($('.drap_img').attr('src')){
+
+		if($('.drapBox img').attr('src')){
 			Api.work.workEdit(this.editData).then(res=>{
 				if(res.data.code == 'success'){
 					var jsons = {
@@ -280,7 +281,6 @@ export default {
 						location.href = '/user/cart';
 						
 					}
-
 				},err=>{
 					
 				})
