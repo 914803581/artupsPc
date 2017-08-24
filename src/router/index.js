@@ -215,12 +215,8 @@ let router = new VueRouter({
       meta: {
         title: '海报编辑'
       }
-<<<<<<< HEAD
     },
     {
-=======
-    }, {
->>>>>>> 3eb190e648f662761d0c3419f6b1080aa6d53445
       path: '/album/tlEdit',
       name: 'tlEdit',
       component: tlEdit,
