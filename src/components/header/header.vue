@@ -38,6 +38,7 @@
 </template>
 
 <script type="text/ecmascript-6">
+  import Api from '../../API.js'
   export default {
     name: 'nav-hander',
     data: function () {
@@ -88,6 +89,15 @@
         localStorage.userName = '头条快报'
         localStorage.avatar = 'http://img13.artimg.net/passport/avatar/002/141/731/150_150.png'
         window.location.reload()
+      },
+      Login: function () {
+        Api.user.login({"t" : "1"}).then(res=>{
+            //console.log(res);
+            //alert(res.data.authorizeCodeUrl);
+            window.location.href=res.data.authorizeCodeUrl;
+        },err=>{
+          alert('Error');
+        });
       },
       exit: function () {
         localStorage.clear()

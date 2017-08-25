@@ -114,12 +114,20 @@ const QUERY_ORDER_STATE = `${HOST}artup-build//builder/order/query.do?format=jso
 //const CUT_WEIXIN_IMG = `${HOST}artup-build/builder/cors/picture/cut.do?format=json&ignore=true`
 const CUT_WEIXIN_IMG = `${HOST}artup-build/image/cors/thumbnail.do?format=json&ignore=true`
 
+//
+const USER_LOGIN_URL = `${HOST}artup-build/wx/pc/authorizeCodeUrl.do?ignore=true&client=pc&format=json`
 
 export default {
 
   testBaidu: {
     test: (inter) => {
       return VueHttp.$http.get(HOST + inter)
+    }
+  },
+  user: {
+    login: (paraJsons) => {
+      //window.location.href=res.data.authorizeCodeUrl
+      return VueHttp.$http.get(USER_LOGIN_URL, {params: paraJsons})
     }
   },
   sku: {
