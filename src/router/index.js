@@ -4,15 +4,6 @@ import VueRouter from 'vue-router'
 import bbsMsg from '@/components/bbs/bbsMsg'
 import index from '@/components/component/index/index' // 首页
 import testStore from '@/components/store' // 测试vuex
-import WorksList from '@/views/center/WorksListView'
-import DraftList from '@/views/center/DraftListView'
-import MaterialList from '@/views/center/MaterialListView'
-import AccountManager from '@/views/center/AccountManagerView'
-import AccountSecurity from '@/views/center/AccountSecurityView'
-import AddressManager from '@/views/center/AddressManagerView'
-import AddressAdd from '@/views/center/AddressAddView'
-import OrderList from '@/views/center/OrderListView'
-import CouponList from '@/views/center/CouponListView'
 import UserWorks from '@/views/user/WorksListView'
 import UserMaterial from '@/views/user/MaterialListView'
 import UserCoupons from '@/views/user/CouponListView'
@@ -74,69 +65,6 @@ let router = new VueRouter({
       path: '/',
       beforeEnter: function () {
         location.href = '/welcome.html'
-      }
-    }, {
-      path: '/center/works',
-      name: 'WorksList',
-      component: WorksList,
-      meta: {
-        title: '我的作品'
-      }
-    }, {
-      path: '/center/draft',
-      name: 'DraftList',
-      component: DraftList,
-      meta: {
-        title: '草稿箱'
-      }
-    }, {
-      path: '/center/material',
-      name: 'MaterialList',
-      component: MaterialList,
-      meta: {
-        title: '我的素材'
-      }
-    }, {
-      path: '/center/account',
-      name: 'AccountManager',
-      component: AccountManager,
-      meta: {
-        title: '账户资料'
-      }
-    }, {
-      path: '/center/security',
-      name: 'AccountSecurity',
-      component: AccountSecurity,
-      meta: {
-        title: '账户安全'
-      }
-    }, {
-      path: '/center/address',
-      name: 'AddressManager',
-      component: AddressManager,
-      meta: {
-        title: '收货地址管理'
-      }
-    }, {
-      path: '/center/address/addition',
-      name: 'AddressAdd',
-      component: AddressAdd,
-      meta: {
-        title: '收货地址管理'
-      }
-    }, {
-      path: '/center/order',
-      name: 'OrderList',
-      component: OrderList,
-      meta: {
-        title: '订单管理'
-      }
-    }, {
-      path: '/center/coupons',
-      name: 'CouponList',
-      component: CouponList,
-      meta: {
-        title: '优惠券管理'
       }
     }, {
       path: '/user/works',

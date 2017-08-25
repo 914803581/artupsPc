@@ -72,9 +72,9 @@
       }
     },
     methods: {
-	  continueEdit($index){ //继续编辑
-	  	 location.href="/album/maxImgEdit?dbId="+this.workData[$index].dbId;
-	  },
+      continueEdit($index) { // 继续编辑
+        location.href = "/album/maxImgEdit?dbId=" + this.workData[$index].dbId
+      },
       deleteWorkList: function () {
         let deleteArr = []
         this.workData.forEach(function (work) {
@@ -160,7 +160,6 @@
 </script>
 
 <style lang="scss" type="text/scss" rel="stylesheet/sass">
-  @import "~cube.css/src/scss/neat.scss";
 
   .draft-list {
     .wrapper {

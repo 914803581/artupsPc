@@ -19,15 +19,15 @@
           child: [{
             id: 'works',
             label: '我的作品',
-            path: '/center/works'
+            path: '/center/works.html'
           }, {
             id: 'draft',
             label: '草稿箱',
-            path: '/center/draft'
+            path: '/center/draft.html'
           }, {
             id: 'material',
             label: '我的素材',
-            path: '/center/material'
+            path: '/center/material.html'
           }]
         }, {
           title: '账户管理',
@@ -35,15 +35,15 @@
           child: [{
             id: 'account',
             label: '账户资料',
-            path: '/center/account'
+            path: '/center/account.html'
           }, {
             id: 'security',
             label: '账户安全',
-            path: '/center/security'
+            path: '/center/security.html'
           }, {
             id: 'address',
             label: '收获地址管理',
-            path: '/center/address'
+            path: '/center/address.html'
           }]
         }, {
           title: '订单',
@@ -51,7 +51,7 @@
           child: [{
             id: 'order',
             label: '订单管理',
-            path: '/center/order'
+            path: '/center/order.html'
           }]
         }, {
           title: '优惠券',
@@ -59,7 +59,7 @@
           child: [{
             id: 'coupons',
             label: '优惠券管理',
-            path: '/center/coupons'
+            path: '/center/coupons.html'
           }]
         }]
       }

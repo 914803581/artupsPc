@@ -23,7 +23,7 @@
               <span class="text">{{item.mobile}}</span>
               <label>邮编：</label>
               <span class="text">100000</span>
-              <p class="address">{{item.address}}</p>
+              <p class="address">{{item.province}},{{item.address}}</p>
               <div class="set-default-box">
                 <el-button v-show="!startDelete&&!item.hasDefault" @click="setDefault(item)" class="btn" type="danger">
                   设为默认
@@ -32,15 +32,15 @@
                 <el-button v-show="startDelete" @click="showEditBox(item)" class="btn" type="danger">编辑</el-button>
               </div>
             </div>
-            <el-pagination
-              v-show="total>pageSize"
-              small
-              layout="prev, pager, next"
-              :page-size="pageSize"
-              :total="total"
-              @current-change="paging">
-            </el-pagination>
           </div>
+          <el-pagination
+            v-show="total>pageSize"
+            small
+            layout="prev, pager, next"
+            :page-size="pageSize"
+            :total="total"
+            @current-change="paging">
+          </el-pagination>
         </div>
         <left-menu selected="address"></left-menu>
       </div>
@@ -76,21 +76,21 @@
         addressList: [],
         radioAddress: '',
         total: 0,
-        pageSize: 15
+        pageSize: 5
       }
     },
     methods: {
       addition: function () {
-        this.$router.push({
-          name: 'AddressAdd'
-        })
+        location.href = 'address/add.html'
       },
-      getData: function () {
-        this.pageNum -= 1
+      getData: function (pn) {
+        if (pn) {
+          this.pageNum = pn
+        }
         Api.Address.List({
           status: 1,
-          pageNum: this.pageNum,
-          pageSize: 15,
+          pageNum: this.pageNum - 1,
+          pageSize: this.pageSize,
           sort: 'createdDt'
         }).then((result) => {
           return result.status === 200 ? result.request.response : ''
@@ -108,18 +108,33 @@
         this.radioAddress = ''
       },
       deleteAddress: function () {
+        let _self = this
         if (!this.radioAddress) {
+          this.$alert('请选择需要删除的地址！', '提示')
           return
         }
-        Api.Address.Delete({
-          dbId: this.radioAddress
-        }).then((result) => {
-          return result.status === 200 ? result.request.response : ''
-        }).then((result) => {
-          if (result.code === 'success') {
-            this.pageNum = 1
-            this.getData()
-          }
+        this.$confirm('确定要删除该地址信息吗?', '提示', {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          type: 'warning'
+        }).then(() => {
+          Api.Address.Delete({
+            dbId: _self.radioAddress
+          }).then((result) => {
+            return result.status === 200 ? result.request.response : ''
+          }).then((result) => {
+            result = JSON.parse(result)
+            if (result.code === 'success') {
+              if (_self.addressList.length > 1) {
+                _self.getData()
+              } else {
+                _self.pageNum--
+                if (_self.pageNum) {
+                  _self.getData()
+                }
+              }
+            }
+          })
         })
       },
       setDefault: function (address) {
@@ -139,7 +154,8 @@
       showEditBox: function (item) {
         console.log(item)
       },
-      paging: function () {
+      paging: function (pn) {
+        this.getData(pn)
       }
     },
     components: {
@@ -149,13 +165,12 @@
     },
     watch: {},
     created: function () {
-      this.getData()
+      this.getData(1)
     }
   }
 </script>
 
 <style lang="scss" type="text/scss" rel="stylesheet/sass">
-  @import "~cube.css/src/scss/neat.scss";
 
   .address-manager {
     .btn {
@@ -196,7 +211,8 @@
         margin-right: 22px;
       }
       .address-list {
-        padding: 20px 34px;
+        padding: 0 34px 20px;
+        margin-bottom: 38px;
       }
       .address-details {
         position: relative;
@@ -254,6 +270,28 @@
           display: block;
           margin: -13px 0 0 -50px;
         }
+      }
+    }
+    .el-pagination {
+      position: absolute;
+      bottom: 20px;
+      left: 0;
+      right: 0;
+      text-align: center;
+      button:hover {
+        color: #a00912;
+      }
+      .el-pager li:hover {
+        color: #a00912;
+      }
+      .number {
+        padding: 0 15px;
+        font-size: 14px;
+      }
+      .number.active {
+        border-color: #fff;
+        background-color: #fff;
+        color: #a00912;
       }
     }
   }

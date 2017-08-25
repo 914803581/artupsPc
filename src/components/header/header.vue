@@ -2,7 +2,7 @@
   <header class="unify-header">
     <div class="wrapper">
       <a href="/welcome.html" class="logo">
-        <h1 class="title">雅昌影业</h1>
+        <h1 class="title">雅昌影像</h1>
       </a>
       <ul class="menu">
         <li class="item" v-for="item in menus">
@@ -48,35 +48,34 @@
         }, {
           label: '画册',
           link: '/album.html?category=huace'
-        },
-          {
-            label: '框画',
-            link: '/framed-pictures.html?category=kuanghua'
-          }, {
-            label: '海报',
-            link: '/poster.html?category=haibao'
-          }, {
-            label: '小时光',
-            link: '/album/imgEditMsg?category=baobaoshu&tplCode=pc_baobaoshu_170-235_24_single'
-          }, {
-            label: '台历',
-            link: '/desk.html?category=taili'
-          }],
+        }, {
+          label: '框画',
+          link: '/framed-pictures.html?category=kuanghua'
+        }, {
+          label: '海报',
+          link: '/poster.html?category=haibao'
+        }, {
+          label: '小时光',
+          link: '/album/imgEditMsg?category=baobaoshu&tplCode=pc_baobaoshu_170-235_24_single'
+        }, {
+          label: '台历',
+          link: '/desk.html?category=taili'
+        }],
         userMenu: [{
           label: '我的主页',
-          link: '/welcome.html'
+          link: '/center/works.html'
         }, {
           label: '订单管理',
-          link: '/center/order'
+          link: '/center/order.html'
         }, {
           label: '我的作品',
-          link: '/center/works'
+          link: '/center/works.html'
         }, {
           label: '我的草稿箱',
-          link: '/center/draft'
+          link: '/center/draft.html'
         }, {
           label: '我的素材',
-          link: '/center/material'
+          link: '/center/material.html'
         }],
         userInfo: null,
         isLogin: false

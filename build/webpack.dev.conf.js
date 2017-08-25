@@ -54,4 +54,26 @@ config.build.multiplePageList.forEach((page) => {
   }));
 });
 
+var userCenter = config.build.userCenterPage;
+userCenter.list.forEach((page) => {
+  let entryKey = `${(page.path || userCenter.path)}/${page.pageName}`
+  webpackConfig.entry[entryKey] = `./src/views/center/entry/${page.entry}`
+  webpackConfig.plugins.push(new HtmlWebpackPlugin({
+    filename: path.resolve(__dirname, `../dist/${page.path || userCenter.path}/${page.pageName}.html`),
+    template: path.resolve(__dirname, `../src/views/center/template/${page.template || userCenter.template}`),
+    title: page.title,
+    keywords: page.keywords || userCenter.keywords,
+    description: page.description || userCenter.description,
+    inject: true,
+    chunks: [entryKey],
+    minify: {
+      removeComments: true,
+      collapseWhitespace: true,
+      removeAttributeQuotes: true
+    },
+    resourcePrefix: '/',
+    chunksSortMode: 'dependency'
+  }));
+});
+
 module.exports = webpackConfig
