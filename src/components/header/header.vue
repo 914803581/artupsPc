@@ -2,7 +2,7 @@
   <header class="unify-header">
     <div class="wrapper">
       <a href="/welcome.html" class="logo">
-        <h1 class="title">雅昌影业</h1>
+        <h1 class="title">雅昌影像</h1>
       </a>
       <ul class="menu">
         <li class="item" v-for="item in menus">
@@ -38,6 +38,7 @@
 </template>
 
 <script type="text/ecmascript-6">
+  import Api from '../../API.js'
   export default {
     name: 'nav-hander',
     data: function () {
@@ -48,35 +49,34 @@
         }, {
           label: '画册',
           link: '/album.html?category=huace'
-        },
-          {
-            label: '框画',
-            link: '/framed-pictures.html?category=kuanghua'
-          }, {
-            label: '海报',
-            link: '/poster.html?category=haibao'
-          }, {
-            label: '小时光',
-            link: '/album/imgEditMsg?category=baobaoshu&tplCode=pc_baobaoshu_170-235_24_single'
-          }, {
-            label: '台历',
-            link: '/desk.html?category=taili'
-          }],
+        }, {
+          label: '框画',
+          link: '/framed-pictures.html?category=kuanghua'
+        }, {
+          label: '海报',
+          link: '/poster.html?category=haibao'
+        }, {
+          label: '小时光',
+          link: '/album/imgEditMsg?category=baobaoshu&tplCode=pc_baobaoshu_170-235_24_single'
+        }, {
+          label: '台历',
+          link: '/desk.html?category=taili'
+        }],
         userMenu: [{
           label: '我的主页',
-          link: '/welcome.html'
+          link: '/center/works.html'
         }, {
           label: '订单管理',
-          link: '/center/order'
+          link: '/center/order.html'
         }, {
           label: '我的作品',
-          link: '/center/works'
+          link: '/center/works.html'
         }, {
           label: '我的草稿箱',
-          link: '/center/draft'
+          link: '/center/draft.html'
         }, {
           label: '我的素材',
-          link: '/center/material'
+          link: '/center/material.html'
         }],
         userInfo: null,
         isLogin: false
@@ -89,6 +89,15 @@
         localStorage.userName = '头条快报'
         localStorage.avatar = 'http://img13.artimg.net/passport/avatar/002/141/731/150_150.png'
         window.location.reload()
+      },
+      Login: function () {
+        Api.user.login({"t" : "1"}).then(res=>{
+            //console.log(res);
+            //alert(res.data.authorizeCodeUrl);
+            window.location.href=res.data.authorizeCodeUrl;
+        },err=>{
+          alert('Error');
+        });
       },
       exit: function () {
         localStorage.clear()

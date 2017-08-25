@@ -3,95 +3,72 @@
     <unify-header></unify-header>
     <div class="container">
       <div class="wrapper">
-      	<div class="lineRs r">
-			<ul id="ul_activePay" order-status="">
-				<li ng-click="AllPay()">全部订单 <i class="activePay"></i></li>
-				<li class="IdPay" ng-click="UnpaidPay()">待付款 <b aot-number="" class="ng-binding" style="width: 24px; right: -14px;">153</b> <i></i> </li>
-				<li class="IdPay" ng-click="AlreadyPay()">已支付 <b aot-number="" class="ng-binding" style="width: 24px; right: -14px;">38</b> <i></i> </li>
-				<li class="IdPay" ng-click="quantityCana()">已取消<b aot-number="" class="ng-binding" style="width: 24px; right: -14px;">14</b> <i></i> </li>
-				<!-- <li ng-click="waitGoods()">待收货 <b aot-number>{{quantityWait}}</b> <i></i></li> -->
-				
-			</ul>
-		</div>
         <div class="main">
-          <div class="lineR lineR2 r">
-				<div class="linetit m">
-					<span class="l">订单列表</span>
-					<p class="r">
-						<span class="lets1 ">收货人</span>
-						<span class="lets2 ">金额</span>
-						<span class="lets3 ">状态</span>
-						<span class="lets4 ">操作</span>
-					</p>
-				</div>
-				
-				<!--订单list-->
-				<div ng-hide="totalCount==0" class="lineliet m ng-scope" order-height="" ng-repeat="order in orderList">
-					<div class="linetop m">
-						<span class="lines1">
-							 <span class="ng-binding">2017-08-07 10:56:15</span>				
-						</span>
-						<span class="lines1">
-							订单号：<span class="ng-binding">20170807105615939</span>
-						</span>
-					</div>
-					<div class="linecont">
-						<div class="lect1 l">
-							<div class="lectmain ng-scope" ng-repeat="childOrder in order.orderItems">
-								<div class="lectm_img l">
-									<img ng-src="http://testpcbuilder.artup.com/upload/758a86701f2d4d29980a535c5d7066f31493877673.jpg" src="http://testpcbuilder.artup.com/upload/758a86701f2d4d29980a535c5d7066f31493877673.jpg">									
-								</div>
-								<div class="lectm_ct r">
-									<p class="lect_top">
-										<span class="1 ng-binding">
-											未命名 2017-05-04 14:01
-										</span>	
-										<span class="lect_cer ng-binding" style="font-weight: normal;">
-											
-										</span>
-										<span class="r ng-binding">
-											x 1
-										</span>
-									</p>
-									<p class="lect_cer ng-binding">
-										海报/400X500mm                                                                                      
-									</p>
-									
-								</div>
-							</div>
-							
-						</div>
-						<div class="lect0 lets1 l shr ng-binding" style="height: 123px;">
-							彭进
-						</div>
-						<div class="lect0 lets2 l jine" style="height: 123px;">
-							<p class="jine01 mt1">应付</p>
-							<p class="jine02">￥
-							 <span class="ng-binding">79.00</span></p>
-							<p class="jine03">总 额 :￥<span class="ng-binding">79.00</span></p>
-							<p class="jine04">（含运费：￥0）</p>
-						</div>
-						<div class="lect0 lets3 l fkzt" style="height: 123px;">
-							<p class="ddfk mt1 ng-binding">等待支付</p>
-							<!-- <p class="ywc">已完成</p> -->
-							<p><a href="user.html#/orderInfo?orderId=23750">订单详情</a></p>
-							<p><a href="user.html#/Logistics?orderCode=20170807105615939">查看物流</a></p>
-						</div>
-						<div class="lect0 lets4 l" style="height: 123px;">
-						<!-- {{order.status}} -->
-							<!-- ngIf: order.status!=-1 --><input class="csctbtn1 mt1 ng-scope" aa="微信支付" ng-click="payZF(order,order.paytypename)" ng-show="true" ng-if="order.status!=-1" type="button" name="" id="" value="付款"><!-- end ngIf: order.status!=-1 -->
-							<!-- ngIf: order.status=='0' --><input ng-if="order.status=='0'" ng-show="true" ng-click="cancellationOrder($index)" class="csctbtn2 mt1 ng-scope" type="button" name="" id="" value="取消订单"><!-- end ngIf: order.status=='0' -->
-							<!-- ngIf: order.status=='Cancel' || order.status==-1 -->
-							<!-- <input ng-show="{{order.PaymentStatus!='2'}}"  ng-if="order.status=='Cancel'" ng-click="cancellationOrder($index)" class="csctbtn2 mt1" type="button" name="" id="" value="取消订单" /> -->
-							<input style="cursor:default;" ng-show="false" class="csctbtn2 mt1 ng-hide" type="button" name="" id="" value="已支付">
-						</div>
-					</div>
-				</div>
-				
-			</div>
+          <div class="filter">
+            <ul class="filter-list">
+              <li class="item" @click="changeFilter(item)" :class="{activate:item.elect}" v-for="item in filterOptions">
+                <label>{{item.label}}</label>
+                <i v-show="item.countIndicator" class="count-indicator">{{item.countIndicator}}</i>
+              </li>
+            </ul>
+          </div>
+          <div class="panel">
+            <div class="list-head">
+              <label class="order-list">订单列表</label>
+              <label class="consignee">收货人</label>
+              <label class="amount">金额</label>
+              <label class="state">状态</label>
+              <label class="operation">操作</label>
+            </div>
+            <ul class="order-list" v-if="orderList.length">
+              <li class="item" v-for="item in orderList">
+                <div class="head">
+                  <span class="time">{{item.createdDt}}</span>
+                  <span class="order-id">订单号：{{item.code}}</span>
+                </div>
+                <div class="order-main" :style="{height:item.cars.length*140+'px'}">
+                  <div class="list">
+                    <div class="car" v-for="car in item.cars">
+                      <img :src="car.thumbnailImageUrl" class="thumbnail">
+                      <h6 class="title">{{car.sku}}</h6>
+                      <h6 class="specification">{{car.sku}}</h6>
+                    </div>
+                  </div>
+                  <div class="name">
+                    <span class="consignee">王彦民</span>
+                  </div>
+                  <div class="amount">
+                    <div class="parcel">
+                      <label>应付</label>
+                      <span class="val">{{item.total}}</span>
+                      <span class="total">{{item.total}}</span>
+                      <span class="freight">（含运费:￥0）</span>
+                    </div>
+                  </div>
+                  <div class="state">
+                    <span class="state-text">{{item.orderState}}</span>
+                  </div>
+                  <div class="operation">
+                    <div class="parcel">
+                      <a href="#" class="payment-btn">付款</a>
+                      <a href="#" class="cancel-order">取消订单</a>
+                    </div>
+                  </div>
+                </div>
+              </li>
+            </ul>
+            <el-pagination
+              v-show="total>pageSize"
+              small
+              layout="prev, pager, next"
+              :page-size="pageSize"
+              :total="total"
+              @current-change="paging">
+            </el-pagination>
+          </div>
         </div>
-      <left-menu selected="order"></left-menu>
-     </div>
+        <left-menu selected="order"></left-menu>
+      </div>
     </div>
     <unify-footer></unify-footer>
   </div>
@@ -101,25 +78,67 @@
   import Header from '../../components/header/header.vue'
   import Footer from '../../components/footer/footer.vue'
   import LeftMenu from '../../components/center/menu.vue'
+  import Api from '@/api.js'
 
   export default {
     data: function () {
       return {
-        form: {
-          email: '',
-          name: '',
-          region: '',
-          date1: '',
-          date2: '',
-          delivery: false,
-          type: [],
-          resource: '',
-          desc: ''
-        },
-        imageUrl: ''
+        total: 1000,
+        pageSize: 5,
+        pageNum: 1,
+        orderList: [],
+        filterOptions: [{
+          label: '全部订单',
+          elect: true,
+          countIndicator: 0
+        }, {
+          label: '待付款',
+          elect: false,
+          countIndicator: 10
+        }, {
+          label: '已支付',
+          elect: false,
+          countIndicator: 32
+        }, {
+          label: '已取消',
+          elect: false,
+          countIndicator: 5
+        }]
       }
     },
-    methods: {},
+    methods: {
+      changeFilter: function (filter) {
+        this.filterOptions.forEach((filter) => {
+          filter.elect = false
+        })
+        filter.elect = true
+      },
+      paging: function (pn) {
+        if (pn) {
+          this.pageNum = pn - 1
+        }
+        Api.Order.OrderList({
+          format: 'json',
+          ignore: true,
+          pageSize: this.pageSize,
+          pageNum: this.pageNum,
+          sort: 'createdDt',
+          order: 'desc',
+          userDbId: 2221214
+        }).then((result) => {
+          return result.status === 200 ? result.request.response : ''
+        }).then((result) => {
+          result = JSON.parse(result)
+          this.orderList = result.results
+          if (result.totalPage) {
+            this.pageNum = result.totalPage
+          }
+          if (result.totalRecord) {
+//            this.total = result.totalRecord
+          }
+        })
+      }
+    },
     components: {
       'unify-header': Header,
       'unify-footer': Footer,
@@ -127,12 +146,12 @@
     },
     watch: {},
     created: function () {
+      this.paging(1)
     }
   }
 </script>
 
 <style lang="scss" type="text/scss" rel="stylesheet/sass">
-  @import "~cube.css/src/scss/neat.scss";
 
   .order-manager {
     .wrapper {
@@ -149,14 +168,260 @@
       width: 960px;
       min-height: 668px;
       float: right;
-      border-radius: 5px;
-      border: 1px solid #dedede;
+      .filter {
+        padding-left: 10px;
+      }
+    }
+    .panel {
+      padding: 26px;
       background: #fff;
-      h2.title {
-        padding-left: 30px;
+      border-radius: 5px;
+      border: 1px solid #dcdcdc;
+    }
+
+    .list-head {
+      font-size: 0;
+      .order-list, .consignee, .amount, .state, .operation {
+        display: inline-block;
+        box-sizing: border-box;
+        color: #303030;
         font-size: 16px;
-        line-height: 55px;
-        border-bottom: 1px solid #DEDEDE;
+        font-weight: 400;
+        text-align: center;
+      }
+      .order-list {
+        width: 400px;
+        padding-left: 0.46em;
+        text-align: left;
+      }
+      .consignee {
+        width: 130px;
+      }
+      .amount {
+        width: 144px;
+      }
+      .state {
+        width: 116px;
+      }
+      .operation {
+        width: 116px;
+      }
+    }
+    ul.order-list {
+      min-height: 456px;
+      .item {
+        margin-top: 18px;
+        border: 1px solid #dedede;
+        border-radius: 2px;
+      }
+      .head {
+        background: #eee;
+        padding-left: 1.5em;
+        color: #999;
+        line-height: 40px;
+        .order-id {
+          margin-left: 3em;
+        }
+      }
+      .order-main {
+        overflow: hidden;
+        .list, .name, .amount, .state, .operation {
+          float: left;
+          height: 100%;
+          box-sizing: border-box;
+          border-right: 1px solid #dcdcdc;
+        }
+        .list {
+          width: 399px;
+          padding: 0 20px;
+          .car {
+            position: relative;
+            margin-top: 20px;
+            height: 100px;
+          }
+          .thumbnail {
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            border-radius: 2px;
+          }
+          .title {
+            position: absolute;
+            top: 12px;
+            left: 120px;
+            width: 238px;
+            font-size: 14px;
+            font-weight: 600;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+          }
+          .specification {
+            position: absolute;
+            top: 56px;
+            left: 120px;
+            color: #999;
+          }
+        }
+        .name {
+          position: relative;
+          width: 130px;
+          .consignee {
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            color: #333;
+            font-size: 14px;
+            line-height: 20px;
+            text-align: center;
+            margin-top: -10px;
+          }
+        }
+        .amount {
+          position: relative;
+          width: 144px;
+          label, .val, .total, .freight {
+            display: block;
+            margin-top: 4px;
+            font-size: 14px;
+            text-align: center;
+          }
+          label {
+            margin-top: 0;
+            color: #000;
+            font-size: 16px;
+            line-height: 1;
+          }
+          .val {
+            color: #a00912;
+            &:before {
+              content: '￥';
+            }
+          }
+          .total {
+            color: #999;
+            &:before {
+              content: '总 额：￥';
+            }
+          }
+          .freight {
+            color: #999;
+            line-height: 1;
+          }
+          .parcel {
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 92px;
+            margin-top: -46px;
+          }
+        }
+        .state {
+          position: relative;
+          width: 116px;
+          .state-text {
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            line-height: 20px;
+            margin-top: -10px;
+            text-align: center;
+            font-weight: 400;
+          }
+        }
+        .operation {
+          position: relative;
+          width: 115px;
+          border-right: 0;
+          .parcel {
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 54px;
+            margin-top: -32px;
+          }
+          .payment-btn {
+            display: block;
+            width: 80%;
+            margin: 0 auto;
+            line-height: 30px;
+            background: #a00912;
+            border-radius: 3px;
+            color: #fff;
+            font-size: 12px;
+            text-align: center;
+          }
+          .cancel-order {
+            display: block;
+            margin-top: 20px;
+            color: #3a3a3a;
+            text-align: center;
+            line-height: 1;
+          }
+        }
+      }
+    }
+    .filter-list {
+      overflow: hidden;
+      .item {
+        position: relative;
+        float: left;
+        height: 58px;
+        padding-top: 14px;
+        margin-right: 40px;
+        box-sizing: border-box;
+        &:last-child {
+          margin-right: 0;
+        }
+        &.activate {
+          label {
+            border-bottom: 2px solid #c50b16;
+          }
+        }
+        label {
+          padding-bottom: 4px;
+          color: #303030;
+          font-size: 16px;
+          font-weight: 400;
+
+        }
+        .count-indicator {
+          position: absolute;
+          top: 5px;
+          right: -12px;
+          width: 20px;
+          line-height: 20px;
+          text-align: center;
+          color: #fff;
+          font-style: normal;
+          font-size: 12px;
+          font-weight: 400;
+          background: #c50b16;
+          border-radius: 50%;
+        }
+      }
+    }
+    .el-pagination {
+      text-align: center;
+      margin-top: 30px;
+      button:hover {
+        color: #a00912;
+      }
+      .el-pager li:hover {
+        color: #a00912;
+      }
+      .number {
+        padding: 0 15px;
+        font-size: 14px;
+      }
+      .number.active {
+        border-color: #fff;
+        background-color: #fff;
+        color: #a00912;
       }
     }
   }

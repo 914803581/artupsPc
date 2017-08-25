@@ -33,7 +33,7 @@
             </div>
           </div>
           <el-pagination
-            small="false"
+            small
             layout="prev, pager, next"
             :total="50000">
           </el-pagination>
@@ -99,7 +99,6 @@
 </script>
 
 <style lang="scss" type="text/scss" rel="stylesheet/sass">
-  @import "~cube.css/src/scss/neat.scss";
 
   .coupon-manager {
     .btn {

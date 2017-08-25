@@ -9,6 +9,50 @@ module.exports = {
     assetsSubDirectory: 'static',
     assetsPublicPath: '//image2.artup.com/pc/',
     multiplePageList: ['welcome', 'album', 'magnet', 'framed-pictures', 'poster', 'desk'],
+    userCenterPage: {
+      path: 'center',
+      template: 'index.html',
+      keywords: '传给雅昌,画册,装饰画,有框画,海报定制,挂历2018',
+      description: '传给雅昌是雅昌集团旗下中国最大的专业艺术影像输出平台，提供画册、装饰画、框画、海报、挂历等照片产品的个性定制服务。您选一张照片，我送您一件艺术品。',
+      list: [{
+        title: '我的作品',
+        entry: 'works.js',
+        pageName: 'works',
+      }, {
+        title: '草稿箱',
+        entry: 'draft.js',
+        pageName: 'draft',
+      }, {
+        title: '我的素材',
+        entry: 'material.js',
+        pageName: 'material',
+      }, {
+        title: '账户资料',
+        entry: 'account.js',
+        pageName: 'account',
+      }, {
+        title: '账户安全',
+        entry: 'security.js',
+        pageName: 'security',
+      }, {
+        title: '收货地址管理',
+        entry: 'address.js',
+        pageName: 'address',
+      }, {
+        path: 'center/address',
+        title: '添加收货地址',
+        entry: 'address-add.js',
+        pageName: 'add',
+      }, {
+        title: '订单管理',
+        entry: 'order.js',
+        pageName: 'order',
+      }, {
+        title: '优惠券管理',
+        entry: 'coupons.js',
+        pageName: 'coupons',
+      }]
+    },
     productionSourceMap: true,
     // Gzip off by default as many popular static hosts such as
     // Surge or Netlify already gzip all static assets for you.

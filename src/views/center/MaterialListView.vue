@@ -152,7 +152,6 @@
 </script>
 
 <style lang="scss" type="text/scss" rel="stylesheet/sass">
-  @import "~cube.css/src/scss/neat.scss";
 
   .material-list {
     .wrapper {
