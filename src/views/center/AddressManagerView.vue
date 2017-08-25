@@ -29,7 +29,7 @@
                   设为默认
                 </el-button>
                 <span v-show="!startDelete&&item.hasDefault" class="text-default">默认地址</span>
-                <el-button v-show="startDelete" @click="showEditBox(item)" class="btn" type="danger">编辑</el-button>
+                <el-button v-show="startDelete" @click="edit(item)" class="btn" type="danger">编辑</el-button>
               </div>
             </div>
           </div>
@@ -138,21 +138,25 @@
         })
       },
       setDefault: function (address) {
+        let _self = this
         Api.Address.SetDefault({
           dbId: address.dbId
         }).then((result) => {
           return result.status === 200 ? result.request.response : ''
         }).then((result) => {
+          result = JSON.parse(result)
           if (result.code === 'success') {
-            this.addressList.forEach((item) => {
+            _self.addressList.forEach((item) => {
               item.hasDefault = false
             })
             address.hasDefault = true
+            console.log(address)
           }
         })
       },
-      showEditBox: function (item) {
-        console.log(item)
+      edit: function (address) {
+        localStorage[`Address${address.dbId}`] = JSON.stringify(address)
+        location.href = `/center/address/edit.html?dbId=${address.dbId}`
       },
       paging: function (pn) {
         this.getData(pn)

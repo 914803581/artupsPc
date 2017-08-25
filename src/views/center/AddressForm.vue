@@ -40,7 +40,8 @@
         <el-input type="textarea" v-model="ruleForm.addition"></el-input>
       </el-form-item>
       <el-form-item class="submit-item">
-        <el-button class="submit-btn" type="primary" @click="submitForm('ruleForm')">立即创建</el-button>
+        <el-button class="submit-btn" type="primary" @click="submitForm('ruleForm')">{{dbId ? '确认修改' : '立即创建'}}
+        </el-button>
         <el-button @click="resetForm('ruleForm')">重置</el-button>
       </el-form-item>
     </el-form>
@@ -53,23 +54,9 @@
 
   export default {
     props: {
-      formData: {
-        type: Object,
-        default: () => {
-          return {
-            name: '',
-            provinceText: '',
-            cityText: '',
-            county: '',
-            postcode: '',
-            phone: '',
-            addition: ''
-          }
-        }
-      },
-      callbackUrl: {
+      dbId: {
         type: String,
-        default: '/center/address.html'
+        default: ''
       }
     },
     data: function () {
@@ -113,6 +100,13 @@
       }
     },
     methods: {
+      getCallbackPage: function () {
+        let callbackPage = localStorage['AddressEditCallBackPage']
+        if (!callbackPage) {
+          callbackPage = '/center/address.html'
+        }
+        return callbackPage
+      },
       submitForm(formName) {
         let _self = this
         this.$refs[formName].validate((valid) => {
@@ -120,6 +114,30 @@
             return
           }
           let form = this.ruleForm
+          if (this.dbId) {
+            Api.Address.Edit({
+              dbId: this.dbId,
+              name: form.name,
+              mobile: form.phone,
+              province: [form.provinceText, form.cityText, form.county].join(','),
+              address: form.addition,
+              mainAddr: 'Y'
+            }).then((result) => {
+              return result.status === 200 ? result.request.response : ''
+            }).then((result) => {
+              result = JSON.parse(result)
+              if (result.code === 'success') {
+                this.$alert('修改成功', '提示', {
+                  confirmButtonText: '确定',
+                  callback: function () {
+                    localStorage.removeItem(`Address${_self.dbId}`)
+                    location.href = _self.getCallbackPage()
+                  }
+                })
+              }
+            })
+            return
+          }
           Api.Address.Add({
             name: form.name,
             mobile: form.phone,
@@ -134,7 +152,7 @@
               this.$alert('添加成功', '提示', {
                 confirmButtonText: '确定',
                 callback: function () {
-                  location.href = _self.callbackUrl
+                  location.href = _self.getCallbackPage()
                 }
               })
             }
@@ -143,49 +161,101 @@
       },
       resetForm(formName) {
         this.$refs[formName].resetFields()
+      },
+      fillEditData: function (dbId) {
+        let _self = this
+        let address = localStorage[`Address${dbId}`]
+        if (!address) {
+          location.href = this.getCallbackPage()
+        }
+        address = JSON.parse(address)
+        let provinceArray = address.province
+        if (provinceArray) {
+          provinceArray = provinceArray.split(',')
+        }
+        this.ruleForm = {
+          name: address.name,
+          province: '',
+          provinceText: provinceArray ? provinceArray[0] : '',
+          city: '',
+          cityText: provinceArray && provinceArray.length >= 2 ? provinceArray[1] : '',
+          county: provinceArray && provinceArray.length >= 3 ? provinceArray[2] : '',
+          postcode: '',
+          phone: address.mobile,
+          addition: address.address
+        }
+        let citys = null
+        if (this.ruleForm.provinceText) {
+          for (let i = 0; i < this.region.length; i++) {
+            let item = this.region[i]
+            if (item.name === _self.ruleForm.provinceText) {
+              citys = item.venue
+              _self.ruleForm.province = item.id + ''
+              break
+            }
+          }
+          if (this.ruleForm.cityText && citys) {
+            for (let i = 0; i < citys.length; i++) {
+              let item = citys[i]
+              if (item.name === _self.ruleForm.cityText) {
+                this.ruleForm.city = item.id + ''
+                break
+              }
+            }
+          }
+        }
       }
     },
     watch: {
       'ruleForm.province': function (val) {
         this.city = null
-        this.ruleForm.city = ''
         let _self = this
         this.region.forEach((province) => {
           if (province.id === val - 0) {
             _self.ruleForm.provinceText = province.name
             _self.city = province.venue ? province.venue : null
+            if (_self.ruleForm.city) {
+              let count = 0
+              _self.city.forEach((item) => {
+                if (item.id + '' === _self.ruleForm.city) {
+                  count++
+                }
+              })
+              if (!count) {
+                _self.ruleForm.city = ''
+              }
+            }
           }
         })
       },
       'ruleForm.city': function (val) {
+        let _self = this
         this.county = null
         if (!this.city) {
           return
         }
-        this.ruleForm.county = ''
-        let _self = this
         this.city.forEach((city) => {
           if (city.id === val - 0) {
             _self.ruleForm.cityText = city.name
             _self.county = city.venue ? city.venue : null
+            if (_self.ruleForm.county) {
+              let count = 0
+              _self.county.forEach((item) => {
+                if (item.name === _self.ruleForm.county) {
+                  count++
+                }
+              })
+              if (!count) {
+                _self.ruleForm.county = ''
+              }
+            }
           }
         })
       }
     },
     created: function () {
-      console.log('ok')
-      console.log(this.formData)
-      if (this.formData.provinceText) {
-
-      }
-      if (this.formData.cityText) {
-
-      }
-      if (this.formData.county) {
-        this.ruleForm.county = this.formData.county
-      }
-      for (let key in this.formData) {
-        this.ruleForm[key] = this.formData[key]
+      if (this.dbId) {
+        this.fillEditData(this.dbId)
       }
     }
   }

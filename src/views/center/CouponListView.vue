@@ -80,7 +80,7 @@
     },
     watch: {},
     created: function () {
-      for (let i = 0; i < 20; i++) {
+      for (let i = 0; i < 10; i++) {
         this.couponData.push({
           'isUse': 'Y',
           'couponName': 'all_40',

@@ -44,6 +44,11 @@ module.exports = {
         entry: 'address-add.js',
         pageName: 'add',
       }, {
+        path: 'center/address',
+        title: '修改收货地址',
+        entry: 'address-edit.js',
+        pageName: 'edit',
+      }, {
         title: '订单管理',
         entry: 'order.js',
         pageName: 'order',

@@ -306,6 +306,11 @@ export default {
         params: paramJson
       })
     },
+    Edit: (paramJson) => {
+      return HTTP.get(UPDATE_ADDRESS, {
+        params: paramJson
+      })
+    },
     List: (paramJson) => {
       return HTTP.get(ADDRESS, {
         params: paramJson
