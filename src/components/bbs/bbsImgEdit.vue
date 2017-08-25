@@ -5,7 +5,6 @@
 	</div>
 </template>
 <script>
-	// import '' from ''
 	import MaxImgEdit from '../../components/component/maxImgModul/maxImgEdit.vue'
 	export default {
 		data() {
@@ -57,19 +56,7 @@
 								"lastPage": false
 							}
 						],
-						[{
-								"template": bbsTemplateData.bbs8,
-								"only": false,
-								"firstPage": false,
-								"lastPage": false
-							},
-							{
-								"template": bbsTemplateData.bbs8,
-								"only": false,
-								"firstPage": false,
-								"lastPage": false
-							}
-						],
+						
 						[{
 							"template": bbsTemplateData.bbs9,
 							"only": true,
@@ -119,7 +106,7 @@
 							isTrue: false
 						},
 						{
-							templateImg: 'http://image2.artup.com/resources/static/pc/images/bbs_pc01.jpg',
+							templateImg: 'http://image2.artup.com/resources/static/pc/images/bbs_pc09.jpg',
 							isTrue: true
 						}
 					]

@@ -30,6 +30,11 @@
 											</el-option>
 										</el-select>
 									</li>
+									<li>选择起始年月:</li>
+									<li>
+										<el-date-picker style="width: 164px;" :picker-options="pickerOptions0" size="small"  v-model="dataMonth" type="month" placeholder="选择台历开始的年月">
+  										</el-date-picker>
+									</li>
 								</ul>
 							</div>
 						</div>
@@ -125,6 +130,12 @@
 	export default {
 		data() {
 			return {
+				pickerOptions0: {//初始化日期区间函数
+		          disabledDate(time) {
+		            return  time.getTime() < new Date('1/1/2017') || time.getTime() > new Date('12/31/2018');
+		          }
+		        },
+				dataMonth:"",//年月绑定的值
 				tailiStyle:{  //这里1等于横，2为竖
 					plate:"1"	
 				},
@@ -186,12 +197,21 @@
 				$(".taili_pu_2").removeClass("taili_pu");
 			},
 			changeSize() {
-				if(this.optionValue == "横") {
-					$(".taili_pu_2").addClass("taili_pu");
-					$(".taili_pu").removeClass("taili_pu_2");
-				} else if(this.optionValue == "竖") {
-					$(".taili_pu").addClass("taili_pu_2");
-					$(".taili_pu_2").removeClass("taili_pu");
+				if (sessionStorage.getItem('tailiType')!=this.optionValue) {
+					if(this.optionValue == "横") {
+						$(".taili_pu_2").addClass("taili_pu");
+						$(".taili_pu").removeClass("taili_pu_2");
+					} else if(this.optionValue == "竖") {
+						$(".taili_pu").addClass("taili_pu_2");
+						$(".taili_pu_2").removeClass("taili_pu");
+					}
+				}else{
+					this.$message({
+						showClose: true,
+						message: '版式未发生改变',
+						type: 'success'
+					});
+					return;
 				}
 			},
 			goCart() { //加入购物车
@@ -219,7 +239,6 @@
 				}, err => {
 					alert('添加购物车出错');
 				})
-
 			},
 			autoDrapImg() { //自动填充图片的操作
 				var vm = this;
@@ -342,44 +361,6 @@
 						type: 'success'
 					});
 				}
-
-				//				Api.work.workEdit(this.workEdit).then((res) => {
-				//					if(res.data.code == "success") { //如果成功
-				//						res.data.commandTitle;
-				//						this.workEdit.edtDbId = res.data.extraCode;
-				//						console.log('保存的code:', res.data.extraCode);
-				//						let isOK = true
-				//						$(".comtent_chanpin .pubilc_div .bbsClass  .img_drap").each(function(index, el) {
-				//							if(!$(el).attr("src")) { //如果src存在
-				//								var page = $(el).parents(".pubilc_div").find(".pageleft >span").eq(0).text();
-				//								if(page) {
-				//									vm.$message({
-				//										showClose: true,
-				//										message: '请上传第' + page + '页图片'
-				//									});
-				//									isOK = false
-				//									return false;
-				//								}
-				//								if($(el).parents(".lomoTemplate")) { //lomo卡图片不完整
-				//									vm.$message({
-				//										showClose: true,
-				//										message: 'lomo卡图片上传不完整'
-				//									});
-				//									isOK = false
-				//									return false;
-				//								}
-				//							}
-				//						})
-				//						if(isOK) { //作品图片全部上传完毕
-				//							this.$message({
-				//								showClose: true,
-				//								message: '作品已全部上传成功,预览作品后，请添加购物车购买 !',
-				//								type: 'success'
-				//							});
-				//						}
-				//					}
-				//
-				//				})
 			},
 			footerBoolean(val) { //素材库抬起底部图片
 				var vm = this;
@@ -573,6 +554,9 @@
 			this.setBbsTemplate();
 		},
 		mounted() {
+			//默认的值
+			sessionStorage.setItem('tailiType','横');
+			
 			var vm = this;
 			// 调用vuex里面的拖拽方法，初始化的时候
 			this.setPageIndex()

@@ -45,19 +45,22 @@ let store = new Vuex.Store({
 		}
 	},
 	mutations: { //改变数据的方法集合-->记住 这个方法只能处理同步的异步的是actions函数
+		//存入text
+		RullText(state, obj) { //再次编辑的时候,存入文字
+			//存入再次编辑数据的东西
+			state.editData.textHashMap.putvalue(obj.constName, obj.picObj);
+//			state.editData.base64HashMap.putvalue(obj.constName, obj.picObj);
+		},
 		//存入图片ImgHashMap
-
 		ReEditWork_p(state, obj) { //再次编辑作品存入数据图片
 			//存入再次编辑数据的东西
 			state.editData.ImgHashMap.putvalue(obj.constName, obj.picObj);
 			state.editData.base64HashMap.putvalue(obj.constName, obj.picObj);
-
 		},
 		ReEditWork_p_lomo(state, obj) {
 			state.editData.lomoHashMap.putvalue(obj.constName, obj.picObj);
 			state.editData.baseLomoHashMap.putvalue(obj.constName, obj.picObj);
 			console.log(state.editData.lomoHashMap.getvalue(obj.constName))
-
 		},
 		previewWork_lomo(state, obj) {
 			//存入base64给预览产品

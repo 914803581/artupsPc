@@ -34,7 +34,8 @@ new Vue({
 	framePage: '', //页数	
 	frameColor: '', //颜色	
 	editImageUrl : '' ,//编辑框背景图
-	skuId : '' //当前产品的skuId
+	skuId : '', //当前产品的skuId
+	templateCode:''
   },
   components: {
     'unify-header': Header,
@@ -101,16 +102,17 @@ new Vue({
   			parameter:this.skuCode
   		};
   		Api.sku.querySku(jsons).then(res=>{
-  			console.log(res)
+  			console.log()
   			this.previewImageUrl = res.data.previewImageUrl;//框形预览图
   			this.editImageUrl = res.data.editImageUrl;//编辑框背景图
   			this.price = res.data.price; 
   			this.skuId = res.data.skuId;
+  			this.templateCode = res.data.templateCode
   		});
   	},
   	/*开始定制*/
   	startCustom (){
-  		location.href = '/album/albumSelect?size='+this.nowSize+"&editImageUrl="+this.editImageUrl+"&price="+this.price+'&sku='+this.skuCode+'&color='+this.nowColorName+'&category='+this.getQueryString('category')+'&skuId='+this.skuId+'&page='+this.nowPage;
+  		location.href = '/album/albumSelect?size='+this.nowSize+"&editImageUrl="+this.editImageUrl+"&price="+this.price+'&sku='+this.skuCode+'&color='+this.nowColorName+'&category='+this.getQueryString('category')+'&skuId='+this.skuId+'&page='+this.nowPage+'&templateCode='+this.templateCode;
   	}
   	
   },
@@ -120,13 +122,14 @@ new Vue({
 	var queryObj = {'category':this.getQueryString('category')};
     	sessionStorage.setItem("urlQuery",JSON.stringify(queryObj)); 
     	
-	//获取框画的类型
+	//获取画册的类型
 	Api.sku.queryAttributes({category:this.getFromSession("category")}).then(res=>{
 		if(res){
 			console.log(res)
 			this.frameSize = res.data.attributes[2].attributeValues;
 			this.frameColor = res.data.attributes[0].attributeValues;
 			this.framePage = res.data.attributes[1].attributeValues;
+			//console.log(res.data.templateCode)
 			/*默认获取价和展示图片
 			 * 默认选择第一个
 			 */
