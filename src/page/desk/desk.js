@@ -18,7 +18,7 @@ Vue.use(Utils)  // 工具函数
 new Vue({
   el: '#app',
   data: {
-    picturePrefix: '//test.artup.com/img/',
+    picturePrefix: Api.STATIC_SERVER_HOST,
     shufflingList: ['index_03.jpg', 'index_04.jpg', 'index_05.jpg', 'index_06.jpg', 'index_07.jpg'],
     frameShowBool : true ,//true不选择框画尺寸是显示的dome   -false时候显示选择尺寸dome
     frameSize : {},//框画的尺寸
@@ -51,7 +51,7 @@ new Vue({
 		};
 		$('.kuangAngle').removeClass('typeActive');
 		$('.kuangAngle').eq(index).addClass('typeActive');
-		this.nowColor = $('.kuangAngle').eq(index).attr('color');
+		this.nowColor = $('.kuangAngle').eq(index).attr('code');
 		this.updataSkuData();
 	},
   	/*点击更新画册的页数
@@ -89,7 +89,7 @@ new Vue({
 	},
 	/*更新sku*/
   	updataSkuData (){
-  		this.skuCode = this.getFromSession("category") + '.' + this.nowSize + '.' + this.nowPage + '.' + this.nowColor;
+  		this.skuCode = this.getFromSession("category") + '.' + this.nowSize + '.' + this.nowColor;
   		//console.log(this.skuCode)
   		var jsons = {
   			category:this.getFromSession("category"),
@@ -113,15 +113,13 @@ new Vue({
 	Api.sku.queryAttributes({category:this.getFromSession("category")}).then(res=>{
 		if(res){
 			console.log(res)
-			this.frameSize = res.data.attributes[2].attributeValues;
+			this.frameSize = res.data.attributes[1].attributeValues;
 			this.frameColor = res.data.attributes[0].attributeValues;
-			this.framePage = res.data.attributes[1].attributeValues;
 			/*默认获取价和展示图片
 			 * 默认选择第一个
 			 */
 			setTimeout(function(){
 				that.nowSize = $('.k1_Foot1size_click').eq(0).attr('size');
-				that.nowPage = $('.k1_FootPage_click').eq(0).attr('page');
 				that.nowColor = $('.kuangAngle').eq(1).attr('code');
 				that.updataSkuData();
 			});

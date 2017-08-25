@@ -19,7 +19,10 @@ function selectTpl(){
 				$('.'+domStr).css({
 					'width':picBoxWidth+'px',
 					'height':picBoxHeight+'px',
-				})
+				});
+				console.log(str)
+				console.log(picBoxHeight)
+				console.log(picBoxWidth)
   				domObj.width = picBoxWidth;
   				domObj.height = picBoxHeight;
   				$('.shwoImgBox').removeClass('boxBorderNoe');
