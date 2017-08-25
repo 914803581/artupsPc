@@ -28,6 +28,8 @@ import albumSelect from '@/components/album/albumSelect'
 import tlEdit from '@/components/bbs/tlEdit'  //台历编辑
 import maxImgEdit from '@/components/bbs/bbsImgEdit' //多图编辑的入口
 
+import huaceEdit from '@/components/bbs/huaceEdit' //多图编辑的入口
+
 
 Vue.use(VueRouter)
 
@@ -222,6 +224,14 @@ let router = new VueRouter({
       component: tlEdit,
       meta: {
         title: '台历编辑'
+      }
+    },
+    {
+      path: '/album/huaceEdit',
+      name: 'huaceEdit',
+      component: huaceEdit,
+      meta: {
+        title: '画册编辑'
       }
     }
   ]

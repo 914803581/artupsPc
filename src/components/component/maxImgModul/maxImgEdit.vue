@@ -288,7 +288,9 @@
 				this.workEdit.skuId = bbsSlsectDate.skuId;
 				this.workEdit.status = 1;
 				this.workEdit.skuCode = bbsSlsectDate.skuCode;
-
+				
+				
+				
 				$(".comtent_chanpin .pubilc_div .bbsClass  .img_drap").each(function(index, el) {
 					if($(el).attr("src")) { //如果src存在
 						vm.workEdit.thumbnailImageUrl = $(el).attr("imgstyle");
@@ -689,8 +691,17 @@
 				console.log(this.previewData)
 				this.previewDialogVisible = true
 			},
-			fnd() {
-				console.log("数据改变了")
+			dataPull() {//数据改变的函数
+				var vm = this;
+				
+				vm.bbsTemplate_data = vm.dataTemp.productData;
+				vm.mobanArr = vm.dataTemp.templateImgData;
+				console.log('hahhaha',vm.bbsTemplate_data)
+				setTimeout(function(){
+					vm.setPageIndex();
+					vm.$forceUpdate()
+				},400)
+				
 			}
 		},
 		computed: {
@@ -700,9 +711,13 @@
 			})
 		},
 		watch: {
-			bbsTemplate_data: "fnd"
+			bbsTemplate_data: "dataPull"
 		},
 		created() {
+			
+		},
+		mounted() {
+			
 			console.log('传递的数据', this.dataTemp)
 			// 宝宝书模版数据
 			this.bbsTemplate_data = this.dataTemp.productData;
@@ -712,8 +727,7 @@
 			this.mobanArr = this.dataTemp.templateImgData;
 			//给模版数据赋予一个初始化的值
 			this.setBbsTemplate();
-		},
-		mounted() {
+			
 			var vm = this;
 			// 调用vuex里面的拖拽方法，初始化的时候
 			this.$store.commit('drapDiv')
@@ -722,11 +736,15 @@
 			//设置书皮的操作
 			let colorName = JSON.parse(sessionStorage.getItem("bbsSlsectDate")).colorName;
 			//设置背景
-			setBookBg(colorName, $(".titlePage_bg .page_fm"), $(".firstPage .page_bg"), $(".lastPage .page_bg"))
+
+			setTimeout(function(){
+				setBookBg(colorName, $(".titlePage_bg .page_fm"), $(".firstPage .page_bg"), $(".lastPage .page_bg"));
+			},100)
 
 			if(this.$route.query.dbId) { // 如果是再次编辑进来的界面
 				this.workEdit.edtDbId = this.$route.query.dbId // 存入id预防
 				Api.work.unfinishedWork(this.$route.query.dbId).then((res) => {
+					console.log(res)
 					var oImgData = JSON.parse(res.data.data.editPicture)
 					var editTxt = JSON.parse(res.data.data.editTxt)
 					console.log(oImgData)
@@ -769,10 +787,12 @@
 									"editCnfIndex": editTxt[i].editCnfIndex,
 									"editCnfName": editTxt[i].editCnfName
 								};
-								console.log(textMapVal)
-								//								oThis.editData.textMap.putvalue(constName, textMapVal);
 								var pageNum = editTxt[i].page + '_' + editTxt[i].num + '_text';
-								$("#" + pageNum).text(editTxt[i].content)
+								$("#" + pageNum).text(editTxt[i].content);
+								vm.$store.commit("RullText", {
+									constName: constName,
+									picObj: textMapVal
+								});
 							}
 						}
 						if(oImgData.length > 0) {
