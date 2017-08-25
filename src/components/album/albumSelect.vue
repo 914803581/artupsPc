@@ -7,7 +7,7 @@
 		        <div class="titleName">选择画册主题</div>
 		        <div class="oprateBtn">
 		            <div class="btnStyle cancel">取消</div>
-		            <div class="btnStyle create">创建画册</div>
+		            <div @click="crectHc" class="btnStyle create">创建画册</div>
 		        </div>
 		    </div>
 		</div>
@@ -19,7 +19,6 @@
 				        	<div class="thName">{{item.content}}</div>
 				        	<div class="styleId">D01G01</div>
 			        </div>
-			        
 		        </div>
 		    </div>
 		</div>
@@ -35,6 +34,7 @@
 	export default {
 	    data () {
 	      return {
+	     	huaceType:'',
 	      	picturePrefix : Api.STATIC_SERVER_HOST,
 	      	typeDataList : {}//板式数组
 	      }	
@@ -47,6 +47,19 @@
 		    checkActive(index){//选中样式
 		    		$('.img_div').removeClass('active');
 		    		$('.img_div').eq(index).addClass('active');
+		    		this.huaceType = $(".thName").eq(index).text();
+		    },
+		    crectHc(){
+		    		if (this.huaceType) {
+		    			window.location.href = "/album/huaceEdit?huaceType="+this.huaceType
+		    		}else{
+		    			this.$message({
+							showClose: true,
+							message: '请先选择您需要创建的作品风格！',
+							type: 'warning'
+						});
+		    		}
+		    		
 		    }
 	    },
 	    created(){//只执行一次
@@ -60,8 +73,12 @@
 		    		"price":this.$route.query.price,
 		    		"skuId":this.$route.query.skuId,
 		    		"size":this.$route.query.size,
-		    		"titleName":"画册"
+		    		"titleName":"画册",
+		    		"tplCode":this.$route.query.templateCode
 	    		};
+	    		var obj = JSON.parse(sessionStorage.getItem("urlQuery"));
+	    		obj.tplCode = this.$route.query.templateCode;
+	    		sessionStorage.setItem("urlQuery",JSON.stringify(obj));	    		
 	    		sessionStorage.setItem('bbsSlsectDate',JSON.stringify(jsons));
 	    		sessionStorage.setItem('titleName','画册');
 	    		this.typeDataList = JSON.parse(this.$route.query.editImageUrl);

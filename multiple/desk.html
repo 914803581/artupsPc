@@ -23,7 +23,7 @@
 		    </div>
 		    <div class="bothSides">
 		       <div class="imgBoxList" v-show="!frameShowBool">
-			       <div id="picContainer" class="picContainer picContainerOne" :style="{'background':nowColor}">
+			       <div id="picContainer" class="picContainer picContainerOne" :style="{backgroundImage:'url('+picturePrefix+previewImageUrl+')'}">
 			       				
 			       </div>
 		       	  <div class="boxA">
@@ -47,10 +47,8 @@
 		       <div class="typeBox">
 		       		<div class="btnChoose">选择尺寸</div>
 		       		<div class="sizeBox">
-		       			<!--<div @click='updateSizeFn(index)' v-for='(frameSize,index) in frameSize' class="k1_Foot1size_click" sizeType='A' :size='frameSize.code'>A&nbsp; {{frameSize.name}}</div>-->
-		       			<div @click='updateSizeFn(index)' class="k1_Foot1size_click" sizeType='A' :size='frameSize.code'>A&nbsp; 145X195mm</div>
-		       			<div @click='updateSizeFn(index)' class="k1_Foot1size_click" sizeType='A' :size='frameSize.code'>A&nbsp; 195X145mm</div>
-		       			
+		       			<div @click='updateSizeFn(index)' v-for='(frameSize,index) in frameSize' class="k1_Foot1size_click" :sizeType='frameSize.name | firstCode' :size='frameSize.code'>{{frameSize.name}}</div>
+
 		       		</div>
 		       		<!--<div class="btnChoose">选择页码</div>
 		       		<div class="sizeBox">
@@ -58,17 +56,9 @@
 		       		</div>-->
 		       		<div class="btnChoose">选择颜色</div>
 		       		<div class="frameBox">
-		       			<!--<div class="picAndText" v-for="(item,index) in frameColor">
-		       				<div class="kuangAngle" @click="updateColorFn(index)"  frameType='zm' :code='item.code' :color='item.attr' :style="{'background':item.attr}"></div>
+		       			<div class="picAndText" v-for="(item,index) in frameColor">
+		       				<div class="kuangAngle" @click="updateColorFn(index)"  :colorName='item.name' :code='item.code' :color='item.attr' :style="{'background':item.attr}"></div>
 		       				<div class="k1_Foot1frame_click k1_pre_frame">{{item.name}}</div>
-		       			</div>-->
-		       			<div class="picAndText">
-		       				<div class="kuangAngle" @click="updateColorFn(index)"  frameType='zm' style="background:#6a3906"></div>
-		       				<div class="k1_Foot1frame_click k1_pre_frame">咖啡色</div>
-		       			</div>
-		       			<div class="picAndText">
-		       				<div class="kuangAngle" @click="updateColorFn(index)"  frameType='zm'  style="background:##F7F7F7"></div>
-		       				<div class="k1_Foot1frame_click k1_pre_frame">白色</div>
 		       			</div>
 		       			
 		       		</div>
@@ -76,7 +66,7 @@
 	                    <div class="showPrice">
 	                        ￥ : <span class="price_show">{{price}}</span><span class="skuCode" style="display: none"></span>
 	                    </div>
-	                    <a href="/album/albumSelect"><div class="startBook">开始定制</div></a>
+	                    <a href="/album/tlEdit"><div class="startBook">开始定制</div></a>
 	                </div>
 		       </div>
 		       

@@ -72,8 +72,13 @@
       }
     },
     methods: {
-      continueEdit($index) { // 继续编辑
-        location.href = "/album/maxImgEdit?dbId=" + this.workData[$index].dbId
+      continueEdit($index) { //继续编辑
+        var textCode = this.workData[$index].sku.substr(0, 3)
+        if (textCode === "小时光") {
+          location.href = "/album/maxImgEdit?dbId=" + this.workData[$index].dbId
+        } else if (textCode === "画册.") {
+          location.href = "/album/huaceEdit?dbId=" + this.workData[$index].dbId
+        }
       },
       deleteWorkList: function () {
         let deleteArr = []
