@@ -146,10 +146,13 @@
 			
 		},
 		mounted() { //全部渲染完毕
-			
-			
-//			this.$route.query
+
 			var SlsectDate = JSON.parse(sessionStorage.getItem("bbsSlsectDate"));
+			console.log(SlsectDate.size)
+			if (SlsectDate.size=="255X355") {
+				this.dataTemplate.templateSource = hcTemplate255X355
+			}
+			
 			var str = "风景方版";
 			
 			if (str =="风景方版") { //SlsectDate.size==""

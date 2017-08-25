@@ -29,11 +29,12 @@ module.exports = {
     }
   },
   module: {
-    rules: [{
+    rules: [
+    {
       test: /\.(js|vue)$/,
       loader: 'eslint-loader',
       enforce: 'pre',
-      include: [resolve('src') + '/views/', resolve('test')],
+      include: [resolve('src') + '/views', resolve('test')],
       options: {
         formatter: require('eslint-friendly-formatter')
       }

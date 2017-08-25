@@ -10,6 +10,7 @@
 		data() {
 			return {
 				dataTemplate: {
+					'templateSource':bbsTemplateData,
 					"productData": [
 						[{
 							"template": bbsTemplateData.bbs1,

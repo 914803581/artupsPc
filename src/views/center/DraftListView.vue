@@ -72,20 +72,14 @@
       }
     },
     methods: {
-<<<<<<< HEAD
-	  continueEdit($index){ //继续编辑
-	  	var textCode  = this.workData[$index].sku.substr(0,3);
-	  	if(textCode=="小时光"){
-	  		location.href="/album/maxImgEdit?dbId="+this.workData[$index].dbId;
-	  	}else if(textCode=="画册."){
-			location.href="/album/huaceEdit?dbId="+this.workData[$index].dbId;
-	  	} 	 
-	  },
-=======
-      continueEdit($index) { // 继续编辑
-        location.href = "/album/maxImgEdit?dbId=" + this.workData[$index].dbId
+      continueEdit($index) { //继续编辑
+        var textCode = this.workData[$index].sku.substr(0, 3)
+        if (textCode === "小时光") {
+          location.href = "/album/maxImgEdit?dbId=" + this.workData[$index].dbId
+        } else if (textCode === "画册.") {
+          location.href = "/album/huaceEdit?dbId=" + this.workData[$index].dbId
+        }
       },
->>>>>>> c47722923f2b3cac9c8138975fa018c2d829d127
       deleteWorkList: function () {
         let deleteArr = []
         this.workData.forEach(function (work) {

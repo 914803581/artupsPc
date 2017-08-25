@@ -146,6 +146,7 @@
 	export default {
 		data() {
 			return {
+				template_Source:[],//修改的模版源
 				colorName: '',
 				previewDialogVisible: false,
 				mobanArr: [],
@@ -696,7 +697,8 @@
 				
 				vm.bbsTemplate_data = vm.dataTemp.productData;
 				vm.mobanArr = vm.dataTemp.templateImgData;
-				console.log('hahhaha',vm.bbsTemplate_data)
+				vm.template_Source = vm.dataTemp.templateSource;
+				console.log('hahhaha',vm.dataTemp.templateSource)
 				setTimeout(function(){
 					vm.setPageIndex();
 					vm.$forceUpdate()
