@@ -14,26 +14,12 @@
 		<div class="container-box">
 		    <div class="container-fluid ">
 		        <div class="row themeBox">
-			        <div class="themeDiv text-center themeStyle"> 
-				        	<img class="img_div" src="http://image2.artup.com/static/pc/imgs/album/huise-255-355-4.png">
-				        	<div class="thName">风景竖版</div>
+			        <div @click='checkActive(index)' class="themeDiv text-center themeStyle" v-for="(item,index) in typeDataList"> 
+				        	<img class="img_div" :src="picturePrefix+item.editImageUrl">
+				        	<div class="thName">{{item.content}}</div>
 				        	<div class="styleId">D01G01</div>
 			        </div>
-			        <div class="themeDiv text-center themeStyle">
-			        		<img class="img_div" src="http://image2.artup.com/static/pc/imgs/album/huise-255-355-3.png">
-			        		<div class="thName">纪实竖版</div>
-			        		<div class="styleId">D02G01</div>
-			        </div>
-			        <div class="themeDiv text-center themeStyle">
-			        		<img class="img_div" src="http://image2.artup.com/static/pc/imgs/album/huise-255-355-1.png">
-			        		<div class="thName">建筑竖版</div>
-			        		<div class="styleId">D04G01</div>
-			        </div>
-			        <div class="themeDiv text-center themeStyle">
-			        		<img class="img_div select_theme" src="http://image2.artup.com/static/pc/imgs/album/huise-255-355-2.png">
-			        		<div class="thName">人像竖版</div>
-			        		<div class="styleId">D03G01</div>
-			        </div>
+			        
 		        </div>
 		    </div>
 		</div>
@@ -44,10 +30,13 @@
 <script>
 	import navHander from '../header/header.vue'
 	import footer from '../footer/footer.vue'
+  	import Api from '../../api.js'
+	
 	export default {
 	    data () {
 	      return {
-	      	
+	      	picturePrefix : Api.STATIC_SERVER_HOST,
+	      	typeDataList : {}//板式数组
 	      }	
 	   	},
 	    components:{ //在再这里要注入我的组件
@@ -55,11 +44,27 @@
 	      'nav-footer':footer
 	    },
 	    methods: {
-	    
+		    checkActive(index){//选中样式
+		    		$('.img_div').removeClass('active');
+		    		$('.img_div').eq(index).addClass('active');
+		    }
 	    },
 	    created(){//只执行一次
 	    },
 	    mounted(){
+	    		var jsons = {
+		    		"colorName":this.$route.query.color,
+		    		"name":"画册."+this.$route.query.color+"."+this.$route.query.size+'.'+this.$route.query.page,
+		    		"skuCode":this.$route.query.sku,
+		    		"category":this.$route.query.category,
+		    		"price":this.$route.query.price,
+		    		"skuId":this.$route.query.skuId,
+		    		"size":this.$route.query.size,
+		    		"titleName":"画册"
+	    		};
+	    		sessionStorage.setItem('bbsSlsectDate',JSON.stringify(jsons));
+	    		sessionStorage.setItem('titleName','画册');
+	    		this.typeDataList = JSON.parse(this.$route.query.editImageUrl);
 			$('.img_div').click(function(){
 				$('.img_div').removeClass('active');
 				$(this).addClass('active');

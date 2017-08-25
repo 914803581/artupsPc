@@ -1,6 +1,6 @@
 <template>
 	<div id="confimOrder">
-		<Handers	></Handers>
+		<unify-header></unify-header>
 		<div class="order1 m ng-scope">
 			<p class="ord1-tit">填写并核对订单信息</p>
 			<div class="rod001">
@@ -32,9 +32,7 @@
 								<a class="xuanze l" href="javascript:;" @click="setDefaultAddress(index,address.dbid)"><span  class="xz01" v-show="address.isOK"></span></a><span>{{address.isOK}}{{address.province}}{{address.address}}</span>
 							</div>
 						</div>
-					</div>
-					
-					
+					</div>		
 				</div>
 				<div class="ord1m2 r">
 					<p class="r"><a href="mallAsp.html#/address_add?order=add"><input class="ord1m-btm" type="button" name="" id="" value="新增收货地址"></a></p>
@@ -167,7 +165,7 @@
 <script>
 	import Api from '../../../API.js'
 	import { MessageBox } from 'element-ui';
-	
+	import Header from '@/components/header/header.vue'
     export default {
         data() {
             return {
@@ -182,6 +180,9 @@
               selectAddressA:true,
               payType:1
             }
+        },
+        components:{
+        		'unify-header': Header
         },
         methods: {
         		pay_wx(){

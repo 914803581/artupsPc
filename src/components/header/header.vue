@@ -50,11 +50,6 @@
           label: '画册',
           link: '/album.html?category=huace'
         },
-//      {
-//        label: '磁铁画',
-//        link: '/magnet.html'
-//      },
-
           {
             label: '框画',
             link: '/framed-pictures.html?category=kuanghua'
@@ -64,6 +59,9 @@
           }, {
             label: '小时光',
             link: '/album/imgEditMsg?category=baobaoshu&tplCode=pc_baobaoshu_170-235_24_single'
+          }, {
+            label: '台历',
+            link: '/desk.html?category=taili'
           }],
         userMenu: [{
           label: '我的主页',
@@ -163,7 +161,7 @@
       .item {
         display: block;
         margin-top: 12px;
-        padding: 0 46px;
+        padding: 0 38px;
         float: left;
         font-size: 16px;
         line-height: 26px;

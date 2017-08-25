@@ -1,6 +1,6 @@
 import 'cube.css/src/scss/neat.scss'
 import 'element-ui/lib/theme-default/index.css'
-import './album.scss'
+import './desk.scss'
 import Vue from 'vue'
 import ElementUI from 'element-ui'
 import SelectTpl from '../script/index.js'
@@ -25,16 +25,13 @@ new Vue({
     nowSize : '',//当前框的尺寸
 	nowPage : '', //当前页数
 	nowColor : '', //当前color
-	nowColorName : '',
-	nowShowBackgroundColor : '', //当前展示框的背景色
 	skuCode : '' ,//用来取价钱的sku
 	price : '', //框画的价钱
 	previewImageUrl : '',//框形预览图
 	frameType : '', //框形
 	framePage: '', //页数	
 	frameColor: '', //颜色	
-	editImageUrl : '' ,//编辑框背景图
-	skuId : '' //当前产品的skuId
+	editImageUrl : '' //编辑框背景图
   },
   components: {
     'unify-header': Header,
@@ -54,9 +51,7 @@ new Vue({
 		};
 		$('.kuangAngle').removeClass('typeActive');
 		$('.kuangAngle').eq(index).addClass('typeActive');
-		this.nowShowBackgroundColor = $('.kuangAngle').eq(index).attr('color');
-		this.nowColor = $('.kuangAngle').eq(index).attr('code');
-		this.nowColorName =  $('.kuangAngle').eq(index).attr('colorName');
+		this.nowColor = $('.kuangAngle').eq(index).attr('color');
 		this.updataSkuData();
 	},
   	/*点击更新画册的页数
@@ -104,15 +99,9 @@ new Vue({
   			console.log(res)
   			this.previewImageUrl = res.data.previewImageUrl;//框形预览图
   			this.editImageUrl = res.data.editImageUrl;//编辑框背景图
-  			this.price = res.data.price; 
-  			this.skuId = res.data.skuId;
+  			this.price = res.data.price;
   		});
-  	},
-  	/*开始定制*/
-  	startCustom (){
-  		location.href = '/album/albumSelect?size='+this.nowSize+"&editImageUrl="+this.editImageUrl+"&price="+this.price+'&sku='+this.skuCode+'&color='+this.nowColorName+'&category='+this.getQueryString('category')+'&skuId='+this.skuId+'&page='+this.nowPage;
   	}
-  	
   },
   mounted(){
   	var that = this;

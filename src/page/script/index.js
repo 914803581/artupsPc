@@ -12,7 +12,7 @@ function selectTpl(){
 		 * domStr 是要被设置的框（div）
 		 */
 		setShowImgSize:function(str,domStr){
-			console.log(str)
+		
 			if(str){
 				var picBoxWidth = $('.'+str).width();
 				var picBoxHeight = $('.'+str).height();
@@ -22,6 +22,8 @@ function selectTpl(){
 				})
   				domObj.width = picBoxWidth;
   				domObj.height = picBoxHeight;
+  				$('.shwoImgBox').removeClass('boxBorderNoe');
+  				$('.'+str).addClass('boxBorderNoe');
 				//console.log(domeSize)
 				//callBack(domeSize);
 			}

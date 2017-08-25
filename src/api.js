@@ -6,7 +6,7 @@ Vue.prototype.$http = axios
 
 // 常量 API 接口地址
 const HOST = 'http://image2.artup.com/'
-const CLIENT = 'pc';
+const CLIENT = 'pc'
 
 // 图片服务器（静态资源）服务器地址
 const STATIC_SERVER_HOST = 'http://image2.artup.com/'
@@ -24,7 +24,7 @@ var HTTP = VueHttp.$http.create({
 // timeout:5000, //请求超时配置
   params: { // 每一个连接都跟手的东西，查询字符串
     userDbId: userDbIds,
-    client:'pc'
+    client: 'pc'
   },
   headers: {}// 设置请求头的对象
 })
@@ -44,7 +44,7 @@ const SAVE_WORK_URL = `${HOST}artup-build/builder/cors/edit/add/command.do?forma
 /* 作品列表 */
 const QUERY_WORK_LIST_URL = `${HOST}artup-build/builder/cors/edit/queryByPage.do?format=json&ignore=true`
 /* 查询sku */
-const QUERY_SKU_URL = `${HOST}artup-build/builder/sku.do?format=json&ignore=true`
+const QUERY_SKU_URL = `${HOST}artup-build/builder/sku.do?format=json&ignore=true&client=pc`
 /* 查询属性对象 */
 const QUERY_ATTRIBUTE_URL = `${HOST}artup-build/builder/service/attributes.do?format=json&ignore=true`
 
@@ -84,7 +84,7 @@ const ORDER_PAY = `${HOST}artup-build/builder/orderPayment/payment.do?format=jso
 const UPDATA_ORDER_STATUS = `${HOST}artup-build/builder/order/update/command.do?format=json&ignore=true`
 
 /* 获取订单列表 */
-const ORDER_LIST_STATUS = `${HOST}artup-build/builder/order/queryByPage.do?format=json&ignore=true&pageSize=150&sort=createdDt&order=desc`
+const ORDER_LIST = `${HOST}artup-build/builder/order/queryByPage.do`
 
 /* 取消订单 */
 const CANCLE_ORDER_STATUS = `${HOST}artup-build/builder/order/update/command.do?format=json&ignore=true&status=-1`
@@ -148,23 +148,23 @@ export default {
         qs.stringify(jsons)
       )
     },
-    queryCar:(jsons)=>{
-	   		return HTTP.get(QUERY_CAR,{params:jsons})
-	},
+    queryCar: (jsons) => {
+      return HTTP.get(QUERY_CAR, {params: jsons})
+    },
     orderPay: (jsons) => {
       return VueHttp.$http.post(ORDER_PAY,
         qs.stringify(jsons)
       )
     },
-    queryOrderState:(jsons)=>{
-    		return HTTP.get(QUERY_ORDER_STATE,{params:jsons})
+    queryOrderState: (jsons) => {
+      return HTTP.get(QUERY_ORDER_STATE, {params: jsons})
     },
     carList: (jsons) => { // 购物车列表
       return HTTP.get(CAR_LIST, {params: jsons})
     },
-    submitCars:(jsons)=>{
-	   		return HTTP.post(SUBMIT_CARS, qs.stringify(jsons))
-	},
+    submitCars: (jsons) => {
+      return HTTP.post(SUBMIT_CARS, qs.stringify(jsons))
+    },
     createOrder: (jsons) => { // 创建订单
       return VueHttp.$http.post(CREATE_ORDER,
         qs.stringify(jsons)
@@ -183,9 +183,6 @@ export default {
     },
     cancleOrder: (jsons) => { // 取消订单
       return VueHttp.$http.get(CANCLE_ORDER_STATUS, {params: jsons})
-    },
-    orderListStatus: (jsons) => {
-      return VueHttp.$http.get(ORDER_LIST_STATUS, {params: jsons})
     },
     deleteOrder: (jsons) => {
       return VueHttp.$http.get(DELETE_ORDER, {params: jsons})
@@ -226,11 +223,11 @@ export default {
     }
   },
   work: { // 作品的接口post方法(保存)
-       workEdit: (jsons) => {
-         return HTTP.post(SAVE_WORK_URL,
-           qs.stringify(jsons)
-         )
-       },
+    workEdit: (jsons) => {
+      return HTTP.post(SAVE_WORK_URL,
+        qs.stringify(jsons)
+      )
+    },
     // deletWork: (jsons) => {
     //   return VueHttp.$http.get(DELECT_WORK, {params: jsons})
     // },
@@ -240,13 +237,13 @@ export default {
     //     }
     //   )
     // },
-       unfinishedWork: (edtDbId) => {//素材回填数据   -->edtDbId 回填的数据
-         return HTTP.get(QUERY_UNFINISHED_WORK_URL, {
-           params: {
-           	 edtDbId:edtDbId
-           }
-         })
-       }
+    unfinishedWork: (edtDbId) => { //素材回填数据   -->edtDbId 回填的数据
+      return HTTP.get(QUERY_UNFINISHED_WORK_URL, {
+        params: {
+          edtDbId: edtDbId
+        }
+      })
+    }
     // checkDPI: (jsons) => {
     //   return VueHttp.$http.post(MATER_DPI,
     //     qs.stringify(jsons)
@@ -290,20 +287,25 @@ export default {
         }
       )
     },
-    MaterialCut: (pictureDbIds,thumbnailWidth) => { // 素材如果是微信图片选择裁剪图片,pictureDbIds图片id，thumbnailWidth 裁剪的宽度
+    MaterialCut: (pictureDbIds, thumbnailWidth) => { // 素材如果是微信图片选择裁剪图片,pictureDbIds图片id，thumbnailWidth 裁剪的宽度
       return HTTP.get(CUT_WEIXIN_IMG,
         {
           params: {
-			            "pictureDbIds":pictureDbIds,
-			            "thumbnailWidth":thumbnailWidth,
-                  "thumbnailType" : "thumbnail",
-                  "client" : "pc"
+            'pictureDbIds': pictureDbIds,
+            'thumbnailWidth': thumbnailWidth,
+            'thumbnailType': 'thumbnail',
+            'client': 'pc'
           }
         }
       )
     }
   },
   Address: {
+    Add: (paramJson) => {
+      return HTTP.get(NEW_ADDRESS, {
+        params: paramJson
+      })
+    },
     List: (paramJson) => {
       return HTTP.get(ADDRESS, {
         params: paramJson
@@ -320,9 +322,15 @@ export default {
       })
     }
   },
-  UPLOAD_URL: UPLOAD_URL,
-  CLIENT,
-  STATIC_SERVER_HOST:STATIC_SERVER_HOST,
+  Order: {
+    OrderList: (paramJson) => {
+      return HTTP.get(ORDER_LIST, {
+        params: paramJson
+      })
+    }
+  },
+  UPLOAD_URL: UPLOAD_URL, CLIENT,
+  STATIC_SERVER_HOST: STATIC_SERVER_HOST,
   ajax: function (url, callback) {
     console.log(arguments.length)
     if (arguments.length > 2) {
@@ -336,7 +344,9 @@ export default {
       callback('123')
     }
   },
+
   $$ajax: function (inter, data, callback) {
+    // eslint-disable-next-line no-undef
     if (data && url !== '') {
       console.log('post请求')
     } else {

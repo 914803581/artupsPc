@@ -50,7 +50,7 @@
           		<div class="page_fm">
           			<span>封 面</span>
           		</div>
-          		<div style="background: #efefef;">     			
+          		<div style="background: #efefef;">
           		</div>
           	</div>
              <div class="time_bg" v-for="(item,index) in bbsTemplate_data">
@@ -135,6 +135,7 @@
     <!--<div-editText ></div-editText>-->
 
     <preview-book
+      :colorName="colorName"
       :visible.sync="previewDialogVisible"
       :data="previewData"
       @close="previewDialogVisible=false"
@@ -142,6 +143,8 @@
   </div>
 </template>
 <script>
+  /* eslint-disable semi */
+
   import {Message} from 'element-ui'
   import {mapState, mapGetters, mapActions, mapMutations} from 'vuex'
   import Header from '@/components/header/header.vue'
@@ -157,6 +160,7 @@
   export default {
     data() {
       return {
+        colorName:'',
         previewDialogVisible: false,
         mobanArr: [// 模版对应的图片
           {
@@ -221,7 +225,7 @@
 //		beforeRouteEnter(to,from,next){
 //			console.log(to)
 //			console.log(from)
-//			
+//
 //			next();
 //
 //		},
@@ -237,29 +241,24 @@
         delectFooter: "delectFooterData"
       }),
       goCart() {//加入购物车
+      	//字符串转换数组存储到对象里面
+	    let bbsSlsectDate = JSON.parse(sessionStorage.getItem("bbsSlsectDate"));
         var jsons = {
           operator: "add",
-//					userDbId: localStorage.getItem("userDbId"),
-//					client: "mobile", //渠道前端传递，暂时写死
+		  userDbId: localStorage.getItem("userDbId"),
           category: bbsSlsectDate.category, //产品类型这里是宝宝书,暂时写死
-          edtDbId: this.bbs.extraCode, //编辑的id
+          edtDbId: this.workEdit.edtDbId, //编辑的id
           price: bbsSlsectDate.price,
-          num: 1,
-          discount: '',
-          channelCode: "artron",
-          opSystem: '',
+          num: "1",
           thumbnailImageUrl: "",//首页图
           total: bbsSlsectDate.price,
           sku: bbsSlsectDate.name,
-          skuCode: bbsSlsectDate.skuCode
+          skuCode: bbsSlsectDate.skuCode,
+          skuId:bbsSlsectDate.skuId
         }
         Api.car.addCar(jsons).then(res => {
           console.log(res);
-//					if(res.data.code === 'success' && res.data.extraCode) {
-//					location.href = "#cart?edtDbId=" + this.bbs.extraCode + "&category=" + bbsSlsectDate.category
-//					} else {
-//						alert('添加购物车失败(' + res.data.message + ')');
-//					}
+          this.$router.push({path:"/user/cart",query:{}})
         }, err => {
           alert('添加购物车出错');
         })
@@ -302,50 +301,52 @@
       footerImgSlectFooter($index) {//提交
         this.$store.commit("editFooterStatus", $index)
       },
+      assembleData(){ //执行保存工作组装数据的公共函数
+      	 var vm = this;
+	        var arrMap = []; //宝宝书图片的
+	        var textArrMap = []; //文字的
+	        var lomArrMap = []; //lomo卡的
+	        for (var i = 0; i < this.$store.state.editData.ImgHashMap.keys().length; i++) {
+
+	          if (this.$store.state.editData.ImgHashMap.getvalue(this.$store.state.editData.ImgHashMap.keys()[i])) {
+
+	            arrMap.push(this.$store.state.editData.ImgHashMap.getvalue(this.$store.state.editData.ImgHashMap.keys()[i]));
+	          }
+	        }
+	        for (var i = 0; i < this.$store.state.editData.lomoHashMap.keys().length; i++) {
+	          if (this.$store.state.editData.lomoHashMap.getvalue(this.$store.state.editData.lomoHashMap.keys()[i])) {
+	            lomArrMap.push(this.$store.state.editData.lomoHashMap.getvalue(this.$store.state.editData.lomoHashMap.keys()[i]));
+	          }
+	        }
+	        for (var i = 0; i < this.$store.state.editData.textHashMap.keys().length; i++) {
+	          if (this.$store.state.editData.textHashMap.getvalue(this.$store.state.editData.textHashMap.keys()[i])) {
+	            textArrMap.push(this.$store.state.editData.textHashMap.getvalue(this.$store.state.editData.textHashMap.keys()[i]));
+	          }
+	        }
+	        //字符串转换数组存储到对象里面
+	        let bbsSlsectDate = JSON.parse(sessionStorage.getItem("bbsSlsectDate"));
+	        this.workEdit.editPicture = JSON.stringify(arrMap);
+	        this.workEdit.editTxt = JSON.stringify(textArrMap);
+	        this.workEdit.lomo = JSON.stringify(lomArrMap);
+	        this.workEdit.tplCode = this.getFromSession("tplCode");
+	        this.workEdit.operator = "add";
+	        this.workEdit.category = this.getFromSession("category");
+	        this.workEdit.sku = bbsSlsectDate.name;
+	        this.workEdit.skuId = bbsSlsectDate.skuId;
+	        this.workEdit.status = 1;
+	        this.workEdit.skuCode = bbsSlsectDate.skuCode;
+
+	        $(".comtent_chanpin .pubilc_div .bbsClass  .img_drap").each(function (index, el) {
+	          if ($(el).attr("src")) { //如果src存在
+	            vm.workEdit.thumbnailImageUrl = $(el).attr("imgstyle");
+	            return false;
+	          } else {
+	            vm.workEdit.thumbnailImageUrl = "";
+	          }
+	        })
+      },
       editWork() {//保存作品
-        var vm = this;
-        var arrMap = []; //宝宝书图片的
-        var textArrMap = []; //文字的
-        var lomArrMap = []; //lomo卡的
-        for (var i = 0; i < this.$store.state.editData.ImgHashMap.keys().length; i++) {
-
-          if (this.$store.state.editData.ImgHashMap.getvalue(this.$store.state.editData.ImgHashMap.keys()[i])) {
-
-            arrMap.push(this.$store.state.editData.ImgHashMap.getvalue(this.$store.state.editData.ImgHashMap.keys()[i]));
-          }
-        }
-        for (var i = 0; i < this.$store.state.editData.lomoHashMap.keys().length; i++) {
-          if (this.$store.state.editData.lomoHashMap.getvalue(this.$store.state.editData.lomoHashMap.keys()[i])) {
-            lomArrMap.push(this.$store.state.editData.lomoHashMap.getvalue(this.$store.state.editData.lomoHashMap.keys()[i]));
-          }
-        }
-        for (var i = 0; i < this.$store.state.editData.textHashMap.keys().length; i++) {
-          if (this.$store.state.editData.textHashMap.getvalue(this.$store.state.editData.textHashMap.keys()[i])) {
-            textArrMap.push(this.$store.state.editData.textHashMap.getvalue(this.$store.state.editData.textHashMap.keys()[i]));
-          }
-        }
-        //字符串转换数组存储到对象里面
-        let bbsSlsectDate = JSON.parse(sessionStorage.getItem("bbsSlsectDate"));
-
-        this.workEdit.editPicture = JSON.stringify(arrMap);
-        this.workEdit.editTxt = JSON.stringify(textArrMap);
-        this.workEdit.lomo = JSON.stringify(lomArrMap);
-        this.workEdit.tplCode = this.getFromSession("tplCode");
-        this.workEdit.operator = "add";
-        this.workEdit.category = this.getFromSession("category");
-        this.workEdit.sku = bbsSlsectDate.name;
-        this.workEdit.skuId = bbsSlsectDate.skuId;
-        this.workEdit.status = 1;
-        this.workEdit.skuCode = bbsSlsectDate.skuCode;
-
-        $(".comtent_chanpin .pubilc_div .bbsClass  .img_drap").each(function (index, el) {
-          if ($(el).attr("src")) { //如果src存在
-            vm.workEdit.thumbnailImageUrl = $(el).attr("imgstyle");
-            return false;
-          } else {
-            vm.workEdit.thumbnailImageUrl = "";
-          }
-        })
+       this.assembleData();
         //保存函数
         console.log(this.workEdit)
         Api.work.workEdit(this.workEdit).then((res) => {
@@ -364,11 +365,12 @@
       },
       nextStep() { //下一步
         //保存函数
+        this.assembleData();
         var vm = this;
-
+		console.log(this.workEdit)
         Api.work.workEdit(this.workEdit).then((res) => {
           if (res.data.code == "success") { //如果成功
-
+			res.data.commandTitle;
             this.workEdit.edtDbId = res.data.extraCode;
             console.log('保存的code:', res.data.extraCode);
             let isOK = true
@@ -399,6 +401,7 @@
                 message: '作品已全部上传成功,预览作品后，请添加购物车购买 !',
                 type: 'success'
               });
+
             }
           }
 
@@ -429,7 +432,7 @@
 //			切换的模版索引
         var chenkIndex = 'bbs' + (index + 1);
         var otemplate = this.bbsTemplate_data[this.bbs.bbs_index1][this.bbs.bbs_index2];
-		
+
         if (this.mobanArr[index].isTrue) { //两页换横版的情况选中
           console.log("两页换横版的情况选中")
           //切换前选中的页码
@@ -630,42 +633,57 @@
       get_material() {
 
       },
-      preview() {
-        let _self = this
+      preview () {
+        const TYPESTYLECOUNT = {1: 1, 2: 1, 3: 2, 4: 1, 5: 1, 6: 2, 7: 4, 8: 4, 9: 1}
+        let typeStyle = []
+        $('.time_main_left_ht .pubilc_div > .time_pu .bbsClass').each((i, el) => {
+          typeStyle.push($(el).find('.img_drap:eq(0)').attr('typestyle'))
+        })
         this.previewData = []
-        let assembly = []
-        let pageIndex = {}
+        let _self = this
+        typeStyle.forEach((type) => {
+          type = type - 0;
+          let pageInfo = {
+            title: '标题一二三',
+            type: type,
+            imgs: []
+          }
+          _self.previewData.push(pageInfo)
+          if (type === 9) {
+            _self.previewData.push(Object.assign(pageInfo, {}))
+          }
+        })
         this.PreviewWork.baseHashMap.keys().forEach(function (key) {
           let img = _self.PreviewWork.baseHashMap.getvalue(key)
-          let _imgObject = {
+          _self.previewData[img.page - 1].imgs.push({
             id: img.picDbId,
-            index: img.num,
-            src: img.thumbnailImageUrl
-          }
-          let index = 0
-          if (pageIndex[img.page]) {
-            index = pageIndex[img.page]
-            assembly[index].imgs.push(_imgObject)
-          } else {
-            index = assembly.length
-            pageIndex[img.page] = index
-            assembly[index] = {
-              index: img.page,
-              type: img.editCnfIndex,
-              title: '标题123456',
-              imgs: [_imgObject]
+            index: img.num - 0,
+            src: img.base64Img ? img.base64Img : img.thumbnailImageUrl
+          })
+        })
+        this.previewData.forEach((obj) => {
+          let imgList = {}
+          obj.imgs.forEach((obj) => {
+            imgList[obj.index] = obj
+          })
+          for (let i = 1; i <= TYPESTYLECOUNT[obj.type]; i++) {
+            if (!imgList[i]) {
+              imgList[i] = {
+                isNull: true,
+                id: new Date().getTime(),
+                index: i,
+                src: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWO4dOnSfwAIZgN2UcgHsgAAAABJRU5ErkJggg=='
+              }
             }
           }
+          let imgs = []
+          for (let key in imgList) {
+            imgs.push(imgList[key])
+          }
+          obj.imgs = imgs
         })
-        assembly.sort((a, b) => {
-          return a.page - 0 > b.page - 0
-        })
-        this.previewData = assembly
-        this.PreviewWork.lomoHashMap.keys().forEach((key) => {
-          console.log(this.PreviewWork.lomoHashMap.getvalue(key))
-        })
-//        console.log(this.PreviewWork.textHashMap.keys())
-//        console.log('预览需要的数据', this.PreviewWork)
+        this.colorName = JSON.parse(sessionStorage.getItem("bbsSlsectDate")).colorName;
+        console.log(this.previewData)
         this.previewDialogVisible = true
       },
       fnd() {
@@ -682,7 +700,7 @@
       bbsTemplate_data: "fnd"
     },
     created() {
-		
+
       // 宝宝书模版数据
       this.bbsTemplate_data = bbsData_template;
 
@@ -699,15 +717,14 @@
       this.setPageIndex()
       this.jisuan()// 计算页面位置
 // this.$router.push({ path: '/security/iploginanalysis/'+json.name,params: { deviceId: 123}});
-	
+
 	//设置书皮的操作
 	 let colorName = JSON.parse(sessionStorage.getItem("bbsSlsectDate")).colorName;
-//	console.log(colorName)
 	//设置背景
-	setBookBg(colorName)
-	
+	setBookBg(colorName,$(".titlePage_bg .page_fm"),$(".firstPage .page_bg"),$(".lastPage .page_bg"))
+
       if (this.$route.query.dbId) {  // 如果是再次编辑进来的界面
-        this.workEdit.edtDbId = this.$route.query.dbId// 存入id预防      
+        this.workEdit.edtDbId = this.$route.query.dbId// 存入id预防
         Api.work.unfinishedWork(this.$route.query.dbId).then((res) => {
           var oImgData = JSON.parse(res.data.data.editPicture)
           var editTxt = JSON.parse(res.data.data.editTxt)
@@ -721,7 +738,7 @@
           // 图片节点生成之后id回显 ==>动态添加id节点
           setTimeout(function () {
             $(".comtent_chanpin .pubilc_div .bbsClass  .img_drap").each(function (index, el) {//图片
-            	  	
+
               var opage = $(el).parents(".pubilc_div").find(".page .pageleft span").text();
               if ($(el).parents(".pubilc_div").size()<2) { //如果是横版的页面
               	opage = $(el).parents(".pubilc_div").find(".page .pageleft span").eq(0).text();
@@ -735,7 +752,7 @@
             $(".comtent_chanpin .pubilc_div .pageLomo").each(function (index, el) {//lomo
               var srcDom = $(el).parents(".pubilc_div").find(".img_drap")
               srcDom.attr("id", $(el).text() + '_' + srcDom.attr("imgsort") + '_' + 'lomo');
-            })       
+            })
           }, 500)
 
           //回显图片和文字

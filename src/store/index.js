@@ -120,7 +120,10 @@ let store = new Vuex.Store({
 			if(edidData.parents(".lomoTemplate").size() > 0) {
 				oPage = edidData.parents(".lomoTemplate").find(".page .pageLomo").text()
 			}
-
+			//如果是台历
+			if(edidData.parents(".pubilc_taili_div").size() > 0) {
+				oPage = edidData.parents(".pubilc_taili_div").find(".page span:nth-of-type(2)").text(); //第几页	
+			}
 			var constName = oPage + "_" + oimgSort;
 			var picObj = {
 				"constName": constName,
@@ -166,6 +169,7 @@ let store = new Vuex.Store({
 				}, 200)
 				return;
 			}
+						
 			setTimeout(function() {	
 				min_scale = edidData.attr("min_scale"); //图片和缩略图的比例
 				picObj.actions.min_scale = min_scale;
@@ -317,9 +321,7 @@ let store = new Vuex.Store({
 					var dataImg = state.bbs.footerData[oIndex]; //每一个对象
 					//回显图片和删除底部缓存
 					console.log(ev.target)
-					//						if($(ev.target).find(">img").attr("src")){
-					//							console.log('有图')
-					//						}
+
 					$(ev.target).next("img").attr("src", dataImg.thumbnailUrl).attr('imgStyle', dataImg.thumbnailUrl);
 					state.bbs.footerData.splice(oIndex, 1);
 					console.log(dataImg)
@@ -333,16 +335,17 @@ let store = new Vuex.Store({
 						oTypeStyle = 1;
 						oimgSort = 1;
 					}
-					//						console.log('页数'+oPage)
-					//						console.log('板式'+oTypeStyle)
-					//						console.log('图片的顺序'+oimgSort)
 					//如果是lomo卡
 					if($(ev.target).parents(".lomoTemplate").size() > 0) {
 						oPage = $(ev.target).parents(".lomoTemplate").find(".page .pageLomo").text()
 					}
+					//如果是台历
+					if($(ev.target).parents(".pubilc_taili_div").size() > 0) {
+						oPage = $(ev.target).parents(".pubilc_taili_div").find(".page span:nth-of-type(2)").text(); //第几页	
+					}
 					var constName = oPage + "_" + oimgSort;
 					console.log(constName)
-
+					
 					var picObj = {
 						"constName": constName,
 						"picDbId": dataImg.dbId,
@@ -374,6 +377,8 @@ let store = new Vuex.Store({
 						state.editData.ImgHashMap.remove((parseInt(oPage) + 1) + '_3');
 						state.editData.ImgHashMap.remove((parseInt(oPage) + 1) + '_4');
 					}
+					
+					
 					//如果是lomo卡
 					if($(ev.target).parents(".lomoTemplate").size() > 0) {
 						//计算位置

@@ -3,14 +3,25 @@
     <el-dialog :title="title" :size="size" :visible.sync="previewDialogVisible" @close="close" @open="open"
                :close-on-click-modal="false">
       <div class="preview_comtent" ref="previewComtent">
-        <div class="hard">{{title}}[封面]</div>
-        <div class="hard">扉页</div>
-        <div class="preview_page" :class="'style_type_'+item.type" v-for="item in data">
+        <div class="hard" ref="frontCover"></div>
+        <div class="hard even" ref="coverPage"></div>
+        <div class="preview_page"
+             :class="[
+               'style_type_'+item.type,
+               {
+                 'odd': index % 2 && item.type !== 9,
+                 'even': !(index%2) && item.type !== 9,
+                 't9_left': index%2 && item.type === 9,
+                 't9_right': !(index%2) && item.type === 9
+               }
+               ]" v-for="(item,index) in data">
           <img :key="img.id" :src="img.src" :class="['page_style_'+item.type,'img_style_'+item.type+'_'+img.index]"
                v-for="img in item.imgs">
           <label class="title">{{item.title}}</label>
+          <span class="page_num" :class="!((index+1)%2) ? 'left' : 'right'">第{{index + 1}}页</span>
         </div>
-        <div class="hard">尾页</div>
+        <div class="hard even"></div>
+        <div class="hard" ref="lastPage"></div>
       </div>
     </el-dialog>
   </div>
@@ -21,6 +32,10 @@
 
   export default {
     props: {
+      colorName: {
+        type: String,
+        default: ''
+      },
       title: {
         type: String,
         default: '预览画册'
@@ -60,6 +75,7 @@
         if (!this.isTurn) {
           this.isTurn = true
           this.$nextTick(function () {
+            setBookBg(this.colorName, $(this.$refs.frontCover), $(this.$refs.coverPage), $(this.$refs.lastPage))
             $(this.$refs.previewComtent).turn({
               page: 2,
               width: 900,
@@ -79,6 +95,7 @@
       }
     },
     created: function () {
+
     }
   }
 </script>
@@ -86,7 +103,9 @@
 <style lang="scss" rel="stylesheet/sass">
   .preview {
     .el-dialog--small {
+      top: 50% !important;
       width: 940px;
+      margin-top: -326px;
     }
     .preview_comtent {
       width: 900px;
@@ -94,7 +113,7 @@
       overflow: hidden;
       border-radius: 4px;
       .hard {
-        background: #ccc !important;
+        background: #f1f1f1;
         color: #333;
         box-shadow: inset 0 0 5px #666;
         font-weight: bold;
@@ -109,6 +128,13 @@
         background-image: linear-gradient(left, #fff 95%, #dadada 100%);
         box-shadow: inset 0 0 5px #666;
       }
+
+      .style_type_9 {
+        &:focus {
+          outline: 0 !important;
+        }
+      }
+
       .preview_page {
         position: relative;
         float: left;
@@ -125,12 +151,23 @@
         }
         .title {
           position: absolute;
-          bottom: 4px;
+          bottom: 14px;
           display: block;
           width: 100%;
           font-size: 16px;
           font-weight: 400;
           text-align: center;
+        }
+        .page_num {
+          position: absolute;
+          bottom: 4px;
+          font-size: 12px;
+          &.left {
+            left: 4px;
+          }
+          &.right {
+            right: 4px;
+          }
         }
         .page_style_1 {
           position: relative;

@@ -21,8 +21,8 @@
 		        <p class="pageTitleDetail"><span>更多详情</span></p>
 		    </div>
 		    <div class="bothSides">
-		       <div class="imgBoxList">
-			       <div id="picContainer">
+		       <div class="imgBoxList" v-show="!frameShowBool">
+			       <div id="picContainer" class="picContainer picContainerOne" :style="{'background':nowShowBackgroundColor}">
 			       				
 			       </div>
 		       	  <div class="boxA">
@@ -37,38 +37,37 @@
 		       	   <div class="boxD">
 		       	  	<span class="sizeFrame">D</span>
 		       	  </div>
-
+		       </div>
+		       <div class="imgBoxList" v-show="frameShowBool">
+			       <div  class="picContainerTwo picContainer " style="background-image: url(http://test.artup.com/builder/imgs/album/albumbig.png)">		
+			      
+			       </div>
 		       </div>
 		       <div class="typeBox">
 		       		<div class="btnChoose">选择尺寸</div>
 		       		<div class="sizeBox">
-		       			<div class="k1_Foot1size_click" sizeType='A' size='400×500'>A&nbsp; 255×355 mm </div>
-		       			<div class="k1_Foot1size_click" sizeType='B' size='500×400'>B&nbsp; 355×255 mm </div>
-		       			<div class="k1_Foot1size_click" sizeType='C' size='500×500'>C&nbsp; 360×360 mm </div>
-		       			<div class="k1_Foot1size_click" sizeType='D' size='530×740'>D&nbsp; 360×510 mm </div>
+		       			<div @click='updateSizeFn(index)' v-for='(frameSize,index) in frameSize' class="k1_Foot1size_click" :sizeType='frameSize.name | firstCode' :size='frameSize.code'>{{frameSize.name}}</div>
+		       			
 
 		       		</div>
 		       		<div class="btnChoose">选择页码</div>
 		       		<div class="sizeBox">
-		       			<div class="k1_Foot1size_click" sizeType='A' size='400×500'>56页码 </div>
+		       			<div @click="updatePageFn(index)" class="k1_Foot1size_click k1_FootPage_click" v-for="(item,index) in framePage"  :page='item.code'>{{item.code}} </div>
 		       		</div>
 		       		<div class="btnChoose">选择颜色</div>
 		       		<div class="frameBox">
-		       			<div class="picAndText">
-		       				<div class="kuangAngle" frameType='zm' style="background-color:rgb(29, 28, 25)"></div>
-		       				<div class="k1_Foot1frame_click k1_pre_frame">黑色</div>
+		       			<div class="picAndText" v-for="(item,index) in frameColor">
+		       				<div class="kuangAngle" @click="updateColorFn(index)"  :colorName='item.name' :code='item.code' :color='item.attr' :style="{'background':item.attr}"></div>
+		       				<div class="k1_Foot1frame_click k1_pre_frame">{{item.name}}</div>
 		       			</div>
-		       			<div class="picAndText">
-		       				<div class="kuangAngle" frameType='yxl' style="background-color:rgb(153, 153, 153);"></div>
-		       				<div class="k1_Foot1frame_click k1_pre_frame">灰色</div>
-		       			</div>
+		       			
 		       			
 		       		</div>
 		       		<div class="rightBottom">
 	                    <div class="showPrice">
-	                        ￥ : <span class="price_show">499</span><span class="skuCode" style="display: none"></span>
+	                        ￥ : <span class="price_show">{{price}}</span><span class="skuCode" style="display: none"></span>
 	                    </div>
-	                    <a href="/album/albumSelect"><div class="startBook">开始定制</div></a>
+	                    <a @click="startCustom"><div class="startBook">开始定制</div></a>
 	                </div>
 		       </div>
 		       

@@ -73,7 +73,7 @@
     },
     methods: {
 	  continueEdit($index){ //继续编辑
-		  this.$router.push({path:"/album/imgEdit",query:{dbId:this.workData[$index].dbId}})
+	  	 location.href="/album/maxImgEdit?dbId="+this.workData[$index].dbId;
 	  },
       deleteWorkList: function () {
         let deleteArr = []
