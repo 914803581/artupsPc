@@ -81,13 +81,22 @@
         productData.name = this.workData[$index].sku
         productData.skuCode = this.workData[$index].skuCode
         productData.category = this.workData[$index].category
-        productData.price = "299"
+        productData.price = this.workData[$index].price
         productData.skuId = this.workData[$index].skuId
+        productData.size = JSON.stringify(this.workData[$index].sku).split(".")[2]
         console.log(productData)
+//        urlQuery 数据组装
+        var urlQuery = {}
+        urlQuery.category = this.workData[$index].category
+        urlQuery.defDbId = this.workData[$index].defDbId
+        urlQuery.tplCode = this.workData[$index].tplCode
+//        存入session
+        sessionStorage.setItem("bbsSlsectDate", JSON.stringify(productData))
+        sessionStorage.setItem("urlQuery", JSON.stringify(urlQuery))
         if (textCode === "小时光") {
-//          location.href = "/album/maxImgEdit?dbId=" + this.workData[$index].dbId
+          location.href = "/album/maxImgEdit?dbId=" + this.workData[$index].dbId
         } else if (textCode === "画册.") {
-//          location.href = "/album/huaceEdit?dbId=" + this.workData[$index].dbId
+          location.href = "/album/huaceEdit?dbId=" + this.workData[$index].dbId
         }
       },
       deleteWorkList: function () {

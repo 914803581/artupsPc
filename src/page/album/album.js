@@ -119,7 +119,7 @@ new Vue({
   mounted(){
   	var that = this;
   	//获取url的category值 以字符串的json格式保存到sessionStroage中
-	var queryObj = {'category':this.getQueryString('category'),'defDbId':this.getQueryString('defDbId')};
+	var queryObj = {'category':this.getQueryString('category'),'defDbId':this.getQueryString("defDbId")};
     	sessionStorage.setItem("urlQuery",JSON.stringify(queryObj));
 
 	//获取画册的类型
