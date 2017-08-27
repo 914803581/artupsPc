@@ -74,10 +74,20 @@
     methods: {
       continueEdit($index) { //继续编辑
         var textCode = this.workData[$index].sku.substr(0, 3)
+//        var bbsSlsectDate = JSON.parse(sessionStorage.getItem("bbsSlsectDate"));
+        var productData = {}
+        console.log(JSON.stringify(this.workData[$index].sku))
+        productData.colorName = JSON.stringify(this.workData[$index].sku).split(".")[1]
+        productData.name = this.workData[$index].sku
+        productData.skuCode = this.workData[$index].skuCode
+        productData.category = this.workData[$index].category
+        productData.price = "299"
+        productData.skuId = this.workData[$index].skuId
+        console.log(productData)
         if (textCode === "小时光") {
-          location.href = "/album/maxImgEdit?dbId=" + this.workData[$index].dbId
+//          location.href = "/album/maxImgEdit?dbId=" + this.workData[$index].dbId
         } else if (textCode === "画册.") {
-          location.href = "/album/huaceEdit?dbId=" + this.workData[$index].dbId
+//          location.href = "/album/huaceEdit?dbId=" + this.workData[$index].dbId
         }
       },
       deleteWorkList: function () {

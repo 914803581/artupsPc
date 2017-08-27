@@ -31,8 +31,8 @@ new Vue({
 	price : '', //框画的价钱
 	previewImageUrl : '',//框形预览图
 	frameType : '', //框形
-	framePage: '', //页数	
-	frameColor: '', //颜色	
+	framePage: '', //页数
+	frameColor: '', //颜色
 	editImageUrl : '' ,//编辑框背景图
 	skuId : '', //当前产品的skuId
 	templateCode:''
@@ -51,7 +51,7 @@ new Vue({
 			//this.updataTypeFn(0);//当不选择框形的时候默认选择第一个框形
 			this.updatePageFn(0);
 			this.updateSizeFn(0);
-			
+
 		};
 		$('.kuangAngle').removeClass('typeActive');
 		$('.kuangAngle').eq(index).addClass('typeActive');
@@ -72,7 +72,7 @@ new Vue({
 		};
 		$('.k1_FootPage_click').removeClass('typeActive');
 		$('.k1_FootPage_click').eq(index).addClass('typeActive');
-		
+
 		this.updataSkuData();
 	},
 	/*点击更新框画尺寸
@@ -105,7 +105,7 @@ new Vue({
   			console.log()
   			this.previewImageUrl = res.data.previewImageUrl;//框形预览图
   			this.editImageUrl = res.data.editImageUrl;//编辑框背景图
-  			this.price = res.data.price; 
+  			this.price = res.data.price;
   			this.skuId = res.data.skuId;
   			this.templateCode = res.data.templateCode
   		});
@@ -114,14 +114,14 @@ new Vue({
   	startCustom (){
   		location.href = '/album/albumSelect?size='+this.nowSize+"&editImageUrl="+this.editImageUrl+"&price="+this.price+'&sku='+this.skuCode+'&color='+this.nowColorName+'&category='+this.getQueryString('category')+'&skuId='+this.skuId+'&page='+this.nowPage+'&templateCode='+this.templateCode;
   	}
-  	
+
   },
   mounted(){
   	var that = this;
   	//获取url的category值 以字符串的json格式保存到sessionStroage中
-	var queryObj = {'category':this.getQueryString('category')};
-    	sessionStorage.setItem("urlQuery",JSON.stringify(queryObj)); 
-    	
+	var queryObj = {'category':this.getQueryString('category'),'defDbId':this.getQueryString('defDbId')};
+    	sessionStorage.setItem("urlQuery",JSON.stringify(queryObj));
+
 	//获取画册的类型
 	Api.sku.queryAttributes({category:this.getFromSession("category")}).then(res=>{
 		if(res){
@@ -142,9 +142,9 @@ new Vue({
 		}
 
 	},err=>{
-		
+
 	});
-	
+
   },
   created: function () {
     document.body.style.cssText = 'opacity:1;'

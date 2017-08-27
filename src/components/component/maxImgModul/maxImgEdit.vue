@@ -53,7 +53,7 @@
               <div style="background: #efefef;">
               </div>
             </div>
-            <div class="time_bg" v-for="(item,index) in bbsTemplate_data">
+            <div class="time_bg" :index_style="index" v-for="(item,index) in bbsTemplate_data">
               <!--pubilc_div 这个class是留给整屏来定义的样式  click_template 是用vue里面的事件委派来解决避免不了的dom操作  hengban_bbs 横版增加的class  hengban_bbs 红线class-->
               <div class="firstPage" v-if="item[0].firstPage">
                 <div class="page_bg"></div>
@@ -298,8 +298,13 @@
         this.workEdit.skuId = bbsSlsectDate.skuId;
         this.workEdit.status = 1;
         this.workEdit.skuCode = bbsSlsectDate.skuCode;
-
-
+        this.workEdit.price = bbsSlsectDate.price;
+        this.workEdit.theme ="";  //画册的版式
+        this.workEdit.defDbId = this.getFromSession("defDbId");
+//        如果存在就存入此字段
+        if(this.$route.query.huaceType){
+          this.workEdit.huaceType = this.$route.query.huaceType;
+        }
         $(".comtent_chanpin .pubilc_div .bbsClass  .img_drap").each(function (index, el) {
           if ($(el).attr("src")) { //如果src存在
             vm.workEdit.thumbnailImageUrl = $(el).attr("imgstyle");
@@ -614,7 +619,6 @@
         })
       },
       jisuan() { //动态计算面积
-        console.log($(".comtent_chanpin .line_comtent .comtent .title").height())
         var oH = $(window).height() - $(".footer_img").height() - $(".unify-header").height() - $(".comtent_chanpin .line_comtent .comtent .title").height() - 2;
         $(".line_comtent .scrollBar").css("height", oH + 'px');
       },
@@ -706,7 +710,7 @@
         vm.bbsTemplate_data = vm.dataTemp.productData;
         vm.mobanArr = vm.dataTemp.templateImgData;
         vm.template_Source = vm.dataTemp.templateSource;
-        console.log('hahhaha', vm.dataTemp.templateSource)
+//        console.log('hahhaha', vm.dataTemp.templateSource)
         setTimeout(function () {
           vm.setPageIndex();
           vm.$forceUpdate()
@@ -735,6 +739,7 @@
       this.lomoTemplate_data = this.dataTemp.lomoData_template;
       //右侧模版的数据
       this.mobanArr = this.dataTemp.templateImgData;
+
       //给模版数据赋予一个初始化的值
       this.setBbsTemplate();
 
@@ -764,10 +769,43 @@
             var oImgLomo = JSON.parse(res.data.data.lomo)
             console.log(oImgLomo)
           }
+          setTimeout(function () { //先加载节点，让版式找到二纬数组的索引
+            setTemplate();
+          }, 300)
+          //先加载所有的版式
+         setTimeout(function () {
+           if (oImgData.length > 0) {
+             for (var i = 0; i < oImgData.length; i++) {
+               var pageNum = oImgData[i].page + '_' + oImgData[i].num + '_bbs';
+               var oArrIndex = $("#" + pageNum).parents(".time_bg").attr("index_style")
+               //根据找到页码
+               var oPage = $("#" + pageNum).parents(".bbsClass").siblings(".page").find(".pageleft span").eq(0).text();
+               var bbs = "bbs"+oImgData[i].editCnfIndex
+               if(parseInt(oPage)%2==1){
+                 vm.bbsTemplate_data[oArrIndex][0].template = vm.template_Source[bbs];
+               }
+//               else{
+//                 vm.bbsTemplate_data[oArrIndex][1].template = vm.template_Source[bbs];
+//               }
+               //切换板式
+              console.log('1___',vm.bbsTemplate_data[oArrIndex][0].template);
+              console.log('2___',vm.template_Source[bbs])
+//             var chenkIndex = 'bbs' + (oArrIndex + 1);
+//             var otemplate = this.bbsTemplate_data[this.bbs.bbs_index1][this.bbs.bbs_index2];
+
+               console.log(oArrIndex,'对应的页码___',oPage)
+               console.log("id",pageNum,"版式",oImgData[i].editCnfIndex);
+             }
+           }
+         },400)
           // 图片节点生成之后id回显 ==>动态添加id节点
           setTimeout(function () {
-            $(".comtent_chanpin .pubilc_div .bbsClass  .img_drap").each(function (index, el) { //图片
+            setTemplate();
+          }, 600)
 
+          //给添加动态id的函数
+          function setTemplate() {
+            $(".comtent_chanpin .pubilc_div .bbsClass  .img_drap").each(function (index, el) { //图片
               var opage = $(el).parents(".pubilc_div").find(".page .pageleft span").text();
               if ($(el).parents(".pubilc_div").size() < 2) { //如果是横版的页面
                 opage = $(el).parents(".pubilc_div").find(".page .pageleft span").eq(0).text();
@@ -782,8 +820,7 @@
               var srcDom = $(el).parents(".pubilc_div").find(".img_drap")
               srcDom.attr("id", $(el).text() + '_' + srcDom.attr("imgsort") + '_' + 'lomo');
             })
-          }, 500)
-
+          }
           //回显图片和文字
           setTimeout(function () {
             if (editTxt.length > 0) {
