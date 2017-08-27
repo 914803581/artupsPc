@@ -795,6 +795,7 @@
                //找到2维数组的第一位角标
                var oArrIndex = parseInt(oPage/2)
                var bbs = "bbs"+oImgData[i].editCnfIndex
+
                if(parseInt(oPage)%2==1){
                  if(vm.bbsTemplate_data[oArrIndex][1]){
                    vm.bbsTemplate_data[oArrIndex][1].template = vm.template_Source[bbs];
@@ -803,8 +804,18 @@
                  }
                }
                else{
+                 if(oImgData[i].crossPage){
+                   vm.bbsTemplate_data[oArrIndex][1] = [];
+                   var bs = vm.bbsTemplate_data[oArrIndex][0];
+                   vm.bbsTemplate_data[oArrIndex][0].template = vm.template_Source[bbs];
+                   vm.bbsTemplate_data[oArrIndex][0].only = true;
+                   vm.$forceUpdate();
+                   vm.$nextTick();
+                   return;
+                 }
                  vm.bbsTemplate_data[oArrIndex][0].template = vm.template_Source[bbs];
-                 vm.$forceUpdate();vm.$nextTick();
+                 vm.$forceUpdate();
+                 vm.$nextTick();
                }
              }
            }
