@@ -28,10 +28,13 @@ new Vue({
 	skuCode : '' ,//用来取价钱的sku
 	price : '', //框画的价钱
 	previewImageUrl : '',//框形预览图
+
 	frameType : '', //框形
-	framePage: '', //页数	
-	frameColor: '', //颜色	
-	editImageUrl : '' //编辑框背景图
+	framePage: '', //页数
+	frameColor: '', //颜色
+	editImageUrl : '', //编辑框背景图
+	skuId: '',//产品的skuId
+	templateCode: ''//产品的templateCode
   },
   components: {
     'unify-header': Header,
@@ -47,7 +50,7 @@ new Vue({
 			//this.updataTypeFn(0);//当不选择框形的时候默认选择第一个框形
 			this.updatePageFn(0);
 			this.updateSizeFn(0);
-			
+
 		};
 		$('.kuangAngle').removeClass('typeActive');
 		$('.kuangAngle').eq(index).addClass('typeActive');
@@ -66,7 +69,7 @@ new Vue({
 		};
 		$('.k1_FootPage_click').removeClass('typeActive');
 		$('.k1_FootPage_click').eq(index).addClass('typeActive');
-		
+
 		this.updataSkuData();
 	},
 	/*点击更新框画尺寸
@@ -100,15 +103,43 @@ new Vue({
   			this.previewImageUrl = res.data.previewImageUrl;//框形预览图
   			this.editImageUrl = res.data.editImageUrl;//编辑框背景图
   			this.price = res.data.price;
+  			this.skuId =  res.data.skuId;
+  			this.templateCode = res.data.templateCode
   		});
+  	},
+  	/*开始定制*/
+  	startCustom (){
+  		var jsons = {
+		    		"colorName":this.nowColor,
+		    		"name":"台历."+this.nowColor+"."+this.nowSize,
+		    		"skuCode":this.skuCode,
+		    		"category":this.getFromSession("category"),
+		    		"price":this.price,
+		    		"skuId":this.skuId,
+		    		"size":this.nowSize,
+		    		"titleName":"台历",
+		    		"tplCode":this.templateCode
+	    		};
+  		    if(this.nowSize=="195X145"){
+            sessionStorage.setItem('tailiType', '横');
+          }else {
+            sessionStorage.setItem('tailiType', '竖');
+          }
+	    		if(this.frameShowBool == false){
+	    			sessionStorage.setItem('bbsSlsectDate',JSON.stringify(jsons))
+	    			location.href = '/album/tlEdit'
+	    		}else{
+	    			alert('请选择尺寸和颜色')
+	    		}
+
   	}
   },
   mounted(){
   	var that = this;
   	//获取url的category值 以字符串的json格式保存到sessionStroage中
 	var queryObj = {'category':this.getQueryString('category')};
-    	sessionStorage.setItem("urlQuery",JSON.stringify(queryObj)); 
-    	
+    	sessionStorage.setItem("urlQuery",JSON.stringify(queryObj));
+
 	//获取框画的类型
 	Api.sku.queryAttributes({category:this.getFromSession("category")}).then(res=>{
 		if(res){
@@ -126,9 +157,9 @@ new Vue({
 		}
 
 	},err=>{
-		
+
 	});
-	
+
   },
   created: function () {
     document.body.style.cssText = 'opacity:1;'

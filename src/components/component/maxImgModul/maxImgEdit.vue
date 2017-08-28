@@ -804,11 +804,13 @@
                  }
                }
                else{
+//                 console.log(oImgData[i].crossPage)
                  if(oImgData[i].crossPage){
+                   alert(oImgData[i].crossPage)
                    vm.bbsTemplate_data[oArrIndex][1] = [];
-                   var bs = vm.bbsTemplate_data[oArrIndex][0];
-                   vm.bbsTemplate_data[oArrIndex][0].template = vm.template_Source[bbs];
                    vm.bbsTemplate_data[oArrIndex][0].only = true;
+                   vm.bbsTemplate_data[oArrIndex][0].template = vm.template_Source.bbs9;
+                   console.log('_____',vm.bbsTemplate_data[oArrIndex][0])
                    vm.$forceUpdate();
                    vm.$nextTick();
                    return;
