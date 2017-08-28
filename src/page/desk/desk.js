@@ -29,8 +29,8 @@ new Vue({
 	price : '', //框画的价钱
 	previewImageUrl : '',//框形预览图
 	frameType : '', //框形
-	framePage: '', //页数	
-	frameColor: '', //颜色	
+	framePage: '', //页数
+	frameColor: '', //颜色
 	editImageUrl : '' //编辑框背景图
   },
   components: {
@@ -47,7 +47,7 @@ new Vue({
 			//this.updataTypeFn(0);//当不选择框形的时候默认选择第一个框形
 			this.updatePageFn(0);
 			this.updateSizeFn(0);
-			
+
 		};
 		$('.kuangAngle').removeClass('typeActive');
 		$('.kuangAngle').eq(index).addClass('typeActive');
@@ -66,7 +66,7 @@ new Vue({
 		};
 		$('.k1_FootPage_click').removeClass('typeActive');
 		$('.k1_FootPage_click').eq(index).addClass('typeActive');
-		
+
 		this.updataSkuData();
 	},
 	/*点击更新框画尺寸
@@ -107,8 +107,8 @@ new Vue({
   	var that = this;
   	//获取url的category值 以字符串的json格式保存到sessionStroage中
 	var queryObj = {'category':this.getQueryString('category')};
-    	sessionStorage.setItem("urlQuery",JSON.stringify(queryObj)); 
-    	
+    	sessionStorage.setItem("urlQuery",JSON.stringify(queryObj));
+
 	//获取框画的类型
 	Api.sku.queryAttributes({category:this.getFromSession("category")}).then(res=>{
 		if(res){
@@ -126,9 +126,9 @@ new Vue({
 		}
 
 	},err=>{
-		
+
 	});
-	
+
   },
   created: function () {
     document.body.style.cssText = 'opacity:1;'
