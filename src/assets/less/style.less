@@ -141,7 +141,7 @@ html,body{width:100%;height: 100%;font-family: "微软雅黑";font-weight: 500;}
               }
            }
     }
-      
+
 }
 //书皮样式
 .titlePage_bg{
@@ -156,7 +156,7 @@ html,body{width:100%;height: 100%;font-family: "微软雅黑";font-weight: 500;}
             float: left;
             height: 100%;
             position: relative;
-            
+
            span{
                position: absolute;
                line-height: 30px;
@@ -168,10 +168,27 @@ html,body{width:100%;height: 100%;font-family: "微软雅黑";font-weight: 500;}
                     color: #333;
                     left: 40% ;
            }
-        }        
+        }
     }
-    
-   //封面的样式   
+
+//台历封面的样式 2017 横竖 2018等
+    .taili_2017_heng{
+      background: url(http://image2.artup.com/static/img/xsg_lsfm.jpg) no-repeat !important;
+      background-size: 100% 100% !important;
+    }
+    .taili_2017_shu{
+      background: url(http://image2.artup.com/static/img/xsg_lsfm.jpg) no-repeat !important;
+      background-size: 100% 100% !important;
+    }
+    .taili_2018_heng{
+
+    }
+    .taili_2018_shu{
+
+    }
+
+
+   //封面的样式
    .bbs_bg_blue{ //宝宝书蓝色
         background: url(http://image2.artup.com/static/img/xsg_lsfm.jpg) no-repeat !important;
         background-size: 100% 100% !important;
@@ -190,12 +207,12 @@ html,body{width:100%;height: 100%;font-family: "微软雅黑";font-weight: 500;}
         background-size: 100% 100% !important;
     }
     .bbs_bg_red_fm{background: #eb6621 !important;}
-    
+
     .bbs_bg_orange{//宝宝书橙色
         background: url(http://image2.artup.com/static/img/xsg_csfm.jpg) !important;
         background-size: 100% 100% !important;
     }
-    .bbs_bg_orange_fd{background: #c52d6b !important;} 
+    .bbs_bg_orange_fd{background: #c52d6b !important;}
     .bbs_bg_orange_fm{background: #eb6621 !important;}
     .bbs_bg_green{//宝宝书绿色
         background: url(http://image2.artup.com/static/img/xsg_lvsfm.jpg) !important;
@@ -205,7 +222,7 @@ html,body{width:100%;height: 100%;font-family: "微软雅黑";font-weight: 500;}
         background: url(http://image2.artup.com/static/img/xsg_lvsfd.jpg) !important;
         background-size: 100% 100% !important;
     }
-    .bbs_bg_green_fm{background: #283e6f !important;}  
+    .bbs_bg_green_fm{background: #283e6f !important;}
     //黑色
     .black_bg{
         background:#1d1c19!important;
@@ -216,12 +233,12 @@ html,body{width:100%;height: 100%;font-family: "微软雅黑";font-weight: 500;}
     .gray_bg{
         background:#989898!important;
     }
-    
+
 .firstPage,.lastPage{ //首页和尾页书皮的样式
    .page_bg{
        height: 212px;
        width: 100%;
-   } 
+   }
    .footer_page{
        height: 30px;
        background: red;
@@ -309,7 +326,7 @@ html,body{width:100%;height: 100%;font-family: "微软雅黑";font-weight: 500;}
         .time_main_left{
            width:100%;
            overflow: auto;
-           margin-top: 30px;          
+           margin-top: 30px;
             .time_bg{
                 float: left;
                 width: 320px;
@@ -326,7 +343,7 @@ html,body{width:100%;height: 100%;font-family: "微软雅黑";font-weight: 500;}
             }
             >.taili_hengban{ //台历横版的情况
                 height: auto !important;
-                background: #efefef;                
+                background: #efefef;
                 .pubilc_div{
                     height: 230px;
                      &:nth-of-type(2n+2) .taili_pu{
@@ -334,12 +351,12 @@ html,body{width:100%;height: 100%;font-family: "微软雅黑";font-weight: 500;}
                     }
                      &:nth-of-type(2n+2) .taili_pu_2{
                         float: right;
-                    }                   
+                    }
                     //台历的样式
-                   >.taili_pu{             
+                   >.taili_pu{
                        width: 152px;
-                       float:left;  
-                       height: 120px; 
+                       float:left;
+                       height: 120px;
                        >.taili_template{
                            width: 100%;
                            height: 100%;
@@ -348,14 +365,14 @@ html,body{width:100%;height: 100%;font-family: "微软雅黑";font-weight: 500;}
                     }
                     .taili_pu_2{
                            width: 152px;
-                           float:left;  
-                           height: 190px; 
+                           float:left;
+                           height: 190px;
                            >.taili_template{
                                width: 100%;
                                height: 100%;
                                background-color: #fff;
                            }
-                    }                   
+                    }
                 }
             }
         }
@@ -379,7 +396,7 @@ html,body{width:100%;height: 100%;font-family: "微软雅黑";font-weight: 500;}
                margin-left: 20px !important;
              }
             .bbs_hengban{
-                
+
                 width: 280px;
                 height:160px;
                 margin: 18px auto 18px;
@@ -436,11 +453,11 @@ html,body{width:100%;height: 100%;font-family: "微软雅黑";font-weight: 500;}
     }
 
     .pubilc_div{
-        
-        
+
+
 //          transition: all 1.3s;
             box-sizing: border-box;
-            
+
                   .hcTemplatetext01{
                       .title_pu{
                               border: 1px solid #d2d2d2;
@@ -522,8 +539,8 @@ html,body{width:100%;height: 100%;font-family: "微软雅黑";font-weight: 500;}
                           line-height: 13px;font-size: 12px; overflow: hidden;box-shadow: rgb(136, 136, 136) 2px 2px 2px; background: #e9e9e9;
                       }
               }
-                
-                     
+
+
                 .time_pu{
                     position: relative;
                     .bbsClass{
@@ -1124,7 +1141,7 @@ html,body{width:100%;height: 100%;font-family: "微软雅黑";font-weight: 500;}
                         right: -4px;
                     }
                     >.title_msg{
-                        
+
                     }
                     .text{
                         position: absolute;
@@ -1140,7 +1157,7 @@ html,body{width:100%;height: 100%;font-family: "微软雅黑";font-weight: 500;}
                         .text{
                             color: #de6d74;
                         }
-                        
+
                     }
                 }
                 .img_size_border{
