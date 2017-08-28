@@ -4,8 +4,8 @@
     <div class="container">
       <div class="wrapper">
         <div class="main">
-          <h2 class="title">添加地址</h2>
-          <address-form></address-form>
+          <h2 class="title">修改地址</h2>
+          <address-form :dbId="dbId"></address-form>
         </div>
         <left-menu selected="address"></left-menu>
       </div>
@@ -19,10 +19,13 @@
   import Footer from 'components/footer/footer'
   import LeftMenu from 'components/center/menu'
   import AddressForm from './AddressForm'
+  import * as helper from 'base/js/helper.js'
 
   export default {
     data: function () {
-      return {}
+      return {
+        dbId: ''
+      }
     },
     methods: {},
     components: {
@@ -30,6 +33,20 @@
       'unify-footer': Footer,
       LeftMenu,
       AddressForm
+    },
+    created: function () {
+      let callbackPage = localStorage['AddressEditCallBackPage']
+      if (!callbackPage) {
+        callbackPage = '/center/address.html'
+      }
+      this.dbId = helper.getQueryString('dbId')
+      if (this.dbId) {
+        if (!localStorage[`Address${this.dbId}`]) {
+          location.href = callbackPage
+        }
+      } else {
+        location.href = callbackPage
+      }
     }
   }
 </script>

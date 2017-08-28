@@ -83,7 +83,7 @@
   export default {
     data: function () {
       return {
-        total: 1000,
+        total: 0,
         pageSize: 5,
         pageNum: 1,
         orderList: [],
@@ -134,7 +134,7 @@
             this.pageNum = result.totalPage
           }
           if (result.totalRecord) {
-//            this.total = result.totalRecord
+            this.total = result.totalRecord
           }
         })
       }

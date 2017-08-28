@@ -74,6 +74,25 @@
     methods: {
       continueEdit($index) { //继续编辑
         var textCode = this.workData[$index].sku.substr(0, 3)
+//        var bbsSlsectDate = JSON.parse(sessionStorage.getItem("bbsSlsectDate"));
+        var productData = {}
+        console.log(JSON.stringify(this.workData[$index].sku))
+        productData.colorName = JSON.stringify(this.workData[$index].sku).split(".")[1]
+        productData.name = this.workData[$index].sku
+        productData.skuCode = this.workData[$index].skuCode
+        productData.category = this.workData[$index].category
+        productData.price = this.workData[$index].price
+        productData.skuId = this.workData[$index].skuId
+        productData.size = JSON.stringify(this.workData[$index].sku).split(".")[2]
+        console.log(productData)
+//        urlQuery 数据组装
+        var urlQuery = {}
+        urlQuery.category = this.workData[$index].category
+        urlQuery.defDbId = this.workData[$index].defDbId
+        urlQuery.tplCode = this.workData[$index].tplCode
+//        存入session
+        sessionStorage.setItem("bbsSlsectDate", JSON.stringify(productData))
+        sessionStorage.setItem("urlQuery", JSON.stringify(urlQuery))
         if (textCode === "小时光") {
           location.href = "/album/maxImgEdit?dbId=" + this.workData[$index].dbId
         } else if (textCode === "画册.") {

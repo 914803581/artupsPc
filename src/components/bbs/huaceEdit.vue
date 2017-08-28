@@ -34,10 +34,11 @@
 					hcTemplate360X510:hcTemplate360X510
 				}
 				var hcTemplate = obj['hcTemplate'+size];
+				console.log(hcTemplate)
 				var dataP = {};
-				dataP.productData = [							 	
+				dataP.productData = [
 						[{
-						    "template": hcTemplate.bbs1,
+              "template": hcTemplate.bbs1,
 							"only": false,
 							"firstPage": true, //第一页必须有的属性
 							"lastPage": false
@@ -143,7 +144,7 @@
 			  }
 		},
 		created() { //只执行一次
-			
+
 		},
 		mounted() { //全部渲染完毕
 
@@ -152,14 +153,14 @@
 			if (SlsectDate.size=="255X355") {
 				this.dataTemplate.templateSource = hcTemplate255X355
 			}
-			
+
 			var str = "风景方版";
-			
+
 			if (str =="风景方版") { //SlsectDate.size==""
 				 this.dataTemplate.productData = this.setBanshi(SlsectDate.size).productData;
 				 this.dataTemplate.templateImgData = this.setBanshi(SlsectDate.size).templateImgData;
-//				 this.dataTemplate.templateSource = 
-			}					
+//				 this.dataTemplate.templateSource =
+			}
 		}
 	}
 </script>

@@ -48,19 +48,19 @@
           link: '/welcome.html'
         }, {
           label: '画册',
-          link: '/album.html?category=huace'
+          link: '/album.html?category=huace&defDbId=9de2973d-3487-4b05-b556-b9b92dd75493'
         }, {
           label: '框画',
-          link: '/framed-pictures.html?category=kuanghua'
+          link: '/framed-pictures.html?category=kuanghua&defDbId=6afedcf6-b0e4-447d-afd9-c70449f42f50'
         }, {
           label: '海报',
-          link: '/poster.html?category=haibao'
+          link: '/poster.html?category=haibao&defDbId=d6e44ca4-511f-41d5-87df-d8d75a491c09'
         }, {
           label: '小时光',
-          link: '/album/imgEditMsg?category=baobaoshu&tplCode=pc_baobaoshu_170-235_24_single'
+          link: '/album/imgEditMsg?category=baobaoshu&tplCode=pc_baobaoshu_170-235_24_single&defDbId=7ad740df-0b81-418f-b4b5-c078ef580b47'
         }, {
           label: '台历',
-          link: '/desk.html?category=taili'
+          link: '/desk.html?category=taili&defDbId=f80b4c98-15ca-4da0-b482-0c8270c2eac6'
         }],
         userMenu: [{
           label: '我的主页',

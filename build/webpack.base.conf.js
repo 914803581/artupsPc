@@ -25,6 +25,7 @@ module.exports = {
       '@': resolve('src'),
       'components': `${resolve('src')}/components/`,
       'data': resolve('data'),
+      'base': `${resolve('src')}/base/`,
       'static': resolve('static'),
     }
   },
