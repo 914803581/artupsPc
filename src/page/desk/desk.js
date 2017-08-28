@@ -111,15 +111,20 @@ new Vue({
   	startCustom (){
   		var jsons = {
 		    		"colorName":this.nowColor,
-		    		"name":"画册."+this.nowColor+"."+this.nowSize,
+		    		"name":"台历."+this.nowColor+"."+this.nowSize,
 		    		"skuCode":this.skuCode,
 		    		"category":this.getFromSession("category"),
 		    		"price":this.price,
 		    		"skuId":this.skuId,
 		    		"size":this.nowSize,
-		    		"titleName":"画册",
+		    		"titleName":"台历",
 		    		"tplCode":this.templateCode
 	    		};
+  		    if(this.nowSize=="195X145"){
+            sessionStorage.setItem('tailiType', '横');
+          }else {
+            sessionStorage.setItem('tailiType', '竖');
+          }
 	    		if(this.frameShowBool == false){
 	    			sessionStorage.setItem('bbsSlsectDate',JSON.stringify(jsons))
 	    			location.href = '/album/tlEdit'
