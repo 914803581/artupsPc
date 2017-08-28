@@ -31,7 +31,9 @@ new Vue({
 	frameType : '', //框形
 	framePage: '', //页数	
 	frameColor: '', //颜色	
-	editImageUrl : '' //编辑框背景图
+	editImageUrl : '', //编辑框背景图
+	skuId: '',//产品的skuId
+	templateCode: ''//产品的templateCode
   },
   components: {
     'unify-header': Header,
@@ -100,7 +102,30 @@ new Vue({
   			this.previewImageUrl = res.data.previewImageUrl;//框形预览图
   			this.editImageUrl = res.data.editImageUrl;//编辑框背景图
   			this.price = res.data.price;
+  			this.skuId =  res.data.skuId;
+  			this.templateCode = res.data.templateCode
   		});
+  	},
+  	/*开始定制*/
+  	startCustom (){
+  		var jsons = {
+		    		"colorName":this.nowColor,
+		    		"name":"画册."+this.nowColor+"."+this.nowSize,
+		    		"skuCode":this.skuCode,
+		    		"category":this.getFromSession("category"),
+		    		"price":this.price,
+		    		"skuId":this.skuId,
+		    		"size":this.nowSize,
+		    		"titleName":"画册",
+		    		"tplCode":this.templateCode
+	    		};
+	    		if(this.frameShowBool == false){
+	    			sessionStorage.setItem('bbsSlsectDate',JSON.stringify(jsons))	    			
+	    			location.href = '/album/tlEdit'
+	    		}else{
+	    			alert('请选择尺寸和颜色')
+	    		}
+	    
   	}
   },
   mounted(){
