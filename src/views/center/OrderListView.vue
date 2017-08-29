@@ -1,7 +1,7 @@
 <template>
   <div class="order-manager" id="orderList">
     <unify-header></unify-header>
-    <div class="container">
+    <div class="container" ref="container">
       <div class="wrapper">
         <div class="main">
           <div class="filter">
@@ -26,7 +26,7 @@
                   <span class="time">{{item.createdDt}}</span>
                   <span class="order-id">订单号：{{item.code}}</span>
                 </div>
-                <div class="order-main" :style="{height:item.cars.length*140+'px'}">
+                <div class="order-main" :style="{height:(item.cars.length?item.cars.length*140:140)+'px'}">
                   <div class="list">
                     <div class="car" v-for="car in item.cars">
                       <img :src="car.thumbnailImageUrl" class="thumbnail">
@@ -90,19 +90,23 @@
         filterOptions: [{
           label: '全部订单',
           elect: true,
-          countIndicator: 0
+          countIndicator: 0,
+          status: 0
         }, {
           label: '待付款',
           elect: false,
-          countIndicator: 10
+          countIndicator: 0,
+          status: 1
         }, {
           label: '已支付',
           elect: false,
-          countIndicator: 32
+          countIndicator: 0,
+          status: 2
         }, {
           label: '已取消',
           elect: false,
-          countIndicator: 5
+          countIndicator: 0,
+          status: -1
         }]
       }
     },
@@ -112,16 +116,36 @@
           filter.elect = false
         })
         filter.elect = true
+        this.orderList = []
+        this.paging(1)
       },
       paging: function (pn) {
         if (pn) {
-          this.pageNum = pn - 1
+          this.pageNum = pn
+        }
+        let filterElect = null
+        this.filterOptions.forEach((filter) => {
+          if (filter.elect) {
+            filterElect = filter
+          }
+        })
+        if (filterElect.status) {
+          Api.Order.OrderListCount({
+            ignore: true,
+            format: 'json',
+            userDbId: 2221214,
+            status: filterElect.status
+          }).then((result) => {
+            return result.status === 200 ? result.request.response : ''
+          }).then((result) => {
+            filterElect.countIndicator = result - 0
+          })
         }
         Api.Order.OrderList({
           format: 'json',
           ignore: true,
           pageSize: this.pageSize,
-          pageNum: this.pageNum,
+          pageNum: this.pageNum - 1,
           sort: 'createdDt',
           order: 'desc',
           userDbId: 2221214
@@ -140,11 +164,18 @@
       }
     },
     components: {
-      'unify-header': Header,
-      'unify-footer': Footer,
-      'left-menu': LeftMenu
+      'unify-header':
+      Header,
+      'unify-footer':
+      Footer,
+      'left-menu':
+      LeftMenu
     },
     watch: {},
+    mounted: function () {
+      console.log(this.$refs.container)
+      this.setMinHeight(this.$refs.container, document.body.clientHeight - 50 - 132)
+    },
     created: function () {
       this.paging(1)
     }

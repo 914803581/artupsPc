@@ -7,7 +7,7 @@ import SelectTpl from '../script/index.js'
 import Header from '@/components/header/header.vue'
 import Footer from '@/components/footer/footer.vue'
 import $ from 'jquery'
-import Api from '../../api.js'
+import Api from '@/api.js'
 import Utils from '../../components/component/util'
 import filter from '../../filter.js'
 
@@ -49,7 +49,7 @@ new Vue({
   		};
   		$('.k1_Foot1size_click').removeClass('sizeActive');
   		$('.k1_Foot1size_click').eq(index).addClass('sizeActive');
-  	
+
   		var showTypeStr = 'box' + $('.k1_Foot1size_click').eq(index).attr('sizetype');//获取尺寸对应框的class
   		selTpl.setShowImgSize(showTypeStr , 'picContainerOne');
   		this.nowSize = $('.k1_Foot1size_click').eq(index).attr('size');
@@ -68,13 +68,13 @@ new Vue({
   		this.nowType = $('.kuangAngle').eq(index).attr('code');
   		this.frameType = $('.kuangAngle').eq(index).attr('frametype');
   		this.updataSkuData();
-  		
+
   	},
   	/*更新sku*/
   	updataSkuData (){
   		this.skuCode = this.getFromSession("category") + '.' + this.nowSize + '.' + this.nowType;
   		//console.log(this.skuCode)
-  		
+
   		var jsons = {
   			category:this.getFromSession("category"),
   			parameter:this.skuCode
@@ -92,14 +92,14 @@ new Vue({
   	startCustom (){
   		location.href = '/framed/framedEdit?size='+this.nowSize+"&editImageUrl="+this.editImageUrl+"&price="+this.price+'&frameType='+this.frameType+'&category='+this.getQueryString('category')+'&skuCode='+this.skuCode+'&templateCode='+this.templateCode+'&skuId='+this.skuId;
   	}
-  	
+
   },
   mounted(){
   	var that = this;
   	//获取url的category值 以字符串的json格式保存到sessionStroage中
 	var queryObj = {'category':this.getQueryString('category')};
-    	sessionStorage.setItem("urlQuery",JSON.stringify(queryObj)); 
-    	
+    	sessionStorage.setItem("urlQuery",JSON.stringify(queryObj));
+
 	//获取框画的类型
 	Api.sku.queryAttributes({category:this.getFromSession("category")}).then(res=>{
 		if(res){
@@ -116,7 +116,7 @@ new Vue({
 		}
 
 	},err=>{
-		
+
 	});
   },
   created: function () {

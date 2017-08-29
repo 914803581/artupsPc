@@ -7,7 +7,7 @@ import SelectTpl from '../script/index.js'
 import Header from '@/components/header/header.vue'
 import Footer from '@/components/footer/footer.vue'
 import $ from 'jquery'
-import Api from '../../api.js'
+import Api from '@/api.js'
 import Utils from '../../components/component/util'
 import filter from '../../filter.js'
 

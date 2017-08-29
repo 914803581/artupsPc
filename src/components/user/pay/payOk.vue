@@ -13,7 +13,7 @@
 							<li>订单支付成功！</li>
 							<li>订单号：<span>{{orderCode}}</span></li>
 							<li>金额: <span>{{price}}元</span></li>
-							
+
 						</ul>
 					</div>
 				</div>
@@ -30,7 +30,7 @@
 </template>
 
 <script>
-	import Api from '../../../API.js'
+	import Api from '@/api.js'
 	import { MessageBox } from 'element-ui';
 
 		export default{
@@ -45,20 +45,20 @@
 					location.href = '/'
 				},
 				ckdd(){
-					
+
 				}
-		
+
 			},
 			mounted(){
 				this.price = this.$route.query.price;
 				this.orderCode = this.$route.query.orderCode;
-		
-		
-			 
+
+
+
 		}
 
 	}
-	
+
 </script>
 <style>
 </style>

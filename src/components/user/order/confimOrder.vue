@@ -18,7 +18,7 @@
 						更多地址&gt;&gt;
 					</div>
 
-					<!-- 全部地址 -->			
+					<!-- 全部地址 -->
 					<div v-show="!selectAddressA" style="color: #A00912;cursor:pointer;" class="ord1m_3 ng-hide">
 						请选择配送地址&gt;&gt;
 					</div>
@@ -32,14 +32,14 @@
 								<a class="xuanze l" href="javascript:;" @click="setDefaultAddress(index,address.dbid)"><span  class="xz01" v-show="address.isOK"></span></a><span>{{address.isOK}}{{address.province}}{{address.address}}</span>
 							</div>
 						</div>
-					</div>		
+					</div>
 				</div>
 				<div class="ord1m2 r">
 					<p class="r"><a href="mallAsp.html#/address_add?order=add"><input class="ord1m-btm" type="button" name="" id="" value="新增收货地址"></a></p>
 				</div>
 			</div>
 		</div>
-		
+
 		<div class="order2 m ng-scope">
 			<p class="ord2-tit">
 				确认订单信息
@@ -51,26 +51,26 @@
 				<span class="r">单价</span>
 			</p>
 			<div class="ord2-main">
-				<div v-for="(itmes,index) in dataList" class="div_order ng-scope">				
+				<div v-for="(itmes,index) in dataList" class="div_order ng-scope">
 				<div class="or2m-t m">
 					<div class="or2m-t-l l">
 						<div class="l img">
 							<img class="l" :src="itmes.thumbnailImageUrl" >
 						</div>
-					
+
 						<div class="l">
 							<p class="p1 ng-binding">{{itmes.sku}}</p>
-							
+
 							<p class="p2"><span class="ng-binding">{{itmes.createdDt}}</span></p>
 						</div>
 					</div>
-					
+
 					<div class="or2m-t-1 l">
 						<!--
 						{{product.Attribute |splitBorber}}
 						-->
 					</div>
-					
+
 					<div class="or2m-t-2 ritdh l">
 						<span class="s1">￥</span>
 						<span class="s2 ng-binding">{{itmes.price}}</span>
@@ -88,11 +88,11 @@
 				</div>
 				<!--隐藏的优惠卷-->
 				<div class="or2m-b m" style="display: none;">
-					
+
 					<div class="or2bm aolectActive">
 						<div ng-if="product.ProductID == items.goodsId" ng-click="setCode(productIndex,$index)" ng-repeat="items in product.result.data.couponStrategy" class="ng-scope">
-												
-						</div>				
+
+						</div>
 					</div>
 				</div>
 			</div>
@@ -134,8 +134,8 @@
 				<div class="dtl01 r">
 					<p class=""><span id="oNUmber" class="redd ng-binding">{{goodsSize}}</span>件商品，商品总金额：￥<span id="oPrice" class="ng-binding">{{allPrice | toFixedTwo}}</span></p>
 					<p style="display: none;" class="">
-					享受优惠：使用优惠劵抵现 <span id="couponPrefeAmount" class="ng-binding">0.00</span> 元，<span ng-show="!manYuan==0" class="">订单总价满<span id="manYuan" class="ng-binding">0</span>元减<span id="prefePrice" class="ng-binding">0</span>元</span> 
-						
+					享受优惠：使用优惠劵抵现 <span id="couponPrefeAmount" class="ng-binding">0.00</span> 元，<span ng-show="!manYuan==0" class="">订单总价满<span id="manYuan" class="ng-binding">0</span>元减<span id="prefePrice" class="ng-binding">0</span>元</span>
+
 					</p>
 					<p class="" style="display: none;">合计优惠金额：-￥<span id="totalPrefeAmount" class="ng-binding">0.00元</span></p>
 					<p class=""><span class="bul">中通快递</span>&nbsp;&nbsp;运费：￥<span>0.00</span></p>
@@ -163,8 +163,8 @@
 </template>
 
 <script>
-	import Api from '../../../API.js'
-	import { MessageBox } from 'element-ui';
+	import Api from '@/api.js'
+	import { MessageBox } from 'element-ui'
 	import Header from '@/components/header/header.vue'
     export default {
         data() {
@@ -200,7 +200,7 @@
         			return;
         		},
         		placeOrder(){
-        			
+
         			if(this.addresBool != true){
 	        			alert('地址不能为空')
 	        			return;
@@ -210,7 +210,7 @@
 					cars:sessionStorage.getItem('cars'),
 					client:Api.CLIENT
 				}
-				Api.car.createOrder(jsons).then(res=>{ 
+				Api.car.createOrder(jsons).then(res=>{
 					if(res.data.code == 'success'){
 	                    var orderDbId = res.data.orderDbId;
 	                    var payType = 'wx';
@@ -222,7 +222,7 @@
 				},err=>{
 					Toast('请求错误');
 				})
-				//location.href="/payOrder";        			
+				//location.href="/payOrder";
         		},
         		setDefaultAddress(index,dbid){
         			this.addressDataList[index].isOK = !this.addressDataList[index].isOK;
@@ -239,7 +239,7 @@
 				           		if(res.data.length > 0){
 				           			this.addressData = res.data[0];
 				           			this.addresBool = true;
-				           		} 
+				           		}
 				           },err=>{
 				            	Toast('数据请求错误');
 				           })
@@ -247,14 +247,14 @@
 						Toast('数据请求错误');
 					})
         		}
-     
+
         },
         mounted() {
-        	 this.car = sessionStorage.getItem('cars'); 
+        	 this.car = sessionStorage.getItem('cars');
 	        	var jsons = {
 	        		dbId:this.car
 	        	}
-        Api.car.queryCar(jsons).then(res=>{ 
+        Api.car.queryCar(jsons).then(res=>{
            	if(res.data.length > 0){
            		this.goodsSize = res.data.length;
            		console.log(res.data)
@@ -262,8 +262,8 @@
            		for(var i = 0; i<this.dataList.length; i++){
            			this.total += Number(this.dataList[i].total);
            			this.allPrice += Number(this.dataList[i].num * this.dataList[i].price);
-           		} 
-           	} 
+           		}
+           	}
            },err=>{
            		Toast('数据请求错误');
            })
@@ -276,15 +276,15 @@
            			this.addressData = res.data[0];
            			console.log(this.addressData)
            			this.addresBool = true;
-           		} 
+           		}
            },err=>{
             	Toast('数据请求错误');
            })
-          
+
            //全部收货地址
            var jsons = {
 				userDbId:this.$route.query.userDbId,
-				status:1, 
+				status:1,
 				pageNum:0,
 				pageSize:15,
 				sort:'createdDt'
@@ -294,10 +294,10 @@
 
 				for (var i = 0; i < this.addressDataList.length; i++) {
 					if(this.addressDataList[i].mainAddr  == '是'){
-						
+
 						this.addressDataList[i].isOK = true;
 					}else{
-						this.addressDataList[i].isOK = false;	
+						this.addressDataList[i].isOK = false;
 					}
 				}
 

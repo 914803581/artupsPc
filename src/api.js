@@ -75,7 +75,7 @@ const DELETE_ORDER = `${HOST}artup-build/builder/order/update/command.do?format=
 const DEFAULT_ADDRESS = `${HOST}artup-build/builder/address/queryAll.do?format=json&ignore=true&status=1&mainAddr=Y`
 
 /* 素材dpi是否合格 */
-const MATER_DPI = `${STATIC_SERVER_HOST}artup-build/builder/cors/picture/validate.do?format=json&ignore=true`
+// const MATER_DPI = `${STATIC_SERVER_HOST}artup-build/builder/cors/picture/validate.do?format=json&ignore=true`
 
 /* 订单支付 */
 const ORDER_PAY = `${HOST}artup-build/builder/orderPayment/payment.do?format=json&ignore=true`
@@ -94,12 +94,12 @@ const CANCLE_ORDER_STATUS = `${HOST}artup-build/builder/order/update/command.do?
 const SET_DEFAULT_ADDRESS = `${HOST}/artup-build/builder/address/mainAddress.do?format=json&ignore=true`
 
 /* 重新登录函数 */
-const GER_USERDBID = `${HOST}artup-build/builder/service/tokenUrl.do?format=json`
+// const GER_USERDBID = `${HOST}artup-build/builder/service/tokenUrl.do?format=json`
 
-const RELOAD_CACHE = `${HOST}artup-build/builder/service/getFromCache.do?ignore=true&format=json`
+// const RELOAD_CACHE = `${HOST}artup-build/builder/service/getFromCache.do?ignore=true&format=json`
 
 /* 首页连接 */
-const INDEX_IMG = `${HOST}artup-build/builder/cors/lunbo/list.do?ignore=true&format=json&client=mobile`
+// const INDEX_IMG = `${HOST}artup-build/builder/cors/lunbo/list.do?ignore=true&format=json&client=mobile`
 // 删除购物车记录
 const DELECT_CAR_RECORD = `${HOST}artup-build/builder/cors/car/delete/command.do?format=json&ignore=true`
 // 删除作品

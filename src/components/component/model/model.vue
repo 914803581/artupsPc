@@ -8,7 +8,7 @@
 					<i  @click="closeModel" class="close closes iconfont">&#xe746;</i>
 				</div>
 				<!--素材库图片-->
-				<div class="upload_inbox">					
+				<div class="upload_inbox">
 					<div style="border: 2px solid #ccc;" id="fileLoad" class="imagebox">
 						<i class="iconfont">&#xe60b;</i>
 						<p class="text">*按shift支持多图上传</p>
@@ -26,10 +26,10 @@
 </template>
 
 <script>
-	import { Loading } from 'element-ui';
-	 import Api from '../../../API.js'
+	import { Loading } from 'element-ui'
+	 import Api from '@/api.js'
 	export default{
-		
+
 		name:'div-model',
 		data () {
 		    return {
@@ -44,18 +44,18 @@
 				if (ob>this.$store.state.bbs.material.length+4) {
 					alert('全部选中完毕')
 					return;
-					
+
 				}
 	    			this.$store.state.bbs.material.forEach((val,index)=>{
 					if (index<ob) {
-						val.isTrue = true;						
+						val.isTrue = true;
 					}
 				})
 	    			this.$forceUpdate();
 	    		},
 			closeModel(event){
 //				console.log(event)
-				this.isShowModels = false;				
+				this.isShowModels = false;
 			},
 			openModel(){
 				this.isShowModels = true;
@@ -72,18 +72,18 @@
 						strCut+=val.dbId+';'
 					}
 				})
-				
+
 				 //素材库图片裁剪
 				 Api.Material.MaterialCut(strCut,2000).then((res)=>{
-					this.$store.commit("slectFile",res.data);					
+					this.$store.commit("slectFile",res.data);
 					//关闭弹窗
 					this.closeModel();
 					//抬起下面的拖动框
 					this.$emit("footerBurl",true)
 					setTimeout(()=>{//延迟去执行此方法避免和vuex内部执行顺利冲突
-						this.$store.commit("drapDiv",this.typeWork)					
-					},200)					
-		        })				
+						this.$store.commit("drapDiv",this.typeWork)
+					},200)
+		        })
 			},
 			selectImg(index){
 				this.$store.state.bbs.material[index].isTrue = !this.$store.state.bbs.material[index].isTrue;
@@ -91,15 +91,15 @@
 			}
 	    },
 	    created(){
-	   	 	
+
 	    },
 	    watch:{
 	    		isShowModel:"openModel"
 	    },
 	    mounted(){
 	    	   let vm = this;
-	    	   this.isShowModels = this.isShowModel;	
-			
+	    	   this.isShowModels = this.isShowModel;
+
 			//后端上传需要的数据
 			var extraPostData = {};
 
@@ -109,24 +109,24 @@
 
             uploadInitializer($, uploadUrl, onUploadComplete);
             // //文件上传事件
-            function onUploadComplete($, r){				
+            function onUploadComplete($, r){
                 var browBtn = $("#fileLoad");
-            		console.log(browBtn.size())               
+            		console.log(browBtn.size())
                 r.assignBrowse(browBtn, false);
                 r.on('filesAdded', function(array) {
-                
+
 //                  if(array.length > 1){
-//                      $.each(array, function(idx, file) { 
+//                      $.each(array, function(idx, file) {
 //                          file.chunks = [];
 //                      });
 //                      alert('只能上传一张图片');
 //                      return;
 //
 //                  }
-                    var ok = validateUploadFiles($, array); 
+                    var ok = validateUploadFiles($, array);
                     if (ok) {
                         //触发uploadStart
-                        r.upload();} 
+                        r.upload();}
                         else {
                             r.cancel();
                         }
@@ -137,12 +137,12 @@
 //                  console.log(vm.extraPostData)
                     extraPostData  = {
 	                    	"userDbId" : '2221214',
-	                    "category" : 'baobaoshu', 
+	                    "category" : 'baobaoshu',
 	                    "format" : 'json',
 	                    "thumbnailWidth":"1400",
 	                    "client":"pc"
                     }
-					
+
 					console.log('开始上传')
                     r.opts.query = extraPostData;
                     //打开进度框
@@ -153,24 +153,24 @@
                     var progressWidth = progress.toFixed(2)*100;
                     //进度条显示
 					console.log('进度条'+progressWidth)
-                  
+
                 });
               	r.on('error',function(){
-                		
+
                 		 alert('网络错误，上传失败');
                 });
-              
+
                 //上传成功
                 r.on('fileSuccess', function(file, message){
                     var rObj = $.parseJSON(message);
                     vm.$store.dispatch("getMaterial")
-                    if(rObj.pictureDbId){ 
+                    if(rObj.pictureDbId){
                         //给父级的回调
-                    } else { 
+                    } else {
                         alert('上传图片失败，请重试');
                     }
                 });
-	    	   
+
 	    	   }
 		}
 	}
