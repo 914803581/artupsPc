@@ -137,6 +137,7 @@
   export default {
     data() {
       return {
+        checkTaiLiData:[], //切换尺寸时候已经有图片的保存的节点
         pickerOptions0: {//初始化日期区间函数
           disabledDate(time) {
             return time.getTime() < new Date('1/1/2017') || time.getTime() > new Date('12/31/2018');
@@ -209,10 +210,12 @@
         console.log("选择的年月__", val)
         this.tailiStyle.taiLiMonth = parseInt(val.split('-')[1])
         this.tailiStyle.taiLiYear = parseInt(val.split('-')[0])
-        console.log(this.tailiStyle)
+        if(this.tailiStyle.taiLiMonth){ // 选择多少月
+           console.log('月份__',this.tailiStyle.taiLiMonth)
+        }
         this.setTailiBg();
       },
-      setTailiBg() {
+      setTailiBg() { //设置台历的背景
         var vm = this;
         if (sessionStorage.getItem('tailiType') == "横") {
           $(".comtent_chanpin .pubilc_div .time_pu .page span:nth-child(2)").each(function (i) {
@@ -240,6 +243,29 @@
           })
         }
       },
+      checkVuexData(){ //切换vuex的数据
+        var vm = this;
+        vm.checkTaiLiData=[];
+        $(".comtent_chanpin .pubilc_div .bbsClass .img_drap").each(function (index, el) {
+          if ($(el).attr("src")) {
+            vm.checkTaiLiData.push($(el));
+          }
+        })
+
+//        if($(vm.checkTaiLiData).size()>0){
+//          $(vm.checkTaiLiData).each(function (index, el) { //真正存放的操作
+//            $(".editAutoDrap").removeClass("editAutoDrap");
+//            $(el).addClass("editAutoDrap"); //编辑自动拖拽
+//            //每次循环都取触发存储数据的操作
+//            vm.$store.commit("autoPushData")
+////           //计算位置
+//            setTimeout(function () {
+//              dragThumb($(el), $(el).parent())
+//            }, 100)
+//
+//          })
+//        }
+      },
       changeSize() { //台历的横竖
         var vm = this;
         console.log('type___',sessionStorage.getItem('tailiType'))
@@ -250,13 +276,16 @@
             $(".taili_pu").removeClass("taili_pu_2");
             sessionStorage.setItem('tailiType', this.optionValue)
             vm.setTailiBg(); //修改台历背景图片
+
           } else if (this.optionValue == "竖") {
             $(".taili_pu").addClass("taili_pu_2");
             $(".taili_pu_2").removeClass("taili_pu");
             sessionStorage.setItem('tailiType', this.optionValue)
             vm.setTailiBg(); //修改台历背景图片
           }
-
+          setTimeout(function () {
+            vm.checkVuexData();
+          },100)
         } else {
 //          this.$message({
 //            showClose: true,
@@ -325,13 +354,14 @@
         })
         //处理图片底部自动删除的操作
         vm.$store.commit("autoDrapData", arrDrap)
+
       },
       footerImgSlectFooter($index) { //提交
         this.$store.commit("editFooterStatus", $index)
       },
       assembleData() { //执行保存工作组装数据的公共函数
         var vm = this;
-        var arrMap = []; //宝宝书图片的
+        var arrMap = []; //没有图片的空数组
 
         for (var i = 0; i < this.$store.state.editData.ImgHashMap.keys().length; i++) {
 
@@ -598,6 +628,7 @@
     created() {
       // 宝宝书模版数据
       this.bbsTemplate_data = bbsData_template;
+
       this.setBbsTemplate();
 
     },

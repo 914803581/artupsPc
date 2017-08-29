@@ -13,12 +13,12 @@ let store = new Vuex.Store({
 			materialModel: false, //
 			material: [], //素材库的数据
 			footerData: [], //底部的缓存数据可以供拖拽到图片框
-			textData: '', //文本框文字				
+			textData: '', //文本框文字
 		},
 		editData: { //保存给后端缓存的大对象= 图片的hash lomo的hash
 			ImgHashMap: new HashMap(), //图片
 			lomoHashMap: new HashMap(), //lomo卡
-			textHashMap: new HashMap(), //保存的文字	
+			textHashMap: new HashMap(), //保存的文字
 			base64HashMap: new HashMap(), //预览宝宝书需要的base数据
 			baseLomoHashMap: new HashMap() //lomo卡需要的base数据
 		}
@@ -125,7 +125,7 @@ let store = new Vuex.Store({
 			}
 			//如果是台历
 			if(edidData.parents(".pubilc_taili_div").size() > 0) {
-				oPage = edidData.parents(".pubilc_taili_div").find(".page span:nth-of-type(2)").text(); //第几页	
+				oPage = edidData.parents(".pubilc_taili_div").find(".page span:nth-of-type(2)").text(); //第几页
 			}
 			var constName = oPage + "_" + oimgSort;
 			var picObj = {
@@ -167,25 +167,25 @@ let store = new Vuex.Store({
 					picObj.actions.height = Math.abs(parseFloat(edidData.height()))/min_scale;
 					//存入lomoHashMap
 					state.editData.lomoHashMap.putvalue(constName, picObj);
-					//存入base64Lomo给预览产品				
+					//存入base64Lomo给预览产品
 					state.editData.baseLomoHashMap.putvalue(constName, picObj);
 				}, 200)
 				return;
 			}
-						
-			setTimeout(function() {	
+
+			setTimeout(function() {
 				min_scale = edidData.attr("min_scale"); //图片和缩略图的比例
 				picObj.actions.min_scale = min_scale;
 				picObj.actions.x = Math.abs(parseFloat(edidData.css("left")))/min_scale;
 				picObj.actions.y = Math.abs(parseFloat(edidData.css("top")))/min_scale;
 				picObj.actions.width = Math.abs(parseFloat(edidData.width()))/min_scale;
-				picObj.actions.height = Math.abs(parseFloat(edidData.height()))/min_scale;				
+				picObj.actions.height = Math.abs(parseFloat(edidData.height()))/min_scale;
 				//存入lomoHashMap
 				state.editData.ImgHashMap.putvalue(constName, picObj);
-				//存入base64Lomo给预览产品				
+				//存入base64Lomo给预览产品
 				state.editData.base64HashMap.putvalue(constName, picObj);
 				console.log(state.editData.ImgHashMap.getvalue(constName));
-			}, 200)
+			}, 400)
 		},
 		autoDrapData(state, obj) { //自动填充后端的处理图片的方法
 			var arrIndex = [];
@@ -301,7 +301,7 @@ let store = new Vuex.Store({
 				oDrapDiv[i].index = i;
 				//			console.log(oDrapDiv[i].src)
 				oDrapDiv[i].ondragstart = function(ev) {
-					//				ev.preventDefault();	
+					//				ev.preventDefault();
 					var ev = ev || window.event;
 					//这里指定setDate的index=i
 					ev.dataTransfer.setData('Index', this.index);
@@ -312,13 +312,13 @@ let store = new Vuex.Store({
 				oDrap[i].ondragover = function(ev) {
 					//enter和leave之间连续触发
 					//要想触发drop事件，就 必须在dragover当中阻止默认事件
-					//document.title = i++;		
+					//document.title = i++;
 					ev.preventDefault();
 				};
 				//拖动结束
 				oDrap[i].ondrop = function(ev) {
 					ev.preventDefault();
-					ev.stopPropagation(); //预防ff图片拖出打开		
+					ev.stopPropagation(); //预防ff图片拖出打开
 					//根据传递过来的角标拿到底部的缓存数据
 					var oIndex = ev.dataTransfer.getData('Index');
 					var dataImg = state.bbs.footerData[oIndex]; //每一个对象
@@ -344,11 +344,11 @@ let store = new Vuex.Store({
 					}
 					//如果是台历
 					if($(ev.target).parents(".pubilc_taili_div").size() > 0) {
-						oPage = $(ev.target).parents(".pubilc_taili_div").find(".page span:nth-of-type(2)").text(); //第几页	
+						oPage = $(ev.target).parents(".pubilc_taili_div").find(".page span:nth-of-type(2)").text(); //第几页
 					}
 					var constName = oPage + "_" + oimgSort;
 					console.log(constName)
-					
+
 					var picObj = {
 						"constName": constName,
 						"picDbId": dataImg.dbId,
@@ -380,8 +380,8 @@ let store = new Vuex.Store({
 						state.editData.ImgHashMap.remove((parseInt(oPage) + 1) + '_3');
 						state.editData.ImgHashMap.remove((parseInt(oPage) + 1) + '_4');
 					}
-					
-					
+
+
 					//如果是lomo卡
 					if($(ev.target).parents(".lomoTemplate").size() > 0) {
 						//计算位置
@@ -431,8 +431,8 @@ let store = new Vuex.Store({
 		//			},2000)
 		//		},
 		//		textAction(context,obj){
-		//			console.log('我的触发了test')			
-		//			console.log('我接收到的上级参数...'+obj.text)			
+		//			console.log('我的触发了test')
+		//			console.log('我接收到的上级参数...'+obj.text)
 		//		},
 		getMaterial({
 			commit,
