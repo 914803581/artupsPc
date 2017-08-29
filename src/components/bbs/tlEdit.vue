@@ -57,7 +57,7 @@
       <div class="line_comtent">
         <div class="comtent scrollBar">
           <div class="time_main_left time_main_left_ht">
-            <div class="time_bg taili_hengban" v-for="(item,index) in bbsTemplate_data">
+            <div class="time_bg taili_hengban" :index-stort="index"  v-for="(item,index) in bbsTemplate_data">
               <!--pubilc_div 这个class是留给整屏来定义的样式  click_template 是用vue里面的事件委派来解决避免不了的dom操作  hengban_bbs 横版增加的class  hengban_bbs 红线class-->
               <div :ddd="item[0].firstPage" class="pubilc_div pubilc_taili_div" :only="htmlTetx.only"
                    :class="{'hengban_bbs':htmlTetx.only}" v-html="htmlTetx.template"
@@ -140,7 +140,7 @@
         checkTaiLiData:[], //切换尺寸时候已经有图片的保存的节点
         pickerOptions0: {//初始化日期区间函数
           disabledDate(time) {
-            return time.getTime() < new Date('1/1/2017') || time.getTime() > new Date('12/31/2018');
+            return time.getTime() < new Date('1/1/2017') || time.getTime() > new Date('1/31/2018');
           }
         },
         dataMonth: "",//年月绑定的值
@@ -208,40 +208,43 @@
       },
       changeMonth(val) {//选择的年月
         console.log("选择的年月__", val)
-        this.tailiStyle.taiLiMonth = parseInt(val.split('-')[1])
-        this.tailiStyle.taiLiYear = parseInt(val.split('-')[0])
-        if(this.tailiStyle.taiLiMonth){ // 选择多少月
-           console.log('月份__',this.tailiStyle.taiLiMonth)
+        var vm = this;
+        vm.tailiStyle.taiLiMonth = parseInt(val.split('-')[1])
+        vm.tailiStyle.taiLiYear = parseInt(val.split('-')[0])
+        console.log('台历数据',vm.bbsTemplate_data);
+        if(vm.tailiStyle.taiLiMonth) { // 选择多少月
+          console.log('月份__', vm.tailiStyle.taiLiMonth)
+          vm.setPageIndex();
         }
-        this.setTailiBg();
+        vm.setTailiBg();
       },
       setTailiBg() { //设置台历的背景
         var vm = this;
         if (sessionStorage.getItem('tailiType') == "横") {
-          $(".comtent_chanpin .pubilc_div .time_pu .page span:nth-child(2)").each(function (i) {
-            var yearBg = $(this).parents(".time_bg").next(".time_bg").find(".taili_pu >img");
-            yearBg.attr("src", "http://image2.artup.com/static/pc/images/pc_taili/taili_195X145/" + vm.tailiStyle.taiLiYear + $(this).text() + ".jpg");
-            if (i == 12) { //最后一页
-              if (parseInt(vm.tailiStyle.taiLiYear) === 2017) {
-                $(".lastPage_taili").attr("src", "http://image2.artup.com/static/pc/images/pc_taili/taili_195X145/end2017.jpg")
-              } else if(parseInt(vm.tailiStyle.taiLiYear) === 2018){
-                $(".lastPage_taili").attr("src", "http://image2.artup.com/static/pc/images/pc_taili/taili_195X145/end2018.jpg")
-              }
-            }
-          })
-        } else if (sessionStorage.getItem('tailiType') == "竖") {
-          $(".comtent_chanpin .pubilc_div .time_pu .page span:nth-child(2)").each(function (i, el) {
-            var yearBg = $(el).parents(".time_bg").next(".time_bg").find(".taili_pu_2 >img");
-            yearBg.attr("src", "http://image2.artup.com/static/pc/images/pc_taili/taili_145X195/" + vm.tailiStyle.taiLiYear + $(el).text() + ".jpg");
-            if (i == 12) { //最后一页
-              if (parseInt(vm.tailiStyle.taiLiYear) === 2017) {
-                $(".lastPage_taili").attr("src", "http://image2.artup.com/static/pc/images/pc_taili/taili_145X195/end2017.jpg")
-              } else if(parseInt(vm.tailiStyle.taiLiYear) === 2018){
-                $(".lastPage_taili").attr("src", "http://image2.artup.com/static/pc/images/pc_taili/taili_145X195/end2018.jpg")
-              }
-            }
-          })
+          setBg("横","taili_145X195");
+        }else{
+           setBg("竖","taili_145X195");
         }
+        function setBg(ifflag,str) { //ifflag判断条件 路径 taili_145X195
+          if (sessionStorage.getItem('tailiType') == ifflag) {
+            $(".comtent_chanpin .pubilc_div .time_pu .page span:nth-child(2)").each(function(index,els){
+              if(index>0){
+                var oPage = $(this).text();// 页码
+                var year = parseInt($(this).prev(".year").text())
+                var yearBg =  $(this).parents(".time_bg").find(".time_pu >img");
+                yearBg.attr("src", "http://image2.artup.com/static/pc/images/pc_taili/"+str+"/" +year + oPage + ".jpg");
+              }
+            })
+            if (parseInt(vm.tailiStyle.taiLiYear) === 2017) {
+              $(".lastPage_taili").attr("src", "http://image2.artup.com/static/pc/images/pc_taili/"+str+"/end2017.jpg")
+            } else if(parseInt(vm.tailiStyle.taiLiYear) === 2018 || parseInt(vm.tailiStyle.taiLiMonth)>1){
+              $(".lastPage_taili").attr("src", "http://image2.artup.com/static/pc/images/pc_taili/"+str+"/end2018.jpg")
+            }
+          }
+        }
+
+
+        vm.setPageIndex();
       },
       checkVuexData(){ //切换vuex的数据
         var vm = this;
@@ -501,7 +504,6 @@
           this.dataEditImg.oActions = this.$store.state.editData.ImgHashMap.getvalue(constName).actions;
           console.log(this.dataEditImg)
           //从vuex缓存里面拿到我的数据
-          //        console.log()
           this.openImgEdit();
         }
       },
@@ -513,6 +515,7 @@
         })
       },
       setPageIndex() { //设置页数
+        var vm = this;
         $(".comtent_chanpin .pubilc_div .time_pu .page").each(function (i, el) {
           if (i == 0) {
             $(el).text("");
@@ -520,10 +523,31 @@
             $(el).append("<span></span>");
             $(el).find("span:nth-child(2)").text("封面");
           } else {
-            $(el).find("span:nth-child(2)").text(i);
+            if(vm.tailiStyle.taiLiMonth>1){
+              $(el).find("span:nth-child(2)").text(i+(vm.tailiStyle.taiLiMonth-1));
+                  $(".comtent_chanpin .pubilc_div .time_pu .page span:nth-child(2)").each(function(index,els){
+                    if($(this).text()>12){
+                      $(this).text(parseInt($(this).text())-12)
+                      if(parseInt(vm.tailiStyle.taiLiYear) < 2018){
+                        $(this).prev("span").text(parseInt(vm.tailiStyle.taiLiYear)+1+'年')
+                      }else{
+                        $(this).prev("span").text(parseInt(vm.tailiStyle.taiLiYear)+'年')
+                      }
+
+                    }
+//                    else{
+//                      $(this).prev("span").text(parseInt(vm.tailiStyle.taiLiYear)+'年')
+//                    }
+                  })
+
+            }else{
+              $(el).find("span:nth-child(2)").text(i);
+              $(el).find(".year").text(vm.tailiStyle.taiLiYear+'年')
+            }
+
           }
         })
-        $(".time_main_left .time_bg:last-of-type").find(".pubilc_div:nth-child(2) .time_pu >img").addClass("lastPage_taili")
+        $(".time_main_left .time_bg:last-of-type").find(".pubilc_div:nth-child(1) .time_pu >img").addClass("lastPage_taili")
       },
       jisuan() { //动态计算面积
         console.log($(".comtent_chanpin .line_comtent .comtent .title").height())
@@ -633,10 +657,7 @@
 
     },
     mounted() {
-
       //默认设置背景
-
-
       var vm = this;
       // 调用vuex里面的拖拽方法，初始化的时候
       this.setPageIndex()

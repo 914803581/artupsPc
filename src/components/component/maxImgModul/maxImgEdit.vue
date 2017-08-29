@@ -766,7 +766,7 @@
           $(el).attr("id", opage + '_' + $(el).attr("imgsort") + '_' + 'bbs');
         })
         $(".comtent_chanpin .pubilc_div > .time_pu .title_pu").each((index, el) => { //文字
-          var opage = $(el).parents(".pubilc_div").find(".page .pageleft span").text();
+          var opage = $(el).parents(".pubilc_div").find(".page .pageleft span").eq(0).text();
           $(el).attr("id", opage + '_' + $(el).attr("textsort") + '_' + 'text');
         })
         $(".comtent_chanpin .pubilc_div .pageLomo").each(function (index, el) { //lomo
@@ -866,7 +866,6 @@
                   "crop": "true",
                   "editCnfName": oImgData[i].editCnfName,
                   "crossPage":oImgData[i].crossPage
-
                 };
 //                if(oImgData[i].cossPage){
 //                  picObj.cossPage = oImgData[i].cossPage;
