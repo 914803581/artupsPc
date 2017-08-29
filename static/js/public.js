@@ -8,11 +8,11 @@ function HashMap () {
     * 对象
     */
     var entry = new Object();//存放信息
-    
+
             /**
      * @description 往hashmap中添加键值对
      * @param key 键 页码
-     * @param value 值 
+     * @param value 值
      */
     this.putvalue=function(key,value){
         if(!this.containsKey(key)){//没有包含时map大小+1
@@ -64,7 +64,7 @@ function HashMap () {
     }
     /**
      * @description 返回所有值
-     * 
+     *
      */
     this.values=function (){
         var values = new Array();
@@ -127,7 +127,7 @@ function dragThumb(cs_src, cs_divdom) { //cs_src图片的节点,框型（固定d
 	}
 	//位移的距离盒子-图片缩小比例/2
 	var dx = (boxWidth-imgWidth)/2;
-	var dy = (boxHeight-imgHeight)/2;	
+	var dy = (boxHeight-imgHeight)/2;
 	//渲染定位
 	cs_src.css({
 		width:imgWidth+'px',
@@ -136,41 +136,41 @@ function dragThumb(cs_src, cs_divdom) { //cs_src图片的节点,框型（固定d
 		top:dy+'px'
 	})
 	cs_src.attr("min_scale",mul);
-} 
+}
 
 /*校验文本框输入是否有表情*/
-function isEmojiCharacter(substring) {  
-    for ( var i = 0; i < substring.length; i++) {  
-        var hs = substring.charCodeAt(i);  
-        if (0xd800 <= hs && hs <= 0xdbff) {  
-            if (substring.length > 1) {  
-                var ls = substring.charCodeAt(i + 1);  
-                var uc = ((hs - 0xd800) * 0x400) + (ls - 0xdc00) + 0x10000;  
-                if (0x1d000 <= uc && uc <= 0x1f77f) {  
-                    return true;  
-                }  
-            }  
-        } else if (substring.length > 1) {  
-            var ls = substring.charCodeAt(i + 1);  
-            if (ls == 0x20e3) {  
-                return true;  
-            }  
-        } else {  
-            if (0x2100 <= hs && hs <= 0x27ff) {  
-                return true;  
-            } else if (0x2B05 <= hs && hs <= 0x2b07) {  
-                return true;  
-            } else if (0x2934 <= hs && hs <= 0x2935) {  
-                return true;  
-            } else if (0x3297 <= hs && hs <= 0x3299) {  
-                return true;  
-            } else if (hs == 0xa9 || hs == 0xae || hs == 0x303d || hs == 0x3030  
-                    || hs == 0x2b55 || hs == 0x2b1c || hs == 0x2b1b  
-                    || hs == 0x2b50) {  
-                return true;  
-            }  
-        }  
-    }  
+function isEmojiCharacter(substring) {
+    for ( var i = 0; i < substring.length; i++) {
+        var hs = substring.charCodeAt(i);
+        if (0xd800 <= hs && hs <= 0xdbff) {
+            if (substring.length > 1) {
+                var ls = substring.charCodeAt(i + 1);
+                var uc = ((hs - 0xd800) * 0x400) + (ls - 0xdc00) + 0x10000;
+                if (0x1d000 <= uc && uc <= 0x1f77f) {
+                    return true;
+                }
+            }
+        } else if (substring.length > 1) {
+            var ls = substring.charCodeAt(i + 1);
+            if (ls == 0x20e3) {
+                return true;
+            }
+        } else {
+            if (0x2100 <= hs && hs <= 0x27ff) {
+                return true;
+            } else if (0x2B05 <= hs && hs <= 0x2b07) {
+                return true;
+            } else if (0x2934 <= hs && hs <= 0x2935) {
+                return true;
+            } else if (0x3297 <= hs && hs <= 0x3299) {
+                return true;
+            } else if (hs == 0xa9 || hs == 0xae || hs == 0x303d || hs == 0x3030
+                    || hs == 0x2b55 || hs == 0x2b1c || hs == 0x2b1b
+                    || hs == 0x2b50) {
+                return true;
+            }
+        }
+    }
 }
 
 //pc宝宝书模版
@@ -187,13 +187,13 @@ var bbsTemplateData={
 	bbs9:'<div class="time_pu"><div class="bbsClass bbs_hengban"><div class="drapBox div_page"><div class="drap_img"></div> <img imgsort="1" typestyle="9" src="" class="img_drap"></div></div> <p textsort="1" typestyle="8" class="hengbanText  title_pu text"></p> <div class="page"><div class="pageleft">第<span page=""></span>页</div> <div class="pageleft">第<span page=""></span>页</div></div></div>',
 //	bbs10:'<div class="time_pu"><div class="bbsClass hcTemplatetext01"><div class="mainTitle title_pu" typestyle="1" textsort="1" ></div><div class="subtitle title_pu" typestyle="1" textsort="2"></div><div class="box_text"><div class="text_left title_pu" typestyle="1" textsort="3"></div><div class="text_right title_pu" typestyle="1" textsort="4"></div></div><div class="page"><div class="pageleft">第<span page=""></span>页</div><div class="pageRight"></div></div></div></div>',
 //	bbs11:'<div class="time_pu"><div class="bbsClass hcTemplatetext02"><div class="mainTitle title_pu" typestyle="2" textsort="1" ></div><div class="subtitle title_pu" typestyle="2" textsort="2"></div><div class="box_text title_pu" typestyle="2" textsort="3" ></div><div class="page"><div class="pageleft">第<span page=""></span>页</div><div class="pageRight"></div></div></div></div>',
-//	bbs12:'<div class="time_pu"><div class="bbsClass hcTemplatetext03"><div class="mainTitle title_pu" typestyle="3" textsort="1" ></div><div class="box_text title_pu" typestyle="3" textsort="2" ></div><div class="page"><div class="pageleft">第<span page=""></span>页</div><div class="pageRight"></div></div></div></div>'	
+//	bbs12:'<div class="time_pu"><div class="bbsClass hcTemplatetext03"><div class="mainTitle title_pu" typestyle="3" textsort="1" ></div><div class="box_text title_pu" typestyle="3" textsort="2" ></div><div class="page"><div class="pageleft">第<span page=""></span>页</div><div class="pageRight"></div></div></div></div>'
 	//lomo卡的模版
 	lomo1:'<div class="time_pu lomoTemplate"><div class="bbsClass bbs_hengban"><div class="drapBox div_page"><div class="drap_img drap_img_lomo"></div> <img imgsort="1" typestyle="1" src="" class="img_drap"></div></div>  <div class="page"><div class="pageRight pageLomo">&nbsp;</div> <div class="pageRight">6寸照片</div></div></div>',
 	lomo2:'<div class="time_pu lomoTemplate"><div class="drapBox bbsClass template04"><div class="drap_img drap_img_lomo"></div><img class="img_drap" imgSort="1" typeStyle="2" src=""/></div><div  class="page"><div class="pageRight pageLomo">&nbsp;</div><div class="pageRight">LOMO卡</div></div></div>',
-	//台历的模版	
+	//台历的模版
 	taili1:'<div class="time_pu taili_pu"><div class="bbsClass drapBox taili_template"><div class="drap_img"></div><img  class="img_drap" imgSort="1" typeStyle="2" src=""/></div><div  class="page"> <span class="year"></span>第<span></span>月</div></div>',
-	taili2:'<div class="time_pu taili_pu_2"><div class="bbsClass drapBox taili_template"><div class="drap_img"></div><img  class="img_drap" imgSort="1" typeStyle="2" src=""/></div></p><div  class="page"><span class="year"></span>第<span></span>月</div></div>',	
+	taili2:'<div class="time_pu taili_pu_2"><div class="bbsClass drapBox taili_template"><div class="drap_img"></div><img  class="img_drap" imgSort="1" typeStyle="2" src=""/></div></p><div  class="page"><span class="year"></span>第<span></span>月</div></div>',
 	taili3:'<div class="time_pu taili_pu"><img style="width:100%;height:100%" src="https://www.artup.com/img/tl_icon09.png"></div>'
 };
 
@@ -210,7 +210,7 @@ var hcTemplate255X355={//hcTemplate225_355
 	bbs6:'<div class="time_pu hcTemplate225_355"><div class="bbsClass drapBox template255_255"><div class="drap_img"></div><img imgSort="1" typeStyle="6" class="img_drap" src=""/></div><p textSort="1" typeStyle="6" class="text title_pu"></p><div  class="page"><div class="pageleft">第<span></span>页</div><div class="pageRight"></div></div></div>',
 	bbs7:'<div class="time_pu hcTemplate225_355"><div class="bbsClass drapBox template255_150"><div class="drap_img"></div><img imgSort="1" typeStyle="7" class="img_drap" src=""/></div><p textSort="1" typeStyle="7" class="text title_pu"></p><div  class="page"><div class="pageleft">第<span></span>页</div><div class="pageRight"></div></div></div>',
 	bbs9:'<div class="time_pu hcTemplate225_355"><div class="bbsClass template480_320 "><div class="drapBox div_page"><div class="drap_img"></div> <img imgsort="1" typestyle="9" src="" class="img_drap"></div></div> <p textsort="1" typestyle="8" class="hengbanText  title_pu text"></p> <div class="page"><div class="pageleft">第<span page=""></span>页</div> <div class="pageleft">第<span page=""></span>页</div></div></div>',
-//	bbs9:'<div class="time_pu"><div class="bbsClass bbs_hengban"><div class="drapBox div_page"><div class="drap_img"></div> <img imgsort="1" typestyle="9" src="" class="img_drap"></div></div> <p textsort="1" typestyle="8" class="hengbanText  title_pu text"></p> <div class="page"><div class="pageleft">第<span page=""></span>页</div> <div class="pageleft">第<span page=""></span>页</div></div></div>'	
+//	bbs9:'<div class="time_pu"><div class="bbsClass bbs_hengban"><div class="drapBox div_page"><div class="drap_img"></div> <img imgsort="1" typestyle="9" src="" class="img_drap"></div></div> <p textsort="1" typestyle="8" class="hengbanText  title_pu text"></p> <div class="page"><div class="pageleft">第<span page=""></span>页</div> <div class="pageleft">第<span page=""></span>页</div></div></div>'
 };
 /*定义画册八个板式模板*/
 var hcTemplate355X255={//hcTemplate355_225
@@ -222,7 +222,7 @@ var hcTemplate355X255={//hcTemplate355_225
 	bbs6:'<div class="time_pu hcTemplate355_225"><div class="bbsClass drapBox template255_255"><div class="drap_img"></div><img imgSort="1" typeStyle="6" class="img_drap" src=""/></div><p textSort="1" typeStyle="6" class="text title_pu"></p><div  class="page"><div class="pageleft">第<span></span>页</div><div class="pageRight"></div></div></div>',
 	bbs7:'<div class="time_pu hcTemplate355_225"><div class="bbsClass drapBox template255_150"><div class="drap_img"></div><img imgSort="1" typeStyle="7" class="img_drap" src=""/></div><p textSort="1" typeStyle="7" class="text title_pu"></p><div  class="page"><div class="pageleft">第<span></span>页</div><div class="pageRight"></div></div></div>',
 	bbs8:'',
-	bbs9:'<div class="time_pu hcTemplate355_225"><div class="bbsClass template680_220"><div class="drapBox div_page"><div class="drap_img"></div> <img imgsort="1" typestyle="8" src="" class="img_drap"></div></div> <p textsort="1" typestyle="8" class="hengbanText  text"></p> <div class="page"><div class="pageleft">第<span page=""></span>页</div> <div class="pageleft">第<span page=""></span>页</div></div></div>'	
+	bbs9:'<div class="time_pu hcTemplate355_225"><div class="bbsClass template680_220"><div class="drapBox div_page"><div class="drap_img"></div> <img imgsort="1" typestyle="8" src="" class="img_drap"></div></div> <p textsort="1" typestyle="8" class="hengbanText  text"></p> <div class="page"><div class="pageleft">第<span page=""></span>页</div> <div class="pageleft">第<span page=""></span>页</div></div></div>'
 };
 /*定义画册八个板式模板*/
 var hcTemplate360X510={//hcTemplate360_510
@@ -234,13 +234,13 @@ var hcTemplate360X510={//hcTemplate360_510
 	bbs6:'<div class="time_pu hcTemplate360_510"><div class="bbsClass drapBox template330_330"><div class="drap_img"></div><img imgSort="1" typeStyle="6" class="img_drap" src=""/></div><p textSort="1" typeStyle="6" class="text title_pu"></p><div  class="page"><div class="pageleft">第<span></span>页</div><div class="pageRight"></div></div></div>',
 	bbs7:'<div class="time_pu hcTemplate360_510"><div class="bbsClass drapBox template330_320"><div class="drap_img"></div><img imgSort="1" typeStyle="7" class="img_drap" src=""/></div><p textSort="1" typeStyle="7" class="text title_pu"></p><div  class="page"><div class="pageleft">第<span></span>页</div><div class="pageRight"></div></div></div>',
 	bbs8:'',
-	bbs9:'<div class="time_pu hcTemplate360_510"><div class="bbsClass template690_475 "><div class="drapBox div_page"><div class="drap_img"></div> <img imgsort="1" typestyle="8" src="" class="img_drap"></div></div> <p textsort="1" typestyle="8" class="hengbanText  text"></p> <div class="page"><div class="pageleft">第<span page=""></span>页</div> <div class="pageleft">第<span page=""></span>页</div></div></div>'	
+	bbs9:'<div class="time_pu hcTemplate360_510"><div class="bbsClass template690_475 "><div class="drapBox div_page"><div class="drap_img"></div> <img imgsort="1" typestyle="8" src="" class="img_drap"></div></div> <p textsort="1" typestyle="8" class="hengbanText  text"></p> <div class="page"><div class="pageleft">第<span page=""></span>页</div> <div class="pageleft">第<span page=""></span>页</div></div></div>'
 };
 
 
 //var lomoTemplateData={
 //	bbs1:'<div class="time_pu"><div class="bbsClass drapBox template05"><div class="drap_img"></div><img class="img_drap" imgSort="1" typeStyle="5" src=""/></div><p textSort="1" typeStyle="5"  class="text title_pu"></p><div  class="page"><div class="pageleft">第<span></span>页</div><div class="pageRight"></div></div></div>',
-//	bbs2:'<div class="time_pu"><div class="drapBox bbsClass template04"><div class="drap_img"></div><img class="img_drap" imgSort="1" typeStyle="4" src=""/></div><p textSort="1" typeStyle="4" class="text title_pu"></p><div  class="page"><div class="pageleft">第<span></span>页</div><div class="pageRight"></div></div></div>',	
+//	bbs2:'<div class="time_pu"><div class="drapBox bbsClass template04"><div class="drap_img"></div><img class="img_drap" imgSort="1" typeStyle="4" src=""/></div><p textSort="1" typeStyle="4" class="text title_pu"></p><div  class="page"><div class="pageleft">第<span></span>页</div><div class="pageRight"></div></div></div>',
 //}
 //lomo卡模版的数组
 var lomoData_template=[
@@ -303,141 +303,147 @@ var lomoData_template=[
 ]
 
 //定义模版的数组
-var bbsData_template=[	
+var bbsData_template=[
 	[
 		{
 			"template":bbsTemplateData.taili1,
 			"firstPage":false,
 			"lastPage":false,
 			"baseYear":"https://www.artup.com/img/tl_icon09.png"
-		},
-		{
-			"template":bbsTemplateData.taili1,
 		}
+		// ,
+		// {
+		// 	"template":bbsTemplateData.taili1,
+		// }
 	],
 	[
-		{
-			"template":bbsTemplateData.taili3,
 
-		},
-		{
-			"template":bbsTemplateData.taili1,
-			
-		}
-	],
-	[
+    {
+      "template":bbsTemplateData.taili1,
+
+    },
 		{
 			"template":bbsTemplateData.taili3,
-			
-		},
-		{
-			"template":bbsTemplateData.taili1,
-			
-		}
-	],
-	[
-		{
-			"template":bbsTemplateData.taili3,
-			
-		},
-		{
-			"template":bbsTemplateData.taili1,
-			
-		}
-	],
-	[
-		{
-			"template":bbsTemplateData.taili3,
-			
-		},
-		{
-			"template":bbsTemplateData.taili1,
-			
-		}
-	],
-	[
-		{
-			"template":bbsTemplateData.taili3,
-			
-		},
-		{
-			"template":bbsTemplateData.taili1,
-			
-		}
-	],
-	[
-		{
-			"template":bbsTemplateData.taili3,
-			
-		},
-		{
-			"template":bbsTemplateData.taili1,
-		
-		}
-	],
-	[
-		{
-			"template":bbsTemplateData.taili3,
-			
-		},
-		{
-			"template":bbsTemplateData.taili1,
-			
-		}
-	],
-	[
-		{
-			"template":bbsTemplateData.taili3,
-			
-		},
-		{
-			"template":bbsTemplateData.taili1,
-		
-		}
-	],
-	[
-		{
-			"template":bbsTemplateData.taili3,
-			
-		},
-		{
-			"template":bbsTemplateData.taili1,
-			
-		}
-	],
-	[
-		{
-			"template":bbsTemplateData.taili3,
-			
-		},
-		{
-			"template":bbsTemplateData.taili1,
-			
-		}
-	],
-	[
-		{
-			"template":bbsTemplateData.taili3,
-			
-		},
-		{
-			"template":bbsTemplateData.taili1,
 
 		}
 	],
 	[
+    {
+      "template":bbsTemplateData.taili1,
+
+    },
 		{
 			"template":bbsTemplateData.taili3,
+
+		}
+	],
+	[
+
+		{
+			"template":bbsTemplateData.taili1,
 
 		},
-		{
-			"template":bbsTemplateData.taili3,
+    {
+     "template":bbsTemplateData.taili3,
+    }
+	],
+	[
 
-			
-		}
-	]
-	
-	
+		{
+			"template":bbsTemplateData.taili1,
+
+		},
+    {
+    "template":bbsTemplateData.taili3,
+
+    }
+	],
+	[
+    {
+      "template":bbsTemplateData.taili1,
+
+    },
+    {
+      "template":bbsTemplateData.taili3,
+
+    }
+	],
+	[
+    {
+      "template":bbsTemplateData.taili1,
+
+    },
+    {
+      "template":bbsTemplateData.taili3,
+
+    }
+	],
+	[
+    {
+      "template":bbsTemplateData.taili1,
+
+    },
+    {
+      "template":bbsTemplateData.taili3,
+
+    }
+	],
+	[
+    {
+      "template":bbsTemplateData.taili1,
+
+    },
+    {
+      "template":bbsTemplateData.taili3,
+
+    }
+	],
+	[
+    {
+      "template":bbsTemplateData.taili1,
+
+    },
+    {
+      "template":bbsTemplateData.taili3,
+
+    }
+	],
+	[
+    {
+      "template":bbsTemplateData.taili1,
+
+    },
+    {
+      "template":bbsTemplateData.taili3,
+
+    }
+	],
+	[
+    {
+      "template":bbsTemplateData.taili1,
+
+    },
+    {
+      "template":bbsTemplateData.taili3,
+
+    }
+	],
+	[
+    {
+      "template":bbsTemplateData.taili1,
+
+    },
+    {
+      "template":bbsTemplateData.taili3,
+
+    }
+	],
+  [
+    {
+      "template":bbsTemplateData.taili3,
+
+    }
+  ]
 ]
 
 //原生在dom里面随意拖拽的函数
@@ -470,12 +476,12 @@ function pubulic_rm_bg(dom1,dom2,dom3){//统一删除背景的函数
 	dom3.removeClass("bbs_bg_orange_fm bbs_bg_blue_fm bbs_bg_red_fm bbs_bg_green_fm gray_bg black_bg");
 }
 //给扉页加背景
-function setBookBg(name,dom1,dom2,dom3){ //name:书皮名 dom1：封面  dom2第二页纯色背景 ,dom3 页脚	
+function setBookBg(name,dom1,dom2,dom3){ //name:书皮名 dom1：封面  dom2第二页纯色背景 ,dom3 页脚
 	console.log(name)
 	switch (name){
 		case "活力橙":
 	console.log(name)
-		
+
 			pubulic_rm_bg(dom1,dom2,dom3);
 			dom1.addClass("bbs_bg_orange");
 			dom2.addClass("bbs_bg_orange_fd");
@@ -483,7 +489,7 @@ function setBookBg(name,dom1,dom2,dom3){ //name:书皮名 dom1：封面  dom2第
 			break;
 		case "智慧蓝":
 	console.log(name)
-		
+
 			pubulic_rm_bg(dom1,dom2,dom3);
 			dom1.addClass("bbs_bg_blue");
 			dom2.addClass("bbs_bg_blue_fm");
@@ -516,7 +522,7 @@ function setBookBg(name,dom1,dom2,dom3){ //name:书皮名 dom1：封面  dom2第
 		default:
 			break;
 	}
-	
+
 }
 
 
