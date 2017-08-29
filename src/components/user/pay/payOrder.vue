@@ -17,18 +17,18 @@
 				</div>
 			</div>
 		</div>
-		
-		
+
+
 		<Footers></Footers>
 		<div id="zfb_pay_fk">
-	
+
 		</div>
 	</div>
-	
+
 </template>
 <script>
-	import Api from '../../../API.js'
-	import { MessageBox } from 'element-ui';
+	import Api from '@/api.js'
+	import { MessageBox } from 'element-ui'
 
 		export default{
 			data(){
@@ -40,7 +40,7 @@
 			},
 			methods:{
 			pay(jsons){
-	        	 	Api.car.orderPay(jsons).then(res=>{  
+	        	 	Api.car.orderPay(jsons).then(res=>{
 	        	 		console.log(res)
 	        	 		if(res.data.paymentType == 'zfb'){
 	        	 			$('#zfb_pay_fk').html(res.data.payHtml)
@@ -62,8 +62,8 @@
 				}else{
 					this.subject = '支付宝支付';
 				}
-			var jsons = { 
-	        		paymentType:this.$route.query.paymentType, 
+			var jsons = {
+	        		paymentType:this.$route.query.paymentType,
 	        		addressId:this.$route.query.addressId,
 	        		dbId:this.$route.query.dbId,
 	        		userDbId:this.$route.query.userDbId,
@@ -82,19 +82,19 @@
 		           		 location.href="/payOk?orderCode="+res.data.code+'&price='+res.data.total;
 		           	}
 		           },err=>{
-		           	
+
 		           })
 		        }, 5000);//设置3秒循环查询
 			}else{
 				$("#payOrder").hide();
 			}
-			
-	        
-			 
+
+
+
 		}
 
 	}
-	
+
 </script>
 
 

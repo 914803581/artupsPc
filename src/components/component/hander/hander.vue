@@ -73,7 +73,7 @@
 </template>
 
 <script>
-	import Api from '../../../API.js'
+	import Api from '@/api.js'
 	export default{
 		name:"nav-hander",
 		data () {
