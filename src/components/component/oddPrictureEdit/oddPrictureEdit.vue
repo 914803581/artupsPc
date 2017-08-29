@@ -25,26 +25,28 @@
 							<div class="checkBS_b">
 								<el-select v-show='frameSizeData.length > 1' v-model="sizeValue" @change='onChangeSize(sizeValue)' placeholder="请选择尺寸">
 								    <el-option
-								      v-for="item in frameSizeData"								      
+								      v-for="(item,index) in frameSizeData"
+                      :key="index"
 								      :value="item.code+'mm'">
 								    </el-option>
 								  </el-select>
 								  <el-select v-show='frameTypeData.length > 1' style='margin-top: 20px;' @change='onChangeType(typeValue)' v-model="typeValue" placeholder="请选择框形">
 								    <el-option
 								      v-for="(item,index) in frameTypeData"
+                      :key="index"
 								      :code='item.code'
 								      :value="item.name">
 								    </el-option>
 								  </el-select>
 							</div>
 						</div>
-					</transition>	
+					</transition>
 					<div class="box_menu">
 						<ul>
 							<li @click="updateStyle"><i class="iconfont"></i>更换板式</li>
-							<li  @click="addCarFn(1)"><i class="iconfont" style="font-size: 20px; padding: 0px;"></i>加入购物车</li> 
-							<li  @click="addCarFn(2)"><i class="iconfont"></i>立即购买</li> 
-							<!--<li><i class="iconfont"></i>下一步</li> 
+							<li  @click="addCarFn(1)"><i class="iconfont" style="font-size: 20px; padding: 0px;"></i>加入购物车</li>
+							<li  @click="addCarFn(2)"><i class="iconfont"></i>立即购买</li>
+							<!--<li><i class="iconfont"></i>下一步</li>
 							<li><i class="iconfont"></i>保存作品</li>-->
 						</ul>
 					</div>
@@ -60,21 +62,21 @@
 	                        </div>
 	                        <div class="k_AlertInfo" id="alertInfo" style="">像素不足，请替换图片</div>
 	                    </div>-->
-	                 	
+
 	                    <div @click="deitImgFn($event)" class="drap_img img_box" >
-	                        
+
 	                    </div>
-	                   	<img draggable="false" class="drap_img" src="" alt="" /> 
+	                   	<img draggable="false" class="drap_img" src="" alt="" />
 	                   	<div class="div_alert">
-	                 		
+
 	                 	</div>
                    </div>
                 </div>
-			</div> 	
+			</div>
 			  <!--底部的图片-->
 			  <!--v-DomHeight-->
 			  <div style="height: 176px;background-color: #efefef;">
-			  	
+
 			  </div>
 		      <div style="position: fixed;"  class="footer_img">
 		        <div class="footer_up_tittle">
@@ -117,13 +119,13 @@
 	     <transition name="el-fade-in">
 	    		<img-edit @postDataImg="postDatas"  :dataEditJson="dataEditImg"  :isImgEdit="isimgEdit"></img-edit>
 	    </transition>
-	    
+
 	</div>
 </template>
 
 <script>
   import { Message } from 'element-ui';
-  import {mapState,mapGetters,mapActions,mapMutations} from "vuex" 	
+  import {mapState,mapGetters,mapActions,mapMutations} from "vuex"
   import Api from '../../../api.js'
   import filter from '../../../filter.js'
   import {DomHeight} from '../../../directive.js'
@@ -137,7 +139,7 @@ export default {
       	dataEditImg : {},//传递给图片编辑的对象
       	isimgEdit : false, //图片编辑
       	footerShow : true, //页脚控制的折叠变量
-	    switchFormat : false, //控制切换板式弹框显示隐藏变量（true显示 false隐藏） 
+	    switchFormat : false, //控制切换板式弹框显示隐藏变量（true显示 false隐藏）
 	    selectSlide : false,  //控制选择板式下拉菜单
 	    frameSizeData : {},//编辑框尺寸
 	    frameTypeData : {},//编辑框类型
@@ -148,8 +150,8 @@ export default {
       	nowType : '' ,//当前框的类型
       	editImageUrl : '',
       	editData:{},
-      	
-      }	
+
+      }
    	},
    	props:["productData"],
     components:{ //在再这里要注入我的组件
@@ -167,15 +169,15 @@ export default {
     	   //调起图片编辑器
     	   deitImgFn($event){
     	   	 if($($event.target).next(".img_drap").attr("src")==""){return;}//为空返回
-        	  
+
           $(".editbbs_one").removeClass("editbbs_one");
           $($event.target).addClass("editbbs_one");
-          
+
           this.dataEditImg.oSrc = $($event.target).next("img").attr("imgstyle");
           this.dataEditImg.oW = $($event.target).parent(".drapBox").width();
           this.dataEditImg.oH = $($event.target).parent(".drapBox").height();
-          
-           //点击时候获取coustName 从hashMap里面得到他有没第一次编辑的东西         
+
+           //点击时候获取coustName 从hashMap里面得到他有没第一次编辑的东西
           var constName ='1_1';
 		  this.dataEditImg.oActions = this.$store.state.editData.ImgHashMap.getvalue(constName).actions;
     	      this.openImgEdit();
@@ -198,7 +200,7 @@ export default {
       	this.nowSize = str;
       	this.productData.size = this.nowSize;
       	this.updataSkuData();
-      	
+
       },
       onChangeType(data){
       	var typeStr = ''
@@ -211,11 +213,11 @@ export default {
       	this.productData.frameType = data;
       	this.updataSkuData();
       },
-     postDatas(val){    
+     postDatas(val){
       	console.log(val);
       	//获取数据覆盖便于二次编辑
 		var constName ='1_1';
-		//this.$store.state.editData.ImgHashMap.getvalue(constName).actions = val.postData;	
+		//this.$store.state.editData.ImgHashMap.getvalue(constName).actions = val.postData;
 		console.log(this.$store.state.editData.ImgHashMap.getvalue(constName))
 		var picObj = this.$store.state.editData.ImgHashMap.getvalue(constName);
 			picObj.actions = val.postData;
@@ -231,7 +233,7 @@ export default {
 			this.editData.skuId = this.nowProductData.skuId;
 			//alert(this.editData.sku)
 			this.editData.editPicture = '['+JSON.stringify(picObj)+']';
-			
+
 //		var picObj = {
 //				 	"constName":'1_1',
 //				 	"picDbId" : val.pictureDbId,
@@ -243,7 +245,7 @@ export default {
 //				 	 	"minDpiHeight":val.minDpiHeight,
 //				 	 	"minDpiWidth":val.minDpiWidth
 //				 	 },
-//                   "thumbnailImageUrl":val.thumbnailUrl, 
+//                   "thumbnailImageUrl":val.thumbnailUrl,
 //                   "previewThumbnailImageUrl" :val.previewThumbnailImageUrl,
 //                   "cropt" : "false",
 //                   "editCnfName": val.editCnfName,
@@ -280,25 +282,25 @@ export default {
 							location.href = '/user/cart?carDbId='+res.data.extraCode;
 						}
 						location.href = '/user/cart';
-						
+
 					}
 				},err=>{
-					
+
 				})
 				}
 			},err=>{
-				
+
 			});
 		}else{
 			alert('请上传图片')
 		}
-			
+
 
 		},
      closeFormat (){
-     	this.switchFormat = false;	
+     	this.switchFormat = false;
      },
-     
+
      /*更新sku*/
   	updataSkuData (){
   		this.skuCode = this.getFromSession("category") + '.' + this.nowSize + '.' + this.nowType;
@@ -312,9 +314,9 @@ export default {
   			this.nowProductData.price = res.data.price;
     			this.$forceUpdate();
   			this.initEditFrameSize();
-  			
+
   		});
-  		
+
   	},
   	/*初始化编辑框的宽高*/
   	initEditFrameSize (){
@@ -329,22 +331,22 @@ export default {
 		$('.drapBox').css({
 			width:arr[0]+'px',
 			height:arr[1]+'px'
-		});	
+		});
 
 		}
-		
+
     },
     created(){//只执行一次
-    		
+
     },
     mounted(){
-    		
+
     		this.nowProductData = this.productData;//插件传递过来的编辑器上显示数据
     		this.$forceUpdate();
     		console.log(this.nowProductData)
 		var queryObj = {'category':this.nowProductData.category};
 		//获取url的category值 以字符串的json格式保存到sessionStroage中
- 		sessionStorage.setItem("urlQuery",JSON.stringify(queryObj)); 
+ 		sessionStorage.setItem("urlQuery",JSON.stringify(queryObj));
 		//获取框画的类型
 		Api.sku.queryAttributes({category:this.getFromSession("category")}).then(res=>{
 			if(res){
@@ -371,7 +373,7 @@ export default {
 		      	this.editImageUrl = this.nowProductData.editImgUrl;//默认编辑框背景
 			}
 		},err=>{
-			
+
 		});
 		//拖拽选择尺寸框
     		setTimeout(function(){
@@ -379,9 +381,9 @@ export default {
 				 handle:".titleBox"
 			});
     		},500)
-		
 
-		  
+
+
     }
   }
 </script>

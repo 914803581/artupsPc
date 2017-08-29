@@ -247,6 +247,7 @@
           text-overflow: ellipsis;
         }
         .address {
+          width: 676px;
           margin-top: 12px;
           color: #797d80;
           font-size: 16px;

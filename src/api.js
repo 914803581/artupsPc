@@ -85,6 +85,7 @@ const UPDATA_ORDER_STATUS = `${HOST}artup-build/builder/order/update/command.do?
 
 /* 获取订单列表 */
 const ORDER_LIST = `${HOST}artup-build/builder/order/queryByPage.do`
+const ORDER_LIST_COUNT = `${HOST}artup-build/builder/order/amount.do`
 
 /* 取消订单 */
 const CANCLE_ORDER_STATUS = `${HOST}artup-build/builder/order/update/command.do?format=json&ignore=true&status=-1`
@@ -330,6 +331,11 @@ export default {
   Order: {
     OrderList: (paramJson) => {
       return HTTP.get(ORDER_LIST, {
+        params: paramJson
+      })
+    },
+    OrderListCount: (paramJson) => {
+      return HTTP.get(ORDER_LIST_COUNT, {
         params: paramJson
       })
     }

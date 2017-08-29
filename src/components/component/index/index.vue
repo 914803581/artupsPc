@@ -4,7 +4,7 @@
 		<Handers	></Handers>
 		 <div class="block">
 		    <el-carousel height="460px">
-		      <el-carousel-item v-for="item in CarouselImgUrlList" >
+		      <el-carousel-item v-for="(item,index) in CarouselImgUrlList" :key="index">
 		      	<img :src="item" alt="" />
 		      </el-carousel-item>
 		    </el-carousel>
@@ -17,19 +17,19 @@
 				<p class="price m"><span class="s1">起始价格</span><span class="s2">￥&nbsp;<span>499</span>&nbsp;CNY</span></p>
 				<p class="come m"><input type="button" name="" id="" value="开始定制" /></p>
 			</div>
-		
+
 			<div class="cont cont_hc">
 				<p class="intro m">让您的展览永不落寞</p>
 				<p class="tit m">艺术画册</p>
 				<p class="price m"><span class="s1">起始价格</span><span class="s2">￥&nbsp;<span>499</span>&nbsp;CNY</span></p>
 				<p class="come m"><input type="button" name="" id="" value="开始定制" /></p>
-			</div>	
+			</div>
 			<div class="cont cont_cth">
 				<p class="intro m">随时更换，永远新鲜</p>
 				<p class="tit m">艺术磁贴画</p>
 				<p class="price m"><span class="s1">起始价格</span><span class="s2">￥&nbsp;<span>499</span>&nbsp;CNY</span></p>
 				<p class="come m"><input type="button" name="" id="" value="开始定制" /></p>
-			</div>	
+			</div>
 			<div class="cont cont_kh">
 				<p class="intro m">您专属的影像画廊</p>
 				<p class="tit m">艺术框画</p>
@@ -53,7 +53,7 @@
 				<p class="tit m">艺术挂历</p>
 				<p class="price m"><span class="s1">起始价格</span><span class="s2">￥&nbsp;<span>499</span>&nbsp;CNY</span></p>
 				<p class="come m"><input type="button" name="" id="" value="开始定制" /></p>
-			</div>			
+			</div>
 			<div class="cont cont_video">
 				<p class="intro m">为专业摄影师服务二十余载，雅昌建立行业标准</p>
 				<p class="tit m">匠心工艺</p>
@@ -77,7 +77,7 @@
 
 			}
 		}
-		
+
 	}
 </script>
 
