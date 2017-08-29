@@ -852,6 +852,7 @@
             if (oImgData.length > 0) {
               for (var i = 0; i < oImgData.length; i++) {
                 var constName = oImgData[i].page + '_' + oImgData[i].num;
+                console.log(oImgData[i])
                 //map生成变量
                 var picObj = {
                   "constName": constName,
@@ -863,8 +864,13 @@
                   "thumbnailImageUrl": oImgData[i].thumbnailImageUrl,
                   "previewThumbnailImageUrl": oImgData[i].previewThumbnailImageUrl,
                   "crop": "true",
-                  "editCnfName": oImgData[i].editCnfName
+                  "editCnfName": oImgData[i].editCnfName,
+                  "crossPage":oImgData[i].crossPage
+
                 };
+//                if(oImgData[i].cossPage){
+//                  picObj.cossPage = oImgData[i].cossPage;
+//                }
                 vm.$store.commit("ReEditWork_p", {
                   constName: constName,
                   picObj: picObj
