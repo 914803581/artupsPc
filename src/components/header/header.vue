@@ -38,7 +38,7 @@
 </template>
 
 <script type="text/ecmascript-6">
-  import Api from '../../API.js'
+  import Api from '@/api.js'
   export default {
     name: 'nav-hander',
     data: function () {

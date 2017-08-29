@@ -17,7 +17,7 @@
                ]" v-for="(item,index) in data">
           <img :key="img.id" :src="img.src" :class="['page_style_'+item.type,'img_style_'+item.type+'_'+img.index]"
                v-for="img in item.imgs">
-          <label class="title">{{item.title}}</label>
+          <label v-if="item.type !== 9 || (item.type === 9 && index%2)" class="title">{{item.title}}</label>
           <span class="page_num" :class="!((index+1)%2) ? 'left' : 'right'">第{{index + 1}}页</span>
         </div>
         <div class="hard even"></div>
@@ -130,6 +130,23 @@
       }
 
       .style_type_9 {
+        box-shadow: 0 0 0 0 #666;
+        &.t9_left {
+          box-shadow: 3px -3px 5px -3px #666 inset;
+          .img_style_9_1 {
+            width: 200%;
+            height: 500px;
+          }
+        }
+        &.t9_right {
+          box-shadow: -3px -3px 5px -3px #666 inset;
+          .img_style_9_1 {
+            position: absolute;
+            left: -100%;
+            width: 200%;
+            height: 500px;
+          }
+        }
         &:focus {
           outline: 0 !important;
         }
@@ -199,7 +216,7 @@
           left: 50%;
           display: block;
           width: 360px;
-          height: 496px;
+          height: 470px;
           margin: -248px 0 0 -180px;
         }
         .page_style_5 {
