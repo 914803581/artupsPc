@@ -195,6 +195,7 @@
       }
     }
     .panel {
+      min-height: 560px;
       padding: 26px;
       background: #fff;
       border-radius: 5px;

@@ -276,6 +276,7 @@
       padding-left: 36px;
       color: #fff;
       vertical-align: top;
+      outline: 0;
       .icon-gouwuche {
         position: absolute;
         top: 12px;
