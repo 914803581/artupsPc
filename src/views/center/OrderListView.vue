@@ -24,7 +24,7 @@
               <li class="item" v-for="item in orderList">
                 <div class="head">
                   <span class="time">{{item.createdDt}}</span>
-                  <span class="order-id">订单号：{{item.code}}</span>
+                  <a class="order-id" :href="`order/info.html?id=${item.code}`">订单号：{{item.code}}</a>
                 </div>
                 <div class="order-main" :style="{height:(item.cars.length?item.cars.length*140:140)+'px'}">
                   <div class="list">
@@ -131,9 +131,6 @@
         })
         if (filterElect.status) {
           Api.Order.OrderListCount({
-            ignore: true,
-            format: 'json',
-            userDbId: 2221214,
             status: filterElect.status
           }).then((result) => {
             return result.status === 200 ? result.request.response : ''
@@ -142,13 +139,11 @@
           })
         }
         Api.Order.OrderList({
-          format: 'json',
-          ignore: true,
           pageSize: this.pageSize,
           pageNum: this.pageNum - 1,
           sort: 'createdDt',
           order: 'desc',
-          userDbId: 2221214
+          status: filterElect.status
         }).then((result) => {
           return result.status === 200 ? result.request.response : ''
         }).then((result) => {
@@ -164,11 +159,8 @@
       }
     },
     components: {
-      'unify-header':
-      Header,
-      'unify-footer':
-      Footer,
-      'left-menu':
+      'unify-header': Header,
+      'unify-footer': Footer,
       LeftMenu
     },
     watch: {},
@@ -250,6 +242,8 @@
         color: #999;
         line-height: 40px;
         .order-id {
+          color: #999;
+          outline: 0;
           margin-left: 3em;
         }
       }

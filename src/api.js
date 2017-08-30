@@ -85,8 +85,8 @@ const ORDER_PAY = `${HOST}artup-build/builder/orderPayment/payment.do?format=jso
 const UPDATA_ORDER_STATUS = `${HOST}artup-build/builder/order/update/command.do?format=json&ignore=true`
 
 /* 获取订单列表 */
-const ORDER_LIST = `${HOST}artup-build/builder/order/queryByPage.do`
-const ORDER_LIST_COUNT = `${HOST}artup-build/builder/order/amount.do`
+const ORDER_LIST = `${HOST}artup-build/builder/order/queryByPage.do?format=json&ignore=true`
+const ORDER_LIST_COUNT = `${HOST}artup-build/builder/order/amount.do?format=json&ignore=true`
 
 /* 取消订单 */
 const CANCLE_ORDER_STATUS = `${HOST}artup-build/builder/order/update/command.do?format=json&ignore=true&status=-1`

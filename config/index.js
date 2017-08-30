@@ -53,6 +53,11 @@ module.exports = {
         entry: 'order.js',
         pageName: 'order',
       }, {
+        path: 'center/order',
+        title: '订单详情',
+        entry: 'order-info.js',
+        pageName: 'info',
+      }, {
         title: '优惠券管理',
         entry: 'coupons.js',
         pageName: 'coupons',
