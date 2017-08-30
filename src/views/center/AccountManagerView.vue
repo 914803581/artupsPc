@@ -1,7 +1,7 @@
 <template>
   <div class="account-info">
     <unify-header></unify-header>
-    <div class="container">
+    <div class="container" ref="container">
       <div class="wrapper">
         <div class="main">
           <h2 class="title">账户资料</h2>
@@ -95,6 +95,9 @@
       'left-menu': LeftMenu
     },
     watch: {},
+    mounted: function () {
+      this.setMinHeight(this.$refs.container, document.body.clientHeight - 50 - 132)
+    },
     created: function () {
     }
   }

@@ -1,11 +1,11 @@
 <template>
   <div class="address-add">
     <unify-header></unify-header>
-    <div class="container">
+    <div class="container" ref="container">
       <div class="wrapper">
         <div class="main">
           <h2 class="title">添加地址</h2>
-          <address-form></address-form>
+          <address-form :returnUrl="returnUrl"></address-form>
         </div>
         <left-menu selected="address"></left-menu>
       </div>
@@ -22,7 +22,9 @@
 
   export default {
     data: function () {
-      return {}
+      return {
+        returnUrl: ''
+      }
     },
     methods: {},
     components: {
@@ -30,6 +32,10 @@
       'unify-footer': Footer,
       LeftMenu,
       AddressForm
+    },
+    mounted: function () {
+      this.returnUrl = this.request.order === 'add' ? '/order/confim' : ''
+      this.setMinHeight(this.$refs.container, document.body.clientHeight - 50 - 132)
     }
   }
 </script>

@@ -57,6 +57,10 @@
       dbId: {
         type: String,
         default: ''
+      },
+      returnUrl: {
+        type: String,
+        default: ''
       }
     },
     data: function () {
@@ -101,7 +105,7 @@
     },
     methods: {
       getCallbackPage: function () {
-        let callbackPage = localStorage['AddressEditCallBackPage']
+        let callbackPage = this.returnUrl
         if (!callbackPage) {
           callbackPage = '/center/address.html'
         }

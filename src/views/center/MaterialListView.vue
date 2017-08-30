@@ -1,7 +1,7 @@
 <template>
   <div class="material-list">
     <unify-header></unify-header>
-    <div class="container">
+    <div class="container" ref="container">
       <div class="wrapper">
         <div class="main">
           <h2 class="title">我的素材</h2>
@@ -145,6 +145,9 @@
       'left-menu': LeftMenu
     },
     watch: {},
+    mounted: function () {
+      this.setMinHeight(this.$refs.container, document.body.clientHeight - 50 - 132)
+    },
     created: function () {
       this.getData()
     }
@@ -209,6 +212,8 @@
         margin-right: 56px;
         overflow: hidden;
         .img-box {
+          display: table-cell;
+          vertical-align:middle;
           width: 258px;
           height: 195px;
           border: 1px solid #dedede;

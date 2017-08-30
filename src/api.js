@@ -48,6 +48,7 @@ const QUERY_SKU_URL = `${HOST}artup-build/builder/sku.do?format=json&ignore=true
 /* 查询属性对象 */
 const QUERY_ATTRIBUTE_URL = `${HOST}artup-build/builder/service/attributes.do?format=json&ignore=true`
 
+const CAR_COUNT = `${HOST}artup-build/builder/cors/car/queryTotalCars.do?format=json&ignore=true`
 /* 添加购物车 */
 const ADD_CAR = `${HOST}artup-build/builder/cors/car/add/command.do?format=json&ignore=true`
 /* 购物车列表 */
@@ -140,6 +141,13 @@ export default {
     }
   },
   car: {// 购物车
+    CarCount: (paramJson) => {
+      return HTTP.get(CAR_COUNT,
+        {
+          params: paramJson
+        }
+      )
+    },
     deleteCarCorde: (jsons) => {
       return VueHttp.$http.get(DELECT_CAR_RECORD, {params: jsons})
     },
