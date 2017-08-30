@@ -173,6 +173,10 @@ let store = new Vuex.Store({
 				return;
 			}
 
+      if(picObj.page==="封面"){ //如果是台历有封面的情况
+        picObj.page = '0';
+        picObj.constName = '0_1'
+      }
 			setTimeout(function() {
 				min_scale = edidData.attr("min_scale"); //图片和缩略图的比例
 				picObj.actions.min_scale = min_scale;
@@ -401,6 +405,11 @@ let store = new Vuex.Store({
 						}, 100)
 						return;
 					}
+
+          if(picObj.page==="封面"){ //如果是台历有封面的情况
+					  picObj.page = '0';
+            picObj.constName = '0_1'
+					}
 					//计算位置
 					setTimeout(function() {
 						$(ev.target).next("img").attr("style", "")
@@ -410,6 +419,7 @@ let store = new Vuex.Store({
 						picObj.actions.y = Math.abs(parseFloat($(ev.target).next("img").css("top")))/min_scale;
 						picObj.actions.width = Math.abs(parseFloat($(ev.target).width()))/min_scale;
 						picObj.actions.height = Math.abs(parseFloat($(ev.target).height()))/min_scale;
+
 						//存入图片ImgHashMap
 						state.editData.ImgHashMap.putvalue(constName, picObj);
 						console.log(state.editData.ImgHashMap.getvalue(constName))

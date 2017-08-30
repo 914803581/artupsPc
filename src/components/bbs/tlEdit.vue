@@ -47,9 +47,10 @@
               <li><i class="iconfont">&#xe711;</i>添加组件</li>
               <li @click="bbs.Switching=true"><i class="iconfont">&#xe64f;</i>更换板式</li>
               <li @click="goCart"><i style="font-size: 20px;padding:0 ;" class="iconfont">&#xe602;</i>加入购物车</li>
-              <li><i class="iconfont">&#xe629;</i>立即购买</li>
-              <li @click="nextStep"><i class="iconfont">&#xe629;</i>下一步</li>
-              <li @click="editWork"><i class="iconfont">&#xe612;</i>保存作品</li>
+              <li @click="nextStep"><i class="iconfont">&#xe629;</i>立即购买</li>
+              <!--<li @click="nextStep"><i class="iconfont">&#xe629;</i>下一步</li>-->
+              <!--这里保存是要先验证，然后在保存-->
+              <!--<li ><i class="iconfont">&#xe612;</i>保存作品</li>-->
             </ul>
           </div>
         </div>
@@ -143,7 +144,7 @@
             return time.getTime() < new Date('1/1/2017') || time.getTime() > new Date('1/31/2018');
           }
         },
-        dataMonth: "",//年月绑定的值
+        dataMonth: "2017-01",//年月绑定的值
         tailiStyle: {  //这里1等于横，2为竖
           plate: "1",
           taiLiMonth: '1', //台历默认的月份
@@ -209,6 +210,7 @@
       changeMonth(val) {//选择的年月
         console.log("选择的年月__", val)
         var vm = this;
+        vm.dataMonth = val;
         vm.tailiStyle.taiLiMonth = parseInt(val.split('-')[1])
         vm.tailiStyle.taiLiYear = parseInt(val.split('-')[0])
         console.log('台历数据',vm.bbsTemplate_data);
@@ -242,8 +244,6 @@
             }
           }
         }
-
-
         vm.setPageIndex();
       },
       checkVuexData(){ //切换vuex的数据
@@ -316,6 +316,11 @@
         }
         Api.car.addCar(jsons).then(res => {
           console.log(res);
+          this.$message({
+            showClose: true,
+            message: '成功添加购物车!',
+            type: 'success'
+          });
           this.$router.push({
             path: "/user/cart",
             query: {}
@@ -377,14 +382,15 @@
         //字符串转换数组存储到对象里面
         let bbsSlsectDate = JSON.parse(sessionStorage.getItem("bbsSlsectDate"));
         this.workEdit.editPicture = JSON.stringify(arrMap);
-        this.workEdit.tplCode = this.getFromSession("tplCode");
+        this.workEdit.tplCode = bbsSlsectDate.tplCode;
         this.workEdit.operator = "add";
         this.workEdit.category = this.getFromSession("category");
         this.workEdit.sku = bbsSlsectDate.name;
         this.workEdit.skuId = bbsSlsectDate.skuId;
-        this.workEdit.status = 1;
+        this.workEdit.status = 2;
         this.workEdit.skuCode = bbsSlsectDate.skuCode;
-
+        this.workEdit.startDt = vm.dataMonth;
+        this.workEdit.defDbId = this.getFromSession("defDbId");
         $(".comtent_chanpin .pubilc_div .bbsClass  .img_drap").each(function (index, el) {
           if ($(el).attr("src")) { //如果src存在
             vm.workEdit.thumbnailImageUrl = $(el).attr("imgstyle");
@@ -399,16 +405,15 @@
         //保存函数
         console.log(this.workEdit)
         Api.work.workEdit(this.workEdit).then((res) => {
+          console.log(res);
           if (res.data.code == "success") { //如果成功
-            this.$message({
-              showClose: true,
-              message: '作品保存成功 !',
-              type: 'success'
-            });
+            //存入编辑id
+            this.workEdit.edtDbId = res.data.extraCode
+            this.goCart(); //执行加入购物车的操作
+            console.log('保存的code:', res.data.extraCode)
+
           }
-          //存入编辑id
-          this.workEdit.edtDbId = res.data.extraCode
-          console.log('保存的code:', res.data.extraCode)
+
         })
       },
       nextStep() { //下一步
@@ -431,7 +436,7 @@
               }
               vm.$message({
                 showClose: true,
-                message: '请上传台历第' + page + '月图片'
+                message: '请上传台历'+$(el).parents(".pubilc_div").find(".page span:nth-of-type(1)").text()+ page + '月图片'
               });
               isOK = false
               return false;
@@ -439,11 +444,8 @@
           }
         })
         if (isOK) { //作品图片全部上传完毕
-          this.$message({
-            showClose: true,
-            message: '作品已全部上传成功,预览作品后，请添加购物车购买 !',
-            type: 'success'
-          });
+
+          vm.editWork(); //执行保存的工作
         }
       },
       footerBoolean(val) { //素材库抬起底部图片
