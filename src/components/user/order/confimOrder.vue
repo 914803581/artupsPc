@@ -35,7 +35,7 @@
 					</div>
 				</div>
 				<div class="ord1m2 r">
-					<p class="r"><a href="mallAsp.html#/address_add?order=add"><input class="ord1m-btm" type="button" name="" id="" value="新增收货地址"></a></p>
+					<p class="r"><a href="/center/address/add.html?order=add"><input class="ord1m-btm" type="button" name="" id="" value="新增收货地址"></a></p>
 				</div>
 			</div>
 		</div>
