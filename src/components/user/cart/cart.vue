@@ -104,9 +104,10 @@
 		    },
 			methods:{//单条记录删除
 				deleteCar(index,dbId){
-					 this.$confirm('您确定要删除此条订单吗?', '提示', {
+					 this.$confirm('您确定要删除此条订单吗?', '购物车', {
 				          confirmButtonText: '确定',
 				          cancelButtonText: '取消',
+                  customClass:'artup_MessageBox',
 				          type: 'warning'
 				        }).then(() => {
 				        var userDbId = '2221214';
@@ -118,6 +119,7 @@
 								this.dataList.splice(index,1)
 								this.$message({
 						            type: 'success',
+                        iconClass:"atrup_Message",
 						            message: '删除成功!'
 						          });
 							}
@@ -128,6 +130,7 @@
 				        }).catch(() => {
 				          this.$message({
 				            type: 'info',
+                    iconClass:"atrup_Message",
 				            message: '已取消删除'
 				          });
 				        });
@@ -167,6 +170,7 @@
 									//购物车为空
 								}
 								this.$message({
+                        iconClass:"atrup_Message",
 						            type: 'success',
 						            message: '删除成功!'
 						          });
@@ -177,6 +181,7 @@
 
 				        }).catch(() => {
 				          this.$message({
+                    iconClass:"atrup_Message",
 				            type: 'info',
 				            message: '已取消删除'
 				          });
@@ -256,7 +261,7 @@
 						}
 					})
 					if(cars.length < 1){
-						this.$message({message: '请选择结算产品!' });
+						this.$message({iconClass:"atrup_Message",message: '请选择结算产品!' });
 					}
 
 					if(switchBool == true){
@@ -272,11 +277,13 @@
 
 								location.href="/order/confim";
 							} else{
-								this.$message({message: '请求错误!' });
+								this.$message({iconClass:"atrup_Message",message: '请求错误!' });
 
 							}
 						},err=>{
-							this.$message({message: '请求错误!' });
+							this.$message({iconClass:"atrup_Message",
+
+                message: '请求错误!' });
 						})
 
 					}else{

@@ -6,13 +6,13 @@
         <div class="comtent">
           <div class="title">
             <div class="title_left">
-              <span>宝宝书编辑</span>
+              <span>{{titleMsg.titleName}}编辑</span>
               <span>2017-07-14 11:05</span>
             </div>
             <div class="title_right">
-              <span>255x355mm</span>
-              <span>56页</span>
-              <span>￥499</span>
+              <span>{{titleMsg.size_product}}</span>
+              <!--<span>56页</span>-->
+              <span>￥{{titleMsg.price_product}}</span>
             </div>
           </div>
           <transition name="el-zoom-in-top">
@@ -70,7 +70,7 @@
               </div>
             </div>
           </div>
-          <div class="title">
+          <div v-show="titleMsg.titleName=='小时光'" class="title">
             <div class="title_left"><span>LOMO卡编辑</span> <span>2017-07-14 11:05</span></div>
             <div class="title_right"><span>照片尺寸：102X152</span> <span>LOMO卡单张：74X100</span> <span>赠送物品</span></div>
           </div>
@@ -155,6 +155,11 @@
   export default {
     data() {
       return {
+        titleMsg:{
+          "titleName":sessionStorage.getItem("titleName"),
+          "price_product": JSON.parse(sessionStorage.getItem("bbsSlsectDate")).price,
+          "size_product":JSON.parse(sessionStorage.getItem("bbsSlsectDate")).name
+        },
         template_Source: [],//修改的模版源
         colorName: '',
         previewDialogVisible: false,
@@ -239,6 +244,7 @@
         if ($(arrNode).size() < 1) {
           this.$message({
             showClose: true,
+            iconClass:"atrup_Message",
             message: '恭喜您图片已全部上传完毕，请加入购物车购买喲',
             type: 'success'
           });
@@ -322,6 +328,7 @@
           if (res.data.code == "success") { //如果成功
             this.$message({
               showClose: true,
+              iconClass:"atrup_Message",
               message: '作品保存成功 !',
               type: 'success'
             });
@@ -348,6 +355,7 @@
                 var page = $(el).parents(".pubilc_div").find(".pageleft >span").eq(0).text();
                 if (page) {
                   vm.$message({
+                    iconClass:"atrup_Message",
                     showClose: true,
                     message: '请上传第' + page + '页图片'
                   });
@@ -356,6 +364,7 @@
                 }
                 if ($(el).parents(".lomoTemplate")) { //lomo卡图片不完整
                   vm.$message({
+                    iconClass:"atrup_Message",
                     showClose: true,
                     message: 'lomo卡图片上传不完整'
                   });
@@ -366,6 +375,7 @@
             })
             if (isOK) { //作品图片全部上传完毕
               this.$message({
+                iconClass:"atrup_Message",
                 showClose: true,
                 message: '作品已全部上传成功,预览作品后，请添加购物车购买 !',
                 type: 'success'
@@ -391,6 +401,7 @@
         })
         if (vms) {
           this.$message({
+            iconClass:"atrup_Message",
             showClose: true,
             message: '请选择需要更换的板式页码',
             type: 'warning'
@@ -410,6 +421,7 @@
           var oLastPage = $(".lastPage").prev(".pubilc_div").find(".pageleft span").text();
           if (otext == 1 || otext == oLastPage) {
             vm.$message({
+              iconClass:"atrup_Message",
               showClose: true,
               message: '首尾页不能切换双页的板式 ！',
               type: 'warning'

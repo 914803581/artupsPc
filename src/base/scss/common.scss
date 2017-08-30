@@ -2,3 +2,50 @@ body {
   min-width: 1200px;
   overflow: scroll;
 }
+
+//artup_MessageBox 弹窗   vm.$confirm方法  customClass:'artup_MessageBox'
+body .artup_MessageBox {
+      .el-icon-warning{
+        width: 36px;
+        height: 36px;
+        background: url("http://image2.artup.com/static/pc/imgs/common/logo_1.jpg") no-repeat ;
+        background-size: 100% 100%;
+      }
+      .el-icon-warning:before {
+        content: "";
+      }
+//      关闭按钮
+      .el-message-box__close{
+         font-size: 14px;
+        &:hover{
+          color: #a00912;
+        }
+      }
+
+//      按钮
+  .el-button{
+    padding: 8px 25px;
+  }
+  .el-button--primary{
+    background: #bb2626;
+    border: 1px solid #bb2626;
+    &:hover{
+      background: #a00912;
+    }
+    &:active{
+      position: relative;
+      top:1px;
+    }
+  }
+}
+//消息提示  要自定义此class    ->   iconClass:"atrup_Message",
+body .atrup_Message{
+    width: 30px;
+    height: 30px;
+    display: inline-block;
+    vertical-align: middle;
+    position: relative;
+    left:-6px;
+    background: url("http://image2.artup.com/static/pc/imgs/common/logo_1.jpg") no-repeat ;
+    background-size: 100% 100%;
+}
