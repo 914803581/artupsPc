@@ -57,7 +57,7 @@
 								"lastPage": false
 							}
 						],
-						
+
 						[{
 							"template": bbsTemplateData.bbs9,
 							"only": true,

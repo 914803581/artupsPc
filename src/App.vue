@@ -41,3 +41,6 @@
     -moz-osx-font-smoothing: grayscale;
   }
 </style>
+<style type="text/css" lang="scss">
+  @import './base/scss/common.scss';
+</style>

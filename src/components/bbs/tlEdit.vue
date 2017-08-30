@@ -11,8 +11,8 @@
             </div>
             <div class="title_right">
               <span>255x355mm</span>
-              <span>56页</span>
-              <span>￥499</span>
+              <span>13页</span>
+              <span>￥49.99</span>
             </div>
           </div>
           <transition name="el-zoom-in-top">
@@ -134,7 +134,7 @@
   import editText from '../component/editText/editText.vue'
   import navHander from '../../components/component/hander/hander.vue'
   import PreviewBook from '../album/previewBook'
-
+  let isOk = false;
   export default {
     data() {
       return {
@@ -145,6 +145,7 @@
           }
         },
         dataMonth: "2017-01",//年月绑定的值
+//        isOk:false,
         tailiStyle: {  //这里1等于横，2为竖
           plate: "1",
           taiLiMonth: '1', //台历默认的月份
@@ -271,32 +272,46 @@
       },
       changeSize() { //台历的横竖
         var vm = this;
-        console.log('type___',sessionStorage.getItem('tailiType'))
-        console.log('optionValue___',this.optionValue)
-        if (sessionStorage.getItem('tailiType') != this.optionValue) {
-          if (this.optionValue == "横") {
-            $(".taili_pu_2").addClass("taili_pu");
-            $(".taili_pu").removeClass("taili_pu_2");
-            sessionStorage.setItem('tailiType', this.optionValue)
-            vm.setTailiBg(); //修改台历背景图片
 
-          } else if (this.optionValue == "竖") {
-            $(".taili_pu").addClass("taili_pu_2");
-            $(".taili_pu_2").removeClass("taili_pu");
-            sessionStorage.setItem('tailiType', this.optionValue)
-            vm.setTailiBg(); //修改台历背景图片
-          }
-          setTimeout(function () {
-            vm.checkVuexData();
-          },100)
-        } else {
-//          this.$message({
-//            showClose: true,
-//            message: '版式未发生改变',
-//            type: 'success'
-//          });
-//          return;
+        if(isOk){
+          vm.$confirm('切换版式之后将会清空', '台历提醒', {
+            confirmButtonText: '确定',
+            cancelButtonText: '取消',
+            type: 'warning',
+            customClass:'artup_MessageBox'
+          }).then(() => {
+            if (sessionStorage.getItem('tailiType') != this.optionValue) {
+              if (this.optionValue == "横") {
+                $(".taili_pu_2").addClass("taili_pu");
+                $(".taili_pu").removeClass("taili_pu_2");
+                sessionStorage.setItem('tailiType', this.optionValue)
+                vm.setTailiBg(); //修改台历背景图片
+
+              } else if (this.optionValue == "竖") {
+                $(".taili_pu").addClass("taili_pu_2");
+                $(".taili_pu_2").removeClass("taili_pu");
+                sessionStorage.setItem('tailiType', this.optionValue)
+                vm.setTailiBg(); //修改台历背景图片
+              }
+              setTimeout(function () {
+                vm.checkVuexData();
+              },100)
+            }
+          }).catch(() => {
+            vm.$message({
+              type: 'success',
+              iconClass:"atrup_Message",
+              message: '已取消'
+            });
+//            if(this.optionValue=="横"){
+//              this.optionValue=="竖"
+//            }
+//            if(this.optionValue=="竖"){
+//              this.optionValue=="横"
+//            }
+          });
         }
+
       },
       goCart() { //加入购物车
         //字符串转换数组存储到对象里面
@@ -318,6 +333,7 @@
           console.log(res);
           this.$message({
             showClose: true,
+            iconClass:"atrup_Message",
             message: '成功添加购物车!',
             type: 'success'
           });
@@ -340,6 +356,7 @@
         var arrDrap = []; //一下传递给vuex处理的数据角标
         if ($(arrNode).size() < 1) {
           this.$message({
+            iconClass:"atrup_Message",
             showClose: true,
             message: '恭喜您图片已全部上传完毕，请加入购物车购买喲',
             type: 'success'
@@ -429,12 +446,14 @@
               if (page == "封面") {
                 vm.$message({
                   showClose: true,
+                  iconClass:"atrup_Message",
                   message: '请上传台历封面图片'
                 });
                 isOK = false
                 return false;
               }
               vm.$message({
+                iconClass:"atrup_Message",
                 showClose: true,
                 message: '请上传台历'+$(el).parents(".pubilc_div").find(".page span:nth-of-type(1)").text()+ page + '月图片'
               });
@@ -689,7 +708,14 @@
           vm.setTailiBg(); //修改台历背景图片
         }
         vm.optionValue = sessionStorage.getItem('tailiType');
+
+
       }, 500)
+
+
+      setTimeout(function(){
+        isOk = true;
+      },2000)
     }
   }
 </script>
