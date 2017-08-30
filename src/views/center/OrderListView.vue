@@ -173,7 +173,6 @@
     },
     watch: {},
     mounted: function () {
-      console.log(this.$refs.container)
       this.setMinHeight(this.$refs.container, document.body.clientHeight - 50 - 132)
     },
     created: function () {

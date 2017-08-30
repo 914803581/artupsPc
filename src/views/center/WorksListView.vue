@@ -1,7 +1,7 @@
 <template>
   <div class="works-list">
     <unify-header></unify-header>
-    <div class="container">
+    <div class="container" ref="container">
       <div class="wrapper">
         <div class="main">
           <h2 class="title">我的作品</h2>
@@ -188,6 +188,9 @@
       'unify-footer': Footer,
       'left-menu': LeftMenu
     },
+    mounted: function () {
+      this.setMinHeight(this.$refs.container, document.body.clientHeight - 50 - 132)
+    },
     created: function () {
       this.getData()
     }
@@ -302,6 +305,8 @@
         overflow: hidden;
         .img-box {
           position: relative;
+          display: table-cell;
+          vertical-align: middle;
           width: 258px;
           height: 195px;
           border: 1px solid #dedede;

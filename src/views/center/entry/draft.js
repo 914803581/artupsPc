@@ -4,8 +4,10 @@ import 'element-ui/lib/theme-default/index.css'
 import Vue from 'vue'
 import ElementUI from 'element-ui'
 import App from '../DraftListView'
+import mixins from '@/mixins'
 
 Vue.use(ElementUI)
+Vue.mixin(mixins)
 
 // eslint-disable-next-line no-new
 new Vue({

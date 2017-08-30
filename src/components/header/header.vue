@@ -26,7 +26,7 @@
         </div>
         <a href="/user/cart" class="shopping-cart" v-if="isLogin">
           <i class="iconfont icon-gouwuche"></i>
-          <em class="shopping-count">12</em>
+          <em class="shopping-count">{{carCount}}</em>
           <label>购物车</label>
         </a>
         <a class="login-register" href="javascript:void(0);" @click="testLogin" v-if="!isLogin">
@@ -39,10 +39,12 @@
 
 <script type="text/ecmascript-6">
   import Api from '@/api.js'
+
   export default {
     name: 'nav-hander',
     data: function () {
       return {
+        carCount: 0,
         menus: [{
           label: '首页',
           link: '/welcome.html'
@@ -83,6 +85,17 @@
       }
     },
     methods: {
+      getCarCount: function () {
+        let _self = this
+        Api.car.CarCount({}).then(res => {
+          if (res.status === 200) {
+            let count = res.request.responseText - 0
+            if (!isNaN(count)) {
+              _self.carCount = count > 99 ? '...' : count
+            }
+          }
+        })
+      },
       // TODO: 临时测试登录，待完善登录逻辑
       testLogin: function () {
         localStorage.userDbId = '2221214'
@@ -91,13 +104,14 @@
         window.location.reload()
       },
       Login: function () {
-        Api.user.login({"t" : "1"}).then(res=>{
-            //console.log(res);
-            //alert(res.data.authorizeCodeUrl);
-            window.location.href=res.data.authorizeCodeUrl;
-        },err=>{
-          alert('Error');
-        });
+        Api.user.login({"t": "1"}).then(res => {
+          //console.log(res);
+          //alert(res.data.authorizeCodeUrl);
+          window.location.href = res.data.authorizeCodeUrl
+        }, err => {
+          console.log(err)
+          alert('Error')
+        })
       },
       exit: function () {
         localStorage.clear()
@@ -120,6 +134,9 @@
     },
     created: function () {
       this.isLogin = this.getLoginState()
+      if (this.isLogin) {
+        this.getCarCount()
+      }
     }
   }
 </script>
@@ -277,7 +294,7 @@
         font-size: 12px;
         font-style: normal;
         text-align: center;
-        background: #ff0000;
+        background: #a00912;
         border-radius: 50%;
       }
       label {

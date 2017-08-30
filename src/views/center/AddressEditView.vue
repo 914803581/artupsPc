@@ -1,7 +1,7 @@
 <template>
   <div class="address-add">
     <unify-header></unify-header>
-    <div class="container">
+    <div class="container" ref="container">
       <div class="wrapper">
         <div class="main">
           <h2 class="title">修改地址</h2>
@@ -33,6 +33,9 @@
       'unify-footer': Footer,
       LeftMenu,
       AddressForm
+    },
+    mounted: function () {
+      this.setMinHeight(this.$refs.container, document.body.clientHeight - 50 - 132)
     },
     created: function () {
       let callbackPage = localStorage['AddressEditCallBackPage']
