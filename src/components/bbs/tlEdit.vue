@@ -117,8 +117,8 @@
       <edit-text :isEditText="iseditText"></edit-text>
     </transition>
     <!--<div-editText ></div-editText>-->
-    <preview-book :colorName="colorName" :visible.sync="previewDialogVisible" :data="previewData"
-                  @close="previewDialogVisible=false"></preview-book>
+    <preview-calendar :colorName="colorName" :visible.sync="previewDialogVisible" :data="previewData"
+                  @close="previewDialogVisible=false"></preview-calendar>
   </div>
 </template>
 <script>
@@ -133,7 +133,7 @@
   import imgEdit from '../component/imgEdit/imgEdit.vue'
   import editText from '../component/editText/editText.vue'
   import navHander from '../../components/component/hander/hander.vue'
-  import PreviewBook from '../album/previewBook'
+  import PreviewCalendar from '../album/previewCalendar.vue'
   let isOk = false;
   export default {
     data() {
@@ -198,7 +198,7 @@
       divModel,
       imgEdit,
       editText,
-      PreviewBook
+      PreviewCalendar
     },
     methods: {
       ...mapMutations({ //同步触发操作集合
@@ -595,66 +595,6 @@
 
       },
       preview() {
-        const TYPESTYLECOUNT = {
-          1: 1,
-          2: 1,
-          3: 2,
-          4: 1,
-          5: 1,
-          6: 2,
-          7: 4,
-          8: 4,
-          9: 1
-        }
-        let typeStyle = []
-        $('.time_main_left_ht .pubilc_div > .time_pu .bbsClass').each((i, el) => {
-          typeStyle.push($(el).find('.img_drap:eq(0)').attr('typestyle'))
-        })
-        this.previewData = []
-        let _self = this
-        typeStyle.forEach((type) => {
-          type = type - 0;
-          let pageInfo = {
-            title: '标题一二三',
-            type: type,
-            imgs: []
-          }
-          _self.previewData.push(pageInfo)
-          if (type === 9) {
-            _self.previewData.push(Object.assign(pageInfo, {}))
-          }
-        })
-        this.PreviewWork.baseHashMap.keys().forEach(function (key) {
-          let img = _self.PreviewWork.baseHashMap.getvalue(key)
-          _self.previewData[img.page - 1].imgs.push({
-            id: img.picDbId,
-            index: img.num - 0,
-            src: img.base64Img ? img.base64Img : img.thumbnailImageUrl
-          })
-        })
-        this.previewData.forEach((obj) => {
-          let imgList = {}
-          obj.imgs.forEach((obj) => {
-            imgList[obj.index] = obj
-          })
-          for (let i = 1; i <= TYPESTYLECOUNT[obj.type]; i++) {
-            if (!imgList[i]) {
-              imgList[i] = {
-                isNull: true,
-                id: new Date().getTime(),
-                index: i,
-                src: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWO4dOnSfwAIZgN2UcgHsgAAAABJRU5ErkJggg=='
-              }
-            }
-          }
-          let imgs = []
-          for (let key in imgList) {
-            imgs.push(imgList[key])
-          }
-          obj.imgs = imgs
-        })
-//        this.colorName = JSON.parse(sessionStorage.getItem("bbsSlsectDate")).colorName;
-//        console.log(this.previewData)
         this.previewDialogVisible = true
       },
       fnd() {
