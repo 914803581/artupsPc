@@ -24,11 +24,20 @@
               <div class="checkBS_b">
                 <ul>
                   <li>选择尺寸:</li>
+                  <!--<li>-->
+                    <!--<el-select @change="changeSize" size="small" v-model="optionValue" placeholder="请选择">-->
+                      <!--<el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value">-->
+                      <!--</el-option>-->
+                    <!--</el-select>-->
+                  <!--</li>-->
                   <li>
-                    <el-select @change="changeSize" size="small" v-model="optionValue" placeholder="请选择">
-                      <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value">
-                      </el-option>
-                    </el-select>
+                    <div class="el-radio-group">
+                      <label @click="checkTemplateTaili('横')"  class="el-radio-button">
+                        <span class="el-radio-button__inner">横版</span></label>
+                      <label class="el-radio-button">
+                        <span @click="checkTemplateTaili('竖')" class="el-radio-button__inner">竖版</span>
+                      </label>
+                    </div>
                   </li>
                   <li>选择起始年月:</li>
                   <li>
@@ -44,10 +53,10 @@
           <!--功能div-->
           <div class="box_menu">
             <ul>
-              <li><i class="iconfont">&#xe711;</i>添加组件</li>
+              <!--<li><i class="iconfont">&#xe711;</i>添加组件</li>-->
               <li @click="bbs.Switching=true"><i class="iconfont">&#xe64f;</i>更换板式</li>
-              <li @click="goCart"><i style="font-size: 20px;padding:0 ;" class="iconfont">&#xe602;</i>加入购物车</li>
-              <li @click="nextStep"><i class="iconfont">&#xe629;</i>立即购买</li>
+              <li @click="nextStep"><i style="font-size: 20px;padding:0 ;" class="iconfont">&#xe602;</i>加入购物车</li>
+              <!--<li @click="nextStep"><i class="iconfont">&#xe629;</i>立即购买</li>-->
               <!--<li @click="nextStep"><i class="iconfont">&#xe629;</i>下一步</li>-->
               <!--这里保存是要先验证，然后在保存-->
               <!--<li ><i class="iconfont">&#xe612;</i>保存作品</li>-->
@@ -204,9 +213,41 @@
       ...mapMutations({ //同步触发操作集合
         delectFooter: "delectFooterData"
       }),
-      chenk_style() {//切换横版和竖版的方法
-        $(".taili_pu").addClass("taili_pu_2");
-        $(".taili_pu_2").removeClass("taili_pu");
+      checkTemplateTaili(tel){
+        var vm = this;
+        if(sessionStorage.getItem('tailiType') != tel){
+          vm.$confirm('切换版式之后将会清空', '台历提醒', {
+            confirmButtonText: '确定',
+            cancelButtonText: '取消',
+            type: 'warning',
+            customClass:'artup_MessageBox'
+          }).then(() => {
+              if (tel == "横") {
+                $(".taili_pu_2").addClass("taili_pu");
+                $(".taili_pu").removeClass("taili_pu_2");
+                sessionStorage.setItem('tailiType', tel)
+                vm.setTailiBg(); //修改台历背景图片
+              } else if (tel == "竖") {
+                $(".taili_pu").addClass("taili_pu_2");
+                $(".taili_pu_2").removeClass("taili_pu");
+                sessionStorage.setItem('tailiType', tel)
+                vm.setTailiBg(); //修改台历背景图片
+              }
+              vm.$store.commit('removeAllImgHashMap')//指向vuex 清除里面所有的数据
+          }).catch(() => {
+              vm.$message({
+                type: 'success',
+                iconClass:"atrup_Message",
+                message: '已取消'
+              });
+          });
+        }else{
+          vm.$message({
+            type: 'success',
+            iconClass:"atrup_Message",
+            message: '尺寸未发生改变'
+          });
+        }
       },
       changeMonth(val) {//选择的年月
         console.log("选择的年月__", val)
@@ -246,72 +287,6 @@
           }
         }
         vm.setPageIndex();
-      },
-      checkVuexData(){ //切换vuex的数据
-        var vm = this;
-        vm.checkTaiLiData=[];
-        $(".comtent_chanpin .pubilc_div .bbsClass .img_drap").each(function (index, el) {
-          if ($(el).attr("src")) {
-            vm.checkTaiLiData.push($(el));
-          }
-        })
-
-//        if($(vm.checkTaiLiData).size()>0){
-//          $(vm.checkTaiLiData).each(function (index, el) { //真正存放的操作
-//            $(".editAutoDrap").removeClass("editAutoDrap");
-//            $(el).addClass("editAutoDrap"); //编辑自动拖拽
-//            //每次循环都取触发存储数据的操作
-//            vm.$store.commit("autoPushData")
-////           //计算位置
-//            setTimeout(function () {
-//              dragThumb($(el), $(el).parent())
-//            }, 100)
-//
-//          })
-//        }
-      },
-      changeSize() { //台历的横竖
-        var vm = this;
-
-        if(isOk){
-          vm.$confirm('切换版式之后将会清空', '台历提醒', {
-            confirmButtonText: '确定',
-            cancelButtonText: '取消',
-            type: 'warning',
-            customClass:'artup_MessageBox'
-          }).then(() => {
-            if (sessionStorage.getItem('tailiType') != this.optionValue) {
-              if (this.optionValue == "横") {
-                $(".taili_pu_2").addClass("taili_pu");
-                $(".taili_pu").removeClass("taili_pu_2");
-                sessionStorage.setItem('tailiType', this.optionValue)
-                vm.setTailiBg(); //修改台历背景图片
-
-              } else if (this.optionValue == "竖") {
-                $(".taili_pu").addClass("taili_pu_2");
-                $(".taili_pu_2").removeClass("taili_pu");
-                sessionStorage.setItem('tailiType', this.optionValue)
-                vm.setTailiBg(); //修改台历背景图片
-              }
-              setTimeout(function () {
-                vm.checkVuexData();
-              },100)
-            }
-          }).catch(() => {
-            vm.$message({
-              type: 'success',
-              iconClass:"atrup_Message",
-              message: '已取消'
-            });
-//            if(this.optionValue=="横"){
-//              this.optionValue=="竖"
-//            }
-//            if(this.optionValue=="竖"){
-//              this.optionValue=="横"
-//            }
-          });
-        }
-
       },
       goCart() { //加入购物车
         //字符串转换数组存储到对象里面
@@ -395,7 +370,6 @@
             arrMap.push(this.$store.state.editData.ImgHashMap.getvalue(this.$store.state.editData.ImgHashMap.keys()[i]));
           }
         }
-
         //字符串转换数组存储到对象里面
         let bbsSlsectDate = JSON.parse(sessionStorage.getItem("bbsSlsectDate"));
         this.workEdit.editPicture = JSON.stringify(arrMap);
@@ -428,9 +402,7 @@
             this.workEdit.edtDbId = res.data.extraCode
             this.goCart(); //执行加入购物车的操作
             console.log('保存的code:', res.data.extraCode)
-
           }
-
         })
       },
       nextStep() { //下一步
@@ -463,7 +435,6 @@
           }
         })
         if (isOK) { //作品图片全部上传完毕
-
           vm.editWork(); //执行保存的工作
         }
       },
@@ -554,18 +525,12 @@
                       }else{
                         $(this).prev("span").text(parseInt(vm.tailiStyle.taiLiYear)+'年')
                       }
-
                     }
-//                    else{
-//                      $(this).prev("span").text(parseInt(vm.tailiStyle.taiLiYear)+'年')
-//                    }
                   })
-
             }else{
               $(el).find("span:nth-child(2)").text(i);
               $(el).find(".year").text(vm.tailiStyle.taiLiYear+'年')
             }
-
           }
         })
         $(".time_main_left .time_bg:last-of-type").find(".pubilc_div:nth-child(1) .time_pu >img").addClass("lastPage_taili")
@@ -613,9 +578,7 @@
     created() {
       // 宝宝书模版数据
       this.bbsTemplate_data = bbsData_template;
-
       this.setBbsTemplate();
-
     },
     mounted() {
       //默认设置背景
@@ -623,18 +586,10 @@
       // 调用vuex里面的拖拽方法，初始化的时候
       this.setPageIndex()
       this.jisuan() // 计算页面位置
-      //设置台历书皮书的操作
-//      let colorName = JSON.parse(sessionStorage.getItem("bbsSlsectDate")).colorName;
-      //设置背景
-      //setBookBg(colorName, $(".titlePage_bg .page_fm"), $(".firstPage .page_bg"), $(".lastPage .page_bg"))
-      //设置台历的背景图
-
       setTimeout(function () {
         $("#div_drap").Tdrag({
           handle: ".titleBox"
         });
-        vm.changeSize(); //设置图片的大小
-
         if (sessionStorage.getItem('tailiType') == "横") {
           $(".taili_pu_2").addClass("taili_pu");
           $(".taili_pu").removeClass("taili_pu_2");
@@ -647,9 +602,6 @@
 //
           vm.setTailiBg(); //修改台历背景图片
         }
-        vm.optionValue = sessionStorage.getItem('tailiType');
-
-
       }, 500)
 
 
@@ -660,6 +612,4 @@
   }
 </script>
 
-<style>
 
-</style>
