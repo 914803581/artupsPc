@@ -203,6 +203,16 @@ let store = new Vuex.Store({
 			})
 			//组装数据放入
 		},
+    removeAllImgHashMap(state, obj){//清除你的
+      for(var i = 0;i<12;i++){
+        state.editData.ImgHashMap.remove(i+'_1');
+      }
+      //然后在清除页面上所有的图片src
+      $(".comtent_chanpin .pubilc_div .time_pu .bbsClass .img_drap").each(function(){
+        $(this).attr("src","");
+        $(this).attr("style","");
+      })
+    },
 		setDrapData(state, obj) { //两页换横版的时候清空vue里面相邻所有的数据
 			console.log(obj)
 			var oPage = obj.opage;
@@ -216,7 +226,6 @@ let store = new Vuex.Store({
 				state.editData.textHashMap.remove((parseInt(oPage) + 1) + '_3');
 				state.editData.textHashMap.remove((parseInt(oPage) + 1) + '_4');
 				state.editData.textHashMap.remove((parseInt(oPage) + 1) + '_5');
-
 				//删除base64的
 				state.editData.base64HashMap.remove((parseInt(oPage) + 1) + '_1');
 				state.editData.base64HashMap.remove((parseInt(oPage) + 1) + '_2');
@@ -311,7 +320,6 @@ let store = new Vuex.Store({
 					ev.dataTransfer.setData('Index', this.index);
 				}
 			}
-
 			for(var i = 0; i < oDrap.length; i++) {
 				oDrap[i].ondragover = function(ev) {
 					//enter和leave之间连续触发

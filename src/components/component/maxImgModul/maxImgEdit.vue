@@ -109,15 +109,17 @@
         </div>
         <el-collapse-transition>
           <div v-show="footerShow" class="fonter_box_img">
-            <ul>
+            <ul v-if="$store.state.bbs.footerData.length > 0">
               <li @click="footerImgSlectFooter(index)" :class="{'img_size_border':footerImg.slectFooter}"
                   :att="footerImg.slectFooter" v-for="(footerImg,index) in $store.state.bbs.footerData"
                   draggable="true">
                 <img :src="footerImg.thumbnailUrl"/>
               </li>
             </ul>
+            <p style="line-height: 116px;text-align: center;font-size: 16px;color: #6b6b6b;" v-if="$store.state.bbs.footerData.length==0">选择“添加图片”来开始使用</p>
           </div>
         </el-collapse-transition>
+
       </div>
     </div>
     <!--模态框素材库-->
