@@ -206,6 +206,7 @@ let store = new Vuex.Store({
     removeAllImgHashMap(state, obj){//清除你的
       for(var i = 0;i<12;i++){
         state.editData.ImgHashMap.remove(i+'_1');
+        state.editData.base64HashMap.remove(i+'_1');
       }
       //然后在清除页面上所有的图片src
       $(".comtent_chanpin .pubilc_div .time_pu .bbsClass .img_drap").each(function(){

@@ -53,10 +53,10 @@
           <!--功能div-->
           <div class="box_menu">
             <ul>
-              <li><i class="iconfont">&#xe711;</i>添加组件</li>
+              <!--<li><i class="iconfont">&#xe711;</i>添加组件</li>-->
               <li @click="bbs.Switching=true"><i class="iconfont">&#xe64f;</i>更换板式</li>
-              <li @click="goCart"><i style="font-size: 20px;padding:0 ;" class="iconfont">&#xe602;</i>加入购物车</li>
-              <li @click="nextStep"><i class="iconfont">&#xe629;</i>立即购买</li>
+              <li @click="nextStep"><i style="font-size: 20px;padding:0 ;" class="iconfont">&#xe602;</i>加入购物车</li>
+              <!--<li @click="nextStep"><i class="iconfont">&#xe629;</i>立即购买</li>-->
               <!--<li @click="nextStep"><i class="iconfont">&#xe629;</i>下一步</li>-->
               <!--这里保存是要先验证，然后在保存-->
               <!--<li ><i class="iconfont">&#xe612;</i>保存作品</li>-->
@@ -370,7 +370,6 @@
             arrMap.push(this.$store.state.editData.ImgHashMap.getvalue(this.$store.state.editData.ImgHashMap.keys()[i]));
           }
         }
-
         //字符串转换数组存储到对象里面
         let bbsSlsectDate = JSON.parse(sessionStorage.getItem("bbsSlsectDate"));
         this.workEdit.editPicture = JSON.stringify(arrMap);
@@ -403,9 +402,7 @@
             this.workEdit.edtDbId = res.data.extraCode
             this.goCart(); //执行加入购物车的操作
             console.log('保存的code:', res.data.extraCode)
-
           }
-
         })
       },
       nextStep() { //下一步
@@ -640,9 +637,7 @@
     created() {
       // 宝宝书模版数据
       this.bbsTemplate_data = bbsData_template;
-
       this.setBbsTemplate();
-
     },
     mounted() {
       //默认设置背景
