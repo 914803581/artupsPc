@@ -25,14 +25,14 @@
                 <ul>
                   <li>选择尺寸:</li>
                   <!--<li>-->
-                    <!--<el-select @change="changeSize" size="small" v-model="optionValue" placeholder="请选择">-->
-                      <!--<el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value">-->
-                      <!--</el-option>-->
-                    <!--</el-select>-->
+                  <!--<el-select @change="changeSize" size="small" v-model="optionValue" placeholder="请选择">-->
+                  <!--<el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value">-->
+                  <!--</el-option>-->
+                  <!--</el-select>-->
                   <!--</li>-->
                   <li>
                     <div class="el-radio-group">
-                      <label @click="checkTemplateTaili('横')"  class="el-radio-button">
+                      <label @click="checkTemplateTaili('横')" class="el-radio-button">
                         <span class="el-radio-button__inner">横版</span></label>
                       <label class="el-radio-button">
                         <span @click="checkTemplateTaili('竖')" class="el-radio-button__inner">竖版</span>
@@ -67,7 +67,7 @@
       <div class="line_comtent">
         <div class="comtent scrollBar">
           <div class="time_main_left time_main_left_ht">
-            <div class="time_bg taili_hengban" :index-stort="index"  v-for="(item,index) in bbsTemplate_data">
+            <div class="time_bg taili_hengban" :index-stort="index" v-for="(item,index) in bbsTemplate_data">
               <!--pubilc_div 这个class是留给整屏来定义的样式  click_template 是用vue里面的事件委派来解决避免不了的dom操作  hengban_bbs 横版增加的class  hengban_bbs 红线class-->
               <div :ddd="item[0].firstPage" class="pubilc_div pubilc_taili_div" :only="htmlTetx.only"
                    :class="{'hengban_bbs':htmlTetx.only}" v-html="htmlTetx.template"
@@ -127,7 +127,7 @@
     </transition>
     <!--<div-editText ></div-editText>-->
     <preview-calendar :colorName="colorName" :visible.sync="previewDialogVisible" :data="previewData"
-                  @close="previewDialogVisible=false"></preview-calendar>
+                      @close="previewDialogVisible=false"></preview-calendar>
   </div>
 </template>
 <script>
@@ -143,11 +143,12 @@
   import editText from '../component/editText/editText.vue'
   import navHander from '../../components/component/hander/hander.vue'
   import PreviewCalendar from '../album/previewCalendar.vue'
+
   let isOk = false;
   export default {
     data() {
       return {
-        checkTaiLiData:[], //切换尺寸时候已经有图片的保存的节点
+        checkTaiLiData: [], //切换尺寸时候已经有图片的保存的节点
         pickerOptions0: {//初始化日期区间函数
           disabledDate(time) {
             return time.getTime() < new Date('1/1/2017') || time.getTime() > new Date('1/31/2018');
@@ -213,38 +214,38 @@
       ...mapMutations({ //同步触发操作集合
         delectFooter: "delectFooterData"
       }),
-      checkTemplateTaili(tel){
+      checkTemplateTaili(tel) {
         var vm = this;
-        if(sessionStorage.getItem('tailiType') != tel){
+        if (sessionStorage.getItem('tailiType') != tel) {
           vm.$confirm('切换版式之后将会清空', '台历提醒', {
             confirmButtonText: '确定',
             cancelButtonText: '取消',
             type: 'warning',
-            customClass:'artup_MessageBox'
+            customClass: 'artup_MessageBox'
           }).then(() => {
-              if (tel == "横") {
-                $(".taili_pu_2").addClass("taili_pu");
-                $(".taili_pu").removeClass("taili_pu_2");
-                sessionStorage.setItem('tailiType', tel)
-                vm.setTailiBg(); //修改台历背景图片
-              } else if (tel == "竖") {
-                $(".taili_pu").addClass("taili_pu_2");
-                $(".taili_pu_2").removeClass("taili_pu");
-                sessionStorage.setItem('tailiType', tel)
-                vm.setTailiBg(); //修改台历背景图片
-              }
-              vm.$store.commit('removeAllImgHashMap')//指向vuex 清除里面所有的数据
+            if (tel == "横") {
+              $(".taili_pu_2").addClass("taili_pu");
+              $(".taili_pu").removeClass("taili_pu_2");
+              sessionStorage.setItem('tailiType', tel)
+              vm.setTailiBg(); //修改台历背景图片
+            } else if (tel == "竖") {
+              $(".taili_pu").addClass("taili_pu_2");
+              $(".taili_pu_2").removeClass("taili_pu");
+              sessionStorage.setItem('tailiType', tel)
+              vm.setTailiBg(); //修改台历背景图片
+            }
+            vm.$store.commit('removeAllImgHashMap')//指向vuex 清除里面所有的数据
           }).catch(() => {
-              vm.$message({
-                type: 'success',
-                iconClass:"atrup_Message",
-                message: '已取消'
-              });
+            vm.$message({
+              type: 'success',
+              iconClass: "atrup_Message",
+              message: '已取消'
+            });
           });
-        }else{
+        } else {
           vm.$message({
             type: 'success',
-            iconClass:"atrup_Message",
+            iconClass: "atrup_Message",
             message: '尺寸未发生改变'
           });
         }
@@ -255,8 +256,8 @@
         vm.dataMonth = val;
         vm.tailiStyle.taiLiMonth = parseInt(val.split('-')[1])
         vm.tailiStyle.taiLiYear = parseInt(val.split('-')[0])
-        console.log('台历数据',vm.bbsTemplate_data);
-        if(vm.tailiStyle.taiLiMonth) { // 选择多少月
+        console.log('台历数据', vm.bbsTemplate_data);
+        if (vm.tailiStyle.taiLiMonth) { // 选择多少月
           console.log('月份__', vm.tailiStyle.taiLiMonth)
           vm.setPageIndex();
         }
@@ -265,27 +266,29 @@
       setTailiBg() { //设置台历的背景
         var vm = this;
         if (sessionStorage.getItem('tailiType') == "横") {
-          setBg("横","taili_145X195");
-        }else{
-           setBg("竖","taili_145X195");
+          setBg("横", "taili_145X195");
+        } else {
+          setBg("竖", "taili_145X195");
         }
-        function setBg(ifflag,str) { //ifflag判断条件 路径 taili_145X195
+
+        function setBg(ifflag, str) { //ifflag判断条件 路径 taili_145X195
           if (sessionStorage.getItem('tailiType') == ifflag) {
-            $(".comtent_chanpin .pubilc_div .time_pu .page span:nth-child(2)").each(function(index,els){
-              if(index>0){
+            $(".comtent_chanpin .pubilc_div .time_pu .page span:nth-child(2)").each(function (index, els) {
+              if (index > 0) {
                 var oPage = $(this).text();// 页码
                 var year = parseInt($(this).prev(".year").text())
-                var yearBg =  $(this).parents(".time_bg").find(".time_pu >img");
-                yearBg.attr("src", "http://image2.artup.com/static/pc/images/pc_taili/"+str+"/" +year + oPage + ".jpg");
+                var yearBg = $(this).parents(".time_bg").find(".time_pu >img");
+                yearBg.attr("src", "http://image2.artup.com/static/pc/images/pc_taili/" + str + "/" + year + oPage + ".jpg");
               }
             })
             if (parseInt(vm.tailiStyle.taiLiYear) === 2017) {
-              $(".lastPage_taili").attr("src", "http://image2.artup.com/static/pc/images/pc_taili/"+str+"/end2017.jpg")
-            } else if(parseInt(vm.tailiStyle.taiLiYear) === 2018 || parseInt(vm.tailiStyle.taiLiMonth)>1){
-              $(".lastPage_taili").attr("src", "http://image2.artup.com/static/pc/images/pc_taili/"+str+"/end2018.jpg")
+              $(".lastPage_taili").attr("src", "http://image2.artup.com/static/pc/images/pc_taili/" + str + "/end2017.jpg")
+            } else if (parseInt(vm.tailiStyle.taiLiYear) === 2018 || parseInt(vm.tailiStyle.taiLiMonth) > 1) {
+              $(".lastPage_taili").attr("src", "http://image2.artup.com/static/pc/images/pc_taili/" + str + "/end2018.jpg")
             }
           }
         }
+
         vm.setPageIndex();
       },
       goCart() { //加入购物车
@@ -308,7 +311,7 @@
           console.log(res);
           this.$message({
             showClose: true,
-            iconClass:"atrup_Message",
+            iconClass: "atrup_Message",
             message: '成功添加购物车!',
             type: 'success'
           });
@@ -331,7 +334,7 @@
         var arrDrap = []; //一下传递给vuex处理的数据角标
         if ($(arrNode).size() < 1) {
           this.$message({
-            iconClass:"atrup_Message",
+            iconClass: "atrup_Message",
             showClose: true,
             message: '恭喜您图片已全部上传完毕，请加入购物车购买喲',
             type: 'success'
@@ -418,16 +421,16 @@
               if (page == "封面") {
                 vm.$message({
                   showClose: true,
-                  iconClass:"atrup_Message",
+                  iconClass: "atrup_Message",
                   message: '请上传台历封面图片'
                 });
                 isOK = false
                 return false;
               }
               vm.$message({
-                iconClass:"atrup_Message",
+                iconClass: "atrup_Message",
                 showClose: true,
-                message: '请上传台历'+$(el).parents(".pubilc_div").find(".page span:nth-of-type(1)").text()+ page + '月图片'
+                message: '请上传台历' + $(el).parents(".pubilc_div").find(".page span:nth-of-type(1)").text() + page + '月图片'
               });
               isOK = false
               return false;
@@ -515,21 +518,21 @@
             $(el).append("<span></span>");
             $(el).find("span:nth-child(2)").text("封面");
           } else {
-            if(vm.tailiStyle.taiLiMonth>1){
-              $(el).find("span:nth-child(2)").text(i+(vm.tailiStyle.taiLiMonth-1));
-                  $(".comtent_chanpin .pubilc_div .time_pu .page span:nth-child(2)").each(function(index,els){
-                    if($(this).text()>12){
-                      $(this).text(parseInt($(this).text())-12)
-                      if(parseInt(vm.tailiStyle.taiLiYear) < 2018){
-                        $(this).prev("span").text(parseInt(vm.tailiStyle.taiLiYear)+1+'年')
-                      }else{
-                        $(this).prev("span").text(parseInt(vm.tailiStyle.taiLiYear)+'年')
-                      }
-                    }
-                  })
-            }else{
+            if (vm.tailiStyle.taiLiMonth > 1) {
+              $(el).find("span:nth-child(2)").text(i + (vm.tailiStyle.taiLiMonth - 1));
+              $(".comtent_chanpin .pubilc_div .time_pu .page span:nth-child(2)").each(function (index, els) {
+                if ($(this).text() > 12) {
+                  $(this).text(parseInt($(this).text()) - 12)
+                  if (parseInt(vm.tailiStyle.taiLiYear) < 2018) {
+                    $(this).prev("span").text(parseInt(vm.tailiStyle.taiLiYear) + 1 + '年')
+                  } else {
+                    $(this).prev("span").text(parseInt(vm.tailiStyle.taiLiYear) + '年')
+                  }
+                }
+              })
+            } else {
               $(el).find("span:nth-child(2)").text(i);
-              $(el).find(".year").text(vm.tailiStyle.taiLiYear+'年')
+              $(el).find(".year").text(vm.tailiStyle.taiLiYear + '年')
             }
           }
         })
@@ -560,6 +563,7 @@
 
       },
       preview() {
+        console.log('dataMonth', this.dataMonth)
         this.previewDialogVisible = true
       },
       fnd() {
@@ -605,9 +609,9 @@
       }, 500)
 
 
-      setTimeout(function(){
+      setTimeout(function () {
         isOk = true;
-      },2000)
+      }, 2000)
     }
   }
 </script>

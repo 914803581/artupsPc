@@ -8,7 +8,7 @@
                :close-on-click-modal="false"
     >
       <div class="main">
-        <ul class="list">
+        <ul class="list" ref="pageList">
           <li class="item">
             <img src="http://wx3.sinaimg.cn/mw690/c5131475ly1fj22y6b46nj20m80b4mx0.jpg" class="page-img front">
             <img src="http://wx1.sinaimg.cn/mw690/6f86dff2gy1finrexen6qg205k05jb2c.gif" class="page-img back">
@@ -34,9 +34,9 @@
             <img src="http://wx3.sinaimg.cn/mw690/9b7d8157gy1fj2r20zudhj20c8096dg1.jpg" class="page-img back">
           </li>
         </ul>
-        <button id="upward">向上</button>
-        <button id="down">向下</button>
-        <button id="revolution">转</button>
+        <button @click="upward">上翻</button>
+        <button @click="down">下翻</button>
+        <button @click="revolution">旋转</button>
       </div>
     </el-dialog>
   </div>
@@ -70,14 +70,12 @@
       size: {
         type: String,
         default: 'small'
-      },
-      pageNum: {
-        type: Number,
-        default: 1
       }
     },
     data: function () {
       return {
+        pageNum: 1,
+        revolutionState: 0,
         isTurn: false,
         previewDialogVisible: this.visible
       }
@@ -93,13 +91,42 @@
         }
       },
       upward: function () {
-
+        var items = this.$refs.pageList.getElementsByClassName('item')
+        if (this.pageNum > items.length) {
+          return
+        }
+        var last = items[items.length - this.pageNum]
+        last.style.transform = 'rotateX(' + (180 - this.pageNum) + 'deg)'
+        this.pageNum++
+        setTimeout(function () {
+          last.getElementsByClassName('back')[0].style.zIndex = '200'
+        }, 1000)
       },
       down: function () {
-
+        let _self = this
+        if (this.pageNum <= 1) {
+          return
+        }
+        this.pageNum--
+        var items = this.$refs.pageList.getElementsByClassName('item')
+        var last = items[items.length - this.pageNum]
+        last.style.transform = 'rotateX(0deg)'
+        setTimeout(function () {
+          last.getElementsByClassName('back')[0].style.zIndex = '1'
+        }, 1000)
+        if (this.pageNum === 1 && this.revolutionState) {
+          setTimeout(function () {
+            _self.$refs.pageList.style.transform = 'rotateZ(0deg)'
+          }, 1020)
+        }
       },
       revolution: function () {
-
+        if (this.pageNum === 1 && !this.revolutionState) {
+          return
+        }
+        var list = this.$refs.pageList
+        this.revolutionState = this.revolutionState ? 0 : 1
+        list.style.transform = 'rotateZ(' + (this.revolutionState ? '180' : '0') + 'deg)'
       }
     },
     watch: {
@@ -116,20 +143,20 @@
   .preview {
     .el-dialog--small {
       top: 50% !important;
-      width: 940px;
+      width: 500px;
       margin-top: -326px;
     }
     .main {
       perspective: 1000px;
-      height: 800px;
+      text-align: center;
     }
 
     .list {
       position: relative;
-      padding-top: 400px;
-      width: 400px;
-      height: 400px;
-      margin: 0 auto;
+      padding-top: 300px;
+      width: 300px;
+      height: 300px;
+      margin: 0 auto 20px;
       transform-style: preserve-3d;
       transition: 800ms ease-in;
     }
@@ -137,8 +164,8 @@
     .item {
       position: absolute;
       bottom: 0;
-      width: 400px;
-      height: 400px;
+      width: 300px;
+      height: 300px;
       transform-style: preserve-3d;
       transform-origin: top;
       transform: rotateX(0deg);
@@ -150,8 +177,8 @@
       top: 0;
       left: 0;
       display: block;
-      width: 400px;
-      height: 400px;
+      width: 300px;
+      height: 300px;
       &.front {
         z-index: 100;
       }
