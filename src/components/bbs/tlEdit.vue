@@ -109,7 +109,8 @@
                 <img :src="footerImg.thumbnailUrl"/>
               </li>
             </ul>
-            <p style="line-height: 116px;text-align: center;font-size: 16px;color: #6b6b6b;" v-if="$store.state.bbs.footerData.length==0">选择“添加图片”来开始使用</p>
+            <p style="line-height: 116px;text-align: center;font-size: 16px;color: #6b6b6b;"
+               v-if="$store.state.bbs.footerData.length==0">选择“添加图片”来开始使用</p>
 
           </div>
         </el-collapse-transition>
@@ -576,10 +577,13 @@
           let img = _self.PreviewWork.baseHashMap.getvalue(key)
           let pageNum = img.page - 0
           let userImg = img.base64Img ? img.base64Img : img.thumbnailImageUrl
-          let calendar = 'http://image2.artup.com/static/pc/images/pc_taili/taili_145X195/20171.jpg'
           if (!pageNum) {
             _self.previewData[13 - (pageNum + 1)].front = userImg
           } else {
+            let years = _self.dataMonth.split('-')[0] - 0
+            let months = (parseInt(_self.dataMonth.split('-')[1]) - 1) + pageNum - 1
+            let date = new Date(years, months)
+            let calendar = `http://image2.artup.com/static/pc/images/pc_taili/taili_145X195/${date.getFullYear()}${(date.getMonth() + 1)}.jpg`
             _self.previewData[13 - pageNum - 1].front = calendar
             _self.previewData[13 - pageNum].back = userImg
           }
