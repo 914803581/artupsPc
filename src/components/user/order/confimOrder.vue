@@ -232,7 +232,8 @@
                 client:Api.CLIENT,
                 invoiceTitle:this.form.invoiceTitle,//发票
                 mark:this.form.mark,//备注
-                productCategory:this.form.productCategory //类型
+                productCategory:this.form.productCategory, //类型
+                userDbId : localStorage.getItem("userDbId")
               }
 				Api.car.createOrder(jsons).then(res=>{
             if(res.data.code == 'success'){
