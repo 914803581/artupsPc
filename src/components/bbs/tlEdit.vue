@@ -55,8 +55,8 @@
             <ul>
               <!--<li><i class="iconfont">&#xe711;</i>添加组件</li>-->
               <li @click="bbs.Switching=true"><i class="iconfont">&#xe64f;</i>更换板式</li>
-              <li @click="nextStep"><i style="font-size: 20px;padding:0 ;" class="iconfont">&#xe602;</i>加入购物车</li>
-              <!--<li @click="nextStep"><i class="iconfont">&#xe629;</i>立即购买</li>-->
+              <li @click="nextStep('1')"><i style="font-size: 20px;padding:0 ;" class="iconfont">&#xe602;</i>加入购物车</li>
+              <li @click="nextStep('2')"><i class="iconfont">&#xe629;</i>立即购买</li>
               <!--<li @click="nextStep"><i class="iconfont">&#xe629;</i>下一步</li>-->
               <!--这里保存是要先验证，然后在保存-->
               <!--<li ><i class="iconfont">&#xe612;</i>保存作品</li>-->
@@ -291,7 +291,7 @@
 
         vm.setPageIndex();
       },
-      goCart() { //加入购物车
+      goCart(val) { //加入购物车
         //字符串转换数组存储到对象里面
         let bbsSlsectDate = JSON.parse(sessionStorage.getItem("bbsSlsectDate"));
         var jsons = {
@@ -309,19 +309,38 @@
         }
         Api.car.addCar(jsons).then(res => {
           console.log(res);
+
+          if(val=="1"){
+            this.$message({
+              showClose: true,
+              iconClass: "atrup_Message",
+              message: '成功添加购物车!',
+              type: 'success'
+            });
+            this.$router.push({
+              path: "/user/cart",
+              query: {}
+            })
+          }else{
+            this.$message({
+              showClose: true,
+              iconClass: "atrup_Message",
+              message: '请点击结算，立即购买吧!',
+              type: 'success'
+            });
+            this.$router.push({
+              path: "/user/cart",
+              query: {"carDbId":res.data.extraCode}
+            })
+          }
+        }, err => {
+          console.log(err)
           this.$message({
             showClose: true,
             iconClass: "atrup_Message",
-            message: '成功添加购物车!',
+            message: '添加购物车出错!',
             type: 'success'
           });
-          this.$router.push({
-            path: "/user/cart",
-            query: {}
-          })
-        }, err => {
-          console.log(err)
-          alert('添加购物车出错');
         })
       },
       autoDrapImg() { //自动填充图片的操作
@@ -394,7 +413,7 @@
           }
         })
       },
-      editWork() { //保存作品
+      editWork(val) { //保存作品
         this.assembleData();
         //保存函数
         console.log(this.workEdit)
@@ -403,12 +422,12 @@
           if (res.data.code === 'success') { //如果成功
             //存入编辑id
             this.workEdit.edtDbId = res.data.extraCode
-            this.goCart(); //执行加入购物车的操作
+            this.goCart(val); //执行加入购物车的操作
             console.log('保存的code:', res.data.extraCode)
           }
         })
       },
-      nextStep() { //下一步
+      nextStep(val) { //下一步
         //保存函数
         this.assembleData();
         var vm = this;
@@ -438,7 +457,7 @@
           }
         })
         if (isOK) { //作品图片全部上传完毕
-          vm.editWork(); //执行保存的工作
+          vm.editWork(val); //执行保存的工作
         }
       },
       footerBoolean(val) { //素材库抬起底部图片

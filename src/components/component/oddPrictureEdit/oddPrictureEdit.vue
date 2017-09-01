@@ -251,6 +251,7 @@ export default {
 //                   "editCnfName": val.editCnfName,
 //                   "userDbId":val.userDbId
 //				 };
+
         $(".editbbs_one").next("img").attr("src",val.imgData).css("width","100%").css("height","100%").css("left",0).css("top",0)
      },
      updateStyle (){
@@ -259,9 +260,9 @@ export default {
      },
      /*加入购物车*/
 	addCarFn(type){
-
 		if($('.drapBox img').attr('src')){
 			Api.work.workEdit(this.editData).then(res=>{
+
 				if(res.data.code == 'success'){
 					var jsons = {
 					edtDbId:res.data.extraCode,
@@ -278,11 +279,11 @@ export default {
 				}
 				Api.car.addCar(jsons).then(res=>{
 					if(res.data.code == 'success'){
-						if(type == 2){
-							location.href = '/user/cart?carDbId='+res.data.extraCode
+						if(type == 2 || type == '2'){
+							location.href = '/user/cart?carDbId='+res.data.extraCode;
 						}else{
-              location.href = '/user/cart'
-            }
+							location.href = '/user/cart';
+						}
 					}
 				},err=>{
 
@@ -370,7 +371,13 @@ export default {
 		      		}
 		      	};
 		      	this.nowType = typeStr;
-		      	this.editImageUrl = this.nowProductData.editImgUrl;//默认编辑框背景
+		      	if(this.nowProductData.type == '海报'){
+		      		this.editImageUrl = ''
+
+		      	}else{
+		      		this.editImageUrl = this.nowProductData.editImgUrl;//框画默认编辑框背景
+		      	}
+
 			}
 		},err=>{
 

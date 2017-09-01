@@ -35,10 +35,10 @@
             <ul>
               <!--<li><i class="iconfont">&#xe711;</i>添加组件</li>-->
               <li @click="bbs.Switching=true"><i class="iconfont">&#xe64f;</i>更换板式</li>
-              <li @click="goCart"><i style="font-size: 20px;padding:0 ;" class="iconfont">&#xe602;</i>加入购物车</li>
-              <li @click="nextStep"><i class="iconfont">&#xe629;</i>下一步</li>
               <li @click="editWork"><i class="iconfont">&#xe612;</i>保存作品</li>
-              <li><i class="iconfont">&#xe629;</i>立即购买</li>
+              <li @click="nextStep('1')"><i style="font-size: 20px;padding:0 ;" class="iconfont">&#xe602;</i>加入购物车</li>
+              <li @click="nextStep('2')"><i class="iconfont">&#xe629;</i>立即购买</li>
+              <!--<li @click="nextStep('1')"><i class="iconfont">&#xe629;</i>下一步</li>-->
             </ul>
           </div>
         </div>
@@ -207,7 +207,7 @@
       ...mapMutations({ //同步触发操作集合
         delectFooter: "delectFooterData"
       }),
-      goCart() { //加入购物车
+      goCart(val) { //加入购物车
         //字符串转换数组存储到对象里面
         let bbsSlsectDate = JSON.parse(sessionStorage.getItem("bbsSlsectDate"));
         var jsons = {
@@ -225,10 +225,30 @@
         }
         Api.car.addCar(jsons).then(res => {
           console.log(res);
-          this.$router.push({
-            path: "/user/cart",
-            query: {}
-          })
+          if(val=="1"){
+            this.$message({
+              showClose: true,
+              iconClass: "atrup_Message",
+              message: '成功添加购物车!',
+              type: 'success'
+            });
+            this.$router.push({
+              path: "/user/cart",
+              query: {}
+            })
+          }else{
+            this.$message({
+              showClose: true,
+              iconClass: "atrup_Message",
+              message: '请点击结算，立即购买吧!',
+              type: 'success'
+            });
+            this.$router.push({
+              path: "/user/cart",
+              query: {"carDbId":res.data.extraCode}
+            })
+          }
+
         }, err => {
           alert('添加购物车出错');
         })
@@ -341,7 +361,7 @@
           console.log('保存的code:', res.data.extraCode)
         })
       },
-      nextStep() { //下一步
+      nextStep(val) { //下一步
         //保存函数
         this.assembleData();
         var vm = this;
@@ -376,13 +396,13 @@
               }
             })
             if (isOK) { //作品图片全部上传完毕
-              this.$message({
-                iconClass:"atrup_Message",
-                showClose: true,
-                message: '作品已全部上传成功,预览作品后，请添加购物车购买 !',
-                type: 'success'
-              });
-
+//              this.$message({
+//                iconClass:"atrup_Message",
+//                showClose: true,
+//                message: '作品已全部上传成功,预览作品后，请添加购物车购买 !',
+//                type: 'success'
+//              });
+              this.goCart(val);
             }
           }
 
