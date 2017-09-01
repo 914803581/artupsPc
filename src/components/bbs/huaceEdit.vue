@@ -82,19 +82,7 @@
 								"lastPage": false
 							}
 						],
-						[{
-								"template": hcTemplate.bbs3,
-								"only": false,
-								"firstPage": false,
-								"lastPage": false
-							},
-							{
-								"template": hcTemplate.bbs6,
-								"only": false,
-								"firstPage": false,
-								"lastPage": false
-							}
-						],
+
 						[{
 							"template": hcTemplate.bbs9,
 							"only": true,

@@ -42,7 +42,11 @@
 	    		selectImg_10(){ //快速选中十张
 				var ob = (++this.imgMunber)*5
 				if (ob>this.$store.state.bbs.material.length+4) {
-					alert('全部选中完毕')
+          this.$message({
+            showClose: true,
+            iconClass: "atrup_Message",
+            message: '已经全部选中'
+          });
 					return;
 
 				}

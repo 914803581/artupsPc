@@ -100,7 +100,7 @@
           label: '已支付',
           elect: false,
           countIndicator: 0,
-          status: 2
+          status: 3
         }, {
           label: '已取消',
           elect: false,
