@@ -33,12 +33,12 @@
           <!--功能div-->
           <div class="box_menu">
             <ul>
-              <li><i class="iconfont">&#xe711;</i>添加组件</li>
+              <!--<li><i class="iconfont">&#xe711;</i>添加组件</li>-->
               <li @click="bbs.Switching=true"><i class="iconfont">&#xe64f;</i>更换板式</li>
               <li @click="goCart"><i style="font-size: 20px;padding:0 ;" class="iconfont">&#xe602;</i>加入购物车</li>
-              <li><i class="iconfont">&#xe629;</i>立即购买</li>
               <li @click="nextStep"><i class="iconfont">&#xe629;</i>下一步</li>
               <li @click="editWork"><i class="iconfont">&#xe612;</i>保存作品</li>
+              <li><i class="iconfont">&#xe629;</i>立即购买</li>
             </ul>
           </div>
         </div>

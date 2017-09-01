@@ -274,15 +274,15 @@ export default {
 					skuCode:this.nowProductData.skuCode,
 					skuId:this.nowProductData.skuId,
 					status:1,
-					userDbId:'2221214'
+					userDbId:localStorage.getItem("userDbId")
 				}
 				Api.car.addCar(jsons).then(res=>{
 					if(res.data.code == 'success'){
 						if(type == 2){
-							location.href = '/user/cart?carDbId='+res.data.extraCode;
-						}
-						location.href = '/user/cart';
-
+							location.href = '/user/cart?carDbId='+res.data.extraCode
+						}else{
+              location.href = '/user/cart'
+            }
 					}
 				},err=>{
 
