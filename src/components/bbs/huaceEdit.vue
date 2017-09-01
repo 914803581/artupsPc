@@ -108,7 +108,8 @@
 							"lastPage": true //最后一页必须有的属性
 						}]
 					]
-				dataP.templateImgData = [{
+				dataP.templateImgData =
+          [{
 							templateImg: 'http://image2.artup.com/resources/static/pc/images/pc_huace_template/hc_template_255_355_01.jpg',
 							isTrue: false
 						},
@@ -153,13 +154,14 @@
 			if (SlsectDate.size=="255X355") {
 				this.dataTemplate.templateSource = hcTemplate255X355
 			}
-
+      if(SlsectDate.size=="360X510"){
+        this.dataTemplate.templateSource = hcTemplate360X510;
+      }
 			var str = "风景方版";
 
 			if (str =="风景方版") { //SlsectDate.size==""
 				 this.dataTemplate.productData = this.setBanshi(SlsectDate.size).productData;
 				 this.dataTemplate.templateImgData = this.setBanshi(SlsectDate.size).templateImgData;
-//				 this.dataTemplate.templateSource =
 			}
 		}
 	}
