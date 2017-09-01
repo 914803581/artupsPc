@@ -131,7 +131,7 @@
   </div>
 </template>
 <script>
-  /* eslint-disable semi */
+  /* eslint-disable semi,no-undef */
   import {Message} from 'element-ui'
   import {mapState, mapGetters, mapActions, mapMutations} from 'vuex'
   import Header from '@/components/header/header.vue'
@@ -149,28 +149,25 @@
     data() {
       return {
         checkTaiLiData: [], //切换尺寸时候已经有图片的保存的节点
-        pickerOptions0: {//初始化日期区间函数
+        pickerOptions0: { //初始化日期区间函数
           disabledDate(time) {
             return time.getTime() < new Date('1/1/2017') || time.getTime() > new Date('1/31/2018');
           }
         },
-        dataMonth: "2017-01",//年月绑定的值
+        dataMonth: '2017-01', //年月绑定的值
 //        isOk:false,
         tailiStyle: {  //这里1等于横，2为竖
           plate: "1",
           taiLiMonth: '1', //台历默认的月份
           taiLiYear: '2017'//台历默认的年份
         },
-        //选择横版还是竖版
-        options: [{
+        options: [{ //选择横版还是竖版
           value: '横',
           label: '台历横版'
-        },
-          {
-            value: '竖',
-            label: '台历竖版'
-          }
-        ],
+        }, {
+          value: '竖',
+          label: '台历竖版'
+        }],
         optionValue: '', //选中的横竖板式
         colorName: '',
         previewDialogVisible: false,
@@ -216,19 +213,19 @@
       }),
       checkTemplateTaili(tel) {
         var vm = this;
-        if (sessionStorage.getItem('tailiType') != tel) {
+        if (sessionStorage.getItem('tailiType') !== tel) {
           vm.$confirm('切换版式之后将会清空', '台历提醒', {
             confirmButtonText: '确定',
             cancelButtonText: '取消',
             type: 'warning',
             customClass: 'artup_MessageBox'
           }).then(() => {
-            if (tel == "横") {
+            if (tel === "横") {
               $(".taili_pu_2").addClass("taili_pu");
               $(".taili_pu").removeClass("taili_pu_2");
               sessionStorage.setItem('tailiType', tel)
               vm.setTailiBg(); //修改台历背景图片
-            } else if (tel == "竖") {
+            } else if (tel === "竖") {
               $(".taili_pu").addClass("taili_pu_2");
               $(".taili_pu_2").removeClass("taili_pu");
               sessionStorage.setItem('tailiType', tel)
@@ -250,7 +247,7 @@
           });
         }
       },
-      changeMonth(val) {//选择的年月
+      changeMonth(val) { //选择的年月
         console.log("选择的年月__", val)
         var vm = this;
         vm.dataMonth = val;
@@ -265,14 +262,14 @@
       },
       setTailiBg() { //设置台历的背景
         var vm = this;
-        if (sessionStorage.getItem('tailiType') == "横") {
+        if (sessionStorage.getItem('tailiType') === "横") {
           setBg("横", "taili_145X195");
         } else {
           setBg("竖", "taili_145X195");
         }
 
         function setBg(ifflag, str) { //ifflag判断条件 路径 taili_145X195
-          if (sessionStorage.getItem('tailiType') == ifflag) {
+          if (sessionStorage.getItem('tailiType') === ifflag) {
             $(".comtent_chanpin .pubilc_div .time_pu .page span:nth-child(2)").each(function (index, els) {
               if (index > 0) {
                 var oPage = $(this).text();// 页码
@@ -320,6 +317,7 @@
             query: {}
           })
         }, err => {
+          console.log(err)
           alert('添加购物车出错');
         })
       },
@@ -345,7 +343,10 @@
           if (index < vm.FooterDataAuto.length) {
             $(".editAutoDrap").removeClass("editAutoDrap");
             $(el).addClass("editAutoDrap"); //编辑自动拖拽
-            $(el).attr("src", vm.FooterDataAuto[index].thumbnailUrl).attr('imgStyle', vm.FooterDataAuto[index].thumbnailUrl).attr("dbid", vm.FooterDataAuto[index].dbId).attr("thumbnailScale", vm.FooterDataAuto[index].thumbnailScale);
+            $(el).attr("src", vm.FooterDataAuto[index].thumbnailUrl)
+              .attr('imgStyle', vm.FooterDataAuto[index].thumbnailUrl)
+              .attr("dbid", vm.FooterDataAuto[index].dbId)
+              .attr("thumbnailScale", vm.FooterDataAuto[index].thumbnailScale)
             //每次循环都取触发存储数据的操作
             vm.$store.commit("autoPushData")
             //计算位置
@@ -357,7 +358,6 @@
         })
         //处理图片底部自动删除的操作
         vm.$store.commit("autoDrapData", arrDrap)
-
       },
       footerImgSlectFooter($index) { //提交
         this.$store.commit("editFooterStatus", $index)
@@ -365,12 +365,9 @@
       assembleData() { //执行保存工作组装数据的公共函数
         var vm = this;
         var arrMap = []; //没有图片的空数组
-
         for (var i = 0; i < this.$store.state.editData.ImgHashMap.keys().length; i++) {
-
           if (this.$store.state.editData.ImgHashMap.getvalue(this.$store.state.editData.ImgHashMap.keys()[i])) {
-
-            arrMap.push(this.$store.state.editData.ImgHashMap.getvalue(this.$store.state.editData.ImgHashMap.keys()[i]));
+            arrMap.push(this.$store.state.editData.ImgHashMap.getvalue(this.$store.state.editData.ImgHashMap.keys()[i]))
           }
         }
         //字符串转换数组存储到对象里面
@@ -400,7 +397,7 @@
         console.log(this.workEdit)
         Api.work.workEdit(this.workEdit).then((res) => {
           console.log(res);
-          if (res.data.code == "success") { //如果成功
+          if (res.data.code === 'success') { //如果成功
             //存入编辑id
             this.workEdit.edtDbId = res.data.extraCode
             this.goCart(); //执行加入购物车的操作
@@ -418,7 +415,7 @@
           if (!$(el).attr("src")) { //如果src存在
             var page = $(el).parents(".pubilc_div").find(".page span:nth-of-type(2)").text();
             if (page) {
-              if (page == "封面") {
+              if (page === "封面") {
                 vm.$message({
                   showClose: true,
                   iconClass: "atrup_Message",
@@ -456,7 +453,7 @@
         //      ImgHashMapBase64
         var oImgSort = $(".editbbs_one").next("img").attr("imgsort")
         var oTypesTyle = $(".editbbs_one").next("img").attr("typestyle")
-        var constName = oPage + "_" + oImgSort;
+        constName = oPage + "_" + oImgSort;
         var picObj = {
           "constName": constName,
           "page": oPage,
@@ -486,17 +483,17 @@
         this.bbsTemplate_data[index1][index2].slectTemplate = true;
         this.$nextTick();
         if ($($event.target).hasClass("drap_img")) { //点击图片调起编辑器
-          if ($($event.target).next(".img_drap").attr("src") == "") {
+          if ($($event.target).next(".img_drap").attr("src") === "") {
             return;
           } //为空返回
           $(".editbbs_one").removeClass("editbbs_one");
           $($event.target).addClass("editbbs_one");
-          this.dataEditImg.oSrc = $($event.target).next("img").attr("imgstyle");
-          this.dataEditImg.oW = $($event.target).parent(".drapBox").width();
-          this.dataEditImg.oH = $($event.target).parent(".drapBox").height();
+          this.dataEditImg.oSrc = $($event.target).next("img").attr("imgstyle")
+          this.dataEditImg.oW = $($event.target).parent(".drapBox").width()
+          this.dataEditImg.oH = $($event.target).parent(".drapBox").height()
           //点击时候获取coustName 从hashMap里面得到他有没第一次编辑的东西
           var constName = this.getCoustNameTaiLi($($event.target))
-          this.dataEditImg.oActions = this.$store.state.editData.ImgHashMap.getvalue(constName).actions;
+          this.dataEditImg.oActions = this.$store.state.editData.ImgHashMap.getvalue(constName).actions
           console.log(this.dataEditImg)
           //从vuex缓存里面拿到我的数据
           this.openImgEdit();
@@ -512,7 +509,7 @@
       setPageIndex() { //设置页数
         var vm = this;
         $(".comtent_chanpin .pubilc_div .time_pu .page").each(function (i, el) {
-          if (i == 0) {
+          if (i === 0) {
             $(el).text("");
             $(el).append("<span></span>");
             $(el).append("<span></span>");
@@ -563,7 +560,28 @@
 
       },
       preview() {
-        console.log('dataMonth', this.dataMonth)
+        let _self = this
+        this.previewData = []
+        let defaultImg = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWO4dOnSfwAIZgN2UcgHsgAAAABJRU5ErkJggg=='
+        for (let i = 0; i < 13; i++) {
+          this.previewData.push({
+            front: defaultImg,
+            back: defaultImg
+          })
+        }
+        this.previewData[0].back = 'http://image2.artup.com/static/pc/images/pc_taili/taili_145X195/end2017.jpg'
+        this.PreviewWork.baseHashMap.keys().forEach(function (key) {
+          let img = _self.PreviewWork.baseHashMap.getvalue(key)
+          let pageNum = img.page - 0
+          let userImg = img.base64Img ? img.base64Img : img.thumbnailImageUrl
+          let calendar = 'http://image2.artup.com/static/pc/images/pc_taili/taili_145X195/20171.jpg'
+          if (!pageNum) {
+            _self.previewData[13 - (pageNum + 1)].front = userImg
+          } else {
+            _self.previewData[13 - pageNum - 1].front = calendar
+            _self.previewData[13 - pageNum].back = userImg
+          }
+        })
         this.previewDialogVisible = true
       },
       fnd() {
@@ -581,12 +599,13 @@
     },
     created() {
       // 宝宝书模版数据
-      this.bbsTemplate_data = bbsData_template;
-      this.setBbsTemplate();
+      // eslint-disable-next-line camelcase
+      this.bbsTemplate_data = bbsData_template
+      this.setBbsTemplate()
     },
     mounted() {
       //默认设置背景
-      var vm = this;
+      var vm = this
       // 调用vuex里面的拖拽方法，初始化的时候
       this.setPageIndex()
       this.jisuan() // 计算页面位置
@@ -594,23 +613,19 @@
         $("#div_drap").Tdrag({
           handle: ".titleBox"
         });
-        if (sessionStorage.getItem('tailiType') == "横") {
-          $(".taili_pu_2").addClass("taili_pu");
-          $(".taili_pu").removeClass("taili_pu_2");
+        if (sessionStorage.getItem('tailiType') === "横") {
+          $(".taili_pu_2").addClass("taili_pu")
+          $(".taili_pu").removeClass("taili_pu_2")
 //          vm.optionValue = sessionStorage.getItem('tailiType');
-          vm.setTailiBg(); //修改台历背景图片
-        }
-        else if (sessionStorage.getItem('tailiType') == "竖") {
-          $(".taili_pu").addClass("taili_pu_2");
-          $(".taili_pu_2").removeClass("taili_pu");
-//
+          vm.setTailiBg() //修改台历背景图片
+        } else if (sessionStorage.getItem('tailiType') === "竖") {
+          $(".taili_pu").addClass("taili_pu_2")
+          $(".taili_pu_2").removeClass("taili_pu")
           vm.setTailiBg(); //修改台历背景图片
         }
       }, 500)
-
-
       setTimeout(function () {
-        isOk = true;
+        isOk = true
       }, 2000)
     }
   }

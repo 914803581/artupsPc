@@ -9,29 +9,9 @@
     >
       <div class="main">
         <ul class="list" ref="pageList">
-          <li class="item">
-            <img src="http://wx3.sinaimg.cn/mw690/c5131475ly1fj22y6b46nj20m80b4mx0.jpg" class="page-img front">
-            <img src="http://wx1.sinaimg.cn/mw690/6f86dff2gy1finrexen6qg205k05jb2c.gif" class="page-img back">
-          </li>
-          <li class="item">
-            <img src="http://wx1.sinaimg.cn/mw690/6f86dff2gy1finrexen6qg205k05jb2c.gif" class="page-img front">
-            <img src="http://wx1.sinaimg.cn/mw690/648f6403gy1fj1wrixepaj20qo0zkds0.jpg" class="page-img back">
-          </li>
-          <li class="item">
-            <img src="http://wx2.sinaimg.cn/mw690/9b7d8157gy1fj2qfzsoqjj20h70chgnf.jpg" class="page-img front">
-            <img src="http://wx3.sinaimg.cn/mw690/006yiDbvgy1fj1wtkl9klj30u01hc17e.jpg" class="page-img back">
-          </li>
-          <li class="item">
-            <img src="http://wx2.sinaimg.cn/mw690/9b7d8157gy1fj2qfz67urj20j60bsac9.jpg" class="page-img front">
-            <img src="http://wx3.sinaimg.cn/mw690/006yiDbvgy1fj1wu2vr5bj30qh0yqn9q.jpg" class="page-img back">
-          </li>
-          <li class="item">
-            <img src="http://wx2.sinaimg.cn/mw690/9b7d8157gy1fj2qfxow4bj20hr0k7tca.jpg" class="page-img front">
-            <img src="http://wx2.sinaimg.cn/mw690/cc4db942ly1fj2poodxquj20sg1dcqd1.jpg" class="page-img back">
-          </li>
-          <li class="item">
-            <img src="http://wx1.sinaimg.cn/mw690/9b7d8157gy1fj2qfwh8ucj20j60ivq6y.jpg" class="page-img front">
-            <img src="http://wx3.sinaimg.cn/mw690/9b7d8157gy1fj2r20zudhj20c8096dg1.jpg" class="page-img back">
+          <li class="item" v-for="page in data">
+            <img :src="page.front" class="page-img front">
+            <img :src="page.back" class="page-img back">
           </li>
         </ul>
         <button @click="upward">上翻</button>
@@ -130,6 +110,13 @@
       }
     },
     watch: {
+      pageNum: function (val) {
+        let _self = this
+        let top = (val === 1) ? 0 : 300
+        setTimeout(function () {
+          _self.$refs.pageList.style.paddingTop = `${top}px`
+        }, 500)
+      },
       visible: function (val) {
         this.previewDialogVisible = val
       }
@@ -145,6 +132,7 @@
       top: 50% !important;
       width: 500px;
       margin-top: -326px;
+      overflow: hidden;
     }
     .main {
       perspective: 1000px;
@@ -153,7 +141,6 @@
 
     .list {
       position: relative;
-      padding-top: 300px;
       width: 300px;
       height: 300px;
       margin: 0 auto 20px;
@@ -170,6 +157,7 @@
       transform-origin: top;
       transform: rotateX(0deg);
       transition: 1.5s ease-in;
+      border: 1px solid #3a3a3a;
     }
 
     .page-img {
