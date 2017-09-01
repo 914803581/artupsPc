@@ -11,37 +11,40 @@
         <h4 class="headings">
           <div class="wrapper">订单信息</div>
         </h4>
-        <div class="wrapper">
+        <div v-for="item in orderInfo" class="wrapper">
           <div class="order-info">
             <div class="row">
               <label>订单编号：</label>
-              <span>20170808093921401</span>
+              <span>{{item.code}}</span>
             </div>
             <div class="row">
               <label>订单状态：</label>
-              <span>等待支付</span>
+              <span>{{item.orderState}}</span>
             </div>
-            <div class="row">
-              <label>商品明细：</label>
-              <span>框画/棕色木框/400X500mm x 4</span>
+
+            <div v-for="orders in item.cars">
+              <div class="row">
+                <label>商品明细：</label>
+                <span>{{orders.sku}}  	&nbsp; 	&nbsp;  x{{orders.num}}</span>
+              </div>
+              <!--<div class="row">-->
+                <!--<label>交易金额：</label>-->
+                <!--<span>456.00元</span>-->
+              <!--</div>-->
             </div>
             <div class="row">
               <label>购买时间：</label>
-              <span>2017年08月08日</span>
-            </div>
-            <div class="row">
-              <label>交易金额：</label>
-              <span>456.00元</span>
+              <span>{{item.updatedDt}}</span>
             </div>
           </div>
           <div class="consignee">
             <label>收货人信息：</label>
-            <span>彭进</span>
-            <p>浙江省归属感的故事会受到很多事 彭进 (收) 18301232813</p>
+            <span>名称无</span>
+            <p>{{item.address}}</p>
           </div>
           <div class="invoice">
             <h5>发票信息：</h5>
-            <span>框画</span>
+            <span>发票信息无</span>
           </div>
           <div class="remark">
             <h5>备注信息</h5>
@@ -51,11 +54,12 @@
             <h5>结算信息</h5>
             <div class="row">
               <label>支付方式：</label>
-              <span>微信支付</span>
+              <span>{{item.paymentType}}</span>
             </div>
             <div class="row">
               <label>商品金额：</label>
-              <span>商品总金额1156.0000元 - 优惠金额 700 元 + 运费0.0000元 = 订单总金额：456.00元</span>
+              <!--<span>商品总金额1156.00元 - 优惠金额 700 元 + 运费0.0000元 = 订单总金额：456.00元</span>-->
+              <span>{{item.total}}元</span>
             </div>
           </div>
         </div>
@@ -73,7 +77,9 @@
 
   export default {
     data: function () {
-      return {}
+      return {
+        orderInfo: []
+      }
     },
     methods: {},
     components: {
@@ -83,8 +89,16 @@
     watch: {},
     mounted: function () {
       this.setMinHeight(this.$refs.container, document.body.scrollHeight - 50 - 132 - 92 - 14)
+      let dbId = this.getQueryString("id")
+      Api.Order.queryOrder({
+        "orderDbId": dbId
+      }).then((result) => {
+        this.orderInfo = result.data
+        console.log(this.orderInfo)
+      })
     },
     created: function () {
+
     }
   }
 </script>

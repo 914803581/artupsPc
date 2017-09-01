@@ -184,9 +184,6 @@ export default {
         qs.stringify(jsons)
       )
     },
-    queryOrder: (jsons) => { // 订单详情
-      return VueHttp.$http.get(QUERY_ORDER, {params: jsons})
-    },
     updataOrderStatus: (jsons) => { // 改变订单状态
       return VueHttp.$http.get(UPDATA_ORDER_STATUS, {params: jsons})
     },
@@ -337,7 +334,7 @@ export default {
     }
   },
   Order: {
-    OrderList: (paramJson) => {
+    OrderList: (paramJson) => { //订单列表
       return HTTP.get(ORDER_LIST, {
         params: paramJson
       })
@@ -346,6 +343,9 @@ export default {
       return HTTP.get(ORDER_LIST_COUNT, {
         params: paramJson
       })
+    },
+    queryOrder: (jsons) => { // 订单详情
+      return HTTP.get(QUERY_ORDER, {params: jsons})
     }
   },
   UPLOAD_URL: UPLOAD_URL, CLIENT,
