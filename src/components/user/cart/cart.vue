@@ -73,7 +73,7 @@
 				全部删除
 			</li>
 			<li class="cat_pay03">
-				已选商品 <i class="ng-binding">0</i> 件合计（不含运费）：¥<b class="ng-binding">{{allPic}}</b>
+				已选商品 <i class="ng-binding">{{productNum}}</i> 件合计（不含运费）：¥<b class="ng-binding">{{allPic}}</b>
 				<a @click="gotoPayOrder()" >结算</a>
 			</li>
 			<li></li>
@@ -96,7 +96,8 @@
 				return{
 					dataList:[],
 					allPic:'',
-					checkAllBtn:false
+					checkAllBtn:false,
+					productNum: 0
 				}
 			},
 			components:{ //在再这里要注入我的组件
@@ -204,12 +205,15 @@
 				},
 				oPrice(){//计算价格
 					var arr = 0;
+					var arrNum = 0;
 					for (var i = 0; i < this.dataList.length; i++) {
 						if (this.dataList[i].isOK) {
 							arr+=this.dataList[i].price * this.dataList[i].num;
+							arrNum += this.dataList[i].num
 						}
 					}
 					this.allPic = arr.toFixed(2);
+					this.productNum = arrNum.toFixed(0)
 				},
 				/*设置选中状态*/
 				updateCheck(index){

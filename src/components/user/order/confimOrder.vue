@@ -5,15 +5,15 @@
     <el-dialog title="发票信息" :visible.sync="dialogFormVisible">
       <el-form :model="form">
         <el-form-item label="发票抬头" :label-width="formLabelWidth">
-          <el-input v-model="form.invoiceTitle" auto-complete="off"></el-input>
+          <el-input v-model="form.invoiceTitle" ></el-input>
         </el-form-item>
         <el-form-item label="产品类型" :label-width="formLabelWidth">
-          <el-input v-model="form.productCategory" auto-complete="off"></el-input>
+          <el-input disabled="disabled" v-model="form.productCategory" ></el-input>
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
-        <el-button @click="dialogFormVisible = false">取 消</el-button>
-        <el-button type="primary" @click="dialogFormVisible = false">确 定</el-button>
+        <el-button style="padding: 8px 25px;" @click="dialogFormVisible = false">取 消</el-button>
+        <el-button style="padding: 8px 25px;background: #bb2626;border: 1px solid #bb2626;" type="primary" @click="dialogFormVisible = false">确 定</el-button>
       </div>
     </el-dialog>
 
@@ -228,19 +228,22 @@
 	        			return;
 	        		}
         			var jsons = {
-					userDbId:'2221214',
-					cars:sessionStorage.getItem('cars'),
-					client:Api.CLIENT
-				}
+                cars:sessionStorage.getItem('cars'),
+                client:Api.CLIENT,
+                invoiceTitle:this.form.invoiceTitle,//发票
+                mark:this.form.mark,//备注
+                productCategory:this.form.productCategory, //类型
+                userDbId : localStorage.getItem("userDbId")
+              }
 				Api.car.createOrder(jsons).then(res=>{
-					if(res.data.code == 'success'){
-	                    var orderDbId = res.data.orderDbId;
-	                    var payType = 'wx';
-	                    if(this.payType == 2){
-							payType='zfb';
-    						}
-    					    location.href="/pay/payOrder?addressId="+this.addressData.dbId+"&userDbId=2221214&dbId="+res.data.orderDbId+"&paymentType="+payType;
-					}
+            if(res.data.code == 'success'){
+                var orderDbId = res.data.orderDbId;
+                var payType = 'wx';
+                if(this.payType == 2){
+                  payType='zfb';
+            }
+            location.href="/pay/payOrder?addressId="+this.addressData.dbId+"&userDbId=2221214&dbId="+res.data.orderDbId+"&paymentType="+payType;
+        }
 				},err=>{
 					alert('请求错误');
 				})
@@ -280,11 +283,14 @@
            	if(res.data.length > 0){
            		this.goodsSize = res.data.length;
            		console.log(res.data)
+              let type = '';
            		this.dataList = res.data;
            		for(var i = 0; i<this.dataList.length; i++){
+           		  type+= this.dataList[i].sku.split(".")[0]+'+'
            			this.total += Number(this.dataList[i].total);
            			this.allPrice += Number(this.dataList[i].num * this.dataList[i].price);
            		}
+              this.form.productCategory = type.substring(0,type.length-1)
            	}
            },err=>{
           alert('数据请求错误');
