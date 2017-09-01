@@ -1,6 +1,22 @@
 <template>
 	<div id="confimOrder">
 		<unify-header></unify-header>
+    <!--发票-->
+    <el-dialog title="发票信息" :visible.sync="dialogFormVisible">
+      <el-form :model="form">
+        <el-form-item label="发票抬头" :label-width="formLabelWidth">
+          <el-input v-model="form.invoiceTitle" ></el-input>
+        </el-form-item>
+        <el-form-item label="产品类型" :label-width="formLabelWidth">
+          <el-input disabled="disabled" v-model="form.productCategory" ></el-input>
+        </el-form-item>
+      </el-form>
+      <div slot="footer" class="dialog-footer">
+        <el-button style="padding: 8px 25px;" @click="dialogFormVisible = false">取 消</el-button>
+        <el-button style="padding: 8px 25px;background: #bb2626;border: 1px solid #bb2626;" type="primary" @click="dialogFormVisible = false">确 定</el-button>
+      </div>
+    </el-dialog>
+
 		<div class="order1 m ng-scope">
 			<p class="ord1-tit">填写并核对订单信息</p>
 			<div class="rod001">
@@ -105,13 +121,12 @@
 					<input class="ntrtxt ng-pristine ng-untouched ng-valid ng-empty" type="text" ng-model="exchangeCouponCode" name="" id="exchangeCouponCode" value="" placeholder="请输入优惠码"><input class="ntrbtn" type="button" name="" ng-click="exchangeCode()" id="" value="兑换"></p>
 					<!-- <span>{{exchangeCouponCode}}</span>	 -->
 				</div>
-				<input ng-model="remark" class="nthbz ng-pristine ng-untouched ng-valid ng-empty" type="" name="" id="" value="" placeholder="添加订单备注，限50个字">
+				<input v-model="form.mark" class="nthbz ng-pristine ng-untouched ng-valid ng-empty" type="" name="" id="" value="" placeholder="添加订单备注，限50个字">
 			</div>
-
 			<div class="bill m">
 				<span class="billl l">发票信息</span>
 				<p class="billr r"><span>普通发票 （纸质）</span><span>个 人</span><span>明细</span>
-				<a  href="">修改</a><span>&gt;</span></p>
+				<a @click="dialogFormVisible=true" href="javascript:void(0)">修改</a><span>&gt;</span></p>
 			</div>
 			<div class="pay m">
 				<div class="pay-tit">
@@ -169,6 +184,13 @@
     export default {
         data() {
             return {
+              dialogFormVisible: false,
+              form: {
+                invoiceTitle:"",//发票
+                mark: '', //备注
+                productCategory: "" //类型
+              },
+              formLabelWidth: '120px',
               dataList:[],
               addressData:[],
               addressDataList:[],
@@ -206,21 +228,24 @@
 	        			return;
 	        		}
         			var jsons = {
-					userDbId:'2221214',
-					cars:sessionStorage.getItem('cars'),
-					client:Api.CLIENT
-				}
+                cars:sessionStorage.getItem('cars'),
+                client:Api.CLIENT,
+                invoiceTitle:this.form.invoiceTitle,//发票
+                mark:this.form.mark,//备注
+                productCategory:this.form.productCategory, //类型
+                userDbId : localStorage.getItem("userDbId")
+              }
 				Api.car.createOrder(jsons).then(res=>{
-					if(res.data.code == 'success'){
-	                    var orderDbId = res.data.orderDbId;
-	                    var payType = 'wx';
-	                    if(this.payType == 2){
-							payType='zfb';
-    						}
-    					    location.href="/pay/payOrder?addressId="+this.addressData.dbId+"&userDbId=2221214&dbId="+res.data.orderDbId+"&paymentType="+payType;
-					}
+            if(res.data.code == 'success'){
+                var orderDbId = res.data.orderDbId;
+                var payType = 'wx';
+                if(this.payType == 2){
+                  payType='zfb';
+            }
+            location.href="/pay/payOrder?addressId="+this.addressData.dbId+"&userDbId=2221214&dbId="+res.data.orderDbId+"&paymentType="+payType;
+        }
 				},err=>{
-					Toast('请求错误');
+					alert('请求错误');
 				})
 				//location.href="/payOrder";
         		},
@@ -241,10 +266,10 @@
 				           			this.addresBool = true;
 				           		}
 				           },err=>{
-				            	Toast('数据请求错误');
+                 alert('数据请求错误');
 				           })
 					},err=>{
-						Toast('数据请求错误');
+            alert('数据请求错误');
 					})
         		}
 
@@ -258,14 +283,17 @@
            	if(res.data.length > 0){
            		this.goodsSize = res.data.length;
            		console.log(res.data)
+              let type = '';
            		this.dataList = res.data;
            		for(var i = 0; i<this.dataList.length; i++){
+           		  type+= this.dataList[i].sku.split(".")[0]+'+'
            			this.total += Number(this.dataList[i].total);
            			this.allPrice += Number(this.dataList[i].num * this.dataList[i].price);
            		}
+              this.form.productCategory = type.substring(0,type.length-1)
            	}
            },err=>{
-           		Toast('数据请求错误');
+          alert('数据请求错误');
            })
           //默认收货地址
            var addJsons= {
@@ -278,17 +306,17 @@
            			this.addresBool = true;
            		}
            },err=>{
-            	Toast('数据请求错误');
+         alert('数据请求错误');
            })
 
            //全部收货地址
            var jsons = {
-				userDbId:this.$route.query.userDbId,
-				status:1,
-				pageNum:0,
-				pageSize:15,
-				sort:'createdDt'
-			}
+            userDbId:this.$route.query.userDbId,
+            status:1,
+            pageNum:0,
+            pageSize:15,
+            sort:'createdDt'
+          }
 			Api.address.addressList(jsons).then(res=>{
 				this.addressDataList = res.data.results;
 
@@ -302,7 +330,7 @@
 				}
 
 			},err=>{
-				Toast('数据请求错误');
+        alert('数据请求错误');
 			})
         }
     }

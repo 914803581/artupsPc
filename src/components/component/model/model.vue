@@ -17,9 +17,9 @@
 						<img :src="item.thumbnailUrl"    alt="" />
 					</div>
 				</div>
-				<el-button style="position: relative;left: -45%;" @click.native="slectFile" type="danger">上传图片</el-button>
+				<el-button style="position: relative;left: -50%;" @click.native="slectFile" type="danger">上传图片</el-button>
 				<!--快速选中十张图片-->
-				<span  @click="selectImg_10" class="selectImg_10" style="float: right" >10</span>
+        <el-button style="position: relative;left: 52%;" @click.native="selectImg_10" type="">批量选中</el-button>
 			</div>
 		</div>
 	</div>
@@ -42,7 +42,11 @@
 	    		selectImg_10(){ //快速选中十张
 				var ob = (++this.imgMunber)*5
 				if (ob>this.$store.state.bbs.material.length+4) {
-					alert('全部选中完毕')
+          this.$message({
+            showClose: true,
+            iconClass: "atrup_Message",
+            message: '已经全部选中'
+          });
 					return;
 
 				}

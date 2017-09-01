@@ -24,7 +24,7 @@
               <li class="item" v-for="item in orderList">
                 <div class="head">
                   <span class="time">{{item.createdDt}}</span>
-                  <a class="order-id" :href="`order/info.html?id=${item.code}`">订单号：{{item.code}}</a>
+                  <a class="order-id" :href="`order/info.html?id=${item.dbId}`">订单号：{{item.code}}</a>
                 </div>
                 <div class="order-main" :style="{height:(item.cars.length?item.cars.length*140:140)+'px'}">
                   <div class="list">
@@ -90,8 +90,7 @@
         filterOptions: [{
           label: '全部订单',
           elect: true,
-          countIndicator: 0,
-          status: 0
+          countIndicator: 0
         }, {
           label: '待付款',
           elect: false,
@@ -101,7 +100,7 @@
           label: '已支付',
           elect: false,
           countIndicator: 0,
-          status: 2
+          status: 3
         }, {
           label: '已取消',
           elect: false,
