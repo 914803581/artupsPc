@@ -1,6 +1,6 @@
 <template>
 	<div id="cart">
-    <Loading :loadingText="'模版加载中...'" :showLoading="sLoading"></Loading>
+    
 		<nav-header></nav-header>
 		<div class="p_cat ng-scope">
 		<dl ng-if="!items.length==0" class="ng-scope">
