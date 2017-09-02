@@ -2,7 +2,7 @@
 	<div id="bbsMsg">
 		<unify-header></unify-header>
 		<div class="div-box">
-				
+
 				<div class="img_tl_bg active_04">
 					<!--<img src="img/fan210.jpg" style="position: absolute;top: -100px; left: 70px;">-->
 				</div>
@@ -10,7 +10,7 @@
 					<span>小时光</span>
 					<p>小小的时光，记录点滴美好</p>
 				</div>
-				<div class="preview">					
+				<div class="preview">
 					<dl  class="hc-dl">
 					 <dt style="padding-bottom: 20px;" class="dt-botton">
 						<h4 id="clickH1"><b>请选择颜色</b>  <span style="display: none;">修改</span> </h4>
@@ -18,7 +18,7 @@
 							<li  :data-code="color.code"  :data-name="color.name" :dbId ="color.dbId" @click="checkWork(index)" :class="{'line':codeNumber==index}"  v-for="(color,index) in attributes[0].attributeValues"  class="li-color5 ">
 								<b :style="{'background':color.attr}"></b>
 								<p>{{color.name}}</p>
-							</li>						
+							</li>
 						</ul>
 					</dt>
 					<dd class="" style="float: left;width: 143px;">
@@ -36,14 +36,15 @@
 					<br>
 					<br>
 					<br>
-					<dt style="">					
+					<dt style="">
 						<div class="pices">
 							¥ <i>{{price}}</i> CNY
 						</div>
-						<a href="/album/maxImgEdit" class="sib-a">开始定制</a>
+            <!--href="/album/maxImgEdit"-->
+						<div  @click="goEdit" class="sib-a">开始定制</div>
 					</dt>
 				</dl>
-				</div>							
+				</div>
 			</div>
 			<div id="contents">
 			<div class="xsg">
@@ -154,7 +155,7 @@
 				</div>
 				<div class="bbstpone">
 					<img src="http://image2.artup.com/static/pc/bbs/001_03.png" alt="">
-				</div>				
+				</div>
 				</div>
 			</div>
 		</div>
@@ -170,7 +171,7 @@
 				</div>
 				<div class="bbstpone">
 					<img src="http://image2.artup.com/static/pc/bbs/00_03.png" alt="">
-				</div>				
+				</div>
 			</div>
 		</div>
 		<div class="xsg7">
@@ -185,7 +186,7 @@
 				</div>
 				<div class="bbstpone">
 					<img src="http://image2.artup.com/static/pc/bbs/33_06.png" alt="">
-				</div>				
+				</div>
 			</div>
 		</div>
 		<div class="xsg8">
@@ -222,21 +223,29 @@
 				bbsSlsectDate:{}
 			}
 		},
-		components:{  
+		components:{
 	       'unify-header': Header
 	   },
 		 methods: {
+//		  开始定制按钮
+       goEdit(){
+         if(localStorage.getItem("userDbId")){
+           location.href = "/album/maxImgEdit"
+         }else {
+           this.setUrlCallback()
+         }
+       },
 		 	checkWork($index){ //切换选项
 		 		var vm = this;
 		 		this.codeNumber = $index;
 		 		setTimeout(function(){
-				 	vm.getPrice($(".bbs_msg .line"));		    
+				 	vm.getPrice($(".bbs_msg .line"));
 				},100)
 		 	},
 		 	getPrice(dom){//获得页面的价格
 					this.bbsSlsectDate={};
 					//获得页面的颜色
-				 	this.bbsSlsectDate.colorName = dom.eq(0).find("p").text().trim();				 	
+				 	this.bbsSlsectDate.colorName = dom.eq(0).find("p").text().trim();
 					var dataCode = '';//请求价格需要的参数
 					var dataCode2 = '';//后端需要的参数
 					dom.each(function(index,el){
@@ -255,7 +264,7 @@
 						"category": this.getFromSession("category"),
 						"parameter" : dataCode
 					};
-				 	//请求价格:			
+				 	//请求价格:
 					Api.sku.querySku(paramsJson).then((res)=>{
 						//价格计算
 						 this.price = res.data.price;
@@ -268,27 +277,27 @@
 		 mounted(){
 		 	var vm = this;
 		 	//拿到url东西?category存入session里面
-		 	this.addToSession();		 	
-		 	var paraAttributeJson = {  
+		 	this.addToSession();
+		 	var paraAttributeJson = {
 				category: this.getFromSession("category") //类型
 			};
 		 	Api.sku.queryAttributes(paraAttributeJson).then((res)=>{
 				//添加1个titleName
 				 sessionStorage.setItem('titleName',res.data.name);
-		
+
 				  this.attributes = res.data.attributes;
 				  console.log(this.attributes)
 				 //默认的价格
 				 setTimeout(function(){
-				 	vm.getPrice($(".bbs_msg .line"));				    
-				 },100)	 
+				 	vm.getPrice($(".bbs_msg .line"));
+				 },100)
 			});
 		 }
 	}
 </script>
 
 <style lang="less">
-	
+
 	#bbsMsg{
 .xsg{
 	width: 100%;
@@ -329,13 +338,13 @@
 .bbstpone img{
 	display: block;
 	margin: 0 auto;
-	
+
 }
 .xsg2{
 	height: 870px;
 	width: 100%;
 	background: #f3f3f3;
-	
+
 }
 .xsg2 .xsgContent{
 }
@@ -349,13 +358,13 @@
 	height: 30px;
 	width: 100%;
 	text-align: center;
-	
+
 }
 .xsg3{
 	height: 860px;
 	width: 100%;
 	background: #fff;
-	
+
 }
 .xsg4{
 	height: 820px;
@@ -394,7 +403,7 @@
 .sxgwz ul li{
 	text-align: center;
 	height: 30px;
-	line-height: 30px;	
+	line-height: 30px;
 	font-size: 18px;
 }
 .sxgwz ul li:nth-child(1){
@@ -430,7 +439,7 @@
 /*banenr-bg*/
  .div-box{width: 1120px;height: 780px;margin: 0 auto;position: relative;z-index: 99;}
  .text{width: 561px;height: 129px;float: right;margin-top: 80px;margin-bottom: 30px;}
- 
+
 .text span{height: 56px;line-height: 56px;color: #000;font-size: 40px;font-family: "微软雅黑";font-weight: 600;}
  .text p{height: 38px;line-height: 38px;color: #555;font-size: 18px;font-family: "微软雅黑";margin-top: 6px;}
  .preview{width: 560px;height: 415px;float: right;position: relative;overflow: hidden;}
@@ -473,7 +482,7 @@ body .active_01{background: url(http://image2.artup.com/static/pc/bbs/bbs_05.png
 body .active_02{background: url(http://image2.artup.com/static/pc/bbs/bbs_04.png) no-repeat;background-size: 100%;}
 body .active_03{background: url(http://image2.artup.com/static/pc/bbs/bbs_03.png) no-repeat;background-size: 100%;}
 body .active_04{background: url(http://image2.artup.com/static/pc/bbs/bbs_02.png) no-repeat;background-size: 100%;}
-		
+
 	}
-	
+
 </style>
