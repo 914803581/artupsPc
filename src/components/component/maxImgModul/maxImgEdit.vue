@@ -116,7 +116,8 @@
                 <img :src="footerImg.thumbnailUrl"/>
               </li>
             </ul>
-            <p style="line-height: 116px;text-align: center;font-size: 16px;color: #6b6b6b;" v-if="$store.state.bbs.footerData.length==0">选择“添加图片”来开始使用</p>
+            <p style="line-height: 116px;text-align: center;font-size: 16px;color: #6b6b6b;"
+               v-if="$store.state.bbs.footerData.length==0">选择“添加图片”来开始使用</p>
           </div>
         </el-collapse-transition>
       </div>
@@ -156,10 +157,10 @@
   export default {
     data() {
       return {
-        titleMsg:{
-          "titleName":sessionStorage.getItem("titleName"),
+        titleMsg: {
+          "titleName": sessionStorage.getItem("titleName"),
           "price_product": JSON.parse(sessionStorage.getItem("bbsSlsectDate")).price,
-          "size_product":JSON.parse(sessionStorage.getItem("bbsSlsectDate")).name
+          "size_product": JSON.parse(sessionStorage.getItem("bbsSlsectDate")).name
         },
         template_Source: [],//修改的模版源
         colorName: '',
@@ -224,7 +225,7 @@
         }
         Api.car.addCar(jsons).then(res => {
           console.log(res);
-          if(val=="1"){
+          if (val == "1") {
             this.$message({
               showClose: true,
               iconClass: "atrup_Message",
@@ -235,7 +236,7 @@
               path: "/user/cart",
               query: {}
             })
-          }else{
+          } else {
             this.$message({
               showClose: true,
               iconClass: "atrup_Message",
@@ -244,7 +245,7 @@
             });
             this.$router.push({
               path: "/user/cart",
-              query: {"carDbId":res.data.extraCode}
+              query: {"carDbId": res.data.extraCode}
             })
           }
 
@@ -265,7 +266,7 @@
         if ($(arrNode).size() < 1) {
           this.$message({
             showClose: true,
-            iconClass:"atrup_Message",
+            iconClass: "atrup_Message",
             message: '恭喜您图片已全部上传完毕，请加入购物车购买喲',
             type: 'success'
           });
@@ -326,10 +327,10 @@
         this.workEdit.status = 1;
         this.workEdit.skuCode = bbsSlsectDate.skuCode;
         this.workEdit.price = bbsSlsectDate.price;
-        this.workEdit.theme ="";  //画册的版式
+        this.workEdit.theme = "";  //画册的版式
         this.workEdit.defDbId = this.getFromSession("defDbId");
 //        如果存在就存入此字段
-        if(this.$route.query.huaceType){
+        if (this.$route.query.huaceType) {
           this.workEdit.theme = this.$route.query.huaceType;
         }
         $(".comtent_chanpin .pubilc_div .bbsClass  .img_drap").each(function (index, el) {
@@ -349,7 +350,7 @@
           if (res.data.code == "success") { //如果成功
             this.$message({
               showClose: true,
-              iconClass:"atrup_Message",
+              iconClass: "atrup_Message",
               message: '作品保存成功 !',
               type: 'success'
             });
@@ -376,7 +377,7 @@
                 var page = $(el).parents(".pubilc_div").find(".pageleft >span").eq(0).text();
                 if (page) {
                   vm.$message({
-                    iconClass:"atrup_Message",
+                    iconClass: "atrup_Message",
                     showClose: true,
                     message: '请上传第' + page + '页图片'
                   });
@@ -385,7 +386,7 @@
                 }
                 if ($(el).parents(".lomoTemplate")) { //lomo卡图片不完整
                   vm.$message({
-                    iconClass:"atrup_Message",
+                    iconClass: "atrup_Message",
                     showClose: true,
                     message: 'lomo卡图片上传不完整'
                   });
@@ -422,7 +423,7 @@
         })
         if (vms) {
           this.$message({
-            iconClass:"atrup_Message",
+            iconClass: "atrup_Message",
             showClose: true,
             message: '请选择需要更换的板式页码',
             type: 'warning'
@@ -442,7 +443,7 @@
           var oLastPage = $(".lastPage").prev(".pubilc_div").find(".pageleft span").text();
           if (otext == 1 || otext == oLastPage) {
             vm.$message({
-              iconClass:"atrup_Message",
+              iconClass: "atrup_Message",
               showClose: true,
               message: '首尾页不能切换双页的板式 ！',
               type: 'warning'
@@ -675,35 +676,102 @@
 
       },
       preview() {
-        const TYPESTYLECOUNT = {
-          1: 1,
-          2: 1,
-          3: 2,
-          4: 1,
-          5: 1,
-          6: 2,
-          7: 4,
-          8: 4,
-          9: 1
+        console.log(this.PreviewWork)
+        var TYPESTYLECOUNT = {}
+        let titleName = sessionStorage.titleName ? sessionStorage.titleName : ''
+        if (titleName === '画册') {
+          // 画册1、2、3
+          TYPESTYLECOUNT = {
+            1: {
+              text: 4
+            },
+            2: {
+              text: 3
+            },
+            3: {
+              text: 2
+            },
+            4: {
+              img: 1
+            },
+            5: {
+              img: 2
+            },
+            6: {
+              img: 1
+            },
+            7: {
+              img: 1
+            },
+            9: {
+              img: 1
+            }
+          }
+        } else {
+          TYPESTYLECOUNT = {
+            1: {
+              img: 1
+            },
+            2: {
+              img: 1
+            },
+            3: {
+              img: 2
+            },
+            4: {
+              img: 1
+            },
+            5: {
+              img: 1
+            },
+            6: {
+              img: 2
+            },
+            7: {
+              img: 4
+            },
+            8: {
+              img: 4
+            },
+            9: {
+              img: 1
+            }
+          }
         }
+
         let typeStyle = []
         $('.time_main_left_ht .pubilc_div > .time_pu .bbsClass').each((i, el) => {
-          typeStyle.push($(el).find('.img_drap:eq(0)').attr('typestyle'))
+          let img = $(el).find('.img_drap:eq(0)')
+          let typestyle = ''
+          if (img.length) {
+            typestyle = img.attr('typestyle')
+          } else {
+            let titlePu = $(el).find('.title_pu:eq(0)')
+            typestyle = titlePu ? titlePu.attr('typestyle') : ''
+          }
+          typeStyle.push(typestyle)
         })
         this.previewData = []
         let _self = this
+        // 生成占位数据
         typeStyle.forEach((type) => {
           type = type - 0;
           let pageInfo = {
             title: '标题一二三',
             type: type,
-            imgs: []
+            imgs: [],
+            text: []
           }
           _self.previewData.push(pageInfo)
           if (type === 9) {
             _self.previewData.push(Object.assign(pageInfo, {}))
           }
         })
+        this.PreviewWork.textHashMap.keys().forEach(function (key) {
+          let text = _self.PreviewWork.textHashMap.getvalue(key)
+          console.log('TTT', text)
+        })
+        // 放图片
         this.PreviewWork.baseHashMap.keys().forEach(function (key) {
           let img = _self.PreviewWork.baseHashMap.getvalue(key)
           _self.previewData[img.page - 1].imgs.push({
@@ -712,12 +780,15 @@
             src: img.base64Img ? img.base64Img : img.thumbnailImageUrl
           })
         })
+        // 补空位
         this.previewData.forEach((obj) => {
           let imgList = {}
           obj.imgs.forEach((obj) => {
             imgList[obj.index] = obj
           })
-          for (let i = 1; i <= TYPESTYLECOUNT[obj.type]; i++) {
+          let imgCount = TYPESTYLECOUNT[obj.type]['img'] ? TYPESTYLECOUNT[obj.type]['img'] : 0
+          let i = 1
+          for (i; i <= imgCount; i++) {
             if (!imgList[i]) {
               imgList[i] = {
                 isNull: true,
@@ -732,9 +803,30 @@
             imgs.push(imgList[key])
           }
           obj.imgs = imgs
+          // 文字
+          let textMap = {}
+          obj.text.forEach((obj) => {
+            textMap[obj.index] = obj
+          })
+          let textCount = TYPESTYLECOUNT[obj.type]['text'] ? TYPESTYLECOUNT[obj.type]['text'] : 0
+          if (textCount) {
+            obj.title = ''
+            for (let i = 1; i <= textCount; i++) {
+              if (!textMap[i]) {
+                textMap[i] = {
+                  index: i,
+                  text: ''
+                }
+              }
+            }
+            let texts = []
+            for (let key in textMap) {
+              texts.push(textMap[key])
+            }
+            obj.text = texts
+          }
         })
         this.colorName = JSON.parse(sessionStorage.getItem("bbsSlsectDate")).colorName;
-        console.log(this.previewData)
         this.previewDialogVisible = true
       },
       dataPull() {//数据改变的函数
@@ -789,6 +881,7 @@
         setBookBg(colorName, $(".titlePage_bg .page_fm"), $(".firstPage .page_bg"), $(".lastPage .page_bg"));
         setTemplate();//先加载节点，让版式找到二纬数组的索引
       }, 200)
+
       //给添加动态id的函数
       function setTemplate() {
         $(".comtent_chanpin .pubilc_div .bbsClass  .img_drap").each(function (index, el) { //图片
@@ -819,42 +912,42 @@
             var oImgLomo = JSON.parse(res.data.data.lomo)
           }
           //先加载所有的版式
-         setTimeout(function () {
-           if (oImgData.length > 0) {
-             for (var i = 0; i < oImgData.length; i++) {
-               var pageNum = oImgData[i].page + '_' + oImgData[i].num + '_bbs';
-               //根据找到页码
-               var oPage = oImgData[i].page
-               //找到2维数组的第一位角标
-               var oArrIndex = parseInt(oPage/2)
-               var bbs = "bbs"+oImgData[i].editCnfIndex
+          setTimeout(function () {
+            if (oImgData.length > 0) {
+              for (var i = 0; i < oImgData.length; i++) {
+                var pageNum = oImgData[i].page + '_' + oImgData[i].num + '_bbs';
+                //根据找到页码
+                var oPage = oImgData[i].page
+                //找到2维数组的第一位角标
+                var oArrIndex = parseInt(oPage / 2)
+                var bbs = "bbs" + oImgData[i].editCnfIndex
 
-               if(parseInt(oPage)%2==1){
-                 if(vm.bbsTemplate_data[oArrIndex][1]){
-                   vm.bbsTemplate_data[oArrIndex][1].template = vm.template_Source[bbs];
-                   vm.$forceUpdate();
-                   vm.$nextTick();
-                 }
-               }
-               else{
+                if (parseInt(oPage) % 2 == 1) {
+                  if (vm.bbsTemplate_data[oArrIndex][1]) {
+                    vm.bbsTemplate_data[oArrIndex][1].template = vm.template_Source[bbs];
+                    vm.$forceUpdate();
+                    vm.$nextTick();
+                  }
+                }
+                else {
 //                 console.log(oImgData[i].crossPage)
-                 if(oImgData[i].crossPage){
-                   alert(oImgData[i].crossPage)
-                   vm.bbsTemplate_data[oArrIndex][1] = [];
-                   vm.bbsTemplate_data[oArrIndex][0].only = true;
-                   vm.bbsTemplate_data[oArrIndex][0].template = vm.template_Source.bbs9;
-                   console.log('_____',vm.bbsTemplate_data[oArrIndex][0])
-                   vm.$forceUpdate();
-                   vm.$nextTick();
-                   return;
-                 }
-                 vm.bbsTemplate_data[oArrIndex][0].template = vm.template_Source[bbs];
-                 vm.$forceUpdate();
-                 vm.$nextTick();
-               }
-             }
-           }
-         },400)
+                  if (oImgData[i].crossPage) {
+                    alert(oImgData[i].crossPage)
+                    vm.bbsTemplate_data[oArrIndex][1] = [];
+                    vm.bbsTemplate_data[oArrIndex][0].only = true;
+                    vm.bbsTemplate_data[oArrIndex][0].template = vm.template_Source.bbs9;
+                    console.log('_____', vm.bbsTemplate_data[oArrIndex][0])
+                    vm.$forceUpdate();
+                    vm.$nextTick();
+                    return;
+                  }
+                  vm.bbsTemplate_data[oArrIndex][0].template = vm.template_Source[bbs];
+                  vm.$forceUpdate();
+                  vm.$nextTick();
+                }
+              }
+            }
+          }, 400)
           // 图片节点生成之后id回显 ==>动态添加id节点
           setTimeout(function () {
             vm.setPageIndex();
@@ -898,7 +991,7 @@
                   "previewThumbnailImageUrl": oImgData[i].previewThumbnailImageUrl,
                   "crop": "true",
                   "editCnfName": oImgData[i].editCnfName,
-                  "crossPage":oImgData[i].crossPage
+                  "crossPage": oImgData[i].crossPage
                 };
 //                if(oImgData[i].cossPage){
 //                  picObj.cossPage = oImgData[i].cossPage;
