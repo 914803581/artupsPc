@@ -1,6 +1,9 @@
+import Api from '@/api.js'
+
 export default {
   data: function () {
     return {
+      userInfo: null,
       request: new function () {
         let name, value
         let str = location.href
@@ -21,6 +24,28 @@ export default {
   methods: {
     setMinHeight: function (dom, minHeight) {
       dom.style.minHeight = `${minHeight}px`
+    },
+    login: function () {
+      Api.user.login({"t": "1"}).then(res => {
+        window.location.href = res.data.authorizeCodeUrl
+      }, err => {
+        console.log(err)
+        alert('Error')
+      })
+    },
+    getLoginState: function () {
+      var getData = function (key) {
+        return localStorage.getItem(key)
+      }
+      let isLogin = window.localStorage && getData('userName') && getData('userDbId')
+      if (isLogin) {
+        this.userInfo = {
+          userDbId: getData('userDbId'),
+          userName: getData('userName'),
+          avatar: getData('avatar')
+        }
+      }
+      return isLogin
     }
   },
   components: {},

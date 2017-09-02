@@ -29,7 +29,7 @@
           <em class="shopping-count">{{carCount}}</em>
           <label>购物车</label>
         </a>
-        <a class="login-register" href="javascript:void(0);" @click="Login" v-if="!isLogin">
+        <a class="login-register" href="javascript:void(0);" @click="login" v-if="!isLogin">
           登录/注册
         </a>
       </div>
@@ -96,34 +96,9 @@
           }
         })
       },
-
-      Login: function () {
-        Api.user.login({"t": "1"}).then(res => {
-          //console.log(res);
-          //alert(res.data.authorizeCodeUrl);
-          window.location.href = res.data.authorizeCodeUrl
-        }, err => {
-          console.log(err)
-          alert('Error')
-        })
-      },
       exit: function () {
         localStorage.clear()
         window.location.reload()
-      },
-      getLoginState: function () {
-        var getData = function (key) {
-          return localStorage.getItem(key)
-        }
-        let isLogin = window.localStorage && getData('userName') && getData('userDbId')
-        if (isLogin) {
-          this.userInfo = {
-            userDbId: getData('userDbId'),
-            userName: getData('userName'),
-            avatar: getData('avatar')
-          }
-        }
-        return isLogin
       }
     },
     created: function () {

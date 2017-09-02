@@ -168,6 +168,9 @@
     },
     created: function () {
       this.paging(1)
+      this.isLogin = this.getLoginState()
+      if (this.isLogin) {
+      }
     }
   }
 </script>

@@ -8,8 +8,8 @@ import 'element-ui/lib/theme-default/index.css'
 import Axios from 'axios'
 import VueAxios from 'vue-axios'
 
-//import mixins from './mixins'
-//Vue.use(mixins)
+import mixins from './mixins'
+Vue.mixin(mixins)
 // 引入ajax
 Vue.use(VueAxios, Axios)
 //自定义的一些全局组件
