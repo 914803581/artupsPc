@@ -138,7 +138,7 @@
                     //组装后端需要的数据
 //                  console.log(vm.extraPostData)
                     extraPostData  = {
-	                    	"userDbId" : '2221214',
+                      "userDbId" : localStorage.getItem("userDbId"),
 	                    "category" : 'baobaoshu',
 	                    "format" : 'json',
 	                    "thumbnailWidth":"1400",
@@ -155,7 +155,6 @@
                     var progressWidth = progress.toFixed(2)*100;
                     //进度条显示
 					console.log('进度条'+progressWidth)
-
                 });
               	r.on('error',function(){
 

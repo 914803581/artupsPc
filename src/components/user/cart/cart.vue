@@ -1,6 +1,6 @@
 <template>
 	<div id="cart">
-    
+
 		<nav-header></nav-header>
 		<div class="p_cat ng-scope">
 		<dl ng-if="!items.length==0" class="ng-scope">
@@ -109,7 +109,6 @@
                   customClass:'artup_MessageBox',
 				          type: 'warning'
 				        }).then(() => {
-				        var userDbId = '2221214';
 						Api.car.deleteCarCorde({dbId:dbId,userDbId:userDbId}).then(res=>{
 							if(res.data.code == 'success'){
 								if(this.dataList.length < 1){
@@ -162,7 +161,6 @@
 								 i--;
 							}
 						}
-				        var userDbId = '2221214';
 						Api.car.deleteCarCorde({dbId:arr,userDbId:userDbId}).then(res=>{
 							if(res.data.code == 'success'){
 								if(this.dataList.length < 1){
@@ -271,7 +269,6 @@
 
 						var jsons = {
 							//userDbId:localStorage.getItem("userDbId"),
-							userDbId:'2221214',
 							cars: JSON.stringify(carsArry)
 						}
 						Api.car.submitCars(jsons).then(res=>{
@@ -302,7 +299,6 @@
 
 				var jsons = {
 	  			//userDbId:localStorage.getItem("userDbId"),
-	  			userDbId:'2221214',
 	  			status:1,
 	  			pageNum:0,
 	  			pageSize:15,
