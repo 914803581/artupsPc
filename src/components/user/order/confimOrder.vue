@@ -253,12 +253,12 @@
         			this.addressDataList[index].isOK = !this.addressDataList[index].isOK;
         			this.selectAddressA = !this.selectAddressA;
 					var jsons = {
-								userDbId:this.$route.query.userDbId,
+								userDbId:localStorage.getItem('userDbId'),
 								dbId:dbid
 								}
 					Api.address.setDefaultAddress(jsons).then(res=>{
 						 var addJsons= {
-				           		userDbId:this.$route.query.userDbId
+				           		userDbId:localStorage.getItem('userDbId')
 				           }
 						   Api.address.defaultAddress(addJsons).then(res=>{
 				           		if(res.data.length > 0){
@@ -297,7 +297,7 @@
            })
           //默认收货地址
            var addJsons= {
-           		userDbId:this.$route.query.userDbId
+           		userDbId:localStorage.getItem('userDbId')
            }
 		   Api.address.defaultAddress(addJsons).then(res=>{
            		if(res.data.length > 0){
@@ -311,7 +311,7 @@
 
            //全部收货地址
            var jsons = {
-            userDbId:this.$route.query.userDbId,
+            userDbId:localStorage.getItem('userDbId'),
             status:1,
             pageNum:0,
             pageSize:15,

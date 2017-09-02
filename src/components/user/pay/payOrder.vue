@@ -57,7 +57,7 @@
 	        	}
 			},
 			mounted(){
-				if(this.$route.query.paymentType == 'wx'){
+				if(this.$route.query.paymentType == 'pc_wx'){
 					this.subject = '微信支付';
 				}else{
 					this.subject = '支付宝支付';
@@ -66,7 +66,7 @@
 	        		paymentType:this.$route.query.paymentType,
 	        		addressId:this.$route.query.addressId,
 	        		dbId:this.$route.query.dbId,
-	        		userDbId:this.$route.query.userDbId,
+	        		userDbId:localStorage.getItem('userDbId'),
 	            	client:Api.CLIENT,
 	        		subject:this.subject
 	        	};
