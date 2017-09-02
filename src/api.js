@@ -187,9 +187,6 @@ export default {
     updataOrderStatus: (jsons) => { // 改变订单状态
       return VueHttp.$http.get(UPDATA_ORDER_STATUS, {params: jsons})
     },
-    cancleOrder: (jsons) => { // 取消订单
-      return VueHttp.$http.get(CANCLE_ORDER_STATUS, {params: jsons})
-    },
     deleteOrder: (jsons) => {
       return VueHttp.$http.get(DELETE_ORDER, {params: jsons})
     }
@@ -346,6 +343,9 @@ export default {
     },
     queryOrder: (jsons) => { // 订单详情
       return HTTP.get(QUERY_ORDER, {params: jsons})
+    },
+    cancleOrder: (jsons) => { // 取消订单
+      return VueHttp.$http.get(CANCLE_ORDER_STATUS, {params: jsons})
     }
   },
   UPLOAD_URL: UPLOAD_URL, CLIENT,

@@ -120,6 +120,9 @@ userCenter.list.forEach((page) => {
     filename: path.resolve(__dirname, `../dist/${page.path || userCenter.path}/${page.pageName}.html`),
     template: path.resolve(__dirname, `../src/views/center/template/${page.template || userCenter.template}`),
     inject: true,
+    title: page.title,
+    keywords: page.keywords || userCenter.keywords,
+    description: page.description || userCenter.description,
     chunks: ['manifest', 'vendor', entryKey],
     minify: {
       removeComments: true,

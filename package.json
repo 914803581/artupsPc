@@ -9,7 +9,8 @@
     "start": "node build/dev-server.js",
     "build": "node build/build.js",
     "lint": "eslint --ext .js,.vue src",
-    "data": "node build/build-data.js"
+    "data": "node build/build-data.js",
+    "deploy": "sh shell/deploy.sh"
   },
   "dependencies": {
     "element-ui": "^1.3.7",
