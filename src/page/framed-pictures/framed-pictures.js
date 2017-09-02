@@ -92,9 +92,12 @@ new Vue({
   	},
   	/*开始定制*/
   	startCustom (){
-  		location.href = '/framed/framedEdit?size='+this.nowSize+"&editImageUrl="+this.editImageUrl+"&price="+this.price+'&frameType='+this.frameType+'&category='+this.getQueryString('category')+'&skuCode='+this.skuCode+'&templateCode='+this.templateCode+'&skuId='+this.skuId;
+      if(localStorage.getItem("userDbId")){
+        location.href = '/framed/framedEdit?size='+this.nowSize+"&editImageUrl="+this.editImageUrl+"&price="+this.price+'&frameType='+this.frameType+'&category='+this.getQueryString('category')+'&skuCode='+this.skuCode+'&templateCode='+this.templateCode+'&skuId='+this.skuId;
+      }else {
+        this.setUrlCallback()
+      }
   	}
-
   },
   mounted(){
   	var that = this;
