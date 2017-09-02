@@ -428,7 +428,6 @@ let store = new Vuex.Store({
 						picObj.actions.y = Math.abs(parseFloat($(ev.target).next("img").css("top")))/min_scale;
 						picObj.actions.width = Math.abs(parseFloat($(ev.target).width()))/min_scale;
 						picObj.actions.height = Math.abs(parseFloat($(ev.target).height()))/min_scale;
-
 						//存入图片ImgHashMap
 						state.editData.ImgHashMap.putvalue(constName, picObj);
 						console.log(state.editData.ImgHashMap.getvalue(constName))

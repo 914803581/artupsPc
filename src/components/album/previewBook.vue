@@ -7,6 +7,7 @@
         <div class="hard even" ref="coverPage"></div>
         <div class="preview_page"
              :class="[
+               getProductsClass(),
                'style_type_'+item.type,
                {
                  'odd': index % 2 && item.type !== 9,
@@ -15,8 +16,13 @@
                  't9_right': !(index%2) && item.type === 9
                }
                ]" v-for="(item,index) in data">
-          <img :key="img.id" :src="img.src" :class="['page_style_'+item.type,'img_style_'+item.type+'_'+img.index]"
+          <img :key="img.id"
+               :src="img.src"
+               :class="['page_style_'+item.type,'img_style_'+item.type+'_'+img.index]"
                v-for="img in item.imgs">
+          <span :key="t.index"
+                :class="['page_style_'+item.type,'text_style_'+item.type+'_'+t.index]"
+                v-for="t in item.text">{{t.text}}</span>
           <label v-if="item.type !== 9 || (item.type === 9 && index%2)" class="title">{{item.title}}</label>
           <span class="page_num" :class="!((index+1)%2) ? 'left' : 'right'">第{{index + 1}}页</span>
         </div>
@@ -29,7 +35,8 @@
 
 <script type="text/ecmascript-6">
   /* eslint-disable no-undef */
-
+  const PRODUCTS_TIME = '小时光'
+  const PRODUCTS_ALBUM = '画册'
   export default {
     props: {
       colorName: {
@@ -63,6 +70,7 @@
     },
     data: function () {
       return {
+        products: '',
         isTurn: false,
         previewDialogVisible: this.visible
       }
@@ -87,6 +95,14 @@
         } else {
           $(this.$refs.previewComtent).turn('page', 2)
         }
+      },
+      getProductsClass: function () {
+        if (this.products === PRODUCTS_TIME) {
+          return 'products-type-time'
+        }
+        if (this.products === PRODUCTS_ALBUM) {
+          return 'products-type-album'
+        }
       }
     },
     watch: {
@@ -95,7 +111,7 @@
       }
     },
     created: function () {
-
+      this.products = sessionStorage.titleName
     }
   }
 </script>
@@ -186,6 +202,9 @@
             right: 4px;
           }
         }
+
+      }
+      .products-type-time {
         .page_style_1 {
           position: relative;
           top: 50%;
@@ -256,6 +275,46 @@
           }
         }
       }
+      .products-type-album {
+        .page_style_1 {
+          font-size: 0;
+          &.text_style_1_1, &.text_style_1_2 {
+            display: block;
+            width: 88%;
+            margin: 20px 0 0 6%;
+            height: 50px;
+            font-size: 12px;
+            border: 1px solid #eee;
+            background: #eee;
+            box-shadow: 3px 3px 3px #999;
+          }
+          &.text_style_1_2 {
+            line-height: 30px;
+            height: 30px;
+          }
+
+          &.text_style_1_3, &.text_style_1_4 {
+            display: inline-block;
+            margin: 40px 0 0 6%;
+            box-sizing: border-box;
+            width: 41%;
+            height: 350px;
+            border: 1px solid #eee;
+            background: #eee;
+            box-shadow: 3px 3px 3px #999;
+          }
+          &.text_style_1_3 {
+            margin-left: 0;
+          }
+        }
+        .page_style_2 {
+
+        }
+        .page_style_3 {
+
+        }
+      }
+
     }
   }
 </style>
