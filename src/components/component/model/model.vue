@@ -101,12 +101,10 @@
 	    		isShowModel:"openModel"
 	    },
 	    mounted(){
-	    	   let vm = this;
-	    	   this.isShowModels = this.isShowModel;
-
+         let vm = this;
+         this.isShowModels = this.isShowModel
 			//后端上传需要的数据
 			var extraPostData = {};
-
 	    	   //上传的逻辑
 	    	   /* 文件上传init URL */
             var uploadUrl = Api.UPLOAD_URL+'&category=baobaoshu';

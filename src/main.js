@@ -12,9 +12,7 @@ import VueAxios from 'vue-axios'
 //Vue.use(mixins)
 // 引入ajax
 Vue.use(VueAxios, Axios)
-
 //自定义的一些全局组件
-
 import router from '@/router' // 引入路由
 import store from '@/store' // 引入vuex
 // 自定义的一些全局组件
@@ -22,9 +20,10 @@ import Handers from '@/components/component/hander'
 
 import Footers from '@/components/component/footer'
 import utils from './components/component/util'
+import Loading from './components/component/loading'
 Vue.use(ElementUI)
 Vue.use(VueAxios, Axios) // 引入ajax
-
+Vue.use(Loading)
 Vue.use(Handers)
 Vue.use(Footers)
 Vue.use(utils)  // 工具函数

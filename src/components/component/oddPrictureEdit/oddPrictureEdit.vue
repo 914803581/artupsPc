@@ -262,7 +262,7 @@ export default {
 	addCarFn(type){
 		if($('.drapBox img').attr('src')){
 			Api.work.workEdit(this.editData).then(res=>{
-				
+
 				if(res.data.code == 'success'){
 					var jsons = {
 					edtDbId:res.data.extraCode,
@@ -275,7 +275,7 @@ export default {
 					skuCode:this.nowProductData.skuCode,
 					skuId:this.nowProductData.skuId,
 					status:1,
-					userDbId:'2221214'
+					userDbId:localStorage.getItem("userDbId")
 				}
 				Api.car.addCar(jsons).then(res=>{
 					if(res.data.code == 'success'){
@@ -284,8 +284,6 @@ export default {
 						}else{
 							location.href = '/user/cart';
 						}
-						
-
 					}
 				},err=>{
 
@@ -375,7 +373,7 @@ export default {
 		      	this.nowType = typeStr;
 		      	if(this.nowProductData.type == '海报'){
 		      		this.editImageUrl = ''
-		      		
+
 		      	}else{
 		      		this.editImageUrl = this.nowProductData.editImgUrl;//框画默认编辑框背景
 		      	}

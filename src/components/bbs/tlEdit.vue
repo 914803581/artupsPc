@@ -1,6 +1,8 @@
 <template>
   <div id="bbsEdit">
     <unify-header></unify-header>
+    <!--loading -->
+    <Loading :loadingText="sloadingText" :showLoading="sLoading"></Loading>
     <div class="comtent_chanpin">
       <div class="line_comtent">
         <div class="comtent">
@@ -24,12 +26,6 @@
               <div class="checkBS_b">
                 <ul>
                   <li>选择尺寸:</li>
-                  <!--<li>-->
-                  <!--<el-select @change="changeSize" size="small" v-model="optionValue" placeholder="请选择">-->
-                  <!--<el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value">-->
-                  <!--</el-option>-->
-                  <!--</el-select>-->
-                  <!--</li>-->
                   <li>
                     <div class="el-radio-group">
                       <label @click="checkTemplateTaili('横')" class="el-radio-button">
@@ -55,8 +51,8 @@
             <ul>
               <!--<li><i class="iconfont">&#xe711;</i>添加组件</li>-->
               <li @click="bbs.Switching=true"><i class="iconfont">&#xe64f;</i>更换板式</li>
-              <li @click="nextStep"><i style="font-size: 20px;padding:0 ;" class="iconfont">&#xe602;</i>加入购物车</li>
-              <!--<li @click="nextStep"><i class="iconfont">&#xe629;</i>立即购买</li>-->
+              <li @click="nextStep('1')"><i style="font-size: 20px;padding:0 ;" class="iconfont">&#xe602;</i>加入购物车</li>
+              <li @click="nextStep('2')"><i class="iconfont">&#xe629;</i>立即购买</li>
               <!--<li @click="nextStep"><i class="iconfont">&#xe629;</i>下一步</li>-->
               <!--这里保存是要先验证，然后在保存-->
               <!--<li ><i class="iconfont">&#xe612;</i>保存作品</li>-->
@@ -151,6 +147,8 @@
   export default {
     data() {
       return {
+        sLoading:false,
+        sloadingText:"数据保存中...",
         checkTaiLiData: [], //切换尺寸时候已经有图片的保存的节点
         pickerOptions0: { //初始化日期区间函数
           disabledDate(time) {
@@ -291,7 +289,7 @@
 
         vm.setPageIndex();
       },
-      goCart() { //加入购物车
+      goCart(val) { //加入购物车
         //字符串转换数组存储到对象里面
         let bbsSlsectDate = JSON.parse(sessionStorage.getItem("bbsSlsectDate"));
         var jsons = {
@@ -307,21 +305,41 @@
           skuCode: bbsSlsectDate.skuCode,
           skuId: bbsSlsectDate.skuId
         }
+
         Api.car.addCar(jsons).then(res => {
           console.log(res);
+          this.sLoading = false
+          if(val=="1"){
+            this.$message({
+              showClose: true,
+              iconClass: "atrup_Message",
+              message: '成功添加购物车!',
+              type: 'success'
+            });
+            this.$router.push({
+              path: "/user/cart",
+              query: {}
+            })
+          }else{
+            this.$message({
+              showClose: true,
+              iconClass: "atrup_Message",
+              message: '请点击结算，立即购买吧!',
+              type: 'success'
+            });
+            this.$router.push({
+              path: "/user/cart",
+              query: {"carDbId":res.data.extraCode}
+            })
+          }
+        }, err => {
+          console.log(err)
           this.$message({
             showClose: true,
             iconClass: "atrup_Message",
-            message: '成功添加购物车!',
+            message: '添加购物车出错!',
             type: 'success'
           });
-          this.$router.push({
-            path: "/user/cart",
-            query: {}
-          })
-        }, err => {
-          console.log(err)
-          alert('添加购物车出错');
         })
       },
       autoDrapImg() { //自动填充图片的操作
@@ -394,8 +412,11 @@
           }
         })
       },
-      editWork() { //保存作品
+      editWork(val) { //保存作品
         this.assembleData();
+        //唤出loading...
+        this.sLoading = true
+        this.sloadingText = "台历保存中..."
         //保存函数
         console.log(this.workEdit)
         Api.work.workEdit(this.workEdit).then((res) => {
@@ -403,12 +424,12 @@
           if (res.data.code === 'success') { //如果成功
             //存入编辑id
             this.workEdit.edtDbId = res.data.extraCode
-            this.goCart(); //执行加入购物车的操作
+            this.goCart(val); //执行加入购物车的操作
             console.log('保存的code:', res.data.extraCode)
           }
         })
       },
-      nextStep() { //下一步
+      nextStep(val) { //下一步
         //保存函数
         this.assembleData();
         var vm = this;
@@ -438,7 +459,7 @@
           }
         })
         if (isOK) { //作品图片全部上传完毕
-          vm.editWork(); //执行保存的工作
+          vm.editWork(val); //执行保存的工作
         }
       },
       footerBoolean(val) { //素材库抬起底部图片

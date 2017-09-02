@@ -1,5 +1,6 @@
 <template>
 	<div id="cart">
+    <Loading :loadingText="'模版加载中...'" :showLoading="sLoading"></Loading>
 		<nav-header></nav-header>
 		<div class="p_cat ng-scope">
 		<dl ng-if="!items.length==0" class="ng-scope">
@@ -9,7 +10,6 @@
 		<dt>
 			 <div class="cat_hander">
 			 	 <div class="tab01">
-
 				  </div>
 				  <div class="tab02">
 				  	商品信息
@@ -29,7 +29,6 @@
 
 			 </div>
 		</dt>
-
 		<dd  class="ng-scope" v-for="(itmes,indexs) in dataList">
 			<div class="cat_hander">
 			 	 <div class="tab01" @click="updateCheck(indexs)">
@@ -89,10 +88,9 @@
 	import Api from '@/api.js'
 	import { MessageBox } from 'element-ui';
 	import Hander from '../../header/header.vue'
-
-
 		export default{
 			data(){
+//			  loading 的字段
 				return{
 					dataList:[],
 					allPic:'',
@@ -296,6 +294,12 @@
 				}
 			},
 			mounted(){
+			  var vm = this;
+        setTimeout(function () {
+          vm.sLoading= false
+          console.log(vm.sLoading)
+        },4000)
+
 				var jsons = {
 	  			//userDbId:localStorage.getItem("userDbId"),
 	  			userDbId:'2221214',

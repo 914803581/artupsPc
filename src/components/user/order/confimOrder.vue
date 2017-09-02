@@ -124,7 +124,7 @@
 				<input v-model="form.mark" class="nthbz ng-pristine ng-untouched ng-valid ng-empty" type="" name="" id="" value="" placeholder="添加订单备注，限50个字">
 			</div>
 			<div class="bill m">
-				<span class="billl l">发票信息</span>
+				<span class="billl l">发票信息: {{form.invoiceTitle}}</span>
 				<p class="billr r"><span>普通发票 （纸质）</span><span>个 人</span><span>明细</span>
 				<a @click="dialogFormVisible=true" href="javascript:void(0)">修改</a><span>&gt;</span></p>
 			</div>

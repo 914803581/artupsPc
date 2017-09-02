@@ -11,6 +11,7 @@
             </div>
             <div class="title_right">
               <span>{{titleMsg.size_product}}</span>
+              <!--<span>56页</span>-->
               <span>￥{{titleMsg.price_product}}</span>
             </div>
           </div>
@@ -18,15 +19,11 @@
             <div v-show="bbs.Switching" id="div_drap">
               <div class="titleBox menubar_titleBox">
                 更换版式
-                <div @click="bbs.Switching=false" class="titleClose">
-                  <i class="iconfont">&#xe746;</i>
-                </div>
+                <div @click="bbs.Switching=false" class="titleClose"><i class="iconfont">&#xe746;</i></div>
               </div>
               <div class="checkBS_b">
-                <div :style="{'width':itemImg.isTrue?'90%':'45%'}"
-                     :istrue="itemImg.isTrue"
-                     @click="chenkTemplate(index)"
-                     v-for="(itemImg,index) in mobanArr"
+                <div :style="{'width':itemImg.isTrue?'90%':'45%'}" :istrue="itemImg.isTrue"
+                     @click="chenkTemplate(index)" v-for="(itemImg,index) in mobanArr"
                      :class="templateoindex==index?'img_div boder_actiev':'img_div'">
                   <img :src="itemImg.templateImg">
                 </div>
@@ -36,12 +33,12 @@
           <!--功能div-->
           <div class="box_menu">
             <ul>
-              <li><i class="iconfont">&#xe711;</i>添加组件</li>
+              <!--<li><i class="iconfont">&#xe711;</i>添加组件</li>-->
               <li @click="bbs.Switching=true"><i class="iconfont">&#xe64f;</i>更换板式</li>
-              <li @click="goCart"><i style="font-size: 20px;padding:0 ;" class="iconfont">&#xe602;</i>加入购物车</li>
-              <li><i class="iconfont">&#xe629;</i>立即购买</li>
-              <li @click="nextStep"><i class="iconfont">&#xe629;</i>下一步</li>
               <li @click="editWork"><i class="iconfont">&#xe612;</i>保存作品</li>
+              <li @click="nextStep('1')"><i style="font-size: 20px;padding:0 ;" class="iconfont">&#xe602;</i>加入购物车</li>
+              <li @click="nextStep('2')"><i class="iconfont">&#xe629;</i>立即购买</li>
+              <!--<li @click="nextStep('1')"><i class="iconfont">&#xe629;</i>下一步</li>-->
             </ul>
           </div>
         </div>
@@ -53,7 +50,8 @@
               <div class="page_fm">
                 <span>封 面</span>
               </div>
-              <div style="background: #efefef;"></div>
+              <div style="background: #efefef;">
+              </div>
             </div>
             <div class="time_bg" :index_style="index" v-for="(item,index) in bbsTemplate_data">
               <!--pubilc_div 这个class是留给整屏来定义的样式  click_template 是用vue里面的事件委派来解决避免不了的dom操作  hengban_bbs 横版增加的class  hengban_bbs 红线class-->
@@ -61,8 +59,7 @@
                 <div class="page_bg"></div>
                 <div class="footer_page" style="background: #efefef;"></div>
               </div>
-              <div class="pubilc_div"
-                   :only="htmlTetx.only"
+              <div class="pubilc_div" :only="htmlTetx.only"
                    :class="{'active_line':htmlTetx.slectTemplate,'hengban_bbs':htmlTetx.only}"
                    v-html="htmlTetx.template" @click="click_template($event,index,index2)"
                    v-for="(htmlTetx,index2) in item">
@@ -79,12 +76,8 @@
           </div>
           <div style="margin-top: 0;" class="time_main_left">
             <div style="height: 226px;" class="time_bg" v-for="(item,index) in lomoTemplate_data">
-              <div
-                class="pubilc_div"
-                @click="click_template_lomo($event)"
-                :only="htmlTetx.only"
-                :class="{'hengban_bbs':htmlTetx.only}" v-html="htmlTetx.template"
-                v-for="(htmlTetx,index2) in item">
+              <div class="pubilc_div" @click="click_template_lomo($event)" :only="htmlTetx.only"
+                   :class="{'hengban_bbs':htmlTetx.only}" v-html="htmlTetx.template" v-for="(htmlTetx,index2) in item">
               </div>
             </div>
           </div>
@@ -117,10 +110,8 @@
         <el-collapse-transition>
           <div v-show="footerShow" class="fonter_box_img">
             <ul v-if="$store.state.bbs.footerData.length > 0">
-              <li @click="footerImgSlectFooter(index)"
-                  :class="{'img_size_border':footerImg.slectFooter}"
-                  :att="footerImg.slectFooter"
-                  v-for="(footerImg,index) in $store.state.bbs.footerData"
+              <li @click="footerImgSlectFooter(index)" :class="{'img_size_border':footerImg.slectFooter}"
+                  :att="footerImg.slectFooter" v-for="(footerImg,index) in $store.state.bbs.footerData"
                   draggable="true">
                 <img :src="footerImg.thumbnailUrl"/>
               </li>
@@ -143,29 +134,27 @@
     <transition name="el-fade-in">
       <edit-text :isEditText="iseditText"></edit-text>
     </transition>
-    <preview-book
-      :colorName="colorName"
-      :visible.sync="previewDialogVisible"
-      :data="previewData"
-      @close="previewDialogVisible=false"
-    ></preview-book>
+    <!--<div-editText ></div-editText>-->
+
+    <preview-book :colorName="colorName" :visible.sync="previewDialogVisible" :data="previewData"
+                  @close="previewDialogVisible=false"></preview-book>
   </div>
 </template>
 <script>
-  /* eslint-disable semi,no-undef */
+  /* eslint-disable semi */
 
   import {Message} from 'element-ui'
-  import Header from 'components/header/header'
-  import DivModel from 'components/component/model/model'
-  import ImgEdit from 'components/component/imgEdit/imgEdit'
-  import EditText from 'components/component/editText/editText'
-  import PreviewBook from '../../album/previewBook'
   import {mapState, mapGetters, mapActions, mapMutations} from 'vuex'
-  import {DomHeight} from '@/directive.js'
-  import Api from '@/api.js'
+  import Header from '@/components/header/header.vue'
+  import Api from '../../../api.js'
+  import filter from '../../../filter.js'
+  import {DomHeight} from '../../../directive.js'
+  import divModel from '../../component/model/model.vue'
+  import imgEdit from '../../component/imgEdit/imgEdit.vue'
+  import editText from '../../component/editText/editText.vue'
+  import PreviewBook from '../../album/previewBook'
 
   export default {
-    props: ["dataTemp"],
     data() {
       return {
         titleMsg: {
@@ -173,11 +162,13 @@
           "price_product": JSON.parse(sessionStorage.getItem("bbsSlsectDate")).price,
           "size_product": JSON.parse(sessionStorage.getItem("bbsSlsectDate")).name
         },
-        template_Source: [], //修改的模版源
+        template_Source: [],//修改的模版源
         colorName: '',
+        previewDialogVisible: false,
         mobanArr: [],
         templateoindex: 0,
         ImgHashMapBase64: new HashMap(),
+        isShowPreview: false,
         isModel: false, //素材
         isimgEdit: false, //图片编辑
         iseditText: false, //文字弹窗
@@ -194,7 +185,6 @@
         lomoTemplate_data: [], //lomo卡数组
         tplCode: 'pc_baobaoshu_170-235_24_single', //暂时写死的1个数据
         workEdit: {}, //素材保存组装传给后端的数据
-        previewDialogVisible: false,
         previewData: []
       }
     },
@@ -205,11 +195,19 @@
     //			next();
     //
     //		},
+    components: { //在再这里要注入我的组件
+      'unify-header': Header,
+      divModel,
+      imgEdit,
+      editText,
+      PreviewBook
+    },
+    props: ["dataTemp"],
     methods: {
       ...mapMutations({ //同步触发操作集合
         delectFooter: "delectFooterData"
       }),
-      goCart: function () { //加入购物车
+      goCart(val) { //加入购物车
         //字符串转换数组存储到对象里面
         let bbsSlsectDate = JSON.parse(sessionStorage.getItem("bbsSlsectDate"));
         var jsons = {
@@ -227,14 +225,34 @@
         }
         Api.car.addCar(jsons).then(res => {
           console.log(res);
-          this.$router.push({
-            path: "/user/cart",
-            query: {}
-          })
+          if (val == "1") {
+            this.$message({
+              showClose: true,
+              iconClass: "atrup_Message",
+              message: '成功添加购物车!',
+              type: 'success'
+            });
+            this.$router.push({
+              path: "/user/cart",
+              query: {}
+            })
+          } else {
+            this.$message({
+              showClose: true,
+              iconClass: "atrup_Message",
+              message: '请点击结算，立即购买吧!',
+              type: 'success'
+            });
+            this.$router.push({
+              path: "/user/cart",
+              query: {"carDbId": res.data.extraCode}
+            })
+          }
+
         }, err => {
-          console.log(err)
-          alert('添加购物车出错')
+          alert('添加购物车出错');
         })
+
       },
       autoDrapImg() { //自动填充图片的操作
         var vm = this;
@@ -279,20 +297,21 @@
         var arrMap = []; //宝宝书图片的
         var textArrMap = []; //文字的
         var lomArrMap = []; //lomo卡的
-        let i = 0
-        for (; i < this.$store.state.editData.ImgHashMap.keys().length; i++) {
+        for (var i = 0; i < this.$store.state.editData.ImgHashMap.keys().length; i++) {
+
           if (this.$store.state.editData.ImgHashMap.getvalue(this.$store.state.editData.ImgHashMap.keys()[i])) {
-            arrMap.push(this.$store.state.editData.ImgHashMap.getvalue(this.$store.state.editData.ImgHashMap.keys()[i]))
+
+            arrMap.push(this.$store.state.editData.ImgHashMap.getvalue(this.$store.state.editData.ImgHashMap.keys()[i]));
           }
         }
-        for (i = 0; i < this.$store.state.editData.lomoHashMap.keys().length; i++) {
+        for (var i = 0; i < this.$store.state.editData.lomoHashMap.keys().length; i++) {
           if (this.$store.state.editData.lomoHashMap.getvalue(this.$store.state.editData.lomoHashMap.keys()[i])) {
-            lomArrMap.push(this.$store.state.editData.lomoHashMap.getvalue(this.$store.state.editData.lomoHashMap.keys()[i]))
+            lomArrMap.push(this.$store.state.editData.lomoHashMap.getvalue(this.$store.state.editData.lomoHashMap.keys()[i]));
           }
         }
-        for (i = 0; i < this.$store.state.editData.textHashMap.keys().length; i++) {
+        for (var i = 0; i < this.$store.state.editData.textHashMap.keys().length; i++) {
           if (this.$store.state.editData.textHashMap.getvalue(this.$store.state.editData.textHashMap.keys()[i])) {
-            textArrMap.push(this.$store.state.editData.textHashMap.getvalue(this.$store.state.editData.textHashMap.keys()[i]))
+            textArrMap.push(this.$store.state.editData.textHashMap.getvalue(this.$store.state.editData.textHashMap.keys()[i]));
           }
         }
         //字符串转换数组存储到对象里面
@@ -328,7 +347,7 @@
         //保存函数
         console.log(this.workEdit)
         Api.work.workEdit(this.workEdit).then((res) => {
-          if (res.data.code === 'success') { //如果成功
+          if (res.data.code == "success") { //如果成功
             this.$message({
               showClose: true,
               iconClass: "atrup_Message",
@@ -342,13 +361,13 @@
           console.log('保存的code:', res.data.extraCode)
         })
       },
-      nextStep() { //下一步
+      nextStep(val) { //下一步
         //保存函数
         this.assembleData();
         var vm = this;
         console.log(this.workEdit)
         Api.work.workEdit(this.workEdit).then((res) => {
-          if (res.data.code === 'success') { //如果成功
+          if (res.data.code == "success") { //如果成功
             res.data.commandTitle;
             this.workEdit.edtDbId = res.data.extraCode;
             console.log('保存的code:', res.data.extraCode);
@@ -377,14 +396,16 @@
               }
             })
             if (isOK) { //作品图片全部上传完毕
-              this.$message({
-                iconClass: "atrup_Message",
-                showClose: true,
-                message: '作品已全部上传成功,预览作品后，请添加购物车购买 !',
-                type: 'success'
-              })
+//              this.$message({
+//                iconClass:"atrup_Message",
+//                showClose: true,
+//                message: '作品已全部上传成功,预览作品后，请添加购物车购买 !',
+//                type: 'success'
+//              });
+              this.goCart(val);
             }
           }
+
         })
       },
       chenkTemplate(index) { //切换模版
@@ -406,9 +427,9 @@
             showClose: true,
             message: '请选择需要更换的板式页码',
             type: 'warning'
-          })
-          vms = true
-          return
+          });
+          vms = true;
+          return;
         }
         //			切换的模版索引
         var chenkIndex = 'bbs' + (index + 1);
@@ -420,7 +441,7 @@
           var otext = $(".time_main_left_ht .active_line .pageleft span").text();
           //尾页的页码
           var oLastPage = $(".lastPage").prev(".pubilc_div").find(".pageleft span").text();
-          if (otext === 1 || otext === oLastPage) {
+          if (otext == 1 || otext == oLastPage) {
             vm.$message({
               iconClass: "atrup_Message",
               showClose: true,
@@ -437,7 +458,7 @@
           };
           this.bbsTemplate_data[this.bbs.bbs_index1].push(josnImg)
           //两页换横版的时候清空vue里面相邻所有的数据
-          if (otext % 2 === 1) {
+          if (otext % 2 == 1) {
             console.log('偶数')
             vm.$store.commit("setDrapData", {
               "opage": otext,
@@ -459,9 +480,9 @@
         if (this.bbsTemplate_data[this.bbs.bbs_index1][0].only) { //横版换两页的情况
           console.log("横版换两页的情况")
           //切换前选中的页码
-          otext = $(".time_main_left_ht .active_line .pageleft span").text();
+          var otext = $(".time_main_left_ht .active_line .pageleft span").text();
           this.bbsTemplate_data[this.bbs.bbs_index1] = [];
-          josnImg = {
+          var josnImg = {
             "template": vm.template_Source.bbs1,
             "only": false,
             "slectTemplate": false
@@ -483,7 +504,7 @@
             "slectTemplate": false
           };
           //判断角标让选择更精确
-          if (this.bbs.bbs_index2 === 0) {
+          if (this.bbs.bbs_index2 == 0) {
             this.bbsTemplate_data[this.bbs.bbs_index1].push(josnImg2)
             this.bbsTemplate_data[this.bbs.bbs_index1].push(josnImg);
           } else {
@@ -497,7 +518,7 @@
         } else {
           console.log("单页兑换")
           //切换前选中的页码
-          otext = $(".time_main_left_ht .active_line .pageleft span").text();
+          var otext = $(".time_main_left_ht .active_line .pageleft span").text();
           otemplate.template = vm.template_Source[chenkIndex];
           vm.$store.commit("oneToOneSetDrapData", {
             "opage": otext
@@ -528,15 +549,15 @@
           this.$store.state.editData.lomoHashMap.getvalue(constName).actions = val.postData;
           var oPage = $(".editbbs_one").parents(".pubilc_div").find(".pageLomo").text();
         } else {
-          constName = this.getCoustName($(".editbbs_one"))
+          var constName = this.getCoustName($(".editbbs_one"))
           this.$store.state.editData.ImgHashMap.getvalue(constName).actions = val.postData;
-          oPage = $(".editbbs_one").parents(".pubilc_div").find(".page .pageleft span").text();
+          var oPage = $(".editbbs_one").parents(".pubilc_div").find(".page .pageleft span").text();
         }
         $(".editbbs_one").next("img").attr("src", val.imgData).css("width", "100%").css("height", "100%").css("left", 0).css("top", 0)
         //      ImgHashMapBase64
         var oImgSort = $(".editbbs_one").next("img").attr("imgsort")
         var oTypesTyle = $(".editbbs_one").next("img").attr("typestyle")
-        constName = oPage + "_" + oImgSort;
+        var constName = oPage + "_" + oImgSort;
         var picObj = {
           "constName": constName,
           "page": oPage,
@@ -579,7 +600,8 @@
           this.openTxst(); //打开文字框
         }
         if ($($event.target).hasClass("drap_img")) { //点击图片调起编辑器
-          if (!$($event.target).next(".img_drap").attr("src")) {
+
+          if ($($event.target).next(".img_drap").attr("src") == "") {
             return;
           } //为空返回
 
@@ -599,7 +621,7 @@
         }
       },
       click_template_lomo($event) { //lomo卡
-        if (!$($event.target).next(".img_drap").attr("src")) {
+        if ($($event.target).next(".img_drap").attr("src") == "") {
           return;
         } //为空返回
 
@@ -808,16 +830,18 @@
         this.colorName = JSON.parse(sessionStorage.getItem("bbsSlsectDate")).colorName;
         this.previewDialogVisible = true
       },
-      dataPull() { //数据改变的函数
-        var vm = this
+      dataPull() {//数据改变的函数
+        var vm = this;
+
         vm.bbsTemplate_data = vm.dataTemp.productData;
         vm.mobanArr = vm.dataTemp.templateImgData;
         vm.template_Source = vm.dataTemp.templateSource;
 //        console.log('hahhaha', vm.dataTemp.templateSource)
         setTimeout(function () {
-          vm.setPageIndex()
+          vm.setPageIndex();
           vm.$forceUpdate()
         }, 400)
+
       }
     },
     computed: {
@@ -830,18 +854,21 @@
       bbsTemplate_data: "dataPull"
     },
     created() {
+
     },
     mounted() {
+
       console.log('传递的数据', this.dataTemp)
-      let i = 0
       // 宝宝书模版数据
       this.bbsTemplate_data = this.dataTemp.productData;
       // lomo卡模版数据
       this.lomoTemplate_data = this.dataTemp.lomoData_template;
       //右侧模版的数据
       this.mobanArr = this.dataTemp.templateImgData;
+
       //给模版数据赋予一个初始化的值
       this.setBbsTemplate();
+
       var vm = this;
       // 调用vuex里面的拖拽方法，初始化的时候
       this.$store.commit('drapDiv')
@@ -850,6 +877,7 @@
       //设置书皮的操作
       let colorName = JSON.parse(sessionStorage.getItem("bbsSlsectDate")).colorName;
       //设置背景
+
       setTimeout(function () {
         setBookBg(colorName, $(".titlePage_bg .page_fm"), $(".firstPage .page_bg"), $(".lastPage .page_bg"));
         setTemplate();//先加载节点，让版式找到二纬数组的索引
@@ -887,7 +915,7 @@
           //先加载所有的版式
           setTimeout(function () {
             if (oImgData.length > 0) {
-              for (i = 0; i < oImgData.length; i++) {
+              for (var i = 0; i < oImgData.length; i++) {
                 var pageNum = oImgData[i].page + '_' + oImgData[i].num + '_bbs';
                 //根据找到页码
                 var oPage = oImgData[i].page
@@ -895,13 +923,14 @@
                 var oArrIndex = parseInt(oPage / 2)
                 var bbs = "bbs" + oImgData[i].editCnfIndex
 
-                if (parseInt(oPage) % 2 === 1) {
+                if (parseInt(oPage) % 2 == 1) {
                   if (vm.bbsTemplate_data[oArrIndex][1]) {
                     vm.bbsTemplate_data[oArrIndex][1].template = vm.template_Source[bbs];
                     vm.$forceUpdate();
                     vm.$nextTick();
                   }
-                } else {
+                }
+                else {
 //                 console.log(oImgData[i].crossPage)
                   if (oImgData[i].crossPage) {
                     alert(oImgData[i].crossPage)
@@ -925,10 +954,11 @@
             vm.setPageIndex();
             setTemplate();
           }, 600)
-          // 回显图片和文字
+
+          //回显图片和文字
           setTimeout(function () {
             if (editTxt.length > 0) {
-              for (i = 0; i < editTxt.length; i++) {
+              for (var i = 0; i < editTxt.length; i++) {
                 var constName = editTxt[i].page + '_' + editTxt[i].num;
                 //map生成变量
                 var textMapVal = {
@@ -937,19 +967,18 @@
                   "num": editTxt[i].num,
                   "editCnfIndex": editTxt[i].editCnfIndex,
                   "editCnfName": editTxt[i].editCnfName
-                }
+                };
                 var pageNum = editTxt[i].page + '_' + editTxt[i].num + '_text';
                 $("#" + pageNum).text(editTxt[i].content);
                 vm.$store.commit("RullText", {
                   constName: constName,
                   picObj: textMapVal
-                })
+                });
               }
             }
-
             if (oImgData.length > 0) {
-              for (i = 0; i < oImgData.length; i++) {
-                constName = oImgData[i].page + '_' + oImgData[i].num;
+              for (var i = 0; i < oImgData.length; i++) {
+                var constName = oImgData[i].page + '_' + oImgData[i].num;
                 console.log(oImgData[i])
                 //map生成变量
                 var picObj = {
@@ -972,16 +1001,16 @@
                   constName: constName,
                   picObj: picObj
                 });
-                pageNum = oImgData[i].page + '_' + oImgData[i].num + '_bbs';
+                var pageNum = oImgData[i].page + '_' + oImgData[i].num + '_bbs';
                 $("#" + pageNum).css("width", "100%").css("height", "100%").attr("src", oImgData[i].previewThumbnailImageUrl).attr("imgstyle", oImgData[i].thumbnailImageUrl);
               }
             }
             //回显lomo卡图片
             if (oImgLomo && oImgLomo.length > 0) {
-              for (i = 0; i < oImgLomo.length; i++) {
-                constName = oImgLomo[i].page + '_' + oImgLomo[i].num;
+              for (var i = 0; i < oImgLomo.length; i++) {
+                var constName = oImgLomo[i].page + '_' + oImgLomo[i].num;
                 //map生成变量
-                picObj = {
+                var picObj = {
                   "constName": constName,
                   "picDbId": oImgLomo[i].picDbId,
                   "page": oImgLomo[i].page,
@@ -997,7 +1026,7 @@
                   constName: constName,
                   picObj: picObj
                 });
-                pageNum = oImgLomo[i].page + '_' + oImgLomo[i].num + '_lomo';
+                var pageNum = oImgLomo[i].page + '_' + oImgLomo[i].num + '_lomo';
                 $("#" + pageNum).css("width", "100%").css("height", "100%").attr("src", oImgLomo[i].previewThumbnailImageUrl).attr("imgstyle", oImgLomo[i].thumbnailImageUrl);
               }
             }
@@ -1007,16 +1036,10 @@
       setTimeout(function () {
         $("#div_drap").Tdrag();
       }, 500)
-    },
-    components: {
-      'unify-header': Header,
-      DivModel,
-      ImgEdit,
-      EditText,
-      PreviewBook
     }
   }
 </script>
 
 <style>
+
 </style>
