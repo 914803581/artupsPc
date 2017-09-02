@@ -34,10 +34,11 @@ export default {
       })
     },
     getLoginState: function () {
+      localStorage.urlCallback = location.href
       var getData = function (key) {
         return localStorage.getItem(key)
       }
-      let isLogin = window.localStorage && getData('userName') && getData('userDbId')
+      let isLogin = localStorage && getData('userName') && getData('userDbId')
       if (isLogin) {
         this.userInfo = {
           userDbId: getData('userDbId'),
