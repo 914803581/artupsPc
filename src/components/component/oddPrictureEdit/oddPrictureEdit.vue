@@ -5,7 +5,7 @@
 				<div class="comtent">
 					<div class="title">
 						<div class="title_left">
-							<span>{{nowProductData.type}}{{nowProductData.category}}</span>
+							<span>{{nowProductData.type}}</span>
 							<span>2017-07-14 11:05</span>
 						</div>
 						<div class="title_right">
@@ -223,7 +223,7 @@ export default {
 			picObj.actions = val.postData;
 			//console.log(val.postData)
 			this.editData.editCnfName = this.nowProductData.editCnfName;
-			this.editData.userDbId = '2221214';
+			this.editData.userDbId = localStorage.getItem("userDbId")
 			this.editData.category = this.nowProductData.category;
 			this.editData.sku = this.nowProductData.sku;
 			this.editData.status = 2;
@@ -277,6 +277,7 @@ export default {
 					status:1,
 					userDbId:localStorage.getItem("userDbId")
 				}
+				console.log(jsons,'___-')
 				Api.car.addCar(jsons).then(res=>{
 					if(res.data.code == 'success'){
 						if(type == 2 || type == '2'){

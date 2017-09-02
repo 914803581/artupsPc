@@ -103,7 +103,14 @@ function dragThumb(cs_src, cs_divdom) { //cs_src图片的节点,框型（固定d
 	 imgHeight = parseFloat(cs_src.height());//原图高
 	 boxWidth = parseFloat(cs_divdom.width());//框宽
 	 boxHeight = parseFloat(cs_divdom.height());//框高
-	//原图和框的比例（宽）
+  console.log(imgWidth)
+  console.log(imgHeight)
+
+  console.log(boxWidth)
+
+  console.log(boxHeight)
+
+  //原图和框的比例（宽）
 	var oProportionWidth = boxWidth/imgWidth;
 	//原图和框的比例（高）
 	var oProportionHeight =boxHeight/imgHeight;
@@ -115,7 +122,7 @@ function dragThumb(cs_src, cs_divdom) { //cs_src图片的节点,框型（固定d
 	}else{
 		 mul = oProportionHeight;
 	}
-//	console.log('比例:__',mul)
+	// console.log('比例:__',mul)
 	//得到原图变小的比例大小
 	imgWidth = imgWidth * mul;
 		imgHeight = imgHeight * mul;
