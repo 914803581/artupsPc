@@ -10,7 +10,9 @@ import $ from 'jquery'
 import Api from '@/api.js'
 import Utils from '../../components/component/util'
 import filter from '../../filter.js'
+import mixins from '@/mixins'
 
+Vue.mixin(mixins)
 Vue.use(ElementUI)
 var selTpl = new SelectTpl()
 Vue.use(Utils)  // 工具函数
