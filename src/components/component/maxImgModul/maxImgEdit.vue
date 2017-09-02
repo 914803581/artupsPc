@@ -773,7 +773,6 @@
         typeStyle.forEach((type) => {
           type = type - 0;
           let pageInfo = {
-            title: '标题一二三',
             type: type,
             imgs: [],
             text: []
@@ -785,7 +784,10 @@
         })
         this.PreviewWork.textHashMap.keys().forEach(function (key) {
           let text = _self.PreviewWork.textHashMap.getvalue(key)
-          console.log('TTT', text)
+          _self.previewData[text.page - 1].text.push({
+            index: text.num - 0,
+            text: text.content
+          })
         })
         // 放图片
         this.PreviewWork.baseHashMap.keys().forEach(function (key) {
@@ -826,7 +828,6 @@
           })
           let textCount = TYPESTYLECOUNT[obj.type]['text'] ? TYPESTYLECOUNT[obj.type]['text'] : 0
           if (textCount) {
-            obj.title = ''
             for (let i = 1; i <= textCount; i++) {
               if (!textMap[i]) {
                 textMap[i] = {
