@@ -1,11 +1,12 @@
 <template>
 	<div id="oddEdit">
+		<Loading :loadingText="'加入购物车...'" :showLoading="sLoading"></Loading>
 		<div class="comtent_chanpin">
 			<div class="line_comtent">
 				<div class="comtent">
 					<div class="title">
 						<div class="title_left">
-							<span>{{nowProductData.type}}{{nowProductData.category}}</span>
+							<span>{{nowProductData.type}}</span>
 							<span>2017-07-14 11:05</span>
 						</div>
 						<div class="title_right">
@@ -135,6 +136,7 @@
 export default {
     data () {
       return {
+      	sLoading:false,//loding动画
       	isModel:false,//素材库
       	dataEditImg : {},//传递给图片编辑的对象
       	isimgEdit : false, //图片编辑
@@ -217,13 +219,15 @@ export default {
       	console.log(val);
       	//获取数据覆盖便于二次编辑
 		var constName ='1_1';
-		//this.$store.state.editData.ImgHashMap.getvalue(constName).actions = val.postData;
-		console.log(this.$store.state.editData.ImgHashMap.getvalue(constName))
 		var picObj = this.$store.state.editData.ImgHashMap.getvalue(constName);
-			picObj.actions = val.postData;
+			if(val){
+				picObj.actions = val.postData;
+      			$(".editbbs_one").next("img").attr("src",val.imgData).css("width","100%").css("height","100%").css("left",0).css("top",0)
+				
+			}
 			//console.log(val.postData)
 			this.editData.editCnfName = this.nowProductData.editCnfName;
-			this.editData.userDbId = '2221214';
+			this.editData.userDbId = localStorage.getItem("userDbId")
 			this.editData.category = this.nowProductData.category;
 			this.editData.sku = this.nowProductData.sku;
 			this.editData.status = 2;
@@ -234,25 +238,7 @@ export default {
 			//alert(this.editData.sku)
 			this.editData.editPicture = '['+JSON.stringify(picObj)+']';
 
-//		var picObj = {
-//				 	"constName":'1_1',
-//				 	"picDbId" : val.pictureDbId,
-//				 	"page" :val.picPage,
-//				 	"editCnfIndex" :val.styleType,
-//				 	"num" : val.picNum,
-//				 	 actions : {
-//				 	 	"thumbnailScale":val.thumbnailScale,
-//				 	 	"minDpiHeight":val.minDpiHeight,
-//				 	 	"minDpiWidth":val.minDpiWidth
-//				 	 },
-//                   "thumbnailImageUrl":val.thumbnailUrl,
-//                   "previewThumbnailImageUrl" :val.previewThumbnailImageUrl,
-//                   "cropt" : "false",
-//                   "editCnfName": val.editCnfName,
-//                   "userDbId":val.userDbId
-//				 };
 
-        $(".editbbs_one").next("img").attr("src",val.imgData).css("width","100%").css("height","100%").css("left",0).css("top",0)
      },
      updateStyle (){
      	this.switchFormat = true;
@@ -260,9 +246,12 @@ export default {
      },
      /*加入购物车*/
 	addCarFn(type){
+		
+		this.postDatas();
 		if($('.drapBox img').attr('src')){
+			this.sLoading = true;
 			Api.work.workEdit(this.editData).then(res=>{
-
+				console.log(this.editData)
 				if(res.data.code == 'success'){
 					var jsons = {
 					edtDbId:res.data.extraCode,
@@ -277,23 +266,50 @@ export default {
 					status:1,
 					userDbId:localStorage.getItem("userDbId")
 				}
+				console.log(jsons,'___-')
 				Api.car.addCar(jsons).then(res=>{
 					if(res.data.code == 'success'){
+						this.sLoading = false;
+						this.$message({
+				            showClose: true,
+				            iconClass: "atrup_Message",
+				            message: '加入购物车成功!',
+				            type: 'success'
+				          });
 						if(type == 2 || type == '2'){
-							location.href = '/user/cart?carDbId='+res.data.extraCode;
+							 this.$router.push({
+					              path: "/user/cart",
+					              query: {"carDbId":res.data.extraCode}
+					            })
+							//location.href = '/user/cart?carDbId='+res.data.extraCode;
 						}else{
-							location.href = '/user/cart';
+						  this.$router.push({
+				              path: "/user/cart",
+				              query:{}
+				            })
 						}
+						
 					}
 				},err=>{
-
+					this.$message({
+						showClose: true,
+			            iconClass: "atrup_Message",
+			            message: '加入购物车出错!',
+			            type: 'success'
+			          });
 				})
 				}
 			},err=>{
 
 			});
 		}else{
-			alert('请上传图片')
+			this.$message({
+				showClose: true,
+	            iconClass: "atrup_Message",
+	            message: '请上传图片!',
+	            type: 'success'
+	          });
+			
 		}
 
 
@@ -341,7 +357,7 @@ export default {
 
     },
     mounted(){
-
+   
     		this.nowProductData = this.productData;//插件传递过来的编辑器上显示数据
     		this.$forceUpdate();
     		console.log(this.nowProductData)
@@ -388,8 +404,7 @@ export default {
 				 handle:".titleBox"
 			});
     		},500)
-
-
+		
 
     }
   }

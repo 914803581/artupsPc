@@ -1,5 +1,6 @@
 <template>
   <div id="bbsEdit">
+    <Loading :loadingText="sloadingText" :showLoading="sLoading"></Loading>
     <unify-header></unify-header>
     <div class="comtent_chanpin">
       <div class="line_comtent">
@@ -157,6 +158,8 @@
   export default {
     data() {
       return {
+        sloadingText:"",
+        sLoading:false,
         titleMsg: {
           "titleName": sessionStorage.getItem("titleName"),
           "price_product": JSON.parse(sessionStorage.getItem("bbsSlsectDate")).price,
@@ -208,6 +211,8 @@
         delectFooter: "delectFooterData"
       }),
       goCart(val) { //加入购物车
+//        this.sLoading = true;
+
         //字符串转换数组存储到对象里面
         let bbsSlsectDate = JSON.parse(sessionStorage.getItem("bbsSlsectDate"));
         var jsons = {
@@ -225,6 +230,7 @@
         }
         Api.car.addCar(jsons).then(res => {
           console.log(res);
+          this.sLoading = false;
           if (val == "1") {
             this.$message({
               showClose: true,
@@ -343,11 +349,14 @@
         })
       },
       editWork() { //保存作品
+        this.sLoading = true;
+        this.sloadingText = "作品保存中..."
         this.assembleData();
         //保存函数
         console.log(this.workEdit)
         Api.work.workEdit(this.workEdit).then((res) => {
           if (res.data.code == "success") { //如果成功
+            this.sLoading = false;
             this.$message({
               showClose: true,
               iconClass: "atrup_Message",
@@ -363,11 +372,18 @@
       },
       nextStep(val) { //下一步
         //保存函数
+        this.sLoading = true;
+        if (val == "1"){
+          this.sloadingText = "加入购物车..."
+        }else if(val == "2"){
+          this.sloadingText = "立即购买..."
+        }
         this.assembleData();
         var vm = this;
         console.log(this.workEdit)
         Api.work.workEdit(this.workEdit).then((res) => {
           if (res.data.code == "success") { //如果成功
+            this.sLoading = false;
             res.data.commandTitle;
             this.workEdit.edtDbId = res.data.extraCode;
             console.log('保存的code:', res.data.extraCode);

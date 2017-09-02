@@ -29,7 +29,7 @@
           <em class="shopping-count">{{carCount}}</em>
           <label>购物车</label>
         </a>
-        <a class="login-register" href="javascript:void(0);" @click="testLogin" v-if="!isLogin">
+        <a class="login-register" href="javascript:void(0);" @click="Login" v-if="!isLogin">
           登录/注册
         </a>
       </div>
@@ -96,13 +96,7 @@
           }
         })
       },
-      // TODO: 临时测试登录，待完善登录逻辑
-      testLogin: function () {
-        localStorage.userDbId = '2221214'
-        localStorage.userName = '头条快报'
-        localStorage.avatar = 'http://img13.artimg.net/passport/avatar/002/141/731/150_150.png'
-        window.location.reload()
-      },
+
       Login: function () {
         Api.user.login({"t": "1"}).then(res => {
           //console.log(res);
