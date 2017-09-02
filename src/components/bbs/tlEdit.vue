@@ -1,6 +1,8 @@
 <template>
   <div id="bbsEdit">
     <unify-header></unify-header>
+    <!--loading -->
+    <Loading :loadingText="sloadingText" :showLoading="sLoading"></Loading>
     <div class="comtent_chanpin">
       <div class="line_comtent">
         <div class="comtent">
@@ -24,12 +26,6 @@
               <div class="checkBS_b">
                 <ul>
                   <li>选择尺寸:</li>
-                  <!--<li>-->
-                  <!--<el-select @change="changeSize" size="small" v-model="optionValue" placeholder="请选择">-->
-                  <!--<el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value">-->
-                  <!--</el-option>-->
-                  <!--</el-select>-->
-                  <!--</li>-->
                   <li>
                     <div class="el-radio-group">
                       <label @click="checkTemplateTaili('横')" class="el-radio-button">
@@ -151,6 +147,8 @@
   export default {
     data() {
       return {
+        sLoading:false,
+        sloadingText:"数据保存中...",
         checkTaiLiData: [], //切换尺寸时候已经有图片的保存的节点
         pickerOptions0: { //初始化日期区间函数
           disabledDate(time) {
@@ -307,9 +305,10 @@
           skuCode: bbsSlsectDate.skuCode,
           skuId: bbsSlsectDate.skuId
         }
+
         Api.car.addCar(jsons).then(res => {
           console.log(res);
-
+          this.sLoading = false
           if(val=="1"){
             this.$message({
               showClose: true,
@@ -415,6 +414,9 @@
       },
       editWork(val) { //保存作品
         this.assembleData();
+        //唤出loading...
+        this.sLoading = true
+        this.sloadingText = "台历保存中..."
         //保存函数
         console.log(this.workEdit)
         Api.work.workEdit(this.workEdit).then((res) => {

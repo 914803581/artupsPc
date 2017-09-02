@@ -119,7 +119,6 @@
             <p style="line-height: 116px;text-align: center;font-size: 16px;color: #6b6b6b;" v-if="$store.state.bbs.footerData.length==0">选择“添加图片”来开始使用</p>
           </div>
         </el-collapse-transition>
-
       </div>
     </div>
     <!--模态框素材库-->
