@@ -5,7 +5,9 @@ import Vue from 'vue'
 import ElementUI from 'element-ui'
 import Header from '@/components/header/header.vue'
 import Footer from '@/components/footer/footer.vue'
+import mixins from '@/mixins'
 
+Vue.mixin(mixins)
 Vue.use(ElementUI)
 
 // eslint-disable-next-line no-new

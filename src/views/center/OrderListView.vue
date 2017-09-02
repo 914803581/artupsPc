@@ -35,7 +35,7 @@
                     </div>
                   </div>
                   <div class="name">
-                    <span class="consignee">王彦民</span>
+                    <span class="consignee">{{userInfo.userName}}</span>
                   </div>
                   <div class="amount">
                     <div class="parcel">
@@ -50,8 +50,11 @@
                   </div>
                   <div class="operation">
                     <div class="parcel">
-                      <a href="#" class="payment-btn">付款</a>
-                      <a href="#" class="cancel-order">取消订单</a>
+                      <a href="javascript:void(0);" v-show="item.status===2" class="payment-btn" @click="pay">付款</a>
+                      <a href="javascript:void(0);" v-show="[-1,3].indexOf(item.status) < 0" class="cancel-order"
+                         @click="cancel(item)">取消订单</a>
+                      <a href="javascript:void(0);" v-show="[3,-1].indexOf(item.status) >= 0" class="cancel-order"
+                         @click="deleteOrder(item)">删除订单</a>
                     </div>
                   </div>
                 </div>
@@ -83,6 +86,7 @@
   export default {
     data: function () {
       return {
+        userInfo: null,
         total: 0,
         pageSize: 5,
         pageNum: 1,
@@ -155,6 +159,43 @@
             this.total = result.totalRecord
           }
         })
+      },
+      pay: function () {
+        console.log('pay')
+      },
+      cancel: function (order) {
+        this.$confirm('确认要取消订单吗？')
+          .then(_ => {
+            Api.Order.CancleOrder({
+              dbId: order.dbId
+            }).then((result) => {
+              return result.status === 200 ? result.request.response : ''
+            }).then((result) => {
+              console.log(result)
+            })
+          })
+      },
+      deleteOrder: function (order) {
+        let _self = this
+        this.$confirm('确认要删除订单吗？')
+          .then(_ => {
+            Api.Order.DelOrder({
+              dbId: order.dbId
+            }).then((result) => {
+              return result.status === 200 ? result.request.response : ''
+            }).then((result) => {
+              console.log(result)
+              if (_self.orderList.length > 1) {
+                this.paging()
+              } else {
+                if (_self.pageNum - 1) {
+                  this.paging(_self.pageNum - 1)
+                } else {
+                  this.paging(1)
+                }
+              }
+            })
+          })
       }
     },
     components: {
@@ -168,6 +209,7 @@
     },
     created: function () {
       this.paging(1)
+      this.getLoginState()
     }
   }
 </script>

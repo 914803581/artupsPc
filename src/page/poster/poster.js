@@ -10,7 +10,9 @@ import $ from 'jquery'
 import Api from '@/api.js'
 import Utils from '../../components/component/util'
 import filter from '../../filter.js'
+import mixins from '@/mixins'
 
+Vue.mixin(mixins)
 Vue.use(ElementUI)
 var selTpl = new SelectTpl()
 Vue.use(Utils)  // 工具函数
@@ -90,7 +92,11 @@ new Vue({
   	},
   	/*开始定制*/
   	startCustom (){
-  		location.href = '/poster/posterEdit?size='+this.nowSize+"&price="+this.price+'&frameType='+this.frameType+'&category='+this.getQueryString('category')+'&skuCode='+this.skuCode+'&templateCode='+this.templateCode+'&skuId='+this.skuId;;
+      if(localStorage.getItem("userDbId")){
+        location.href = '/poster/posterEdit?size='+this.nowSize+"&price="+this.price+'&frameType='+this.frameType+'&category='+this.getQueryString('category')+'&skuCode='+this.skuCode+'&templateCode='+this.templateCode+'&skuId='+this.skuId;;
+      }else {
+        this.setUrlCallback()
+      }
   	}
   },
   mounted(){

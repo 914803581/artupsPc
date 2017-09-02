@@ -69,8 +69,7 @@ const CREATE_ORDER = `${HOST}artup-build/builder/order/createOrder.do?format=jso
 const CLONE_ORDER = `${HOST}artup-build/builder/order/cloneOrder.do?format=json&ignore=true`
 /* 获取订单 */
 const QUERY_ORDER = `${HOST}artup-build/builder/order/queryOrders.do?format=json&ignore=true`
-/* 获取订单 */
-const DELETE_ORDER = `${HOST}artup-build/builder/order/update/command.do?format=json&ignore=true&status=-2`
+
 
 /* 查询默认地址 */
 const DEFAULT_ADDRESS = `${HOST}artup-build/builder/address/queryAll.do?format=json&ignore=true&status=1&mainAddr=Y`
@@ -90,6 +89,8 @@ const ORDER_LIST_COUNT = `${HOST}artup-build/builder/order/amount.do?format=json
 
 /* 取消订单 */
 const CANCLE_ORDER_STATUS = `${HOST}artup-build/builder/order/update/command.do?format=json&ignore=true&status=-1`
+// 删除订单
+const DELETE_ORDER = `${HOST}artup-build/builder/order/update/command.do?format=json&ignore=true&status=-2`
 
 /* 设置默认收货地址 */
 const SET_DEFAULT_ADDRESS = `${HOST}/artup-build/builder/address/mainAddress.do?format=json&ignore=true`
@@ -344,8 +345,15 @@ export default {
     queryOrder: (jsons) => { // 订单详情
       return HTTP.get(QUERY_ORDER, {params: jsons})
     },
-    cancleOrder: (jsons) => { // 取消订单
-      return VueHttp.$http.get(CANCLE_ORDER_STATUS, {params: jsons})
+    CancleOrder: (paramJson) => { // 取消订单
+      return HTTP.get(CANCLE_ORDER_STATUS, {
+        params: paramJson
+      })
+    },
+    DelOrder: (paramJson) => { // 取消订单
+      return HTTP.get(DELETE_ORDER, {
+        params: paramJson
+      })
     }
   },
   UPLOAD_URL: UPLOAD_URL, CLIENT,

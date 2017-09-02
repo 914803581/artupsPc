@@ -10,8 +10,11 @@ import $ from 'jquery'
 import Api from '@/api.js'
 import Utils from '../../components/component/util'
 import filter from '../../filter.js'
+import mixins from '@/mixins'
 
+Vue.mixin(mixins)
 Vue.use(ElementUI)
+
 var selTpl = new SelectTpl()
 Vue.use(Utils)  // 工具函数
 //eslint-disable-next-line no-new
@@ -112,9 +115,12 @@ new Vue({
   	},
   	/*开始定制*/
   	startCustom (){
-  		location.href = '/album/albumSelect?size='+this.nowSize+"&editImageUrl="+this.editImageUrl+"&price="+this.price+'&sku='+this.skuCode+'&color='+this.nowColorName+'&category='+this.getQueryString('category')+'&skuId='+this.skuId+'&page='+this.nowPage+'&templateCode='+this.templateCode;
+      if(localStorage.getItem("userDbId")){
+        location.href = '/album/albumSelect?size='+this.nowSize+"&editImageUrl="+this.editImageUrl+"&price="+this.price+'&sku='+this.skuCode+'&color='+this.nowColorName+'&category='+this.getQueryString('category')+'&skuId='+this.skuId+'&page='+this.nowPage+'&templateCode='+this.templateCode;
+      }else {
+        this.setUrlCallback()
+      }
   	}
-
   },
   mounted(){
   	var that = this;

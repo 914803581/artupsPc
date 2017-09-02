@@ -10,7 +10,9 @@ import $ from 'jquery'
 import Api from '../../api.js'
 import Utils from '../../components/component/util'
 import filter from '../../filter.js'
+import mixins from '@/mixins'
 
+Vue.mixin(mixins)
 Vue.use(ElementUI)
 var selTpl = new SelectTpl()
 Vue.use(Utils)  // 工具函数
@@ -109,28 +111,35 @@ new Vue({
   	},
   	/*开始定制*/
   	startCustom (){
-  		var jsons = {
-		    		"colorName":this.nowColor,
-		    		"name":"台历."+this.nowColor+"."+this.nowSize,
-		    		"skuCode":this.skuCode,
-		    		"category":this.getFromSession("category"),
-		    		"price":this.price,
-		    		"skuId":this.skuId,
-		    		"size":this.nowSize,
-		    		"titleName":"台历",
-		    		"tplCode":this.templateCode
-	    		};
-  		    if(this.nowSize=="195X145"){
-            sessionStorage.setItem('tailiType', '横');
-          }else {
-            sessionStorage.setItem('tailiType', '竖');
-          }
-	    		if(this.frameShowBool == false){
-	    			sessionStorage.setItem('bbsSlsectDate',JSON.stringify(jsons))
-	    			location.href = '/album/tlEdit'
-	    		}else{
-	    			alert('请选择尺寸和颜色')
-	    		}
+      if(localStorage.getItem("userDbId")){
+        var jsons = {
+          "colorName":this.nowColor,
+          "name":"台历."+this.nowColor+"."+this.nowSize,
+          "skuCode":this.skuCode,
+          "category":this.getFromSession("category"),
+          "price":this.price,
+          "skuId":this.skuId,
+          "size":this.nowSize,
+          "titleName":"台历",
+          "tplCode":this.templateCode
+        };
+        if(this.nowSize=="195X145"){
+          sessionStorage.setItem('tailiType', '横');
+        }else {
+          sessionStorage.setItem('tailiType', '竖');
+        }
+        if(this.frameShowBool == false){
+          sessionStorage.setItem('bbsSlsectDate',JSON.stringify(jsons))
+          location.href = '/album/tlEdit'
+        }else{
+          alert('请选择尺寸和颜色')
+        }
+      }else {
+        this.setUrlCallback()
+      }
+
+
+
 
   	}
   },

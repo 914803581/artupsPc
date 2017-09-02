@@ -16,6 +16,9 @@ new Vue({
   template: '<App/>',
   components: {App},
   created: function () {
-    document.body.style.cssText = 'opacity:1;'
+    this.isLogin = this.getLoginState()
+    if (!this.isLogin) {
+      this.login()
+    }
   }
 })
