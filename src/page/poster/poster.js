@@ -90,7 +90,11 @@ new Vue({
   	},
   	/*开始定制*/
   	startCustom (){
-  		location.href = '/poster/posterEdit?size='+this.nowSize+"&price="+this.price+'&frameType='+this.frameType+'&category='+this.getQueryString('category')+'&skuCode='+this.skuCode+'&templateCode='+this.templateCode+'&skuId='+this.skuId;;
+      if(localStorage.getItem("userDbId")){
+        location.href = '/poster/posterEdit?size='+this.nowSize+"&price="+this.price+'&frameType='+this.frameType+'&category='+this.getQueryString('category')+'&skuCode='+this.skuCode+'&templateCode='+this.templateCode+'&skuId='+this.skuId;;
+      }else {
+        this.setUrlCallback()
+      }
   	}
   },
   mounted(){
