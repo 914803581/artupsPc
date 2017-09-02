@@ -654,6 +654,7 @@
 
       },
       preview() {
+        console.log(this.PreviewWork)
         var TYPESTYLECOUNT = {}
         let titleName = sessionStorage.titleName ? sessionStorage.titleName : ''
         if (titleName === '画册') {
@@ -734,7 +735,6 @@
         typeStyle.forEach((type) => {
           type = type - 0;
           let pageInfo = {
-            title: '标题一二三',
             type: type,
             imgs: [],
             text: []
@@ -744,6 +744,13 @@
             _self.previewData.push(Object.assign(pageInfo, {}))
           }
         })
+        this.PreviewWork.textHashMap.keys().forEach(function (key) {
+          let text = _self.PreviewWork.textHashMap.getvalue(key)
+          _self.previewData[text.page - 1].text.push({
+            index: text.num - 0,
+            text: text.content
+          })
+        })
         // 放图片
         this.PreviewWork.baseHashMap.keys().forEach(function (key) {
           let img = _self.PreviewWork.baseHashMap.getvalue(key)
@@ -751,15 +758,6 @@
             id: img.picDbId,
             index: img.num - 0,
             src: img.base64Img ? img.base64Img : img.thumbnailImageUrl
-          })
-        })
-        // 放文字
-        this.PreviewWork.textHashMap.keys().forEach(function (key) {
-          let text = _self.PreviewWork.textHashMap.getvalue(key)
-          console.log(text)
-          _self.previewData[text.page - 1].text.push({
-            index: text.num - 0,
-            text: text.content
           })
         })
         // 补空位
@@ -792,7 +790,6 @@
           })
           let textCount = TYPESTYLECOUNT[obj.type]['text'] ? TYPESTYLECOUNT[obj.type]['text'] : 0
           if (textCount) {
-            obj.title = ''
             for (let i = 1; i <= textCount; i++) {
               if (!textMap[i]) {
                 textMap[i] = {
@@ -807,7 +804,6 @@
             }
             obj.text = texts
           }
-          console.log(obj)
         })
         this.colorName = JSON.parse(sessionStorage.getItem("bbsSlsectDate")).colorName;
         this.previewDialogVisible = true
