@@ -753,6 +753,15 @@
             src: img.base64Img ? img.base64Img : img.thumbnailImageUrl
           })
         })
+        // 放文字
+        this.PreviewWork.textHashMap.keys().forEach(function (key) {
+          let text = _self.PreviewWork.textHashMap.getvalue(key)
+          console.log(text)
+          _self.previewData[text.page - 1].text.push({
+            index: text.num - 0,
+            text: text.content
+          })
+        })
         // 补空位
         this.previewData.forEach((obj) => {
           let imgList = {}
@@ -777,16 +786,28 @@
           }
           obj.imgs = imgs
           // 文字
+          let textMap = {}
+          obj.text.forEach((obj) => {
+            textMap[obj.index] = obj
+          })
           let textCount = TYPESTYLECOUNT[obj.type]['text'] ? TYPESTYLECOUNT[obj.type]['text'] : 0
           if (textCount) {
             obj.title = ''
-            for (let i = 0; i < textCount; i++) {
-              obj.text[i] = {
-                index: i + 1,
-                text: ''
+            for (let i = 1; i <= textCount; i++) {
+              if (!textMap[i]) {
+                textMap[i] = {
+                  index: i,
+                  text: ''
+                }
               }
             }
+            let texts = []
+            for (let key in textMap) {
+              texts.push(textMap[key])
+            }
+            obj.text = texts
           }
+          console.log(obj)
         })
         this.colorName = JSON.parse(sessionStorage.getItem("bbsSlsectDate")).colorName;
         this.previewDialogVisible = true
