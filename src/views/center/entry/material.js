@@ -1,6 +1,6 @@
 import '@/base/scss/common.scss'
 import 'cube.css/src/scss/neat.scss'
-import 'static/font/iconfont.css'
+import '@/assets/font/iconfont.css'
 import 'element-ui/lib/theme-default/index.css'
 import Vue from 'vue'
 import ElementUI from 'element-ui'
