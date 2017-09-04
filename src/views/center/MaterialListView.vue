@@ -168,6 +168,7 @@
     }
     .main {
       width: 960px;
+      min-height: 666px;
       float: right;
       border-radius: 5px;
       border: 1px solid #dedede;
