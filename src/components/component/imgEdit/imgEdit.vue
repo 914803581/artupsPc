@@ -3,7 +3,7 @@
 		<div class="model">
 			<div class="upload_box">
 				<div class="upload_title">
-					<span class="icons return_span"><i  class="iconfont">&#xe601;</i>撤销</span>
+					<!--<span class="icons return_span"><i  class="iconfont">&#xe601;</i>撤销</span>-->
 					<p>图片编辑</p>
 					<div @click="closeModel" class="close icons">
 						保存<i class=" iconfont">&#xe639;</i>

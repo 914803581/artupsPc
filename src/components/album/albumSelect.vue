@@ -6,7 +6,7 @@
 		        <div class="space"></div>
 		        <div class="titleName">选择画册主题</div>
 		        <div class="oprateBtn">
-		            <div class="btnStyle cancel">取消</div>
+		            <div  class="btnStyle cancel"><a href="/album.html?category=huace&defDbId=9de2973d-3487-4b05-b556-b9b92dd75493">取消</a></div>
 		            <div @click="crectHc" class="btnStyle create">创建画册</div>
 		        </div>
 		    </div>
@@ -14,7 +14,7 @@
 		<div class="container-box">
 		    <div class="container-fluid ">
 		        <div class="row themeBox">
-			        <div @click='checkActive(index)' class="themeDiv text-center themeStyle" v-for="(item,index) in typeDataList"> 
+			        <div @click='checkActive(index)' class="themeDiv text-center themeStyle" v-for="(item,index) in typeDataList">
 				        	<img class="img_div" :src="picturePrefix+item.editImageUrl">
 				        	<div class="thName">{{item.content}}</div>
 				        	<div class="styleId">D01G01</div>
@@ -30,14 +30,14 @@
 	import navHander from '../header/header.vue'
 	import footer from '../footer/footer.vue'
   	import Api from '../../api.js'
-	
+
 	export default {
 	    data () {
 	      return {
 	     	huaceType:'',
 	      	picturePrefix : Api.STATIC_SERVER_HOST,
 	      	typeDataList : {}//板式数组
-	      }	
+	      }
 	   	},
 	    components:{ //在再这里要注入我的组件
 	      'nav-hander':navHander,
@@ -53,13 +53,15 @@
 		    		if (this.huaceType) {
 		    			window.location.href = "/album/huaceEdit?huaceType="+this.huaceType
 		    		}else{
-		    			this.$message({
-							showClose: true,
-							message: '请先选择您需要创建的作品风格！',
-							type: 'warning'
-						});
+
+              this.$message({
+                showClose: true,
+                iconClass: "atrup_Message",
+                message: '请先选择您需要创建的作品风格 !',
+                type: 'success'
+              });
 		    		}
-		    		
+
 		    }
 	    },
 	    created(){//只执行一次
@@ -78,7 +80,7 @@
 	    		};
 	    		var obj = JSON.parse(sessionStorage.getItem("urlQuery"));
 	    		obj.tplCode = this.$route.query.templateCode;
-	    		sessionStorage.setItem("urlQuery",JSON.stringify(obj));	    		
+	    		sessionStorage.setItem("urlQuery",JSON.stringify(obj));
 	    		sessionStorage.setItem('bbsSlsectDate',JSON.stringify(jsons));
 	    		sessionStorage.setItem('titleName','画册');
 	    		this.typeDataList = JSON.parse(this.$route.query.editImageUrl);
