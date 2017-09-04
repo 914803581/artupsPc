@@ -108,7 +108,6 @@
 </script>
 
 <style lang="scss" type="text/scss" rel="stylesheet/sass">
-  @import "~cube.css/src/scss/neat.scss";
 
   .works-list {
     a.btn {
