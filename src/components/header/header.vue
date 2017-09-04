@@ -26,7 +26,7 @@
         </div>
         <a href="/user/cart" class="shopping-cart" v-if="isLogin">
           <i class="iconfont icon-gouwuche"></i>
-          <em class="shopping-count">{{carCount}}</em>
+          <em class="shopping-count" v-show="carCount">{{carCount}}</em>
           <label>购物车</label>
         </a>
         <a class="login-register" href="javascript:void(0);" @click="login" v-if="!isLogin">
