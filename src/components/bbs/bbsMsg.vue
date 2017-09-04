@@ -10,7 +10,7 @@
 					<span>小时光</span>
 					<p>小小的时光，记录点滴美好</p>
 				</div>
-				<div class="preview">
+				<div class="preview" v-if="attributes.length">
 					<dl  class="hc-dl">
 					 <dt style="padding-bottom: 20px;" class="dt-botton">
 						<h4 id="clickH1"><b>请选择颜色</b>  <span style="display: none;">修改</span> </h4>
