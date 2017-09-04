@@ -111,6 +111,7 @@
 </script>
 
 <style lang="scss" type="text/scss" rel="stylesheet/sass">
+  @import "/static/font/iconfont.css";
 
   .unify-header {
     display: block;

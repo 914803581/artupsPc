@@ -28,6 +28,7 @@ module.exports = {
     'spaced-comment': 0,
     'no-multiple-empty-lines': 0,
     'no-unused-vars': 0,
-    'quotes': 0
+    'quotes': 0,
+    'new-parens': 0
   }
 }
