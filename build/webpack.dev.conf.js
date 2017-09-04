@@ -76,4 +76,26 @@ userCenter.list.forEach((page) => {
   }));
 });
 
+var userPage = config.build.userPage;
+userPage.list.forEach((page) => {
+  let entryKey = `${(page.path || userPage.path)}/${page.pageName}`
+  webpackConfig.entry[entryKey] = `./src/views/user/entry/${page.entry}`
+  webpackConfig.plugins.push(new HtmlWebpackPlugin({
+    filename: path.resolve(__dirname, `../dist/${page.path || userPage.path}/${page.pageName}.html`),
+    template: path.resolve(__dirname, `../src/views/user/template/${page.template || userPage.template}`),
+    title: page.title,
+    keywords: page.keywords || userPage.keywords,
+    description: page.description || userPage.description,
+    inject: true,
+    chunks: [entryKey],
+    minify: {
+      removeComments: true,
+      collapseWhitespace: true,
+      removeAttributeQuotes: true
+    },
+    resourcePrefix: '/',
+    chunksSortMode: 'dependency'
+  }));
+});
+
 module.exports = webpackConfig

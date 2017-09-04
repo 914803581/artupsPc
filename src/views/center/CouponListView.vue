@@ -46,25 +46,13 @@
 </template>
 
 <script type="text/ecmascript-6">
-  import Header from '../../components/header/header.vue'
-  import Footer from '../../components/footer/footer.vue'
-  import LeftMenu from '../../components/center/menu.vue'
+  import UnifyHeader from 'components/header/header'
+  import UnifyFooter from 'components/footer/footer'
+  import LeftMenu from 'components/center/menu'
 
   export default {
     data: function () {
       return {
-        form: {
-          email: '',
-          name: '',
-          region: '',
-          date1: '',
-          date2: '',
-          delivery: false,
-          type: [],
-          resource: '',
-          desc: ''
-        },
-        imageUrl: '',
         input: '',
         couponData: [],
         couponType: {
@@ -74,9 +62,9 @@
     },
     methods: {},
     components: {
-      'unify-header': Header,
-      'unify-footer': Footer,
-      'left-menu': LeftMenu
+      UnifyHeader,
+      UnifyFooter,
+      LeftMenu
     },
     watch: {},
     created: function () {

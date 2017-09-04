@@ -1,7 +1,7 @@
 <template>
   <div class="user-top">
     <div class="user-bg">
-      <a href="/center/account" class="avatar">
+      <a href="/center/account.html" class="avatar">
         <img :src="userAvatar"/>
       </a>
       <span class="nickname">{{nickname}}</span>
@@ -22,21 +22,21 @@
         menus: [{
           id: 'works',
           title: '个人主页',
-          path: '/user/works'
+          path: '/user/works.html'
         }, {
           title: '草稿箱',
-          path: '/center/draft'
+          path: '/center/draft.html'
         }, {
           id: 'material',
           title: '我的素材',
-          path: '/user/material'
+          path: '/user/material.html'
         }, {
           id: 'coupons',
           title: '我的优惠券',
-          path: '/user/coupons'
+          path: '/user/coupons.html'
         }, {
           title: '我的订单',
-          path: '/center/order'
+          path: '/center/order.html'
         }],
         userAvatar: 'http://ww2.sinaimg.cn/mw690/aaa7f81bjw1f2m5j5ca7lj20c807zt92.jpg',
         nickname: '一句微博精选',
@@ -96,12 +96,13 @@
           color: #333333;
           font-size: 16px;
           font-weight: 400;
+          outline: 0;
           border-left: 1px solid #000;
         }
         &:first-child a {
           border: 0;
         }
-        &.selected{
+        &.selected {
           border-bottom: 2px solid #000;
         }
       }
