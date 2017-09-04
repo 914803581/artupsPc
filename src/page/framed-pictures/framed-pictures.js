@@ -129,6 +129,6 @@ new Vue({
     })
   },
   created: function () {
-    document.body.style.cssText = 'opacity:1';
+    document.body.style.cssText = 'opacity:1'
   }
 })
