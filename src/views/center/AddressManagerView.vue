@@ -50,10 +50,11 @@
 </template>
 
 <script type="text/ecmascript-6">
-  import Header from '../../components/header/header.vue'
-  import Footer from '../../components/footer/footer.vue'
-  import LeftMenu from '../../components/center/menu.vue'
-  import Api from '../../api.js'
+  import Header from 'components/header/header'
+  import Footer from 'components/footer/footer'
+  import LeftMenu from 'components/center/menu'
+  import {ALERT_CUSTOM} from 'base/js/common.config'
+  import Api from '@/api.js'
 
   export default {
     data: function () {
@@ -110,14 +111,10 @@
       deleteAddress: function () {
         let _self = this
         if (!this.radioAddress) {
-          this.$alert('请选择需要删除的地址！', '提示')
+          this.$alert('请选择需要删除的地址！', '提示', ALERT_CUSTOM)
           return
         }
-        this.$confirm('确定要删除该地址信息吗?', '提示', {
-          confirmButtonText: '确定',
-          cancelButtonText: '取消',
-          type: 'warning'
-        }).then(() => {
+        this.$confirm('确定要删除该地址信息吗?', '提示', ALERT_CUSTOM).then(() => {
           Api.Address.Delete({
             dbId: _self.radioAddress
           }).then((result) => {

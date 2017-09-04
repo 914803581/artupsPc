@@ -46,30 +46,20 @@
       </div>
     </div>
     <unify-footer></unify-footer>
-    <el-dialog
-      title="我的作品"
-      :visible.sync="deleteDialogVisible"
-      size="small">
-      <span>您确认删除选中作品吗?</span>
-      <span slot="footer" class="dialog-footer">
-        <el-button @click="deleteDialogVisible=false">取 消</el-button>
-        <el-button type="primary" @click="deleteWork">确 定</el-button>
-      </span>
-    </el-dialog>
   </div>
 </template>
 
 <script type="text/ecmascript-6">
-  import Header from '../../components/header/header.vue'
-  import Footer from '../../components/footer/footer.vue'
-  import LeftMenu from '../../components/center/menu.vue'
-  import Api from '../../api.js'
+  import Header from 'components/header/header.vue'
+  import Footer from 'components/footer/footer.vue'
+  import LeftMenu from 'components/center/menu.vue'
+  import {ALERT_CUSTOM} from 'base/js/common.config'
+  import Api from '@/api.js'
 
   export default {
     data: function () {
       return {
         checkedAllValue: false,
-        deleteDialogVisible: false,
         managerIng: false,
         types: [{
           id: '',
@@ -123,15 +113,23 @@
           if (result.code === 'success') {
             this.managerIng = false
             this.checkedAllValue = false
-            this.deleteDialogVisible = false
             this.getData()
           }
         })
       },
       showDeleteDialogVisible: function () {
-        if (this.deleteWorkList().length) {
-          this.deleteDialogVisible = true
+        if (!this.deleteWorkList().length) {
+          return
         }
+        this.$confirm('您确定要删除吗?', '提示', ALERT_CUSTOM).then(() => {
+          this.deleteWork()
+        }).catch(() => {
+          this.$message({
+            type: 'info',
+            iconClass: "atrup_Message",
+            message: '已取消删除'
+          })
+        })
       },
       getData: function () {
         this.pageNum -= 1
