@@ -105,11 +105,11 @@
 						{
 							templateImg: 'http://image2.artup.com/resources/static/pc/images/bbs_pc08.jpg',
 							isTrue: false
-						},
-						{
-							templateImg: 'http://image2.artup.com/resources/static/pc/images/bbs_pc09.jpg',
-							isTrue: true
 						}
+//						{
+//							templateImg: 'http://image2.artup.com/resources/static/pc/images/bbs_pc09.jpg',
+//							isTrue: true
+//						}
 					]
 				}
 			}
