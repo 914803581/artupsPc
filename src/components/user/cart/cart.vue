@@ -88,6 +88,7 @@
 	import Api from '@/api.js'
 	import { MessageBox } from 'element-ui';
 	import Hander from '../../header/header.vue'
+  let userDbId = localStorage.getItem("userDbId")
 		export default{
 			data(){
 //			  loading 的字段
