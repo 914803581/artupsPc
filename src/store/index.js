@@ -423,7 +423,8 @@ let store = new Vuex.Store({
 					setTimeout(function() {
 						$(ev.target).next("img").attr("style", "")
 						dragThumb($(ev.target).next("img"), $(ev.target));
-						min_scale = $(ev.target).next(".img_drap").attr("min_scale"); //图片和缩略图的比例
+						min_scale = $(ev.target).next("img").attr("min_scale"); //图片和缩略图的比例
+            console.log(min_scale)
 						picObj.actions.x = Math.abs(parseFloat($(ev.target).next("img").css("left")))/min_scale;
 						picObj.actions.y = Math.abs(parseFloat($(ev.target).next("img").css("top")))/min_scale;
 						picObj.actions.width = Math.abs(parseFloat($(ev.target).width()))/min_scale;

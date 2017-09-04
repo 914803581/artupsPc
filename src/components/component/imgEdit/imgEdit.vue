@@ -7,13 +7,13 @@
 					<p>图片编辑</p>
 					<div @click="closeModel" class="close icons">
 						保存<i class=" iconfont">&#xe639;</i>
-					</div>					
+					</div>
 				</div>
 				 <div id="editImg" ondragstart='return false;'>
 				    		<!--dpi校验-->
-				    		<!--<div  class="reportNav">		
+				    		<!--<div  class="reportNav">
 								！图片像素不足，会导致打印模糊，建议更换图片
-						</div>-->			
+						</div>-->
 				        <div id="dropBox"  class="resumable-drop">
 				        </div>
 				        <div id="image-cropper">
@@ -26,19 +26,19 @@
 				        </div>
 				    </div>
 				<div class="rotate_img">
-					<div class="rotate_left_90">		
+					<div class="rotate_left_90">
 						<div @click="rotateCcw" class="rotate-ccw">
 							<i class="iconfont">&#xe60f;</i>
 							<span>逆时针</span>
 						</div>
 					</div>
-					<!--<div class="rotate_left_90">		
+					<!--<div class="rotate_left_90">
 						<div @click="checkImg" class="rotate-ccw">
 							<i class="iconfont">&#xe60f;</i>
 							<span>切换图片</span>
 						</div>
 					</div>-->
-					<div class="rotate_right_90">		
+					<div class="rotate_right_90">
 						<div @click="rotateCw" class="rotate-cw">
 							<i class="iconfont">&#xe60e;</i>
 							<span>顺时针</span>
@@ -82,23 +82,23 @@
 				//获取返回的数据
 				this.imgEdit = false;
 				this.$emit("postDataImg",postData)
-				imageCropper.cropit('imageSrc', "");	
+				imageCropper.cropit('imageSrc', "");
 			},
 			openModel(){
 				var vm = this;
 				this.imgEdit = true;
-//				&& 
+//				&&
 				if(this.dataEditJson){
 					console.log(this.dataEditJson)
 				   //修改图片src
-				  imageCropper.cropit('imageSrc', this.dataEditJson.oSrc);				
+				  imageCropper.cropit('imageSrc', this.dataEditJson.oSrc);
 				 //修改图片框大小
 				  if (this.dataEditJson.oW && this.dataEditJson.oH) {  //重新换算宽度比之后
-//                    imageCropper.cropit('previewSize', { width: this.dataEditJson.oW, height: dataEditJson.oH})                 		
-                      imageCropper.cropit('previewSize', { width: this.dataEditJson.oW*300/this.dataEditJson.oH, height: 300 })                 		
+//                    imageCropper.cropit('previewSize', { width: this.dataEditJson.oW, height: dataEditJson.oH})
+                      imageCropper.cropit('previewSize', { width: this.dataEditJson.oW*300/this.dataEditJson.oH, height: 300 })
 				  }
-				  
-				}				 
+
+				}
 			},
 			rotateCw(){
 				angu = reg += rotationalp;
@@ -123,7 +123,7 @@
 	    mounted(){
 	    	var vm = this;
 	    	   this.imgEdit = this.isImgEdit;
-	    	  
+
 	    	   //让框具有拖动的功能
 //		  setTimeout(()=>{
 //		  	 $(".model").each(function(){
@@ -147,7 +147,7 @@
                 		if(vm.dataEditJson.oActions&&JSON.stringify(vm.dataEditJson.oActions)!="{}" &&vm.dataEditJson.oActions.init=="false"){
 						var jsonActions = vm.dataEditJson.oActions;
 						console.log(jsonActions)
-						
+
 						//设置图像的加载缩放
 						imageCropper.cropit('zoom', jsonActions.scale);
 						//旋转角度
@@ -159,8 +159,8 @@
 	                        x: -jsonActions.x* jsonActions.scale,
 	                        y: -jsonActions.y* jsonActions.scale
 	                    });
-//						
-				  }               		
+//
+				  }
                 }
 //		          imageState: {
 //		            src: 'http://scottcheng.github.io/cropit/images/2-960.jpg',
@@ -178,6 +178,10 @@
 
         position: relative;
         /*margin-top: 150px;*/
+
+    }
+    #editImg  img{
+      max-width: inherit;
     }
 	#editImg .reportNav{
 		text-align: center;
@@ -257,7 +261,7 @@
         left: 20%;
         bottom:4%;
     }
-	/*@-moz-document url-prefix() {   
+	/*@-moz-document url-prefix() {
 		 #image-cropper .div_range {bottom:-84%; }
 	}*/
     #image-cropper .div_range > b {

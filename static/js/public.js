@@ -99,53 +99,74 @@ function HashMap() {
     entry = new Object();
   }
 }
-
+function getNaturalWidth(img) {
+  var image = new Image()
+  image.src = img.src
+  var naturalWidth = image.width
+  return naturalWidth
+}
+function getNaturalHeight(img) {
+  var image = new Image()
+  image.src = img.src
+  var naturalHeight = image.height
+  return naturalHeight
+}
 /*计算图片的缩放*/
 function dragThumb(cs_src, cs_divdom) { //cs_src图片的节点,框型（固定div）的节点
-  imgWidth = parseFloat(cs_src.width());//原图宽
-  imgHeight = parseFloat(cs_src.height());//原图高
-  boxWidth = parseFloat(cs_divdom.width());//框宽
-  boxHeight = parseFloat(cs_divdom.height());//框高
-  console.log(imgWidth)
-  console.log(imgHeight)
+    console.log('src____width',getNaturalWidth(cs_src[0]))
 
-  console.log(boxWidth)
+    imgWidth = parseFloat(getNaturalWidth(cs_src[0]));//原图宽
+    imgHeight = parseFloat(getNaturalHeight(cs_src[0]));//原图高
+    boxWidth = parseFloat(cs_divdom.width());//框宽
+    boxHeight = parseFloat(cs_divdom.height());//框高
+    console.log(imgWidth)
+    console.log(imgHeight)
 
-  console.log(boxHeight)
+    console.log(boxWidth)
 
-  //原图和框的比例（宽）
-  var oProportionWidth = boxWidth / imgWidth;
-  //原图和框的比例（高）
-  var oProportionHeight = boxHeight / imgHeight;
-  //alert(boxWidth)
-  //得到换算的最终比例mul
-  var mul;
-  if (oProportionWidth > oProportionHeight) {
-    mul = oProportionWidth;
-  } else {
-    mul = oProportionHeight;
-  }
-  // console.log('比例:__',mul)
-  //得到原图变小的比例大小
-  imgWidth = imgWidth * mul;
-  imgHeight = imgHeight * mul;
-  //图片宽<盒子宽
-  if (imgWidth < boxWidth) {
-    imgWidth = boxWidth
-  } else if (imgHeight < boxHeight) {//图片高 > 盒子高
-    imgHeight = boxHeight
-  }
-  //位移的距离盒子-图片缩小比例/2
-  var dx = (boxWidth - imgWidth) / 2;
-  var dy = (boxHeight - imgHeight) / 2;
+    console.log(boxHeight)
+
+    //原图和框的比例（宽）
+    var oProportionWidth = boxWidth / imgWidth;
+    console.log('原图和框的比例（宽）',oProportionWidth)
+    //原图和框的比例（高）
+    var oProportionHeight = boxHeight / imgHeight;
+    console.log('原图和框的比例（高）',oProportionWidth)
+    //得到换算的最终比例mul
+    var mul;
+    if (oProportionWidth > oProportionHeight) {
+      mul = oProportionWidth;
+    } else {
+      mul = oProportionHeight;
+    }
+    console.log('比例:__',mul)
+    //得到原图变小的比例大小
+    imgWidth = imgWidth * mul;
+    imgHeight = imgHeight * mul;
+    //图片宽<盒子宽
+    if (imgWidth < boxWidth) {
+      imgWidth = boxWidth
+    } else if (imgHeight < boxHeight) {//图片高 > 盒子高
+      imgHeight = boxHeight
+    }
+    //位移的距离盒子-图片缩小比例/2
+    var dx = (boxWidth - imgWidth) / 2;
+    var dy = (boxHeight - imgHeight) / 2;
+    console.log('dx',dx)
+    console.log('dy',dy)
+
   //渲染定位
+  console.log('imgWidth',imgWidth)
+  console.log('imgHeight',imgHeight)
+
   cs_src.css({
-    width: imgWidth + 'px',
-    height: imgHeight + 'px',
-    left: dx + 'px',
-    top: dy + 'px'
-  })
-  cs_src.attr("min_scale", mul);
+      width: imgWidth + 'px',
+      height: imgHeight + 'px',
+      left: dx + 'px',
+      top: dy + 'px',
+      maxWidth:imgWidth + 'px',
+    })
+    cs_src.attr("min_scale", mul);
 }
 
 /*校验文本框输入是否有表情*/
