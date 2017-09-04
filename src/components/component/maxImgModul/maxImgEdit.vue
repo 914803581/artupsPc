@@ -90,7 +90,7 @@
         <div class="footer_up_tittle">
           <div class="footer_left">
             <button @click="delectFooter" class="footer_btn">
-              清空已放入的图片
+              清空底部图片
             </button>
             <button @click="autoDrapImg" v-if="FooterDataAuto.length>0" class="footer_btn">
               自动填充<b style="font-weight: 500;">{{FooterDataAuto.length}}张</b>
