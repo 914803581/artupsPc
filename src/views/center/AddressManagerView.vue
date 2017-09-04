@@ -6,13 +6,19 @@
         <div class="main">
           <h2 class="title">
             <span>收货地址</span>
-            <div class="operation">
+            <div class="operation" v-show="addressList.length">
               <el-button class="btn" v-show="startDelete" @click="rollback" type="danger">回退</el-button>
               <el-button class="btn" v-show="startDelete" @click="deleteAddress" type="danger">删除</el-button>
               <el-button class="btn" v-show="!startDelete" @click="startDelete=true" type="danger">管理</el-button>
               <el-button class="btn" type="danger" @click="addition">添加</el-button>
             </div>
           </h2>
+          <div class="empty-prompt" v-if="!addressList.length">
+            <div class="prompt-text">
+              当前还没有收货地址哦，马上添加！
+            </div>
+            <el-button class="btn" type="danger" @click="addition">添加收货地址</el-button>
+          </div>
           <div class="address-list">
             <div class="address-details" :class="{last:index===addressList.length-1}"
                  v-for="(item,index) in addressList">
@@ -60,17 +66,6 @@
     data: function () {
       return {
         addAddressDialogFormVisible: false,
-        form: {
-          email: '',
-          name: '',
-          region: '',
-          date1: '',
-          date2: '',
-          delivery: false,
-          type: [],
-          resource: '',
-          desc: ''
-        },
         imageUrl: '',
         startDelete: false,
         pageNum: 1,
@@ -213,6 +208,19 @@
       .operation {
         float: right;
         margin-right: 22px;
+      }
+      .empty-prompt {
+        padding: 20px 8px 0;
+        .prompt-text {
+          height: 200px;
+          text-align: center;
+          line-height: 200px;
+          border:1px dashed #eee;
+        }
+        .el-button{
+          display: block;
+          margin: 20px auto 0;
+        }
       }
       .address-list {
         padding: 0 34px 20px;
