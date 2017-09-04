@@ -1,7 +1,8 @@
 <template>
 	<div v-show="isShowModels" id="model">
+    <Loading :loadingText="sloadingText" :modalShow="false" :showLoading="sLoading"></Loading>
 		<div  class="model">
-			<div  v-loading="isShowModels" element-loading-text="素材库加载中..." style="position: absolute !important;" class="upload_box">
+			<div  v-loading="isShowModels" :element-loading-text="dataText" style="position: absolute !important;" class="upload_box">
 				<div  class="upload_title">
 					<!--<span class="color_span">本地</span> |-->
 					<span class="color_span">&nbsp;素材库</span>
@@ -33,6 +34,9 @@
 		name:'div-model',
 		data () {
 		    return {
+          sLoading:false,
+          sloadingText:'图片上传中...',
+          dataText:'素材库加载中...',
 		      isShowModels: false,
 		      imgMunber:0
 		    }
@@ -117,14 +121,17 @@
                 r.assignBrowse(browBtn, false);
                 r.on('filesAdded', function(array) {
 
-//                  if(array.length > 1){
-//                      $.each(array, function(idx, file) {
-//                          file.chunks = [];
-//                      });
-//                      alert('只能上传一张图片');
-//                      return;
-//
-//                  }
+                  if(array.length > 5){ //判断最多只能一次上传5张图片
+                      $.each(array, function(idx, file) {
+                          file.chunks = [];
+                      });
+                      vm.$message({
+                        showClose: true,
+                        iconClass: "atrup_Message",
+                        message: '最多只能上传5张图片'
+                      })
+                      return;
+                  }
                     var ok = validateUploadFiles($, array);
                     if (ok) {
                         //触发uploadStart
@@ -137,6 +144,7 @@
                 r.on('uploadStart', function(){
                     //组装后端需要的数据
 //                  console.log(vm.extraPostData)
+                    vm.sLoading = true
                     extraPostData  = {
                       "userDbId" : localStorage.getItem("userDbId"),
 	                    "category" : 'baobaoshu',
@@ -144,8 +152,7 @@
 	                    "thumbnailWidth":"1400",
 	                    "client":"pc"
                     }
-
-					console.log('开始上传')
+					          console.log('开始上传')
                     r.opts.query = extraPostData;
                     //打开进度框
                 });
@@ -154,21 +161,30 @@
                     var progress = Number(r.progress());
                     var progressWidth = progress.toFixed(2)*100;
                     //进度条显示
-					console.log('进度条'+progressWidth)
+                    $("#loading .div_loading .text_loading").text("图片上传"+parseInt(progressWidth)+'%')
+					          console.log('进度条'+progressWidth)
                 });
               	r.on('error',function(){
-
-                		 alert('网络错误，上传失败');
+                  vm.$message({
+                    showClose: true,
+                    iconClass: "atrup_Message",
+                    message: '网络错误，上传失败'
+                  })
                 });
 
                 //上传成功
                 r.on('fileSuccess', function(file, message){
+                    vm.sLoading = false
                     var rObj = $.parseJSON(message);
                     vm.$store.dispatch("getMaterial")
                     if(rObj.pictureDbId){
                         //给父级的回调
                     } else {
-                        alert('上传图片失败，请重试');
+                      vm.$message({
+                        showClose: true,
+                        iconClass: "atrup_Message",
+                        message: '上传图片失败，请重试'
+                      })
                     }
                 });
 

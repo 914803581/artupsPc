@@ -1,6 +1,6 @@
 <template>
   <div id="loading">
-    <el-dialog :show-close="false" :close-on-press-escape="false" :close-on-click-modal="false"
+    <el-dialog :show-close="false" :modal="modalIsShow" :close-on-press-escape="false" :close-on-click-modal="false"
                :visible.sync="dialogTableVisible">
       <div class="div_loading">
         <div class="img_loading">
@@ -17,18 +17,21 @@
   export default {
     data() {
       return {
+        modalIsShow:true,
         dialogTableVisible: false,
         loadingTxt: "加载中..."
       }
     },
     props: [
       "showLoading",
-      "loadingText"
+      "loadingText",
+      "modalShow"
     ],
     methods: {
       openLoading() {
         this.dialogTableVisible = this.showLoading
         this.loadingTxt = this.loadingText
+        this.modalIsShow = this.modalShow
       }
     },
     watch: {
@@ -37,17 +40,26 @@
     mounted() {
       this.dialogTableVisible = this.showLoading
       this.loadingTxt = this.loadingText
+      console.log(this.modalShow)
+      this.modalIsShow = this.modalShow
     }
   }
 </script>
 
 <style lang="less">
   #loading {
+    .el-dialog__wrapper{
+
+    }
+    position: relative;
+    z-index: 9999;
     .div_loading {
       width: 450px;
       height: 150px;
       overflow: hidden;
       color: #333;
+      position: relative;
+      z-index: 9999;
       box-shadow: #888888 2px 2px 2px;
       .img_loading {
         width: 150px;
