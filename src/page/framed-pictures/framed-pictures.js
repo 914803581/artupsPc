@@ -1,6 +1,7 @@
 import 'cube.css/src/scss/neat.scss'
 import 'element-ui/lib/theme-default/index.css'
 import 'static/font/iconfont.css'
+import '@/base/scss/common.scss'
 import './framed-pictures.scss'
 import Vue from 'vue'
 import ElementUI from 'element-ui'
@@ -91,6 +92,15 @@ new Vue({
     },
     /*开始定制*/
     startCustom() {
+      if (this.frameShowBool === true) {
+        this.$message({
+          showClose: true,
+          iconClass: "atrup_Message",
+          message: '请先选择您需要定制的尺寸和边框 !',
+          type: 'success'
+        })
+        return
+      }
       if (localStorage.getItem("userDbId")) {
         location.href = '/framed/framedEdit?size=' + this.nowSize +
           "&editImageUrl=" + this.editImageUrl +

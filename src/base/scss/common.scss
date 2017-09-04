@@ -2,7 +2,9 @@ body {
   min-width: 1200px;
   overflow: scroll;
 }
-
+body .el-message{
+  margin: 38px auto 0;
+}
 //artup_MessageBox 弹窗   vm.$confirm方法  customClass:'artup_MessageBox'
 body .artup_MessageBox {
       .el-icon-warning{

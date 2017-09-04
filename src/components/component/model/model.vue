@@ -176,6 +176,11 @@
                 r.on('fileSuccess', function(file, message){
                     vm.sLoading = false
                     var rObj = $.parseJSON(message);
+                    vm.$message({
+                      showClose: true,
+                      iconClass: "atrup_Message",
+                      message: '图片上传成功'
+                    })
                     vm.$store.dispatch("getMaterial")
                     if(rObj.pictureDbId){
                         //给父级的回调
