@@ -949,7 +949,7 @@
                 else {
 //                 console.log(oImgData[i].crossPage)
                   if (oImgData[i].crossPage) {
-                    alert(oImgData[i].crossPage)
+//                    alert(oImgData[i].crossPage)
                     vm.bbsTemplate_data[oArrIndex][1] = [];
                     vm.bbsTemplate_data[oArrIndex][0].only = true;
                     vm.bbsTemplate_data[oArrIndex][0].template = vm.template_Source.bbs9;

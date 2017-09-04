@@ -2,6 +2,7 @@ import 'cube.css/src/scss/neat.scss'
 import 'element-ui/lib/theme-default/index.css'
 import 'static/font/iconfont.css'
 import './desk.scss'
+import '@/base/scss/common.scss'
 import Vue from 'vue'
 import ElementUI from 'element-ui'
 import SelectTpl from '../script/index.js'
@@ -129,7 +130,12 @@ new Vue({
           sessionStorage.setItem('bbsSlsectDate', JSON.stringify(jsons))
           location.href = '/album/tlEdit'
         } else {
-          alert('请选择尺寸和颜色')
+          this.$message({
+            showClose: true,
+            iconClass: "atrup_Message",
+            message: '请先选择需要定制的尺寸和颜色 !',
+            type: 'success'
+          })
         }
       } else {
         this.setUrlCallback()
