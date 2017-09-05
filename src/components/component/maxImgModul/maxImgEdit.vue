@@ -8,12 +8,12 @@
           <div class="title">
             <div class="title_left">
               <span>{{titleMsg.titleName}}编辑</span>
-              <span>2017-07-14 11:05</span>
+              <span>{{data_createdDt}}</span>
             </div>
             <div class="title_right">
               <span>{{titleMsg.size_product}}</span>
               <!--<span>56页</span>-->
-              <span>￥{{titleMsg.price_product}}</span>
+              <span><i class="iconfont">&#xe6e2;</i>{{titleMsg.price_product}}</span>
             </div>
           </div>
           <transition name="el-zoom-in-top">
@@ -158,6 +158,7 @@
   export default {
     data() {
       return {
+        data_createdDt:"", // 再次编辑的时间
         sloadingText:"",
         sLoading:false,
         titleMsg: {
@@ -921,10 +922,10 @@
       if (this.$route.query.dbId) { // 如果是再次编辑进来的界面
         this.workEdit.edtDbId = this.$route.query.dbId // 存入id预防
         Api.work.unfinishedWork(this.$route.query.dbId).then((res) => {
-          console.log(res)
+          console.log(res.data.createdDt)
+          this.data_createdDt = res.data.data.createdDt
           var oImgData = JSON.parse(res.data.data.editPicture)
           var editTxt = JSON.parse(res.data.data.editTxt)
-
           if (res.data.data.lomo) { // 如果有lomo卡
             var oImgLomo = JSON.parse(res.data.data.lomo)
           }
@@ -970,7 +971,6 @@
             vm.setPageIndex();
             setTemplate();
           }, 600)
-
           //回显图片和文字
           setTimeout(function () {
             if (editTxt.length > 0) {

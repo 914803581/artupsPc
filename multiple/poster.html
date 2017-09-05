@@ -18,11 +18,11 @@
 	 	<div class="pageTitle">
 	        <h2 class="pageTitleTop">艺术海报</h2>
 	        <p class="pageTitleMid">突破新的视界，再次定义生活影像</p>
-	        <p class="pageTitleDetail"><span>更多详情</span></p>
+	        <!--<p class="pageTitleDetail"><span>更多详情</span></p>-->
 	    </div>
 	    <div class="bothSides">
 		       <div class="imgBoxList"  v-show="!frameShowBool">
-			       <div class="picContainer picContainerOne" :style="{'backgroundImage':'url('+picturePrefix+previewImageUrl+')'}">	
+			       <div class="picContainer picContainerOne" :style="{'backgroundImage':'url('+picturePrefix+previewImageUrl+')'}">
 			       </div>
 		       	  <div class="boxA shwoImgBox">
 		       	  	<span class="sizeFrame">A</span>
@@ -41,8 +41,8 @@
 		       	  </div>
 		       </div>
 		       <div class="imgBoxList" v-show="frameShowBool">
-			       <div  class="picContainer picContainerTwo" :style="{backgroundImage:'url('+picturePrefix+previewImageUrl+')'}">		
-			      
+			       <div  class="picContainer picContainerTwo" :style="{backgroundImage:'url('+picturePrefix+previewImageUrl+')'}">
+
 			       </div>
 		       </div>
 	       	<div class="typeBox">
@@ -50,7 +50,7 @@
 		       		<div class="sizeBox">
 		       			<div @click='updateSizeFn(index)' v-for='(frameSize,index) in frameSize' class="k1_Foot1size_click"  :sizeType='frameSize.name | firstCode' :size='frameSize.code'>&nbsp; {{frameSize.name}}</div>
 		       		</div>
-		       		
+
 		       		<div class="rightBottom">
 	                    <div class="showPrice">
 	                        ￥ : <span class="price_show">{{price}}</span><span class="skuCode" style="display: none"></span>
@@ -58,7 +58,7 @@
 	                    <a @click="startCustom"><div class="startBook">开始定制</div></a>
 	                </div>
 		       </div>
-	       
+
 	    </div>
 	 </div>
 	<unify-footer></unify-footer>

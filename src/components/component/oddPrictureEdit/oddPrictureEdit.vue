@@ -79,7 +79,7 @@
 			  <div style="height: 176px;background-color: #efefef;">
 
 			  </div>
-		      <div style="position: fixed;"  class="footer_img">
+		      <div style="position: fixed;height: auto"  class="footer_img">
 		        <div class="footer_up_tittle">
 		          <div class="footer_left">
 		            <!--<button  class="footer_btn">
@@ -93,9 +93,9 @@
 		            <span class="imgSpan">图片<i class="iconfont">&#xe600;</i></span>
 		          </div>
 		          <div class="footer_right">
-		            <button class="footer_btn">
-		              预览
-		            </button>
+		            <!--<button class="footer_btn">-->
+		              <!--预览-->
+		            <!--</button>-->
 		            <button @click="open_material" class="footer_btn">
 		              添加图片
 		            </button>
@@ -223,7 +223,7 @@ export default {
 			if(val){
 				picObj.actions = val.postData;
       			$(".editbbs_one").next("img").attr("src",val.imgData).css("width","100%").css("height","100%").css("left",0).css("top",0)
-				
+
 			}
 			//console.log(val.postData)
 			this.editData.editCnfName = this.nowProductData.editCnfName;
@@ -246,7 +246,7 @@ export default {
      },
      /*加入购物车*/
 	addCarFn(type){
-		
+
 		this.postDatas();
 		if($('.drapBox img').attr('src')){
 			this.sLoading = true;
@@ -288,7 +288,7 @@ export default {
 				              query:{}
 				            })
 						}
-						
+
 					}
 				},err=>{
 					this.$message({
@@ -309,7 +309,7 @@ export default {
 	            message: '请上传图片!',
 	            type: 'success'
 	          });
-			
+
 		}
 
 
@@ -357,7 +357,7 @@ export default {
 
     },
     mounted(){
-   
+
     		this.nowProductData = this.productData;//插件传递过来的编辑器上显示数据
     		this.$forceUpdate();
     		console.log(this.nowProductData)
@@ -404,7 +404,7 @@ export default {
 				 handle:".titleBox"
 			});
     		},500)
-		
+
 
     }
   }

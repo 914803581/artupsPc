@@ -9,12 +9,12 @@
           <div class="title">
             <div class="title_left">
               <span>台历编辑</span>
-              <span>2017-07-14 11:05</span>
+              <span></span>
             </div>
             <div class="title_right">
-              <span>255x355mm</span>
+              <span>{{tailiSize}}mm</span>
               <span>13页</span>
-              <span>￥59.80</span>
+              <span><i class="iconfont">&#xe6e2;</i>59.80</span>
             </div>
           </div>
           <transition name="el-zoom-in-top">
@@ -89,7 +89,7 @@
           </div>
           <div class="footer_right">
             <button class="footer_btn" @click="preview">
-              预览宝宝书
+              预览台历
             </button>
             <button @click="open_material" class="footer_btn">
               添加图片
@@ -147,6 +147,7 @@
   export default {
     data() {
       return {
+        tailiSize:JSON.parse(sessionStorage.getItem("bbsSlsectDate")).size,
         sLoading:false,
         sloadingText:"数据保存中...",
         checkTaiLiData: [], //切换尺寸时候已经有图片的保存的节点
