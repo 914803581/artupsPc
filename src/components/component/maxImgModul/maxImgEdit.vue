@@ -413,12 +413,6 @@
               }
             })
             if (isOK) { //作品图片全部上传完毕
-//              this.$message({
-//                iconClass:"atrup_Message",
-//                showClose: true,
-//                message: '作品已全部上传成功,预览作品后，请添加购物车购买 !',
-//                type: 'success'
-//              });
               this.goCart(val);
             }
           }
@@ -500,7 +494,7 @@
           var otext = $(".time_main_left_ht .active_line .pageleft span").text();
           this.bbsTemplate_data[this.bbs.bbs_index1] = [];
           var josnImg = {
-            "template": vm.template_Source.bbs1,
+            "template": vm.template_Source.bbs4,
             "only": false,
             "slectTemplate": false
           };
@@ -511,7 +505,7 @@
             "slectTemplate": true
           };
           var josnImg3 = {
-            "template": vm.template_Source.bbs1,
+            "template": vm.template_Source.bbs4,
             "only": false,
             "slectTemplate": true
           };
@@ -528,6 +522,7 @@
             this.bbsTemplate_data[this.bbs.bbs_index1].push(josnImg4)
             this.bbsTemplate_data[this.bbs.bbs_index1].push(josnImg3);
           }
+          console.log(this.bbsTemplate_data[this.bbs.bbs_index1])
           vm.$store.commit("setDrapData", {
             "opage": otext,
             "type": "奇数"
@@ -922,9 +917,10 @@
       if (this.$route.query.dbId) { // 如果是再次编辑进来的界面
         this.workEdit.edtDbId = this.$route.query.dbId // 存入id预防
         Api.work.unfinishedWork(this.$route.query.dbId).then((res) => {
-          console.log(res.data.createdDt)
+
           this.data_createdDt = res.data.data.createdDt
           var oImgData = JSON.parse(res.data.data.editPicture)
+          console.log(oImgData)
           var editTxt = JSON.parse(res.data.data.editTxt)
           if (res.data.data.lomo) { // 如果有lomo卡
             var oImgLomo = JSON.parse(res.data.data.lomo)
@@ -940,28 +936,42 @@
                 var oArrIndex = parseInt(oPage / 2)
                 var bbs = "bbs" + oImgData[i].editCnfIndex
 
-                if (parseInt(oPage) % 2 == 1) {
-                  if (vm.bbsTemplate_data[oArrIndex][1]) {
-                    vm.bbsTemplate_data[oArrIndex][1].template = vm.template_Source[bbs];
+                if (parseInt(oPage) % 2 == 0) {
+                  if (oImgData[i].crossPage) { //是横版的情况
+                    vm.bbsTemplate_data[oArrIndex][1] = [];
+                    vm.bbsTemplate_data[oArrIndex][0].only = true;
+                    vm.bbsTemplate_data[oArrIndex][0].template = vm.template_Source.bbs9;
+                    vm.$forceUpdate();
+                    vm.$nextTick();
+                    return;
+                  }
+                  else{ //单图不是横版的情况
+
+                    var josnImg3 = {
+                      "template": vm.template_Source[bbs],
+                      "only": false,
+                      "slectTemplate": true
+                    };
+                    var josnImg4 = {
+                      "template": vm.template_Source.bbs6,
+                      "only": false,
+                      "slectTemplate": false
+                    };
+//                    vm.bbsTemplate_data[oArrIndex]=[];
+//                    vm.bbsTemplate_data[oArrIndex].push(josnImg3)
+                    vm.bbsTemplate_data[oArrIndex][0].template = vm.template_Source[bbs];
+                    vm.bbsTemplate_data[oArrIndex].push(josnImg4)
+//                    vm.bbsTemplate_data[oArrIndex][1].template = vm.template_Source[bbs];
                     vm.$forceUpdate();
                     vm.$nextTick();
                   }
                 }
                 else {
-//                 console.log(oImgData[i].crossPage)
-                  if (oImgData[i].crossPage) {
-//                    alert(oImgData[i].crossPage)
-                    vm.bbsTemplate_data[oArrIndex][1] = [];
-                    vm.bbsTemplate_data[oArrIndex][0].only = true;
-                    vm.bbsTemplate_data[oArrIndex][0].template = vm.template_Source.bbs9;
-                    console.log('_____', vm.bbsTemplate_data[oArrIndex][0])
+                  if (vm.bbsTemplate_data[oArrIndex][1]) {
+                    vm.bbsTemplate_data[oArrIndex][1].template = vm.template_Source[bbs];
                     vm.$forceUpdate();
                     vm.$nextTick();
-                    return;
                   }
-                  vm.bbsTemplate_data[oArrIndex][0].template = vm.template_Source[bbs];
-                  vm.$forceUpdate();
-                  vm.$nextTick();
                 }
               }
             }

@@ -226,12 +226,14 @@
               $(".taili_pu_2").addClass("taili_pu");
               $(".taili_pu").removeClass("taili_pu_2");
               sessionStorage.setItem('tailiType', tel)
+              vm.tailiSize = "195X145"
               vm.setTailiBg(); //修改台历背景图片
             } else if (tel === "竖") {
               $(".taili_pu").addClass("taili_pu_2");
               $(".taili_pu_2").removeClass("taili_pu");
               sessionStorage.setItem('tailiType', tel)
               vm.setTailiBg(); //修改台历背景图片
+              vm.tailiSize = "145X195"
             }
             vm.$store.commit('removeAllImgHashMap')//指向vuex 清除里面所有的数据
           }).catch(() => {

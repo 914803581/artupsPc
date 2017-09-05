@@ -8,7 +8,7 @@
 				</div>
 				<!--文字输入框-->
 				<textarea class="textBox" v-model="$store.state.bbs.textData" maxlength="40" placeholder="输入字体应保存在40字之内">
-					
+
 				</textarea>
 				<div class="btn_box">
 					<el-button  @click.native="closeModels">取消输入</el-button>
@@ -35,14 +35,14 @@
 			},
 			openModel(){
 				this.isEditTexts = true;
-				
+
 			},
 			okModels(){ //确认输入
 				console.log(this.$store.state.bbs.textData)
 				this.isEditTexts = false;
 				$(".editText_one").text(this.$store.state.bbs.textData)
-				var oPage = $(".editText_one").parents(".pubilc_div").find(".page .pageleft span").text();
-				
+				var oPage = $(".editText_one").parents(".pubilc_div").find(".page .pageleft span").eq(0).text();
+
 				var oTextsort =$(".editText_one").attr("textsort")
 				var oTypestyle =$(".editText_one").attr("typestyle")
 				//提交vuex去做数据组装
