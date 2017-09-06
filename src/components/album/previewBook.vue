@@ -210,8 +210,10 @@
           position: absolute;
           bottom: 14px;
           display: block;
+          box-sizing: border-box;
+          padding: 0 1em;
           width: 100%;
-          font-size: 16px;
+          font-size: 12px;
           font-weight: 400;
           text-align: center;
         }
@@ -231,8 +233,8 @@
           left: 50%;
           display: block;
           width: 360px;
-          height: 466px;
-          margin: -233px 0 0 -180px;
+          height: 450px;
+          margin: -248px 0 0 -180px;
         }
         .page_style_3 {
           display: block;
