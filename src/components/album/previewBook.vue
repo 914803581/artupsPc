@@ -257,8 +257,8 @@
           left: 50%;
           display: block;
           width: 360px;
-          height: 330px;
-          margin: -165px 0 0 -180px;
+          height: 280px;
+          margin: -140px 0 0 -180px;
         }
         .page_style_6 {
           display: inline-block;
