@@ -142,10 +142,9 @@
           result = JSON.parse(result)
           if (result.code === 'success') {
             _self.addressList.forEach((item) => {
-              item.hasDefault = false
+              item.mainAddr = '否'
             })
-            address.hasDefault = true
-            console.log(address)
+            address.mainAddr = '是'
           }
         })
       },
