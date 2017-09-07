@@ -109,7 +109,8 @@
         Api.Material.MaterialData({
           sort: 'uploadDt',
           order: 'desc',
-          status: 1
+          status: 1,
+          pageNum: this.pageNum
         }).then((result) => {
           return result.status === 200 ? result.request.response : ''
         }).then((result) => {
@@ -165,6 +166,8 @@
       background: #f1f1f1;
     }
     .main {
+      position: relative;
+      padding-bottom: 40px;
       width: 960px;
       min-height: 666px;
       float: right;
@@ -245,8 +248,11 @@
       }
     }
     .el-pagination {
+      position: absolute;
+      bottom: 10px;
+      left: 0;
+      right: 0;
       text-align: center;
-      margin: 20px 0 40px;
       button:hover {
         color: #a00912;
       }
