@@ -38,8 +38,8 @@
           title: '我的订单',
           path: '/center/order.html'
         }],
-        userAvatar: 'http://ww2.sinaimg.cn/mw690/aaa7f81bjw1f2m5j5ca7lj20c807zt92.jpg',
-        nickname: '一句微博精选',
+        userAvatar: localStorage['avatar'] ? localStorage['avatar'] : '',
+        nickname: localStorage['userName'] ? localStorage['userName'] : '',
         signature: '我从小到大没什么梦想，一直在路上不问远方，只是衷心希望自己成为一个很厉害的人，你问我什么算厉害，大概就是能有朝一日，保护好爱人，对得起朋友，赡养好家人吧。​​​​'
       }
     },
