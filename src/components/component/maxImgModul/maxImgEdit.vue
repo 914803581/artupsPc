@@ -73,7 +73,7 @@
           </div>
           <div v-show="titleMsg.titleName=='小时光'" class="title">
             <div class="title_left"><span>LOMO卡编辑</span> <span></span></div>
-            <div class="title_right"><span>照片尺寸：102X152</span> <span>LOMO卡单张：74X100</span> <span>赠送物品</span></div>
+            <div class="title_right"><span>照片尺寸：74X100</span> <span>LOMO卡单张：102X152</span> <span>赠送物品</span></div>
           </div>
           <div style="margin-top: 0;" class="time_main_left">
             <div style="height: 226px;" class="time_bg" v-for="(item,index) in lomoTemplate_data">
