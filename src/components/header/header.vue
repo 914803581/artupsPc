@@ -66,7 +66,7 @@
         }],
         userMenu: [{
           label: '我的主页',
-          link: '/user/works.html'
+          link: '/center/works.html'
         }, {
           label: '订单管理',
           link: '/center/order.html'
