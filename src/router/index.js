@@ -32,7 +32,7 @@ let router = new VueRouter({
       name: 'imgEditMsg',
       component: bbsMsg,
       meta: {
-        title: '宝宝书介绍'
+        title: '雅昌影像-艺术小时光制作照片书定制,摄影作品出版-传给雅昌专业定制'
       }
     },
 //  { // 宝宝书编辑页面
