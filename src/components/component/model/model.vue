@@ -73,6 +73,7 @@
 
 			},
 			slectFile(){ //选择上传之后选择的图片
+
 				//过滤选中的图片，形成一个图片缓存
 				var strCut = '';
 				this.$store.state.bbs.material.forEach(val=>{
@@ -80,6 +81,15 @@
 						strCut+=val.dbId+';'
 					}
 				})
+        //为空的时候，请提示1下
+        if(strCut==""){
+          this.$message({
+            showClose: true,
+            iconClass: "atrup_Message",
+            message: '请选择图片上传'
+          })
+          return;
+        }
 
 				 //素材库图片裁剪
 				 Api.Material.MaterialCut(strCut,2000).then((res)=>{

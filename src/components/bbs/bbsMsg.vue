@@ -267,6 +267,7 @@
 				 	//请求价格:
 					Api.sku.querySku(paramsJson).then((res)=>{
 						//价格计算
+            console.log(res)
 						 this.price = res.data.price;
 						 this.bbsSlsectDate.price = res.data.price;
 						 this.bbsSlsectDate.skuId = res.data.skuId;
