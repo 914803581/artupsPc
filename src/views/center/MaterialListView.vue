@@ -74,7 +74,7 @@
         deleteArr.forEach((item) => {
           ids.push(item.dbId)
         })
-        Api.Works.DeletWork({
+        Api.Material.Delete({
           dbId: ids.join(',')
         }).then((result) => {
           return result.status === 200 ? result.request.response : ''

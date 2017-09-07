@@ -44,7 +44,7 @@
             hide: true
           }, {
             id: 'address',
-            label: '收获地址管理',
+            label: '收货地址管理',
             path: '/center/address.html'
           }]
         }, {
