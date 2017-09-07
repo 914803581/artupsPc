@@ -158,10 +158,10 @@
   export default {
     data() {
       return {
-        dataPullTemplate:false,  //监听器是否更新数据
-        data_createdDt:"", // 再次编辑的时间
-        sloadingText:"",
-        sLoading:false,
+        dataPullTemplate: false,  //监听器是否更新数据
+        data_createdDt: "", // 再次编辑的时间
+        sloadingText: "",
+        sLoading: false,
         titleMsg: {
           "titleName": sessionStorage.getItem("titleName"),
           "price_product": JSON.parse(sessionStorage.getItem("bbsSlsectDate")).price,
@@ -233,7 +233,7 @@
         Api.car.addCar(jsons).then(res => {
           console.log(res);
           this.sLoading = false;
-          if (val == "1") {
+          if (val === '1') {
             this.$message({
               showClose: true,
               iconClass: "atrup_Message",
@@ -340,8 +340,8 @@
 
         var bbsTempla = [] //拷贝对象给后端传递数组
         bbsTempla = JSON.parse(JSON.stringify(vm.bbsTemplate_data));
-        bbsTempla.forEach((val)=>{
-          val.forEach((va)=>{
+        bbsTempla.forEach((val) => {
+          val.forEach((va) => {
             va.template = ""
             va.slectTemplate = false
           })
@@ -386,9 +386,9 @@
       nextStep(val) { //下一步
         //保存函数
         this.sLoading = true;
-        if (val == "1"){
+        if (val == "1") {
           this.sloadingText = "加入购物车..."
-        }else if(val == "2"){
+        } else if (val == "2") {
           this.sloadingText = "立即购买..."
         }
         this.assembleData();
@@ -477,7 +477,7 @@
             "template": vm.template_Source.bbs9,
             "only": true,
             "slectTemplate": true,
-            "type":"bbs9",
+            "type": "bbs9",
             "firstPage": false,
             "lastPage": false
           };
@@ -511,7 +511,7 @@
             "template": vm.template_Source.bbs4,
             "only": false,
             "slectTemplate": false,
-            "type":"bbs4",
+            "type": "bbs4",
             "firstPage": false,
             "lastPage": false
           };
@@ -520,7 +520,7 @@
             "template": vm.template_Source[chenkIndex],
             "only": false,
             "slectTemplate": true,
-            "type":chenkIndex,
+            "type": chenkIndex,
             "firstPage": false,
             "lastPage": false
           };
@@ -528,7 +528,7 @@
             "template": vm.template_Source.bbs4,
             "only": false,
             "slectTemplate": true,
-            "type":"bbs4",
+            "type": "bbs4",
             "firstPage": false,
             "lastPage": false
           };
@@ -536,7 +536,7 @@
             "template": vm.template_Source[chenkIndex],
             "only": false,
             "slectTemplate": false,
-            "type":chenkIndex,
+            "type": chenkIndex,
             "firstPage": false,
             "lastPage": false
           };
@@ -558,8 +558,8 @@
           //切换前选中的页码
           var otext = $(".time_main_left_ht .active_line .pageleft span").text();
           otemplate.template = vm.template_Source[chenkIndex];
-          otemplate.type= chenkIndex
-          otemplate.only= false
+          otemplate.type = chenkIndex
+          otemplate.only = false
           vm.$store.commit("oneToOneSetDrapData", {
             "opage": otext
           });
@@ -716,7 +716,6 @@
 
       },
       preview() {
-        console.log(this.PreviewWork)
         var TYPESTYLECOUNT = {}
         let titleName = sessionStorage.titleName ? sessionStorage.titleName : ''
         if (titleName === '画册') {
@@ -872,7 +871,7 @@
       },
       dataPull() {//数据改变的函数
         var vm = this;
-        if(vm.dataPullTemplate){
+        if (vm.dataPullTemplate) {
           return
         }
         vm.bbsTemplate_data = vm.dataTemp.productData;
@@ -948,7 +947,7 @@
         this.workEdit.edtDbId = this.$route.query.dbId // 存入id预防
         Api.work.unfinishedWork(this.$route.query.dbId).then((res) => {
           //再次编辑后端给的版式数据
-          var templateData = JSON.parse(res.data.data.dataTemplate.replace(/&quot;/g,'"'));
+          var templateData = JSON.parse(res.data.data.dataTemplate.replace(/&quot;/g, '"'));
           console.log(templateData)
           this.data_createdDt = res.data.data.createdDt
           var oImgData = JSON.parse(res.data.data.editPicture)
@@ -959,26 +958,26 @@
           }
 
 
-          templateData.forEach((val)=>{
-            val.forEach((va)=>{
+          templateData.forEach((val) => {
+            val.forEach((va) => {
               va.template = vm.template_Source[va.type]
             })
           })
 
           //先加载所有的版式
-            vm.dataPullTemplate = true;
-            vm.bbsTemplate_data = templateData
-            vm.bbsTemplate_data.forEach(function (item,indexs) {
-              item.forEach((obj,j)=>{
-                  obj.only = templateData[indexs][j].only
-                  if(templateData[indexs][j].only){
-                    console.log(j+'索引____')
-                  }
-                  obj.slectTemplate = false
-                  obj.template = templateData[indexs][j].template
-              })
+          vm.dataPullTemplate = true;
+          vm.bbsTemplate_data = templateData
+          vm.bbsTemplate_data.forEach(function (item, indexs) {
+            item.forEach((obj, j) => {
+              obj.only = templateData[indexs][j].only
+              if (templateData[indexs][j].only) {
+                console.log(j + '索引____')
+              }
+              obj.slectTemplate = false
+              obj.template = templateData[indexs][j].template
             })
-            vm.bbsTemplate_data = templateData
+          })
+          vm.bbsTemplate_data = templateData
 //            if (oImgData.length > 0) {
 //              for (var i = 0; i < oImgData.length; i++) {
 //                var pageNum = oImgData[i].page + '_' + oImgData[i].num + '_bbs';

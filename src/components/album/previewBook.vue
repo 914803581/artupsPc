@@ -290,6 +290,7 @@
 
       }
       .products-type-album {
+        .text_style_4_1, //
         .text_style_5_1, //
         .text_style_6_1, //
         .text_style_7_1, //
