@@ -1,6 +1,6 @@
 <template>
   <div class="preview">
-    <el-dialog :title="title" :size="size" :visible.sync="previewDialogVisible" @close="close" @open="open"
+    <el-dialog :title="'预览'+title" :size="size" :visible.sync="previewDialogVisible" @close="close" @open="open"
                :close-on-click-modal="false">
       <div class="preview_comtent" ref="previewComtent">
         <div class="hard" ref="frontCover"></div>

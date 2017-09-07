@@ -137,7 +137,7 @@
     </transition>
     <!--<div-editText ></div-editText>-->
 
-    <preview-book :colorName="colorName" :visible.sync="previewDialogVisible" :data="previewData"
+    <preview-book :title="titleMsg.titleName" :colorName="colorName" :visible.sync="previewDialogVisible" :data="previewData"
                   @close="previewDialogVisible=false"></preview-book>
   </div>
 </template>
