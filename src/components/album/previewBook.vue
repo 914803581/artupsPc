@@ -240,7 +240,7 @@
           display: block;
           width: 360px;
           height: 230px;
-          margin: 20px auto;
+          margin: 20px auto 0;
         }
         .page_style_4 {
           position: relative;
@@ -358,12 +358,6 @@
       }
       .text_style_3_1, .text_style_3_2 {
         display: block;
-        width: 80%;
-        height: 50px;
-        margin: 20px auto 0;
-        border: 1px solid #eee;
-        background: #eee;
-        box-shadow: 3px 3px 3px #999;
         font-size: 12px;
         overflow: hidden;
       }
