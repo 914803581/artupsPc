@@ -4,9 +4,6 @@ import VueRouter from 'vue-router'
 import bbsMsg from '@/components/bbs/bbsMsg'
 import index from '@/components/component/index/index' // 首页
 import testStore from '@/components/store' // 测试vuex
-import UserWorks from '@/views/user/WorksListView'
-import UserMaterial from '@/views/user/MaterialListView'
-import UserCoupons from '@/views/user/CouponListView'
 import cart from '@/components/user/cart/cart'// 购物车
 import confimOrder from '@/components/user/order/confimOrder'// 确认订单
 import loginCallback from '@/components/user/loginCallback'// 登陆跳转
@@ -67,27 +64,6 @@ let router = new VueRouter({
       path: '/',
       beforeEnter: function () {
         location.href = '/welcome.html'
-      }
-    }, {
-      path: '/user/works',
-      name: 'UserWorks',
-      component: UserWorks,
-      meta: {
-        title: '我的作品'
-      }
-    }, {
-      path: '/user/material',
-      name: 'UserMaterial',
-      component: UserMaterial,
-      meta: {
-        title: '我的素材'
-      }
-    }, {
-      path: '/user/coupons',
-      name: 'UserCoupons',
-      component: UserCoupons,
-      meta: {
-        title: '我的优惠券'
       }
     }, {
       path: '/user/cart',
