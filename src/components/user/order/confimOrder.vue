@@ -88,7 +88,7 @@
 					</div>
 
 					<div class="or2m-t-2 ritdh l">
-						<span class="s1">￥</span>
+						<span class="s1"><i class="iconfont">&#xe6e2;</i></span>
 						<span class="s2 ng-binding">{{itmes.price}}</span>
 						<span class="s1">元</span>
 					</div>
@@ -97,7 +97,7 @@
 						<span class="s2 ng-binding">{{itmes.num}}</span>
 					</div>
 					<div class="or2m-t-2 redd l">
-						<span class="s1">￥</span>
+						<span class="s1"><i class="iconfont">&#xe6e2;</i></span>
 						<span class="s2 ng-binding">{{itmes.price * itmes.num | toFixedTwo}}</span>
 						<span class="s1">元</span>
 					</div>
@@ -147,18 +147,18 @@
 			</div>
 			<div class="detail m">
 				<div class="dtl01 r">
-					<p class=""><span id="oNUmber" class="redd ng-binding">{{goodsSize}}</span>件商品，商品总金额：￥<span id="oPrice" class="ng-binding">{{allPrice | toFixedTwo}}</span></p>
+					<p class=""><span id="oNUmber" class="redd ng-binding">{{goodsSize}}</span>件商品，商品总金额：<i class="iconfont">&#xe6e2;</i><span id="oPrice" class="ng-binding">{{allPrice | toFixedTwo}}</span></p>
 					<p style="display: none;" class="">
 					享受优惠：使用优惠劵抵现 <span id="couponPrefeAmount" class="ng-binding">0.00</span> 元，<span ng-show="!manYuan==0" class="">订单总价满<span id="manYuan" class="ng-binding">0</span>元减<span id="prefePrice" class="ng-binding">0</span>元</span>
 
 					</p>
-					<p class="" style="display: none;">合计优惠金额：-￥<span id="totalPrefeAmount" class="ng-binding">0.00元</span></p>
-					<p class=""><span class="bul">中通快递</span>&nbsp;&nbsp;运费：￥<span>0.00</span></p>
+					<p class="" style="display: none;">合计优惠金额：-<i class="iconfont">&#xe6e2;</i><span id="totalPrefeAmount" class="ng-binding">0.00元</span></p>
+					<p class=""><span class="bul">中通快递</span>&nbsp;&nbsp;运费：<i class="iconfont">&#xe6e2;</i><span>0.00</span></p>
 				</div>
 			</div>
 			<div class="detail m" style="clear: both;">
 				<div class="money r">
-					<p class="l">应付金额：<span>￥</span><span id="goodsPayAmount" class="ng-binding">{{allPrice | toFixedTwo}}元</span></p>
+					<p class="l">应付金额：<span><i class="iconfont">&#xe6e2;</i></span><span id="goodsPayAmount" class="ng-binding">{{allPrice | toFixedTwo}}元</span></p>
 				</div>
 			</div>
 			<div class="detail m mt2">

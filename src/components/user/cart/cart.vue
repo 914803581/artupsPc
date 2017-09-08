@@ -44,7 +44,7 @@
 				  	</div>
 				  </div>
 				  <div class="tab03">
-				  	<p class="ng-binding"><b>¥</b>{{itmes.price}}<i>元</i></p>
+				  	<p class="ng-binding"><b><i class="iconfont">&#xe6e2;</i></b>{{itmes.price}}<i>元</i></p>
 				  </div>
 				  <div class="tab04">
 				  	<div class="cat_num">
@@ -54,7 +54,7 @@
 				  	</div>
 				  </div>
 				  <div class="tab05">
-				  	<p class="ng-binding"><b>¥</b>{{itmes.price * itmes.num | toFixedTwo}}<i>元</i></p>
+				  	<p class="ng-binding"><b><i class="iconfont">&#xe6e2;</i></b>{{itmes.price * itmes.num | toFixedTwo}}<i>元</i></p>
 				  </div>
 				  <div class="tab06">
 				  	<b @click="deleteCar(indexs,itmes.dbId)"></b>
@@ -68,11 +68,13 @@
 			<li class="cat_pay01">
 				<p @click="checkAll()"><b><i v-if="checkAllBtn == true" class="ng-hide"></i></b>全选</p>
 			</li>
-			<li @click="allDelect()" class="cat_pay02">
-				全部删除
+			<li  class="cat_pay02">
+        <div @click="allDelect()" style="height: 100%;width: 100px">
+          全部删除
+        </div>
 			</li>
 			<li class="cat_pay03">
-				已选商品 <i class="ng-binding">{{productNum}}</i> 件合计（不含运费）：¥<b class="ng-binding">{{allPic}}</b>
+				已选商品 <i class="ng-binding">{{productNum}}</i> 件合计（不含运费）：<i class="iconfont">&#xe6e2;</i><b class="ng-binding">{{allPic}}</b>
 				<a @click="gotoPayOrder()" >结算</a>
 			</li>
 			<li></li>
@@ -176,7 +178,7 @@
 						          });
 							}
 						},err=>{
-							Toast('请求错误');
+							alert('请求错误');
 						})
 
 				        }).catch(() => {
@@ -295,10 +297,7 @@
 			},
 			mounted(){
 			  var vm = this;
-        setTimeout(function () {
-          vm.sLoading= false
-          console.log(vm.sLoading)
-        },4000)
+
 
 				var jsons = {
 	  			//userDbId:localStorage.getItem("userDbId"),

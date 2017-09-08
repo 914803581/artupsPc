@@ -38,7 +38,7 @@
 					<br>
 					<dt style="">
 						<div class="pices">
-							¥ <i>{{price}}</i> CNY
+            <i class="iconfont">&#xe6e2;</i> <i>{{price}}</i>
 						</div>
             <!--href="/album/maxImgEdit"-->
 						<div  @click="goEdit" class="sib-a">开始定制</div>
