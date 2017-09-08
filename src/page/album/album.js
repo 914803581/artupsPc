@@ -1,4 +1,5 @@
 import 'cube.css/src/scss/neat.scss'
+import 'static/font/iconfont.css'
 import 'element-ui/lib/theme-default/index.css'
 import './album.scss'
 import '@/base/scss/common.scss'
