@@ -209,7 +209,6 @@ export default {
       		if(this.frameTypeData[i].name == data){
       		  this.nowFrameType = this.frameTypeData[i].name
       			typeStr = this.frameTypeData[i].code;
-
       		}
       	};
       	this.nowType = typeStr;
@@ -217,14 +216,13 @@ export default {
       	this.updataSkuData();
       },
      postDatas(val){
-      	console.log(val);
-      	//获取数据覆盖便于二次编辑
+     console.log(val);
+     //获取数据覆盖便于二次编辑
 		var constName ='1_1';
 		var picObj = this.$store.state.editData.ImgHashMap.getvalue(constName);
 			if(val){
 				picObj.actions = val.postData;
-      			$(".editbbs_one").next("img").attr("src",val.imgData).css("width","100%").css("height","100%").css("left",0).css("top",0)
-
+           $(".editbbs_one").next("img").attr("src",val.imgData).css("width","100%").css("height","100%").css("left",0).css("top",0)
 			}
 			//console.log(val.postData)
 			this.editData.editCnfName = this.nowProductData.editCnfName;
@@ -245,9 +243,13 @@ export default {
      	this.switchFormat = true;
     		//$("#div_drap").Tdrag();
      },
+     toCode(){
+       let jsons = JSON.parse(sessionStorage.getItem("bbsSlsectDate"))
+       jsons.editCnfName = this.nowProductData.templateCode+'_single'
+       sessionStorage.setItem('bbsSlsectDate',JSON.stringify(jsons))
+     } ,
      /*加入购物车*/
 	addCarFn(type){
-
 		this.postDatas();
 		if($('.drapBox img').attr('src')){
 			this.sLoading = true;
@@ -266,7 +268,8 @@ export default {
 					skuId:this.nowProductData.skuId,
           tplCode:this.nowProductData.tplCode,
 					status:1,
-					userDbId:localStorage.getItem("userDbId")
+					userDbId:localStorage.getItem("userDbId"),
+          editCnfName:this.nowProductData.tplCode+'_single'
 				}
 				console.log(jsons,'___-')
 				Api.car.addCar(jsons).then(res=>{
@@ -340,12 +343,16 @@ export default {
         this.nowProductData.tplCode = res.data.templateCode
         this.$forceUpdate();
   			this.initEditFrameSize();
+        let jsons = JSON.parse(sessionStorage.getItem("bbsSlsectDate"))
+        jsons.editCnfName = this.nowProductData.tplCode+'_single'
+        sessionStorage.setItem('bbsSlsectDate',JSON.stringify(jsons))
   		});
       setTimeout(function(){
         dragThumb($("#oddEdit .comtent_chanpin .comtent .waikuang .drapBox .drap_img").eq(1),$("#oddEdit .comtent_chanpin .comtent .waikuang .drapBox"))
 
       },500)
-  	},
+
+    },
   	/*初始化编辑框的宽高*/
   	initEditFrameSize (){
 		var size = this.nowSize;//框画尺寸
@@ -368,9 +375,10 @@ export default {
 
     },
     mounted(){
-
+    var vm = this
     		this.nowProductData = this.productData;//插件传递过来的编辑器上显示数据
     		this.$forceUpdate();
+
     		console.log(this.nowProductData)
 		var queryObj = {'category':this.nowProductData.category};
 		//获取url的category值 以字符串的json格式保存到sessionStroage中
@@ -411,9 +419,10 @@ export default {
 		});
 		//拖拽选择尺寸框
     		setTimeout(function(){
-			$("#div_drap").Tdrag({
-				 handle:".titleBox"
-			});
+          $("#div_drap").Tdrag({
+             handle:".titleBox"
+          });
+          vm.toCode()
     		},500)
 
 
