@@ -1,8 +1,8 @@
 <template>
   <div class="center-left-menu">
-    <dl class="menu-list" v-for="item in menus">
+    <dl class="menu-list" :class="{hide:item.hide}" v-for="item in menus">
       <dt><i class="iconfont" :class="item.icon"></i>{{item.title}}</dt>
-      <dd class="item" :class="{selected:page.id===selected}" v-for="page in item.child">
+      <dd class="item" :class="{selected:page.id===selected,hide:page.hide}" v-for="page in item.child">
         <a :href="page.path">{{page.label}}</a>
       </dd>
     </dl>
@@ -35,14 +35,16 @@
           child: [{
             id: 'account',
             label: '账户资料',
-            path: '/center/account.html'
+            path: '/center/account.html',
+            hide: true
           }, {
             id: 'security',
             label: '账户安全',
-            path: '/center/security.html'
+            path: '/center/security.html',
+            hide: true
           }, {
             id: 'address',
-            label: '收获地址管理',
+            label: '收货地址管理',
             path: '/center/address.html'
           }]
         }, {
@@ -56,6 +58,7 @@
         }, {
           title: '优惠券',
           icon: 'icon-discount',
+          hide: true,
           child: [{
             id: 'coupons',
             label: '优惠券管理',
@@ -74,6 +77,9 @@
     border-radius: 5px;
     border: 1px solid #dedede;
     background: #fff;
+    .hide {
+      display: none;
+    }
     .menu-list {
       dt, dd {
         font-size: 16px;

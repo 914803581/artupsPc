@@ -31,10 +31,12 @@
               <span class="text">100000</span>
               <p class="address">{{item.province}},{{item.address}}</p>
               <div class="set-default-box">
-                <el-button v-show="!startDelete&&!item.hasDefault" @click="setDefault(item)" class="btn" type="danger">
+                <el-button v-show="!startDelete&&!isMainMap[item.mainAddr]"
+                           @click="setDefault(item)" class="btn"
+                           type="danger">
                   设为默认
                 </el-button>
-                <span v-show="!startDelete&&item.hasDefault" class="text-default">默认地址</span>
+                <span v-show="!startDelete&&isMainMap[item.mainAddr]" class="text-default">默认地址</span>
                 <el-button v-show="startDelete" @click="edit(item)" class="btn" type="danger">编辑</el-button>
               </div>
             </div>
@@ -65,6 +67,7 @@
   export default {
     data: function () {
       return {
+        isMainMap: {'是': true, '否': false},
         addAddressDialogFormVisible: false,
         imageUrl: '',
         startDelete: false,
@@ -139,10 +142,9 @@
           result = JSON.parse(result)
           if (result.code === 'success') {
             _self.addressList.forEach((item) => {
-              item.hasDefault = false
+              item.mainAddr = '否'
             })
-            address.hasDefault = true
-            console.log(address)
+            address.mainAddr = '是'
           }
         })
       },
@@ -215,9 +217,9 @@
           height: 200px;
           text-align: center;
           line-height: 200px;
-          border:1px dashed #eee;
+          border: 1px dashed #eee;
         }
-        .el-button{
+        .el-button {
           display: block;
           margin: 20px auto 0;
         }

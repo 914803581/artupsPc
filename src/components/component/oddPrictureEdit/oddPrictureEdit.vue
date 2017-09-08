@@ -7,18 +7,18 @@
 					<div class="title">
 						<div class="title_left">
 							<span>{{nowProductData.type}}</span>
-							<span>2017-07-14 11:05</span>
+							<span></span>
 						</div>
 						<div class="title_right">
 							<span>{{nowProductData.size}}</span>
 							<span>{{nowProductData.frameType == 'undefined' ? '' : nowProductData.frameType }}</span>
-							<span>￥{{nowProductData.price}}</span>
+							<span><i class="iconfont">&#xe6e2;</i>{{nowProductData.price}}</span>
 						</div>
 					</div>
 					 <transition name="el-zoom-in-top">
 						<div id="div_drap" v-show="switchFormat" >
 							<div  class="titleBox menubar_titleBox">
-				               更换版式{{switchFormat}}
+				               更换版式
 				            <div  class="titleClose" @click="closeFormat">
 				            		<i class="iconfont"></i>
 				            </div>
@@ -79,7 +79,7 @@
 			  <div style="height: 176px;background-color: #efefef;">
 
 			  </div>
-		      <div style="position: fixed;"  class="footer_img">
+		      <div style="position: fixed;height: auto"  class="footer_img">
 		        <div class="footer_up_tittle">
 		          <div class="footer_left">
 		            <!--<button  class="footer_btn">
@@ -93,9 +93,9 @@
 		            <span class="imgSpan">图片<i class="iconfont">&#xe600;</i></span>
 		          </div>
 		          <div class="footer_right">
-		            <button class="footer_btn">
-		              预览
-		            </button>
+		            <!--<button class="footer_btn">-->
+		              <!--预览-->
+		            <!--</button>-->
 		            <button @click="open_material" class="footer_btn">
 		              添加图片
 		            </button>
@@ -141,10 +141,10 @@ export default {
       	dataEditImg : {},//传递给图片编辑的对象
       	isimgEdit : false, //图片编辑
       	footerShow : true, //页脚控制的折叠变量
-	    switchFormat : false, //控制切换板式弹框显示隐藏变量（true显示 false隐藏）
-	    selectSlide : false,  //控制选择板式下拉菜单
-	    frameSizeData : {},//编辑框尺寸
-	    frameTypeData : {},//编辑框类型
+	      switchFormat : false, //控制切换板式弹框显示隐藏变量（true显示 false隐藏）
+	      selectSlide : false,  //控制选择板式下拉菜单
+	      frameSizeData : {},//编辑框尺寸
+	      frameTypeData : {},//编辑框类型
       	sizeValue : '',
       	typeValue : '',
       	nowProductData:{},//编辑产品的数据
@@ -152,6 +152,7 @@ export default {
       	nowType : '' ,//当前框的类型
       	editImageUrl : '',
       	editData:{},
+        nowFrameType:''
 
       }
    	},
@@ -170,18 +171,16 @@ export default {
       },
     	   //调起图片编辑器
     	   deitImgFn($event){
-    	   	 if($($event.target).next(".img_drap").attr("src")==""){return;}//为空返回
-
+    		  if($($event.target).next(".img_drap").attr("src")==""){return;}//为空返回
           $(".editbbs_one").removeClass("editbbs_one");
           $($event.target).addClass("editbbs_one");
-
           this.dataEditImg.oSrc = $($event.target).next("img").attr("imgstyle");
           this.dataEditImg.oW = $($event.target).parent(".drapBox").width();
           this.dataEditImg.oH = $($event.target).parent(".drapBox").height();
 
            //点击时候获取coustName 从hashMap里面得到他有没第一次编辑的东西
           var constName ='1_1';
-		  this.dataEditImg.oActions = this.$store.state.editData.ImgHashMap.getvalue(constName).actions;
+            this.dataEditImg.oActions = this.$store.state.editData.ImgHashMap.getvalue(constName).actions;
     	      this.openImgEdit();
     	   },
 	   open_material(){ //打开素材库
@@ -208,7 +207,9 @@ export default {
       	var typeStr = ''
       	for(var i = 0; i < this.frameTypeData.length; i++){
       		if(this.frameTypeData[i].name == data){
+      		  this.nowFrameType = this.frameTypeData[i].name
       			typeStr = this.frameTypeData[i].code;
+
       		}
       	};
       	this.nowType = typeStr;
@@ -223,7 +224,7 @@ export default {
 			if(val){
 				picObj.actions = val.postData;
       			$(".editbbs_one").next("img").attr("src",val.imgData).css("width","100%").css("height","100%").css("left",0).css("top",0)
-				
+
 			}
 			//console.log(val.postData)
 			this.editData.editCnfName = this.nowProductData.editCnfName;
@@ -246,7 +247,7 @@ export default {
      },
      /*加入购物车*/
 	addCarFn(type){
-		
+
 		this.postDatas();
 		if($('.drapBox img').attr('src')){
 			this.sLoading = true;
@@ -263,6 +264,7 @@ export default {
 					sku:this.nowProductData.sku,
 					skuCode:this.nowProductData.skuCode,
 					skuId:this.nowProductData.skuId,
+          tplCode:this.nowProductData.tplCode,
 					status:1,
 					userDbId:localStorage.getItem("userDbId")
 				}
@@ -288,7 +290,7 @@ export default {
 				              query:{}
 				            })
 						}
-						
+
 					}
 				},err=>{
 					this.$message({
@@ -309,7 +311,7 @@ export default {
 	            message: '请上传图片!',
 	            type: 'success'
 	          });
-			
+
 		}
 
 
@@ -320,20 +322,29 @@ export default {
 
      /*更新sku*/
   	updataSkuData (){
+
   		this.skuCode = this.getFromSession("category") + '.' + this.nowSize + '.' + this.nowType;
   		var jsons = {
   			category:this.getFromSession("category"),
   			parameter:this.skuCode
   		};
   		Api.sku.querySku(jsons).then(res=>{
-  			//console.log(res)
-  			this.editImageUrl = Api.STATIC_SERVER_HOST + res.data.editImageUrl;//编辑框背景图
-  			this.nowProductData.price = res.data.price;
-    			this.$forceUpdate();
+        this.editImageUrl = Api.STATIC_SERVER_HOST + res.data.editImageUrl;//编辑框背景图
+
+        if(this.nowProductData.type == '海报') {
+          this.editImageUrl =""
+        }
+  			this.nowProductData.price = res.data.price
+        this.nowProductData.sku = this.nowProductData.type+'.'+res.data.size+'.'+this.nowFrameType
+        this.nowProductData.skuCode = res.data.category +'.'+res.data.size+'.'+res.data.box
+        this.nowProductData.tplCode = res.data.templateCode
+        this.$forceUpdate();
   			this.initEditFrameSize();
-
   		});
+      setTimeout(function(){
+        dragThumb($("#oddEdit .comtent_chanpin .comtent .waikuang .drapBox .drap_img").eq(1),$("#oddEdit .comtent_chanpin .comtent .waikuang .drapBox"))
 
+      },500)
   	},
   	/*初始化编辑框的宽高*/
   	initEditFrameSize (){
@@ -357,7 +368,7 @@ export default {
 
     },
     mounted(){
-   
+
     		this.nowProductData = this.productData;//插件传递过来的编辑器上显示数据
     		this.$forceUpdate();
     		console.log(this.nowProductData)
@@ -404,7 +415,7 @@ export default {
 				 handle:".titleBox"
 			});
     		},500)
-		
+
 
     }
   }

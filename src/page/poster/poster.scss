@@ -1,3 +1,5 @@
+import 'static/font/iconfont.css'
+
 .container {
   width: 1280px;
   margin: 0 auto;
@@ -86,8 +88,8 @@
       box-sizing: border-box;
     }
     .boxC {
-      width: 325px;
-      height: 325px;
+      width: 481px;
+      height: 344.5px;
       position: absolute;
       bottom: 0px;
       left: 0px;
@@ -104,8 +106,9 @@
       box-sizing: border-box;
     }
     .boxE {
-      width: 481px;
-      height: 344.5px;
+
+      width: 325px;
+      height: 325px;
       position: absolute;
       bottom: 0px;
       left: 0px;
@@ -203,7 +206,7 @@
       width: 425px;
       height: 32px;
       margin: 65px 0;
-      float: left;
+      //float: left;
       .showPrice {
         font-size: 24px;
         height: 50px;

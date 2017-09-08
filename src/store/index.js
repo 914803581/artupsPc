@@ -337,7 +337,7 @@ let store = new Vuex.Store({
 					var dataImg = state.bbs.footerData[oIndex]; //每一个对象
 					//回显图片和删除底部缓存
 					console.log(ev.target)
-
+          // $(".comtent_chanpin .pubilc_div .time_pu .bbsClass .drap_img").eq(0).css("background","none")
 					$(ev.target).next("img").attr("src", dataImg.thumbnailUrl).attr('imgStyle', dataImg.thumbnailUrl);
 					state.bbs.footerData.splice(oIndex, 1);
 					console.log(dataImg)

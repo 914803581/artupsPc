@@ -10,7 +10,7 @@
 					<span>小时光</span>
 					<p>小小的时光，记录点滴美好</p>
 				</div>
-				<div class="preview">
+				<div class="preview" v-if="attributes.length">
 					<dl  class="hc-dl">
 					 <dt style="padding-bottom: 20px;" class="dt-botton">
 						<h4 id="clickH1"><b>请选择颜色</b>  <span style="display: none;">修改</span> </h4>
@@ -252,10 +252,9 @@
 						dataCode+=$(this).attr("data-code")+'.'
 						dataCode2+=$(this).attr("data-name")+'.'
 					})
-					console.log(dataCode)
-					console.log(dataCode2)
+
 					//组装后端需要的数据暂存浏览器
-					this.bbsSlsectDate.name = sessionStorage.getItem('titleName')+'.'+dataCode2;
+					this.bbsSlsectDate.name = sessionStorage.getItem('titleName')+'.'+dataCode2.substr(0,dataCode2.length-1);
 					this.bbsSlsectDate.skuCode = this.getFromSession("category")+'.'+dataCode;
 					this.bbsSlsectDate.category = this.getFromSession("category"); //类型字段
 					console.log(this.attributes)
@@ -267,6 +266,7 @@
 				 	//请求价格:
 					Api.sku.querySku(paramsJson).then((res)=>{
 						//价格计算
+            console.log(res)
 						 this.price = res.data.price;
 						 this.bbsSlsectDate.price = res.data.price;
 						 this.bbsSlsectDate.skuId = res.data.skuId;

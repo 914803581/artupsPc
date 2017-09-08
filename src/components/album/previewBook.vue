@@ -1,6 +1,6 @@
 <template>
   <div class="preview">
-    <el-dialog :title="title" :size="size" :visible.sync="previewDialogVisible" @close="close" @open="open"
+    <el-dialog :title="'预览'+title" :size="size" :visible.sync="previewDialogVisible" @close="close" @open="open"
                :close-on-click-modal="false">
       <div class="preview_comtent" ref="previewComtent">
         <div class="hard" ref="frontCover"></div>
@@ -16,10 +16,10 @@
                  't9_right': !(index%2) && item.type === 9
                }
                ]" v-for="(item,index) in data">
-          <img :key="img.id"
-               :src="img.src"
-               :class="['page_style_'+item.type,'img_style_'+item.type+'_'+img.index]"
-               v-for="img in item.imgs">
+          <div :key="img.id"
+               :style="{'background-image':`url('${img.src}')`}"
+               :class="['main-image','page_style_'+item.type,'img_style_'+item.type+'_'+img.index]"
+               v-for="img in item.imgs"></div>
           <span :key="t.index"
                 :class="['text_style_'+item.type+'_'+t.index]"
                 v-for="t in item.text">{{t.text}}</span>
@@ -118,6 +118,11 @@
 
 <style lang="scss" rel="stylesheet/sass">
   .preview {
+    .main-image{
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: 50%;
+    }
     .el-dialog--small {
       top: 50% !important;
       width: 940px;
@@ -210,8 +215,10 @@
           position: absolute;
           bottom: 14px;
           display: block;
+          box-sizing: border-box;
+          padding: 0 1em;
           width: 100%;
-          font-size: 16px;
+          font-size: 12px;
           font-weight: 400;
           text-align: center;
         }
@@ -231,14 +238,14 @@
           left: 50%;
           display: block;
           width: 360px;
-          height: 466px;
-          margin: -233px 0 0 -180px;
+          height: 450px;
+          margin: -248px 0 0 -180px;
         }
         .page_style_3 {
           display: block;
           width: 360px;
           height: 230px;
-          margin: 20px auto;
+          margin: 20px auto 0;
         }
         .page_style_4 {
           position: relative;
@@ -255,8 +262,8 @@
           left: 50%;
           display: block;
           width: 360px;
-          height: 330px;
-          margin: -165px 0 0 -180px;
+          height: 280px;
+          margin: -140px 0 0 -180px;
         }
         .page_style_6 {
           display: inline-block;
@@ -288,6 +295,7 @@
 
       }
       .products-type-album {
+        .text_style_4_1, //
         .text_style_5_1, //
         .text_style_6_1, //
         .text_style_7_1, //

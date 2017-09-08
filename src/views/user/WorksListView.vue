@@ -4,24 +4,27 @@
     <page-top selected="works"></page-top>
     <div class="container">
       <div class="wrapper">
-        <a href="/center/works" class="btn btn-manager">管理我的作品</a>
+        <a href="/center/works.html" class="btn btn-manager">管理我的作品</a>
         <div class="works">
           <div class="works-container">
             <div class="woks-data" v-for="work in workData" :key="work.id">
               <div class="img-box">
-                <img :src="work.imgPath" :alt="work.name" :title="work.name">
+                <img :src="work.thumbnailImageUrl" :alt="work.sku" :title="work.sku">
               </div>
               <label class="title">{{work.name}}</label>
-              <span class="time">{{work.createTime | time}}</span>
-              <span class="type">{{work.typeName}} {{work.size}} mm</span>
+              <span class="time">{{work.createdDt}}</span>
+              <span class="type">{{work.sku}}</span>
               <a href="javascript:void(0);" class="buy-btn">购买定制</a>
             </div>
           </div>
         </div>
         <el-pagination
-          small="false"
+          v-show="total>pageSize"
+          small
           layout="prev, pager, next"
-          :total="50000">
+          :page-size="pageSize"
+          :total="total"
+          @current-change="paging">
         </el-pagination>
       </div>
     </div>
@@ -30,79 +33,53 @@
 </template>
 
 <script type="text/ecmascript-6">
-  import Header from '../../components/header/header.vue'
-  import Footer from '../../components/footer/footer.vue'
-  import PageTop from '../../components/user/top.vue'
+  import UnifyHeader from 'components/header/header'
+  import UnifyFooter from 'components/footer/footer'
+  import PageTop from 'components/user/top'
+  import Api from '@/api.js'
 
   export default {
     data: function () {
       return {
-        managerIng: false,
-        types: [{
-          id: '-1',
-          text: '所有类型',
-          selected: true
-        }, {
-          id: 'kuanghua',
-          text: '框画'
-        }, {
-          id: 'haibao',
-          text: '海报'
-        }, {
-          id: 'citiehua',
-          text: '磁贴画'
-        }, {
-          id: 'huace',
-          text: '画册'
-        }],
-        workData: []
+        workData: [],
+        pageSize: 12,
+        total: 0,
+        pageNum: 1
       }
     },
     methods: {
-      typeFilter: function (type) {
-        let _self = this
-        this.types.forEach(function (t, i) {
-          t['selected'] = false
-          if (t.id === type.id) {
-            _self.types.splice(i, 1)
+      paging: function (val) {
+        this.pageNum = val
+        this.getData()
+      },
+      getData: function () {
+        this.pageNum -= 1
+        Api.Works.WorkList({
+          sortField: 'createdDt',
+          pageSize: this.pageSize,
+          pageNum: this.pageNum,
+          order: 'desc',
+          category: ''
+        }).then((result) => {
+          return result.status === 200 ? result.request.response : ''
+        }).then((result) => {
+          let data = result ? JSON.parse(result) : ''
+          if (!data) {
+            return
           }
+          this.workData = data.results
+          this.total = data.totalRecord
         })
-        type['selected'] = true
-        this.types.unshift(type)
       }
     },
     components: {
-      'unify-header': Header,
-      'unify-footer': Footer,
-      'page-top': PageTop
+      UnifyHeader,
+      UnifyFooter,
+      PageTop
     },
     watch: {},
     created: function () {
-      for (let i = 0; i < 9; i++) {
-        this.workData.push({
-          id: '475bb8d4c5874f69810c30bdb4733e74',
-          name: '未命名 2017-05-15 16:02',
-          skuCode: 'B01004',
-          material: null,
-          size: '500*400',
-          worksType: 'haibao',
-          isrelease: null,
-          createTime: 1494835379000,
-          page: null,
-          imgPath: 'http://testpcbuilder.artup.com/upload/475bb8d4c5874f69810c30bdb4733e741494835379.jpg',
-          price: 40,
-          ext: 'web',
-          ext2: null,
-          ext3: null,
-          userId: '8dab7dbe6d094347ac8d2af61c4b194a',
-          pdfPath: null,
-          isRedo: null,
-          productId: null,
-          typeName: '海报',
-          attribute: null,
-          swfUrl: null
-        })
-      }
+      this.getData()
     }
   }
 </script>
@@ -128,6 +105,7 @@
       overflow: hidden;
     }
     .container {
+      min-height: 350px;
       padding: 14px 0 92px;
       background: #f9f9f9;
     }

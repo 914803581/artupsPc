@@ -34,8 +34,8 @@ var HTTP = VueHttp.$http.create({
 const UPLOAD_URL = `${STATIC_SERVER_HOST}artup-build/image/cors/upload.do?format=json&ignore=true`
 
 /* 查询素材库 */
-//const QUERY_PICTURE_URL = `${HOST}artup-build/service/picture/page.do?format=json&ignore=true`
 const QUERY_PICTURE_URL = `${HOST}artup-build/image/cors/userImages.do?format=json&ignore=true`
+const DELETE_MATERIAL = `${HOST}artup-build/service/delete/command.do?format=json&ignore=true`
 
 /* 未完成作品 */
 const QUERY_UNFINISHED_WORK_URL = `${HOST}artup-build/builder/cors/edit/queryOne.do?format=json&ignore=true`
@@ -286,6 +286,13 @@ export default {
   Material: {
     MaterialData: (paramJson) => { // 素材数据
       return HTTP.get(QUERY_PICTURE_URL,
+        {
+          params: paramJson
+        }
+      )
+    },
+    Delete: (paramJson) => { // 删除素材数据
+      return HTTP.get(DELETE_MATERIAL,
         {
           params: paramJson
         }

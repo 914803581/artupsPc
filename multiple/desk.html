@@ -19,12 +19,12 @@
 		        <h2 class="pageTitleTop">艺术台历</h2>
 		        <p class="pageTitleMid">13张专属照片，定制365天的时光陪伴</p>
 		        <p class="pageTitleMid">用艺术装饰你的生活，打造你的桌面展览</p>
-		        <p class="pageTitleDetail"><span>更多详情</span></p>
+		        <!--<p class="pageTitleDetail"><span>更多详情</span></p>-->
 		    </div>
 		    <div class="bothSides">
-		       <div class="imgBoxList" v-show="!frameShowBool">
+		       <div style="left: 120px;pointer-events: none" class="imgBoxList" v-show="!frameShowBool">
 			       <div id="picContainer" class="picContainer picContainerOne" :style="{backgroundImage:'url('+picturePrefix+previewImageUrl+')'}">
-			       				
+
 			       </div>
 		       	  <div class="boxA">
 		       	  	<span class="sizeFrame">A</span>
@@ -34,8 +34,8 @@
 		       	  </div>
 		       </div>
 		       <div class="imgBoxList" v-show="frameShowBool">
-			       <div  class="picContainerTwo picContainer " style="background-image: url(https://www.artup.com/img/tl_icon13.png)">		
-			      
+			       <div  class="picContainerTwo picContainer " style="background-image: url(https://www.artup.com/img/tl_icon13.png)">
+
 			       </div>
 		       </div>
 		       <div class="typeBox">
@@ -54,7 +54,7 @@
 		       				<div class="kuangAngle" @click="updateColorFn(index)"  :colorName='item.name' :code='item.code' :color='item.attr' :style="{'background':item.attr}"></div>
 		       				<div class="k1_Foot1frame_click k1_pre_frame">{{item.name}}</div>
 		       			</div>
-		       			
+
 		       		</div>
 		       		<div class="rightBottom">
 	                    <div class="showPrice">
@@ -63,7 +63,7 @@
 	                    <a @click="startCustom"><div class="startBook">开始定制</div></a>
 	                </div>
 		       </div>
-		       
+
 		    </div>
 		 </div>
   		<unify-footer></unify-footer>

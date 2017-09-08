@@ -16,61 +16,69 @@
 							"template": bbsTemplateData.bbs1,
 							"only": false,
 							"firstPage": true, //第一页必须有的属性
-							"lastPage": false
+							"lastPage": false,
+              "type":"bbs1"
 						}],
 						[{
 								"template": bbsTemplateData.bbs2,
 								"only": false,
 								"firstPage": false,
-								"lastPage": false
+								"lastPage": false,
+                "type":"bbs2"
 							},
 							{
 								"template": bbsTemplateData.bbs3,
 								"only": false,
 								"firstPage": false,
-								"lastPage": false
+								"lastPage": false,
+                "type":"bbs3"
 							}
 						],
 						[{
 								"template": bbsTemplateData.bbs4,
 								"only": false,
 								"firstPage": false,
-								"lastPage": false
+								"lastPage": false,
+                "type":"bbs4"
 							},
 							{
 								"template": bbsTemplateData.bbs5,
 								"only": false,
 								"firstPage": false,
-								"lastPage": false
+								"lastPage": false,
+                "type":"bbs5"
 							}
 						],
 						[{
 								"template": bbsTemplateData.bbs6,
 								"only": false,
 								"firstPage": false,
-								"lastPage": false
+								"lastPage": false,
+                "type":"bbs6"
 							},
 							{
 								"template": bbsTemplateData.bbs7,
 								"only": false,
 								"firstPage": false,
-								"lastPage": false
+								"lastPage": false,
+                "type":"bbs7"
 							}
 						],
 
-						[{
-							"template": bbsTemplateData.bbs9,
-							"only": true,
-							"firstPage": false,
-							"lastPage": false
-						}],
+//						[{
+//							"template": bbsTemplateData.bbs9,
+//							"only": true,
+//							"firstPage": false,
+//							"lastPage": false,
+//              "type":"bbs9"
+//						}],
 						[{
 							"template": bbsTemplateData.bbs2,
 							"only": false,
 							"firstPage": false,
-							"lastPage": true //最后一页必须有的属性
+							"lastPage": true, //最后一页必须有的属性
+              "type":"bbs2"
 						}]
-
 					], //产品需要的数据
 					'lomoData_template': lomoData_template, //lomo卡需要的数据
 					'templateImgData': [ // 模版对应的图片
@@ -105,11 +113,12 @@
 						{
 							templateImg: 'http://image2.artup.com/resources/static/pc/images/bbs_pc08.jpg',
 							isTrue: false
-						},
-						{
-							templateImg: 'http://image2.artup.com/resources/static/pc/images/bbs_pc09.jpg',
-							isTrue: true
 						}
+//						,
+//						{
+//							templateImg: 'http://image2.artup.com/resources/static/pc/images/bbs_pc09.jpg',
+//							isTrue: true
+//						}
 					]
 				}
 			}

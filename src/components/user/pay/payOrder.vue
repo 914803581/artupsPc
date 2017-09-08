@@ -41,8 +41,9 @@
 			methods:{
 			pay(jsons){
 	        	 	Api.car.orderPay(jsons).then(res=>{
+
 	        	 		console.log(res)
-	        	 		if(res.data.paymentType == 'zfb'){
+	        	 		if(res.data.paymentType == 'pc_zfb' || res.data.paymentType == 'zfb'){
 	        	 			$('#zfb_pay_fk').html(res.data.payHtml)
 	        	 		}else{
 	        	 			//PC端微信扫码生成二维码
@@ -57,7 +58,7 @@
 	        	}
 			},
 			mounted(){
-				if(this.$route.query.paymentType == 'pc_wx'){
+				if(this.$route.query.paymentType == 'wx'){
 					this.subject = '微信支付';
 				}else{
 					this.subject = '支付宝支付';
@@ -67,14 +68,14 @@
 	        		addressId:this.$route.query.addressId,
 	        		dbId:this.$route.query.dbId,
 	        		userDbId:localStorage.getItem('userDbId'),
-	            	client:Api.CLIENT,
+              client:Api.CLIENT,
 	        		subject:this.subject
 	        	};
 
 	        //调用支付接口
 			this.pay(jsons);
 
-			if(this.$route.query.paymentType == 'wx'){
+			if(this.$route.query.paymentType == 'wx' || this.$route.query.paymentType == 'pc_wx'){
 				var	timer1 = setInterval(function(){
 		           Api.car.queryOrderState(jsons).then(res=>{
 		           	if(res.data.status >= 3){

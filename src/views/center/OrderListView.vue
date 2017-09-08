@@ -50,7 +50,8 @@
                   </div>
                   <div class="operation">
                     <div class="parcel">
-                      <a href="javascript:void(0);" v-show="item.status===2" class="payment-btn" @click="pay">付款</a>
+                      <a href="javascript:void(0);" v-show="item.status===2" class="payment-btn"
+                         @click="pay(item)">付款</a>
                       <a href="javascript:void(0);" v-show="[-1,3].indexOf(item.status) < 0" class="cancel-order"
                          @click="cancel(item)">取消订单</a>
                       <a href="javascript:void(0);" v-show="[3,-1].indexOf(item.status) >= 0" class="cancel-order"
@@ -160,8 +161,9 @@
           }
         })
       },
-      pay: function () {
-        console.log('pay')
+      pay: function (order) {
+        let orderPay = order.paymentType.split('_')[1]
+        location.href = `/pay/payOrder?addressId=${order.addressDbId}&userDbId=${order.userDbId}&dbId=${order.dbId}&paymentType=${orderPay}`
       },
       cancel: function (order) {
         this.$confirm('确认要取消订单吗？')

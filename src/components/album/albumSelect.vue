@@ -69,7 +69,7 @@
 	    mounted(){
 	    		var jsons = {
 		    		"colorName":this.$route.query.color,
-		    		"name":"画册."+this.$route.query.color+"."+this.$route.query.size+'.'+this.$route.query.page,
+		    		"name":"画册."+this.$route.query.color+"."+this.$route.query.size+'.'+this.$route.query.page+'页',
 		    		"skuCode":this.$route.query.sku,
 		    		"category":this.$route.query.category,
 		    		"price":this.$route.query.price,

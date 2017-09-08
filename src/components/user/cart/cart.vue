@@ -104,7 +104,7 @@
 		    },
 			methods:{//单条记录删除
 				deleteCar(index,dbId){
-					 this.$confirm('您确定要删除此条订单吗?', '购物车', {
+					 this.$confirm('您确定要删除此条商品吗?', '购物车', {
 				          confirmButtonText: '确定',
 				          cancelButtonText: '取消',
                   customClass:'artup_MessageBox',
@@ -145,15 +145,17 @@
 						}
 					}
 					if(arr.length < 1){
-						this.$alert('请选择要删除的内容', '删除', {
-				          confirmButtonText: '确定',
-				          callback: action => {
-				          }
-				        });
+
+            this.$message({
+              type: 'info',
+              iconClass:"atrup_Message",
+              message: '请选择要删除的内容'
+            });
 					}else{
-					   this.$confirm('您确定要删除吗?', '提示', {
+					   this.$confirm('您确定要清空购物车吗?', '提示', {
 				          confirmButtonText: '确定',
 				          cancelButtonText: '取消',
+                customClass:'artup_MessageBox',
 				          type: 'warning'
 				        }).then(() => {
 				        	for (var i = 0; i < this.dataList.length; i++) {

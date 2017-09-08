@@ -1,3 +1,5 @@
+import 'static/font/iconfont.css'
+
 .container {
     width: 1280px;
     margin: 0 auto;
@@ -68,8 +70,8 @@
             background-size: 100% 100% !important;
          }
         .boxA{
-            width: 255px;
-            height: 355px;
+            width: 410px;
+            height: 306px;
             position: absolute;
             bottom: 0px;
             left: 0px;
@@ -77,8 +79,8 @@
             box-sizing: content-box;
         }
         .boxB{
-            width: 355px;
-            height: 255px;
+            width: 306px;
+            height: 410px;
             position: absolute;
             bottom: 0px;
             left: 0px;
@@ -130,7 +132,7 @@
             margin-bottom: 25px;
             width: 100%;
             float: left;
-            
+
         }
         .sizeBox {
             width: 432px;
@@ -161,7 +163,7 @@
                 }
         }
         .frameBox {
-           
+
             width: 482px;
             float: left;
             /* height: 384px; */
@@ -198,14 +200,14 @@
                     align-items: center;
                     justify-content: center;
                 }
-                
+
             }
         }
         .rightBottom {
             width: 425px;
             height: 32px;
             margin: 65px 0;
-            float: left;
+            //float: left;
             .showPrice {
                 font-size: 24px;
                 height: 50px;

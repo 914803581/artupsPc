@@ -18,12 +18,12 @@
 		 	<div class="pageTitle">
 		        <h2 class="pageTitleTop">艺术框画</h2>
 		        <p class="pageTitleMid">艺术和现代工艺的完美结合</p>
-		        <p class="pageTitleDetail"><span>更多详情</span></p>
+		        <!--<p class="pageTitleDetail"><span>更多详情</span></p>-->
 		    </div>
 		    <div class="bothSides">
-		       <div class="imgBoxList"  v-show="!frameShowBool">
+		       <div style="left: 120px;pointer-events: none" class="imgBoxList"  v-show="!frameShowBool">
 			       <div class="picContainer picContainerOne" :style="{backgroundImage:'url('+picturePrefix+previewImageUrl+')'}">
-			       				
+
 			       </div>
 		       	  <div class="boxA shwoImgBox">
 		       	  	<span class="sizeFrame">A</span>
@@ -41,9 +41,9 @@
 		       	  	<span class="sizeFrame">E</span>
 		       	  </div>
 		       </div>
-		       <div class="imgBoxList" v-show="frameShowBool">
-			       <div  class="picContainer picContainerTwo" :style="{backgroundImage:'url('+picturePrefix+previewImageUrl+')'}">		
-			      
+		       <div  class="imgBoxList" v-show="frameShowBool">
+			       <div  class="picContainer picContainerTwo" :style="{backgroundImage:'url('+picturePrefix+previewImageUrl+')'}">
+
 			       </div>
 		       </div>
 		       <div class="typeBox">
@@ -57,7 +57,7 @@
 		       				<div class="kuangAngle" @click='updataTypeFn(index)' :code='frameType.code' :frameType='frameType.name' :style="{backgroundImage:'url('+picturePrefix+frameType.attr+')'}"></div>
 		       				<div class="k1_Foot1frame_click k1_pre_frame">{{frameType.name}}</div>
 		       			</div>
-		       			
+
 		       		</div>
 		       		<div class="rightBottom">
 	                    <div class="showPrice">

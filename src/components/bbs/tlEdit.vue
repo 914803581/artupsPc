@@ -9,12 +9,12 @@
           <div class="title">
             <div class="title_left">
               <span>台历编辑</span>
-              <span>2017-07-14 11:05</span>
+              <span></span>
             </div>
             <div class="title_right">
-              <span>255x355mm</span>
+              <span>台历.<span id="colour">白色</span>.{{tailiSize}}mm</span>
               <span>13页</span>
-              <span>￥59.80</span>
+              <span><i class="iconfont">&#xe6e2;</i>59.80</span>
             </div>
           </div>
           <transition name="el-zoom-in-top">
@@ -51,7 +51,7 @@
             <ul>
               <!--<li><i class="iconfont">&#xe711;</i>添加组件</li>-->
               <li @click="bbs.Switching=true"><i class="iconfont">&#xe64f;</i>更换板式</li>
-              <li @click="nextStep('1')"><i style="font-size: 20px;padding:0 ;" class="iconfont">&#xe602;</i>加入购物车</li>
+              <li @click="nextStep('1')"><i style="font-size: 20px;padding:0;" class="iconfont">&#xe602;</i>加入购物车</li>
               <li @click="nextStep('2')"><i class="iconfont">&#xe629;</i>立即购买</li>
               <!--<li @click="nextStep"><i class="iconfont">&#xe629;</i>下一步</li>-->
               <!--这里保存是要先验证，然后在保存-->
@@ -78,7 +78,7 @@
         <div class="footer_up_tittle">
           <div class="footer_left">
             <button @click="delectFooter" class="footer_btn">
-              清空已放入的图片
+              清空底部图片
             </button>
             <button @click="autoDrapImg" v-if="FooterDataAuto.length>0" class="footer_btn">
               自动填充<b style="font-weight: 500;">{{FooterDataAuto.length}}张</b>
@@ -89,7 +89,7 @@
           </div>
           <div class="footer_right">
             <button class="footer_btn" @click="preview">
-              预览宝宝书
+              预览台历
             </button>
             <button @click="open_material" class="footer_btn">
               添加图片
@@ -147,6 +147,7 @@
   export default {
     data() {
       return {
+        tailiSize:JSON.parse(sessionStorage.getItem("bbsSlsectDate")).size,
         sLoading:false,
         sloadingText:"数据保存中...",
         checkTaiLiData: [], //切换尺寸时候已经有图片的保存的节点
@@ -225,12 +226,14 @@
               $(".taili_pu_2").addClass("taili_pu");
               $(".taili_pu").removeClass("taili_pu_2");
               sessionStorage.setItem('tailiType', tel)
+              vm.tailiSize = "195X145"
               vm.setTailiBg(); //修改台历背景图片
             } else if (tel === "竖") {
               $(".taili_pu").addClass("taili_pu_2");
               $(".taili_pu_2").removeClass("taili_pu");
               sessionStorage.setItem('tailiType', tel)
               vm.setTailiBg(); //修改台历背景图片
+              vm.tailiSize = "145X195"
             }
             vm.$store.commit('removeAllImgHashMap')//指向vuex 清除里面所有的数据
           }).catch(() => {
@@ -649,6 +652,11 @@
           $(".taili_pu").addClass("taili_pu_2")
           $(".taili_pu_2").removeClass("taili_pu")
           vm.setTailiBg(); //修改台历背景图片
+        }
+        //如果是咖啡色
+        if(JSON.parse(sessionStorage.getItem("bbsSlsectDate")).colorName=="coffee"){
+//          $(".comtent_chanpin .pubilc_div .time_pu .bbsClass .drap_img").eq(0).css("background","#6A3906")
+          $("#colour").text("咖啡色")
         }
       }, 500)
       setTimeout(function () {

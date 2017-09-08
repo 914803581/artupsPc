@@ -164,7 +164,7 @@
 			<div class="detail m mt2">
 				<div class="btnaa r">
 					<p class="l">
-					<a class="btna1" href="#userCat">返回购物车</a> <input class="btnbtn" @click="placeOrder()" type="button" id="" value="提交订单"></p>
+					<a class="btna1" href="/user/cart">返回购物车</a> <input class="btnbtn" @click="placeOrder()" type="button" id="" value="提交订单"></p>
 				</div>
 			</div>
 			<div class="detail m">

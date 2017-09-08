@@ -101,13 +101,13 @@ function HashMap() {
 }
 function getNaturalWidth(img) {
   var image = new Image()
-  image.src = img.src
+  image.src = img.getAttribute("imgstyle")
   var naturalWidth = image.width
   return naturalWidth
 }
 function getNaturalHeight(img) {
   var image = new Image()
-  image.src = img.src
+  image.src = img.getAttribute("imgstyle")
   var naturalHeight = image.height
   return naturalHeight
 }
@@ -163,8 +163,8 @@ function dragThumb(cs_src, cs_divdom) { //cs_src图片的节点,框型（固定d
       width: imgWidth + 'px',
       height: imgHeight + 'px',
       left: dx + 'px',
-      top: dy + 'px',
-      maxWidth:imgWidth + 'px',
+      top: dy + 'px'
+      // maxWidth:imgWidth + 'px',
     })
     cs_src.attr("min_scale", mul);
 }

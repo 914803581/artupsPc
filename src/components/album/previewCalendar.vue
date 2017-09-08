@@ -104,7 +104,8 @@
         if (this.pageNum === 1 && !this.revolutionState) {
           return
         }
-        var list = this.$refs.pageList
+        let list = this.$refs.pageList
+        let backs = list.getElementsByClassName('back')
         this.revolutionState = this.revolutionState ? 0 : 1
         list.style.transform = 'rotateZ(' + (this.revolutionState ? '180' : '0') + 'deg)'
       }
@@ -169,6 +170,9 @@
       height: 300px;
       &.front {
         z-index: 100;
+      }
+      &.back {
+        transform: rotateY(180deg);
       }
     }
 
