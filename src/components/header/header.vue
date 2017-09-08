@@ -59,7 +59,7 @@
           link: '/poster.html?category=haibao&defDbId=d6e44ca4-511f-41d5-87df-d8d75a491c09'
         }, {
           label: '小时光',
-          link: '/album/imgEditMsg?category=baobaoshu&tplCode=pc_baobaoshu_170-235_24_single&defDbId=7ad740df-0b81-418f-b4b5-c078ef580b47'
+          link: '/album/imgEditMsg?category=baobaoshu&tplCode=pc_baobaoshu_170-235_24&defDbId=7ad740df-0b81-418f-b4b5-c078ef580b47'
         }, {
           label: '台历',
           link: '/desk.html?category=taili&defDbId=f80b4c98-15ca-4da0-b482-0c8270c2eac6'

@@ -104,10 +104,10 @@ let store = new Vuex.Store({
 			var picObj = {
 				"constName": constName,
 				"page": obj.page,
-				"editCnfIndex": obj.typeStyle,
+				"editCnfIndex": obj.typestyle,
 				"num": obj.textsort,
 				"content": obj.txt,
-				"editCnfName": JSON.parse(sessionStorage.getItem("urlQuery")).tplCode,
+				"editCnfName": JSON.parse(sessionStorage.getItem("bbsSlsectDate")).editCnfName,
 				"crossPage": false
 			};
 			//存入图片ImgHashMap
@@ -147,7 +147,7 @@ let store = new Vuex.Store({
 				"thumbnailImageUrl": edidData.attr("src"),
 				"previewThumbnailImageUrl": "",
 				"crop": "true",
-				"editCnfName": JSON.parse(sessionStorage.getItem("urlQuery")).tplCode,
+				"editCnfName": JSON.parse(sessionStorage.getItem("bbsSlsectDate")).editCnfName,
 				"crossPage": false
 			};
 			//如果是横版的修改标识符
@@ -382,7 +382,7 @@ let store = new Vuex.Store({
 						"thumbnailImageUrl": dataImg.thumbnailUrl,
 						"previewThumbnailImageUrl": "",
 						"crop": "true",
-						"editCnfName": JSON.parse(sessionStorage.getItem("urlQuery")).tplCode,
+						"editCnfName": JSON.parse(sessionStorage.getItem("bbsSlsectDate")).editCnfName,
 						"crossPage": false
 					};
 					if($(ev.target).parents(".pubilc_div").hasClass("hengban_bbs")) { //如果拖动的图片结束是横版
