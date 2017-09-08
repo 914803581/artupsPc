@@ -45,7 +45,7 @@
 								<p class="l">收货人：<span>{{address.name}}</span>电话：<span>{{address.mobile}}</span></p>
 							</div>
 							<div class="ord1m_2">
-								<a class="xuanze l" href="javascript:;" @click="setDefaultAddress(index,address.dbid)"><span  class="xz01" v-show="address.isOK"></span></a><span>{{address.isOK}}{{address.province}}{{address.address}}</span>
+								<a class="xuanze l" href="javascript:;" @click="setDefaultAddress(index,address.dbId)"><span  class="xz01" v-show="address.isOK"></span></a><span>{{address.province}}{{address.address}}</span>
 							</div>
 						</div>
 					</div>
@@ -249,26 +249,30 @@
 				//location.href="/payOrder";
         		},
         		setDefaultAddress(index,dbid){
+        			this.addressDataList.forEach(itme=>{
+        				itme.isOK = false
+        			})
         			this.addressDataList[index].isOK = !this.addressDataList[index].isOK;
         			this.selectAddressA = !this.selectAddressA;
 					var jsons = {
 								userDbId:localStorage.getItem('userDbId'),
 								dbId:dbid
-								}
+							}
 					Api.address.setDefaultAddress(jsons).then(res=>{
 						 var addJsons= {
 				           		userDbId:localStorage.getItem('userDbId')
-				           }
+				         }
 						   Api.address.defaultAddress(addJsons).then(res=>{
 				           		if(res.data.length > 0){
+				           			console.log(this.addressData)
 				           			this.addressData = res.data[0];
 				           			this.addresBool = true;
 				           		}
 				           },err=>{
-                 alert('数据请求错误');
+                					 alert('数据请求错误');
 				           })
 					},err=>{
-            alert('数据请求错误');
+           					 alert('数据请求错误');
 					})
         		}
 
@@ -281,7 +285,6 @@
         Api.car.queryCar(jsons).then(res=>{
            	if(res.data.length > 0){
            		this.goodsSize = res.data.length;
-           		console.log(res.data)
               let type = '';
            		this.dataList = res.data;
            		for(var i = 0; i<this.dataList.length; i++){
@@ -318,9 +321,9 @@
           }
 			Api.address.addressList(jsons).then(res=>{
 				this.addressDataList = res.data.results;
+				console.log(res.data.results)
 				for (var i = 0; i < this.addressDataList.length; i++) {
 					if(this.addressDataList[i].mainAddr  == '是'){
-
 						this.addressDataList[i].isOK = true;
 					}else{
 						this.addressDataList[i].isOK = false;
