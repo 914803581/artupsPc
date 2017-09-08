@@ -222,7 +222,6 @@
         			return;
         		},
         		placeOrder(){
-
         			if(this.addresBool != true){
 	        			alert('地址不能为空')
 	        			return;
@@ -242,7 +241,7 @@
                 if(this.payType == 2){
                   payType='zfb';
             }
-            location.href="/pay/payOrder?addressId="+this.addressData.dbId+"&userDbId=2221214&dbId="+res.data.orderDbId+"&paymentType="+payType;
+            location.href="/pay/payOrder?addressId="+this.addressData.dbId+"&userDbId="+localStorage.getItem("userDbId")+"&dbId="+res.data.orderDbId+"&paymentType="+payType;
         }
 				},err=>{
 					alert('请求错误');
@@ -319,7 +318,6 @@
           }
 			Api.address.addressList(jsons).then(res=>{
 				this.addressDataList = res.data.results;
-
 				for (var i = 0; i < this.addressDataList.length; i++) {
 					if(this.addressDataList[i].mainAddr  == '是'){
 
