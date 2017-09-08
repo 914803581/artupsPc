@@ -376,10 +376,14 @@ export default {
     },
     mounted(){
     var vm = this
-    		this.nowProductData = this.productData;//插件传递过来的编辑器上显示数据
-    		this.$forceUpdate();
+    this.nowProductData = this.productData;//插件传递过来的编辑器上显示数据
+    this.$forceUpdate();
+    if(!sessionStorage.getItem('bbsSlsectDate')){
+      let obj = {}
+      sessionStorage.setItem('bbsSlsectDate',JSON.stringify(obj))
+    }
 
-    		console.log(this.nowProductData)
+    console.log(this.nowProductData)
 		var queryObj = {'category':this.nowProductData.category};
 		//获取url的category值 以字符串的json格式保存到sessionStroage中
  		sessionStorage.setItem("urlQuery",JSON.stringify(queryObj));
