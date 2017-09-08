@@ -70,7 +70,6 @@
 				this.imgMunber = 0;
 				//给vuex提交一个异步请求
 				this.$store.dispatch("getMaterial");
-
 			},
 			slectFile(){ //选择上传之后选择的图片
 

@@ -252,10 +252,9 @@
 						dataCode+=$(this).attr("data-code")+'.'
 						dataCode2+=$(this).attr("data-name")+'.'
 					})
-					console.log(dataCode)
-					console.log(dataCode2)
+
 					//组装后端需要的数据暂存浏览器
-					this.bbsSlsectDate.name = sessionStorage.getItem('titleName')+'.'+dataCode2;
+					this.bbsSlsectDate.name = sessionStorage.getItem('titleName')+'.'+dataCode2.substr(0,dataCode2.length-1);
 					this.bbsSlsectDate.skuCode = this.getFromSession("category")+'.'+dataCode;
 					this.bbsSlsectDate.category = this.getFromSession("category"); //类型字段
 					console.log(this.attributes)

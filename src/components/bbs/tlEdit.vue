@@ -12,7 +12,7 @@
               <span></span>
             </div>
             <div class="title_right">
-              <span>{{tailiSize}}mm</span>
+              <span>台历.<span id="colour">白色</span>.{{tailiSize}}mm</span>
               <span>13页</span>
               <span><i class="iconfont">&#xe6e2;</i>59.80</span>
             </div>
@@ -51,7 +51,7 @@
             <ul>
               <!--<li><i class="iconfont">&#xe711;</i>添加组件</li>-->
               <li @click="bbs.Switching=true"><i class="iconfont">&#xe64f;</i>更换板式</li>
-              <li @click="nextStep('1')"><i style="font-size: 20px;padding:0 ;" class="iconfont">&#xe602;</i>加入购物车</li>
+              <li @click="nextStep('1')"><i style="font-size: 20px;padding:0;" class="iconfont">&#xe602;</i>加入购物车</li>
               <li @click="nextStep('2')"><i class="iconfont">&#xe629;</i>立即购买</li>
               <!--<li @click="nextStep"><i class="iconfont">&#xe629;</i>下一步</li>-->
               <!--这里保存是要先验证，然后在保存-->
@@ -652,6 +652,11 @@
           $(".taili_pu").addClass("taili_pu_2")
           $(".taili_pu_2").removeClass("taili_pu")
           vm.setTailiBg(); //修改台历背景图片
+        }
+        //如果是咖啡色
+        if(JSON.parse(sessionStorage.getItem("bbsSlsectDate")).colorName=="coffee"){
+//          $(".comtent_chanpin .pubilc_div .time_pu .bbsClass .drap_img").eq(0).css("background","#6A3906")
+          $("#colour").text("咖啡色")
         }
       }, 500)
       setTimeout(function () {
