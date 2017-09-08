@@ -162,7 +162,8 @@
         })
       },
       pay: function (order) {
-        location.href = `/pay/payOrder?addressId=${order.addressDbId}&userDbId=${order.userDbId}&dbId=${order.dbId}&paymentType=${order.paymentType}`
+        let orderPay = order.paymentType.split('_')[1]
+        location.href = `/pay/payOrder?addressId=${order.addressDbId}&userDbId=${order.userDbId}&dbId=${order.dbId}&paymentType=${orderPay}`
       },
       cancel: function (order) {
         this.$confirm('确认要取消订单吗？')

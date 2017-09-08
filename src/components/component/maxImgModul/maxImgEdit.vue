@@ -101,7 +101,7 @@
           </div>
           <div class="footer_right">
             <button class="footer_btn" @click="preview">
-              预览宝宝书
+              预览{{titleMsg.titleName}}
             </button>
             <button @click="open_material" class="footer_btn">
               添加图片
@@ -942,9 +942,10 @@
           srcDom.attr("id", $(el).text() + '_' + srcDom.attr("imgsort") + '_' + 'lomo');
         })
       }
-
       if (this.$route.query.dbId) { // 如果是再次编辑进来的界面
         this.workEdit.edtDbId = this.$route.query.dbId // 存入id预防
+        vm.sLoading = true
+        vm.sloadingText = '作品继续编辑中...'
         Api.work.unfinishedWork(this.$route.query.dbId).then((res) => {
           //再次编辑后端给的版式数据
           var templateData = JSON.parse(res.data.data.dataTemplate.replace(/&quot;/g, '"'));
@@ -970,9 +971,6 @@
           vm.bbsTemplate_data.forEach(function (item, indexs) {
             item.forEach((obj, j) => {
               obj.only = templateData[indexs][j].only
-              if (templateData[indexs][j].only) {
-                console.log(j + '索引____')
-              }
               obj.slectTemplate = false
               obj.template = templateData[indexs][j].template
             })
@@ -1070,9 +1068,6 @@
                   "editCnfName": oImgData[i].editCnfName,
                   "crossPage": oImgData[i].crossPage
                 };
-//                if(oImgData[i].cossPage){
-//                  picObj.cossPage = oImgData[i].cossPage;
-//                }
                 vm.$store.commit("ReEditWork_p", {
                   constName: constName,
                   picObj: picObj
@@ -1106,6 +1101,7 @@
                 $("#" + pageNum).css("width", "100%").css("height", "100%").attr("src", oImgLomo[i].previewThumbnailImageUrl).attr("imgstyle", oImgLomo[i].thumbnailImageUrl);
               }
             }
+            vm.sLoading = false
           }, 1000)
         })
       }
