@@ -27,8 +27,6 @@
               <span class="text name">{{item.name}}</span>
               <label>联系方式：</label>
               <span class="text">{{item.mobile}}</span>
-              <label>邮编：</label>
-              <span class="text">100000</span>
               <p class="address">{{item.province}},{{item.address}}</p>
               <div class="set-default-box">
                 <el-button v-show="!startDelete&&!isMainMap[item.mainAddr]"

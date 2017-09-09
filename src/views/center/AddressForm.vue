@@ -30,11 +30,8 @@
           ></el-option>
         </el-select>
       </el-form-item>
-      <el-form-item label="邮政编码">
-        <el-input v-model="ruleForm.postcode"></el-input>
-      </el-form-item>
       <el-form-item label="手机" prop="phone">
-        <el-input v-model="ruleForm.phone"></el-input>
+        <el-input v-model="ruleForm.phone" maxlength="11"></el-input>
       </el-form-item>
       <el-form-item label="详细地址" prop="addition">
         <el-input type="textarea" v-model="ruleForm.addition"></el-input>
@@ -50,6 +47,7 @@
 
 <script type="text/ecmascript-6">
   import region from 'data/region.json'
+  import {ALERT_CUSTOM} from 'base/js/common.config'
   import Api from '@/api.js'
 
   export default {
@@ -75,7 +73,6 @@
           city: '',
           cityText: '',
           county: '',
-          postcode: '',
           phone: '',
           addition: ''
         },
@@ -131,13 +128,12 @@
             }).then((result) => {
               result = JSON.parse(result)
               if (result.code === 'success') {
-                this.$alert('修改成功', '提示', {
-                  confirmButtonText: '确定',
+                this.$alert('修改成功', '提示', Object.assign(ALERT_CUSTOM, {
                   callback: function () {
                     localStorage.removeItem(`Address${_self.dbId}`)
                     location.href = _self.getCallbackPage()
                   }
-                })
+                }))
               }
             })
             return
@@ -153,12 +149,12 @@
           }).then((result) => {
             result = JSON.parse(result)
             if (result.code === 'success') {
-              this.$alert('添加成功', '提示', {
+              this.$alert('添加成功', '提示', Object.assign(ALERT_CUSTOM, {
                 confirmButtonText: '确定',
                 callback: function () {
                   location.href = _self.getCallbackPage()
                 }
-              })
+              }))
             }
           })
         })
@@ -184,7 +180,6 @@
           city: '',
           cityText: provinceArray && provinceArray.length >= 2 ? provinceArray[1] : '',
           county: provinceArray && provinceArray.length >= 3 ? provinceArray[2] : '',
-          postcode: '',
           phone: address.mobile,
           addition: address.address
         }
