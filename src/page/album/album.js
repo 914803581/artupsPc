@@ -104,6 +104,7 @@ new Vue({
         parameter: this.skuCode
       }
       Api.sku.querySku(jsons).then(res => {
+        console.log(res)
         this.previewImageUrl = res.data.previewImageUrl //框形预览图
         this.editImageUrl = res.data.editImageUrl //编辑框背景图
         this.price = res.data.price
@@ -123,6 +124,10 @@ new Vue({
         return
       }
       if (localStorage.getItem("userDbId")) {
+        let editCnfName = ''
+        if (this.nowSize === '255X355') {
+          editCnfName = 'pc_huace_255-355_56_single'
+        }
         location.href =
           '/album/albumSelect?size=' + this.nowSize +
           "&editImageUrl=" + this.editImageUrl +
@@ -132,7 +137,8 @@ new Vue({
           '&category=' + this.getQueryString('category') +
           '&skuId=' + this.skuId +
           '&page=' + this.nowPage +
-          '&templateCode=' + this.templateCode
+          '&templateCode=' + this.templateCode +
+          '&editCnfName=' + editCnfName
       } else {
         this.setUrlCallback()
       }

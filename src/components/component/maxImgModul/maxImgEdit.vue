@@ -947,6 +947,19 @@
         vm.sLoading = true
         vm.sloadingText = '作品继续编辑中...'
         Api.work.unfinishedWork(this.$route.query.dbId).then((res) => {
+          console.log(res.data.data.finish)
+          if(res.data.data.finish=='N'){
+            vm.$message({
+              iconClass: "atrup_Message",
+              showClose: true,
+              message: '图片还未裁剪完毕，请稍后再试!',
+              type: 'warning'
+            });
+            setTimeout(function () {
+              location.href = '/center/draft.html'
+              return;
+            },1500)
+          }
           //再次编辑后端给的版式数据
           var templateData = JSON.parse(res.data.data.dataTemplate.replace(/&quot;/g, '"'));
           console.log(templateData)
@@ -957,8 +970,6 @@
           if (res.data.data.lomo) { // 如果有lomo卡
             var oImgLomo = JSON.parse(res.data.data.lomo)
           }
-
-
           templateData.forEach((val) => {
             val.forEach((va) => {
               va.template = vm.template_Source[va.type]

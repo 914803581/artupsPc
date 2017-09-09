@@ -45,7 +45,7 @@
 								<p class="l">收货人：<span>{{address.name}}</span>电话：<span>{{address.mobile}}</span></p>
 							</div>
 							<div class="ord1m_2">
-								<a class="xuanze l" href="javascript:;" @click="setDefaultAddress(index,address.dbid)"><span  class="xz01" v-show="address.isOK"></span></a><span>{{address.isOK}}{{address.province}}{{address.address}}</span>
+								<a class="xuanze l" href="javascript:;" @click="setDefaultAddress(index,address.dbId)"><span  class="xz01" v-show="address.isOK"></span></a><span>{{address.province}}{{address.address}}</span>
 							</div>
 						</div>
 					</div>
@@ -88,7 +88,7 @@
 					</div>
 
 					<div class="or2m-t-2 ritdh l">
-						<span class="s1">￥</span>
+						<span class="s1"><i class="iconfont">&#xe6e2;</i></span>
 						<span class="s2 ng-binding">{{itmes.price}}</span>
 						<span class="s1">元</span>
 					</div>
@@ -97,7 +97,7 @@
 						<span class="s2 ng-binding">{{itmes.num}}</span>
 					</div>
 					<div class="or2m-t-2 redd l">
-						<span class="s1">￥</span>
+						<span class="s1"><i class="iconfont">&#xe6e2;</i></span>
 						<span class="s2 ng-binding">{{itmes.price * itmes.num | toFixedTwo}}</span>
 						<span class="s1">元</span>
 					</div>
@@ -147,18 +147,18 @@
 			</div>
 			<div class="detail m">
 				<div class="dtl01 r">
-					<p class=""><span id="oNUmber" class="redd ng-binding">{{goodsSize}}</span>件商品，商品总金额：￥<span id="oPrice" class="ng-binding">{{allPrice | toFixedTwo}}</span></p>
+					<p class=""><span id="oNUmber" class="redd ng-binding">{{goodsSize}}</span>件商品，商品总金额：<i class="iconfont">&#xe6e2;</i><span id="oPrice" class="ng-binding">{{allPrice | toFixedTwo}}</span></p>
 					<p style="display: none;" class="">
 					享受优惠：使用优惠劵抵现 <span id="couponPrefeAmount" class="ng-binding">0.00</span> 元，<span ng-show="!manYuan==0" class="">订单总价满<span id="manYuan" class="ng-binding">0</span>元减<span id="prefePrice" class="ng-binding">0</span>元</span>
 
 					</p>
-					<p class="" style="display: none;">合计优惠金额：-￥<span id="totalPrefeAmount" class="ng-binding">0.00元</span></p>
-					<p class=""><span class="bul">中通快递</span>&nbsp;&nbsp;运费：￥<span>0.00</span></p>
+					<p class="" style="display: none;">合计优惠金额：-<i class="iconfont">&#xe6e2;</i><span id="totalPrefeAmount" class="ng-binding">0.00元</span></p>
+					<p class=""><span class="bul">中通快递</span>&nbsp;&nbsp;运费：<i class="iconfont">&#xe6e2;</i><span>0.00</span></p>
 				</div>
 			</div>
 			<div class="detail m" style="clear: both;">
 				<div class="money r">
-					<p class="l">应付金额：<span>￥</span><span id="goodsPayAmount" class="ng-binding">{{allPrice | toFixedTwo}}元</span></p>
+					<p class="l">应付金额：<span><i class="iconfont">&#xe6e2;</i></span><span id="goodsPayAmount" class="ng-binding">{{allPrice | toFixedTwo}}元</span></p>
 				</div>
 			</div>
 			<div class="detail m mt2">
@@ -222,7 +222,6 @@
         			return;
         		},
         		placeOrder(){
-
         			if(this.addresBool != true){
 	        			alert('地址不能为空')
 	        			return;
@@ -242,7 +241,7 @@
                 if(this.payType == 2){
                   payType='zfb';
             }
-            location.href="/pay/payOrder?addressId="+this.addressData.dbId+"&userDbId=2221214&dbId="+res.data.orderDbId+"&paymentType="+payType;
+            location.href="/pay/payOrder?addressId="+this.addressData.dbId+"&userDbId="+localStorage.getItem("userDbId")+"&dbId="+res.data.orderDbId+"&paymentType="+payType;
         }
 				},err=>{
 					alert('请求错误');
@@ -250,26 +249,30 @@
 				//location.href="/payOrder";
         		},
         		setDefaultAddress(index,dbid){
+        			this.addressDataList.forEach(itme=>{
+        				itme.isOK = false
+        			})
         			this.addressDataList[index].isOK = !this.addressDataList[index].isOK;
         			this.selectAddressA = !this.selectAddressA;
 					var jsons = {
 								userDbId:localStorage.getItem('userDbId'),
 								dbId:dbid
-								}
+							}
 					Api.address.setDefaultAddress(jsons).then(res=>{
 						 var addJsons= {
 				           		userDbId:localStorage.getItem('userDbId')
-				           }
+				         }
 						   Api.address.defaultAddress(addJsons).then(res=>{
 				           		if(res.data.length > 0){
+				           			console.log(this.addressData)
 				           			this.addressData = res.data[0];
 				           			this.addresBool = true;
 				           		}
 				           },err=>{
-                 alert('数据请求错误');
+                					 alert('数据请求错误');
 				           })
 					},err=>{
-            alert('数据请求错误');
+           					 alert('数据请求错误');
 					})
         		}
 
@@ -282,7 +285,6 @@
         Api.car.queryCar(jsons).then(res=>{
            	if(res.data.length > 0){
            		this.goodsSize = res.data.length;
-           		console.log(res.data)
               let type = '';
            		this.dataList = res.data;
            		for(var i = 0; i<this.dataList.length; i++){
@@ -319,10 +321,9 @@
           }
 			Api.address.addressList(jsons).then(res=>{
 				this.addressDataList = res.data.results;
-
+				console.log(res.data.results)
 				for (var i = 0; i < this.addressDataList.length; i++) {
 					if(this.addressDataList[i].mainAddr  == '是'){
-
 						this.addressDataList[i].isOK = true;
 					}else{
 						this.addressDataList[i].isOK = false;

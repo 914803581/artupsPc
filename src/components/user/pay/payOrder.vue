@@ -43,7 +43,7 @@
 	        	 	Api.car.orderPay(jsons).then(res=>{
 
 	        	 		console.log(res)
-	        	 		if(res.data.paymentType == 'pc_zfb'){
+	        	 		if(res.data.paymentType == 'pc_zfb' || res.data.paymentType == 'zfb'){
 	        	 			$('#zfb_pay_fk').html(res.data.payHtml)
 	        	 		}else{
 	        	 			//PC端微信扫码生成二维码

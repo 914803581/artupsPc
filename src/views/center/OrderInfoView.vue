@@ -44,17 +44,17 @@
           </div>
           <div class="invoice">
             <h5>发票信息：</h5>
-            <span>发票信息无</span>
+            <span>{{item.invoiceTitle}}</span>
           </div>
           <div class="remark">
             <h5>备注信息</h5>
-            <p>无</p>
+            <p>{{item.mark}}</p>
           </div>
           <div class="pay-info">
             <h5>结算信息</h5>
             <div class="row">
               <label>支付方式：</label>
-              <span>{{item.paymentType}}</span>
+              <span>{{item.paymentTypeName}}</span>
             </div>
             <div class="row">
               <label>商品金额：</label>

@@ -38,7 +38,7 @@
 					<br>
 					<dt style="">
 						<div class="pices">
-							¥ <i>{{price}}</i> CNY
+            <i class="iconfont">&#xe6e2;</i> <i>{{price}}</i>
 						</div>
             <!--href="/album/maxImgEdit"-->
 						<div  @click="goEdit" class="sib-a">开始定制</div>
@@ -257,6 +257,7 @@
 					this.bbsSlsectDate.name = sessionStorage.getItem('titleName')+'.'+dataCode2.substr(0,dataCode2.length-1);
 					this.bbsSlsectDate.skuCode = this.getFromSession("category")+'.'+dataCode;
 					this.bbsSlsectDate.category = this.getFromSession("category"); //类型字段
+          this.bbsSlsectDate.editCnfName = "pc_baobaoshu_170-235_24_single"
 					console.log(this.attributes)
 					//console.log(this.getFromSession("category"))
 					var paramsJson = {

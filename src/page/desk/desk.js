@@ -32,7 +32,7 @@ new Vue({
     skuCode: '', //用来取价钱的sku
     price: '', //框画的价钱
     previewImageUrl: '', //框形预览图
-
+    nowColorZW: '', //当前颜色中文
     frameType: '', //框形
     framePage: '', //页数
     frameColor: '', //颜色
@@ -112,14 +112,15 @@ new Vue({
       if (localStorage.getItem("userDbId")) {
         var jsons = {
           "colorName": this.nowColor,
-          "name": "台历." + this.nowColor + "." + this.nowSize,
+          "name": "台历." + this.nowColorZW + "." + this.nowSize,
           "skuCode": this.skuCode,
           "category": this.getFromSession("category"),
           "price": this.price,
           "skuId": this.skuId,
           "size": this.nowSize,
           "titleName": "台历",
-          "tplCode": this.templateCode
+          "tplCode": this.templateCode,
+          "editCnfName": this.templateCode + '_single'
         }
         if (this.nowSize === "195X145") {
           sessionStorage.setItem('tailiType', '横')
@@ -162,6 +163,7 @@ new Vue({
         setTimeout(function () {
           that.nowSize = $('.k1_Foot1size_click').eq(0).attr('size')
           that.nowColor = $('.kuangAngle').eq(1).attr('code')
+          that.nowColorZW = $('.kuangAngle').eq(1).attr('colorname')
           that.updataSkuData()
         })
       }

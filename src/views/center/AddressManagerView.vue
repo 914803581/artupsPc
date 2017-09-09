@@ -98,6 +98,7 @@
           }
           this.total = data.totalRecord
           this.addressList = data.results
+          console.log(this.addressList)
         })
       },
       rollback: function () {

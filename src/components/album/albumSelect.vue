@@ -76,7 +76,8 @@
 		    		"skuId":this.$route.query.skuId,
 		    		"size":this.$route.query.size,
 		    		"titleName":"画册",
-		    		"tplCode":this.$route.query.templateCode
+		    		"tplCode":this.$route.query.templateCode,
+            "editCnfName": this.$route.query.editCnfName
 	    		};
 	    		var obj = JSON.parse(sessionStorage.getItem("urlQuery"));
 	    		obj.tplCode = this.$route.query.templateCode;
