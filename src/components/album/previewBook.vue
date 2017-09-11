@@ -361,22 +361,23 @@
           height: 340px;
           margin-top: 50px;
         }
+        .text_style_3_1, .text_style_3_2 {
+          display: block;
+          width: 80%;
+          height: 50px;
+          margin: 20px auto 0;
+          border: 1px solid #eee;
+          background: #eee;
+          box-shadow: 3px 3px 3px #999;
+          font-size: 12px;
+          overflow: hidden;
+        }
+        &.text_style_3_2 {
+          margin-top: 50px;
+          height: 180px;
+        }
       }
-      .text_style_3_1, .text_style_3_2 {
-        display: block;
-        width: 80%;
-        height: 50px;
-        margin: 20px auto 0;
-        border: 1px solid #eee;
-        background: #eee;
-        box-shadow: 3px 3px 3px #999;
-        font-size: 12px;
-        overflow: hidden;
-      }
-      &.text_style_3_2 {
-        margin-top: 50px;
-        height: 180px;
-      }
+
       .img_style_4_1 {
         display: block;
         width: 88%;
