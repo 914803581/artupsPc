@@ -137,7 +137,8 @@
     </transition>
     <!--<div-editText ></div-editText>-->
 
-    <preview-book :title="titleMsg.titleName" :colorName="colorName" :visible.sync="previewDialogVisible" :data="previewData"
+    <preview-book :title="titleMsg.titleName" :colorName="colorName" :visible.sync="previewDialogVisible"
+                  :data="previewData"
                   @close="previewDialogVisible=false"></preview-book>
   </div>
 </template>
@@ -802,7 +803,11 @@
           }
           _self.previewData.push(pageInfo)
           if (type === 9) {
-            _self.previewData.push(Object.assign(pageInfo, {}))
+            _self.previewData.push({
+              type: 9,
+              imgs: pageInfo.imgs,
+              text: []
+            })
           }
         })
         this.PreviewWork.textHashMap.keys().forEach(function (key) {
@@ -942,13 +947,14 @@
           srcDom.attr("id", $(el).text() + '_' + srcDom.attr("imgsort") + '_' + 'lomo');
         })
       }
+
       if (this.$route.query.dbId) { // 如果是再次编辑进来的界面
         this.workEdit.edtDbId = this.$route.query.dbId // 存入id预防
         vm.sLoading = true
         vm.sloadingText = '作品继续编辑中...'
         Api.work.unfinishedWork(this.$route.query.dbId).then((res) => {
           console.log(res.data.data.finish)
-          if(res.data.data.finish=='N'){
+          if (res.data.data.finish == 'N') {
             vm.$message({
               iconClass: "atrup_Message",
               showClose: true,
@@ -958,7 +964,7 @@
             setTimeout(function () {
               location.href = '/center/draft.html'
               return;
-            },1500)
+            }, 1500)
           }
           //再次编辑后端给的版式数据
           var templateData = JSON.parse(res.data.data.dataTemplate.replace(/&quot;/g, '"'));
