@@ -7,7 +7,7 @@
 					<!--<i  @click="closeModels"  class="close iconfont">&#xe746;</i>-->
 				</div>
 				<!--文字输入框-->
-				<textarea class="textBox" v-model="$store.state.bbs.textData" maxlength="40" placeholder="输入字体应保存在40字之内">
+				<textarea class="textBox" v-model="$store.state.bbs.textData" :maxlength="textNumbers" :placeholder="placeholder">
 
 				</textarea>
 				<div class="btn_box">
@@ -24,18 +24,21 @@
 		name:'editText',
 		data () {
 		    return {
-		      isEditTexts: false
+          placeholder:'',
+		      isEditTexts: false,
+          textNumbers:'40'
 //		      textData:''
 		    }
 		  },
-		 props:["isEditText"],
+		 props:["isEditText","textNumber"],
 	     methods:{
 			closeModels(){
 				this.isEditTexts = false
 			},
 			openModel(){
 				this.isEditTexts = true;
-
+        this.textNumbers = this.textNumber
+        this.placeholder = '限制输入（' + this.textNumbers + '字）';
 			},
 			okModels(){ //确认输入
 				console.log(this.$store.state.bbs.textData)
@@ -59,6 +62,7 @@
 	    },
 	    mounted(){
 	    	   this.isEditTexts = this.isEditText;
+            this.textNumbers = this.textNum
 		}
 	}
 </script>

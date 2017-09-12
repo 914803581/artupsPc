@@ -86,7 +86,7 @@
       </div>
       <!--<div class="line_comtent"><div class="comtent"><div class="title"><div class="title_left"><span>宝宝书编辑</span> <span>2017-07-14 11:05</span></div> <div class="title_right"><span>255x355mm</span> <span>56页</span> <span>￥499</span></div></div></div></div>-->
       <!--底部的图片-->
-      <div v-DomHeight class="footer_img">
+      <div v-DomHeight style="position: fixed;height: auto" class="footer_img">
         <div class="footer_up_tittle">
           <div class="footer_left">
             <button @click="delectFooter" class="footer_btn">
@@ -133,7 +133,7 @@
     </transition>
     <!--文字编辑框-->
     <transition name="el-fade-in">
-      <edit-text :isEditText="iseditText"></edit-text>
+      <edit-text :textNumber="textNum" :isEditText="iseditText"></edit-text>
     </transition>
     <!--<div-editText ></div-editText>-->
 
@@ -158,6 +158,7 @@
   export default {
     data() {
       return {
+        textNum:'40', //文本限制的字数
         dataPullTemplate: false,  //监听器是否更新数据
         data_createdDt: "", // 再次编辑的时间
         sloadingText: "",
@@ -637,10 +638,9 @@
           if ($($event.target)) {
             this.$store.commit("getTextBox", $($event.target).text())
           }
-          this.openTxst(); //打开文字框
+          this.openTxst($($event.target).attr("maxlength")); //打开文字框
         }
         if ($($event.target).hasClass("drap_img")) { //点击图片调起编辑器
-
           if ($($event.target).next(".img_drap").attr("src") == "") {
             return;
           } //为空返回
@@ -706,8 +706,10 @@
       open_material() { //打开素材库
         this.isModel = !this.isModel
       },
-      openTxst() { //打开文字框
+      openTxst(maxlen) { //打开文字框
+
         this.iseditText = !this.iseditText;
+        this.textNum = maxlen;
       },
       openImgEdit() {
         this.isimgEdit = !this.isimgEdit;
@@ -961,6 +963,7 @@
             },1500)
           }
           //再次编辑后端给的版式数据
+          console.log(res.data.data)
           var templateData = JSON.parse(res.data.data.dataTemplate.replace(/&quot;/g, '"'));
           console.log(templateData)
           this.data_createdDt = res.data.data.createdDt
