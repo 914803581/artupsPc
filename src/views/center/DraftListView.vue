@@ -20,9 +20,8 @@
                   <el-checkbox v-show="managerIng" v-model="work.checked" class="checkbox-work"></el-checkbox>
                   <img :src="work.thumbnailImageUrl" :alt="work.name" :title="work.name">
                 </div>
-                <label class="title">{{work.name}}</label>
+                <label class="title">{{work.sku}}</label>
                 <span class="time">{{work.updatedDt}}</span>
-                <span class="type">{{work.sku}}</span>
                 <a @click="continueEdit(index)" href="javascript:void(0);" class="buy-btn">继续编辑</a>
               </div>
             </div>
@@ -240,7 +239,7 @@
         position: relative;
         float: left;
         width: 260px;
-        margin-right: 56px;
+        margin: 0 56px 28px 0;
         overflow: hidden;
         .img-box {
           display: table-cell;
@@ -279,14 +278,12 @@
           display: block;
           color: #cbcbcb;
           font-size: 12px;
-        }
-        .type {
-          margin-bottom: 28px;
+          line-height: 25px;
         }
         .buy-btn {
           position: absolute;
           right: 10px;
-          bottom: 28px;
+          bottom: 0;
           display: block;
           padding: 0 .8em;
           background: #a00912;
