@@ -39,7 +39,7 @@
           </div>
           <div class="consignee">
             <label>收货人信息：</label>
-            <span>名称无</span>
+            <span>{{item.consignee}}</span>
             <p>{{item.address}}</p>
           </div>
           <div class="invoice">
@@ -54,7 +54,7 @@
             <h5>结算信息</h5>
             <div class="row">
               <label>支付方式：</label>
-              <span>{{item.paymentTypeName}}</span>
+              <span>{{item.paymentType |sum}}</span>
             </div>
             <div class="row">
               <label>商品金额：</label>
@@ -73,6 +73,7 @@
   import Header from '../../components/header/header.vue'
   import Footer from '../../components/footer/footer.vue'
   import LeftMenu from '../../components/center/menu.vue'
+  import Filter from '@/filter.js'
   import Api from '@/api.js'
 
   export default {
