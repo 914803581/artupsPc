@@ -10,8 +10,8 @@
       <div class="main">
         <ul class="list" ref="pageList">
           <li class="item" v-for="page in data">
-            <img :src="page.front" class="page-img front">
-            <img :src="page.back" class="page-img back">
+            <div class="page-img front" :style="{backgroundImage:`url(${page.front})`}"></div>
+            <div class="page-img back" :style="{backgroundImage:`url(${page.back})`}"></div>
           </li>
         </ul>
         <button @click="upward">上翻</button>
@@ -129,7 +129,7 @@
 
 <style lang="scss" rel="stylesheet/sass">
   .preview {
-    user-select:none;
+    user-select: none;
     .el-dialog--small {
       top: 50% !important;
       width: 500px;
@@ -169,6 +169,10 @@
       display: block;
       width: 300px;
       height: 300px;
+      background-color: #fff;
+      background-repeat: no-repeat;
+      background-size: auto 100%;
+      background-position: center;
       &.front {
         z-index: 100;
       }
@@ -179,7 +183,7 @@
 
     button {
       font-size: 20px;
-      user-select:none;
+      user-select: none;
     }
 
   }
