@@ -147,9 +147,9 @@
   export default {
     data() {
       return {
-        tailiSize:JSON.parse(sessionStorage.getItem("bbsSlsectDate")).size,
-        sLoading:false,
-        sloadingText:"数据保存中...",
+        tailiSize: JSON.parse(sessionStorage.getItem("bbsSlsectDate")).size,
+        sLoading: false,
+        sloadingText: "数据保存中...",
         checkTaiLiData: [], //切换尺寸时候已经有图片的保存的节点
         pickerOptions0: { //初始化日期区间函数
           disabledDate(time) {
@@ -312,7 +312,7 @@
         Api.car.addCar(jsons).then(res => {
           console.log(res);
           this.sLoading = false
-          if(val=="1"){
+          if (val == "1") {
             this.$message({
               showClose: true,
               iconClass: "atrup_Message",
@@ -323,7 +323,7 @@
               path: "/user/cart",
               query: {}
             })
-          }else{
+          } else {
             this.$message({
               showClose: true,
               iconClass: "atrup_Message",
@@ -332,7 +332,7 @@
             });
             this.$router.push({
               path: "/user/cart",
-              query: {"carDbId":res.data.extraCode}
+              query: {"carDbId": res.data.extraCode}
             })
           }
         }, err => {
@@ -590,9 +590,16 @@
         let _self = this
         this.previewData = []
         let defaultImg = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWO4dOnSfwAIZgN2UcgHsgAAAABJRU5ErkJggg=='
-        for (let i = 0; i < 13; i++) {
+        for (let i = 12; i >= 0; i--) {
+          let calendar = defaultImg
+          if (i) {
+            let years = _self.dataMonth.split('-')[0] - 0
+            let months = (parseInt(_self.dataMonth.split('-')[1]) - 1) + i - 1
+            let date = new Date(years, months)
+            calendar = `http://image2.artup.com/static/pc/images/pc_taili/taili_145X195/${date.getFullYear()}${(date.getMonth() + 1)}.jpg`
+          }
           this.previewData.push({
-            front: defaultImg,
+            front: calendar,
             back: defaultImg
           })
         }
@@ -654,7 +661,7 @@
           vm.setTailiBg(); //修改台历背景图片
         }
         //如果是咖啡色
-        if(JSON.parse(sessionStorage.getItem("bbsSlsectDate")).colorName=="coffee"){
+        if (JSON.parse(sessionStorage.getItem("bbsSlsectDate")).colorName == "coffee") {
 //          $(".comtent_chanpin .pubilc_div .time_pu .bbsClass .drap_img").eq(0).css("background","#6A3906")
           $("#colour").text("咖啡色")
         }

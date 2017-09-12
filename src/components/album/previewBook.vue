@@ -23,7 +23,8 @@
           <span :key="t.index"
                 :class="['text_style_'+item.type+'_'+t.index]"
                 v-for="t in item.text">{{t.text}}</span>
-          <label v-if="item.type !== 9 || (item.type === 9 && index%2)" class="title">{{item.title}}</label>
+          <label v-if="item.type !== 9 || (item.type === 9 && index%2 )"
+                 class="title">{{item.title}}|{{index}}</label>
           <span class="page_num" :class="!((index+1)%2) ? 'left' : 'right'">第{{index + 1}}页</span>
         </div>
         <div class="hard even"></div>
@@ -118,7 +119,7 @@
 
 <style lang="scss" rel="stylesheet/sass">
   .preview {
-    .main-image{
+    .main-image {
       background-size: cover;
       background-repeat: no-repeat;
       background-position: 50%;
@@ -360,22 +361,23 @@
           height: 340px;
           margin-top: 50px;
         }
+        .text_style_3_1, .text_style_3_2 {
+          display: block;
+          width: 80%;
+          height: 50px;
+          margin: 20px auto 0;
+          border: 1px solid #eee;
+          background: #eee;
+          box-shadow: 3px 3px 3px #999;
+          font-size: 12px;
+          overflow: hidden;
+        }
+        &.text_style_3_2 {
+          margin-top: 50px;
+          height: 180px;
+        }
       }
-      .text_style_3_1, .text_style_3_2 {
-        display: block;
-        width: 80%;
-        height: 50px;
-        margin: 20px auto 0;
-        border: 1px solid #eee;
-        background: #eee;
-        box-shadow: 3px 3px 3px #999;
-        font-size: 12px;
-        overflow: hidden;
-      }
-      &.text_style_3_2 {
-        margin-top: 50px;
-        height: 180px;
-      }
+
       .img_style_4_1 {
         display: block;
         width: 88%;

@@ -28,7 +28,7 @@
                   <img :src="work.thumbnailImageUrl" :alt="work.name" :title="work.name">
                 </div>
                 <label class="title">{{work.name}}</label>
-                <span class="time">{{work.updatedDt}}</span>
+                <span class="time">{{work.createdDt}}</span>
                 <span class="type">{{work.sku}}</span>
                 <a href="javascript:void(0);" class="buy-btn">购买定制</a>
               </div>

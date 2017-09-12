@@ -129,6 +129,7 @@
 
 <style lang="scss" rel="stylesheet/sass">
   .preview {
+    user-select:none;
     .el-dialog--small {
       top: 50% !important;
       width: 500px;
@@ -178,6 +179,7 @@
 
     button {
       font-size: 20px;
+      user-select:none;
     }
 
   }

@@ -31,7 +31,7 @@
                     <div class="car" v-for="car in item.cars">
                       <img :src="car.thumbnailImageUrl" class="thumbnail">
                       <h6 class="title">{{car.sku}}</h6>
-                      <h6 class="specification">{{car.sku}}</h6>
+                      <h6 class="specification">{{item.createdDt}}</h6>
                     </div>
                   </div>
                   <div class="name">
