@@ -72,6 +72,7 @@ new Vue({
       }
       $('.k1_FootPage_click').removeClass('typeActive')
       $('.k1_FootPage_click').eq(index).addClass('typeActive')
+      // this.nowColorZW = $(".typeActive").attr("colorname")
       this.updataSkuData()
     },
     /*点击更新框画尺寸
@@ -89,6 +90,7 @@ new Vue({
       var showTypeStr = 'box' + $('.k1_Foot1size_click').eq(index).attr('sizetype') //获取尺寸对应框的class
       selTpl.setShowImgSize(showTypeStr, 'picContainerOne')
       this.nowSize = $('.k1_Foot1size_click').eq(index).attr('size')
+
       this.updataSkuData()
     },
     /*更新sku*/
@@ -105,6 +107,7 @@ new Vue({
         this.price = res.data.price
         this.skuId = res.data.skuId
         this.templateCode = res.data.templateCode
+        this.nowColorZW = $('.typeActive').attr('colorname')
       })
     },
     /*开始定制*/
@@ -162,8 +165,8 @@ new Vue({
                */
         setTimeout(function () {
           that.nowSize = $('.k1_Foot1size_click').eq(0).attr('size')
-          that.nowColor = $('.kuangAngle').eq(1).attr('code')
-          that.nowColorZW = $('.kuangAngle').eq(1).attr('colorname')
+          that.nowColor = $('.kuangAngle').eq(0).attr('code')
+          that.nowColorZW = $('.kuangAngle').eq(0).attr('colorname')
           that.updataSkuData()
         })
       }

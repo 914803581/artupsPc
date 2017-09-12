@@ -224,7 +224,6 @@ export default {
 				picObj.actions = val.postData;
            $(".editbbs_one").next("img").attr("src",val.imgData).css("width","100%").css("height","100%").css("left",0).css("top",0)
 			}
-			//console.log(val.postData)
 			this.editData.editCnfName = this.nowProductData.editCnfName;
 			this.editData.userDbId = localStorage.getItem("userDbId")
 			this.editData.category = this.nowProductData.category;

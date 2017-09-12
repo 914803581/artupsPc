@@ -74,7 +74,7 @@
         </div>
       </div>
       <!--底部的图片-->
-      <div v-DomHeight class="footer_img">
+      <div v-DomHeight style="position: fixed;height: auto" class="footer_img">
         <div class="footer_up_tittle">
           <div class="footer_left">
             <button @click="delectFooter" class="footer_btn">
@@ -236,6 +236,9 @@
               vm.tailiSize = "145X195"
             }
             vm.$store.commit('removeAllImgHashMap')//指向vuex 清除里面所有的数据
+            //修改session的值
+            let bbsSlsectDate = JSON.parse(sessionStorage.getItem("bbsSlsectDate"));
+            this.updataSkuData(this.tailiSize,bbsSlsectDate.colorName);
           }).catch(() => {
             vm.$message({
               type: 'success',
@@ -394,8 +397,21 @@
             arrMap.push(this.$store.state.editData.ImgHashMap.getvalue(this.$store.state.editData.ImgHashMap.keys()[i]))
           }
         }
+        //切换尺寸的时候重新组装数据
+//       function  updataSkuData(nowSize, nowColor) {
+//          var skuCode = 'taili' + '.' + nowSize + '.' + nowColor
+//          var jsons = {
+//            category: 'taili',
+//            parameter: skuCode
+//          }
+//          Api.sku.querySku(jsons).then(res => {
+//            console.log('日历参数___', res)
+//          })
+//        }
         //字符串转换数组存储到对象里面
         let bbsSlsectDate = JSON.parse(sessionStorage.getItem("bbsSlsectDate"));
+//        updataSkuData(this.tailiSize,bbsSlsectDate.colorName);
+
         this.workEdit.editPicture = JSON.stringify(arrMap);
         this.workEdit.tplCode = bbsSlsectDate.tplCode;
         this.workEdit.operator = "add";
@@ -422,13 +438,22 @@
           category: 'taili',
           parameter: skuCode
         }
+        let bbsSlsectDate = JSON.parse(sessionStorage.getItem("bbsSlsectDate"));
         Api.sku.querySku(jsons).then(res => {
-          console.log('日历参数___', res)
-    //            this.previewImageUrl = res.data.previewImageUrl //框形预览图
-    //            this.editImageUrl = res.data.editImageUrl //编辑框背景图
-    //            this.price = res.data.price
-    //            this.skuId = res.data.skuId
-    //            this.templateCode = res.data.templateCode
+          this.workEdit.tplCode = res.data.templateCode;
+          this.workEdit.sku = bbsSlsectDate.name.split('.')[0]+'.'+bbsSlsectDate.name.split('.')[1]+'.'+nowSize;
+          this.workEdit.skuId = res.data.skuId;
+          this.workEdit.status = 2;
+          this.workEdit.skuCode = skuCode;
+
+          bbsSlsectDate.size = nowSize
+          bbsSlsectDate.name = bbsSlsectDate.name.split('.')[0]+'.'+bbsSlsectDate.name.split('.')[1]+'.'+nowSize
+          bbsSlsectDate.tplCode = res.data.templateCode
+          bbsSlsectDate.editCnfName = res.data.templateCode+'_single'
+          bbsSlsectDate.skuId = res.data.skuId
+          bbsSlsectDate.skuCode = skuCode
+
+          sessionStorage.setItem("bbsSlsectDate",JSON.stringify(bbsSlsectDate));
         })
       },
       editWork(val) { //保存作品
