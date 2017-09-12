@@ -54,7 +54,7 @@
                          @click="pay(item)">付款</a>
                       <a href="javascript:void(0);" v-show="[-1,3].indexOf(item.status) < 0" class="cancel-order"
                          @click="cancel(item)">取消订单</a>
-                      <a href="javascript:void(0);" v-show="[3,-1].indexOf(item.status) >= 0" class="cancel-order"
+                      <a href="javascript:void(0);" v-show="[-1].indexOf(item.status) >= 0" class="cancel-order"
                          @click="deleteOrder(item)">删除订单</a>
                     </div>
                   </div>
