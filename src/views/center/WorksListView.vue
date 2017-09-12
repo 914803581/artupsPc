@@ -30,7 +30,7 @@
                 <label class="title">{{work.name}}</label>
                 <span class="time">{{work.createdDt}}</span>
                 <span class="type">{{work.sku}}</span>
-                <a href="javascript:void(0);" class="buy-btn">购买定制</a>
+                <a href="javascript:void(0);" @click="Purchase(work)" class="buy-btn">购买定制</a>
               </div>
             </div>
           </div>
@@ -86,6 +86,35 @@
       }
     },
     methods: {
+      Purchase(work) {
+        console.log(work)
+        var jsons = {
+          edtDbId: work.dbId,
+          thumbnailImageUrl: work.thumbnailImageUrl,
+          category: work.category,
+          price: work.price,
+          num: 1,
+          total: work.price,
+          sku: work.sku,
+          skuCode: work.skuCode,
+          skuId: work.skuId,
+          tplCode: work.tplCode,
+          status: 1,
+          userDbId: localStorage.getItem("userDbId"),
+          editCnfName: work.tplCode + '_single'
+        }
+        Api.car.addCar(jsons).then(res => {
+          if (res.data.code === "success") {
+//            this.$message({
+//              showClose: true,
+//              iconClass: "atrup_Message",
+//              message: '加入购物车成功!',
+//              type: 'success'
+//            })
+            window.location.href = "/user/cart"
+          }
+        })
+      },
       deleteWorkList: function () {
         let deleteArr = []
         this.workData.forEach(function (work) {

@@ -271,11 +271,11 @@ export default {
 					userDbId:localStorage.getItem("userDbId"),
           editCnfName:this.nowProductData.tplCode+'_single'
 				}
-				console.log(jsons,'___-')
+				console.log(this.nowProductData.tplCode)
 				Api.car.addCar(jsons).then(res=>{
 					if(res.data.code == 'success'){
 						this.sLoading = false;
-						this.$message({
+						      this.$message({
 				            showClose: true,
 				            iconClass: "atrup_Message",
 				            message: '加入购物车成功!',

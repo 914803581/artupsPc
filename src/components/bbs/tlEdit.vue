@@ -415,6 +415,22 @@
           }
         })
       },
+      //切换尺寸的时候重新组装数据
+      updataSkuData(nowSize, nowColor) {
+        var skuCode = 'taili' + '.' + nowSize + '.' + nowColor
+        var jsons = {
+          category: 'taili',
+          parameter: skuCode
+        }
+        Api.sku.querySku(jsons).then(res => {
+          console.log('日历参数___', res)
+    //            this.previewImageUrl = res.data.previewImageUrl //框形预览图
+    //            this.editImageUrl = res.data.editImageUrl //编辑框背景图
+    //            this.price = res.data.price
+    //            this.skuId = res.data.skuId
+    //            this.templateCode = res.data.templateCode
+        })
+      },
       editWork(val) { //保存作品
         this.assembleData();
         //唤出loading...
