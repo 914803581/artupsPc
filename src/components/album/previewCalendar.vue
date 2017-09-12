@@ -8,15 +8,15 @@
                :close-on-click-modal="false"
     >
       <div class="main">
-        <ul class="list" ref="pageList">
+        <ul class="list" :class="{cross:format,vertical:!format}" ref="pageList">
           <li class="item" v-for="page in data">
             <div class="page-img front" :style="{backgroundImage:`url(${page.front})`}"></div>
             <div class="page-img back" :style="{backgroundImage:`url(${page.back})`}"></div>
           </li>
         </ul>
-        <button @click="upward">上翻</button>
-        <button @click="down">下翻</button>
-        <button @click="revolution">旋转</button>
+        <button @click="upward"><i class="iconfont icon-shangfan"></i>上翻</button>
+        <button @click="down"><i class="iconfont icon-xiafan"></i>下翻</button>
+        <button @click="revolution"><i class="iconfont icon-xuanzhuan"></i>旋转</button>
       </div>
     </el-dialog>
   </div>
@@ -25,6 +25,8 @@
 <script type="text/ecmascript-6">
   /* eslint-disable no-undef */
 
+  const VERTICAL_CROSS = 0
+  const FORMAT_CROSS = 1
   export default {
     props: {
       colorName: {
@@ -54,6 +56,7 @@
     },
     data: function () {
       return {
+        format: VERTICAL_CROSS,
         pageNum: 1,
         revolutionState: 0,
         isTurn: false,
@@ -105,7 +108,6 @@
           return
         }
         let list = this.$refs.pageList
-        let backs = list.getElementsByClassName('back')
         this.revolutionState = this.revolutionState ? 0 : 1
         list.style.transform = 'rotateZ(' + (this.revolutionState ? '180' : '0') + 'deg)'
       }
@@ -120,6 +122,11 @@
       },
       visible: function (val) {
         this.previewDialogVisible = val
+        if (sessionStorage.tailiType === '横') {
+          this.format = FORMAT_CROSS
+        } else {
+          this.format = VERTICAL_CROSS
+        }
       }
     },
     created: function () {
@@ -149,6 +156,18 @@
       transform-style: preserve-3d;
       transition: 800ms ease-in;
     }
+    .list.vertical {
+      width: 260px;
+      .item {
+        width: 260px;
+      }
+    }
+    .list.cross {
+      width: 360px;
+      .item {
+        width: 360px;
+      }
+    }
 
     .item {
       position: absolute;
@@ -167,8 +186,8 @@
       top: 0;
       left: 0;
       display: block;
-      width: 300px;
-      height: 300px;
+      width: 100%;
+      height: 100%;
       background-color: #fff;
       background-repeat: no-repeat;
       background-size: auto 100%;
@@ -182,8 +201,19 @@
     }
 
     button {
-      font-size: 20px;
+      cursor: pointer;
       user-select: none;
+      border: 0;
+      padding: 0 1.2em;
+      background: transparent;
+      text-align: center;
+      font-size: 12px;
+      font-weight: 400;
+      outline: none;
+      .iconfont {
+        display: block;
+        font-size: 20px;
+      }
     }
 
   }
