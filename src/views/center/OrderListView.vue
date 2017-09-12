@@ -35,7 +35,7 @@
                     </div>
                   </div>
                   <div class="name">
-                    <span class="consignee">{{userInfo.userName}}</span>
+                    <span class="consignee">{{item.consignee}}</span>
                   </div>
                   <div class="amount">
                     <div class="parcel">
@@ -79,9 +79,10 @@
 </template>
 
 <script type="text/ecmascript-6">
-  import Header from '../../components/header/header.vue'
-  import Footer from '../../components/footer/footer.vue'
-  import LeftMenu from '../../components/center/menu.vue'
+  import Header from 'components/header/header.vue'
+  import Footer from 'components/footer/footer.vue'
+  import LeftMenu from 'components/center/menu.vue'
+  import {ALERT_CUSTOM} from 'base/js/common.config'
   import Api from '@/api.js'
 
   export default {
@@ -156,9 +157,7 @@
           if (result.totalPage) {
             this.pageNum = result.totalPage
           }
-          if (result.totalRecord) {
-            this.total = result.totalRecord
-          }
+          this.total = result.totalRecord
         })
       },
       pay: function (order) {
@@ -166,7 +165,7 @@
         location.href = `/pay/payOrder?addressId=${order.addressDbId}&userDbId=${order.userDbId}&dbId=${order.dbId}&paymentType=${orderPay}`
       },
       cancel: function (order) {
-        this.$confirm('确认要取消订单吗？')
+        this.$confirm('确认要取消订单吗？', ALERT_CUSTOM)
           .then(_ => {
             Api.Order.CancleOrder({
               dbId: order.dbId
@@ -179,7 +178,7 @@
       },
       deleteOrder: function (order) {
         let _self = this
-        this.$confirm('确认要删除订单吗？')
+        this.$confirm('确认要删除订单吗？', ALERT_CUSTOM)
           .then(_ => {
             Api.Order.DelOrder({
               dbId: order.dbId
