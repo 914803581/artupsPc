@@ -66,17 +66,17 @@
           text: '所有类型',
           selected: true
         }, {
-          id: 'kuanghua',
-          text: '框画'
+          id: 'huace',
+          text: '画册'
         }, {
           id: 'haibao',
           text: '海报'
         }, {
-          id: 'citiehua',
-          text: '磁贴画'
+          id: 'baobaoshu',
+          text: '小时光'
         }, {
-          id: 'huace',
-          text: '画册'
+          id: 'taili',
+          text: '台历'
         }],
         workData: [],
         category: '',
