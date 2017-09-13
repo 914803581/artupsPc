@@ -375,12 +375,12 @@
               .attr("dbid", vm.FooterDataAuto[index].dbId)
               .attr("thumbnailScale", vm.FooterDataAuto[index].thumbnailScale)
             //每次循环都取触发存储数据的操作
-            vm.$store.commit("autoPushData")
+            vm.$store.commit("autoPushDataTaili",'taili')
             //计算位置
             setTimeout(function () {
               arrDrap.unshift(index)
               dragThumb($(el), $(el).parent())
-            }, 100)
+            }, 200)
           }
         })
         //处理图片底部自动删除的操作

@@ -1,12 +1,18 @@
-function GetQueryString(name) {
-  var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)")
-  var r = window.location.search.substr(1).match(reg)
-  if (r != null) return unescape(r[2])
-  return null
+// function GetQueryString(name) {
+//   var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)")
+//   var r = window.location.search.substr(1).match(reg)
+//   if (r != null) return unescape(r[2])
+//   return null
+// }
+function GetQueryString(key) {
+  var reg = new RegExp("(^|&)" + key + "=([^&]*)(&|$)")
+  var result = window.location.search.substr(1).match(reg)
+  return result ? decodeURIComponent(result[2]) : null
 }
 
 var userDbId = GetQueryString("userDbId") //userid
 var headImgUrl = GetQueryString("headImgUrl") //头像
+console.log(GetQueryString("userName"))
 var userName = GetQueryString("userName") // userName
 if (userDbId) {
   localStorage.setItem("userDbId", userDbId)

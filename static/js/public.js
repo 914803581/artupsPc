@@ -113,25 +113,16 @@ function getNaturalHeight(img) {
 }
 /*计算图片的缩放*/
 function dragThumb(cs_src, cs_divdom) { //cs_src图片的节点,框型（固定div）的节点
-    console.log('src____width',getNaturalWidth(cs_src[0]))
 
     imgWidth = parseFloat(getNaturalWidth(cs_src[0]));//原图宽
     imgHeight = parseFloat(getNaturalHeight(cs_src[0]));//原图高
     boxWidth = parseFloat(cs_divdom.width());//框宽
     boxHeight = parseFloat(cs_divdom.height());//框高
-    console.log(imgWidth)
-    console.log(imgHeight)
-
-    console.log(boxWidth)
-
-    console.log(boxHeight)
 
     //原图和框的比例（宽）
     var oProportionWidth = boxWidth / imgWidth;
-    console.log('原图和框的比例（宽）',oProportionWidth)
     //原图和框的比例（高）
     var oProportionHeight = boxHeight / imgHeight;
-    console.log('原图和框的比例（高）',oProportionWidth)
     //得到换算的最终比例mul
     var mul;
     if (oProportionWidth > oProportionHeight) {
@@ -139,7 +130,6 @@ function dragThumb(cs_src, cs_divdom) { //cs_src图片的节点,框型（固定d
     } else {
       mul = oProportionHeight;
     }
-    console.log('比例:__',mul)
     //得到原图变小的比例大小
     imgWidth = imgWidth * mul;
     imgHeight = imgHeight * mul;
@@ -152,12 +142,10 @@ function dragThumb(cs_src, cs_divdom) { //cs_src图片的节点,框型（固定d
     //位移的距离盒子-图片缩小比例/2
     var dx = (boxWidth - imgWidth) / 2;
     var dy = (boxHeight - imgHeight) / 2;
-    console.log('dx',dx)
-    console.log('dy',dy)
+
 
   //渲染定位
-  console.log('imgWidth',imgWidth)
-  console.log('imgHeight',imgHeight)
+
 
   cs_src.css({
       width: imgWidth + 'px',

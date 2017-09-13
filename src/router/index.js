@@ -45,7 +45,7 @@ let router = new VueRouter({
       name: 'maxImgEdit',
       component: maxImgEdit,
       meta: {
-        title: '产品编辑'
+        title: '小时光编辑'
       }
     },
     { // vuex的具体使用路由暂时备份
