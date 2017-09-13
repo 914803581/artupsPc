@@ -515,8 +515,14 @@
       },
       postDatas(val) { //获取数据覆盖便于二次编辑
         var constName = this.getCoustNameTaiLi($(".editbbs_one"))
+//        if(constName==="封面_1"){
+//          constName="0_1"
+//        }
         this.$store.state.editData.ImgHashMap.getvalue(constName).actions = val.postData;
-        var oPage = $(".editbbs_one").parents(".pubilc_div").find(".page .pageleft span").text();
+        var oPage = $(".editbbs_one").parents(".pubilc_taili_div").find(".page span:nth-of-type(2)").text();
+        if(oPage==="封面"){ //如果是台历有封面的情况
+          oPage = 0
+        }
         $(".editbbs_one").next("img").attr("src", val.imgData).css("width", "100%").css("height", "100%").css("left", 0).css("top", 0)
         //      ImgHashMapBase64
         var oImgSort = $(".editbbs_one").next("img").attr("imgsort")
@@ -531,12 +537,14 @@
           "base64Img": val.imgData
         };
         if ($(".editbbs_one").hasClass("drap_img_lomo")) { //lomo
+//          alert(constName)
           this.$store.commit("previewWork_lomo", {
             constName: constName,
             picObj: picObj
           })
         } else {
           //拿constName去替换vuex里面已经存在的数据给预览产品
+//          alert(constName)
           this.$store.commit("previewWork", {
             constName: constName,
             picObj: picObj
@@ -562,7 +570,7 @@
           //点击时候获取coustName 从hashMap里面得到他有没第一次编辑的东西
           var constName = this.getCoustNameTaiLi($($event.target))
           this.dataEditImg.oActions = this.$store.state.editData.ImgHashMap.getvalue(constName).actions
-          console.log(this.dataEditImg)
+//          console.log(this.dataEditImg)
           //从vuex缓存里面拿到我的数据
           this.openImgEdit();
         }

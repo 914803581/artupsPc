@@ -115,9 +115,9 @@ let store = new Vuex.Store({
 		},
     autoPushDataTaili(state, obj) {
       var edidData = $(".editAutoDrap");
-      if(obj==="taili"){
-        console.log(edidData)
-      }
+      // if(obj==="taili"){
+      //   console.log(edidData)
+      // }
       var oPage = edidData.parents(".pubilc_taili_div").find(".page span:nth-of-type(2)").text(); //第几页
       var oTypeStyle = edidData.attr("typestyle"); //板式
       var oimgSort = edidData.attr("imgsort"); //图片的顺序
@@ -230,10 +230,10 @@ let store = new Vuex.Store({
 				}, 200)
 				return;
 			}
-      if(picObj.page==="封面"){ //如果是台历有封面的情况
-        picObj.page = '0';
-        picObj.constName = '0_1'
-      }
+      // if(picObj.page==="封面"){ //如果是台历有封面的情况
+      //   picObj.page = '0';
+      //   picObj.constName = '0_1'
+      // }
 			setTimeout(function() {
 				min_scale = edidData.attr("min_scale"); //图片和缩略图的比例
 				picObj.actions.min_scale = min_scale;

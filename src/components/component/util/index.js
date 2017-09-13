@@ -8,9 +8,10 @@ export default{
   	 }
   	 //获取台历的coustName
   	 Vue.prototype.getCoustNameTaiLi = function (dom) {
-  	 	return dom.parents(".pubilc_taili_div").find(".page span:nth-of-type(2)").text()+'_'+dom.next("img").attr("imgsort")
-  	 }
+      var page =  dom.parents(".pubilc_taili_div").find(".page span:nth-of-type(2)").text();
+      return page+'_'+dom.next("img").attr("imgsort")
 
+  	 }
     //开始定制或者其他需要用户权限的地方如果没有就去登录跳转，有就给当前页面字符串存入urlCallback localStorage里面
     Vue.prototype.setUrlCallback = function(){
       localStorage.setItem("urlCallback",location.href)
