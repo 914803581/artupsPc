@@ -190,7 +190,7 @@
       height: 100%;
       background-color: #fff;
       background-repeat: no-repeat;
-      background-size: auto 100%;
+      background-size: 100% 100%;
       background-position: center;
       &.front {
         z-index: 100;
