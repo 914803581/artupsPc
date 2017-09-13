@@ -593,7 +593,8 @@
         } else {
           var constName = this.getCoustName($(".editbbs_one"))
           this.$store.state.editData.ImgHashMap.getvalue(constName).actions = val.postData;
-          var oPage = $(".editbbs_one").parents(".pubilc_div").find(".page .pageleft span").text();
+          var oPage = $(".editbbs_one").parents(".pubilc_div").find(".page .pageleft").eq(0).find("span").text();
+          alert(oPage)
         }
         $(".editbbs_one").next("img").attr("src", val.imgData).css("width", "100%").css("height", "100%").css("left", 0).css("top", 0)
         //      ImgHashMapBase64
