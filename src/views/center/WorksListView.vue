@@ -69,6 +69,9 @@
           id: 'huace',
           text: '画册'
         }, {
+          id: 'kuanghua',
+          text: '框画'
+        }, {
           id: 'haibao',
           text: '海报'
         }, {
