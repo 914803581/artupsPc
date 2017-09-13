@@ -113,11 +113,52 @@ let store = new Vuex.Store({
 			//存入图片ImgHashMap
 			state.editData.textHashMap.putvalue(constName, picObj);
 		},
+    autoImgOne(state, obj) { //单图的触发操作
+      var edidData = $(".editAutoDrap");
+      var oPage = "1"; //第几页
+      var oTypeStyle = "1"; //板式
+      var oimgSort = "1"; //图片的顺序
+      var min_scale = "";
+
+      var constName = oPage + "_" + oimgSort;
+      var picObj = {
+        "constName": constName,
+        "picDbId": edidData.attr("dbId"),
+        "page": oPage,
+        "editCnfIndex": oTypeStyle,
+        "num": oimgSort,
+        "actions": {
+          "thumbnailScale": edidData.attr("thumbnailScale"),
+          "init": "true", //标识符第二次进去消失
+          "cropit": "true",
+          "height": "",
+          "rotate": 0,
+          "width": Math.abs(parseFloat(edidData.prev().width())),
+          "x": "",
+          "y": edidData.css("top")
+        },
+        "thumbnailImageUrl": edidData.attr("src"),
+        "previewThumbnailImageUrl": "",
+        "crop": "true",
+        "editCnfName": JSON.parse(sessionStorage.getItem("bbsSlsectDate")).editCnfName,
+        "crossPage": false
+      };
+      setTimeout(function() {
+        min_scale = edidData.attr("min_scale"); //图片和缩略图的比例
+        picObj.actions.min_scale = min_scale;
+        picObj.actions.x = Math.abs(parseFloat(edidData.css("left")))/min_scale;
+        picObj.actions.y = Math.abs(parseFloat(edidData.css("top")))/min_scale;
+        picObj.actions.width = Math.abs(parseFloat(edidData.prev().width()))/min_scale;
+        picObj.actions.height = Math.abs(parseFloat(edidData.prev().height()))/min_scale;
+        //存入lomoHashMap
+        state.editData.ImgHashMap.putvalue(constName, picObj);
+        //存入base64Lomo给预览产品
+        state.editData.base64HashMap.putvalue(constName, picObj);
+        console.log(state.editData.ImgHashMap.getvalue(constName));
+      }, 400)
+    },
     autoPushDataTaili(state, obj) {
       var edidData = $(".editAutoDrap");
-      // if(obj==="taili"){
-      //   console.log(edidData)
-      // }
       var oPage = edidData.parents(".pubilc_taili_div").find(".page span:nth-of-type(2)").text(); //第几页
       var oTypeStyle = edidData.attr("typestyle"); //板式
       var oimgSort = edidData.attr("imgsort"); //图片的顺序
@@ -398,6 +439,9 @@ let store = new Vuex.Store({
 					$(ev.target).next("img").attr("src", dataImg.thumbnailUrl).attr('imgStyle', dataImg.thumbnailUrl);
 					state.bbs.footerData.splice(oIndex, 1);
 					console.log(dataImg)
+          $(ev.target).next().attr("dbid",dataImg.dbId)
+          $(ev.target).next().attr("thumbnailScale",dataImg.thumbnailScale)
+
 					var oPage = $(ev.target).parents(".pubilc_div").find(".page .pageleft span").attr("page"); //第几页
 					var oTypeStyle = $(ev.target).next(".img_drap").attr("typestyle"); //板式
 					var oimgSort = $(ev.target).next(".img_drap").attr("imgsort"); //图片的顺序
@@ -450,7 +494,6 @@ let store = new Vuex.Store({
 						state.editData.ImgHashMap.remove((parseInt(oPage) + 1) + '_3');
 						state.editData.ImgHashMap.remove((parseInt(oPage) + 1) + '_4');
 					}
-
 
 					//如果是lomo卡
 					if($(ev.target).parents(".lomoTemplate").size() > 0) {

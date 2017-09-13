@@ -67,7 +67,7 @@
 	                    <div @click="deitImgFn($event)" class="drap_img img_box" >
 
 	                    </div>
-	                   	<img draggable="false" class="drap_img" src="" alt="" />
+	                   	<img draggable="false" class="drap_img editAutoDrap" src="" alt="" />
 	                   	<div class="div_alert">
 
 	                 	</div>
@@ -244,7 +244,7 @@ export default {
      },
      toCode(){
        let jsons = JSON.parse(sessionStorage.getItem("bbsSlsectDate"))
-       jsons.editCnfName = this.nowProductData.templateCode+'_single'
+       jsons.editCnfName = this.nowProductData.templateCode
        sessionStorage.setItem('bbsSlsectDate',JSON.stringify(jsons))
      } ,
      /*加入购物车*/
@@ -268,7 +268,7 @@ export default {
           tplCode:this.nowProductData.tplCode,
 					status:1,
 					userDbId:localStorage.getItem("userDbId"),
-          editCnfName:this.nowProductData.tplCode+'_single'
+          editCnfName:this.nowProductData.tplCode
 				}
 				console.log(this.nowProductData.tplCode)
 				Api.car.addCar(jsons).then(res=>{
@@ -324,7 +324,7 @@ export default {
 
      /*更新sku*/
   	updataSkuData (){
-
+      var vm = this;
   		this.skuCode = this.getFromSession("category") + '.' + this.nowSize + '.' + this.nowType;
   		var jsons = {
   			category:this.getFromSession("category"),
@@ -336,6 +336,9 @@ export default {
         if(this.nowProductData.type == '海报') {
           this.editImageUrl =""
         }
+        if(!this.nowFrameType){
+          this.nowFrameType = this.nowProductData.frameType
+        }
   			this.nowProductData.price = res.data.price
         this.nowProductData.sku = this.nowProductData.type+'.'+res.data.size+'.'+this.nowFrameType
         this.nowProductData.skuCode = res.data.category +'.'+res.data.size+'.'+res.data.box
@@ -343,14 +346,17 @@ export default {
         this.$forceUpdate();
   			this.initEditFrameSize();
         let jsons = JSON.parse(sessionStorage.getItem("bbsSlsectDate"))
-        jsons.editCnfName = this.nowProductData.tplCode+'_single'
+        jsons.editCnfName = this.nowProductData.tplCode
         sessionStorage.setItem('bbsSlsectDate',JSON.stringify(jsons))
   		});
       setTimeout(function(){
-        dragThumb($("#oddEdit .comtent_chanpin .comtent .waikuang .drapBox .drap_img").eq(1),$("#oddEdit .comtent_chanpin .comtent .waikuang .drapBox"))
-
+        var oImg = $("#oddEdit .comtent_chanpin .comtent .waikuang .drapBox .drap_img").eq(1);
+        if(oImg.attr("src")!=oImg.attr("imgstyle")){
+          oImg.attr("src",oImg.attr("imgstyle"))
+        }
+        dragThumb(oImg,$("#oddEdit .comtent_chanpin .comtent .waikuang .drapBox"))
+        vm.$store.commit("autoImgOne");
       },500)
-
     },
   	/*初始化编辑框的宽高*/
   	initEditFrameSize (){

@@ -1,5 +1,3 @@
-
-
 //HashMap取值
 function HashMap() {
   /**
