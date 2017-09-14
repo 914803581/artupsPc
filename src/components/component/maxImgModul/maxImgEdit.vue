@@ -111,10 +111,10 @@
         <el-collapse-transition>
           <div v-show="footerShow" class="fonter_box_img">
             <ul v-if="$store.state.bbs.footerData.length > 0">
-              <li @click="footerImgSlectFooter(index)" :class="{'img_size_border':footerImg.slectFooter}"
+              <li @click="footerImgSlectFooter(index)"   :style="{backgroundImage: 'url(\''+footerImg.thumbnailUrl+'\')'}"  class="bg_cover"  :class="{'img_size_border':footerImg.slectFooter}"
                   :att="footerImg.slectFooter" v-for="(footerImg,index) in $store.state.bbs.footerData"
                   draggable="true">
-                <img :src="footerImg.thumbnailUrl"/>
+                <img style="opacity:0;" :src="footerImg.thumbnailUrl"/>
               </li>
             </ul>
             <p style="line-height: 116px;text-align: center;font-size: 16px;color: #6b6b6b;"

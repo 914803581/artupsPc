@@ -14,8 +14,8 @@
 						<i class="iconfont">&#xe60b;</i>
 						<p class="text">*按shift支持多图上传</p>
 					</div>
-					<div @click="selectImg(index)" :class="item.isTrue ?'imagebox img_size_border':'imagebox'  " v-for="(item,index) in $store.state.bbs.material">
-						<img :src="item.thumbnailUrl"    alt="" />
+					<div @click="selectImg(index)"  :style="{backgroundImage: 'url(\''+item.thumbnailUrl+'\')'}"  :class="item.isTrue ?'imagebox img_size_border bg_cover':'imagebox bg_cover'  " v-for="(item,index) in $store.state.bbs.material">
+						<!--<img style="opacity: 0" :src="item.thumbnailUrl"    alt="" />-->
 					</div>
 				</div>
 				<el-button style="position: relative;left: -50%;" @click.native="slectFile" type="danger">上传图片</el-button>

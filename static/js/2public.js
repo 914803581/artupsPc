@@ -111,6 +111,7 @@ function getNaturalHeight(img) {
 }
 /*计算图片的缩放*/
 function dragThumb(cs_src, cs_divdom) { //cs_src图片的节点,框型（固定div）的节点
+
     imgWidth = parseFloat(getNaturalWidth(cs_src[0]));//原图宽
     imgHeight = parseFloat(getNaturalHeight(cs_src[0]));//原图高
     boxWidth = parseFloat(cs_divdom.width());//框宽
@@ -139,7 +140,11 @@ function dragThumb(cs_src, cs_divdom) { //cs_src图片的节点,框型（固定d
     //位移的距离盒子-图片缩小比例/2
     var dx = (boxWidth - imgWidth) / 2;
     var dy = (boxHeight - imgHeight) / 2;
+
+
   //渲染定位
+
+
   cs_src.css({
       width: imgWidth + 'px',
       height: imgHeight + 'px',
