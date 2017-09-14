@@ -71,7 +71,7 @@
               </div>
             </div>
           </div>
-          <div v-show="titleMsg.titleName=='小时光'" class="title">
+          <div v-show="lomoTemplate_data.length>0" class="title">
             <div class="title_left"><span>LOMO卡编辑</span> <span></span></div>
             <div class="title_right"><span>照片尺寸：152X102</span> <span>LOMO卡单张：74X100</span> <span>赠送物品</span></div>
           </div>

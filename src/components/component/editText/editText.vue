@@ -7,7 +7,7 @@
 					<!--<i  @click="closeModels"  class="close iconfont">&#xe746;</i>-->
 				</div>
 				<!--文字输入框-->
-				<textarea class="textBox" v-model="$store.state.bbs.textData" :maxlength="textNumbers" :placeholder="placeholder">
+				<textarea @keydown="keyupShow($event)" class="textBox" v-model="$store.state.bbs.textData" :maxlength="textNumbers" :placeholder="placeholder">
 
 				</textarea>
 				<div class="btn_box">
@@ -32,6 +32,11 @@
 		  },
 		 props:["isEditText","textNumber"],
 	     methods:{
+         keyupShow($event){
+           if($event.keyCode==13){
+              $event.preventDefault();
+           }
+         },
 			closeModels(){
 				this.isEditTexts = false
 			},
@@ -43,7 +48,7 @@
 			okModels(){ //确认输入
 				console.log(this.$store.state.bbs.textData)
 				this.isEditTexts = false;
-				$(".editText_one").text(this.$store.state.bbs.textData)
+        $(".editText_one").text(this.$store.state.bbs.textData)
 				var oPage = $(".editText_one").parents(".pubilc_div").find(".page .pageleft span").eq(0).text();
 
 				var oTextsort =$(".editText_one").attr("textsort")
