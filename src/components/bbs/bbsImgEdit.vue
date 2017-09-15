@@ -63,6 +63,7 @@
 								"lastPage": false,
                 "type":"bbs7"
 							}
+
 						],
 
 //						[{
@@ -73,11 +74,11 @@
 //              "type":"bbs9"
 //						}],
 						[{
-							"template": bbsTemplateData.bbs2,
+							"template": bbsTemplateData.bbs8,
 							"only": false,
 							"firstPage": false,
 							"lastPage": true, //最后一页必须有的属性
-              "type":"bbs2"
+              "type":"bbs8"
 						}]
 					], //产品需要的数据
 					'lomoData_template': lomoData_template, //lomo卡需要的数据
