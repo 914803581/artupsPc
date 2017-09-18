@@ -42,29 +42,200 @@
                 "type":"bbs4"
 							},
 							{
-								"template": bbsTemplateData.bbs5,
+								"template": bbsTemplateData.bbs1,
 								"only": false,
 								"firstPage": false,
 								"lastPage": false,
-                "type":"bbs5"
+                "type":"bbs1"
 							}
 						],
 						[{
-								"template": bbsTemplateData.bbs6,
+								"template": bbsTemplateData.bbs1,
 								"only": false,
 								"firstPage": false,
 								"lastPage": false,
-                "type":"bbs6"
+                "type":"bbs1"
 							},
 							{
-								"template": bbsTemplateData.bbs7,
+								"template": bbsTemplateData.bbs4,
 								"only": false,
 								"firstPage": false,
 								"lastPage": false,
-                "type":"bbs7"
+                "type":"bbs4"
 							}
-
 						],
+            [{
+              "template": bbsTemplateData.bbs4,
+              "only": false,
+              "firstPage": false,
+              "lastPage": false,
+              "type":"bbs4"
+            },
+              {
+                "template": bbsTemplateData.bbs5,
+                "only": false,
+                "firstPage": false,
+                "lastPage": false,
+                "type":"bbs5"
+              }
+            ],
+            [{
+              "template": bbsTemplateData.bbs5,
+              "only": false,
+              "firstPage": false,
+              "lastPage": false,
+              "type":"bbs5"
+            },
+              {
+                "template": bbsTemplateData.bbs4,
+                "only": false,
+                "firstPage": false,
+                "lastPage": false,
+                "type":"bbs4"
+              }
+            ],
+            [{
+              "template": bbsTemplateData.bbs6,
+              "only": false,
+              "firstPage": false,
+              "lastPage": false,
+              "type":"bbs6"
+            },
+              {
+                "template": bbsTemplateData.bbs2,
+                "only": false,
+                "firstPage": false,
+                "lastPage": false,
+                "type":"bbs2"
+              }
+            ],
+            [{
+              "template": bbsTemplateData.bbs8,
+              "only": false,
+              "firstPage": false,
+              "lastPage": false,
+              "type":"bbs8"
+            },
+              {
+                "template": bbsTemplateData.bbs5,
+                "only": false,
+                "firstPage": false,
+                "lastPage": false,
+                "type":"bbs5"
+              }
+            ],[{
+              "template": bbsTemplateData.bbs7,
+              "only": false,
+              "firstPage": false,
+              "lastPage": false,
+              "type":"bbs7"
+            },
+              {
+                "template": bbsTemplateData.bbs2,
+                "only": false,
+                "firstPage": false,
+                "lastPage": false,
+                "type":"bbs2"
+              }
+            ],[{
+              "template": bbsTemplateData.bbs2,
+              "only": false,
+              "firstPage": false,
+              "lastPage": false,
+              "type":"bbs2"
+            },
+              {
+                "template": bbsTemplateData.bbs1,
+                "only": false,
+                "firstPage": false,
+                "lastPage": false,
+                "type":"bbs1"
+              }
+            ],[{
+              "template": bbsTemplateData.bbs2,
+              "only": false,
+              "firstPage": false,
+              "lastPage": false,
+              "type":"bbs2"
+            },
+              {
+                "template": bbsTemplateData.bbs2,
+                "only": false,
+                "firstPage": false,
+                "lastPage": false,
+                "type":"bbs2"
+              }
+            ],[{
+              "template": bbsTemplateData.bbs6,
+              "only": false,
+              "firstPage": false,
+              "lastPage": false,
+              "type":"bbs6"
+            },
+              {
+                "template": bbsTemplateData.bbs4,
+                "only": false,
+                "firstPage": false,
+                "lastPage": false,
+                "type":"bbs4"
+              }
+            ],[{
+              "template": bbsTemplateData.bbs1,
+              "only": false,
+              "firstPage": false,
+              "lastPage": false,
+              "type":"bbs1"
+            },
+              {
+                "template": bbsTemplateData.bbs2,
+                "only": false,
+                "firstPage": false,
+                "lastPage": false,
+                "type":"bbs2"
+              }
+            ],[{
+              "template": bbsTemplateData.bbs4,
+              "only": false,
+              "firstPage": false,
+              "lastPage": false,
+              "type":"bbs4"
+            },
+              {
+                "template": bbsTemplateData.bbs1,
+                "only": false,
+                "firstPage": false,
+                "lastPage": false,
+                "type":"bbs1"
+              }
+            ],[{
+              "template": bbsTemplateData.bbs5,
+              "only": false,
+              "firstPage": false,
+              "lastPage": false,
+              "type":"bbs5"
+            },
+              {
+                "template": bbsTemplateData.bbs3,
+                "only": false,
+                "firstPage": false,
+                "lastPage": false,
+                "type":"bbs3"
+              }
+            ],[{
+              "template": bbsTemplateData.bbs2,
+              "only": false,
+              "firstPage": false,
+              "lastPage": false,
+              "type":"bbs2"
+            },
+              {
+                "template": bbsTemplateData.bbs1,
+                "only": false,
+                "firstPage": false,
+                "lastPage": false,
+                "type":"bbs1"
+              }
+            ],
 
 //						[{
 //							"template": bbsTemplateData.bbs9,
@@ -74,11 +245,11 @@
 //              "type":"bbs9"
 //						}],
 						[{
-							"template": bbsTemplateData.bbs8,
+							"template": bbsTemplateData.bbs5,
 							"only": false,
 							"firstPage": false,
 							"lastPage": true, //最后一页必须有的属性
-              "type":"bbs8"
+              "type":"bbs5"
 						}]
 					], //产品需要的数据
 					'lomoData_template': lomoData_template, //lomo卡需要的数据

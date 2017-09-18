@@ -249,13 +249,19 @@ export default {
      } ,
      /*加入购物车*/
 	addCarFn(type){
+	  var vm = this;
 		this.postDatas();
 		if($('.drapBox img').attr('src')){
 			this.sLoading = true;
-			Api.work.workEdit(this.editData).then(res=>{
-				console.log(this.editData)
-				if(res.data.code == 'success'){
-					var jsons = {
+      let jsons = JSON.parse(sessionStorage.getItem("bbsSlsectDate"))
+      this.editData.tplCode = jsons.editCnfName
+      this.editData.editCnfName = jsons.editCnfName
+      console.log(this.editData)
+      Api.work.workEdit(this.editData).then(res=>{
+
+
+        if(res.data.code == 'success'){
+					var aaajsons = {
 					edtDbId:res.data.extraCode,
 					thumbnailImageUrl:res.data.commandTitle,
 					category:this.getFromSession("category"),
@@ -270,38 +276,38 @@ export default {
 					userDbId:localStorage.getItem("userDbId"),
           editCnfName:this.nowProductData.tplCode
 				}
-				console.log(this.nowProductData.tplCode)
-				Api.car.addCar(jsons).then(res=>{
-					if(res.data.code == 'success'){
-						this.sLoading = false;
-						      this.$message({
-				            showClose: true,
-				            iconClass: "atrup_Message",
-				            message: '加入购物车成功!',
-				            type: 'success'
-				          });
+         setTimeout(function () {
+           Api.car.addCar(aaajsons).then(res=>{
+             if(res.data.code == 'success'){
+               vm.sLoading = false;
+               vm.$message({
+                 showClose: true,
+                 iconClass: "atrup_Message",
+                 message: '加入购物车成功!',
+                 type: 'success'
+               });
 						if(type == 2 || type == '2'){
-							 this.$router.push({
+              vm.$router.push({
 					              path: "/user/cart",
 					              query: {"carDbId":res.data.extraCode}
 					            })
-							//location.href = '/user/cart?carDbId='+res.data.extraCode;
 						}else{
-						  this.$router.push({
+              vm.$router.push({
 				              path: "/user/cart",
 				              query:{}
 				            })
 						}
 
-					}
-				},err=>{
-					this.$message({
-						showClose: true,
-			            iconClass: "atrup_Message",
-			            message: '加入购物车出错!',
-			            type: 'success'
-			          });
-				})
+             }
+           },err=>{
+             vm.$message({
+               showClose: true,
+               iconClass: "atrup_Message",
+               message: '加入购物车出错!',
+               type: 'success'
+             });
+           })
+         },200)
 				}
 			},err=>{
 
@@ -342,7 +348,12 @@ export default {
   			this.nowProductData.price = res.data.price
         this.nowProductData.sku = this.nowProductData.type+'.'+res.data.size+'.'+this.nowFrameType
         this.nowProductData.skuCode = res.data.category +'.'+res.data.size+'.'+res.data.box
+        if(this.nowFrameType === "undefined"){
+          this.nowProductData.sku = this.nowProductData.type+'.'+res.data.size
+          this.nowProductData.skuCode = res.data.category +'.'+res.data.size
+        }
         this.nowProductData.tplCode = res.data.templateCode
+
         this.$forceUpdate();
   			this.initEditFrameSize();
         let jsons = JSON.parse(sessionStorage.getItem("bbsSlsectDate"))

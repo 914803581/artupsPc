@@ -45,11 +45,11 @@
               "type":"bbs1"
 						}],
 						[{
-								"template": hcTemplate.bbs2,
+								"template": hcTemplate.bbs4,
 								"only": false,
 								"firstPage": false,
 								"lastPage": false,
-              "type":"bbs2"
+              "type":"bbs4"
 							},
 							{
 								"template": hcTemplate.bbs3,
@@ -59,27 +59,26 @@
                 "type":"bbs3"
 							}
 						],
+            [{
+              "template": hcTemplate.bbs9,
+              "only": true,
+              "firstPage": false,
+              "lastPage": false,
+              "type":"bbs9"
+            }],
+            [{
+              "template": hcTemplate.bbs9,
+              "only": true,
+              "firstPage": false,
+              "lastPage": false,
+              "type":"bbs9"
+            }],
 						[{
-								"template": hcTemplate.bbs4,
+								"template": hcTemplate.bbs7,
 								"only": false,
 								"firstPage": false,
 								"lastPage": false,
-              "type":"bbs4"
-							},
-							{
-								"template": hcTemplate.bbs5,
-								"only": false,
-								"firstPage": false,
-								"lastPage": false,
-                "type":"bbs5"
-							}
-						],
-						[{
-								"template": hcTemplate.bbs6,
-								"only": false,
-								"firstPage": false,
-								"lastPage": false,
-              "type":"bbs6"
+              "type":"bbs7"
 							},
 							{
 								"template": hcTemplate.bbs7,
@@ -89,20 +88,237 @@
                 "type":"bbs7"
 							}
 						],
-
-						[{
-							"template": hcTemplate.bbs9,
-							"only": true,
-							"firstPage": false,
-							"lastPage": false,
+            [{
+              "template": hcTemplate.bbs9,
+              "only": true,
+              "firstPage": false,
+              "lastPage": false,
               "type":"bbs9"
-						}],
+            }],
+            [{
+              "template": hcTemplate.bbs9,
+              "only": true,
+              "firstPage": false,
+              "lastPage": false,
+              "type":"bbs9"
+            }],
 						[{
-							"template": hcTemplate.bbs1,
+								"template": hcTemplate.bbs4,
+								"only": false,
+								"firstPage": false,
+								"lastPage": false,
+              "type":"bbs4"
+							},
+							{
+								"template": hcTemplate.bbs7,
+								"only": false,
+								"firstPage": false,
+								"lastPage": false,
+                "type":"bbs7"
+							}
+						],
+            [{
+              "template": hcTemplate.bbs9,
+              "only": true,
+              "firstPage": false,
+              "lastPage": false,
+              "type":"bbs9"
+            }],
+            [{
+              "template": hcTemplate.bbs9,
+              "only": true,
+              "firstPage": false,
+              "lastPage": false,
+              "type":"bbs9"
+            }],
+
+            [{
+              "template": hcTemplate.bbs4,
+              "only": false,
+              "firstPage": false,
+              "lastPage": false,
+              "type":"bbs4"
+            },
+              {
+                "template": hcTemplate.bbs4,
+                "only": false,
+                "firstPage": false,
+                "lastPage": false,
+                "type":"bbs4"
+              }
+            ],
+            [{
+              "template": hcTemplate.bbs9,
+              "only": true,
+              "firstPage": false,
+              "lastPage": false,
+              "type":"bbs9"
+            }],[{
+              "template": hcTemplate.bbs9,
+              "only": true,
+              "firstPage": false,
+              "lastPage": false,
+              "type":"bbs9"
+            }],
+            [{
+              "template": hcTemplate.bbs4,
+              "only": false,
+              "firstPage": false,
+              "lastPage": false,
+              "type":"bbs4"
+            },
+              {
+                "template": hcTemplate.bbs3,
+                "only": false,
+                "firstPage": false,
+                "lastPage": false,
+                "type":"bbs3"
+              }
+            ],
+          [{
+            "template": hcTemplate.bbs9,
+            "only": true,
+            "firstPage": false,
+            "lastPage": false,
+            "type":"bbs9"
+          }],
+          [{
+            "template": hcTemplate.bbs9,
+            "only": true,
+            "firstPage": false,
+            "lastPage": false,
+            "type":"bbs9"
+          }],
+          [{
+            "template": hcTemplate.bbs7,
+            "only": false,
+            "firstPage": false,
+            "lastPage": false,
+            "type":"bbs7"
+          },
+            {
+              "template": hcTemplate.bbs7,
+              "only": false,
+              "firstPage": false,
+              "lastPage": false,
+              "type":"bbs7"
+            }
+          ],
+          [{
+            "template": hcTemplate.bbs9,
+            "only": true,
+            "firstPage": false,
+            "lastPage": false,
+            "type":"bbs9"
+          }],
+          [{
+            "template": hcTemplate.bbs9,
+            "only": true,
+            "firstPage": false,
+            "lastPage": false,
+            "type":"bbs9"
+          }],
+          [{
+            "template": hcTemplate.bbs4,
+            "only": false,
+            "firstPage": false,
+            "lastPage": false,
+            "type":"bbs4"
+          },
+            {
+              "template": hcTemplate.bbs5,
+              "only": false,
+              "firstPage": false,
+              "lastPage": false,
+              "type":"bbs5"
+            }
+          ],
+          [{
+            "template": hcTemplate.bbs9,
+            "only": true,
+            "firstPage": false,
+            "lastPage": false,
+            "type":"bbs9"
+          }],
+          [{
+            "template": hcTemplate.bbs4,
+            "only": false,
+            "firstPage": false,
+            "lastPage": false,
+            "type":"bbs4"
+          },
+            {
+              "template": hcTemplate.bbs4,
+              "only": false,
+              "firstPage": false,
+              "lastPage": false,
+              "type":"bbs4"
+            }
+          ],
+          [{
+            "template": hcTemplate.bbs9,
+            "only": true,
+            "firstPage": false,
+            "lastPage": false,
+            "type":"bbs9"
+          }],
+          [{
+            "template": hcTemplate.bbs6,
+            "only": false,
+            "firstPage": false,
+            "lastPage": false,
+            "type":"bbs6"
+          },
+            {
+              "template": hcTemplate.bbs6,
+              "only": false,
+              "firstPage": false,
+              "lastPage": false,
+              "type":"bbs6"
+            }
+          ],
+          [{
+            "template": hcTemplate.bbs9,
+            "only": true,
+            "firstPage": false,
+            "lastPage": false,
+            "type":"bbs9"
+          }],
+          [{
+            "template": hcTemplate.bbs9,
+            "only": true,
+            "firstPage": false,
+            "lastPage": false,
+            "type":"bbs9"
+          }],
+          [{
+            "template": hcTemplate.bbs7,
+            "only": false,
+            "firstPage": false,
+            "lastPage": false,
+            "type":"bbs7"
+          },
+            {
+              "template": hcTemplate.bbs7,
+              "only": false,
+              "firstPage": false,
+              "lastPage": false,
+              "type":"bbs7"
+            }
+          ],
+          [{
+            "template": hcTemplate.bbs9,
+            "only": true,
+            "firstPage": false,
+            "lastPage": false,
+            "type":"bbs9"
+          }],
+						[{
+							"template": hcTemplate.bbs7,
 							"only": false,
 							"firstPage": false,
 							"lastPage": true, //最后一页必须有的属性
-              "type":"bbs1"
+              "type":"bbs7"
 						}]
 					]
 				dataP.templateImgData =
