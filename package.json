@@ -1,8 +1,8 @@
 {
-  "name": "artup-pc",
+  "name": "hanmeilin",
   "version": "1.0.0",
-  "description": "artup",
-  "author": "pengjin0 <827879040@qq.com>",
+  "description": "hanmeilin",
+  "author": "lixia",
   "private": true,
   "scripts": {
     "dev": "node build/dev-server.js",

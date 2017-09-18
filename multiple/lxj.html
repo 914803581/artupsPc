@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="zh_CN">
+<head>
+  <meta charset="UTF-8">
+  <title>雅昌影像-专业定制照片画册,装饰画,海报,挂历</title>
+  <meta name="Keywords" content="传给雅昌,画册,装饰画,有框画,海报定制,挂历2018"/>
+  <meta name="Description" content="传给雅昌是雅昌集团旗下中国最大的专业艺术影像输出平台，提供画册、装饰画、框画、海报、挂历等照片产品的个性定制服务。您选一张照片，我送您一件艺术品。"/>
+  <style>
+    body {
+      opacity: 0;
+    }
+    body,html{
+      font-family: "微软雅黑";
+      color: #424242;
+      width: 100%;
+    }
+    .lxj-main{
+      width:100%;
+    }
+    .selectProduct{
+      width: 100%;
+      height: 520px;
+      background: #fff;
+    }
+    .selectProductContent{
+      width: 1196px;
+      height: 100%;
+      margin:0 auto;
+    }
+    .selectProductContentLeft{
+      width: 580px;
+      height: 100%;
+      box-sizing: border-box;
+      float: left;
+    }
+    .selectProductContentLeft >img{
+      margin-left: 75px;
+      margin-top: 80px;
+    }
+    .selectProductContentRight .price{
+      width: 520px;
+      height: 390px;
+      margin-top: 120px;
+      margin-left: 100px;
+    }
+    .selectProductContentRight .price .introduce{
+      width: 100%;
+      height: 160px;
+    }
+    .selectProductContentRight .price .introduce ul li{
+      margin-top: 22px;
+      color: #555;
+      font-size: 18px;
+    }
+    .selectProductContentRight .price .introduce ul li:nth-child(1){
+      font-size: 40px;
+      color: #1a1a1a;
+      height: 40px;
+      font-weight:bold;
+    }
+    .selectProductContentRight .price .selectParameter{
+
+    }
+    .selectProductContentRight .price .selectParameter ul{
+      width: 100%;
+      height: 40px;
+    }
+    .selectProductContentRight .price .selectParameter ul li{
+      float: left;
+      width: 130px;
+      height: 38px;
+      color: #222222;
+      font-size: 16.2px;
+
+      line-height: 38px;
+      margin-left: 14px;
+    }
+    .selectProductContentRight .price .selectParameter ul li:nth-child(1){
+      margin-left: 0;
+    }
+
+    .selectProductContentRight .price .selectParameter ul:nth-child(2) li{
+      border: 1px solid #0088cc;
+      border-radius: 4px;
+      text-align: center;
+      box-sizing: border-box;
+
+    }
+    .selectProductContentRight .price .selectParameter ul:nth-child(3) li{
+      height: 80px;
+      line-height: 80px;
+      font-size: 20px;
+    }
+    .selectProductContentRight .price .selectParameter ul:nth-child(3) {
+      height: 80px;
+
+    }
+    .selectProductContentRight .price .selectParameter ul:nth-child(4) li{
+      width: 148px;
+      height: 40px;
+      background-color: #010101;
+      border-radius: 4px;
+      color: #fff;
+      text-align: center;
+      font-size: 16px;
+      font-weight: 500;
+    }
+    .selectProductContentRight .price .selectParameter ul:nth-child(4) li a{
+      display: block;
+      width:100%;
+      height:100%;color: #fff;
+    }
+    .selectProductContentRight{
+      width: 596px;
+      height: 100%;
+      box-sizing: border-box;
+      float: left;
+
+    }
+    .lxjOne{
+      width:100%;
+      height:800px;
+      background-color:#f2f2f2;
+    }
+    .lxjOneContent{
+      width: 1127px;
+      height: 100%;
+      margin:0 auto;
+      position: relative;
+    }
+    .oneIntrouce{
+      position:absolute;
+      top:80px;
+      left:9%;
+      right:9%;
+    }
+    .oneIntrouce h3{
+      height: 56px;
+      line-height: 56px;
+      color: rgb(0, 0, 0);
+      font-size: 40px;
+      text-align: center;
+    }
+    .oneIntrouce p{
+      height: 38px;
+      line-height: 38px;
+      color: rgb(85, 85, 85);
+      font-size: 18px;
+      text-align: center;
+    }
+    .lxjTwo{
+      width:100%;
+      height:1000px;
+      background-color: #fff;
+    }
+    .lxjTwoContent{
+      width: 1127px;
+      height: 100%;
+      margin:0 auto;
+    }
+    .twoIntrouce{
+      padding:50px 0;
+    }
+    .twoIntrouce h3{
+      height: 56px;
+      line-height: 56px;
+      color: rgb(0, 0, 0);
+      font-size: 40px;
+      text-align: center;
+    }
+    .twoIntrouce p{
+      height: 38px;
+      line-height: 38px;
+      color: rgb(85, 85, 85);
+      font-size: 18px;
+      text-align: center;
+    }
+    .lxjThree{
+      width:100%;
+      height:802px;
+      background-color: #f2f2f2;
+    }
+    .lxjThreeContent{
+      width: 1126px;
+      height: 100%;
+      margin:0 auto;
+      border: 1px solid #f2f2f2;
+      position: relative;
+    }
+    .threeIntrouce{
+      position:absolute;
+      top:130px;
+      left:120px;
+    }
+    .threeIntrouce h3{
+      height: 56px;
+      line-height: 56px;
+      color: rgb(0, 0, 0);
+      font-size: 40px;
+      text-align:left;
+    }
+    .threeIntrouce p{
+      height: 38px;
+      line-height: 38px;
+      color: rgb(85, 85, 85);
+      font-size: 18px;
+      text-align: left;
+    }
+    .lxjFour{
+      width:100%;
+      height:980px;
+      background-color: #fff;
+    }
+    .lxjFourContent{
+      width: 1127px;
+      height: 100%;
+      margin:0 auto;
+    }
+    .fourIntrouce{
+      padding:50px 0;
+    }
+    .fourIntrouce h3{
+      height: 56px;
+      line-height: 56px;
+      color: rgb(0, 0, 0);
+      font-size: 40px;
+      text-align: center;
+    }
+    .fourIntrouce p{
+      height: 38px;
+      line-height: 38px;
+      color: rgb(85, 85, 85);
+      font-size: 18px;
+      text-align: center;
+    }
+    .lxjFive{
+      width:100%;
+      height:1053px;
+      background-color: #f2f2f2;
+    }
+    .lxjFiveContent{
+      width: 1126px;
+      height: 100%;
+      margin:0 auto;
+      border: 1px solid #f2f2f2;
+      position: relative;
+    }
+    .fiveIntrouce{
+      position:absolute;
+      top:45px;
+      left:9%;
+      right:9%;
+    }
+    .fiveIntrouce h3{
+      height: 56px;
+      line-height: 56px;
+      color: rgb(0, 0, 0);
+      font-size: 40px;
+      text-align: center;
+    }
+    .fiveIntrouce p{
+      height: 38px;
+      line-height: 38px;
+      color: rgb(85, 85, 85);
+      font-size: 18px;
+      text-align: center;
+    }
+    .lxjFix{
+      width:100%;
+      height:1025px;
+      background-color: #fff;
+    }
+    .lxjFixContent{
+      width: 1126px;
+      height: 100%;
+      margin:0 auto;
+    }
+    .fixIntrouce{
+      padding:50px 0;
+    }
+    .fixIntrouce h3{
+      height: 56px;
+      line-height: 56px;
+      color: rgb(0, 0, 0);
+      font-size: 40px;
+      text-align: center;
+    }
+    .fixIntrouce p{
+      height: 38px;
+      line-height: 38px;
+      color: rgb(85, 85, 85);
+      font-size: 18px;
+      text-align: center;
+    }
+    .icon-24_{
+      margin-bottom:20px;
+      width:100%;
+      height:400px;
+    }
+    .icon-24_ ul{
+      width:1127px;
+      height:100%;
+      margin:0 auto;
+    }
+    .icon-24_ ul li{
+      font-size:25px;
+      color:rgba(27,27,27,0.5);
+      text-align:center;
+      line-height:46px;
+    }
+  </style>
+</head>
+<body>
+<div id="app">
+  <unify-header></unify-header>
+  <div class="lxj-main">
+    <div class="selectProduct">
+      <div class="selectProductContent">
+        <div class="selectProductContentLeft">
+          <img src="http://image2.artup.com/static/pc/imgs/lxj/lxj_01.jpg" alt="">
+        </div>
+        <div class="selectProductContentRight">
+          <div class="price">
+            <div class="introduce">
+              <ul>
+                <li>旅行记</li>
+                <li>旅行的意义不在于战利品有多少，旅行的故事</li>
+                <li>无须过多文字的赘述，光影才是最好的讲述者</li>
+              </ul>
+            </div>
+            <div class="selectParameter">
+              <ul>
+                <li>尺寸</li>
+                <li>页数</li>
+              </ul>
+              <ul>
+                <li>250 x 250mm</li>
+                <li>32页</li>
+              </ul>
+              <ul>
+
+                <li style="width:220px;">￥299CNY<span style="display:none;text-decoration: line-through;margin-left:20px;color:gray;">￥299CNY</span></li>
+              </ul>
+              <ul>
+                <li>
+                  <a href="#">开始定制</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="lxjOne">
+      <div class="lxjOneContent">
+        <div class="oneIntrouce">
+          <h3>一路的风景，需要分享</h3>
+          <p>旅行如此美妙，但却留不住一道风景，留不住有趣的故事。倒不如将照片打印出来，留住难忘的旅程，与人分享。</p>
+        </div>
+        <img src="http://image2.artup.com/static/pc/imgs/lxj/lxj_01.jpg" alt="">
+      </div>
+    </div>
+    <div class="lxjTwo">
+      <div class="lxjTwoContent">
+        <div class="twoIntrouce">
+          <h3>永远年轻，永远在路上</h3>
+          <p>世界有绝美的风景，我有寻美的心情。旅途，不是寻找风景，而是找回自己</p>
+        </div>
+        <img src="http://image2.artup.com/static/pc/imgs/lxj/lxj_02.jpg" alt="">
+      </div>
+    </div>
+    <div class="lxjThree">
+      <div class="lxjThreeContent">
+        <div class="threeIntrouce">
+          <h3>点滴收录时光旅程</h3>
+          <p>最好的目的地是没去过的地方。将旅途中的风景与故事</p>
+          <p>收录其中，记录那份初见的美好。</p>
+        </div>
+        <img src="http://image2.artup.com/static/pc/imgs/lxj/lxj_03.jpg" alt="">
+      </div>
+    </div>
+    <div class="lxjFour">
+      <div class="lxjFourContent">
+        <div class="fourIntrouce">
+          <h3>方形版式    方寸珍藏 </h3>
+          <p>250*250mm尺寸方形画册32页图文排版</p>
+          <p>随心搭配意大利进口艺术纸，穿越千里只为方寸间的感动，为你呈现旅途中点滴精彩</p>
+          <p>完整记录你的旅行回忆，连接过去的时光与去过的地方</p>
+        </div>
+        <img src="http://image2.artup.com/static/pc/imgs/lxj/lxj_04.jpg" alt="">
+      </div>
+    </div>
+    <div class="lxjFive">
+      <div class="lxjFiveContent">
+        <div class="fiveIntrouce">
+          <h3>装帧设计</h3>
+          <p> 书封采用烫金工艺、硬质感硬壳封面</p>
+          <p>封面、封底照片、文字可任意定制，定制专属于你的旅行回忆</p>
+          <p>方脊锁线精装，可180度平铺翻阅，获得全景式观看体验</p>
+        </div>
+        <img src="http://image2.artup.com/static/pc/imgs/lxj/lxj_05.jpg" alt="">
+      </div>
+    </div>
+    <div class="lxjFix">
+      <div class="lxjFixContent">
+        <div class="fixIntrouce">
+          <h3>多重保护   方便珍藏</h3>
+          <p> 配备硬壳简约书封、典雅扉页、质感 </p>
+          <p>硬壳封面， 有效保护书中照片，防水、防刮花</p>
+        </div>
+        <img src="http://image2.artup.com/static/pc/imgs/lxj/lxj_06.jpg" alt="">
+      </div>
+    </div>
+    <div class="icon-24_">
+      <ul>
+        <li>产品参数</li>
+        <li>产品品牌：传给雅昌</li>
+        <li>产品内容：旅行记主题封套+精致画册</li>
+        <li>产品尺寸：250*250MM</li>
+        <li>产品工艺：锁线精装</li>
+        <li>定制页数：32P内页+1P封面</li>
+        <li>产品价格：299元</li>
+        <li>制作周期：7个工作日（不含配送时间）</li>
+      </ul>
+    </div>
+  </div>
+  <unify-footer></unify-footer>
+</div>
+</body>
+</html>

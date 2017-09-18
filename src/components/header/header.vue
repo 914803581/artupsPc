@@ -55,6 +55,12 @@
           label: '框画',
           link: '/framed-pictures.html?category=kuanghua&defDbId=6afedcf6-b0e4-447d-afd9-c70449f42f50'
         }, {
+          label: '合集',
+          link: '/heji.html?category=heji&defDbId=5ea5e91b-21fd-481f-ab11-c767b19eed53'
+        }, {
+          label: '旅行记',
+          link: '/lxj.html?category=lvxingji&defDbId=2ef25e96-adcb-4612-b701-fe91b4856218'
+        }, {
           label: '海报',
           link: '/poster.html?category=haibao&defDbId=d6e44ca4-511f-41d5-87df-d8d75a491c09'
         }, {
@@ -140,12 +146,12 @@
     .menu {
       display: block;
       float: left;
-      margin-left: 88px;
+      margin-left: 10px;
       overflow: hidden;
       .item {
         display: block;
         margin-top: 12px;
-        padding: 0 38px;
+        padding: 0 30px;
         float: left;
         font-size: 16px;
         line-height: 26px;
