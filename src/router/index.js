@@ -14,6 +14,7 @@ import framedEdit from '@/components/framed/framedEdit'//框画编辑
 import posterEdit from '@/components/poster/posterEdit'//海报编辑
 import albumSelect from '@/components/album/albumSelect'
 import tlEdit from '@/components/bbs/tlEdit'  //台历编辑
+import hejiEdit from '@/components/bbs/hejiEdit'  //台历编辑
 import maxImgEdit from '@/components/bbs/bbsImgEdit' //多图编辑的入口
 
 import huaceEdit from '@/components/bbs/huaceEdit' //多图编辑的入口
@@ -136,6 +137,14 @@ let router = new VueRouter({
       component: huaceEdit,
       meta: {
         title: '画册编辑'
+      }
+    },
+    {
+      path: '/album/hejiEdit',
+      name: 'hejiEdit',
+      component: hejiEdit,
+      meta: {
+        title: '艺术影像合集编辑'
       }
     }
   ]
