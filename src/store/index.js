@@ -211,8 +211,7 @@ let store = new Vuex.Store({
       }, 400)
     },
 		autoPushData(state, obj) {
-		  if(obj==="taili"){
-      }
+
 			var edidData = $(".editAutoDrap");
 			var oPage = edidData.parents(".pubilc_div").find(".page .pageleft span").attr("page"); //第几页
 			var oTypeStyle = edidData.attr("typestyle"); //板式
@@ -271,10 +270,7 @@ let store = new Vuex.Store({
 				}, 200)
 				return;
 			}
-      // if(picObj.page==="封面"){ //如果是台历有封面的情况
-      //   picObj.page = '0';
-      //   picObj.constName = '0_1'
-      // }
+
 			setTimeout(function() {
 				min_scale = edidData.attr("min_scale"); //图片和缩略图的比例
 				picObj.actions.min_scale = min_scale;

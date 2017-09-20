@@ -48,6 +48,7 @@
 			okModels(){ //确认输入
 				console.log(this.$store.state.bbs.textData)
 				this.isEditTexts = false;
+//        $(".editText_one").find(".text_span").text(this.$store.state.bbs.textData)
         $(".editText_one").text(this.$store.state.bbs.textData)
 				var oPage = $(".editText_one").parents(".pubilc_div").find(".page .pageleft span").eq(0).text();
 

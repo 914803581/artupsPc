@@ -56,10 +56,10 @@
           link: '/framed-pictures.html?category=kuanghua&defDbId=6afedcf6-b0e4-447d-afd9-c70449f42f50'
         }, {
           label: '合集',
-          link: '/heji.html?category=heji&defDbId=5ea5e91b-21fd-481f-ab11-c767b19eed53'
+          link: '/heji.html?category=heji&defDbId=5ea5e91b-21fd-481f-ab11-c767b19eed53&tplCode=pc_heji_500X350_10'
         }, {
           label: '旅行记',
-          link: '/lxj.html?category=lvxingji&defDbId=2ef25e96-adcb-4612-b701-fe91b4856218'
+          link: '/lxj.html?category=lvxingji&defDbId=2ef25e96-adcb-4612-b701-fe91b4856218&tplCode=pc_lvxingji_250X250_32'
         }, {
           label: '海报',
           link: '/poster.html?category=haibao&defDbId=d6e44ca4-511f-41d5-87df-d8d75a491c09'

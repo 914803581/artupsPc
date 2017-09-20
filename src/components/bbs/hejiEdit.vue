@@ -12,9 +12,9 @@
               <span></span>
             </div>
             <div class="title_right">
-              <span>合集.<span id="colour">白色</span>.500*300mm</span>
+              <span>合集.<span id="colour"></span>500*350mm</span>
               <span>10页</span>
-              <span><i class="iconfont">&#xe6e2;</i>299.00</span>
+              <span><i class="iconfont">&#xe6e2;</i>289.00</span>
             </div>
           </div>
           <transition name="el-zoom-in-top">
@@ -37,19 +37,20 @@
               <li @click="nextStep('2')"><i class="iconfont">&#xe629;</i>立即购买</li>
               <!--<li @click="nextStep"><i class="iconfont">&#xe629;</i>下一步</li>-->
               <!--这里保存是要先验证，然后在保存-->
-              <li ><i class="iconfont">&#xe612;</i>保存作品</li>
+              <!--<li ><i class="iconfont">&#xe612;</i>保存作品</li>-->
             </ul>
           </div>
         </div>
       </div>
       <div class="line_comtent">
         <div class="comtent scrollBar">
-          <div class="time_main_left time_main_left_ht">
-            <div class="time_bg taili_hengban" :index-stort="index" v-for="(item,index) in bbsTemplate_data">
-              <!--pubilc_div 这个class是留给整屏来定义的样式  click_template 是用vue里面的事件委派来解决避免不了的dom操作  hengban_bbs 横版增加的class  hengban_bbs 红线class-->
-              <div :ddd="item[0].firstPage" class="pubilc_div pubilc_taili_div" :only="htmlTetx.only"
+          <div class="time_main_left" id="hejiEdit">
+
+            <div class="time_bg heji_hengban" :index-stort="index" v-for="(item,index) in bbsTemplate_data">
+              <!--pubilc_div 这个class是留给整屏来定义的样式  click_template 是用vue里面的事件委派来解决避免不了的dom操作  hengban_bbs 横版增加的class  hengban_bbs 红线class  @click="click_template($event)"-->
+              <div :ddd="item[0].firstPage" class="pubilc_div pubilc_heji_div" :only="htmlTetx.only"
                    :class="{'hengban_bbs':htmlTetx.only}" v-html="htmlTetx.template"
-                   @click="click_template($event,index,index2)" v-for="(htmlTetx,index2) in item">
+                   @click="click_template($event)"  v-for="(htmlTetx,index2) in item">
               </div>
             </div>
           </div>
@@ -70,9 +71,9 @@
             <span class="imgSpan">图片<i class="iconfont">&#xe600;</i></span>
           </div>
           <div class="footer_right">
-            <button class="footer_btn" @click="preview">
-              预览合集
-            </button>
+            <!--<button class="footer_btn" @click="preview">-->
+              <!--预览合集-->
+            <!--</button>-->
             <button @click="open_material" class="footer_btn">
               添加图片
             </button>
@@ -151,21 +152,77 @@
         dataEditImg: {}, //传递给图片编辑的对象
         bbsTemplate_data: [
           [{
-            "template": bbsTemplateData.bbs2,
-            "only": false,
+            "template": bbsTemplateData.heji1,
+            "only": true,
             "firstPage": false,
             "lastPage": false,
-            "type":"bbs2"
-          },
-            {
-              "template": bbsTemplateData.bbs3,
-              "only": false,
-              "firstPage": false,
-              "lastPage": false,
-              "type":"bbs3"
-            }
+            "type":"bbs1"
+          }
+          ],[{
+            "template": bbsTemplateData.heji1,
+            "only": true,
+            "firstPage": false,
+            "lastPage": false,
+            "type":"bbs1"
+          }
+          ],[{
+            "template": bbsTemplateData.heji1,
+            "only": true,
+            "firstPage": false,
+            "lastPage": false,
+            "type":"bbs1"
+          }
+          ],[{
+            "template": bbsTemplateData.heji1,
+            "only": true,
+            "firstPage": false,
+            "lastPage": false,
+            "type":"bbs1"
+          }
+          ],[{
+            "template": bbsTemplateData.heji1,
+            "only": true,
+            "firstPage": false,
+            "lastPage": false,
+            "type":"bbs1"
+          }
+          ],[{
+            "template": bbsTemplateData.heji1,
+            "only": true,
+            "firstPage": false,
+            "lastPage": false,
+            "type":"bbs1"
+          }
+          ],[{
+            "template": bbsTemplateData.heji1,
+            "only": true,
+            "firstPage": false,
+            "lastPage": false,
+            "type":"bbs1"
+          }
+          ],[{
+            "template": bbsTemplateData.heji1,
+            "only": true,
+            "firstPage": false,
+            "lastPage": false,
+            "type":"bbs1"
+          }
+          ],[{
+            "template": bbsTemplateData.heji1,
+            "only": true,
+            "firstPage": false,
+            "lastPage": false,
+            "type":"bbs1"
+          }
+          ],[{
+            "template": bbsTemplateData.heji1,
+            "only": true,
+            "firstPage": false,
+            "lastPage": false,
+            "type":"bbs1"
+          }
           ]
-        ], //宝宝书模版数据的二维数组
+        ],
         tplCode: 'pc_heji_500X350_10_single', //合集
         workEdit: {}, //素材保存组装传给后端的数据
         previewData: []
@@ -189,6 +246,29 @@
       ...mapMutations({ //同步触发操作集合
         delectFooter: "delectFooterData"
       }),
+      click_template ($event) { //vue模版渲染完毕之后的事件处理,index1和index2就是那个二维数组对应的索引
+        if ($($event.target).hasClass("drap_img")) { //点击图片调起编辑器
+          if ($($event.target).next(".img_drap").attr("src") === "") {
+            return;
+          } //为空返回
+          $(".editbbs_one").removeClass("editbbs_one");
+          $($event.target).addClass("editbbs_one");
+          this.dataEditImg.oSrc = $($event.target).next("img").attr("imgstyle")
+          this.dataEditImg.oW = $($event.target).parent(".drapBox").width()
+          this.dataEditImg.oH = $($event.target).parent(".drapBox").height()
+          //点击时候获取coustName 从hashMap里面得到他有没第一次编辑的东西
+          var constName = this.getCoustName($($event.target))
+          this.dataEditImg.oActions = this.$store.state.editData.ImgHashMap.getvalue(constName).actions
+//          console.log(this.dataEditImg)
+          //从vuex缓存里面拿到我的数据
+          this.openImgEdit();
+        }
+        },
+        setPageIndex() { //设置页数
+        $(".comtent_chanpin .time_pu .page .pageleft span").each((i, e) => {
+          $(e).text((i + 1)).attr("page", (i + 1))
+        })
+      },
       goCart(val) { //加入购物车
         //字符串转换数组存储到对象里面
         let bbsSlsectDate = JSON.parse(sessionStorage.getItem("bbsSlsectDate"));
@@ -268,7 +348,7 @@
               .attr("dbid", vm.FooterDataAuto[index].dbId)
               .attr("thumbnailScale", vm.FooterDataAuto[index].thumbnailScale)
             //每次循环都取触发存储数据的操作
-            vm.$store.commit("autoPushDataTaili",'taili')
+            vm.$store.commit("autoPushData",'heji')
             //计算位置
             setTimeout(function () {
               arrDrap.unshift(index)
@@ -338,12 +418,12 @@
         let isOK = true
         $(".comtent_chanpin .pubilc_div .bbsClass  .img_drap").each(function (index, el) {
           if (!$(el).attr("src")) { //如果src存在
-            var page = $(el).parents(".pubilc_div").find(".page span:nth-of-type(2)").text();
+            var page = $(el).parents(".pubilc_div").find(".page span").text();
             if (page) {
               vm.$message({
                 iconClass: "atrup_Message",
                 showClose: true,
-                message: '请上传台历' + $(el).parents(".pubilc_div").find(".page span:nth-of-type(1)").text() + page + '月图片'
+                message: '请上传合集第' + page + '张图片'
               });
               isOK = false
               return false;
@@ -362,12 +442,9 @@
         }, 300)
       },
       postDatas(val) { //获取数据覆盖便于二次编辑
-        var constName = this.getCoustNameTaiLi($(".editbbs_one"))
+        var constName = this.getCoustName($(".editbbs_one"))
         this.$store.state.editData.ImgHashMap.getvalue(constName).actions = val.postData;
-        var oPage = $(".editbbs_one").parents(".pubilc_taili_div").find(".page span:nth-of-type(2)").text();
-        if(oPage==="封面"){ //如果是台历有封面的情况
-          oPage = 0
-        }
+        var oPage = $(".editbbs_one").parents(".pubilc_heji_div").find(".pageleft span").attr("page");
         $(".editbbs_one").next("img").attr("src", val.imgData).css("width", "100%").css("height", "100%").css("left", 0).css("top", 0)
         //      ImgHashMapBase64
         var oImgSort = $(".editbbs_one").next("img").attr("imgsort")
@@ -395,9 +472,6 @@
           })
         }
       },
-      setBbsTemplate() {
-
-      },
       jisuan() { //动态计算面积
         console.log($(".comtent_chanpin .line_comtent .comtent .title").height())
         var oH = $(window).height() - $(".footer_img").height() - $(".unify-header").height() - $(".comtent_chanpin .line_comtent .comtent .title").height() - 2;
@@ -419,6 +493,7 @@
       openImgEdit() {
         this.isimgEdit = !this.isimgEdit;
       },
+
       preview() {
         let _self = this
         this.previewData = []
@@ -465,13 +540,11 @@
 
     },
     created() {
-
     },
     mounted() {
       //默认设置背景
       var vm = this
-      // 调用vuex里面的拖拽方法，初始化的时候
-//      this.setPageIndex()
+      vm.setPageIndex()
       this.jisuan() // 计算页面位置
       setTimeout(function () {
         $("#div_drap").Tdrag({
