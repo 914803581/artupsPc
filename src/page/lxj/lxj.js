@@ -48,6 +48,7 @@ var thing = new Vue({
         this.price = res.data.price
         bbsSlsectDate.category = res.data.category
         bbsSlsectDate.editCnfName = "pc_lvxingji_250X250_32_single"
+        sessionStorage.setItem("titleName", "旅行记")
         setTimeout(function () {
           sessionStorage.setItem("bbsSlsectDate", JSON.stringify(bbsSlsectDate))
         }, 100)

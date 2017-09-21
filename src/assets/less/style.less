@@ -362,6 +362,7 @@ html,body{width:100%;height: 100%;font-family: "微软雅黑";font-weight: 500;}
                     width: 50%;
                     float: left;
                     height: 100%;
+                    position: relative;
                 }
 
             }
@@ -404,7 +405,7 @@ html,body{width:100%;height: 100%;font-family: "微软雅黑";font-weight: 500;}
     }
 
     //模版样式
-    .active_line{border: 1px solid #a00912 !important;height: 242px !important;overflow: hidden;}
+    .active_line{border: 1px solid #a00912 !important;overflow: hidden;}
 
         .hengban_bbs{
         width: 100% !important;
@@ -2212,5 +2213,60 @@ body .lomoTemplate .template04 {
   }
   .pageleft{
     text-indent:100px;
+  }
+}
+
+//旅行记
+#product{
+  .travelEdit_one{  //旅行记
+    .titlePage_bg{
+      width: 324px;
+      height: 168px;
+    }
+    .time_bg{
+      width: 324px;
+      height: 194px;
+      position: relative;
+      .firstPage{
+        height:168px ;
+        .page_bg{
+          height:168px;
+        }
+      }
+      .pubilc_div{
+        height:194px;
+      }
+      .time_pu{
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        top:0;
+        left:0;
+        box-sizing: border-box;border-left: 1px solid #efefef;
+        .template_lxj_2{
+          margin:20px 18px;
+        }
+        .template_lxj_3{
+          width: 106px;
+          height: 134px;
+          margin:17px auto;
+        }
+        .template_lxj_4{
+          width: 136px;
+          height: 106px;
+          margin:23px auto;
+        }
+        .template_lxj_5{
+          width: 136px;
+          height: 94px;
+          margin:29px auto;
+        }
+        .template_lxj_6{
+          width: 139px;
+          height: 96px;
+          margin:28px auto;
+        }
+      }
+    }
   }
 }

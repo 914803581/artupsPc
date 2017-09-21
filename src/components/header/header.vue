@@ -151,7 +151,7 @@
       .item {
         display: block;
         margin-top: 12px;
-        padding: 0 30px;
+        padding: 0 27px;
         float: left;
         font-size: 16px;
         line-height: 26px;
