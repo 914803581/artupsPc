@@ -82,10 +82,16 @@
 //        存入session
         sessionStorage.setItem("bbsSlsectDate", JSON.stringify(productData))
         sessionStorage.setItem("urlQuery", JSON.stringify(urlQuery))
+        console.log(textCode, '___')
         if (textCode === "小时光") {
           location.href = "/album/maxImgEdit?dbId=" + this.workData[$index].dbId
+          sessionStorage.setItem("titleName", "小时光")
         } else if (textCode === "画册.") {
           location.href = "/album/huaceEdit?dbId=" + this.workData[$index].dbId
+          sessionStorage.setItem("titleName", "画册")
+        } else if (textCode === "旅行记") {
+          location.href = "/album/travelEdit?dbId=" + this.workData[$index].dbId
+          sessionStorage.setItem("titleName", "旅行记")
         }
       },
       deleteWorkList: function () {

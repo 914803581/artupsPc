@@ -250,7 +250,11 @@ let store = new Vuex.Store({
 			};
 			//如果是横版的修改标识符
 			if(edidData.parents(".hengban_bbs").size() > 0) {
-				picObj.crossPage = true;
+				  picObj.crossPage = true;
+
+        if(sessionStorage.getItem("titleName")=="旅行记"){
+          picObj.crossPage = false;
+        }
 			}
 			//			console.log(edidData)
 			//如果是lomo卡
@@ -489,6 +493,10 @@ let store = new Vuex.Store({
 						state.editData.ImgHashMap.remove((parseInt(oPage) + 1) + '_2');
 						state.editData.ImgHashMap.remove((parseInt(oPage) + 1) + '_3');
 						state.editData.ImgHashMap.remove((parseInt(oPage) + 1) + '_4');
+
+						if(sessionStorage.getItem("titleName")=="旅行记"){
+              picObj.crossPage = false;
+            }
 					}
 
 					//如果是lomo卡

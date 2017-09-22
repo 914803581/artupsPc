@@ -47,7 +47,7 @@
       <div class="line_comtent">
         <div id="product" class="comtent scrollBar">
           <div   :class="{'travelEdit_one':titleMsg.titleName=='旅行记'}" class="time_main_left time_main_left_ht">
-            <div class="titlePage_bg">
+            <div   class="titlePage_bg">
               <div class="page_fm">
                 <span>封 面</span>
               </div>
@@ -406,6 +406,29 @@
             $(".comtent_chanpin .pubilc_div .bbsClass  .img_drap").each(function (index, el) {
               if (!$(el).attr("src")) { //如果src存在
                 var page = $(el).parents(".pubilc_div").find(".pageleft >span").eq(0).text();
+                //旅行记的时候删除封面
+                if(vm.titleMsg.titleName=='旅行记'){
+                  if(page==0){
+                    vm.$message({
+                      iconClass: "atrup_Message",
+                      showClose: true,
+                      message: '请上传封面图片'
+                    });
+                    isOK = false
+                    return false;
+                  }
+                  if(page==$(".comtent_chanpin .pubilc_div .time_pu .page").size()-1){
+                    vm.$message({
+                      iconClass: "atrup_Message",
+                      showClose: true,
+                      message: '请上传封底图片'
+                    });
+                    isOK = false
+                    return false;
+                  }
+
+                }
+
                 if (page) {
                   vm.$message({
                     iconClass: "atrup_Message",
@@ -559,6 +582,23 @@
           console.log("单页兑换")
           //切换前选中的页码
           var otext = $(".time_main_left_ht .active_line .pageleft span").text();
+
+          //旅行记的时候删除封面
+          if(vm.titleMsg.titleName=='旅行记'){
+            if(otext==0 ||otext==$(".comtent_chanpin .pubilc_div .time_pu .page").size()-1){
+              vm.$message({
+                iconClass: "atrup_Message",
+                showClose: true,
+                message: '首尾页不能更换板式'
+              });
+              vm.setBbsTemplate();//修改选中状态
+              vm.$forceUpdate();
+              return false;
+            }
+          }
+
+
+
           otemplate.template = vm.template_Source[chenkIndex];
           otemplate.type = chenkIndex
           otemplate.only = false
@@ -686,6 +726,21 @@
         })
       },
       setPageIndex() { //设置页数
+
+        //旅行记设置页数
+        if(this.titleMsg.titleName=='旅行记'){ //如果是旅行设置页数
+          $(".comtent_chanpin .time_pu .page .pageleft span").each((i, e) => {
+            if(i==0){
+              $(e).prev(".page_b").text("封 面")
+            }
+            if(i==$(".comtent_chanpin .time_pu .page .pageleft span").size()-1){
+              $(e).prev(".page_b").text("封 底")
+            }
+            $(e).text((i )).attr("page", (i))
+          })
+          return
+        }
+
         $(".comtent_chanpin .time_pu .page .pageleft span").each((i, e) => {
           $(e).text((i + 1)).attr("page", (i + 1))
         })
@@ -925,7 +980,6 @@
       //设置书皮的操作
       let colorName = JSON.parse(sessionStorage.getItem("bbsSlsectDate")).colorName;
       //设置背景
-
       setTimeout(function () {
         setBookBg(colorName, $(".titlePage_bg .page_fm"), $(".firstPage .page_bg"), $(".lastPage .page_bg"));
         setTemplate();//先加载节点，让版式找到二纬数组的索引
@@ -955,7 +1009,6 @@
         vm.sLoading = true
         vm.sloadingText = '作品继续编辑中...'
         Api.work.unfinishedWork(this.$route.query.dbId).then((res) => {
-          console.log(res.data.data.finish)
           if (res.data.data.finish == 'N') {
             vm.$message({
               iconClass: "atrup_Message",
@@ -969,7 +1022,7 @@
             }, 1500)
           }
           //再次编辑后端给的版式数据
-          console.log(res.data.data)
+          console.log('再次编辑后端给的版式数据' ,res.data.data)
           var templateData = JSON.parse(res.data.data.dataTemplate.replace(/&quot;/g, '"'));
           console.log(templateData)
           this.data_createdDt = res.data.data.createdDt
@@ -996,55 +1049,6 @@
             })
           })
           vm.bbsTemplate_data = templateData
-//            if (oImgData.length > 0) {
-//              for (var i = 0; i < oImgData.length; i++) {
-//                var pageNum = oImgData[i].page + '_' + oImgData[i].num + '_bbs';
-//                //根据找到页码
-//                var oPage = oImgData[i].page
-//                //找到2维数组的第一位角标
-//                var oArrIndex = parseInt(oPage / 2)
-//                var bbs = "bbs" + oImgData[i].editCnfIndex
-//
-//                if (parseInt(oPage) % 2 == 1) {
-//                  if (vm.bbsTemplate_data[oArrIndex][1]) {
-//                    vm.bbsTemplate_data[oArrIndex][1].template = vm.template_Source[bbs];
-//                    vm.$forceUpdate();
-//                    vm.$nextTick();
-//                  }
-//
-//                else {
-//                    if (oImgData[i].crossPage) { //是横版的情况
-//                      vm.bbsTemplate_data[oArrIndex][1] = [];
-//                      vm.bbsTemplate_data[oArrIndex][0].only = true;
-//                      vm.bbsTemplate_data[oArrIndex][0].template = vm.template_Source.bbs9;
-//                      vm.$forceUpdate();
-//                      vm.$nextTick();
-//                      return;
-//                    }
-//                    else{ //单图不是横版的情况
-//
-//                      var josnImg3 = {
-//                        "template": vm.template_Source[bbs],
-//                        "only": false,
-//                        "slectTemplate": true
-//                      };
-//                      var josnImg4 = {
-//                        "template": vm.template_Source.bbs6,
-//                        "only": false,
-//                        "slectTemplate": false
-//                      };
-////                    vm.bbsTemplate_data[oArrIndex]=[];
-////                    vm.bbsTemplate_data[oArrIndex].push(josnImg3)
-//                      vm.bbsTemplate_data[oArrIndex][0].template = vm.template_Source[bbs];
-//                      vm.bbsTemplate_data[oArrIndex].push(josnImg4)
-////                    vm.bbsTemplate_data[oArrIndex][1].template = vm.template_Source[bbs];
-//                      vm.$forceUpdate();
-//                      vm.$nextTick();
-//                    }
-//                  }
-//                }
-//              }
-//            }
           // 图片节点生成之后id回显 ==>动态添加id节点
           setTimeout(function () {
             vm.setPageIndex();
@@ -1093,6 +1097,7 @@
                   picObj: picObj
                 });
                 var pageNum = oImgData[i].page + '_' + oImgData[i].num + '_bbs';
+                console.log(pageNum)
                 $("#" + pageNum).css("width", "100%").css("height", "100%").attr("src", oImgData[i].previewThumbnailImageUrl).attr("imgstyle", oImgData[i].thumbnailImageUrl);
               }
             }
@@ -1124,6 +1129,10 @@
             vm.sLoading = false
           }, 1000)
         })
+      }
+      //旅行记的时候删除封面
+      if(vm.titleMsg.titleName=='旅行记'){
+        $(".titlePage_bg").hide()
       }
       setTimeout(function () {
         $("#div_drap").Tdrag();

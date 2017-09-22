@@ -47,8 +47,8 @@
           <div class="time_main_left" id="hejiEdit">
             <div class="time_bg heji_hengban" :index-stort="index" v-for="(item,index) in bbsTemplate_data">
               <!--pubilc_div 这个class是留给整屏来定义的样式  click_template 是用vue里面的事件委派来解决避免不了的dom操作  hengban_bbs 横版增加的class  hengban_bbs 红线class  @click="click_template($event)"-->
-              <div :ddd="item[0].firstPage" class="pubilc_div pubilc_heji_div" :only="htmlTetx.only"
-                   :class="{'hengban_bbs':htmlTetx.only}" v-html="htmlTetx.template"
+              <div :ddd="item[0].firstPage" class="pubilc_div pubilc_heji_div" :only="htmlTetx.double"
+                   :class="{'hengban_bbs':htmlTetx.double}" v-html="htmlTetx.template"
                    @click="click_template($event)"  v-for="(htmlTetx,index2) in item">
               </div>
             </div>
@@ -152,70 +152,80 @@
         bbsTemplate_data: [
           [{
             "template": bbsTemplateData.heji1,
-            "only": true,
+            "only": false,
+            "double": true,
             "firstPage": false,
             "lastPage": false,
             "type":"bbs1"
           }
           ],[{
             "template": bbsTemplateData.heji1,
-            "only": true,
+            "only": false,
+            "double": true,
             "firstPage": false,
             "lastPage": false,
             "type":"bbs1"
           }
           ],[{
             "template": bbsTemplateData.heji1,
-            "only": true,
+            "only": false,
+            "double": true,
             "firstPage": false,
             "lastPage": false,
             "type":"bbs1"
           }
           ],[{
             "template": bbsTemplateData.heji1,
-            "only": true,
+            "only": false,
+            "double": true,
             "firstPage": false,
             "lastPage": false,
             "type":"bbs1"
           }
           ],[{
             "template": bbsTemplateData.heji1,
-            "only": true,
+            "only": false,
+            "double": true,
             "firstPage": false,
             "lastPage": false,
             "type":"bbs1"
           }
           ],[{
             "template": bbsTemplateData.heji1,
-            "only": true,
+            "only": false,
+            "double": true,
             "firstPage": false,
             "lastPage": false,
             "type":"bbs1"
           }
           ],[{
             "template": bbsTemplateData.heji1,
-            "only": true,
+            "only": false,
+            "double": true,
             "firstPage": false,
             "lastPage": false,
             "type":"bbs1"
           }
           ],[{
             "template": bbsTemplateData.heji1,
-            "only": true,
+            "only": false,
+            "double": true,
             "firstPage": false,
             "lastPage": false,
             "type":"bbs1"
           }
           ],[{
             "template": bbsTemplateData.heji1,
-            "only": true,
+            "only": false,
+            "double": true,
             "firstPage": false,
             "lastPage": false,
             "type":"bbs1"
           }
           ],[{
             "template": bbsTemplateData.heji1,
-            "only": true,
+            "only": false,
+            "double": true,
             "firstPage": false,
             "lastPage": false,
             "type":"bbs1"
