@@ -62,6 +62,7 @@ var thing = new Vue({
     }
 
     sessionStorage.setItem("urlQuery", JSON.stringify(queryObj))
+    sessionStorage.setItem("titleName", '合集')
     //获取合集的类型
     Api.sku.queryAttributes({category: this.getFromSession("category")}).then(res => {
       if (res) {

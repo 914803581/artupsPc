@@ -267,6 +267,8 @@
           this.dataEditImg.oH = $($event.target).parent(".drapBox").height()
           //点击时候获取coustName 从hashMap里面得到他有没第一次编辑的东西
           var constName = this.getCoustName($($event.target))
+          console.log(this.$store.state.editData.ImgHashMap.getvalue(constName))
+
           this.dataEditImg.oActions = this.$store.state.editData.ImgHashMap.getvalue(constName).actions
 //          console.log(this.dataEditImg)
           //从vuex缓存里面拿到我的数据

@@ -487,15 +487,16 @@ let store = new Vuex.Store({
 						"crossPage": false
 					};
 					if($(ev.target).parents(".pubilc_div").hasClass("hengban_bbs")) { //如果拖动的图片结束是横版
-						picObj.crossPage = true;
-						//拖动是横版的情况删除他后面的所有图片
-						state.editData.ImgHashMap.remove((parseInt(oPage) + 1) + '_1');
-						state.editData.ImgHashMap.remove((parseInt(oPage) + 1) + '_2');
-						state.editData.ImgHashMap.remove((parseInt(oPage) + 1) + '_3');
-						state.editData.ImgHashMap.remove((parseInt(oPage) + 1) + '_4');
 
-						if(sessionStorage.getItem("titleName")=="旅行记"){
+            picObj.crossPage = true;
+            if(sessionStorage.getItem("titleName")=="合集" || sessionStorage.getItem("titleName")=="旅行记"){
               picObj.crossPage = false;
+            }else{
+              //拖动是横版的情况删除他后面的所有图片
+              state.editData.ImgHashMap.remove((parseInt(oPage) + 1) + '_1');
+              state.editData.ImgHashMap.remove((parseInt(oPage) + 1) + '_2');
+              state.editData.ImgHashMap.remove((parseInt(oPage) + 1) + '_3');
+              state.editData.ImgHashMap.remove((parseInt(oPage) + 1) + '_4');
             }
 					}
 

@@ -41,13 +41,12 @@
             <div class="imgBoxList" v-show="frameShowBool">
                 <div class="picContainerTwo picContainer "
                      style="background-image: url(http://test.artup.com/builder/imgs/album/albumbig.png)">
-
                 </div>
             </div>
             <div class="typeBox">
                 <div class="btnChoose">选择尺寸</div>
                 <div class="sizeBox">
-                    <div v-if="index==0"  @click='updateSizeFn(index)' v-for='(frameSize,index) in frameSize' class="k1_Foot1size_click"
+                    <div   @click='updateSizeFn(index)' v-for='(frameSize,index) in frameSize' class="k1_Foot1size_click"
                          :sizeType='frameSize.name | firstCode' :size='frameSize.code'>{{frameSize.name}}
                     </div>
                 </div>

@@ -4,6 +4,8 @@ export default{
   {
   	//获得coustName  宝宝书
   	 Vue.prototype.getCoustName = function (dom) {
+  	   console.log(dom.parents(".pubilc_div").find(".pageleft span").attr("page"))
+  	   console.log(dom.next("img").attr("imgsort"))
   	 	return dom.parents(".pubilc_div").find(".pageleft span").attr("page")+'_'+dom.next("img").attr("imgsort")
   	 }
   	 //获取台历的coustName

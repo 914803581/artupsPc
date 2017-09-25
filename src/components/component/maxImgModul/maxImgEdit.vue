@@ -46,7 +46,7 @@
       </div>
       <div class="line_comtent">
         <div id="product" class="comtent scrollBar">
-          <div   :class="{'travelEdit_one':titleMsg.titleName=='旅行记'}" class="time_main_left time_main_left_ht">
+          <div   :class="{'travelEdit_one':titleMsg.titleName=='旅行记','hc_342X342':titleMsg.size_product=='画册.黑色.342X342.56页','hc_342X250':titleMsg.size_product=='画册.黑色.342X250.56页'}" class="time_main_left time_main_left_ht">
             <div   class="titlePage_bg">
               <div class="page_fm">
                 <span>封 面</span>
