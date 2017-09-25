@@ -233,43 +233,48 @@
           height: 360px;
           margin: -180px 0 0 -180px;
         }
+        // 75%
         .page_style_2 {
           position: relative;
           top: 50%;
           left: 50%;
           display: block;
-          width: 360px;
+          width: 338px;
           height: 450px;
-          margin: -248px 0 0 -180px;
+          margin: -248px 0 0 -169px;
         }
+        // 145%
         .page_style_3 {
           display: block;
-          width: 360px;
+          width: 334px;
           height: 230px;
           margin: 20px auto 0;
         }
+        // 69%
         .page_style_4 {
           position: relative;
           top: 50%;
           left: 50%;
           display: block;
-          width: 360px;
+          width: 324px;
           height: 470px;
-          margin: -248px 0 0 -180px;
+          margin: -248px 0 0 -162px;
         }
+        // 145%
         .page_style_5 {
           position: relative;
           top: 50%;
           left: 50%;
           display: block;
           width: 360px;
-          height: 280px;
-          margin: -140px 0 0 -180px;
+          height: 244px;
+          margin: -122px 0 0 -180px;
         }
+        // 66%
         .page_style_6 {
           display: inline-block;
           width: 180px;
-          height: 360px;
+          height: 270px;
           margin: 80px 20px 0 0;
           &.img_style_6_2 {
             margin-right: 0;
@@ -277,18 +282,16 @@
         }
         .page_style_7, .page_style_8 {
           display: inline-block;
-          width: 180px;
-          height: 180px;
+          width: 153px;
+          height: 230px;
           margin: 20px 20px 0 0;
-          &.img_style_7_1, &.img_style_7_2 {
-            margin-top: 60px;
-          }
           &.img_style_7_2, &.img_style_7_4, &.img_style_8_2, &.img_style_8_4 {
             margin-right: 0;
           }
         }
         .page_style_8 {
-          height: 220px;
+          width: 180px;
+          height: 180px;
           &.img_style_8_1, &.img_style_8_2 {
             margin-top: 30px;
           }
