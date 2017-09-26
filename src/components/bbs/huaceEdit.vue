@@ -379,127 +379,24 @@
 
 			if (str =="风景方版") { //SlsectDate.size==""
 //				 this.dataTemplate.productData = this.setBanshi(SlsectDate.size).productData;
-
-        console.log(hcTemplate342X250)
-        this.dataTemplate.productData =[
-          [{
-            "template": hcTemplate342X250.bbs1,
-            "only": false,
-            "firstPage": true, //第一页必须有的属性
-            "lastPage": false,
-            "type":"bbs1"
-          }],
-          [{
-            "template": hcTemplate342X250.bbs2,
-            "only": false,
-            "firstPage": false,
-            "lastPage": false,
-            "type":"bbs2"
-          },
-            {
-              "template": hcTemplate342X250.bbs3,
-              "only": false,
-              "firstPage": false,
-              "lastPage": false,
-              "type":"bbs3"
-            }
-          ],
-          [{
-            "template": hcTemplate342X250.bbs4,
-            "only": false,
-            "firstPage": false,
-            "lastPage": false,
-            "type":"bbs4"
-          },
-            {
-              "template": hcTemplate342X250.bbs5,
-              "only": false,
-              "firstPage": false,
-              "lastPage": false,
-              "type":"bbs5"
-            }
-          ],
-          [{
-            "template": hcTemplate342X250.bbs6,
-            "only": false,
-            "firstPage": false,
-            "lastPage": false,
-            "type":"bbs6"
-          },
-            {
-              "template": hcTemplate342X250.bbs7,
-              "only": false,
-              "firstPage": false,
-              "lastPage": false,
-              "type":"bbs7"
-            }
-          ],
-          [{
-            "template": hcTemplate342X250.bbs8,
-            "only": false,
-            "firstPage": false,
-            "lastPage": false,
-            "type":"bbs8"
-          },
-            {
-              "template": hcTemplate342X250.bbs8,
-              "only": false,
-              "firstPage": false,
-              "lastPage": false,
-              "type":"bbs8"
-            }
-          ],
-          [
-            {
-              "template": hcTemplate342X250.bbs9,
-              "only": true,
-              "firstPage": false,
-              "lastPage": false,
-              "type":"bbs9"
-            }
-          ],
-          [{
-            "template": hcTemplate342X250.bbs10,
-            "only": false,
-            "firstPage": false,
-            "lastPage": false,
-            "type":"bbs10"
-          },
-            {
-              "template": hcTemplate342X250.bbs11,
-              "only": false,
-              "firstPage": false,
-              "lastPage": false,
-              "type":"bbs11"
-            }
-          ],
-
-          [{
-            "template": hcTemplate342X250.bbs100,
-            "only": false,
-            "firstPage": false,
-            "lastPage": true, //最后一页必须有的属性
-            "type":"bbs100"
-          }]
-        ]
-        //342*342
+//        #250X342
 //        this.dataTemplate.productData =[
 //          [{
-//            "template": hcTemplate342X342.bbs1,
+//            "template": hcTemplate250X342.bbs1,
 //            "only": false,
 //            "firstPage": true, //第一页必须有的属性
 //            "lastPage": false,
 //            "type":"bbs1"
 //          }],
 //          [{
-//            "template": hcTemplate342X342.bbs2,
+//            "template": hcTemplate250X342.bbs2,
 //            "only": false,
 //            "firstPage": false,
 //            "lastPage": false,
 //            "type":"bbs2"
 //          },
 //            {
-//              "template": hcTemplate342X342.bbs3,
+//              "template": hcTemplate250X342.bbs3,
 //              "only": false,
 //              "firstPage": false,
 //              "lastPage": false,
@@ -507,14 +404,14 @@
 //            }
 //          ],
 //          [{
-//            "template": hcTemplate342X342.bbs4,
+//            "template": hcTemplate250X342.bbs4,
 //            "only": false,
 //            "firstPage": false,
 //            "lastPage": false,
 //            "type":"bbs4"
 //          },
 //            {
-//              "template": hcTemplate342X342.bbs5,
+//              "template": hcTemplate250X342.bbs5,
 //              "only": false,
 //              "firstPage": false,
 //              "lastPage": false,
@@ -522,14 +419,85 @@
 //            }
 //          ],
 //          [{
-//            "template": hcTemplate342X342.bbs6,
+//            "template": hcTemplate250X342.bbs6,
 //            "only": false,
 //            "firstPage": false,
 //            "lastPage": false,
 //            "type":"bbs6"
 //          },
 //            {
-//              "template": hcTemplate342X342.bbs7,
+//              "template": hcTemplate250X342.bbs4,
+//              "only": false,
+//              "firstPage": false,
+//              "lastPage": false,
+//              "type":"bbs7"
+//            }
+//          ],
+//          [
+//            {
+//              "template": hcTemplate250X342.bbs9,
+//              "only": true,
+//              "firstPage": false,
+//              "lastPage": false,
+//              "type":"bbs9"
+//            }
+//          ],
+//          [{
+//            "template": hcTemplate250X342.bbs100,
+//            "only": false,
+//            "firstPage": false,
+//            "lastPage": true, //最后一页必须有的属性
+//            "type":"bbs100"
+//          }]
+//        ]
+        // #342X250
+//        this.dataTemplate.productData =[
+//          [{
+//            "template": hcTemplate342X250.bbs1,
+//            "only": false,
+//            "firstPage": true, //第一页必须有的属性
+//            "lastPage": false,
+//            "type":"bbs1"
+//          }],
+//          [{
+//            "template": hcTemplate342X250.bbs2,
+//            "only": false,
+//            "firstPage": false,
+//            "lastPage": false,
+//            "type":"bbs2"
+//          },
+//            {
+//              "template": hcTemplate342X250.bbs3,
+//              "only": false,
+//              "firstPage": false,
+//              "lastPage": false,
+//              "type":"bbs3"
+//            }
+//          ],
+//          [{
+//            "template": hcTemplate342X250.bbs4,
+//            "only": false,
+//            "firstPage": false,
+//            "lastPage": false,
+//            "type":"bbs4"
+//          },
+//            {
+//              "template": hcTemplate342X250.bbs5,
+//              "only": false,
+//              "firstPage": false,
+//              "lastPage": false,
+//              "type":"bbs5"
+//            }
+//          ],
+//          [{
+//            "template": hcTemplate342X250.bbs6,
+//            "only": false,
+//            "firstPage": false,
+//            "lastPage": false,
+//            "type":"bbs6"
+//          },
+//            {
+//              "template": hcTemplate342X250.bbs7,
 //              "only": false,
 //              "firstPage": false,
 //              "lastPage": false,
@@ -537,29 +505,138 @@
 //            }
 //          ],
 //          [{
-//            "template": hcTemplate342X342.bbs8,
+//            "template": hcTemplate342X250.bbs8,
 //            "only": false,
 //            "firstPage": false,
 //            "lastPage": false,
 //            "type":"bbs8"
 //          },
 //            {
-//              "template": hcTemplate342X342.bbs8,
+//              "template": hcTemplate342X250.bbs8,
 //              "only": false,
 //              "firstPage": false,
 //              "lastPage": false,
-//              "type":"bbs7"
+//              "type":"bbs8"
+//            }
+//          ],
+//          [
+//            {
+//              "template": hcTemplate342X250.bbs9,
+//              "only": true,
+//              "firstPage": false,
+//              "lastPage": false,
+//              "type":"bbs9"
 //            }
 //          ],
 //          [{
-//            "template": hcTemplate342X342.bbs9,
-//            "only": true,
+//            "template": hcTemplate342X250.bbs10,
+//            "only": false,
 //            "firstPage": false,
 //            "lastPage": false,
-//            "type":"bbs9"
-//          }
-//          ]
+//            "type":"bbs10"
+//          },
+//            {
+//              "template": hcTemplate342X250.bbs11,
+//              "only": false,
+//              "firstPage": false,
+//              "lastPage": false,
+//              "type":"bbs11"
+//            }
+//          ],
+//
+//          [{
+//            "template": hcTemplate342X250.bbs100,
+//            "only": false,
+//            "firstPage": false,
+//            "lastPage": true, //最后一页必须有的属性
+//            "type":"bbs100"
+//          }]
 //        ]
+        //342*342
+        this.dataTemplate.productData =[
+          [{
+            "template": hcTemplate342X342.bbs1,
+            "only": false,
+            "firstPage": true, //第一页必须有的属性
+            "lastPage": false,
+            "type":"bbs1"
+          }],
+          [{
+            "template": hcTemplate342X342.bbs2,
+            "only": false,
+            "firstPage": false,
+            "lastPage": false,
+            "type":"bbs2"
+          },
+            {
+              "template": hcTemplate342X342.bbs3,
+              "only": false,
+              "firstPage": false,
+              "lastPage": false,
+              "type":"bbs3"
+            }
+          ],
+          [{
+            "template": hcTemplate342X342.bbs4,
+            "only": false,
+            "firstPage": false,
+            "lastPage": false,
+            "type":"bbs4"
+          },
+            {
+              "template": hcTemplate342X342.bbs5,
+              "only": false,
+              "firstPage": false,
+              "lastPage": false,
+              "type":"bbs5"
+            }
+          ],
+          [{
+            "template": hcTemplate342X342.bbs6,
+            "only": false,
+            "firstPage": false,
+            "lastPage": false,
+            "type":"bbs6"
+          },
+            {
+              "template": hcTemplate342X342.bbs7,
+              "only": false,
+              "firstPage": false,
+              "lastPage": false,
+              "type":"bbs7"
+            }
+          ],
+          [{
+            "template": hcTemplate342X342.bbs8,
+            "only": false,
+            "firstPage": false,
+            "lastPage": false,
+            "type":"bbs8"
+          },
+            {
+              "template": hcTemplate342X342.bbs8,
+              "only": false,
+              "firstPage": false,
+              "lastPage": false,
+              "type":"bbs7"
+            }
+          ],
+          [{
+            "template": hcTemplate342X342.bbs9,
+            "only": true,
+            "firstPage": false,
+            "lastPage": false,
+            "type":"bbs9"
+          }
+          ],
+          [{
+            "template": hcTemplate342X342.bbs100,
+            "only": false,
+            "firstPage": false,
+            "lastPage": true, //最后一页必须有的属性
+            "type":"bbs100"
+          }]
+        ]
 				 this.dataTemplate.templateImgData = this.setBanshi(SlsectDate.size).templateImgData;
 			}
 		}
