@@ -125,20 +125,51 @@ new Vue({
       }
       if (localStorage.getItem("userDbId")) {
         let editCnfName = ''
-        if (this.nowSize === '255X355') {
-          editCnfName = 'pc_huace_255-355_56_single'
+        if (this.nowSize === '342X342') {
+          editCnfName = 'pc_huace_342-342_56_single'
         }
+        if (this.nowSize === '342X250') {
+          editCnfName = 'pc_huace_342-250_56_single'
+        }
+        if (this.nowSize === '250X342') {
+          editCnfName = 'pc_huace_250-342_56_single'
+        }
+        if (this.nowSize === '342X500') {
+          editCnfName = 'pc_huace_342-500_56_single'
+        }
+        var jsons = {
+          "colorName": this.nowColorName,
+          "name": "画册." + this.nowColorName + "." + this.nowSize + '.' + this.nowPage + '页',
+          "skuCode": this.skuCode,
+          "category": this.getQueryString('category'),
+          "price": this.price,
+          "skuId": this.skuId,
+          "size": this.nowSize,
+          "titleName": "画册",
+          "tplCode": this.templateCode,
+          "editCnfName": editCnfName,
+          "eqTitle": "画册." + this.nowSize
+        }
+
+        var obj = JSON.parse(sessionStorage.getItem("urlQuery"))
+        obj.tplCode = this.templateCode
+        sessionStorage.setItem("urlQuery", JSON.stringify(obj))
+        sessionStorage.setItem('bbsSlsectDate', JSON.stringify(jsons))
+        sessionStorage.setItem('titleName', '画册')
+
+        // location.href =
+        //   '/album/albumSelect?size=' + this.nowSize +
+        //   "&editImageUrl=" + this.editImageUrl +
+        //   "&price=" + this.price +
+        //   '&sku=' + this.skuCode +
+        //   '&color=' + this.nowColorName +
+        //   '&category=' + this.getQueryString('category') +
+        //   '&skuId=' + this.skuId +
+        //   '&page=' + this.nowPage +
+        //   '&templateCode=' + this.templateCode +
+        //   '&editCnfName=' + editCnfName
         location.href =
-          '/album/albumSelect?size=' + this.nowSize +
-          "&editImageUrl=" + this.editImageUrl +
-          "&price=" + this.price +
-          '&sku=' + this.skuCode +
-          '&color=' + this.nowColorName +
-          '&category=' + this.getQueryString('category') +
-          '&skuId=' + this.skuId +
-          '&page=' + this.nowPage +
-          '&templateCode=' + this.templateCode +
-          '&editCnfName=' + editCnfName
+          '/album/huaceEdit'
       } else {
         this.setUrlCallback()
       }
