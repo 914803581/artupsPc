@@ -85,10 +85,10 @@
 	    		sessionStorage.setItem('bbsSlsectDate',JSON.stringify(jsons));
 	    		sessionStorage.setItem('titleName','画册');
 	    		this.typeDataList = JSON.parse(this.$route.query.editImageUrl);
-			$('.img_div').click(function(){
-				$('.img_div').removeClass('active');
-				$(this).addClass('active');
-			})
+          $('.img_div').click(function(){
+            $('.img_div').removeClass('active');
+            $(this).addClass('active');
+          })
 	    }
   }
 </script>

@@ -46,10 +46,8 @@
       </div>
       <div class="line_comtent">
         <div id="product" class="comtent scrollBar">
-          <div
-            :class="{'travelEdit_one':titleMsg.titleName=='旅行记','hc_342X342':titleMsg.size_product=='画册.黑色.342X342.56页','hc_342X250':titleMsg.size_product=='画册.黑色.342X250.56页','hc_250X342':titleMsg.size_product=='画册.黑色.250X342.56页','hc_342X500':titleMsg.size_product=='画册.黑色.342X500.56页'}"
-            class="time_main_left time_main_left_ht">
-            <div class="titlePage_bg">
+          <div   :class="{'travelEdit_one':titleMsg.titleName=='旅行记','hc_342X342':titleMsg.eqTitle=='画册.342X342','hc_342X250':titleMsg.eqTitle=='画册.342X250','hc_250X342':titleMsg.eqTitle=='画册.250X342','hc_342X500':titleMsg.eqTitle=='画册.342X500'}" class="time_main_left time_main_left_ht">
+            <div   class="titlePage_bg">
               <div class="page_fm">
                 <span>封 面</span>
               </div>
@@ -170,7 +168,8 @@
         titleMsg: {
           "titleName": sessionStorage.getItem("titleName"),
           "price_product": JSON.parse(sessionStorage.getItem("bbsSlsectDate")).price,
-          "size_product": JSON.parse(sessionStorage.getItem("bbsSlsectDate")).name
+          "size_product": JSON.parse(sessionStorage.getItem("bbsSlsectDate")).name,
+          "eqTitle":JSON.parse(sessionStorage.getItem("bbsSlsectDate")).eqTitle
         },
         template_Source: [],//修改的模版源
         colorName: '',
