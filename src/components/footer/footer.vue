@@ -27,19 +27,19 @@
       return {
         internalLinks: [{
           label: '关于我们',
-          link: '/user.html#/lableCgyc'
+          link: '/'
         }, {
           label: '帮助中心',
-          link: '/user.html#/lableGmlc'
+          link: '/'
         }, {
           label: '商务合作',
-          link: '/user.html#/lableSwhz'
+          link: '/'
         }, {
           label: '服务条款',
-          link: '/user.html#/lableFwtk'
+          link: '/'
         }, {
           label: '站点地图',
-          link: '/user.html#/lableMap'
+          link: '/'
         }]
       }
     }
@@ -95,5 +95,4 @@
       }
     }
   }
-
 </style>

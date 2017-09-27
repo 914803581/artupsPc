@@ -111,7 +111,8 @@
         <el-collapse-transition>
           <div v-show="footerShow" class="fonter_box_img">
             <ul v-if="$store.state.bbs.footerData.length > 0">
-              <li @click="footerImgSlectFooter(index)"   :style="{backgroundImage: 'url(\''+footerImg.thumbnailUrl+'\')'}"  class="bg_cover"  :class="{'img_size_border':footerImg.slectFooter}"
+              <li @click="footerImgSlectFooter(index)" :style="{backgroundImage: 'url(\''+footerImg.thumbnailUrl+'\')'}"
+                  class="bg_cover" :class="{'img_size_border':footerImg.slectFooter}"
                   :att="footerImg.slectFooter" v-for="(footerImg,index) in $store.state.bbs.footerData"
                   draggable="true">
                 <img style="filter:alpha(opacity=0);opacity: 0;" :src="footerImg.thumbnailUrl"/>
@@ -159,7 +160,7 @@
   export default {
     data() {
       return {
-        textNum:'40', //文本限制的字数
+        textNum: '40', //文本限制的字数
         dataPullTemplate: false,  //监听器是否更新数据
         data_createdDt: "", // 再次编辑的时间
         sloadingText: "",
@@ -405,8 +406,8 @@
               if (!$(el).attr("src")) { //如果src存在
                 var page = $(el).parents(".pubilc_div").find(".pageleft >span").eq(0).text();
                 //旅行记的时候删除封面
-                if(vm.titleMsg.titleName=='旅行记'){
-                  if(page==0){
+                if (vm.titleMsg.titleName == '旅行记') {
+                  if (page == 0) {
                     vm.$message({
                       iconClass: "atrup_Message",
                       showClose: true,
@@ -415,7 +416,7 @@
                     isOK = false
                     return false;
                   }
-                  if(page==$(".comtent_chanpin .pubilc_div .time_pu .page").size()-1){
+                  if (page == $(".comtent_chanpin .pubilc_div .time_pu .page").size() - 1) {
                     vm.$message({
                       iconClass: "atrup_Message",
                       showClose: true,
@@ -582,8 +583,8 @@
           var otext = $(".time_main_left_ht .active_line .pageleft span").text();
 
           //旅行记的时候删除封面
-          if(vm.titleMsg.titleName=='旅行记'){
-            if(otext==0 ||otext==$(".comtent_chanpin .pubilc_div .time_pu .page").size()-1){
+          if (vm.titleMsg.titleName == '旅行记') {
+            if (otext == 0 || otext == $(".comtent_chanpin .pubilc_div .time_pu .page").size() - 1) {
               vm.$message({
                 iconClass: "atrup_Message",
                 showClose: true,
@@ -734,12 +735,12 @@
       setPageIndex() { //设置页数
 
         //旅行记设置页数
-        if(this.titleMsg.titleName=='旅行记'){ //如果是旅行设置页数
+        if (this.titleMsg.titleName == '旅行记') { //如果是旅行设置页数
           $(".comtent_chanpin .time_pu .page .pageleft span").each((i, e) => {
-            if(i==0){
+            if (i == 0) {
               $(e).prev(".page_b").text("封 面")
             }
-            if(i==$(".comtent_chanpin .time_pu .page .pageleft span").size()-1){
+            if (i == $(".comtent_chanpin .time_pu .page .pageleft span").size() - 1) {
               $(e).prev(".page_b").text("封 底")
             }
             $(e).text((i )).attr("page", (i))
@@ -765,11 +766,10 @@
           vm.jisuan(); // 计算页面位置
         }, 300)
       },
-      open_material() { //打开素材库
+      open_material() { // 打开素材库
         this.isModel = !this.isModel
       },
-      openTxst(maxlen) { //打开文字框
-
+      openTxst(maxlen) { // 打开文字框
         this.iseditText = !this.iseditText;
         this.textNum = maxlen;
       },
@@ -781,64 +781,53 @@
       },
       preview() {
         var TYPESTYLECOUNT = {}
-        let titleName = sessionStorage.titleName ? sessionStorage.titleName : ''
-        if (titleName === '画册') {
+        let bbsSlsectDate = sessionStorage.bbsSlsectDate ? JSON.parse(sessionStorage.bbsSlsectDate) : {}
+        bbsSlsectDate.format = bbsSlsectDate.skuCode.split('.')
+        console.log(bbsSlsectDate)
+        if (['category', 'baobaoshu'].indexOf(bbsSlsectDate.category) < 0) {
+          return
+        }
+        if (bbsSlsectDate.category === 'category') {
           // 画册1、2、3
-          TYPESTYLECOUNT = {
-            1: {
-              text: 4
-            },
-            2: {
-              text: 3
-            },
-            3: {
-              text: 2
-            },
-            4: {
-              img: 1
-            },
-            5: {
-              img: 2
-            },
-            6: {
-              img: 1
-            },
-            7: {
-              img: 1
-            },
-            9: {
-              img: 1
+          //TYPESTYLECOUNT = {1: {text: 4}, 2: {text: 3}, 3: {text: 2}, 4: {img: 1}, 5: {img: 2}, 6: {img: 1}, 7: {img: 1}, 9: {img: 1}}
+          if (bbsSlsectDate.size === '342X342') {
+            TYPESTYLECOUNT = {
+              1: {text: 2},
+              2: {img: 1},
+              3: {img: 1},
+              4: {img: 1},
+              5: {img: 1},
+              6: {img: 1},
+              7: {img: 1},
+              8: {img: 1},
+              9: {img: 1}
             }
           }
-        } else {
-          TYPESTYLECOUNT = {
-            1: {
-              img: 1
-            },
-            2: {
-              img: 1
-            },
-            3: {
-              img: 2
-            },
-            4: {
-              img: 1
-            },
-            5: {
-              img: 1
-            },
-            6: {
-              img: 2
-            },
-            7: {
-              img: 4
-            },
-            8: {
-              img: 4
-            },
-            9: {
-              img: 1
+          if (bbsSlsectDate.size === '342X250') {
+            TYPESTYLECOUNT = {
+              1: {text: 2},
+              2: {img: 1},
+              3: {img: 1},
+              4: {img: 1},
+              5: {img: 1},
+              6: {img: 1},
+              7: {img: 1},
+              8: {img: 1},
+              9: {img: 1}
             }
+          }
+        }
+        if (bbsSlsectDate.category === 'baobaoshu') {
+          TYPESTYLECOUNT = {
+            1: {img: 1},
+            2: {img: 1},
+            3: {img: 2},
+            4: {img: 1},
+            5: {img: 1},
+            6: {img: 2},
+            7: {img: 4},
+            8: {img: 4},
+            9: {img: 1}
           }
         }
 
@@ -1040,7 +1029,7 @@
             }, 1500)
           }
           //再次编辑后端给的版式数据
-          console.log('再次编辑后端给的版式数据' ,res.data.data)
+          console.log('再次编辑后端给的版式数据', res.data.data)
           var templateData = JSON.parse(res.data.data.dataTemplate.replace(/&quot;/g, '"'));
           console.log(templateData)
           this.data_createdDt = res.data.data.createdDt
@@ -1149,7 +1138,7 @@
         })
       }
       //旅行记的时候删除封面
-      if(vm.titleMsg.titleName=='旅行记'){
+      if (vm.titleMsg.titleName == '旅行记') {
         $(".titlePage_bg").hide()
       }
       setTimeout(function () {
