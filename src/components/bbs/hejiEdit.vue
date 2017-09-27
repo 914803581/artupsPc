@@ -12,8 +12,8 @@
               <span></span>
             </div>
             <div class="title_right">
-              <span>合集.<span id="colour"></span>500*350mm</span>
-              <span>10页</span>
+              <span>合集.<span id="colour"></span>500X350.10页</span>
+              <span></span>
               <span><i class="iconfont">&#xe6e2;</i>289.00</span>
             </div>
           </div>

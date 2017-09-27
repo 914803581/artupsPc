@@ -42,6 +42,7 @@ var thing = new Vue({
         parameter: this.skuCode
       }
       Api.sku.querySku(jsons).then(res => {
+        console.log(res)
         bbsSlsectDate.tplCode = res.data.templateCode
         bbsSlsectDate.skuId = res.data.skuId
         bbsSlsectDate.price = res.data.price
@@ -70,7 +71,7 @@ var thing = new Vue({
       if (res) {
         console.log(res.data)
         var attributeValues = res.data.attributes
-        bbsSlsectDate.name = res.data.name + '.' + attributeValues[0].attributeValues[0].name + '.' + attributeValues[1].attributeValues[0].name
+        bbsSlsectDate.name = res.data.name + '.' + attributeValues[0].attributeValues[0].code + '.' + attributeValues[1].attributeValues[0].code + '页'
         bbsSlsectDate.skuCode = res.data.code + '.' + attributeValues[0].attributeValues[0].code + '.' + attributeValues[1].attributeValues[0].code
         bbsSlsectDate.size = attributeValues[0].attributeValues[0].name
         this.nowSize = bbsSlsectDate.skuCode

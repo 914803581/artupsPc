@@ -282,11 +282,7 @@ var hcTemplate342X500 = { //旅行记模版
   bbs11: '<div class="time_pu"><div class="bbsClass bbs_hengban template_lxj_11"><div class="drapBox div_page"><div class="drap_img"></div> <img imgsort="1" typestyle="11" src="" class="img_drap"></div><div maxlength="40" class="mainTitle title_pu" typestyle="11" textsort="1" ><span class="text_span text_40"></span></div></div><div class="page page_8"><div class="pageleft">第<span page=""></span>页</div> <div class="pageleft">第<span page=""></span>页</div></div></div>',
   bbs12: '<div class="time_pu"><div class="bbsClass bbs_hengban template_lxj_12"><div class="drapBox div_page"><div class="drap_img"></div> <img imgsort="1" typestyle="12" src="" class="img_drap"></div></div><div class="page page_8"><div class="pageleft">第<span page=""></span>页</div> <div class="pageleft">第<span page=""></span>页</div></div></div>',
   bbs100: '<div class="time_pu"><div class="bbsClass drapBox template02 template_lxj_100"><div class="drap_img"></div><img  class="img_drap" imgSort="1" typeStyle="100" src=""/></div><div maxlength="40" class="mainTitle_footer title_pu" typestyle="100" textsort="1" ><span class="text_span text_40"></span></div><div class="login_footer"></div><div  class="page page_8"><div class="pageleft">第<span></span>页</div><div class="pageRight"></div></div></div>'
-
-
 }
-
-
 /*定义画册八个板式模板*/
 var hcTemplate255X355 = {//hcTemplate225_355
 //	bbs1:'<div class="time_pu"><div class="bbsClass drapBox template01"><div class="drap_img"></div><img imgSort="1" typeStyle="1" class="img_drap" src=""/></div><p textSort="1" typeStyle="1" class="text title_pu"></p><div  class="page"><div class="pageleft">第<span></span>页</div><div class="pageRight"></div></div></div>',
@@ -617,5 +613,157 @@ function setBookBg(name, dom1, dom2, dom3) { //name:书皮名 dom1：封面  dom
   }
 }
 
+//画册板式图片对应的数组
+let hc_template_img_250X342= [{
+  templateImg: 'http://image2.artup.com/resources/static/pc/images/hc_250*342/hc_template_250X342_01.jpg',
+  isTrue: false,isHeight : 116
+},
+  {
+    templateImg: 'http://image2.artup.com/resources/static/pc/images/hc_250*342/hc_template_250X342_02.jpg',
+    isTrue: false,isHeight : 116
+  },
+  {
+    templateImg: 'http://image2.artup.com/resources/static/pc/images/hc_250*342/hc_template_250X342_03.jpg',
+    isTrue: false,isHeight : 116
+  },
+  {
+    templateImg: 'http://image2.artup.com/resources/static/pc/images/hc_250*342/hc_template_250X342_04.jpg',
+    isTrue: false,isHeight : 116
+  },
+  {
+    templateImg: 'http://image2.artup.com/resources/static/pc/images/hc_250*342/hc_template_250X342_05.jpg',
+    isTrue: false,isHeight : 116
+  },
+  {
+    templateImg: 'http://image2.artup.com/resources/static/pc/images/hc_250*342/hc_template_250X342_06.jpg',
+    isTrue: false,isHeight : 116
+  },
+  {
+    templateImg: 'http://image2.artup.com/resources/static/pc/images/hc_250*342/hc_template_250X342_09.jpg',
+    isTrue: true,isHeight : 116
+  }]
 
+let hc_template_img_342X250= [
+  {
+  templateImg: 'http://image2.artup.com/resources/static/pc/images/hc_342*250/hc_template_342X250_01.jpg',
+  isTrue: false,
+  isHeight : 66
+  },{
+  templateImg: 'http://image2.artup.com/resources/static/pc/images/hc_342*250/hc_template_342X250_02.jpg',
+  isTrue: false,
+    isHeight : 66
+  },{
+  templateImg: 'http://image2.artup.com/resources/static/pc/images/hc_342*250/hc_template_342X250_03.jpg',
+  isTrue: false,isHeight : 66
+  },{
+  templateImg: 'http://image2.artup.com/resources/static/pc/images/hc_342*250/hc_template_342X250_04.jpg',
+  isTrue: false,isHeight : 66
+  },{
+  templateImg: 'http://image2.artup.com/resources/static/pc/images/hc_342*250/hc_template_342X250_05.jpg',
+  isTrue: false,isHeight : 66
+  },{
+  templateImg: 'http://image2.artup.com/resources/static/pc/images/hc_342*250/hc_template_342X250_06.jpg',
+  isTrue: false,isHeight : 66
+  },{
+  templateImg: 'http://image2.artup.com/resources/static/pc/images/hc_342*250/hc_template_342X250_07.jpg',
+  isTrue: false,isHeight : 66
+  },{
+  templateImg: 'http://image2.artup.com/resources/static/pc/images/hc_342*250/hc_template_342X250_08.jpg',
+  isTrue: false,isHeight : 66
+  },{
+  templateImg: 'http://image2.artup.com/resources/static/pc/images/hc_342*250/hc_template_342X250_09.jpg',
+  isTrue: true,isHeight : 66
+  },{
+  templateImg: 'http://image2.artup.com/resources/static/pc/images/hc_342*250/hc_template_342X250_10.jpg',
+  isTrue: false,isHeight : 66
+  },{
+  templateImg: 'http://image2.artup.com/resources/static/pc/images/hc_342*250/hc_template_342X250_11.jpg',
+  isTrue: false,isHeight : 66
+  }
+]
 
+let hc_template_img_342X342= [{
+  templateImg: 'http://image2.artup.com/resources/static/pc/images/hc_342*342/hc_template_342X342_01.jpg',
+  isTrue: false,isHeight : 86
+},
+  {
+    templateImg: 'http://image2.artup.com/resources/static/pc/images/hc_342*342/hc_template_342X342_02.jpg',
+    isTrue: false,isHeight : 86
+  },
+  {
+    templateImg: 'http://image2.artup.com/resources/static/pc/images/hc_342*342/hc_template_342X342_03.jpg',
+    isTrue: false,isHeight : 86
+  },
+  {
+    templateImg: 'http://image2.artup.com/resources/static/pc/images/hc_342*342/hc_template_342X342_04.jpg',
+    isTrue: false,isHeight : 86
+  },
+  {
+    templateImg: 'http://image2.artup.com/resources/static/pc/images/hc_342*342/hc_template_342X342_05.jpg',
+    isTrue: false,isHeight : 86
+  },
+  {
+    templateImg: 'http://image2.artup.com/resources/static/pc/images/hc_342*342/hc_template_342X342_06.jpg',
+    isTrue: false,isHeight : 86
+  },{
+    templateImg: 'http://image2.artup.com/resources/static/pc/images/hc_342*342/hc_template_342X342_07.jpg',
+    isTrue: false,isHeight : 86
+  },{
+    templateImg: 'http://image2.artup.com/resources/static/pc/images/hc_342*342/hc_template_342X342_08.jpg',
+    isTrue: false,isHeight : 86
+  },
+  {
+    templateImg: 'http://image2.artup.com/resources/static/pc/images/hc_250*342/hc_template_250X342_09.jpg',
+    isTrue: true,isHeight : 86
+  }]
+
+let hc_template_img_342X500= [
+  {
+  templateImg: 'http://image2.artup.com/resources/static/pc/images/hc_342*500/hc_template_342X500_01.jpg',
+  isTrue: false,isHeight : 124
+  },
+  {
+  templateImg: 'http://image2.artup.com/resources/static/pc/images/hc_342*500/hc_template_342X500_02.jpg',
+  isTrue: false,isHeight : 124
+  },
+  {
+  templateImg: 'http://image2.artup.com/resources/static/pc/images/hc_342*500/hc_template_342X500_03.jpg',
+  isTrue: false,isHeight : 124
+  },
+  {
+  templateImg: 'http://image2.artup.com/resources/static/pc/images/hc_342*500/hc_template_342X500_04.jpg',
+  isTrue: false,isHeight : 124
+  },
+  {
+  templateImg: 'http://image2.artup.com/resources/static/pc/images/hc_342*500/hc_template_342X500_05.jpg',
+  isTrue: false,isHeight : 124
+  },
+  {
+  templateImg: 'http://image2.artup.com/resources/static/pc/images/hc_342*500/hc_template_342X500_06.jpg',
+  isTrue: false,isHeight : 124
+  },
+  {
+  templateImg: 'http://image2.artup.com/resources/static/pc/images/hc_342*500/hc_template_342X500_07.jpg',
+  isTrue: false,isHeight : 124
+  },
+  {
+  templateImg: 'http://image2.artup.com/resources/static/pc/images/hc_342*500/hc_template_342X500_08.jpg',
+  isTrue: false,isHeight : 124
+  },
+  {
+  templateImg: 'http://image2.artup.com/resources/static/pc/images/hc_342*500/hc_template_342X500_09.jpg',
+  isTrue: true,isHeight : 124
+  },
+  {
+  templateImg: 'http://image2.artup.com/resources/static/pc/images/hc_342*500/hc_template_342X500_10.jpg',
+  isTrue: true,isHeight : 124
+  },
+  {
+  templateImg: 'http://image2.artup.com/resources/static/pc/images/hc_342*500/hc_template_342X500_11.jpg',
+  isTrue: true,isHeight : 124
+  },
+  {
+  templateImg: 'http://image2.artup.com/resources/static/pc/images/hc_342*500/hc_template_342X500_12.jpg',
+  isTrue: true,isHeight : 124
+  }
+]

@@ -145,7 +145,7 @@ let router = new VueRouter({
       name: 'hejiEdit',
       component: hejiEdit,
       meta: {
-        title: '艺术影像合集编辑'
+        title: '合集编辑'
       }
     },
     {

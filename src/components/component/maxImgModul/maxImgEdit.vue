@@ -23,7 +23,7 @@
                 <div @click="bbs.Switching=false" class="titleClose"><i class="iconfont">&#xe746;</i></div>
               </div>
               <div class="checkBS_b">
-                <div :style="{'width':itemImg.isTrue?'90%':'45%'}" :istrue="itemImg.isTrue"
+                <div :style="{'width':itemImg.isTrue?'90%':'45%','height':itemImg.isHeight+'px'}" :istrue="itemImg.isTrue"
                      @click="chenkTemplate(index)" v-for="(itemImg,index) in mobanArr"
                      :class="templateoindex==index?'img_div boder_actiev':'img_div'">
                   <img :src="itemImg.templateImg">
@@ -263,7 +263,6 @@
         }, err => {
           alert('添加购物车出错');
         })
-
       },
       autoDrapImg() { //自动填充图片的操作
         var vm = this;
@@ -309,9 +308,7 @@
         var textArrMap = []; //文字的
         var lomArrMap = []; //lomo卡的
         for (var i = 0; i < this.$store.state.editData.ImgHashMap.keys().length; i++) {
-
           if (this.$store.state.editData.ImgHashMap.getvalue(this.$store.state.editData.ImgHashMap.keys()[i])) {
-
             arrMap.push(this.$store.state.editData.ImgHashMap.getvalue(this.$store.state.editData.ImgHashMap.keys()[i]));
           }
         }
@@ -500,7 +497,7 @@
           }
           this.bbsTemplate_data[this.bbs.bbs_index1] = [];
           var josnImg = {
-            "template": vm.template_Source.bbs9,
+            "template": vm.template_Source[chenkIndex],
             "only": true,
             "slectTemplate": true,
             "type": "bbs9",
@@ -597,9 +594,18 @@
               return false;
             }
           }
-
-
-
+          if(vm.titleMsg.titleName=='画册'){
+            if(otext == $(".comtent_chanpin .pubilc_div .time_pu .page .pageleft").size()){
+              vm.$message({
+                iconClass: "atrup_Message",
+                showClose: true,
+                message: '尾页不能更换板式'
+              });
+              vm.setBbsTemplate();//修改选中状态
+              vm.$forceUpdate();
+              return false;
+            }
+          }
           otemplate.template = vm.template_Source[chenkIndex];
           otemplate.type = chenkIndex
           otemplate.only = false
@@ -694,7 +700,6 @@
           this.dataEditImg.oH = $($event.target).parent(".drapBox").height();
           //点击时候获取coustName 从hashMap里面得到他有没第一次编辑的东西
           var constName = this.getCoustName($($event.target))
-
           this.dataEditImg.oActions = this.$store.state.editData.ImgHashMap.getvalue(constName).actions;
           console.log(this.dataEditImg)
           //从vuex缓存里面拿到我的数据
@@ -1009,6 +1014,18 @@
         this.workEdit.edtDbId = this.$route.query.dbId // 存入id预防
         vm.sLoading = true
         vm.sloadingText = '作品继续编辑中...'
+        if (this.$route.query.eqTitle=="画册.250X342") {
+          vm.template_Source = hcTemplate250X342
+        }
+        if (this.$route.query.eqTitle=="画册.342X342") {
+          vm.template_Source= hcTemplate342X342
+        }
+        if (this.$route.query.eqTitle=="画册.342X250") {
+          vm.template_Source = hcTemplate342X250
+        }
+        if (this.$route.query.eqTitle=="画册.342X500") {
+          vm.template_Source = hcTemplate342X500
+        }
         Api.work.unfinishedWork(this.$route.query.dbId).then((res) => {
           if (res.data.data.finish == 'N') {
             vm.$message({
