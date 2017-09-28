@@ -841,7 +841,7 @@
           if (this.previewSize === '342X500') {
             TYPESTYLECOUNT = {
               1: {text: 6},
-              2: {text: 1, img: 2},
+              2: {text: 3},
               3: {text: 1},
               4: {text: 1, img: 1},
               5: {text: 1, img: 1},

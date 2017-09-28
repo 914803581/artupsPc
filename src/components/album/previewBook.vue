@@ -82,6 +82,10 @@
           '250X342': {
             width: 328 * 2,
             height: 450
+          },
+          '342X500': {
+            width: 308 * 2,
+            height: 450
           }
         },
         products: '',
@@ -130,6 +134,7 @@
   @import "./previewBookScss/342X342.scss";
   @import "./previewBookScss/342X250.scss";
   @import "./previewBookScss/250X342.scss";
+  @import "./previewBookScss/342X500.scss";
 
   .style_type_100 .title {
     position: absolute;
