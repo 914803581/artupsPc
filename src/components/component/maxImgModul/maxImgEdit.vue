@@ -501,7 +501,7 @@
             "template": vm.template_Source[chenkIndex],
             "only": true,
             "slectTemplate": true,
-            "type": "bbs9",
+            "type": chenkIndex,
             "firstPage": false,
             "lastPage": false
           };

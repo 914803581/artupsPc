@@ -76,16 +76,26 @@ new Vue({
       }
       $('.k1_FootPage_click').removeClass('typeActive')
       $('.k1_FootPage_click').eq(index).addClass('typeActive')
-
+      this.nowPage = $('.k1_FootPage_click').eq(index).attr('page')
       this.updataSkuData()
     },
     /*点击更新框画尺寸
        * index: 点击对象的索引
        */
     updateSizeFn(index) {
+      if (index === 3) {
+        $(".k1_FootPage_click").eq(0).show()
+        $(".k1_FootPage_click").eq(1).hide()
+        $('.k1_FootPage_click').eq(0).addClass('typeActive')
+        this.nowPage = 72
+      } else {
+        $(".k1_FootPage_click").eq(1).show()
+        $(".k1_FootPage_click").eq(0).hide()
+        this.nowPage = 56
+      }
       if (this.frameShowBool) {
         this.frameShowBool = false //选择尺寸  显示带尺寸的dome
-        this.updatePageFn(0)
+        this.updatePageFn(1)
         this.updateColorFn(0)
         //this.updataTypeFn(0);//当不选择框形的时候默认选择第一个框形
       }
@@ -99,6 +109,7 @@ new Vue({
     /*更新sku*/
     updataSkuData() {
       this.skuCode = [this.getFromSession("category"), this.nowSize, this.nowPage, this.nowColor].join('.')
+      console.log(this.skuCode)
       let jsons = {
         category: this.getFromSession("category"),
         parameter: this.skuCode
@@ -195,6 +206,7 @@ new Vue({
                * 默认选择第一个
                */
         setTimeout(function () {
+          $(".k1_FootPage_click").eq(0).hide()
           that.nowSize = $('.k1_Foot1size_click').eq(0).attr('size')
           that.nowPage = $('.k1_FootPage_click').eq(0).attr('page')
           that.nowColor = $('.kuangAngle').eq(1).attr('code')

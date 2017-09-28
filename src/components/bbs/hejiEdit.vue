@@ -409,7 +409,7 @@
         this.assembleData();
         //唤出loading...
         this.sLoading = true
-        this.sloadingText = "台历保存中..."
+        this.sloadingText = "合集保存中..."
         //保存函数
         console.log(this.workEdit)
         Api.work.workEdit(this.workEdit).then((res) => {
