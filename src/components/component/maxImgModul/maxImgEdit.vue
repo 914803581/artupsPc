@@ -46,8 +46,10 @@
       </div>
       <div class="line_comtent">
         <div id="product" class="comtent scrollBar">
-          <div   :class="{'travelEdit_one':titleMsg.titleName=='旅行记','hc_342X342':titleMsg.eqTitle=='画册.342X342','hc_342X250':titleMsg.eqTitle=='画册.342X250','hc_250X342':titleMsg.eqTitle=='画册.250X342','hc_342X500':titleMsg.eqTitle=='画册.342X500'}" class="time_main_left time_main_left_ht">
-            <div   class="titlePage_bg">
+          <div
+            :class="{'travelEdit_one':titleMsg.titleName=='旅行记','hc_342X342':titleMsg.eqTitle=='画册.342X342','hc_342X250':titleMsg.eqTitle=='画册.342X250','hc_250X342':titleMsg.eqTitle=='画册.250X342','hc_342X500':titleMsg.eqTitle=='画册.342X500'}"
+            class="time_main_left time_main_left_ht">
+            <div class="titlePage_bg">
               <div class="page_fm">
                 <span>封 面</span>
               </div>
@@ -140,11 +142,12 @@
 
     <preview-book :title="titleMsg.titleName" :colorName="colorName" :visible.sync="previewDialogVisible"
                   :data="previewData"
+                  :size="previewSize"
                   @close="previewDialogVisible=false"></preview-book>
   </div>
 </template>
 <script>
-  /* eslint-disable semi */
+  /* eslint-disable semi,no-undef */
 
   import {Message} from 'element-ui'
   import {mapState, mapGetters, mapActions, mapMutations} from 'vuex'
@@ -169,9 +172,9 @@
           "titleName": sessionStorage.getItem("titleName"),
           "price_product": JSON.parse(sessionStorage.getItem("bbsSlsectDate")).price,
           "size_product": JSON.parse(sessionStorage.getItem("bbsSlsectDate")).name,
-          "eqTitle":JSON.parse(sessionStorage.getItem("bbsSlsectDate")).eqTitle
+          "eqTitle": JSON.parse(sessionStorage.getItem("bbsSlsectDate")).eqTitle
         },
-        template_Source: [],//修改的模版源
+        template_Source: [], //修改的模版源
         colorName: '',
         previewDialogVisible: false,
         mobanArr: [],
@@ -194,7 +197,8 @@
         lomoTemplate_data: [], //lomo卡数组
         tplCode: 'pc_baobaoshu_170-235_24_single', //暂时写死的1个数据
         workEdit: {}, //素材保存组装传给后端的数据
-        previewData: []
+        previewData: [],
+        previewSize: ''
       }
     },
     //		beforeRouteEnter(to,from,next){
@@ -217,10 +221,9 @@
         delectFooter: "delectFooterData"
       }),
       goCart(val) { //加入购物车
-//        this.sLoading = true;
-
-        //字符串转换数组存储到对象里面
-        let bbsSlsectDate = JSON.parse(sessionStorage.getItem("bbsSlsectDate"));
+        // this.sLoading = true;
+        // 字符串转换数组存储到对象里面
+        let bbsSlsectDate = JSON.parse(sessionStorage.getItem("bbsSlsectDate"))
         var jsons = {
           operator: "add",
           userDbId: localStorage.getItem("userDbId"),
@@ -260,11 +263,10 @@
               query: {"carDbId": res.data.extraCode}
             })
           }
-
         }, err => {
-          alert('添加购物车出错');
+          console.log(err)
+          alert('添加购物车出错')
         })
-
       },
       autoDrapImg() { //自动填充图片的操作
         var vm = this;
@@ -288,7 +290,7 @@
           if (index < vm.FooterDataAuto.length) {
             $(".editAutoDrap").removeClass("editAutoDrap");
             $(el).addClass("editAutoDrap"); //编辑自动拖拽
-            $(el).attr("src", vm.FooterDataAuto[index].thumbnailUrl).attr('imgStyle', vm.FooterDataAuto[index].thumbnailUrl).attr("dbid", vm.FooterDataAuto[index].dbId).attr("thumbnailScale", vm.FooterDataAuto[index].thumbnailScale);
+            $(el).attr("src", vm.FooterDataAuto[index].thumbnailUrl).attr('imgStyle', vm.FooterDataAuto[index].thumbnailUrl).attr("dbid", vm.FooterDataAuto[index].dbId).attr("thumbnailScale", vm.FooterDataAuto[index].thumbnailScale)
             //每次循环都取触发存储数据的操作
             vm.$store.commit("autoPushData")
             //计算位置
@@ -309,59 +311,56 @@
         var arrMap = []; //宝宝书图片的
         var textArrMap = []; //文字的
         var lomArrMap = []; //lomo卡的
-        for (var i = 0; i < this.$store.state.editData.ImgHashMap.keys().length; i++) {
-
+        let i = 0
+        for (; i < this.$store.state.editData.ImgHashMap.keys().length; i++) {
           if (this.$store.state.editData.ImgHashMap.getvalue(this.$store.state.editData.ImgHashMap.keys()[i])) {
-
-            arrMap.push(this.$store.state.editData.ImgHashMap.getvalue(this.$store.state.editData.ImgHashMap.keys()[i]));
+            arrMap.push(this.$store.state.editData.ImgHashMap.getvalue(this.$store.state.editData.ImgHashMap.keys()[i]))
           }
         }
-        for (var i = 0; i < this.$store.state.editData.lomoHashMap.keys().length; i++) {
+        for (i = 0; i < this.$store.state.editData.lomoHashMap.keys().length; i++) {
           if (this.$store.state.editData.lomoHashMap.getvalue(this.$store.state.editData.lomoHashMap.keys()[i])) {
-            lomArrMap.push(this.$store.state.editData.lomoHashMap.getvalue(this.$store.state.editData.lomoHashMap.keys()[i]));
+            lomArrMap.push(this.$store.state.editData.lomoHashMap.getvalue(this.$store.state.editData.lomoHashMap.keys()[i]))
           }
         }
-        for (var i = 0; i < this.$store.state.editData.textHashMap.keys().length; i++) {
+        for (i = 0; i < this.$store.state.editData.textHashMap.keys().length; i++) {
           if (this.$store.state.editData.textHashMap.getvalue(this.$store.state.editData.textHashMap.keys()[i])) {
-            textArrMap.push(this.$store.state.editData.textHashMap.getvalue(this.$store.state.editData.textHashMap.keys()[i]));
+            textArrMap.push(this.$store.state.editData.textHashMap.getvalue(this.$store.state.editData.textHashMap.keys()[i]))
           }
         }
         //字符串转换数组存储到对象里面
-        let bbsSlsectDate = JSON.parse(sessionStorage.getItem("bbsSlsectDate"));
-        this.workEdit.editPicture = JSON.stringify(arrMap);
-        this.workEdit.editTxt = JSON.stringify(textArrMap);
-        this.workEdit.lomo = JSON.stringify(lomArrMap);
-        this.workEdit.tplCode = this.getFromSession("tplCode");
-        this.workEdit.operator = "add";
-        this.workEdit.category = this.getFromSession("category");
-        this.workEdit.sku = bbsSlsectDate.name;
-        this.workEdit.skuId = bbsSlsectDate.skuId;
-        this.workEdit.status = 1;
-        this.workEdit.skuCode = bbsSlsectDate.skuCode;
-        this.workEdit.price = bbsSlsectDate.price;
-        this.workEdit.theme = "";  //画册的版式
-        this.workEdit.defDbId = this.getFromSession("defDbId");
-
+        let bbsSlsectDate = JSON.parse(sessionStorage.getItem('bbsSlsectDate'))
+        this.workEdit.editPicture = JSON.stringify(arrMap)
+        this.workEdit.editTxt = JSON.stringify(textArrMap)
+        this.workEdit.lomo = JSON.stringify(lomArrMap)
+        this.workEdit.tplCode = this.getFromSession('tplCode')
+        this.workEdit.operator = 'add'
+        this.workEdit.category = this.getFromSession('category')
+        this.workEdit.sku = bbsSlsectDate.name
+        this.workEdit.skuId = bbsSlsectDate.skuId
+        this.workEdit.status = 1
+        this.workEdit.skuCode = bbsSlsectDate.skuCode
+        this.workEdit.price = bbsSlsectDate.price
+        this.workEdit.theme = ''  //画册的版式
+        this.workEdit.defDbId = this.getFromSession('defDbId')
         var bbsTempla = [] //拷贝对象给后端传递数组
-        bbsTempla = JSON.parse(JSON.stringify(vm.bbsTemplate_data));
+        bbsTempla = JSON.parse(JSON.stringify(vm.bbsTemplate_data))
         bbsTempla.forEach((val) => {
           val.forEach((va) => {
-            va.template = ""
+            va.template = ''
             va.slectTemplate = false
           })
         })
-        this.workEdit.dataTemplate = JSON.stringify(bbsTempla); //版式修改之后的数组
-
+        this.workEdit.dataTemplate = JSON.stringify(bbsTempla) //版式修改之后的数组
 //        如果存在就存入此字段
         if (this.$route.query.huaceType) {
-          this.workEdit.theme = this.$route.query.huaceType;
+          this.workEdit.theme = this.$route.query.huaceType
         }
         $(".comtent_chanpin .pubilc_div .bbsClass  .img_drap").each(function (index, el) {
           if ($(el).attr("src")) { //如果src存在
-            vm.workEdit.thumbnailImageUrl = $(el).attr("imgstyle");
+            vm.workEdit.thumbnailImageUrl = $(el).attr('imgstyle')
             return false;
           } else {
-            vm.workEdit.thumbnailImageUrl = "";
+            vm.workEdit.thumbnailImageUrl = ''
           }
         })
       },
@@ -372,34 +371,33 @@
         //保存函数
         console.log(this.workEdit)
         Api.work.workEdit(this.workEdit).then((res) => {
-          if (res.data.code == "success") { //如果成功
+          if (res.data.code === 'success') { //如果成功
             this.sLoading = false;
             this.$message({
               showClose: true,
               iconClass: "atrup_Message",
               message: '作品保存成功 !',
               type: 'success'
-            });
+            })
           }
           //存入编辑id
           this.workEdit.edtDbId = res.data.extraCode
-
           console.log('保存的code:', res.data.extraCode)
         })
       },
       nextStep(val) { //下一步
         //保存函数
-        this.sLoading = true;
-        if (val == "1") {
-          this.sloadingText = "加入购物车..."
-        } else if (val == "2") {
-          this.sloadingText = "立即购买..."
+        this.sLoading = true
+        if (val === '1') {
+          this.sloadingText = '加入购物车...'
+        } else if (val === '2') {
+          this.sloadingText = '立即购买...'
         }
         this.assembleData();
         var vm = this;
         console.log(this.workEdit)
         Api.work.workEdit(this.workEdit).then((res) => {
-          if (res.data.code == "success") { //如果成功
+          if (res.data.code === 'success') { //如果成功
             this.sLoading = false;
             res.data.commandTitle;
             this.workEdit.edtDbId = res.data.extraCode;
@@ -407,33 +405,31 @@
             let isOK = true
             $(".comtent_chanpin .pubilc_div .bbsClass  .img_drap").each(function (index, el) {
               if (!$(el).attr("src")) { //如果src存在
-                var page = $(el).parents(".pubilc_div").find(".pageleft >span").eq(0).text();
+                var page = $(el).parents(".pubilc_div").find(".pageleft >span").eq(0).text()
                 //旅行记的时候删除封面
-                if (vm.titleMsg.titleName == '旅行记') {
-                  if (page == 0) {
+                if (vm.titleMsg.titleName === '旅行记') {
+                  if (page === 0) {
                     vm.$message({
-                      iconClass: "atrup_Message",
+                      iconClass: 'atrup_Message',
                       showClose: true,
                       message: '请上传封面图片'
                     });
                     isOK = false
                     return false;
                   }
-                  if (page == $(".comtent_chanpin .pubilc_div .time_pu .page").size() - 1) {
+                  if (page === $('.comtent_chanpin .pubilc_div .time_pu .page').size() - 1) {
                     vm.$message({
-                      iconClass: "atrup_Message",
+                      iconClass: 'atrup_Message',
                       showClose: true,
                       message: '请上传封底图片'
                     });
                     isOK = false
                     return false;
                   }
-
                 }
-
                 if (page) {
                   vm.$message({
-                    iconClass: "atrup_Message",
+                    iconClass: 'atrup_Message',
                     showClose: true,
                     message: '请上传第' + page + '页图片'
                   });
@@ -476,72 +472,74 @@
             showClose: true,
             message: '请选择需要更换的板式页码',
             type: 'warning'
-          });
-          vms = true;
-          return;
+          })
+          vms = true
+          return
         }
         //			切换的模版索引
         var chenkIndex = 'bbs' + (index + 1);
-        var otemplate = this.bbsTemplate_data[this.bbs.bbs_index1][this.bbs.bbs_index2];
+        var otemplate = this.bbsTemplate_data[this.bbs.bbs_index1][this.bbs.bbs_index2]
+        let otext = ''
+        let josnImg = {}
 //        alert(this.mobanArr[index].isTrue)
         if (this.mobanArr[index].isTrue) { //两页换横版的情况选中
-          console.log("两页换横版的情况选中")
+          console.log('两页换横版的情况选中')
           //切换前选中的页码
-          var otext = $(".time_main_left_ht .active_line .pageleft span").text();
+          otext = $('.time_main_left_ht .active_line .pageleft span').text()
           //尾页的页码
-          var oLastPage = $(".lastPage").prev(".pubilc_div").find(".pageleft span").text();
-          if (otext == 1 || otext == oLastPage) {
+          var oLastPage = $('.lastPage').prev('.pubilc_div').find('.pageleft span').text()
+          if (otext === 1 || otext === oLastPage) {
             vm.$message({
               iconClass: "atrup_Message",
               showClose: true,
               message: '首尾页不能切换双页的板式 ！',
               type: 'warning'
-            });
-            return;
+            })
+            return
           }
           this.bbsTemplate_data[this.bbs.bbs_index1] = [];
-          var josnImg = {
+          josnImg = {
             "template": vm.template_Source.bbs9,
             "only": true,
             "slectTemplate": true,
             "type": "bbs9",
             "firstPage": false,
             "lastPage": false
-          };
+          }
           this.bbsTemplate_data[this.bbs.bbs_index1].push(josnImg)
           //两页换横版的时候清空vue里面相邻所有的数据
-          if (otext % 2 == 1) {
+          if (otext % 2 === 1) {
             console.log('偶数')
             vm.$store.commit("setDrapData", {
               "opage": otext,
               "type": "偶数"
-            });
+            })
           } else {
             console.log('奇数')
             vm.$store.commit("setDrapData", {
               "opage": otext,
               "type": "奇数"
-            });
+            })
           }
           setTimeout(function () {
             vm.setPageIndex()
             vm.$store.commit("drapDiv")
           }, 300)
-          return;
+          return
         }
         if (this.bbsTemplate_data[this.bbs.bbs_index1][0].only) { //横版换两页的情况
           console.log("横版换两页的情况")
           //切换前选中的页码
-          var otext = $(".time_main_left_ht .active_line .pageleft span").text();
-          this.bbsTemplate_data[this.bbs.bbs_index1] = [];
-          var josnImg = {
-            "template": vm.template_Source.bbs4,
-            "only": false,
-            "slectTemplate": false,
-            "type": "bbs4",
-            "firstPage": false,
-            "lastPage": false
-          };
+          otext = $('.time_main_left_ht .active_line .pageleft span').text()
+          this.bbsTemplate_data[this.bbs.bbs_index1] = []
+          josnImg = {
+            'template': vm.template_Source.bbs4,
+            'only': false,
+            'slectTemplate': false,
+            'type': "bbs4",
+            'firstPage': false,
+            'lastPage': false
+          }
           //选中的板式
           var josnImg2 = {
             "template": vm.template_Source[chenkIndex],
@@ -568,12 +566,12 @@
             "lastPage": false
           };
           //判断角标让选择更精确
-          if (this.bbs.bbs_index2 == 0) {
+          if (this.bbs.bbs_index2 === 0) {
             this.bbsTemplate_data[this.bbs.bbs_index1].push(josnImg2)
-            this.bbsTemplate_data[this.bbs.bbs_index1].push(josnImg);
+            this.bbsTemplate_data[this.bbs.bbs_index1].push(josnImg)
           } else {
             this.bbsTemplate_data[this.bbs.bbs_index1].push(josnImg4)
-            this.bbsTemplate_data[this.bbs.bbs_index1].push(josnImg3);
+            this.bbsTemplate_data[this.bbs.bbs_index1].push(josnImg3)
           }
           console.log(this.bbsTemplate_data[this.bbs.bbs_index1])
           vm.$store.commit("setDrapData", {
@@ -583,23 +581,20 @@
         } else {
           console.log("单页兑换")
           //切换前选中的页码
-          var otext = $(".time_main_left_ht .active_line .pageleft span").text();
-
+          otext = $(".time_main_left_ht .active_line .pageleft span").text() - 0
           //旅行记的时候删除封面
-          if (vm.titleMsg.titleName == '旅行记') {
-            if (otext == 0 || otext == $(".comtent_chanpin .pubilc_div .time_pu .page").size() - 1) {
+          if (vm.titleMsg.titleName === '旅行记') {
+            if (otext === 0 || otext === $(".comtent_chanpin .pubilc_div .time_pu .page").size() - 1) {
               vm.$message({
-                iconClass: "atrup_Message",
+                iconClass: 'atrup_Message',
                 showClose: true,
                 message: '首尾页不能更换板式'
-              });
-              vm.setBbsTemplate();//修改选中状态
-              vm.$forceUpdate();
+              })
+              vm.setBbsTemplate() //修改选中状态
+              vm.$forceUpdate()
               return false;
             }
           }
-
-
           otemplate.template = vm.template_Source[chenkIndex];
           otemplate.type = chenkIndex
           otemplate.only = false
@@ -778,13 +773,14 @@
         let bbsSlsectDate = sessionStorage.bbsSlsectDate ? JSON.parse(sessionStorage.bbsSlsectDate) : {}
         bbsSlsectDate.format = bbsSlsectDate.skuCode.split('.')
         console.log(bbsSlsectDate)
-        if (['category', 'baobaoshu'].indexOf(bbsSlsectDate.category) < 0) {
+        if (['huace', 'baobaoshu'].indexOf(bbsSlsectDate.category) < 0) {
           return
         }
-        if (bbsSlsectDate.category === 'category') {
+        this.previewSize = bbsSlsectDate.size
+        if (bbsSlsectDate.category === 'huace') {
           // 画册1、2、3
           //TYPESTYLECOUNT = {1: {text: 4}, 2: {text: 3}, 3: {text: 2}, 4: {img: 1}, 5: {img: 2}, 6: {img: 1}, 7: {img: 1}, 9: {img: 1}}
-          if (bbsSlsectDate.size === '342X342') {
+          if (this.previewSize === '342X342') {
             TYPESTYLECOUNT = {
               1: {text: 2},
               2: {img: 1},
@@ -794,20 +790,53 @@
               6: {img: 1},
               7: {img: 1},
               8: {img: 1},
-              9: {img: 1}
+              9: {img: 1},
+              100: {img: 1}
             }
           }
-          if (bbsSlsectDate.size === '342X250') {
+          if (this.previewSize === '342X250') {
+            TYPESTYLECOUNT = {
+              1: {text: 2},
+              2: {text: 2, img: 1},
+              3: {img: 1},
+              4: {img: 1},
+              5: {img: 2},
+              6: {img: 3},
+              7: {img: 3},
+              8: {img: 1},
+              9: {img: 1},
+              10: {img: 1},
+              11: {img: 1},
+              100: {img: 1}
+            }
+          }
+          if (this.previewSize === '250X342') {
             TYPESTYLECOUNT = {
               1: {text: 2},
               2: {img: 1},
               3: {img: 1},
               4: {img: 1},
-              5: {img: 1},
-              6: {img: 1},
+              5: {img: 2},
+              6: {img: 3},
+              9: {img: 1},
+              100: {img: 1}
+            }
+          }
+          if (this.previewSize === '342X500') {
+            TYPESTYLECOUNT = {
+              1: {text: 6},
+              2: {text: 1, img: 2},
+              3: {text: 1},
+              4: {text: 1, img: 1},
+              5: {text: 1, img: 1},
+              6: {text: 1, img: 1},
               7: {img: 1},
               8: {img: 1},
-              9: {img: 1}
+              9: {text: 1, img: 1},
+              10: {text: 1, img: 1},
+              11: {text: 1, img: 1},
+              12: {img: 1},
+              100: {img: 1, text: 1}
             }
           }
         }
@@ -824,7 +853,7 @@
             9: {img: 1}
           }
         }
-
+        console.log(TYPESTYLECOUNT)
         let typeStyle = []
         $('.time_main_left_ht .pubilc_div > .time_pu .bbsClass').each((i, el) => {
           let img = $(el).find('.img_drap:eq(0)')
@@ -880,6 +909,7 @@
           })
           let imgCount = TYPESTYLECOUNT[obj.type]['img'] ? TYPESTYLECOUNT[obj.type]['img'] : 0
           let i = 1
+
           for (i; i <= imgCount; i++) {
             if (!imgList[i]) {
               imgList[i] = {
@@ -920,7 +950,7 @@
         this.colorName = JSON.parse(sessionStorage.getItem("bbsSlsectDate")).colorName;
         this.previewDialogVisible = true
       },
-      dataPull() {//数据改变的函数
+      dataPull() { //数据改变的函数
         var vm = this;
         if (vm.dataPullTemplate) {
           return
