@@ -78,6 +78,10 @@
           '342X250': {
             width: 450 * 2,
             height: 328
+          },
+          '250X342': {
+            width: 328 * 2,
+            height: 450
           }
         },
         products: '',
@@ -94,6 +98,7 @@
         if (!this.isTurn) {
           this.isTurn = true
           this.$nextTick(function () {
+            console.log('ok:', this.data)
             setBookBg(this.colorName, $(this.$refs.frontCover), $(this.$refs.coverPage), $(this.$refs.lastPage))
             $(this.$refs.previewComtent).turn({
               page: 2,
@@ -124,4 +129,16 @@
   @import "./previewBookScss/common.scss";
   @import "./previewBookScss/342X342.scss";
   @import "./previewBookScss/342X250.scss";
+  @import "./previewBookScss/250X342.scss";
+
+  .style_type_100 .title {
+    position: absolute;
+    left: 8%;
+    bottom: 32px;
+    display: block;
+    width: 256px;
+    height: 84px;
+    background: url('../../assets/img/title_logo.png') no-repeat 50%;
+    background-size: 100% 100%;
+  }
 </style>

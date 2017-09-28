@@ -5,10 +5,14 @@
 }
 
 .preview {
-  .size-342X342 {
+  .size-250X342 {
+    .el-dialog--small {
+      width: 720px;
+    }
     .preview_comtent {
-      width: 900px;
+      width: 656px;
       height: 450px;
+      margin: 0 auto;
     }
     .text_style_1_1, .text_style_1_2 {
       position: absolute;
@@ -26,13 +30,13 @@
       overflow: hidden;
     }
     .text_style_1_1 {
-      top: 30%;
-      right: 5%;
+      top: 20%;
+      right: 8%;
       width: 62%;
     }
     .text_style_1_2 {
-      top: 48%;
-      right: 5%;
+      top: 34%;
+      right: 8%;
       width: 52%;
     }
     .img_style_2_1 {
@@ -40,66 +44,47 @@
       top: 50%;
       left: 50%;
       display: block;
-      width: 400px;
-      height: 400px;
-      margin: -200px 0 0 -200px;
+      width: 296px;
+      height: 264px;
+      margin: -132px 0 0 -148px;
       @include bg-common;
     }
     .img_style_3_1 {
       position: absolute;
       top: 50%;
-      left: 8%;
+      left: 50%;
       display: block;
-      width: 316px;
-      height: 404px;
-      margin-top: -202px;
+      width: 296px;
+      height: 400px;
+      margin: -200px 0 0 -148px;
       @include bg-common;
     }
     .img_style_4_1 {
       position: absolute;
       top: 50%;
-      left: 20%;
+      left: 0;
       display: block;
-      width: 316px;
-      height: 404px;
-      margin-top: -202px;
+      width: 328px;
+      height: 320px;
+      margin-top: -160px;
       @include bg-common;
     }
     .img_style_5_1 {
       position: absolute;
       top: 50%;
-      left: 8%;
+      left: 0;
       display: block;
-      width: 256px;
-      height: 404px;
-      margin-top: -202px;
+      width: 328px;
+      height: 290px;
+      margin-top: -145px;
       @include bg-common;
     }
     .img_style_6_1 {
       position: absolute;
-      top: 50%;
-      left: 32%;
-      display: block;
-      width: 256px;
-      height: 404px;
-      margin-top: -202px;
-    }
-    .img_style_7_1 {
-      position: absolute;
-      top: 50%;
-      left: 0;
-      display: block;
-      width: 450px;
-      height: 300px;
-      margin-top: -150px;
-      @include bg-common;
-    }
-    .img_style_8_1 {
-      position: absolute;
       top: 0;
       left: 0;
       display: block;
-      width: 450px;
+      width: 328px;
       height: 450px;
       z-index: 500;
       @include bg-common;
@@ -108,8 +93,7 @@
       position: absolute;
       top: 0;
       left: 0;
-      display: block;
-      width: 137%;
+      width: 172%;
       height: 450px;
       z-index: 500;
       @include bg-common;
@@ -118,16 +102,9 @@
       left: -100%;
     }
     .img_style_100_1 {
-      position: absolute;
-      top: 14%;
-      left: 50%;
-      display: block;
-      width: 366px;
-      height: 200px;
-      margin-left: -183px;
-      @include bg-common;
+      width: 294px;
+      height: 266px;
+      margin: 20px auto 0;
     }
-
-
   }
 }
