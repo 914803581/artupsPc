@@ -74,6 +74,10 @@
           '342X342': {
             width: 450 * 2,
             height: 450
+          },
+          '342X250': {
+            width: 450 * 2,
+            height: 328
           }
         },
         products: '',
