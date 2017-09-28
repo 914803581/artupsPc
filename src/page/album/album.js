@@ -51,10 +51,10 @@ new Vue({
      * index: 点击对象的索引
      */
     updateColorFn(index) {
-      if (this.frameShowBool) {
+      if (this.frameShowBool === true) {
         this.frameShowBool = false //选择尺寸  显示带尺寸的dome
         //this.updataTypeFn(0);//当不选择框形的时候默认选择第一个框形
-        this.updatePageFn(0)
+        this.updatePageFn(1)
         this.updateSizeFn(0)
       }
       $('.kuangAngle').removeClass('typeActive')
@@ -68,7 +68,7 @@ new Vue({
      * index: 点击对象的索引
      */
     updatePageFn(index) {
-      if (this.frameShowBool) {
+      if (this.frameShowBool === true) {
         this.frameShowBool = false //选择尺寸  显示带尺寸的dome
         //this.updataTypeFn(0);//当不选择框形的时候默认选择第一个框形
         this.updateSizeFn(0)
@@ -83,21 +83,24 @@ new Vue({
        * index: 点击对象的索引
        */
     updateSizeFn(index) {
-      if (index === 3) {
-        $(".k1_FootPage_click").eq(0).show()
-        $(".k1_FootPage_click").eq(1).hide()
-        $('.k1_FootPage_click').eq(0).addClass('typeActive')
-        this.nowPage = 72
-      } else {
-        $(".k1_FootPage_click").eq(1).show()
-        $(".k1_FootPage_click").eq(0).hide()
-        this.nowPage = 56
-      }
-      if (this.frameShowBool) {
+      if (this.frameShowBool === true) {
         this.frameShowBool = false //选择尺寸  显示带尺寸的dome
         this.updatePageFn(1)
         this.updateColorFn(0)
         //this.updataTypeFn(0);//当不选择框形的时候默认选择第一个框形
+      }
+      if (index === 3) {
+        $('.k1_FootPage_click').eq(0).show()
+        $('.k1_FootPage_click').eq(1).hide()
+        $('.k1_FootPage_click').removeClass('typeActive')
+        $('.k1_FootPage_click').eq(0).addClass('typeActive')
+        this.nowPage = $('.k1_FootPage_click').eq(0).attr('page')
+      } else {
+        $('.k1_FootPage_click').eq(1).show()
+        $('.k1_FootPage_click').eq(0).hide()
+        $('.k1_FootPage_click').removeClass('typeActive')
+        $('.k1_FootPage_click').eq(1).addClass('typeActive')
+        this.nowPage = $('.k1_FootPage_click').eq(1).attr('page')
       }
       $('.k1_Foot1size_click').removeClass('sizeActive')
       $('.k1_Foot1size_click').eq(index).addClass('sizeActive')
@@ -206,10 +209,11 @@ new Vue({
                * 默认选择第一个
                */
         setTimeout(function () {
-          $(".k1_FootPage_click").eq(0).hide()
+          // $(".k1_FootPage_click").eq(0).hide()
           that.nowSize = $('.k1_Foot1size_click').eq(0).attr('size')
           that.nowPage = $('.k1_FootPage_click').eq(0).attr('page')
           that.nowColor = $('.kuangAngle').eq(1).attr('code')
+          $('.k1_FootPage_click').eq(0).hide()
           that.updataSkuData()
         })
       }
