@@ -119,4 +119,5 @@
 <style lang="scss" rel="stylesheet/sass">
   @import "./previewBookScss/common.scss";
   @import "./previewBookScss/342X342.scss";
+  @import "./previewBookScss/342X250.scss";
 </style>

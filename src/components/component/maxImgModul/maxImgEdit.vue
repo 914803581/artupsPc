@@ -23,7 +23,8 @@
                 <div @click="bbs.Switching=false" class="titleClose"><i class="iconfont">&#xe746;</i></div>
               </div>
               <div class="checkBS_b">
-                <div :style="{'width':itemImg.isTrue?'90%':'45%','height':itemImg.isHeight+'px'}" :istrue="itemImg.isTrue"
+                <div :style="{'width':itemImg.isTrue?'90%':'45%','height':itemImg.isHeight+'px'}"
+                     :istrue="itemImg.isTrue"
                      @click="chenkTemplate(index)" v-for="(itemImg,index) in mobanArr"
                      :class="templateoindex==index?'img_div boder_actiev':'img_div'">
                   <img :src="itemImg.templateImg">
@@ -46,8 +47,10 @@
       </div>
       <div class="line_comtent">
         <div id="product" class="comtent scrollBar">
-          <div   :class="{'travelEdit_one':titleMsg.titleName=='旅行记','hc_342X342':titleMsg.eqTitle=='画册.342X342','hc_342X250':titleMsg.eqTitle=='画册.342X250','hc_250X342':titleMsg.eqTitle=='画册.250X342','hc_342X500':titleMsg.eqTitle=='画册.342X500'}" class="time_main_left time_main_left_ht">
-            <div   class="titlePage_bg">
+          <div
+            :class="{'travelEdit_one':titleMsg.titleName=='旅行记','hc_342X342':titleMsg.eqTitle=='画册.342X342','hc_342X250':titleMsg.eqTitle=='画册.342X250','hc_250X342':titleMsg.eqTitle=='画册.250X342','hc_342X500':titleMsg.eqTitle=='画册.342X500'}"
+            class="time_main_left time_main_left_ht">
+            <div class="titlePage_bg">
               <div class="page_fm">
                 <span>封 面</span>
               </div>
@@ -140,6 +143,7 @@
 
     <preview-book :title="titleMsg.titleName" :colorName="colorName" :visible.sync="previewDialogVisible"
                   :data="previewData"
+                  :size="previewSize"
                   @close="previewDialogVisible=false"></preview-book>
   </div>
 </template>
@@ -169,7 +173,7 @@
           "titleName": sessionStorage.getItem("titleName"),
           "price_product": JSON.parse(sessionStorage.getItem("bbsSlsectDate")).price,
           "size_product": JSON.parse(sessionStorage.getItem("bbsSlsectDate")).name,
-          "eqTitle":JSON.parse(sessionStorage.getItem("bbsSlsectDate")).eqTitle
+          "eqTitle": JSON.parse(sessionStorage.getItem("bbsSlsectDate")).eqTitle
         },
         template_Source: [],//修改的模版源
         colorName: '',
@@ -194,7 +198,8 @@
         lomoTemplate_data: [], //lomo卡数组
         tplCode: 'pc_baobaoshu_170-235_24_single', //暂时写死的1个数据
         workEdit: {}, //素材保存组装传给后端的数据
-        previewData: []
+        previewData: [],
+        previewSize: ''
       }
     },
     //		beforeRouteEnter(to,from,next){
@@ -595,8 +600,8 @@
               return false;
             }
           }
-          if(vm.titleMsg.titleName=='画册'){
-            if(otext == $(".comtent_chanpin .pubilc_div .time_pu .page .pageleft").size()){
+          if (vm.titleMsg.titleName == '画册') {
+            if (otext == $(".comtent_chanpin .pubilc_div .time_pu .page .pageleft").size()) {
               vm.$message({
                 iconClass: "atrup_Message",
                 showClose: true,
@@ -1038,16 +1043,16 @@
         this.workEdit.edtDbId = this.$route.query.dbId // 存入id预防
         vm.sLoading = true
         vm.sloadingText = '作品继续编辑中...'
-        if (this.$route.query.eqTitle=="画册.250X342") {
+        if (this.$route.query.eqTitle == "画册.250X342") {
           vm.template_Source = hcTemplate250X342
         }
-        if (this.$route.query.eqTitle=="画册.342X342") {
-          vm.template_Source= hcTemplate342X342
+        if (this.$route.query.eqTitle == "画册.342X342") {
+          vm.template_Source = hcTemplate342X342
         }
-        if (this.$route.query.eqTitle=="画册.342X250") {
+        if (this.$route.query.eqTitle == "画册.342X250") {
           vm.template_Source = hcTemplate342X250
         }
-        if (this.$route.query.eqTitle=="画册.342X500") {
+        if (this.$route.query.eqTitle == "画册.342X500") {
           vm.template_Source = hcTemplate342X500
         }
         Api.work.unfinishedWork(this.$route.query.dbId).then((res) => {
