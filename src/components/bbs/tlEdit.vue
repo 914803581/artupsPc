@@ -12,8 +12,8 @@
               <span></span>
             </div>
             <div class="title_right">
-              <span>台历.<span id="colour">白色</span>.{{tailiSize}}mm</span>
-              <span>13页</span>
+              <span>台历.<span id="colour">白色</span>.{{tailiSize}}.13页</span>
+              <span></span>
               <span><i class="iconfont">&#xe6e2;</i>59.80</span>
             </div>
           </div>
@@ -216,7 +216,7 @@
       checkTemplateTaili(tel) {
         var vm = this;
         if (sessionStorage.getItem('tailiType') !== tel) {
-          vm.$confirm('切换版式之后将会清空', '台历提醒', {
+          vm.$confirm('切换版式之后编辑器内图片会被清空', '台历提醒', {
             confirmButtonText: '确定',
             cancelButtonText: '取消',
             type: 'warning',

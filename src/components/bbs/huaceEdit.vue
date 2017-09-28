@@ -361,11 +361,11 @@
 
 		},
 		mounted() { //全部渲染完毕
-
 			var SlsectDate = JSON.parse(sessionStorage.getItem("bbsSlsectDate"));
 			console.log(SlsectDate.size)
 			if (SlsectDate.size=="250X342") {
-				this.dataTemplate.templateSource = hcTemplate250X342;
+				this.dataTemplate.templateSource = hcTemplate250X342
+        this.dataTemplate.templateImgData =  hc_template_img_250X342
         this.dataTemplate.productData =[
           [{
             "template": hcTemplate250X342.bbs1,
@@ -438,7 +438,8 @@
         ]
 			}
 			if (SlsectDate.size=="342X342") {
-				this.dataTemplate.templateSource = hcTemplate342X342 ;
+				this.dataTemplate.templateSource = hcTemplate342X342
+        this.dataTemplate.templateImgData = hc_template_img_342X342
         this.dataTemplate.productData =[
           [{
             "template": hcTemplate342X342.bbs1,
@@ -525,7 +526,8 @@
         ]
 			}
 			if (SlsectDate.size=="342X250") {
-				this.dataTemplate.templateSource = hcTemplate342X250 ;
+				this.dataTemplate.templateSource = hcTemplate342X250
+        this.dataTemplate.templateImgData = hc_template_img_342X250
         this.dataTemplate.productData =[
           [{
             "template": hcTemplate342X250.bbs1,
@@ -629,7 +631,8 @@
         ]
 			}
 			if (SlsectDate.size=="342X500") {
-				this.dataTemplate.templateSource = hcTemplate342X500;
+				this.dataTemplate.templateSource = hcTemplate342X500
+        this.dataTemplate.templateImgData  = hc_template_img_342X500
         this.dataTemplate.productData =[
           [{
             "template": hcTemplate342X500.bbs1,
@@ -746,12 +749,11 @@
       if(SlsectDate.size=="360X510"){
         this.dataTemplate.templateSource = hcTemplate360X510
       }
-			var str = "风景方版";
-
-			if (str =="风景方版") { //SlsectDate.size==""
-        //this.dataTemplate.productData = this.setBanshi(SlsectDate.size).productData;
-				 this.dataTemplate.templateImgData = this.setBanshi(SlsectDate.size).templateImgData;
-			}
+//			var str = "风景方版";
+//
+//			if (str =="风景方版") { //SlsectDate.size==""
+//				 this.dataTemplate.templateImgData = this.setBanshi(SlsectDate.size).templateImgData;
+//			}
 		}
 	}
 </script>

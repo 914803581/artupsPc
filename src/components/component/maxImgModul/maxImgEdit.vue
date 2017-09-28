@@ -23,7 +23,8 @@
                 <div @click="bbs.Switching=false" class="titleClose"><i class="iconfont">&#xe746;</i></div>
               </div>
               <div class="checkBS_b">
-                <div :style="{'width':itemImg.isTrue?'90%':'45%'}" :istrue="itemImg.isTrue"
+                <div :style="{'width':itemImg.isTrue?'90%':'45%','height':itemImg.isHeight+'px'}"
+                     :istrue="itemImg.isTrue"
                      @click="chenkTemplate(index)" v-for="(itemImg,index) in mobanArr"
                      :class="templateoindex==index?'img_div boder_actiev':'img_div'">
                   <img :src="itemImg.templateImg">
@@ -315,54 +316,59 @@
         for (; i < this.$store.state.editData.ImgHashMap.keys().length; i++) {
           if (this.$store.state.editData.ImgHashMap.getvalue(this.$store.state.editData.ImgHashMap.keys()[i])) {
             arrMap.push(this.$store.state.editData.ImgHashMap.getvalue(this.$store.state.editData.ImgHashMap.keys()[i]))
-          }
-        }
-        for (i = 0; i < this.$store.state.editData.lomoHashMap.keys().length; i++) {
-          if (this.$store.state.editData.lomoHashMap.getvalue(this.$store.state.editData.lomoHashMap.keys()[i])) {
-            lomArrMap.push(this.$store.state.editData.lomoHashMap.getvalue(this.$store.state.editData.lomoHashMap.keys()[i]))
-          }
-        }
-        for (i = 0; i < this.$store.state.editData.textHashMap.keys().length; i++) {
-          if (this.$store.state.editData.textHashMap.getvalue(this.$store.state.editData.textHashMap.keys()[i])) {
-            textArrMap.push(this.$store.state.editData.textHashMap.getvalue(this.$store.state.editData.textHashMap.keys()[i]))
-          }
-        }
-        //字符串转换数组存储到对象里面
-        let bbsSlsectDate = JSON.parse(sessionStorage.getItem('bbsSlsectDate'))
-        this.workEdit.editPicture = JSON.stringify(arrMap)
-        this.workEdit.editTxt = JSON.stringify(textArrMap)
-        this.workEdit.lomo = JSON.stringify(lomArrMap)
-        this.workEdit.tplCode = this.getFromSession('tplCode')
-        this.workEdit.operator = 'add'
-        this.workEdit.category = this.getFromSession('category')
-        this.workEdit.sku = bbsSlsectDate.name
-        this.workEdit.skuId = bbsSlsectDate.skuId
-        this.workEdit.status = 1
-        this.workEdit.skuCode = bbsSlsectDate.skuCode
-        this.workEdit.price = bbsSlsectDate.price
-        this.workEdit.theme = ''  //画册的版式
-        this.workEdit.defDbId = this.getFromSession('defDbId')
-        var bbsTempla = [] //拷贝对象给后端传递数组
-        bbsTempla = JSON.parse(JSON.stringify(vm.bbsTemplate_data))
-        bbsTempla.forEach((val) => {
-          val.forEach((va) => {
-            va.template = ''
-            va.slectTemplate = false
-          })
-        })
-        this.workEdit.dataTemplate = JSON.stringify(bbsTempla) //版式修改之后的数组
+            for (i = 0; i < this.$store.state.editData.ImgHashMap.keys().length; i++) {
+              if (this.$store.state.editData.ImgHashMap.getvalue(this.$store.state.editData.ImgHashMap.keys()[i])) {
+                arrMap.push(this.$store.state.editData.ImgHashMap.getvalue(this.$store.state.editData.ImgHashMap.keys()[i]));
+              }
+            }
+            for (i = 0; i < this.$store.state.editData.lomoHashMap.keys().length; i++) {
+              if (this.$store.state.editData.lomoHashMap.getvalue(this.$store.state.editData.lomoHashMap.keys()[i])) {
+                lomArrMap.push(this.$store.state.editData.lomoHashMap.getvalue(this.$store.state.editData.lomoHashMap.keys()[i]))
+              }
+            }
+            for (i = 0; i < this.$store.state.editData.textHashMap.keys().length; i++) {
+              if (this.$store.state.editData.textHashMap.getvalue(this.$store.state.editData.textHashMap.keys()[i])) {
+                textArrMap.push(this.$store.state.editData.textHashMap.getvalue(this.$store.state.editData.textHashMap.keys()[i]))
+              }
+            }
+            //字符串转换数组存储到对象里面
+            let bbsSlsectDate = JSON.parse(sessionStorage.getItem('bbsSlsectDate'))
+            this.workEdit.editPicture = JSON.stringify(arrMap)
+            this.workEdit.editTxt = JSON.stringify(textArrMap)
+            this.workEdit.lomo = JSON.stringify(lomArrMap)
+            this.workEdit.tplCode = this.getFromSession('tplCode')
+            this.workEdit.operator = 'add'
+            this.workEdit.category = this.getFromSession('category')
+            this.workEdit.sku = bbsSlsectDate.name
+            this.workEdit.skuId = bbsSlsectDate.skuId
+            this.workEdit.status = 1
+            this.workEdit.skuCode = bbsSlsectDate.skuCode
+            this.workEdit.price = bbsSlsectDate.price
+            this.workEdit.theme = ''  //画册的版式
+            this.workEdit.defDbId = this.getFromSession('defDbId')
+            var bbsTempla = [] //拷贝对象给后端传递数组
+            bbsTempla = JSON.parse(JSON.stringify(vm.bbsTemplate_data))
+            bbsTempla.forEach((val) => {
+              val.forEach((va) => {
+                va.template = ''
+                va.slectTemplate = false
+              })
+            })
+            this.workEdit.dataTemplate = JSON.stringify(bbsTempla) //版式修改之后的数组
 //        如果存在就存入此字段
-        if (this.$route.query.huaceType) {
-          this.workEdit.theme = this.$route.query.huaceType
-        }
-        $(".comtent_chanpin .pubilc_div .bbsClass  .img_drap").each(function (index, el) {
-          if ($(el).attr("src")) { //如果src存在
-            vm.workEdit.thumbnailImageUrl = $(el).attr('imgstyle')
-            return false;
-          } else {
-            vm.workEdit.thumbnailImageUrl = ''
+            if (this.$route.query.huaceType) {
+              this.workEdit.theme = this.$route.query.huaceType
+            }
+            $(".comtent_chanpin .pubilc_div .bbsClass  .img_drap").each(function (index, el) {
+              if ($(el).attr("src")) { //如果src存在
+                vm.workEdit.thumbnailImageUrl = $(el).attr('imgstyle')
+                return false;
+              } else {
+                vm.workEdit.thumbnailImageUrl = ''
+              }
+            })
           }
-        })
+        }
       },
       editWork() { //保存作品
         this.sLoading = true;
@@ -384,7 +390,8 @@
           this.workEdit.edtDbId = res.data.extraCode
           console.log('保存的code:', res.data.extraCode)
         })
-      },
+      }
+      ,
       nextStep(val) { //下一步
         //保存函数
         this.sLoading = true
@@ -452,7 +459,8 @@
             }
           }
         })
-      },
+      }
+      ,
       chenkTemplate(index) { //切换模版
         var vms = true;
         var vm = this;
@@ -499,10 +507,10 @@
           }
           this.bbsTemplate_data[this.bbs.bbs_index1] = [];
           josnImg = {
-            "template": vm.template_Source.bbs9,
+            "template": vm.template_Source[chenkIndex],
             "only": true,
             "slectTemplate": true,
-            "type": "bbs9",
+            "type": chenkIndex,
             "firstPage": false,
             "lastPage": false
           }
@@ -595,6 +603,18 @@
               return false;
             }
           }
+          if (vm.titleMsg.titleName == '画册') {
+            if (otext == $(".comtent_chanpin .pubilc_div .time_pu .page .pageleft").size()) {
+              vm.$message({
+                iconClass: "atrup_Message",
+                showClose: true,
+                message: '尾页不能更换板式'
+              });
+              vm.setBbsTemplate();//修改选中状态
+              vm.$forceUpdate();
+              return false;
+            }
+          }
           otemplate.template = vm.template_Source[chenkIndex];
           otemplate.type = chenkIndex
           otemplate.only = false
@@ -609,14 +629,16 @@
           vm.setPageIndex()
           vm.$store.commit("drapDiv");
         }, 300)
-      },
+      }
+      ,
       footerBoolean(val) { //素材库抬起底部图片
         var vm = this;
         this.footerShow = val;
         setTimeout(function () {
           vm.jisuan(); // 计算页面位置
         }, 300)
-      },
+      }
+      ,
 
       postDatas(val) { //获取数据覆盖便于二次编辑
         console.log(val)
@@ -660,7 +682,8 @@
             picObj: picObj
           })
         }
-      },
+      }
+      ,
       click_template($event, index1, index2) { //vue模版渲染完毕之后的事件处理,index1和index2就是那个二维数组对应的索引
         this.bbs.bbs_index1 = index1; //存入二维数组的值
         this.bbs.bbs_index2 = index2;
@@ -689,14 +712,14 @@
           this.dataEditImg.oH = $($event.target).parent(".drapBox").height();
           //点击时候获取coustName 从hashMap里面得到他有没第一次编辑的东西
           var constName = this.getCoustName($($event.target))
-
           this.dataEditImg.oActions = this.$store.state.editData.ImgHashMap.getvalue(constName).actions;
           console.log(this.dataEditImg)
           //从vuex缓存里面拿到我的数据
           //        console.log()
           this.openImgEdit();
         }
-      },
+      }
+      ,
       click_template_lomo($event) { //lomo卡
         if ($($event.target).next(".img_drap").attr("src") == "") {
           return;
@@ -713,14 +736,16 @@
         console.log(constName)
         this.dataEditImg.oActions = this.$store.state.editData.lomoHashMap.getvalue(constName).actions;
         this.openImgEdit();
-      },
+      }
+      ,
       setBbsTemplate() { //设置宝宝书板式初始化数据
         this.bbsTemplate_data.forEach((item, i) => {
           item.forEach((e, i) => {
             e.slectTemplate = false
           })
         })
-      },
+      }
+      ,
       setPageIndex() { //设置页数
 
         //旅行记设置页数
@@ -743,31 +768,38 @@
         $(".comtent_chanpin .time_pu .page .pageLomo").each((i, e) => {
           $(e).text((i + 1)).css("opacity", "0")
         })
-      },
+      }
+      ,
       jisuan() { //动态计算面积
         var oH = $(window).height() - $(".footer_img").height() - $(".unify-header").height() - $(".comtent_chanpin .line_comtent .comtent .title").height() - 2;
         $(".line_comtent .scrollBar").css("height", oH + 'px');
-      },
+      }
+      ,
       checkFooterShow($event) { //切换底部的图片显示隐藏
         var vm = this;
         this.footerShow = !this.footerShow;
         setTimeout(function () {
           vm.jisuan(); // 计算页面位置
         }, 300)
-      },
+      }
+      ,
       open_material() { // 打开素材库
         this.isModel = !this.isModel
-      },
+      }
+      ,
       openTxst(maxlen) { // 打开文字框
         this.iseditText = !this.iseditText;
         this.textNum = maxlen;
-      },
+      }
+      ,
       openImgEdit() {
         this.isimgEdit = !this.isimgEdit;
-      },
+      }
+      ,
       get_material() {
 
-      },
+      }
+      ,
       preview() {
         var TYPESTYLECOUNT = {}
         let bbsSlsectDate = sessionStorage.bbsSlsectDate ? JSON.parse(sessionStorage.bbsSlsectDate) : {}
@@ -949,7 +981,8 @@
         })
         this.colorName = JSON.parse(sessionStorage.getItem("bbsSlsectDate")).colorName;
         this.previewDialogVisible = true
-      },
+      }
+      ,
       dataPull() { //数据改变的函数
         var vm = this;
         if (vm.dataPullTemplate) {
@@ -965,19 +998,24 @@
         }, 400)
 
       }
-    },
+    }
+    ,
     computed: {
-      ...mapGetters({
-        FooterDataAuto: "GetFooterDataAuto", // 底部选中的图片状态
-        PreviewWork: "GetPreviewWork" // 预览产品需要数据的变量
-      })
-    },
+      ...
+        mapGetters({
+          FooterDataAuto: "GetFooterDataAuto", // 底部选中的图片状态
+          PreviewWork: "GetPreviewWork" // 预览产品需要数据的变量
+        })
+    }
+    ,
     watch: {
       bbsTemplate_data: "dataPull"
-    },
+    }
+    ,
     created() {
 
-    },
+    }
+    ,
     mounted() {
 
       console.log('传递的数据', this.dataTemp)
@@ -1027,6 +1065,18 @@
         this.workEdit.edtDbId = this.$route.query.dbId // 存入id预防
         vm.sLoading = true
         vm.sloadingText = '作品继续编辑中...'
+        if (this.$route.query.eqTitle == "画册.250X342") {
+          vm.template_Source = hcTemplate250X342
+        }
+        if (this.$route.query.eqTitle == "画册.342X342") {
+          vm.template_Source = hcTemplate342X342
+        }
+        if (this.$route.query.eqTitle == "画册.342X250") {
+          vm.template_Source = hcTemplate342X250
+        }
+        if (this.$route.query.eqTitle == "画册.342X500") {
+          vm.template_Source = hcTemplate342X500
+        }
         Api.work.unfinishedWork(this.$route.query.dbId).then((res) => {
           if (res.data.data.finish == 'N') {
             vm.$message({

@@ -9,6 +9,43 @@
     body {
       opacity: 0;
     }
+    #main {
+      width: 100%;
+      height: auto;
+      margin: 0 auto;
+      /*background: #efeff4;*/
+      position: relative;
+    }
+   body .el-carousel__button {
+      background: #3a3a3a;
+    }
+    .div-box{width: 1096px;height: 464px;margin: 0 auto;position: relative;}
+    .div-box >i{display: block;position: absolute;width: 57px;height: 57px;background: url(http://image2.artup.com/static/pc/img/new02.png) no-repeat;top: 88px;right: 214px;}
+    .div-box>.margin1{margin-left: 97px;}
+    .div-box>.margin2{float: right;margin-right: 70px;}
+    .div-box>.margin3{margin-left: 145px;}
+    .div-box>.margin4{float: right;margin-right: 44px;width: 269px;}
+    .div-box>ol{/*width: 191px;*/height: 234px;padding-top: 97px;text-align: left;}
+    .div-box>ol>.ol-li1{height: 57px;line-height: 57px;font-family: "å¾®è½¯é›…é»‘";font-weight: 600;font-size: 36px;color: #000;}
+    .div-box>ol>.ol-li2{height: 55px;line-height: 55px;color: #858585;word-spacing: 4px;font-family: "å¾®è½¯é›…é»‘";font-size: 14px;}
+    .div-box>ol>.ol-li3{height: 23px;line-height: 23px;margin-top: 24px;font-family: "å¾®è½¯é›…é»‘";font-size: 14px;color: #5c5c5c;letter-spacing:2px;}
+    .div-box>ol>.ol-li4{height: 27px;line-height: 27px;font-family: "å¾®è½¯é›…é»‘";font-size: 17px;color: #2e2e2e;}
+    .div-box>ol>.ol-li5{margin-top: 10px;position: relative;}
+    .div-box>ol>.ol-li5 a{background: #010101;width: 145px;height: 32px;line-height: 32px;display: block;font-size: 14px;color: #fff;font-family: arial;position: relative;border-radius: 4px;text-align: center;}
+    .div-box>ol>.ol-li5 a:hover{background: #000;color: #fff !important;border: none !important;opacity: 0.8;}
+    .div-box>ol>.ol-li5 a:active{top: 1px;}
+    #main>li{width: 100%;height: 464px;margin-top: 6px;}
+    #main .main-li1{background: url(http://image2.artup.com/static/pc/img/xfk-banner06.png) no-repeat center;}
+    #main .main-li2{background: url(http://image2.artup.com/static/pc/img/indexicon03.png) no-repeat center;}
+    #main .main-li3{background: url(http://image2.artup.com/static/pc/img/indexicon04.png) no-repeat center;}
+    #main .main-li6{background: url(http://image2.artup.com/static/pc/img/tl_icon15.jpg) no-repeat center;}
+    #main .main-li11{background: url(http://image2.artup.com/static/pc/img/qxs.png) no-repeat center;}
+    #main .main-li4{background: url(http://image2.artup.com/static/pc/img/indexicon05.png) no-repeat center;}
+    #main .main-li5{background: url(http://image2.artup.com/static/pc/img/xfk-banner05.png) no-repeat center;}
+    #main .main-li7{background: url(http://image2.artup.com/static/pc/img/js_icon11.jpg) no-repeat center;}
+    #main .main-li8{background: url(http://image2.artup.com/static/pc/img/fan-indeximg003.jpg) no-repeat center;}
+    #main .main-li9{background: url(http://image2.artup.com/static/pc/img/bg_bbs_index.jpg) no-repeat center;}
+    #main .main-li10{background: url(http://image2.artup.com/static/pc/img/hj.png) no-repeat center;}
   </style>
 </head>
 <body>
@@ -22,87 +59,184 @@
         </el-carousel-item>
       </el-carousel>
     </div>
-    <div class="letter">
-      <h4 class="subtitle">拾起流逝时光，甄选记忆宝藏</h4>
-      <h3 class="title">小时光</h3>
-      <div class="starting-price">
-        <label>起始价格</label>
-        <span>￥ 299 CNY</span>
-      </div>
-      <a href="/album/imgEditMsg?category=baobaoshu&tplCode=pc_baobaoshu_170-235_24_single&defDbId=7ad740df-0b81-418f-b4b5-c078ef580b47" class="btn">开始定制</a>
-    </div>
-    <div class="art-album">
-      <h4 class="subtitle">让您的展览永不落寞</h4>
-      <h3 class="title">艺术画册</h3>
-      <div class="starting-price">
-        <label>起始价格</label>
-        <span>￥ 499 CNY</span>
-      </div>
-      <a href="/album.html?category=huace&defDbId=9de2973d-3487-4b05-b556-b9b92dd75493" class="btn">开始定制</a>
-    </div>
-    <!--<div class="magnet">-->
-      <!--<h4 class="subtitle">随时更换，永远新鲜</h4>-->
-      <!--<h3 class="title">艺术磁贴画</h3>-->
-      <!--<div class="starting-price">-->
-        <!--<label>起始价格</label>-->
-        <!--<span>￥ 499 CNY</span>-->
+
+
+    <ul id="main">
+      <li class="main-li6" id="tl_tl">
+        <div class="div-box">
+          <ol>
+            <li class="ol-li1">艺术台历</li>
+            <li class="ol-li2">打造你的桌面展览</li>
+            <li class="ol-li3">起始价格</li>
+            <li class="ol-li4">¥ 59.8 CNY</li>
+            <li class="ol-li5"><a href="/desk.html?category=taili&defDbId=f80b4c98-15ca-4da0-b482-0c8270c2eac6" title="专业定制台历">开始定制</a></li>
+          </ol>
+          <i style="left: 160px;top: 76px;}"></i>
+        </div>
+      </li>
+      <li class="main-li1" id="hc-hc">
+        <div class="div-box">
+          <ol style="float: right;">
+            <li class="ol-li1">艺术画册</li>
+            <li class="ol-li2">收 藏 级 摄 影 作 品 集</li>
+            <li class="ol-li3">起始价格</li>
+            <li class="ol-li4">&yen; 499 CNY</li>
+            <li class="ol-li5"><a href="/album.html?category=huace&defDbId=9de2973d-3487-4b05-b556-b9b92dd75493" title="出版级照片画册纪念册">开始定制</a></li>
+          </ol>
+        </div>
+      </li>
+
+      <li class="main-li11" style="background:#f7f7f7;" >
+        <div class="div-box">
+          <img src="http://image2.artup.com/static/pc/img/lxj.png" alt="出版级照片书照片画册" style="position:absolute;top:20px;right:0">
+          <ol style="width:295px">
+            <li class="ol-li1">旅行记</li>
+            <li class="ol-li2" style="line-height:30px;">
+              <p>旅行的意义不在于战利品有多少，旅行的故事</p>
+              <p>无须过多文字的赘述，光影才是最好的讲述者</p>
+            </li>
+            <li class="ol-li3">起始价格</li>
+            <li class="ol-li4">￥299CNY<span style="display: none;text-decoration: line-through;margin-left:20px;color:gray;">￥299CNY</span></li>
+            <li class="ol-li5"><a  href="/lxj.html?category=lvxingji&defDbId=2ef25e96-adcb-4612-b701-fe91b4856218&tplCode=pc_lvxingji_250X250_32" title="旅行记">开始定制</a></li>
+          </ol>
+        </div>
+      </li>
+      <li class="main-li10" id="kh-kh" style="background:#f7f7f7;">
+        <div class="div-box">
+          <img src="http://image2.artup.com/static/pc/img/hj_02.jpg" alt="合集" style="width: 600px;position: absolute;top: 0;left: 0;">
+          <ol  style="text-align: right;float: right;width:auto;">
+            <li class="ol-li1">艺术影像合集</li>
+            <li class="ol-li2">再 次 创 造 影 像 美 学</li>
+            <li class="ol-li3">起始价格</li>
+            <li class="ol-li4">¥ 289 CNY</li>
+            <li class="ol-li5"><a href="/heji.html?category=heji&defDbId=5ea5e91b-21fd-481f-ab11-c767b19eed53&tplCode=pc_heji_500X350_10" style="float: right;" title="手工打造定制框画挂画装饰画">开始定制</a></li>
+          </ol>
+        </div>
+      </li>
+      <li class="main-li9" >
+        <div class="div-box">
+          <ol>
+            <li class="ol-li1">小时光</li>
+            <li class="ol-li2">小小的时光，记录点滴美好</li>
+            <li class="ol-li3">起始价格</li>
+            <li class="ol-li4">&yen; 299 CNY</li>
+            <li class="ol-li5"><a  href="/album/imgEditMsg?category=baobaoshu&tplCode=pc_baobaoshu_170-235_24_single&defDbId=7ad740df-0b81-418f-b4b5-c078ef580b47" title="家书">开始定制</a></li>
+          </ol>
+        </div>
+      </li>
+      <li class="main-li2" id="kh-kh">
+        <div class="div-box">
+
+          <ol  style="text-align: right;float: right;">
+            <li class="ol-li1">艺术框画</li>
+            <li class="ol-li2">制 作 你 专 属 的 画 廊</li>
+            <li class="ol-li3">起始价格</li>
+            <li class="ol-li4">¥ 289 CNY</li>
+            <li class="ol-li5"><a href="/framed-pictures.html?category=kuanghua&defDbId=6afedcf6-b0e4-447d-afd9-c70449f42f50" style="float: right;" title="手工打造定制框画挂画装饰画">开始定制</a></li>
+          </ol>
+        </div>
+      </li>
+      <li class="main-li3" id="hb-hb">
+        <div class="div-box">
+
+          <ol>
+            <li class="ol-li1">艺术海报</li>
+            <li class="ol-li2">画 面 从 未 如 此 立 体</li>
+            <li class="ol-li3">起始价格</li>
+            <li class="ol-li4">¥ 40 CNY</li>
+            <li class="ol-li5"><a href="/poster.html?category=haibao&defDbId=d6e44ca4-511f-41d5-87df-d8d75a491c09" title="专业定制大幅面艺术海报">开始定制</a></li>
+          </ol>
+        </div>
+      </li>
+      <!--<li class="main-li12" style="background:#f7f7f7;">-->
+      <!--<div class="div-box">-->
+      <!--<ol  style="text-align: left;float: right;width:auto;">-->
+      <!--<li class="ol-li1">毕业季</li>-->
+      <!--<li class="ol-li2">定格一起走过的青葱岁月，定制有关青春的共同回忆</li>-->
+      <!--<li class="ol-li3">起始价格</li>-->
+      <!--<li class="ol-li4">￥299CNY<span style="display: none;text-decoration: line-through;margin-left:20px;color:gray;">￥299CNY</span></li>-->
+      <!--<li class="ol-li5"><a href="zqc/zqc.html" style="float: left;" title="定格一起走过的青葱岁月，定制有关青春的共同回忆">开始定制</a></li>-->
+      <!--</ol>-->
+
       <!--</div>-->
-      <!--<a href="#" class="btn">开始定制</a>-->
-    <!--</div>-->
-    <div class="frame-picture">
-      <h4 class="subtitle">您专属的影像画廊</h4>
-      <h3 class="title">艺术框画</h3>
-      <div class="starting-price">
-        <label>起始价格</label>
-        <span>￥ 289 CNY</span>
-      </div>
-      <a href="/framed-pictures.html?category=kuanghua&defDbId=6afedcf6-b0e4-447d-afd9-c70449f42f50" class="btn">开始定制</a>
-    </div>
-    <div class="posters">
-      <h4 class="subtitle">您专属的影像画廊</h4>
-      <h3 class="title">艺术海报</h3>
-      <div class="starting-price">
-        <label>起始价格</label>
-        <span>￥ 40 CNY</span>
-      </div>
-      <a href="/poster.html?category=haibao&defDbId=d6e44ca4-511f-41d5-87df-d8d75a491c09" class="btn">开始定制</a>
-    </div>
-    <!--<div class="posters">-->
-      <!--<h4 class="subtitle">您专属的影像画廊</h4>-->
-      <!--<h3 class="title">艺术海报</h3>-->
-      <!--<div class="starting-price">-->
-        <!--<label>起始价格</label>-->
-        <!--<span>￥ 499 CNY</span>-->
+      <!--</li>-->
+      <!--<li class="main-li8" id="sgj-sgj" style="">-->
+        <!--<div class="div-box">-->
+          <!--&lt;!&ndash;<ol class="margin1">&ndash;&gt;-->
+          <!--<ol style="float: right;">-->
+            <!--<li class="ol-li1">拾光集</li>-->
+            <!--<li class="ol-li2">拾起流逝时光，甄选记忆宝藏</li>-->
+            <!--<li class="ol-li3">起始价格</li>-->
+            <!--<li class="ol-li4">￥89CNY<span style="text-decoration: line-through;color:gray;margin-left:20px;"></span></li>-->
+            <!--<li class="ol-li5"><a href="activity/shiguangji.html" title="拾光集">开始定制</a></li>-->
+          <!--</ol>-->
+
+        <!--</div>-->
+      <!--</li>-->
+      <!--<li class="main-li4" id="gl-gl">-->
+        <!--<div class="div-box">-->
+          <!--<ol  style="text-align: right;float: right;">-->
+            <!--<li class="ol-li1">艺术挂历</li>-->
+            <!--<li class="ol-li2">您 专 属 的 影 像 画 廊</li>-->
+            <!--<li class="ol-li3">起始价格</li>-->
+            <!--<li class="ol-li4">¥ 199 CNY</li>-->
+            <!--<li class="ol-li5"><a href="gl/gl.html" style="float: right;" title="开始定制2016猴年挂历">开始定制</a></li>-->
+          <!--</ol>-->
+        <!--</div>-->
+      <!--</li>-->
+      <!--<li class="main-li7" >-->
+        <!--<div class="div-box">-->
+          <!--<ol>-->
+            <!--<li class="ol-li1">家·书</li>-->
+            <!--<li class="ol-li2">家 族 记 忆，百 年 传 承</li>-->
+            <!--<li class="ol-li3">起始价格</li>-->
+            <!--<li class="ol-li4">&yen; 598 CNY</li>-->
+            <!--<li class="ol-li5"><a  href="jiashu/jiashu.html" title="家书">开始定制</a></li>-->
+          <!--</ol>-->
+        <!--</div>-->
+      <!--</li>-->
+
+      <!--<li class="main-li5" id="cth-cth">-->
+        <!--<div class="div-box">-->
+
+          <!--<ol>-->
+            <!--<li class="ol-li1">艺术磁贴画</li>-->
+            <!--<li class="ol-li2">随 时 更 换，永 远 新 鲜</li>-->
+            <!--<li class="ol-li3">起始价格</li>-->
+            <!--<li class="ol-li4">&yen; 79 CNY</li>-->
+            <!--<li class="ol-li5"><a  href="cth/cth.html" title="出版级照片画册纪念册">开始定制</a></li>-->
+          <!--</ol>-->
+        <!--</div>-->
+      <!--</li>-->
+      <!--<li class="main-li11" style="background-color:#f7f7f7;">-->
+        <!--<div class="div-box">-->
+          <!--<img src="img/indexicon04.png" alt="专业定制七夕书" style="width: 1000px;opacity: 0;filter:alpha(opacity=0);position: absolute;top: 0;left: 0;">-->
+          <!--<ol>-->
+            <!--<li class="ol-li1">遇见<b style="position: relative;top: -10px;" > . </b>情缘</li>-->
+            <!--<li class="ol-li2">时光中最动人的瞬间就是遇见你</li>-->
+            <!--<li class="ol-li3">起始价格</li>-->
+            <!--<li class="ol-li4" style="position: relative;">-->
+              <!--¥ 299 CNY&nbsp;&nbsp;&nbsp;-->
+            <!--</li>-->
+            <!--<li class="ol-li5"><a href="qxs/qxs.html" title="专业定制七夕书">开始定制</a></li>-->
+          <!--</ol>-->
+        <!--</div>-->
+      <!--</li>-->
+
+    </ul>
+
+
+
+
+    <!--<div class="awards">-->
+      <!--<h4 class="subtitle">为专业摄影师服务二十余载，雅昌建立行业标准</h4>-->
+      <!--<h3 class="title">匠心工艺</h3>-->
+      <!--<div class="play">-->
+        <!--<a href="javascript:void(0);" class="play-btn"></a>-->
       <!--</div>-->
-      <!--<a href="#" class="btn">开始定制</a>-->
+      <!--<p class="describe">雅昌艺术印刷，作为世界艺术印刷的引领者，-->
+        <!--在与国际顶级的技术和材料供应商建立战略合作的过程中，独创了一套满足艺术印刷标准的技术和管理体系，曾先后斩获各类国际印刷大奖700多项，十次问鼎被誉为全球印刷界“奥斯卡”的美国印刷大奖，让东方的雅艺之道，成就世界之最的印艺之美。</p>-->
     <!--</div>-->
-    <div class="desk-calendar">
-      <h4 class="subtitle">您专属的影像画廊</h4>
-      <h3 class="title">艺术台历</h3>
-      <div class="starting-price">
-        <label>起始价格</label>
-        <span>￥ 59.80 CNY</span>
-      </div>
-      <a href="/desk.html?category=taili&defDbId=f80b4c98-15ca-4da0-b482-0c8270c2eac6" class="btn">开始定制</a>
-    </div>
-    <!--<div class="wall-calendar">-->
-      <!--<h4 class="subtitle">您专属的影像画廊</h4>-->
-      <!--<h3 class="title">艺术挂历</h3>-->
-      <!--<div class="starting-price">-->
-        <!--<label>起始价格</label>-->
-        <!--<span>￥ 499 CNY</span>-->
-      <!--</div>-->
-      <!--<a href="#" class="btn">开始定制</a>-->
-    <!--</div>-->
-    <div class="awards">
-      <h4 class="subtitle">为专业摄影师服务二十余载，雅昌建立行业标准</h4>
-      <h3 class="title">匠心工艺</h3>
-      <div class="play">
-        <a href="javascript:void(0);" class="play-btn"></a>
-      </div>
-      <p class="describe">雅昌艺术印刷，作为世界艺术印刷的引领者，
-        在与国际顶级的技术和材料供应商建立战略合作的过程中，独创了一套满足艺术印刷标准的技术和管理体系，曾先后斩获各类国际印刷大奖700多项，十次问鼎被誉为全球印刷界“奥斯卡”的美国印刷大奖，让东方的雅艺之道，成就世界之最的印艺之美。</p>
-    </div>
   </div>
   <unify-footer></unify-footer>
 </div>

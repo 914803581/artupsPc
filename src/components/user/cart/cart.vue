@@ -2,6 +2,7 @@
 	<div id="cart">
 
 		<nav-header></nav-header>
+    <!--<work-null></work-null>-->
 		<div class="p_cat ng-scope">
 		<dl ng-if="!items.length==0" class="ng-scope">
 		<div class="cat_hander" style="width: 1136px;">
@@ -90,6 +91,7 @@
 	import Api from '@/api.js'
 	import { MessageBox } from 'element-ui';
 	import Hander from '../../header/header.vue'
+	import workNull from '@/components/component/workNull/workNull.vue'
   let userDbId = localStorage.getItem("userDbId")
 		export default{
 			data(){
@@ -102,7 +104,8 @@
 				}
 			},
 			components:{ //在再这里要注入我的组件
-		      'nav-header':Hander
+		      'nav-header':Hander,
+          'work-null':workNull
 		    },
 			methods:{//单条记录删除
 				deleteCar(index,dbId){

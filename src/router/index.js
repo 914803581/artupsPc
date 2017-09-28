@@ -19,6 +19,7 @@ import maxImgEdit from '@/components/bbs/bbsImgEdit' //多图编辑的入口
 
 import huaceEdit from '@/components/bbs/huaceEdit' //画册编辑
 import travelEdit from '@/components/bbs/lvxingjiEdit' //旅行记编辑
+import workNull from '@/components/component/workNull/workNull' //旅行记编辑
 
 
 Vue.use(VueRouter)
@@ -145,7 +146,7 @@ let router = new VueRouter({
       name: 'hejiEdit',
       component: hejiEdit,
       meta: {
-        title: '艺术影像合集编辑'
+        title: '合集编辑'
       }
     },
     {
@@ -154,6 +155,15 @@ let router = new VueRouter({
       component: travelEdit,
       meta: {
         title: '旅行记编辑'
+      }
+    }
+    ,
+    {
+      path: '/album/workNull',
+      name: 'null',
+      component: workNull,
+      meta: {
+        title: 'null'
       }
     }
   ]

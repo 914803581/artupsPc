@@ -267,31 +267,31 @@
 					'templateImgData': [ // 模版对应的图片
 						{
 							templateImg: 'http://image2.artup.com/resources/static/pc/images/pc_lxj_template/template_lxj01.jpg',
-							isTrue: false
+							isTrue: false,isHeight : 86
 						},
 						{
 							templateImg: 'http://image2.artup.com/resources/static/pc/images/pc_lxj_template/template_lxj02.jpg',
-							isTrue: false
+							isTrue: false,isHeight : 86
 						},
 						{
 							templateImg: 'http://image2.artup.com/resources/static/pc/images/pc_lxj_template/template_lxj03.jpg',
-							isTrue: false
+							isTrue: false,isHeight : 86
 						},
 						{
 							templateImg: 'http://image2.artup.com/resources/static/pc/images/pc_lxj_template/template_lxj04.jpg',
-							isTrue: false
+							isTrue: false,isHeight : 86
 						},
 						{
 							templateImg: 'http://image2.artup.com/resources/static/pc/images/pc_lxj_template/template_lxj05.jpg',
-							isTrue: false
+							isTrue: false,isHeight : 86
 						},
 						{
 							templateImg: 'http://image2.artup.com/resources/static/pc/images/pc_lxj_template/template_lxj06.jpg',
-							isTrue: false
+							isTrue: false,isHeight : 86
 						},
 						{
 							templateImg: 'http://image2.artup.com/resources/static/pc/images/pc_lxj_template/template_lxj07.jpg',
-							isTrue: false
+							isTrue: false,isHeight : 86
 						}
 //						,
 //						{

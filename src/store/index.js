@@ -252,7 +252,7 @@ let store = new Vuex.Store({
 			if(edidData.parents(".hengban_bbs").size() > 0) {
 				  picObj.crossPage = true;
 
-        if(sessionStorage.getItem("titleName")=="旅行记"){
+        if(sessionStorage.getItem("titleName")=="旅行记" || sessionStorage.getItem("titleName")=="合集"){
           picObj.crossPage = false;
         }
 			}
