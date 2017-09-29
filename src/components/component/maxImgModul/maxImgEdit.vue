@@ -884,15 +884,14 @@
         if (bbsSlsectDate.category === 'baobaoshu') {
           TYPESTYLECOUNT = {
             startPage: 2,
-            1: {img: 1},
-            2: {img: 1},
-            3: {img: 2},
+            1: {img: 1, text: 1},
+            2: {img: 1, text: 1},
+            3: {img: 2, text: 1},
             4: {img: 1},
-            5: {img: 1},
-            6: {img: 2},
-            7: {img: 4},
-            8: {img: 4},
-            9: {img: 1, double: true}
+            5: {img: 1, text: 1},
+            6: {img: 2, text: 1},
+            7: {img: 4, text: 1},
+            8: {img: 4}
           }
         }
         this.hideCover = TYPESTYLECOUNT.hideCover ? true : false

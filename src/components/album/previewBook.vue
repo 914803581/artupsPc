@@ -26,7 +26,8 @@
                 :class="['text_style_'+item.type+'_'+t.index]"
                 v-for="t in item.text">{{t.text}}</span>
           <label class="title">{{item.title}}</label>
-          <span class="page_num" :class="!((index+1)%2) ? 'left' : 'right'">第{{!hideCover ? index + 1 : index - 1}}页</span>
+          <span class="page_num"
+                :class="!((index+1)%2) ? 'left' : 'right'">第{{!hideCover ? index + 1 : index - 1}}页</span>
         </div>
         <div class="hard even" v-if="!hideCover"></div>
         <div class="hard" ref="lastPage" v-if="!hideCover"></div>
@@ -102,6 +103,10 @@
           'lvxingji250mmX250mm': {
             width: 450 * 2,
             height: 450
+          },
+          'baobaoshu170X235': {
+            width: 326 * 2,
+            height: 450
           }
         },
         products: '',
@@ -118,7 +123,7 @@
         if (!this.isTurn) {
           this.isTurn = true
           this.$nextTick(function () {
-            console.log('ok:', this.colorName)
+            console.log('ok:', `${_self.type}${_self.size}`)
             setBookBg(this.colorName, $(this.$refs.frontCover), $(this.$refs.coverPage), $(this.$refs.lastPage))
             $(this.$refs.previewComtent).turn({
               page: _self.startPage,
@@ -152,6 +157,7 @@
   @import "./previewBookScss/huace-250X342";
   @import "./previewBookScss/huace-342X500";
   @import "./previewBookScss/lvxingji-250X250";
+  @import "./previewBookScss/baobaoshu-170X235";
 
   .style_type_100 .title {
     position: absolute;
