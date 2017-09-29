@@ -794,7 +794,6 @@
         var TYPESTYLECOUNT = {}
         let bbsSlsectDate = sessionStorage.bbsSlsectDate ? JSON.parse(sessionStorage.bbsSlsectDate) : {}
         bbsSlsectDate.format = bbsSlsectDate.skuCode.split('.')
-        console.log(bbsSlsectDate)
         if (['huace', 'baobaoshu', 'lvxingji'].indexOf(bbsSlsectDate.category) < 0) {
           return
         }
@@ -906,7 +905,6 @@
             let titlePu = $(el).find('.title_pu:eq(0)')
             typestyle = titlePu ? titlePu.attr('typestyle') : ''
           }
-          console.log('type:', typestyle)
           typeStyle.push(typestyle)
         })
         this.previewData = []
@@ -928,20 +926,18 @@
             })
           }
         })
-        console.log('占位:', typeStyle)
+        let start = TYPESTYLECOUNT.hideCover ? 0 : 1
         this.PreviewWork.textHashMap.keys().forEach(function (key) {
           let text = _self.PreviewWork.textHashMap.getvalue(key)
-          _self.previewData[text.page - 1].text.push({
+          _self.previewData[text.page - start].text.push({
             index: text.num - 0,
             text: text.content
           })
         })
         // 放图片
         this.PreviewWork.baseHashMap.keys().forEach(function (key) {
-          console.log('key:', key)
           let img = _self.PreviewWork.baseHashMap.getvalue(key)
-          console.log('FF:', img)
-          _self.previewData[img.page - 1].imgs.push({
+          _self.previewData[img.page - start].imgs.push({
             id: img.picDbId,
             index: img.num - 0,
             src: img.base64Img ? img.base64Img : img.thumbnailImageUrl
@@ -993,7 +989,6 @@
             obj.text = texts
           }
         })
-        console.log(this.previewData)
         this.colorName = JSON.parse(sessionStorage.getItem("bbsSlsectDate")).colorName;
         this.previewDialogVisible = true
       },
