@@ -144,6 +144,9 @@
     <preview-book :title="titleMsg.titleName" :colorName="colorName" :visible.sync="previewDialogVisible"
                   :data="previewData"
                   :size="previewSize"
+                  :type="previewType"
+                  :hideCover="hideCover"
+                  :startPage="startPage"
                   @close="previewDialogVisible=false"></preview-book>
   </div>
 </template>
@@ -199,7 +202,10 @@
         tplCode: 'pc_baobaoshu_170-235_24_single', //暂时写死的1个数据
         workEdit: {}, //素材保存组装传给后端的数据
         previewData: [],
-        previewSize: ''
+        previewSize: '',
+        previewType: '',
+        hideCover: false,
+        startPage: 2
       }
     },
     //		beforeRouteEnter(to,from,next){
@@ -789,10 +795,11 @@
         let bbsSlsectDate = sessionStorage.bbsSlsectDate ? JSON.parse(sessionStorage.bbsSlsectDate) : {}
         bbsSlsectDate.format = bbsSlsectDate.skuCode.split('.')
         console.log(bbsSlsectDate)
-        if (['huace', 'baobaoshu'].indexOf(bbsSlsectDate.category) < 0) {
+        if (['huace', 'baobaoshu', 'lvxingji'].indexOf(bbsSlsectDate.category) < 0) {
           return
         }
         this.previewSize = bbsSlsectDate.size
+        this.previewType = bbsSlsectDate.category
         if (bbsSlsectDate.category === 'huace') {
           // 画册1、2、3
           //TYPESTYLECOUNT = {1: {text: 4}, 2: {text: 3}, 3: {text: 2}, 4: {img: 1}, 5: {img: 2}, 6: {img: 1}, 7: {img: 1}, 9: {img: 1}}
@@ -806,12 +813,13 @@
               6: {img: 1},
               7: {img: 1},
               8: {img: 1},
-              9: {img: 1},
+              9: {img: 1, double: true},
               100: {img: 1}
             }
           }
           if (this.previewSize === '342X250') {
             TYPESTYLECOUNT = {
+              startPage: 2,
               1: {text: 2},
               2: {text: 3},
               3: {img: 1},
@@ -820,7 +828,7 @@
               6: {img: 3},
               7: {img: 3},
               8: {img: 1},
-              9: {img: 1},
+              9: {img: 1, double: true},
               10: {img: 1},
               11: {img: 1},
               100: {img: 1}
@@ -828,18 +836,20 @@
           }
           if (this.previewSize === '250X342') {
             TYPESTYLECOUNT = {
+              startPage: 2,
               1: {text: 2},
               2: {img: 1},
               3: {img: 1},
               4: {img: 1},
               5: {img: 1},
               6: {img: 1},
-              9: {img: 1},
+              9: {img: 1, double: true},
               100: {img: 1}
             }
           }
           if (this.previewSize === '342X500') {
             TYPESTYLECOUNT = {
+              startPage: 2,
               1: {text: 6},
               2: {text: 3},
               3: {text: 1},
@@ -848,16 +858,32 @@
               6: {text: 1, img: 1},
               7: {img: 1},
               8: {img: 1},
-              9: {text: 1, img: 1},
-              10: {text: 1, img: 1},
-              11: {text: 1, img: 1},
-              12: {img: 1},
+              9: {text: 1, img: 1, double: true},
+              10: {text: 1, img: 1, double: true},
+              11: {text: 1, img: 1, double: true},
+              12: {img: 1, double: true},
               100: {img: 1, text: 1}
             }
           }
         }
+        if (bbsSlsectDate.category === 'lvxingji') {
+          TYPESTYLECOUNT = {
+            startPage: 1,
+            hideCover: true,
+            0: {img: 1, text: 2, double: true},
+            1: {text: 2},
+            2: {img: 1},
+            3: {img: 1},
+            4: {img: 1, text: 1},
+            5: {img: 1, text: 1},
+            6: {img: 2, text: 1},
+            7: {img: 3, text: 1},
+            100: {img: 1}
+          }
+        }
         if (bbsSlsectDate.category === 'baobaoshu') {
           TYPESTYLECOUNT = {
+            startPage: 2,
             1: {img: 1},
             2: {img: 1},
             3: {img: 2},
@@ -866,10 +892,11 @@
             6: {img: 2},
             7: {img: 4},
             8: {img: 4},
-            9: {img: 1}
+            9: {img: 1, double: true}
           }
         }
-        console.log(TYPESTYLECOUNT)
+        this.hideCover = TYPESTYLECOUNT.hideCover ? true : false
+        this.startPage = TYPESTYLECOUNT.startPage
         let typeStyle = []
         $('.time_main_left_ht .pubilc_div > .time_pu .bbsClass').each((i, el) => {
           let img = $(el).find('.img_drap:eq(0)')
@@ -880,6 +907,7 @@
             let titlePu = $(el).find('.title_pu:eq(0)')
             typestyle = titlePu ? titlePu.attr('typestyle') : ''
           }
+          console.log('type:', typestyle)
           typeStyle.push(typestyle)
         })
         this.previewData = []
@@ -893,14 +921,15 @@
             text: []
           }
           _self.previewData.push(pageInfo)
-          if (type === 9) {
+          if (TYPESTYLECOUNT[type].double) {
             _self.previewData.push({
-              type: 9,
+              type: type,
               imgs: pageInfo.imgs,
               text: []
             })
           }
         })
+        console.log('占位:', typeStyle)
         this.PreviewWork.textHashMap.keys().forEach(function (key) {
           let text = _self.PreviewWork.textHashMap.getvalue(key)
           _self.previewData[text.page - 1].text.push({
@@ -910,7 +939,9 @@
         })
         // 放图片
         this.PreviewWork.baseHashMap.keys().forEach(function (key) {
+          console.log('key:', key)
           let img = _self.PreviewWork.baseHashMap.getvalue(key)
+          console.log('FF:', img)
           _self.previewData[img.page - 1].imgs.push({
             id: img.picDbId,
             index: img.num - 0,
@@ -963,6 +994,7 @@
             obj.text = texts
           }
         })
+        console.log(this.previewData)
         this.colorName = JSON.parse(sessionStorage.getItem("bbsSlsectDate")).colorName;
         this.previewDialogVisible = true
       },
