@@ -32,6 +32,14 @@ var thing = new Vue({
     document.body.style.cssText = 'opacity:1;'
   },
   methods: {
+    //开始定制
+    startCustom() {
+      if (localStorage.getItem("userDbId")) {
+        location.href = '/album/hejiEdit'
+      } else {
+        this.setUrlCallback()
+      }
+    },
     /*更新sku*/
     updataSkuData() {
       this.skuCode = this.getFromSession("category") + '.' + this.nowSize
