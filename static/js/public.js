@@ -596,7 +596,7 @@ function setBookBg(name, dom1, dom2, dom3) { //name:书皮名 dom1：封面  dom
 }
 
 //画册板式图片对应的数组
-let hc_template_img_250X342= [{
+var hc_template_img_250X342= [{
   templateImg: 'http://image2.artup.com/resources/static/pc/images/hc_250*342/hc_template_250X342_01.jpg',
   isTrue: false,isHeight : 116
 },
@@ -625,7 +625,7 @@ let hc_template_img_250X342= [{
     isTrue: true,isHeight : 116
   }]
 
-let hc_template_img_342X250= [
+var hc_template_img_342X250= [
   {
   templateImg: 'http://image2.artup.com/resources/static/pc/images/hc_342*250/hc_template_342X250_01.jpg',
   isTrue: false,
@@ -664,7 +664,7 @@ let hc_template_img_342X250= [
   }
 ]
 
-let hc_template_img_342X342= [{
+var hc_template_img_342X342= [{
   templateImg: 'http://image2.artup.com/resources/static/pc/images/hc_342*342/hc_template_342X342_01.jpg',
   isTrue: false,isHeight : 86
 },
@@ -699,7 +699,7 @@ let hc_template_img_342X342= [{
     isTrue: true,isHeight : 86
   }]
 
-let hc_template_img_342X500= [
+var hc_template_img_342X500= [
   {
   templateImg: 'http://image2.artup.com/resources/static/pc/images/hc_342*500/hc_template_342X500_01.jpg',
   isTrue: false,isHeight : 124

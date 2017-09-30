@@ -252,7 +252,7 @@ let store = new Vuex.Store({
 			if(edidData.parents(".hengban_bbs").size() > 0) {
 				  picObj.crossPage = true;
 
-        if(sessionStorage.getItem("titleName")=="旅行记" || sessionStorage.getItem("titleName")=="合集"){
+        if(sessionStorage.getItem("titleName")=="合集"){
           picObj.crossPage = false;
         }
 			}
@@ -489,7 +489,7 @@ let store = new Vuex.Store({
 					if($(ev.target).parents(".pubilc_div").hasClass("hengban_bbs")) { //如果拖动的图片结束是横版
 
             picObj.crossPage = true;
-            if(sessionStorage.getItem("titleName")=="合集" || sessionStorage.getItem("titleName")=="旅行记"){
+            if(sessionStorage.getItem("titleName")=="合集"){
               picObj.crossPage = false;
             }else{
               //拖动是横版的情况删除他后面的所有图片
