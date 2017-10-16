@@ -692,6 +692,7 @@
         this.bbsTemplate_data[index1][index2].slectTemplate = true;
         this.$nextTick();
         console.log($event.target)
+//        || $($event.target).hasClass("text_span")
         if ($($event.target).hasClass("title_pu")) { // 点击文本框
           $(".editText_one").removeClass("editText_one");
           $($event.target).addClass("editText_one");
@@ -1021,7 +1022,6 @@
 
     },
     mounted() {
-
       console.log('传递的数据', this.dataTemp)
       // 宝宝书模版数据
       this.bbsTemplate_data = this.dataTemp.productData;
