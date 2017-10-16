@@ -8,7 +8,7 @@ module.exports = {
     assetsRoot: path.resolve(__dirname, '../dist'),
     assetsSubDirectory: 'static',
     assetsPublicPath: '//image2.artup.com/pc/',
-    multiplePageList: ['welcome', 'album', 'magnet', 'framed-pictures', 'poster', 'desk', 'loginCallback','lxj','heji'],
+    multiplePageList: ['welcome', 'album', 'citiehua', 'magnet', 'framed-pictures', 'poster', 'desk', 'loginCallback', 'lxj', 'heji'],
     userCenterPage: {
       path: 'center',
       template: 'index.html',

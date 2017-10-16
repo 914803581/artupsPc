@@ -1,0 +1,223 @@
+.partition {
+  background: #f1f1f1;
+}
+
+.module-title {
+  padding-top: 70px;
+  font-size: 36px;
+  font-weight: bold;
+  letter-spacing: 2px;
+  line-height: 1;
+  text-align: center;
+}
+
+.module-instruction {
+  margin-top: 35px;
+  font-size: 18px;
+  font-weight: normal;
+  text-align: center;
+  line-height: 1;
+}
+
+.exhibition {
+  width: 400px;
+  height: 300px;
+}
+
+.select-container {
+  width: 880px;
+  padding-bottom: 130px;
+  margin: 70px auto 0;
+  overflow: hidden;
+  .exhibition {
+    width: 400px;
+    height: 450px;
+    float: left;
+    .no-select {
+      width: 300px;
+      height: 450px;
+      background: url('img/kuang.jpg') no-repeat;
+      background-size: 100% 100%;
+    }
+    .proportion {
+      position: relative;
+      width: 100%;
+      height: 100%;
+    }
+    .size-name {
+      position: absolute;
+      right: 10px;
+      top: 10px;
+      font-size: 18px;
+      z-index: 1;
+    }
+    .scale {
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      border: 2px solid rgb(220, 219, 219);
+      box-sizing: border-box;
+      background-size: 100% 100%;
+      background-repeat: no-repeat;
+      &.box-300x400 {
+        width: 200px;
+        height: 266px;
+        &.border-yms.fill {
+          background-image: url("img/300x400-yms.jpg");
+        }
+        &.border-hs.fill {
+          background-image: url("img/300x400-hs.jpg");
+        }
+      }
+      &.box-400x300 {
+        width: 266px;
+        height: 200px;
+        &.border-yms.fill {
+          background-image: url("img/400x300-yms.jpg");
+        }
+        &.border-hs.fill {
+          background-image: url("img/400x300-hs.jpg");
+        }
+      }
+      &.box-400x600 {
+        width: 266px;
+        height: 400px;
+        &.border-yms.fill {
+          background-image: url("img/400x600-yms.jpg");
+        }
+        &.border-hs.fill {
+          background-image: url("img/400x600-hs.jpg");
+        }
+      }
+      &.box-600x400 {
+        width: 400px;
+        height: 266px;
+        &.border-yms.fill {
+          background-image: url("img/600x400-yms.jpg");
+        }
+        &.border-hs.fill {
+          background-image: url("img/600x400-hs.jpg");
+        }
+      }
+    }
+  }
+  .select-operation {
+    width: 412px;
+    float: right;
+    overflow: hidden;
+    .unit-title {
+      display: block;
+      margin-bottom: 26px;
+      font-size: 24px;
+      font-weight: 700;
+    }
+    .select-title {
+      display: block;
+      font-size: 20px;
+      font-weight: normal;
+      margin-bottom: 25px;
+    }
+    .size-list {
+      width: 432px;
+      overflow: hidden;
+      .item {
+        width: 196px;
+        height: 60px;
+        float: left;
+        box-sizing: border-box;
+        margin: 0 20px 20px 0;
+        font-size: 18px;
+        text-align: center;
+        line-height: 59px;
+        cursor: pointer;
+        border-radius: 5px;
+        border: 1px solid rgba(0, 0, 0, 0.3);
+        user-select: none;
+        &.current {
+          border: 3px solid #2a2a2a;
+          pointer-events: none;
+        }
+      }
+    }
+    .border-list {
+      .item {
+        display: inline-block;
+        width: 96px;
+        margin-right: 26px;
+        cursor: pointer;
+        &.current .sample {
+          pointer-events: none;
+          border: 3px solid #a00912;
+        }
+      }
+      .sample {
+        height: 65px;
+        box-sizing: border-box;
+        background-size: 100% 100%;
+        background-repeat: no-repeat;
+        border-radius: 5px;
+        border: 1px solid rgba(0, 0, 0, 0.3);
+      }
+      .border-item-yms {
+        background-image: url('img/angle-yms.jpg');
+      }
+      .border-item-hs {
+        background-image: url('img/angle-hs.jpg');
+      }
+      .border-name {
+        display: block;
+        text-align: center;
+        line-height: 35px;
+        font-size: 16px;
+      }
+    }
+    .price-buy {
+      margin-top: 70px;
+      .price {
+        font-size: 24px;
+        line-height: 32px;
+        font-weight: normal;
+      }
+      .buy-btn {
+        display: block;
+        float: right;
+        width: 108px;
+        font-size: 16px;
+        color: #fff;
+        text-align: center;
+        line-height: 32px;
+        border-radius: 5px;
+        background-color: #a00912;
+        letter-spacing: 2px;
+      }
+    }
+  }
+}
+
+.select-container.huaxin {
+  .exhibition {
+    .no-select {
+      width: 236px;
+      height: 365px;
+      background: url('img/chushihua.png') no-repeat;
+    }
+    .scale.box-300x400.border-yms.fill {
+      background-image: url("img/huaxin-300x400.jpg");
+    }
+    .scale.box-400x300.border-yms.fill {
+      background-image: url("img/huaxin-400x300.jpg");
+    }
+    .scale.box-400x600.border-yms.fill {
+      background-image: url("img/huaxin-400x600.jpg");
+    }
+    .scale.box-600x400.border-yms.fill {
+      background-image: url("img/huaxin-600x400.jpg");
+    }
+  }
+}
+
+.line {
+  height: 1px;
+  width: 100%;
+  background: #fff;
+}

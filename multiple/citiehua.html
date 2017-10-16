@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="zh_CN">
+<head>
+  <meta charset="UTF-8">
+  <title>磁贴画开始定制</title>
+  <meta name="Keywords" content="传给雅昌,画册,装饰画,有框画,海报定制,挂历2018"/>
+  <meta name="Description" content="传给雅昌是雅昌集团旗下中国最大的专业艺术影像输出平台，提供画册、装饰画、框画、海报、挂历等照片产品的个性定制服务。您选一张照片，我送您一件艺术品。"/>
+</head>
+<body style="opacity:0;">
+<div id="app">
+  <unify-header></unify-header>
+  <div class="partition">
+    <h1 class="module-title">艺术磁贴画</h1>
+    <h4 class="module-instruction">全国首创磁贴画，重新定义墙面美学</h4>
+    <div class="select-container">
+      <div class="exhibition">
+        <div v-show="currentSelect.type!==1" class="no-select"></div>
+        <div class="proportion" v-show="currentSelect.type===1">
+          <div class="scale"
+               :class="['box-'+item.size,'border-'+currentSelect.border.color,{fill:item===currentSelect.size}]"
+               v-for="item in sizeList" :key="item.id">
+            <span class="size-name">{{item.id}}</span>
+          </div>
+        </div>
+      </div>
+      <div class="select-operation">
+        <div class="choice-size">
+          <strong class="select-title">选择尺寸</strong>
+          <ul class="size-list">
+            <li
+              class="item"
+              :class="{current:currentSelect.type===1&&item===currentSelect.size}"
+              v-for="item in sizeList"
+              :key="item.id"
+              @click="select(1,item,currentSelect.border)">{{item.id}} {{item.size}} mm
+            </li>
+          </ul>
+        </div>
+        <div class="choice-border">
+          <strong class="select-title">选择边框</strong>
+          <ul class="border-list">
+            <li class="item"
+                :class="{current:currentSelect.type===1&&item===currentSelect.border}"
+                v-for="item in borderList" :key="item.color"
+                @click="select(1,currentSelect.size,item)"
+            >
+              <div class="sample" :class="'border-item-'+item.color"></div>
+              <span class="border-name">{{item.name}}</span>
+            </li>
+          </ul>
+        </div>
+        <div class="price-buy">
+          <span class="price">￥：{{currentSelect.size?currentSelect.size.price:399}}</span>
+          <a href="javascript:void(0);" class="buy-btn">开始定制</a>
+        </div>
+      </div>
+    </div>
+    <div class="line"></div>
+    <div class="select-container huaxin">
+      <div class="exhibition">
+        <div v-show="currentSelect.type!==2" class="no-select"></div>
+        <div class="proportion" v-show="currentSelect.type===2">
+          <div class="scale"
+               :class="['box-'+item.size,'border-'+currentSelect.border.color,{fill:item===currentSelect.size}]"
+               v-for="item in sizeList" :key="item.id">
+            <span class="size-name">{{item.id}}</span>
+          </div>
+        </div>
+      </div>
+      <div class="select-operation">
+        <div class="choice-size">
+          <strong class="unit-title">磁贴画芯</strong>
+          <strong class="select-title">选择尺寸</strong>
+          <ul class="size-list">
+            <li
+              class="item"
+              :class="{current:currentSelect.type===2&&item===currentSelect.size}"
+              v-for="item in sizeList"
+              :key="item.id"
+              @click="select(2,item,currentSelect.border)">{{item.id}} {{item.size}} mm
+            </li>
+          </ul>
+        </div>
+        <div class="price-buy">
+          <span class="price">￥：{{currentSelect.size?currentSelect.size.hxprice:79}}</span>
+          <a href="javascript:void(0);" class="buy-btn">开始定制</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <unify-footer></unify-footer>
+</div>
+</body>
+</html>

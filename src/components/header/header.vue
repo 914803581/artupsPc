@@ -52,6 +52,9 @@
           label: '画册',
           link: '/album.html?category=huace&defDbId=9de2973d-3487-4b05-b556-b9b92dd75493'
         }, {
+          label: '磁铁画',
+          link: '/citiehua.html'
+        }, {
           label: '框画',
           link: '/framed-pictures.html?category=kuanghua&defDbId=6afedcf6-b0e4-447d-afd9-c70449f42f50'
         }, {
@@ -124,7 +127,7 @@
     background: #2e2e2e;
 
     .wrapper {
-      width: 1152px;
+      width: 1200px;
       margin: 0 auto;
       overflow: hidden;
     }
@@ -151,7 +154,7 @@
       .item {
         display: block;
         margin-top: 12px;
-        padding: 0 27px;
+        padding: 0 22px;
         float: left;
         font-size: 16px;
         line-height: 26px;
