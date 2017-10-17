@@ -232,7 +232,8 @@
                 invoiceTitle:this.form.invoiceTitle,//发票
                 mark:this.form.mark,//备注
                 productCategory:this.form.productCategory, //类型
-                userDbId : localStorage.getItem("userDbId")
+                userDbId : localStorage.getItem("userDbId"),
+                addressDbId:this.addressData.dbId
               }
 				Api.car.createOrder(jsons).then(res=>{
             if(res.data.code == 'success'){
@@ -240,7 +241,7 @@
                 var payType = 'wx';
                 if(this.payType == 2){
                   payType='zfb';
-            }
+                }
             location.href="/pay/payOrder?addressId="+this.addressData.dbId+"&userDbId="+localStorage.getItem("userDbId")+"&dbId="+res.data.orderDbId+"&paymentType="+payType;
         }
 				},err=>{
