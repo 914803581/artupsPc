@@ -52,8 +52,11 @@
           label: '画册',
           link: '/album.html?category=huace&defDbId=9de2973d-3487-4b05-b556-b9b92dd75493'
         }, {
-          label: '磁铁画',
-          link: '/citiehua.html'
+          label: '磁贴画',
+          link: '/citiehua.html?category=citiehua'
+        }, {
+          label: '拾光集',
+          link: '/shiguangji.html?category=shiguangji&defDbId=2531a416-b499-11e7-ab6d-c88d8360f6c1'
         }, {
           label: '框画',
           link: '/framed-pictures.html?category=kuanghua&defDbId=6afedcf6-b0e4-447d-afd9-c70449f42f50'
@@ -72,6 +75,9 @@
         }, {
           label: '台历',
           link: '/desk.html?category=taili&defDbId=f80b4c98-15ca-4da0-b482-0c8270c2eac6'
+        }, {
+          label: '挂历',
+          link: '/guali.html?category=guali'
         }],
         userMenu: [{
           label: '我的主页',
@@ -145,7 +151,6 @@
       background: #2e2e2e url('../../assets/img/login_1.png') no-repeat;
       background-size: 100% 100%;
     }
-
     .menu {
       display: block;
       float: left;
@@ -154,7 +159,7 @@
       .item {
         display: block;
         margin-top: 12px;
-        padding: 0 22px;
+        padding: 0 18px;
         float: left;
         font-size: 16px;
         line-height: 26px;

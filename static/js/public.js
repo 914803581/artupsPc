@@ -223,6 +223,21 @@ var travelTemplateData = { //旅行记模版
    //bbs9: '<div class="time_pu "><div class="bbsClass bbs_hengban"><div class="drapBox div_page"><div class="drap_img"></div> <img imgsort="1" typestyle="9" src="" class="img_drap"></div></div> <div maxlength="40" textsort="1" typestyle="8" class="hengbanText  title_pu text"></div> <div class="page"><div class="pageleft">第<span page=""></span>页</div> <div class="pageleft">第<span page=""></span>页</div></div></div>'
 }
 
+
+var shiguangjiTemplateData = {
+  bbs1: '<div class="time_pu"><div class="bbsClass hcTemplatetext03 template_lxj_1"><div maxlength="9" class="mainTitle title_pu" typestyle="1" textsort="1" ><span class="text_span text_9"></span></div><div maxlength="80" class="box_text title_pu" typestyle="1" textsort="2" ><span class="text_span text_15"></span></div><div class="page"><div class="pageleft">第<span page=""></span>页</div><div class="pageRight"></div></div></div></div>',
+  bbs2: '<div class="time_pu "><div class="bbsClass drapBox template02 template_lxj_2 "><div class="drap_img"></div><img  class="img_drap" imgSort="1" typeStyle="2" src=""/></div><div maxlength="40"  textSort="1" typeStyle="2" class="text title_pu"><span class="text_span text_40"></span></div><div  class="page"><div class="pageleft">第<span></span>页</div><div class="pageRight"></div></div></div>',
+  bbs3: '<div class="time_pu "><div class="bbsClass template03 template_lxj_3"><div class="drapBox div_page"><div class="drap_img"></div><img class="img_drap" imgSort="1" typeStyle="3" src=""/></div><div class="drapBox div_page"><div class="drap_img"></div><img class="img_drap" imgSort="2" typeStyle="3" src=""/></div></div><div maxlength="40" textSort="1" typeStyle="3" class="text title_pu"><span class="text_span text_40"></span></div><div  class="page"><div class="pageleft">第<span></span>页</div><div class="pageRight"></div></div></div>',
+  bbs4: '<div class="time_pu "><div class="bbsClass drapBox template01 template_lxj_4"><div class="drap_img"></div><img imgSort="1" typeStyle="1" class="img_drap" src=""/></div><div maxlength="40" textSort="1" typeStyle="1" class="text title_pu"><span class="text_span text_40"></span></div><div  class="page"><div class="pageleft">第<span></span>页</div><div class="pageRight"></div></div></div>',
+  bbs5: '<div class="time_pu "><div class="bbsClass drapBox template05 template_lxj_5"><div class="drap_img"></div><img class="img_drap" imgSort="1" typeStyle="5" src=""/></div><div maxlength="40" textSort="1" typeStyle="5"  class="text title_pu"><span class="text_span text_40"></span></div><div  class="page"><div class="pageleft">第<span></span>页</div><div class="pageRight"></div></div></div>',
+  // bbs4: '<div class="time_pu "><div class="drapBox bbsClass template04"><div class="drap_img"></div><img class="img_drap" imgSort="1" typeStyle="4" src=""/></div><div style="visibility: hidden;" maxlength="40" textSort="1" typeStyle="4" class="text title_pu"><span class="text_span text_40"></span></div style><div  class="page"><div class="pageleft">第<span></span>页</div><div class="pageRight"></div></div></div>',
+  // bbs6: '<div class="time_pu "><div class="bbsClass template06"><div class="drapBox div_page"><div class="drap_img"></div><img class="img_drap" imgSort="1" typeStyle="6" src=""/></div><div class="drapBox div_page"><div class="drap_img"></div><img class="img_drap" imgSort="2" typeStyle="6" src=""/></div></div><div maxlength="40" textSort="1" typeStyle="6" class="text title_pu"><span class="text_span text_40"></span></div><div  class="page"><div class="pageleft">第<span></span>页</div><div class="pageRight"></div></div></div>',
+  // bbs7: '<div class="time_pu "><div class="bbsClass template07"><div class="drapBox div_page"><div class="drap_img"></div><img imgsort="1" typestyle="7" src="" class="img_drap"></div> <div class="drapBox div_page"><div class="drap_img"></div><img imgsort="2" typestyle="7" src="" class="img_drap"></div> <div class="drapBox div_page"><div class="drap_img"></div><img imgsort="3" typestyle="7" src="" class="img_drap"></div> <div class="drapBox div_page"><div class="drap_img"></div><img imgsort="4" typestyle="7" src="" class="img_drap"></div></div> <div maxlength="40" textsort="1" typestyle="7" class="text title_pu"><span class="text_span text_40"></span></div> <div  class="page"><div class="pageleft">第<span></span>页</div><div class="pageRight"></div></div></div>',
+  // bbs8: '<div class="time_pu "><div class="bbsClass template08"><div class="drapBox div_page"><div class="drap_img"></div><img imgsort="1" typestyle="8" src="" class="img_drap"></div> <div class="drapBox div_page"><div class="drap_img"></div><img imgsort="2" typestyle="8" src="" class="img_drap"></div> <div class="drapBox div_page"><div class="drap_img"></div><img imgsort="3" typestyle="8" src="" class="img_drap"></div> <div class="drapBox div_page"><div class="drap_img"></div><img imgsort="4" typestyle="8" src="" class="img_drap"></div></div> <div style="visibility: hidden;" maxlength="40" textsort="1" typestyle="8" class="text title_pu"><span class="text_span text_40"></span></div> <div  class="page"><div class="pageleft">第<span></span>页</div><div class="pageRight"></div></div></div>',
+  // bbs9: '<div class="time_pu "><div class="bbsClass drapBox template01"><div class="drap_img"></div><img imgSort="1" typeStyle="1" class="img_drap" src=""/></div><div maxlength="40" textSort="1" typeStyle="1" class="text title_pu"><span class="text_span text_40"></span></div><div  class="page"><div class="pageleft">第<span></span>页</div><div class="pageRight"></div></div></div>',
+};
+
+
 //定义画册板式 250mmX342mm
 var hcTemplate250X342 = {//hcTemplate225_355
   bbs1: '<div class="time_pu"><div class="bbsClass hcTemplatetext03 template_lxj_1"><div maxlength="9" class="mainTitle title_pu" typestyle="1" textsort="1" ><span class="text_span text_9"></span></div><div maxlength="15" class="box_text title_pu" typestyle="1" textsort="2" ><span class="text_span text_15"></span></div><div class="page"><div class="pageleft">第<span page=""></span>页</div><div class="pageRight"></div></div></div></div>',
@@ -552,7 +567,6 @@ function setBookBg(name, dom1, dom2, dom3) { //name:书皮名 dom1：封面  dom
   switch (name) {
     case "活力橙":
       console.log(name)
-
       pubulic_rm_bg(dom1, dom2, dom3);
       dom1.addClass("bbs_bg_orange");
       dom2.addClass("bbs_bg_orange_fd");
@@ -590,6 +604,14 @@ function setBookBg(name, dom1, dom2, dom3) { //name:书皮名 dom1：封面  dom
       dom2.addClass("gray_bg");
       dom3.addClass("gray_bg");
       break;
+
+    case "浪漫紫":
+      pubulic_rm_bg(dom1, dom2, dom3);
+      dom1.addClass("shiguangji_lmz_fm");
+      dom2.addClass("shiguangji_lmz_fe");
+      dom3.addClass("shiguangji_lmz_fd");
+      break;
+
     default:
       break;
   }

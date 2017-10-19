@@ -120,6 +120,11 @@ const CUT_WEIXIN_IMG = `${HOST}artup-build/image/cors/thumbnail.do?format=json&i
 //
 const USER_LOGIN_URL = `${HOST}artup-build/wx/pc/authorizeCodeUrl.do?ignore=true&client=pc&format=json`
 
+
+
+//测试时光集的接口暂时是微信的
+const SET_DEFAULT_SGUANGJI = `${HOST}/artup-build/builder/service/attributes.do?format=json&ignore=true&category=shiguangji&client=pc`
+
 export default {
 
   testBaidu: {
@@ -139,7 +144,11 @@ export default {
     },
     queryAttributes: (paraJsons) => {
       return HTTP.get(QUERY_ATTRIBUTE_URL, {params: paraJsons})
+    },
+    queryAttributes2: (paraJsons) => {
+      return HTTP.get(SET_DEFAULT_SGUANGJI, {params: paraJsons})
     }
+
   },
   car: {// 购物车
     CarCount: (paramJson) => {

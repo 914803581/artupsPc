@@ -48,7 +48,7 @@
       <div class="line_comtent">
         <div id="product" class="comtent scrollBar">
           <div
-            :class="{'travelEdit_one':titleMsg.titleName=='旅行记','hc_342X342':titleMsg.eqTitle=='画册.342X342','hc_342X250':titleMsg.eqTitle=='画册.342X250','hc_250X342':titleMsg.eqTitle=='画册.250X342','hc_342X500':titleMsg.eqTitle=='画册.342X500'}"
+            :class="{'shiguangji_one':titleMsg.titleName=='拾光集','travelEdit_one':titleMsg.titleName=='旅行记','hc_342X342':titleMsg.eqTitle=='画册.342X342','hc_342X250':titleMsg.eqTitle=='画册.342X250','hc_250X342':titleMsg.eqTitle=='画册.250X342','hc_342X500':titleMsg.eqTitle=='画册.342X500'}"
             class="time_main_left time_main_left_ht">
             <div class="titlePage_bg">
               <div class="page_fm">
@@ -640,7 +640,6 @@
           vm.jisuan(); // 计算页面位置
         }, 300)
       },
-
       postDatas(val) { //获取数据覆盖便于二次编辑
         console.log(val)
         //如果是lomo卡

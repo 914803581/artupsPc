@@ -20,6 +20,7 @@ import maxImgEdit from '@/components/bbs/bbsImgEdit' //多图编辑的入口
 import huaceEdit from '@/components/bbs/huaceEdit' //画册编辑
 import travelEdit from '@/components/bbs/lvxingjiEdit' //旅行记编辑
 import workNull from '@/components/component/workNull/workNull' //旅行记编辑
+import shiguangjiEdit from '@/components/bbs/shiguangjiEdit' //时光集编辑
 
 
 Vue.use(VueRouter)
@@ -123,6 +124,13 @@ let router = new VueRouter({
       component: posterEdit,
       meta: {
         title: '海报编辑'
+      }
+    },{
+      path: '/album/shiguangjiEdit',
+      name: 'shiguangjiEdit',
+      component: shiguangjiEdit,
+      meta: {
+        title: '拾光集编辑'
       }
     },
     {
