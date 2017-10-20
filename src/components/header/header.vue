@@ -159,7 +159,7 @@
       .item {
         display: block;
         margin-top: 12px;
-        padding: 0 18px;
+        padding: 0 16px;
         float: left;
         font-size: 16px;
         line-height: 26px;
