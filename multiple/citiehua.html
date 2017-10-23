@@ -12,14 +12,14 @@
   <div class="partition">
     <h1 class="module-title">艺术磁贴画</h1>
     <h4 class="module-instruction">全国首创磁贴画，重新定义墙面美学</h4>
-    <div class="select-container">
+    <div class="select-container" v-if="drawData">
       <div class="exhibition">
         <div v-show="currentSelect.type!==1" class="no-select"></div>
-        <div class="proportion" v-show="currentSelect.type===1">
+        <div class="proportion" v-if="currentSelect.type===1">
           <div class="scale"
-               :class="['box-'+item.size,'border-'+currentSelect.border.color,{fill:item===currentSelect.size}]"
-               v-for="item in sizeList" :key="item.id">
-            <span class="size-name">{{item.id}}</span>
+               :class="['box-'+item.code,'border-'+currentSelect.border.code,{fill:item.code===currentSelect.size}]"
+               v-for="item in drawData.attributes[1].attributeValues" :key="item.dbId">
+            <span class="size-name">{{item.name.substr(0,1)}}</span>
           </div>
         </div>
       </div>
@@ -29,10 +29,10 @@
           <ul class="size-list">
             <li
               class="item"
-              :class="{current:currentSelect.type===1&&item===currentSelect.size}"
-              v-for="item in sizeList"
-              :key="item.id"
-              @click="select(1,item,currentSelect.border)">{{item.id}} {{item.size}} mm
+              :class="{current:currentSelect.type===1&&item.code===currentSelect.size}"
+              v-for="item in drawData.attributes[1].attributeValues"
+              :key="item.dbId"
+              @click="select(1,item.code)">{{item.name}}
             </li>
           </ul>
         </div>
@@ -40,30 +40,29 @@
           <strong class="select-title">选择边框</strong>
           <ul class="border-list">
             <li class="item"
-                :class="{current:currentSelect.type===1&&item===currentSelect.border}"
-                v-for="item in borderList" :key="item.color"
-                @click="select(1,currentSelect.size,item)"
-            >
-              <div class="sample" :class="'border-item-'+item.color"></div>
+                :class="{current:currentSelect.type===1&&item.code===currentSelect.border.code}"
+                v-for="item in drawData.attributes[0].attributeValues" :key="item.dbId"
+                @click="select(1,0,item)">
+              <div class="sample" :class="'border-item-'+item.code"></div>
               <span class="border-name">{{item.name}}</span>
             </li>
           </ul>
         </div>
         <div class="price-buy">
-          <span class="price">￥：{{currentSelect.size?currentSelect.size.price:399}}</span>
-          <a href="javascript:void(0);" class="buy-btn">开始定制</a>
+          <span class="price" :class="{loading:!currentSelect.price}" v-show="currentSelect.type===1">￥：{{currentSelect.price}}</span>
+          <a href="javascript:void(0);" class="buy-btn" v-show="currentSelect.type===1 && currentSelect.price">开始定制</a>
         </div>
       </div>
     </div>
     <div class="line"></div>
-    <div class="select-container huaxin">
+    <div class="select-container huaxin" v-if="drawCoreData">
       <div class="exhibition">
         <div v-show="currentSelect.type!==2" class="no-select"></div>
         <div class="proportion" v-show="currentSelect.type===2">
           <div class="scale"
-               :class="['box-'+item.size,'border-'+currentSelect.border.color,{fill:item===currentSelect.size}]"
-               v-for="item in sizeList" :key="item.id">
-            <span class="size-name">{{item.id}}</span>
+               :class="['box-'+item.code,{fill:item.code===currentSelect.size}]"
+               v-for="item in drawCoreData.attributes[0].attributeValues" :key="item.dbId">
+            <span class="size-name">{{item.name.substr(0,1)}}</span>
           </div>
         </div>
       </div>
@@ -74,20 +73,19 @@
           <ul class="size-list">
             <li
               class="item"
-              :class="{current:currentSelect.type===2&&item===currentSelect.size}"
-              v-for="item in sizeList"
-              :key="item.id"
-              @click="select(2,item,currentSelect.border)">{{item.id}} {{item.size}} mm
+              :class="{current:currentSelect.type===2&&item.code===currentSelect.size}"
+              v-for="item in drawCoreData.attributes[0].attributeValues"
+              :key="item.dbId"
+              @click="select(2,item.code)">{{item.name}}
             </li>
           </ul>
         </div>
         <div class="price-buy">
-          <span class="price">￥：{{currentSelect.size?currentSelect.size.hxprice:79}}</span>
-          <a href="javascript:void(0);" class="buy-btn">开始定制</a>
+          <span class="price" :class="{loading:!currentSelect.price}" v-show="currentSelect.type===2">￥：{{currentSelect.price}}</span>
+          <a href="javascript:void(0);" class="buy-btn" v-show="currentSelect.type===2 && currentSelect.price">开始定制</a>
         </div>
       </div>
     </div>
-
   </div>
   <unify-footer></unify-footer>
 </div>

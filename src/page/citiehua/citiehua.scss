@@ -1,4 +1,5 @@
 .partition {
+  min-height: 1500px;
   background: #f1f1f1;
 }
 
@@ -26,6 +27,7 @@
 
 .select-container {
   width: 880px;
+  min-height: 580px;
   padding-bottom: 130px;
   margin: 70px auto 0;
   overflow: hidden;
@@ -59,43 +61,43 @@
       box-sizing: border-box;
       background-size: 100% 100%;
       background-repeat: no-repeat;
-      &.box-300x400 {
+      &.box-300X400 {
         width: 200px;
         height: 266px;
-        &.border-yms.fill {
+        &.border-ymssmk.fill {
           background-image: url("img/300x400-yms.jpg");
         }
-        &.border-hs.fill {
+        &.border-hssmk.fill {
           background-image: url("img/300x400-hs.jpg");
         }
       }
-      &.box-400x300 {
+      &.box-400X300 {
         width: 266px;
         height: 200px;
-        &.border-yms.fill {
+        &.border-ymssmk.fill {
           background-image: url("img/400x300-yms.jpg");
         }
-        &.border-hs.fill {
+        &.border-hssmk.fill {
           background-image: url("img/400x300-hs.jpg");
         }
       }
-      &.box-400x600 {
+      &.box-400X600 {
         width: 266px;
         height: 400px;
-        &.border-yms.fill {
+        &.border-ymssmk.fill {
           background-image: url("img/400x600-yms.jpg");
         }
-        &.border-hs.fill {
+        &.border-hssmk.fill {
           background-image: url("img/400x600-hs.jpg");
         }
       }
-      &.box-600x400 {
+      &.box-600X400 {
         width: 400px;
         height: 266px;
-        &.border-yms.fill {
+        &.border-ymssmk.fill {
           background-image: url("img/600x400-yms.jpg");
         }
-        &.border-hs.fill {
+        &.border-hssmk.fill {
           background-image: url("img/600x400-hs.jpg");
         }
       }
@@ -158,10 +160,10 @@
         border-radius: 5px;
         border: 1px solid rgba(0, 0, 0, 0.3);
       }
-      .border-item-yms {
+      .border-item-ymssmk {
         background-image: url('img/angle-yms.jpg');
       }
-      .border-item-hs {
+      .border-item-hssmk {
         background-image: url('img/angle-hs.jpg');
       }
       .border-name {
@@ -177,6 +179,13 @@
         font-size: 24px;
         line-height: 32px;
         font-weight: normal;
+        &.loading {
+          display: inline-block;
+          width: 32px;
+          height: 32px;
+          text-indent: -9999px;
+          background-image: url('img/loading.gif');
+        }
       }
       .buy-btn {
         display: block;
@@ -201,16 +210,16 @@
       height: 365px;
       background: url('img/chushihua.png') no-repeat;
     }
-    .scale.box-300x400.border-yms.fill {
+    .scale.box-300X400.fill {
       background-image: url("img/huaxin-300x400.jpg");
     }
-    .scale.box-400x300.border-yms.fill {
+    .scale.box-400X300.fill {
       background-image: url("img/huaxin-400x300.jpg");
     }
-    .scale.box-400x600.border-yms.fill {
+    .scale.box-400X600.fill {
       background-image: url("img/huaxin-400x600.jpg");
     }
-    .scale.box-600x400.border-yms.fill {
+    .scale.box-600X400.fill {
       background-image: url("img/huaxin-600x400.jpg");
     }
   }
