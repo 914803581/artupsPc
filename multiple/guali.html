@@ -54,12 +54,6 @@
     .div-text span{height: 56px;line-height: 56px;color: #000;font-size: 40px;font-family: "寰蒋闆呴粦";font-weight: bold;}
     .div-text p{height: 38px;line-height: 38px;color: #333;font-size: 18px;font-family: "寰蒋闆呴粦";}
 
-
-
-
-
-
-
     @-webkit-keyframes topN{
       0%{
         opacity: 0;
@@ -139,15 +133,15 @@
         <li class="li-4">请选挂历尺寸</li>
         <li id="gl-gl">
           <ol class="ol-size">
-            <li class="line" mark="">A=500*600mm</li>
-            <li mark="">B=600*500mm</li>
+            <li v-for="(item,index) in attributeValues" :index="index" :class="{'line':index==listIndex}" mark="">{{item.name}}</li>
+            <!--<li mark="">B=600*500mm</li>-->
           </ol>
         </li>
         <li>
           <div class="pices">
             ¥ <i>199</i> CNY
           </div>
-          <a href="https://diy.artup.com/?fsaction=OnlineAPI.create&id=22.NDJhYmI5Yzk,.wqcgHDUr1fZoz19TRUcWf-1dNaETizES" class="sib-a" >开始定制</a>
+          <a href="/album/gualiEdit" class="sib-a" >开始定制</a>
         </li>
       </ul>
 

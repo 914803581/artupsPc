@@ -14,7 +14,8 @@ import framedEdit from '@/components/framed/framedEdit'//框画编辑
 import posterEdit from '@/components/poster/posterEdit'//海报编辑
 import albumSelect from '@/components/album/albumSelect'
 import tlEdit from '@/components/bbs/tlEdit'  //台历编辑
-import hejiEdit from '@/components/bbs/hejiEdit'  //台历编辑
+import hejiEdit from '@/components/bbs/hejiEdit'  //合集编辑
+import gualiEdit from '@/components/bbs/gualiEdit'  //挂历编辑
 import maxImgEdit from '@/components/bbs/bbsImgEdit' //多图编辑的入口
 
 import huaceEdit from '@/components/bbs/huaceEdit' //画册编辑
@@ -163,6 +164,14 @@ let router = new VueRouter({
       component: travelEdit,
       meta: {
         title: '旅行记编辑'
+      }
+    },
+    {
+      path: '/album/gualiEdit',
+      name: 'gualiEdit',
+      component: gualiEdit,
+      meta: {
+        title: '挂历编辑'
       }
     }
     ,

@@ -77,7 +77,7 @@
           link: '/desk.html?category=taili&defDbId=f80b4c98-15ca-4da0-b482-0c8270c2eac6'
         }, {
           label: '挂历',
-          link: '/guali.html?category=guali'
+          link: '/guali.html?category=guali&defDbId=d86b43b8-b496-11e7-ab6d-c88d8360f6c1'
         }],
         userMenu: [{
           label: '我的主页',
