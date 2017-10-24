@@ -50,7 +50,7 @@
         </div>
         <div class="price-buy">
           <span class="price" :class="{loading:!currentSelect.price}" v-show="currentSelect.type===1">￥：{{currentSelect.price}}</span>
-          <a href="javascript:void(0);" class="buy-btn" v-show="currentSelect.type===1 && currentSelect.price">开始定制</a>
+          <a href="javascript:void(0);" class="buy-btn" @click="startCustom" v-show="currentSelect.type===1 && currentSelect.price">开始定制</a>
         </div>
       </div>
     </div>

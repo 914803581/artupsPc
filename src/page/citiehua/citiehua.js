@@ -29,7 +29,12 @@ new Vue({
       size: 0,
       border: 0,
       price: 0
-    }
+    },
+    frameShowBool: true, //true不选择框画尺寸是显示的dome   -false时候显示选择尺寸dome
+    skuCode: '',
+    templateCode: '',
+    skuId: '',
+    editImageUrl: ''
   },
   methods: {
     select: function (type, size, border) {
@@ -51,6 +56,7 @@ new Vue({
       this.currentSelect = Object.assign(this.currentSelect, newVal)
       let category = type === 1 ? 'citiehua' : 'citiehuaxin'
       let parameter = `${category}.${this.currentSelect.size}.${this.currentSelect.border.code}`
+      this.skuCode = parameter
       if (!this.priceMap[parameter]) {
         this._querySku(category, parameter)
       } else {
@@ -82,7 +88,25 @@ new Vue({
       }).then(res => {
         _self.currentSelect.price = res.data.price
         _self.priceMap[parameter] = res.data.price
+        this.templateCode = res.data.templateCode
+        this.skuId = res.data.skuId
+        this.editImageUrl = res.data.editImageUrl //编辑框背景图
       })
+    },
+     /*开始定制*/
+    startCustom() {
+      if (localStorage.getItem("userDbId")) {
+        location.href = '/citiehua/citiehuaEdit?size=' + this.currentSelect.size +
+           "&editImageUrl=" + this.editImageUrl +
+          "&price=" + this.currentSelect.price +
+          '&frameType=' + this.currentSelect.border.name +
+          '&category=' + this.getQueryString('category') +
+          '&skuCode=' + this.skuCode +
+          '&templateCode=' + this.templateCode +
+          '&skuId=' + this.skuId
+      } else {
+        this.setUrlCallback()
+      }
     }
   },
   components: {

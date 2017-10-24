@@ -12,6 +12,7 @@ import payCancel from '@/components/user/pay/payCancel'//取消支付
 import payOk from '@/components/user/pay/payOk'//取消支付
 import framedEdit from '@/components/framed/framedEdit'//框画编辑
 import posterEdit from '@/components/poster/posterEdit'//海报编辑
+import citiehuaEdit from '@/components/citiehua/citiehuaEdit'//磁铁画编辑
 import albumSelect from '@/components/album/albumSelect'
 import tlEdit from '@/components/bbs/tlEdit'  //台历编辑
 import hejiEdit from '@/components/bbs/hejiEdit'  //合集编辑
@@ -125,6 +126,13 @@ let router = new VueRouter({
       component: posterEdit,
       meta: {
         title: '海报编辑'
+      }
+    }, {
+      path: '/citiehua/citiehuaEdit',
+      name: 'citiehuaEdit',
+      component: citiehuaEdit,
+      meta: {
+        title: '磁铁画编辑'
       }
     },{
       path: '/album/shiguangjiEdit',
