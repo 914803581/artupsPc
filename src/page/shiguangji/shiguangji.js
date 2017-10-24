@@ -35,6 +35,11 @@ new Vue({
     'unify-footer': Footer
   },
   methods: {
+    checkColor(oIndex) {
+      this.lineIndex = oIndex
+      // alert(oIndex)
+      this.getData(oIndex)
+    },
     /*更新sku*/
     updataSkuData() {
       this.skuCode = this.getQueryString("category") + '.' + this.nowSize
@@ -55,6 +60,26 @@ new Vue({
           sessionStorage.setItem("bbsSlsectDate", JSON.stringify(bbsSlsectDate))
         }, 100)
       })
+    },
+    //  获取最初数据
+    getData(munber) {
+      Api.sku.queryAttributes({category: this.getQueryString("category")}).then(res => {
+        console.log(res.data.attributes[0].attributeValues)
+        console.log(res.data.attributes[1].attributeValues)
+        console.log(res.data.attributes[2].attributeValues)
+        this.attributeValues = res.data.attributes
+        var attributeValues = res.data.attributes
+        bbsSlsectDate.name = res.data.name + '.' + attributeValues[1].attributeValues[munber].name + '.' + attributeValues[0].attributeValues[0].code + '.' + attributeValues[2].attributeValues[0].code + '页'
+        bbsSlsectDate.skuCode = res.data.code + '.' + attributeValues[1].attributeValues[munber].code + '.' + attributeValues[0].attributeValues[0].code + '.' + attributeValues[2].attributeValues[0].code
+        bbsSlsectDate.size = attributeValues[0].attributeValues[0].name
+        bbsSlsectDate.colorName = attributeValues[1].attributeValues[munber].name
+        // bbsSlsectDate.colorName = attributeValues[1].attributeValues[0].namebbsSlsectDate.name = res.data.name + '.' + attributeValues[1].attributeValues[0].name + '.' + attributeValues[0].attributeValues[0].code + '.' + attributeValues[2].attributeValues[0].code + '页'
+        // bbsSlsectDate.skuCode = res.data.code + '.' + attributeValues[1].attributeValues[0].code + '.' + attributeValues[0].attributeValues[0].code + '.' + attributeValues[2].attributeValues[0].code
+        // bbsSlsectDate.size = attributeValues[0].attributeValues[0].name
+        // bbsSlsectDate.colorName = attributeValues[1].attributeValues[0].name
+        this.nowSize = bbsSlsectDate.skuCode
+        this.updataSkuData()
+      })
     }
   },
   mounted() {
@@ -67,19 +92,7 @@ new Vue({
     }
     sessionStorage.setItem("urlQuery", JSON.stringify(queryObj))
     //获取合集的类型
-    Api.sku.queryAttributes({category: this.getQueryString("category")}).then(res => {
-      console.log(res.data.attributes[0].attributeValues)
-      console.log(res.data.attributes[1].attributeValues)
-      console.log(res.data.attributes[2].attributeValues)
-      this.attributeValues = res.data.attributes
-      var attributeValues = res.data.attributes
-      bbsSlsectDate.name = res.data.name + '.' + attributeValues[1].attributeValues[0].name + '.' + attributeValues[0].attributeValues[0].code + '.' + attributeValues[2].attributeValues[0].code + '页'
-      bbsSlsectDate.skuCode = res.data.code + '.' + attributeValues[1].attributeValues[0].code + '.' + attributeValues[0].attributeValues[0].code + '.' + attributeValues[2].attributeValues[0].code
-      bbsSlsectDate.size = attributeValues[0].attributeValues[0].name
-      bbsSlsectDate.colorName = attributeValues[1].attributeValues[0].name
-      this.nowSize = bbsSlsectDate.skuCode
-      this.updataSkuData()
-    })
+    this.getData(0)
   },
   created: function () {
     document.body.style.cssText = 'opacity:1;'

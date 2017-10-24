@@ -45,7 +45,7 @@
       <div class="line_comtent">
         <div class="comtent scrollBar">
           <div class="time_main_left" id="gualiEdit">
-            <div class="time_bg heji_hengban" :index-stort="index" v-for="(item,index) in bbsTemplate_data">
+            <div :class="{'taili_shu':titleMsg=='竖'}"  class="time_bg heji_hengban" :index-stort="index" v-for="(item,index) in bbsTemplate_data">
               <!--pubilc_div 这个class是留给整屏来定义的样式  click_template 是用vue里面的事件委派来解决避免不了的dom操作  hengban_bbs 横版增加的class  hengban_bbs 红线class  @click="click_template($event)"-->
               <div :ddd="item[0].firstPage" class="pubilc_div pubilc_heji_div" :only="htmlTetx.double"
                    :class="{'hengban_bbs':htmlTetx.double}" v-html="htmlTetx.template"
@@ -129,6 +129,7 @@
   export default {
     data() {
       return {
+        titleMsg:'',//横隔竖着的标识符
         tailiSize: "",
         sLoading: false,
         sloadingText: "数据保存中...",
@@ -301,7 +302,7 @@
       },
       setPageIndex() { //设置页数和下面的背景图
         $(".comtent_chanpin .time_pu .page .pageleft span").each((i, e) => {
-          $(e).text(i).attr("page", i);
+          $(e).text('2018年'+i+'月').attr("page", i);
         })
         //设置对应的背景图
         $("#gualiEdit .guali_img img").each(function (i,e) {
@@ -437,7 +438,7 @@
         this.assembleData();
         //唤出loading...
         this.sLoading = true
-        this.sloadingText = "合集保存中..."
+        this.sloadingText = "挂历保存中..."
         //保存函数
         console.log(this.workEdit)
         Api.work.workEdit(this.workEdit).then((res) => {
@@ -544,10 +545,12 @@
 
     },
     created() {
+//      sessionStorage.setItem('gualiType','竖')
     },
     mounted() {
       //默认设置背景
       var vm = this
+      vm.titleMsg = sessionStorage.getItem('gualiType')=="竖" ?"竖":""
       vm.setPageIndex()
       this.jisuan() // 计算页面位置
       setTimeout(function () {
