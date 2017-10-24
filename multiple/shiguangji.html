@@ -198,7 +198,7 @@
           <dt class="dt-botton">
           <h4 id="clickH1"><b>请选择颜色</b>  <span style="display: none;">修改</span> </h4>
           <ul class="hc-color">
-            <li v-for="(attr,index1) in attributeValues[1].attributeValues" class="li-color5" :class="{'line':index1==lineIndex}">
+            <li @click="checkColor(index1)" v-for="(attr,index1) in attributeValues[1].attributeValues" :color="attr.code" :name="attr.name" class="li-color5" :class="{'line':index1==lineIndex}">
               <b :style="{'background':attr.attr}"></b>
               <p>{{attr.name}}</p>
             </li>

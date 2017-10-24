@@ -204,8 +204,15 @@ var bbsTemplateData = {
   taili1: '<div class="time_pu taili_pu"><div class="bbsClass drapBox taili_template"><div class="drap_img"></div><img  class="img_drap" imgSort="1" typeStyle="1" src=""/></div><div  class="page"> <span class="year"></span>第<span></span>月</div></div>',
   taili2: '<div class="time_pu taili_pu_2"><div class="bbsClass drapBox taili_template"><div class="drap_img"></div><img  class="img_drap" imgSort="1" typeStyle="2" src=""/></div></p><div  class="page"><span class="year"></span>第<span></span>月</div></div>',
   taili3: '<div class="time_pu taili_pu"><img style="width:100%;height:100%" src="https://www.artup.com/img/tl_icon09.png"></div>',
+
+  //挂历的模版
+  // guali1: '<div class="time_pu taili_pu"><div class="bbsClass drapBox taili_template"><div class="drap_img"></div><img  class="img_drap" imgSort="1" typeStyle="1" src=""/></div><div  class="page"> <span class="year"></span>第<span></span>月</div></div>',
+  // guali2: '<div class="time_pu taili_pu_2"><div class="bbsClass drapBox taili_template"><div class="drap_img"></div><img  class="img_drap" imgSort="1" typeStyle="2" src=""/></div></p><div  class="page"><span class="year"></span>第<span></span>月</div></div>',
+  // guali3: '<div class="time_pu taili_pu"><img style="width:100%;height:100%" src="https://www.artup.com/img/tl_icon09.png"></div>',
 //  合集模版
   heji1: '<div class="time_pu "><div class="bbsClass bbs_hengban"><div class="drapBox div_page"><div class="drap_img"></div> <img imgsort="1" typestyle="9" src="" class="img_drap"></div></div>  <div class="page"><div class="pageleft"><span></span></div></div></div>',
+  guali1: '<div class="time_pu"><div class="bbsClass bbs_hengban guali_first"><div class="drapBox div_page"><div class="drap_img"></div> <img imgsort="1" typestyle="9" src="" class="img_drap"></div></div><div class="page"><div class="pageleft"><span></span></div><div class="opacity_page">封 面</div></div></div>',
+  guali2: '<div class="time_pu "><div class="bbsClass bbs_hengban"><div class="drapBox div_page"><div class="drap_img"></div> <img imgsort="1" typestyle="9" src="" class="img_drap"></div></div> <div class="guali_img"><img src="" alt=""></div> <div class="page"><div class="pageleft"><span></span></div></div></div>',
 };
 
 var travelTemplateData = { //旅行记模版
@@ -388,7 +395,7 @@ var lomoData_template = [
 	]
 ]
 
-//定义模版的数组
+//定义模版的数组(台历)
 var bbsData_template = [
   [
     {
@@ -531,6 +538,82 @@ var bbsData_template = [
   ]
 ]
 
+
+
+
+
+//挂历的数据
+var guaLiData_template = [
+  [
+    {
+      "template": bbsTemplateData.guali1,
+      "firstPage": false,
+      "lastPage": false,
+      "baseYear": "https://www.artup.com/img/tl_icon09.png"
+    }
+    // ,
+    // {
+    // 	"template":bbsTemplateData.taili1,
+    // }
+  ],
+  [
+
+    {
+      "template": bbsTemplateData.guali1,
+
+    },
+    {
+      "template": bbsTemplateData.guali1,
+
+    }
+  ],[
+
+    {
+      "template": bbsTemplateData.guali1,
+
+    },
+    {
+      "template": bbsTemplateData.guali1,
+
+    }
+  ],[
+
+    {
+      "template": bbsTemplateData.guali1,
+
+    },
+    {
+      "template": bbsTemplateData.guali1,
+
+    }
+  ],[
+
+    {
+      "template": bbsTemplateData.guali1,
+
+    },
+    {
+      "template": bbsTemplateData.guali1,
+
+    }
+  ],
+  [
+    {
+      "template": bbsTemplateData.guali3,
+    }
+  ]
+]
+
+
+
+
+
+
+
+
+
+
+
 //原生在dom里面随意拖拽的函数
 function drapDom(dragdiv) {
   console.log(dragdiv)
@@ -610,6 +693,24 @@ function setBookBg(name, dom1, dom2, dom3) { //name:书皮名 dom1：封面  dom
       dom1.addClass("shiguangji_lmz_fm");
       dom2.addClass("shiguangji_lmz_fe");
       dom3.addClass("shiguangji_lmz_fd");
+      break;
+   case "随性绿":
+      pubulic_rm_bg(dom1, dom2, dom3);
+      dom1.addClass("shiguangji_sxl_fm");
+      dom2.addClass("shiguangji_sxl_fe");
+      dom3.addClass("shiguangji_sxl_fd");
+      break;
+   case "纯真白":
+      pubulic_rm_bg(dom1, dom2, dom3);
+      dom1.addClass("shiguangji_czb_fm");
+      dom2.addClass("shiguangji_czb_fe");
+      dom3.addClass("shiguangji_czb_fd");
+      break;
+   case "欢聚红":
+      pubulic_rm_bg(dom1, dom2, dom3);
+      dom1.addClass("shiguangji_hjh_fm");
+      dom2.addClass("shiguangji_hjh_fe");
+      dom3.addClass("shiguangji_hjh_fd");
       break;
 
     default:
