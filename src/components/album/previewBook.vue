@@ -107,6 +107,10 @@
           'baobaoshu170X235': {
             width: 326 * 2,
             height: 450
+          },
+          'shiguangji170X235mm': {
+            width: 326 * 2,
+            height: 450
           }
         },
         products: '',
@@ -158,6 +162,7 @@
   @import "./previewBookScss/huace-342X500";
   @import "./previewBookScss/lvxingji-250X250";
   @import "./previewBookScss/baobaoshu-170X235";
+  @import "./previewBookScss/shiguangji-170X235";
 
   .style_type_100 .title {
     position: absolute;

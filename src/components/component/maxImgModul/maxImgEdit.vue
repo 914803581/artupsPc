@@ -151,7 +151,7 @@
   </div>
 </template>
 <script>
-  /* eslint-disable semi */
+  /* eslint-disable semi,no-undef */
 
   import {Message} from 'element-ui'
   import {mapState, mapGetters, mapActions, mapMutations} from 'vuex'
@@ -178,7 +178,7 @@
           "size_product": JSON.parse(sessionStorage.getItem("bbsSlsectDate")).name,
           "eqTitle": JSON.parse(sessionStorage.getItem("bbsSlsectDate")).eqTitle
         },
-        template_Source: [],//修改的模版源
+        template_Source: [], // 修改的模版源
         colorName: '',
         previewDialogVisible: false,
         mobanArr: [],
@@ -228,9 +228,8 @@
         delectFooter: "delectFooterData"
       }),
       goCart(val) { //加入购物车
-//        this.sLoading = true;
-
-        //字符串转换数组存储到对象里面
+        // this.sLoading = true;
+        // 字符串转换数组存储到对象里面
         let bbsSlsectDate = JSON.parse(sessionStorage.getItem("bbsSlsectDate"));
         var jsons = {
           operator: "add",
@@ -271,8 +270,7 @@
               query: {"carDbId": res.data.extraCode}
             })
           }
-
-        }, err => {
+        }, () => {
           alert('添加购物车出错');
         })
       },
@@ -296,11 +294,11 @@
         }
         $(arrNode).each(function (index, el) { //真正存放的操作
           if (index < vm.FooterDataAuto.length) {
-            $(".editAutoDrap").removeClass("editAutoDrap");
-            $(el).addClass("editAutoDrap"); //编辑自动拖拽
-            $(el).attr("src", vm.FooterDataAuto[index].thumbnailUrl).attr('imgStyle', vm.FooterDataAuto[index].thumbnailUrl).attr("dbid", vm.FooterDataAuto[index].dbId).attr("thumbnailScale", vm.FooterDataAuto[index].thumbnailScale);
+            $('.editAutoDrap').removeClass('editAutoDrap')
+            $(el).addClass('editAutoDrap') //编辑自动拖拽
+            $(el).attr('src', vm.FooterDataAuto[index].thumbnailUrl).attr('imgStyle', vm.FooterDataAuto[index].thumbnailUrl).attr('dbid', vm.FooterDataAuto[index].dbId).attr('thumbnailScale', vm.FooterDataAuto[index].thumbnailScale)
             //每次循环都取触发存储数据的操作
-            vm.$store.commit("autoPushData")
+            vm.$store.commit('autoPushData')
             //计算位置
             setTimeout(function () {
               arrDrap.unshift(index)
@@ -309,67 +307,66 @@
           }
         })
         //处理图片底部自动删除的操作
-        vm.$store.commit("autoDrapData", arrDrap)
+        vm.$store.commit('autoDrapData', arrDrap)
       },
       footerImgSlectFooter($index) { //提交
-        this.$store.commit("editFooterStatus", $index)
+        this.$store.commit('editFooterStatus', $index)
       },
       assembleData() { //执行保存工作组装数据的公共函数
-        var vm = this;
-        var arrMap = []; //宝宝书图片的
-        var textArrMap = []; //文字的
-        var lomArrMap = []; //lomo卡的
-        for (var i = 0; i < this.$store.state.editData.ImgHashMap.keys().length; i++) {
+        let vm = this;
+        let arrMap = []; //宝宝书图片的
+        let textArrMap = []; //文字的
+        let lomArrMap = []; //lomo卡的
+        let i = 0
+        for (; i < this.$store.state.editData.ImgHashMap.keys().length; i++) {
           if (this.$store.state.editData.ImgHashMap.getvalue(this.$store.state.editData.ImgHashMap.keys()[i])) {
-            arrMap.push(this.$store.state.editData.ImgHashMap.getvalue(this.$store.state.editData.ImgHashMap.keys()[i]));
+            arrMap.push(this.$store.state.editData.ImgHashMap.getvalue(this.$store.state.editData.ImgHashMap.keys()[i]))
           }
         }
-        for (var i = 0; i < this.$store.state.editData.lomoHashMap.keys().length; i++) {
+        for (i = 0; i < this.$store.state.editData.lomoHashMap.keys().length; i++) {
           if (this.$store.state.editData.lomoHashMap.getvalue(this.$store.state.editData.lomoHashMap.keys()[i])) {
-            lomArrMap.push(this.$store.state.editData.lomoHashMap.getvalue(this.$store.state.editData.lomoHashMap.keys()[i]));
+            lomArrMap.push(this.$store.state.editData.lomoHashMap.getvalue(this.$store.state.editData.lomoHashMap.keys()[i]))
           }
         }
-        for (var i = 0; i < this.$store.state.editData.textHashMap.keys().length; i++) {
+        for (i = 0; i < this.$store.state.editData.textHashMap.keys().length; i++) {
           if (this.$store.state.editData.textHashMap.getvalue(this.$store.state.editData.textHashMap.keys()[i])) {
-            textArrMap.push(this.$store.state.editData.textHashMap.getvalue(this.$store.state.editData.textHashMap.keys()[i]));
+            textArrMap.push(this.$store.state.editData.textHashMap.getvalue(this.$store.state.editData.textHashMap.keys()[i]))
           }
         }
         //字符串转换数组存储到对象里面
-        let bbsSlsectDate = JSON.parse(sessionStorage.getItem("bbsSlsectDate"));
-        this.workEdit.editPicture = JSON.stringify(arrMap);
-        this.workEdit.editTxt = JSON.stringify(textArrMap);
-        this.workEdit.lomo = JSON.stringify(lomArrMap);
-        this.workEdit.tplCode = this.getFromSession("tplCode");
-        this.workEdit.operator = "add";
-        this.workEdit.category = this.getFromSession("category");
-        this.workEdit.sku = bbsSlsectDate.name;
-        this.workEdit.skuId = bbsSlsectDate.skuId;
-        this.workEdit.status = 1;
-        this.workEdit.skuCode = bbsSlsectDate.skuCode;
-        this.workEdit.price = bbsSlsectDate.price;
-        this.workEdit.theme = "";  //画册的版式
-        this.workEdit.defDbId = this.getFromSession("defDbId");
-
+        let bbsSlsectDate = JSON.parse(sessionStorage.getItem('bbsSlsectDate'))
+        this.workEdit.editPicture = JSON.stringify(arrMap)
+        this.workEdit.editTxt = JSON.stringify(textArrMap)
+        this.workEdit.lomo = JSON.stringify(lomArrMap)
+        this.workEdit.tplCode = this.getFromSession('tplCode')
+        this.workEdit.operator = 'add'
+        this.workEdit.category = this.getFromSession('category')
+        this.workEdit.sku = bbsSlsectDate.name
+        this.workEdit.skuId = bbsSlsectDate.skuId
+        this.workEdit.status = 1
+        this.workEdit.skuCode = bbsSlsectDate.skuCode
+        this.workEdit.price = bbsSlsectDate.price
+        this.workEdit.theme = ''  //画册的版式
+        this.workEdit.defDbId = this.getFromSession('defDbId')
         var bbsTempla = [] //拷贝对象给后端传递数组
-        bbsTempla = JSON.parse(JSON.stringify(vm.bbsTemplate_data));
+        bbsTempla = JSON.parse(JSON.stringify(vm.bbsTemplate_data))
         bbsTempla.forEach((val) => {
           val.forEach((va) => {
-            va.template = ""
+            va.template = ''
             va.slectTemplate = false
           })
         })
-        this.workEdit.dataTemplate = JSON.stringify(bbsTempla); //版式修改之后的数组
-
-//        如果存在就存入此字段
+        this.workEdit.dataTemplate = JSON.stringify(bbsTempla) //版式修改之后的数组
+        // 如果存在就存入此字段
         if (this.$route.query.huaceType) {
-          this.workEdit.theme = this.$route.query.huaceType;
+          this.workEdit.theme = this.$route.query.huaceType
         }
-        $(".comtent_chanpin .pubilc_div .bbsClass  .img_drap").each(function (index, el) {
-          if ($(el).attr("src")) { //如果src存在
-            vm.workEdit.thumbnailImageUrl = $(el).attr("imgstyle");
-            return false;
+        $('.comtent_chanpin .pubilc_div .bbsClass  .img_drap').each(function (index, el) {
+          if ($(el).attr('src')) { //如果src存在
+            vm.workEdit.thumbnailImageUrl = $(el).attr('imgstyle')
+            return false
           } else {
-            vm.workEdit.thumbnailImageUrl = "";
+            vm.workEdit.thumbnailImageUrl = ''
           }
         })
       },
@@ -380,7 +377,7 @@
         //保存函数
         console.log(this.workEdit)
         Api.work.workEdit(this.workEdit).then((res) => {
-          if (res.data.code == "success") { //如果成功
+          if (res.data.code === 'success') { //如果成功
             this.sLoading = false;
             this.$message({
               showClose: true,
@@ -398,134 +395,128 @@
       nextStep(val) { //下一步
         //保存函数
         this.sLoading = true;
-        if (val == "1") {
-          this.sloadingText = "加入购物车..."
-        } else if (val == "2") {
-          this.sloadingText = "立即购买..."
+        if (val === '1') {
+          this.sloadingText = '加入购物车...'
+        } else if (val === '2') {
+          this.sloadingText = '立即购买...'
         }
         this.assembleData();
-        var vm = this;
-        console.log(this.workEdit)
+        let vm = this
         Api.work.workEdit(this.workEdit).then((res) => {
-          if (res.data.code == "success") { //如果成功
-            this.sLoading = false;
-            res.data.commandTitle;
+          if (res.data.code === 'success') { //如果成功
+            this.sLoading = false
             this.workEdit.edtDbId = res.data.extraCode;
             console.log('保存的code:', res.data.extraCode);
             let isOK = true
-            $(".comtent_chanpin .pubilc_div .bbsClass  .img_drap").each(function (index, el) {
-              if (!$(el).attr("src")) { //如果src存在
-                var page = $(el).parents(".pubilc_div").find(".pageleft >span").eq(0).text();
+            $('.comtent_chanpin .pubilc_div .bbsClass  .img_drap').each(function (index, el) {
+              if (!$(el).attr('src')) { //如果src存在
+                let page = $(el).parents(".pubilc_div").find(".pageleft >span").eq(0).text()
                 //旅行记的时候删除封面
-                if (vm.titleMsg.titleName == '旅行记') {
-                  if (page == 0) {
+                if (vm.titleMsg.titleName === '旅行记') {
+                  if (page === 0) {
                     vm.$message({
-                      iconClass: "atrup_Message",
+                      iconClass: 'atrup_Message',
                       showClose: true,
                       message: '请上传封面图片'
                     });
                     isOK = false
                     return false;
                   }
-                  if (page == $(".comtent_chanpin .pubilc_div .time_pu .page").size() - 1) {
+                  if (page === $('.comtent_chanpin .pubilc_div .time_pu .page').size() - 1) {
                     vm.$message({
-                      iconClass: "atrup_Message",
+                      iconClass: 'atrup_Message',
                       showClose: true,
                       message: '请上传封底图片'
                     });
                     isOK = false
                     return false;
                   }
-
                 }
-
                 if (page) {
                   vm.$message({
-                    iconClass: "atrup_Message",
+                    iconClass: 'atrup_Message',
                     showClose: true,
-                    message: '请上传第' + page + '页图片'
-                  });
+                    message: `请上传第${page}页图片`
+                  })
                   isOK = false
-                  return false;
+                  return false
                 }
-                if ($(el).parents(".lomoTemplate")) { //lomo卡图片不完整
+                if ($(el).parents('.lomoTemplate')) { //lomo卡图片不完整
                   vm.$message({
-                    iconClass: "atrup_Message",
+                    iconClass: 'atrup_Message',
                     showClose: true,
                     message: 'lomo卡图片上传不完整'
-                  });
+                  })
                   isOK = false
-                  return false;
+                  return false
                 }
               }
             })
-            if (isOK) { //作品图片全部上传完毕
-              this.goCart(val);
+            if (isOK) { // 作品图片全部上传完毕
+              this.goCart(val)
             }
           }
         })
       },
       chenkTemplate(index) { //切换模版
-        var vms = true;
-        var vm = this;
+        let vms = true
+        let vm = this
         this.$forceUpdate();
         this.$nextTick();
-        this.bbsTemplate_data.forEach((item, i) => {
-          item.forEach((e, i) => {
+        this.bbsTemplate_data.forEach((item) => {
+          item.forEach((e) => {
             if (e.slectTemplate) {
               vms = false;
-              this.templateoindex = index;
+              this.templateoindex = index
             }
           })
         })
         if (vms) {
           this.$message({
-            iconClass: "atrup_Message",
+            iconClass: 'atrup_Message',
             showClose: true,
             message: '请选择需要更换的板式页码',
             type: 'warning'
-          });
-          vms = true;
-          return;
+          })
+          vms = true
+          return
         }
-        //			切换的模版索引
-        var chenkIndex = 'bbs' + (index + 1);
-        var otemplate = this.bbsTemplate_data[this.bbs.bbs_index1][this.bbs.bbs_index2];
-//        alert(this.mobanArr[index].isTrue)
+        // 切换的模版索引
+        let chenkIndex = 'bbs' + (index + 1);
+        let otemplate = this.bbsTemplate_data[this.bbs.bbs_index1][this.bbs.bbs_index2]
+        // alert(this.mobanArr[index].isTrue)
         if (this.mobanArr[index].isTrue) { //两页换横版的情况选中
-          console.log("两页换横版的情况选中")
-          //切换前选中的页码
-          var otext = $(".time_main_left_ht .active_line .pageleft span").text();
-          //尾页的页码
-          var oLastPage = $(".lastPage").prev(".pubilc_div").find(".pageleft span").text();
-          if (otext == 1 || otext == oLastPage) {
+          console.log('两页换横版的情况选中')
+          // 切换前选中的页码
+          let otext = $(".time_main_left_ht .active_line .pageleft span").text()
+          // 尾页的页码
+          let oLastPage = $('.lastPage').prev('.pubilc_div').find('.pageleft span').text()
+          if (otext === 1 || otext === oLastPage) {
             vm.$message({
-              iconClass: "atrup_Message",
+              iconClass: 'atrup_Message',
               showClose: true,
               message: '首尾页不能切换双页的板式 ！',
               type: 'warning'
-            });
-            return;
+            })
+            return
           }
           this.bbsTemplate_data[this.bbs.bbs_index1] = [];
-          var josnImg = {
-            "template": vm.template_Source[chenkIndex],
-            "only": true,
-            "slectTemplate": true,
-            "type": chenkIndex,
-            "firstPage": false,
-            "lastPage": false
-          };
+          let josnImg = {
+            'template': vm.template_Source[chenkIndex],
+            'only': true,
+            'slectTemplate': true,
+            'type': chenkIndex,
+            'firstPage': false,
+            'lastPage': false
+          }
           this.bbsTemplate_data[this.bbs.bbs_index1].push(josnImg)
           //两页换横版的时候清空vue里面相邻所有的数据
-          if (otext % 2 == 1) {
-            console.log('偶数')
-            vm.$store.commit("setDrapData", {
-              "opage": otext,
-              "type": "偶数"
-            });
+          if (otext % 2 === 1) {
+            vm.$store.commit('setDrapData', {
+              'opage': otext,
+              'type': '偶数'
+            })
           } else {
-            console.log('奇数')
             vm.$store.commit("setDrapData", {
               "opage": otext,
               "type": "奇数"
@@ -538,84 +529,82 @@
           return;
         }
         if (this.bbsTemplate_data[this.bbs.bbs_index1][0].only) { //横版换两页的情况
-          console.log("横版换两页的情况")
+          console.log('横版换两页的情况')
           //切换前选中的页码
-          var otext = $(".time_main_left_ht .active_line .pageleft span").text();
-          this.bbsTemplate_data[this.bbs.bbs_index1] = [];
-          var josnImg = {
-            "template": vm.template_Source.bbs4,
-            "only": false,
-            "slectTemplate": false,
-            "type": "bbs4",
-            "firstPage": false,
-            "lastPage": false
-          };
+          let otext = $('.time_main_left_ht .active_line .pageleft span').text()
+          this.bbsTemplate_data[this.bbs.bbs_index1] = []
+          let josnImg = {
+            'template': vm.template_Source.bbs4,
+            'only': false,
+            'slectTemplate': false,
+            'type': 'bbs4',
+            'firstPage': false,
+            'lastPage': false
+          }
           //选中的板式
-          var josnImg2 = {
-            "template": vm.template_Source[chenkIndex],
-            "only": false,
-            "slectTemplate": true,
-            "type": chenkIndex,
-            "firstPage": false,
-            "lastPage": false
-          };
-          var josnImg3 = {
-            "template": vm.template_Source.bbs4,
-            "only": false,
-            "slectTemplate": true,
-            "type": "bbs4",
-            "firstPage": false,
-            "lastPage": false
-          };
-          var josnImg4 = {
-            "template": vm.template_Source[chenkIndex],
-            "only": false,
-            "slectTemplate": false,
-            "type": chenkIndex,
-            "firstPage": false,
-            "lastPage": false
-          };
+          let josnImg2 = {
+            'template': vm.template_Source[chenkIndex],
+            'only': false,
+            'slectTemplate': true,
+            'type': chenkIndex,
+            'firstPage': false,
+            'lastPage': false
+          }
+          let josnImg3 = {
+            'template': vm.template_Source.bbs4,
+            'only': false,
+            'slectTemplate': true,
+            'type': 'bbs4',
+            'firstPage': false,
+            'lastPage': false
+          }
+          let josnImg4 = {
+            'template': vm.template_Source[chenkIndex],
+            'only': false,
+            'slectTemplate': false,
+            'type': chenkIndex,
+            'firstPage': false,
+            'lastPage': false
+          }
           //判断角标让选择更精确
-          if (this.bbs.bbs_index2 == 0) {
+          if (this.bbs.bbs_index2 === 0) {
             this.bbsTemplate_data[this.bbs.bbs_index1].push(josnImg2)
-            this.bbsTemplate_data[this.bbs.bbs_index1].push(josnImg);
+            this.bbsTemplate_data[this.bbs.bbs_index1].push(josnImg)
           } else {
             this.bbsTemplate_data[this.bbs.bbs_index1].push(josnImg4)
-            this.bbsTemplate_data[this.bbs.bbs_index1].push(josnImg3);
+            this.bbsTemplate_data[this.bbs.bbs_index1].push(josnImg3)
           }
           console.log(this.bbsTemplate_data[this.bbs.bbs_index1])
-          vm.$store.commit("setDrapData", {
-            "opage": otext,
-            "type": "奇数"
-          });
+          vm.$store.commit('setDrapData', {
+            opage: otext,
+            type: '奇数'
+          })
         } else {
-          console.log("单页兑换")
           //切换前选中的页码
-          var otext = $(".time_main_left_ht .active_line .pageleft span").text();
-
+          let otext = $(".time_main_left_ht .active_line .pageleft span").text();
           //旅行记的时候删除封面
-          if (vm.titleMsg.titleName == '旅行记') {
-            if (otext == 0 || otext == $(".comtent_chanpin .pubilc_div .time_pu .page").size() - 1) {
+          if (vm.titleMsg.titleName === '旅行记') {
+            if (otext === 0 || otext === $(".comtent_chanpin .pubilc_div .time_pu .page").size() - 1) {
               vm.$message({
-                iconClass: "atrup_Message",
+                iconClass: 'atrup_Message',
                 showClose: true,
                 message: '首尾页不能更换板式'
               });
-              vm.setBbsTemplate();//修改选中状态
-              vm.$forceUpdate();
-              return false;
+              vm.setBbsTemplate() // 修改选中状态
+              vm.$forceUpdate()
+              return false
             }
           }
-          if (vm.titleMsg.titleName == '画册') {
-            if (otext == $(".comtent_chanpin .pubilc_div .time_pu .page .pageleft").size()) {
+          if (vm.titleMsg.titleName === '画册') {
+            if (otext === $('.comtent_chanpin .pubilc_div .time_pu .page .pageleft').size()) {
               vm.$message({
-                iconClass: "atrup_Message",
+                iconClass: 'atrup_Message',
                 showClose: true,
                 message: '尾页不能更换板式'
-              });
-              vm.setBbsTemplate();//修改选中状态
-              vm.$forceUpdate();
-              return false;
+              })
+              vm.setBbsTemplate() // 修改选中状态
+              vm.$forceUpdate()
+              return false
             }
           }
           otemplate.template = vm.template_Source[chenkIndex];
@@ -640,44 +629,45 @@
           vm.jisuan(); // 计算页面位置
         }, 300)
       },
-      postDatas(val) { //获取数据覆盖便于二次编辑
+      postDatas(val) { // 获取数据覆盖便于二次编辑
         console.log(val)
+        let constName = ''
+        let oPage = ''
         //如果是lomo卡
-        if ($(".editbbs_one").hasClass("drap_img_lomo")) { //lomo
+        if ($('.editbbs_one').hasClass('drap_img_lomo')) { //lomo
           //是lomo卡调起图片编辑器
-          var constName = $(".editbbs_one").parents(".pubilc_div").find(".pageLomo").text() + '_1';
+          constName = $('.editbbs_one').parents('.pubilc_div').find('.pageLomo').text() + '_1';
           this.$store.state.editData.lomoHashMap.getvalue(constName).actions = val.postData;
-          var oPage = $(".editbbs_one").parents(".pubilc_div").find(".pageLomo").text();
+          oPage = $('.editbbs_one').parents('.pubilc_div').find('.pageLomo').text();
         } else {
-          var constName = this.getCoustName($(".editbbs_one"))
+          constName = this.getCoustName($('.editbbs_one'))
           this.$store.state.editData.ImgHashMap.getvalue(constName).actions = val.postData;
-          var oPage = $(".editbbs_one").parents(".pubilc_div").find(".page .pageleft").eq(0).find("span").text();
+          oPage = $('.editbbs_one').parents('.pubilc_div').find('.page .pageleft').eq(0).find('span').text();
         }
-        $(".editbbs_one").next("img").attr("src", val.imgData).css("width", "100%").css("height", "100%").css("left", 0).css("top", 0)
+        $('.editbbs_one').next('img').attr('src', val.imgData).css('width', '100%').css('height', '100%').css('left', 0).css('top', 0)
         //      ImgHashMapBase64
-        var oImgSort = $(".editbbs_one").next("img").attr("imgsort")
-        var oTypesTyle = $(".editbbs_one").next("img").attr("typestyle")
-        var constName = oPage + "_" + oImgSort;
-        var picObj = {
-          "constName": constName,
-          "page": oPage,
-          "editCnfIndex": oTypesTyle,
-          "num": oImgSort,
-          "editCnfName": "",
-          "base64Img": val.imgData
-        };
-
+        let oImgSort = $('.editbbs_one').next('img').attr('imgsort')
+        let oTypesTyle = $('.editbbs_one').next('img').attr('typestyle')
+        constName = oPage + '_' + oImgSort;
+        let picObj = {
+          'constName': constName,
+          'page': oPage,
+          'editCnfIndex': oTypesTyle,
+          'num': oImgSort,
+          'editCnfName': '',
+          'base64Img': val.imgData
+        }
         //存入专门的base64的图片
         //      this.ImgHashMapBase64.putvalue(constName,picObj);
         //      this.ImgHashMapBase64.getvalue(constName);
-        if ($(".editbbs_one").hasClass("drap_img_lomo")) { //lomo
-          this.$store.commit("previewWork_lomo", {
+        if ($('.editbbs_one').hasClass('drap_img_lomo')) { //lomo
+          this.$store.commit('previewWork_lomo', {
             constName: constName,
             picObj: picObj
           })
         } else {
           //拿constName去替换vuex里面已经存在的数据给预览产品
-          this.$store.commit("previewWork", {
+          this.$store.commit('previewWork', {
             constName: constName,
             picObj: picObj
           })
@@ -701,18 +691,18 @@
           this.openTxst($($event.target).attr("maxlength")); //打开文字框
         }
         if ($($event.target).hasClass("drap_img")) { //点击图片调起编辑器
-          if ($($event.target).next(".img_drap").attr("src") == "") {
-            return;
-          } //为空返回
+          if ($($event.target).next(".img_drap").attr("src") === '') {
+            return
+          } // 为空返回
 
-          $(".editbbs_one").removeClass("editbbs_one");
-          $($event.target).addClass("editbbs_one");
-          this.dataEditImg.oSrc = $($event.target).next("img").attr("imgstyle");
-          this.dataEditImg.oW = $($event.target).parent(".drapBox").width();
-          this.dataEditImg.oH = $($event.target).parent(".drapBox").height();
+          $(".editbbs_one").removeClass("editbbs_one")
+          $($event.target).addClass("editbbs_one")
+          this.dataEditImg.oSrc = $($event.target).next("img").attr("imgstyle")
+          this.dataEditImg.oW = $($event.target).parent(".drapBox").width()
+          this.dataEditImg.oH = $($event.target).parent(".drapBox").height()
           //点击时候获取coustName 从hashMap里面得到他有没第一次编辑的东西
           var constName = this.getCoustName($($event.target))
-          this.dataEditImg.oActions = this.$store.state.editData.ImgHashMap.getvalue(constName).actions;
+          this.dataEditImg.oActions = this.$store.state.editData.ImgHashMap.getvalue(constName).actions
           console.log(this.dataEditImg)
           //从vuex缓存里面拿到我的数据
           //        console.log()
@@ -720,7 +710,7 @@
         }
       },
       click_template_lomo($event) { //lomo卡
-        if ($($event.target).next(".img_drap").attr("src") == "") {
+        if ($($event.target).next(".img_drap").attr("src") === '') {
           return;
         } //为空返回
 
@@ -743,22 +733,20 @@
           })
         })
       },
-      setPageIndex() { //设置页数
-
+      setPageIndex() { // 设置页数
         //旅行记设置页数
-        if (this.titleMsg.titleName == '旅行记') { //如果是旅行设置页数
+        if (this.titleMsg.titleName === '旅行记') { //如果是旅行设置页数
           $(".comtent_chanpin .time_pu .page .pageleft span").each((i, e) => {
-            if (i == 0) {
+            if (i === 0) {
               $(e).prev(".page_b").text("封 面")
             }
-            if (i == $(".comtent_chanpin .time_pu .page .pageleft span").size() - 1) {
+            if (i === $(".comtent_chanpin .time_pu .page .pageleft span").size() - 1) {
               $(e).prev(".page_b").text("封 底")
             }
-            $(e).text((i )).attr("page", (i))
+            $(e).text((i)).attr("page", (i))
           })
           return
         }
-
         $(".comtent_chanpin .time_pu .page .pageleft span").each((i, e) => {
           $(e).text((i + 1)).attr("page", (i + 1))
         })
@@ -791,17 +779,17 @@
 
       },
       preview() {
-        var TYPESTYLECOUNT = {}
+        let TYPESTYLECOUNT = {}
         let bbsSlsectDate = sessionStorage.bbsSlsectDate ? JSON.parse(sessionStorage.bbsSlsectDate) : {}
         bbsSlsectDate.format = bbsSlsectDate.skuCode.split('.')
-        if (['huace', 'baobaoshu', 'lvxingji'].indexOf(bbsSlsectDate.category) < 0) {
+        if (['huace', 'baobaoshu', 'lvxingji', 'shiguangji'].indexOf(bbsSlsectDate.category) < 0) {
           return
         }
         this.previewSize = bbsSlsectDate.size
         this.previewType = bbsSlsectDate.category
         if (bbsSlsectDate.category === 'huace') {
           // 画册1、2、3
-          //TYPESTYLECOUNT = {1: {text: 4}, 2: {text: 3}, 3: {text: 2}, 4: {img: 1}, 5: {img: 2}, 6: {img: 1}, 7: {img: 1}, 9: {img: 1}}
+          // TYPESTYLECOUNT = {1: {text: 4}, 2: {text: 3}, 3: {text: 2}, 4: {img: 1}, 5: {img: 2}, 6: {img: 1}, 7: {img: 1}, 9: {img: 1}}
           if (this.previewSize === '342X342') {
             TYPESTYLECOUNT = {
               1: {text: 2},
@@ -893,7 +881,16 @@
             8: {img: 4}
           }
         }
-        this.hideCover = TYPESTYLECOUNT.hideCover ? true : false
+        if (bbsSlsectDate.category === 'shiguangji') {
+          TYPESTYLECOUNT = {
+            1: {text: 2},
+            2: {img: 1, text: 1},
+            3: {img: 2, text: 1},
+            4: {img: 1, text: 1},
+            5: {img: 1, text: 1}
+          }
+        }
+        this.hideCover = TYPESTYLECOUNT.hideCover
         this.startPage = TYPESTYLECOUNT.startPage
         let typeStyle = []
         $('.time_main_left_ht .pubilc_div > .time_pu .bbsClass').each((i, el) => {
@@ -989,36 +986,33 @@
             obj.text = texts
           }
         })
-        this.colorName = JSON.parse(sessionStorage.getItem("bbsSlsectDate")).colorName;
+        this.colorName = JSON.parse(sessionStorage.getItem('bbsSlsectDate')).colorName;
         this.previewDialogVisible = true
       },
-      dataPull() {//数据改变的函数
-        var vm = this;
+      dataPull() { // 数据改变的函数
+        let vm = this
         if (vm.dataPullTemplate) {
           return
         }
-        vm.bbsTemplate_data = vm.dataTemp.productData;
-        vm.mobanArr = vm.dataTemp.templateImgData;
-        vm.template_Source = vm.dataTemp.templateSource;
-//        console.log('hahhaha', vm.dataTemp.templateSource)
+        vm.bbsTemplate_data = vm.dataTemp.productData
+        vm.mobanArr = vm.dataTemp.templateImgData
+        vm.template_Source = vm.dataTemp.templateSource
         setTimeout(function () {
-          vm.setPageIndex();
+          vm.setPageIndex()
           vm.$forceUpdate()
         }, 400)
-
       }
     },
     computed: {
       ...mapGetters({
-        FooterDataAuto: "GetFooterDataAuto", // 底部选中的图片状态
-        PreviewWork: "GetPreviewWork" // 预览产品需要数据的变量
+        FooterDataAuto: 'GetFooterDataAuto', // 底部选中的图片状态
+        PreviewWork: 'GetPreviewWork' // 预览产品需要数据的变量
       })
     },
     watch: {
-      bbsTemplate_data: "dataPull"
+      bbsTemplate_data: 'dataPull'
     },
     created() {
-
     },
     mounted() {
       console.log('传递的数据', this.dataTemp)
@@ -1028,10 +1022,8 @@
       this.lomoTemplate_data = this.dataTemp.lomoData_template;
       //右侧模版的数据
       this.mobanArr = this.dataTemp.templateImgData;
-
       //给模版数据赋予一个初始化的值
       this.setBbsTemplate();
-
       var vm = this;
       // 调用vuex里面的拖拽方法，初始化的时候
       this.$store.commit('drapDiv')
@@ -1068,20 +1060,20 @@
         this.workEdit.edtDbId = this.$route.query.dbId // 存入id预防
         vm.sLoading = true
         vm.sloadingText = '作品继续编辑中...'
-        if (this.$route.query.eqTitle == "画册.250X342") {
+        if (this.$route.query.eqTitle === '画册.250X342') {
           vm.template_Source = hcTemplate250X342
         }
-        if (this.$route.query.eqTitle == "画册.342X342") {
+        if (this.$route.query.eqTitle === '画册.342X342') {
           vm.template_Source = hcTemplate342X342
         }
-        if (this.$route.query.eqTitle == "画册.342X250") {
+        if (this.$route.query.eqTitle === '画册.342X250') {
           vm.template_Source = hcTemplate342X250
         }
-        if (this.$route.query.eqTitle == "画册.342X500") {
+        if (this.$route.query.eqTitle === '画册.342X500') {
           vm.template_Source = hcTemplate342X500
         }
         Api.work.unfinishedWork(this.$route.query.dbId).then((res) => {
-          if (res.data.data.finish == 'N') {
+          if (res.data.data.finish === 'N') {
             vm.$message({
               iconClass: "atrup_Message",
               showClose: true,
@@ -1090,7 +1082,7 @@
             });
             setTimeout(function () {
               location.href = '/center/draft.html'
-              return;
+              return
             }, 1500)
           }
           //再次编辑后端给的版式数据
@@ -1148,10 +1140,10 @@
               }
             }
             if (oImgData.length > 0) {
-              for (var i = 0; i < oImgData.length; i++) {
-                var constName = oImgData[i].page + '_' + oImgData[i].num;
+              for (i = 0; i < oImgData.length; i++) {
+                let constName = oImgData[i].page + '_' + oImgData[i].num;
                 //map生成变量
-                var picObj = {
+                let picObj = {
                   "constName": constName,
                   "picDbId": oImgData[i].picDbId,
                   "page": oImgData[i].page,
@@ -1168,17 +1160,17 @@
                   constName: constName,
                   picObj: picObj
                 });
-                var pageNum = oImgData[i].page + '_' + oImgData[i].num + '_bbs';
+                let pageNum = oImgData[i].page + '_' + oImgData[i].num + '_bbs';
                 console.log(pageNum)
                 $("#" + pageNum).css("width", "100%").css("height", "100%").attr("src", oImgData[i].previewThumbnailImageUrl).attr("imgstyle", oImgData[i].thumbnailImageUrl);
               }
             }
             //回显lomo卡图片
             if (oImgLomo && oImgLomo.length > 0) {
-              for (var i = 0; i < oImgLomo.length; i++) {
-                var constName = oImgLomo[i].page + '_' + oImgLomo[i].num;
+              for (i = 0; i < oImgLomo.length; i++) {
+                let constName = oImgLomo[i].page + '_' + oImgLomo[i].num;
                 //map生成变量
-                var picObj = {
+                let picObj = {
                   "constName": constName,
                   "picDbId": oImgLomo[i].picDbId,
                   "page": oImgLomo[i].page,
@@ -1194,7 +1186,7 @@
                   constName: constName,
                   picObj: picObj
                 });
-                var pageNum = oImgLomo[i].page + '_' + oImgLomo[i].num + '_lomo';
+                let pageNum = oImgLomo[i].page + '_' + oImgLomo[i].num + '_lomo';
                 $("#" + pageNum).css("width", "100%").css("height", "100%").attr("src", oImgLomo[i].previewThumbnailImageUrl).attr("imgstyle", oImgLomo[i].thumbnailImageUrl);
               }
             }
@@ -1203,7 +1195,7 @@
         })
       }
       //旅行记的时候删除封面
-      if (vm.titleMsg.titleName == '旅行记') {
+      if (vm.titleMsg.titleName === '旅行记') {
         $(".titlePage_bg").hide()
       }
       setTimeout(function () {
