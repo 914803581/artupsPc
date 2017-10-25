@@ -12,7 +12,7 @@
               <span></span>
             </div>
             <div class="title_right">
-              <span>挂历.<span id="colour"></span>600X500.13页</span>
+              <span>挂历.<span id="colour"></span>{{size}}.13页</span>
               <span></span>
               <span><i class="iconfont">&#xe6e2;</i>199.00</span>
             </div>
@@ -45,11 +45,12 @@
       <div class="line_comtent">
         <div class="comtent scrollBar">
           <div class="time_main_left" id="gualiEdit">
-            <div :class="{'taili_shu':titleMsg=='竖'}"  class="time_bg heji_hengban" :index-stort="index" v-for="(item,index) in bbsTemplate_data">
+            <div :class="{'taili_shu':titleMsg==='竖'}" class="time_bg heji_hengban" :index-stort="index"
+                 v-for="(item,index) in bbsTemplate_data">
               <!--pubilc_div 这个class是留给整屏来定义的样式  click_template 是用vue里面的事件委派来解决避免不了的dom操作  hengban_bbs 横版增加的class  hengban_bbs 红线class  @click="click_template($event)"-->
               <div :ddd="item[0].firstPage" class="pubilc_div pubilc_heji_div" :only="htmlTetx.double"
                    :class="{'hengban_bbs':htmlTetx.double}" v-html="htmlTetx.template"
-                   @click="click_template($event)"  v-for="(htmlTetx,index2) in item">
+                   @click="click_template($event)" v-for="(htmlTetx,index2) in item">
               </div>
             </div>
           </div>
@@ -81,10 +82,11 @@
         <el-collapse-transition>
           <div v-show="footerShow" class="fonter_box_img">
             <ul v-if="$store.state.bbs.footerData.length > 0">
-              <li :style="{backgroundImage: 'url(\''+footerImg.thumbnailUrl+'\')'}"  class="bg_cover" @click="footerImgSlectFooter(index)" :class="{'img_size_border':footerImg.slectFooter}"
+              <li :style="{backgroundImage: 'url(\''+footerImg.thumbnailUrl+'\')'}" class="bg_cover"
+                  @click="footerImgSlectFooter(index)" :class="{'img_size_border':footerImg.slectFooter}"
                   :att="footerImg.slectFooter" v-for="(footerImg,index) in $store.state.bbs.footerData"
                   draggable="true">
-                <img  style="filter:alpha(opacity=0);opacity: 0" :src="footerImg.thumbnailUrl"/>
+                <img style="filter:alpha(opacity=0);opacity: 0" :src="footerImg.thumbnailUrl"/>
               </li>
             </ul>
             <p style="line-height: 116px;text-align: center;font-size: 16px;color: #6b6b6b;"
@@ -129,7 +131,8 @@
   export default {
     data() {
       return {
-        titleMsg:'',//横隔竖着的标识符
+        size: '',
+        titleMsg: '',//横隔竖着的标识符
         tailiSize: "",
         sLoading: false,
         sloadingText: "数据保存中...",
@@ -157,103 +160,103 @@
             "double": true,
             "firstPage": false,
             "lastPage": false,
-            "type":"bbs1"
+            "type": "bbs1"
           }
-          ],[{
+          ], [{
             "template": bbsTemplateData.guali2,
             "only": false,
             "double": true,
             "firstPage": false,
             "lastPage": false,
-            "type":"bbs2"
+            "type": "bbs2"
           }
-          ],[{
+          ], [{
             "template": bbsTemplateData.guali2,
             "only": false,
             "double": true,
             "firstPage": false,
             "lastPage": false,
-            "type":"bbs2"
+            "type": "bbs2"
           }
-          ],[{
+          ], [{
             "template": bbsTemplateData.guali2,
             "only": false,
             "double": true,
             "firstPage": false,
             "lastPage": false,
-            "type":"bbs2"
+            "type": "bbs2"
           }
-          ],[{
+          ], [{
             "template": bbsTemplateData.guali2,
             "only": false,
             "double": true,
             "firstPage": false,
             "lastPage": false,
-            "type":"bbs2"
+            "type": "bbs2"
           }
-          ],[{
+          ], [{
             "template": bbsTemplateData.guali2,
             "only": false,
             "double": true,
             "firstPage": false,
             "lastPage": false,
-            "type":"bbs2"
+            "type": "bbs2"
           }
-          ],[{
+          ], [{
             "template": bbsTemplateData.guali2,
             "only": false,
             "double": true,
             "firstPage": false,
             "lastPage": false,
-            "type":"bbs2"
+            "type": "bbs2"
           }
-          ],[{
+          ], [{
             "template": bbsTemplateData.guali2,
             "only": false,
             "double": true,
             "firstPage": false,
             "lastPage": false,
-            "type":"bbs2"
+            "type": "bbs2"
           }
-          ],[{
+          ], [{
             "template": bbsTemplateData.guali2,
             "only": false,
             "double": true,
             "firstPage": false,
             "lastPage": false,
-            "type":"bbs2"
+            "type": "bbs2"
           }
-          ],[{
+          ], [{
             "template": bbsTemplateData.guali2,
             "only": false,
             "double": true,
             "firstPage": false,
             "lastPage": false,
-            "type":"bbs2"
+            "type": "bbs2"
           }
-          ],[{
+          ], [{
             "template": bbsTemplateData.guali2,
             "only": false,
             "double": true,
             "firstPage": false,
             "lastPage": false,
-            "type":"bbs2"
+            "type": "bbs2"
           }
-          ],[{
+          ], [{
             "template": bbsTemplateData.guali2,
             "only": false,
             "double": true,
             "firstPage": false,
             "lastPage": false,
-            "type":"bbs2"
+            "type": "bbs2"
           }
-          ],[{
+          ], [{
             "template": bbsTemplateData.guali2,
             "only": false,
             "double": true,
             "firstPage": false,
             "lastPage": false,
-            "type":"bbs2"
+            "type": "bbs2"
           }
           ]
         ],
@@ -280,7 +283,7 @@
       ...mapMutations({ //同步触发操作集合
         delectFooter: "delectFooterData"
       }),
-      click_template ($event) { //vue模版渲染完毕之后的事件处理,index1和index2就是那个二维数组对应的索引
+      click_template($event) { //vue模版渲染完毕之后的事件处理,index1和index2就是那个二维数组对应的索引
         if ($($event.target).hasClass("drap_img")) { //点击图片调起编辑器
           if ($($event.target).next(".img_drap").attr("src") === "") {
             return;
@@ -293,7 +296,6 @@
           //点击时候获取coustName 从hashMap里面得到他有没第一次编辑的东西
           var constName = this.getCoustName($($event.target))
           console.log(this.$store.state.editData.ImgHashMap.getvalue(constName))
-
           this.dataEditImg.oActions = this.$store.state.editData.ImgHashMap.getvalue(constName).actions
 //          console.log(this.dataEditImg)
           //从vuex缓存里面拿到我的数据
@@ -302,11 +304,11 @@
       },
       setPageIndex() { //设置页数和下面的背景图
         $(".comtent_chanpin .time_pu .page .pageleft span").each((i, e) => {
-          $(e).text('2018年'+i+'月').attr("page", i);
+          $(e).text('2018年' + i + '月').attr("page", i);
         })
         //设置对应的背景图
-        $("#gualiEdit .guali_img img").each(function (i,e) {
-          $(this).attr("src","http://image2.artup.com/static/pc/images/guali_template/guali_600*500/gualishu2018"+(i+1)+".png")
+        $("#gualiEdit .guali_img img").each(function (i, e) {
+          $(this).attr("src", "http://image2.artup.com/static/pc/images/guali_template/guali_600*500/gualishu2018" + (i + 1) + ".png")
         })
       },
       goCart(val) { //加入购物车
@@ -388,7 +390,7 @@
               .attr("dbid", vm.FooterDataAuto[index].dbId)
               .attr("thumbnailScale", vm.FooterDataAuto[index].thumbnailScale)
             //每次循环都取触发存储数据的操作
-            vm.$store.commit("autoPushData",'heji')
+            vm.$store.commit("autoPushData", 'heji')
             //计算位置
             setTimeout(function () {
               arrDrap.unshift(index)
@@ -410,7 +412,6 @@
             arrMap.push(this.$store.state.editData.ImgHashMap.getvalue(this.$store.state.editData.ImgHashMap.keys()[i]))
           }
         }
-
         //字符串转换数组存储到对象里面
         let bbsSlsectDate = JSON.parse(sessionStorage.getItem("bbsSlsectDate"));
 //        updataSkuData(this.tailiSize,bbsSlsectDate.colorName);
@@ -459,11 +460,15 @@
         $(".comtent_chanpin .pubilc_div .bbsClass  .img_drap").each(function (index, el) {
           if (!$(el).attr("src")) { //如果src存在
             var page = $(el).parents(".pubilc_div").find(".page span").text();
+            console.log(page)
             if (page) {
+              if(page=="2018年0月"){
+                page="2018年封面"
+              }
               vm.$message({
                 iconClass: "atrup_Message",
                 showClose: true,
-                message: '请上传合集第' + page + '张图片'
+                message: '请上传挂历' + page + '图片'
               });
               isOK = false
               return false;
@@ -533,7 +538,8 @@
       openImgEdit() {
         this.isimgEdit = !this.isimgEdit;
       },
-      preview() {}
+      preview() {
+      }
     },
     computed: {
       ...mapGetters({
@@ -541,16 +547,15 @@
         PreviewWork: "GetPreviewWork" // 预览产品需要数据的变量
       })
     },
-    watch: {
-
-    },
+    watch: {},
     created() {
-//      sessionStorage.setItem('gualiType','竖')
     },
     mounted() {
       //默认设置背景
       var vm = this
-      vm.titleMsg = sessionStorage.getItem('gualiType')=="竖" ?"竖":""
+      let bbsSlsectDate = JSON.parse(sessionStorage.getItem("bbsSlsectDate"))
+      vm.size = bbsSlsectDate.size
+      vm.titleMsg = sessionStorage.getItem('gualiType') === "竖" ? "竖" : ""
       vm.setPageIndex()
       this.jisuan() // 计算页面位置
       setTimeout(function () {

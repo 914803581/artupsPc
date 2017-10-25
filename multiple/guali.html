@@ -95,8 +95,6 @@
         transform: translateY(0);
       }
     }
-
-
     /*灏哄鍥�*/
     .public_ol_box{width: 541px;height: 541px;position: absolute;left: 20px;top: 80px;z-index: 999;display: none;}
     .public_ol_box >li{position: absolute;bottom: 0;left: 0;color: #000;border: 1px solid #C2C2C2;}
@@ -133,18 +131,17 @@
         <li class="li-4">请选挂历尺寸</li>
         <li id="gl-gl">
           <ol class="ol-size">
-            <li v-for="(item,index) in attributeValues" :index="index" :class="{'line':index==listIndex}" mark="">{{item.name}}</li>
+            <li @click="checkData(index)" v-for="(item,index) in attributeValues" :index="index" :class="{'line':index==listIndex}" mark="">{{item.name}}</li>
             <!--<li mark="">B=600*500mm</li>-->
           </ol>
         </li>
         <li>
           <div class="pices">
-            ¥ <i>199</i> CNY
+            ¥ <i>{{price}}</i> CNY
           </div>
           <a href="/album/gualiEdit" class="sib-a" >开始定制</a>
         </li>
       </ul>
-
     </div>
   </div>
   <!--画册图2-->

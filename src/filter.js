@@ -10,6 +10,11 @@ Vue.filter('sum', function (value) {   // 全局方法 Vue.filter() 注册一个
   }
 })
 
+Vue.filter('checkSrc', function (value) {
+  console.log(value)
+  return value
+})
+
 Vue.filter('json', function (value) {   // 全局方法 Vue.filter() 注册一个自定义过滤器,必须放在Vue实例化前面
   return JSON.stringify(value)
 })

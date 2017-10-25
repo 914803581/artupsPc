@@ -18,7 +18,8 @@
               <div class="woks-data" v-for="(work,index) in workData" :key="work.id">
                 <div class="img-box">
                   <el-checkbox v-show="managerIng" v-model="work.checked" class="checkbox-work"></el-checkbox>
-                  <img :src="work.thumbnailImageUrl" :alt="work.name" :title="work.name">
+                  <img :src="work.thumbnailImageUrl">
+                  <!--<img :src="work.thumbnailImageUrl" :alt="work.name" :title="work.name" >-->
                 </div>
                 <label class="title">{{work.sku}}</label>
                 <span class="time">{{work.updatedDt}}</span>
@@ -92,6 +93,9 @@
         } else if (textCode === "旅行记") {
           location.href = "/album/travelEdit?dbId=" + this.workData[$index].dbId
           sessionStorage.setItem("titleName", "旅行记")
+        } else if (textCode === "拾光集") {
+          location.href = "/album/shiguangjiEdit?dbId=" + this.workData[$index].dbId
+          sessionStorage.setItem("titleName", "拾光集")
         }
       },
       deleteWorkList: function () {

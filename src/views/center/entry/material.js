@@ -6,6 +6,7 @@ import Vue from 'vue'
 import ElementUI from 'element-ui'
 import App from '../MaterialListView'
 import mixins from '@/mixins'
+import filter from '@/filter.js'
 
 Vue.use(ElementUI)
 Vue.mixin(mixins)

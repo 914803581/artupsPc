@@ -58,6 +58,9 @@ new Vue({
         sessionStorage.setItem("titleName", "拾光集")
         setTimeout(function () {
           sessionStorage.setItem("bbsSlsectDate", JSON.stringify(bbsSlsectDate))
+          var tplCode = JSON.parse(sessionStorage.getItem("urlQuery"))
+          tplCode.tplCode = res.data.templateCode
+          sessionStorage.setItem("urlQuery", JSON.stringify(tplCode))
         }, 100)
       })
     },
