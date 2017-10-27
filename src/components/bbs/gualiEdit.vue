@@ -14,7 +14,7 @@
             <div class="title_right">
               <span>挂历.<span id="colour"></span>{{size}}.13页</span>
               <span></span>
-              <span><i class="iconfont">&#xe6e2;</i>199.00</span>
+              <span><i class="iconfont">&#xe6e2;</i>{{price}}</span>
             </div>
           </div>
           <transition name="el-zoom-in-top">
@@ -45,7 +45,7 @@
       <div class="line_comtent">
         <div class="comtent scrollBar">
           <div class="time_main_left" id="gualiEdit">
-            <div :class="{'taili_shu':titleMsg==='竖'}" class="time_bg heji_hengban" :index-stort="index"
+            <div :class="{'taili_shu':titleMsg==='竖','taili_xiaoguali':titleMsg==='小挂历'}" class="time_bg heji_hengban" :index-stort="index"
                  v-for="(item,index) in bbsTemplate_data">
               <!--pubilc_div 这个class是留给整屏来定义的样式  click_template 是用vue里面的事件委派来解决避免不了的dom操作  hengban_bbs 横版增加的class  hengban_bbs 红线class  @click="click_template($event)"-->
               <div :ddd="item[0].firstPage" class="pubilc_div pubilc_heji_div" :only="htmlTetx.double"
@@ -262,7 +262,8 @@
         ],
         tplCode: 'pc_heji_500X350_10_single', //合集
         workEdit: {}, //素材保存组装传给后端的数据
-        previewData: []
+        previewData: [],
+        price:0
       }
     },
     //		beforeRouteEnter(to,from,next){
@@ -366,11 +367,21 @@
       autoDrapImg() { //自动填充图片的操作
         var vm = this;
         var arrNode = [];
-        $(".comtent_chanpin .pubilc_div .bbsClass  .img_drap").each(function (index, el) {
-          if (!$(el).attr("src")) {
-            arrNode.push($(el));
-          }
-        })
+        if(vm.titleMsg=="小挂历"){
+          $(".comtent_chanpin .pubilc_div .bbsClass  .img_drap").each(function (index, el) {
+            if(index>0){
+              if (!$(el).attr("src")) {
+                arrNode.push($(el));
+              }
+            }
+          })
+        } else{
+          $(".comtent_chanpin .pubilc_div .bbsClass  .img_drap").each(function (index, el) {
+            if (!$(el).attr("src")) {
+              arrNode.push($(el));
+            }
+          })
+        }
         var arrDrap = []; //一下传递给vuex处理的数据角标
         if ($(arrNode).size() < 1) {
           this.$message({
@@ -465,13 +476,18 @@
               if(page=="2018年0月"){
                 page="2018年封面"
               }
-              vm.$message({
-                iconClass: "atrup_Message",
-                showClose: true,
-                message: '请上传挂历' + page + '图片'
-              });
-              isOK = false
-              return false;
+              if(vm.titleMsg=="小挂历" &&  page=="2018年封面"){
+                return
+              }else{
+                vm.$message({
+                  iconClass: "atrup_Message",
+                  showClose: true,
+                  message: '请上传挂历' + page + '图片'
+                });
+                isOK = false
+                return false;
+              }
+
             }
           }
         })
@@ -555,7 +571,8 @@
       var vm = this
       let bbsSlsectDate = JSON.parse(sessionStorage.getItem("bbsSlsectDate"))
       vm.size = bbsSlsectDate.size
-      vm.titleMsg = sessionStorage.getItem('gualiType') === "竖" ? "竖" : ""
+      vm.titleMsg = sessionStorage.getItem('gualiType')
+      vm.price = bbsSlsectDate.price
       vm.setPageIndex()
       this.jisuan() // 计算页面位置
       setTimeout(function () {

@@ -72,6 +72,9 @@ new Vue({
         } else if (res.data.size === "600X500") {
           bbsSlsectDate.editCnfName = "pc_guali_600X500_single"
           sessionStorage.setItem('gualiType', '横')
+        } else if (res.data.size === "260X380") {
+          bbsSlsectDate.editCnfName = "pc_guali_260X380_single"
+          sessionStorage.setItem('gualiType', '小挂历')
         }
         sessionStorage.setItem("titleName", "挂历")
         setTimeout(function () {
